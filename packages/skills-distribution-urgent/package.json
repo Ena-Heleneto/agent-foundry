@@ -1,0 +1,27 @@
+{
+  "name": "@foundry/skills-distribution-urgent",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Linux/Codex 项目级技能紧急交付工作区包",
+  "license": "ISC",
+  "engines": {
+    "node": ">=22.20.0"
+  },
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint .",
+    "check-types": "tsc --noEmit",
+    "test": "node --test --test-isolation=none tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@foundry/preset-config": "workspace:*",
+    "@types/node": "catalog:types",
+    "@types/semver": "catalog:types",
+    "eslint": "catalog:dev",
+    "semver": "catalog:shared",
+    "typescript": "catalog:dev",
+    "vite": "catalog:build",
+    "yaml": "catalog:shared"
+  }
+}

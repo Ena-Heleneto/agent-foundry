@@ -1,0 +1,249 @@
+{
+  "task": "T095",
+  "date": "2026-11-11",
+  "scope": "源码级TV08隔离骨架，非生产安装器或真实挂载",
+  "versions": {
+    "specify": {
+      "command": [
+        "<source-home>/.cache/uv/archive-v0/om6AD6JxRTroJuBL/bin/specify",
+        "--version"
+      ],
+      "version": "specify 1.2.6",
+      "stderr": ""
+    },
+    "skills": {
+      "command": [
+        "node",
+        "/tmp/foundry-t104-20261111/npm-cache/_npx/0757c8f0298e564a/node_modules/skills/bin/cli.mjs",
+        "--version"
+      ],
+      "version": "1.7.4",
+      "stderr": ""
+    },
+    "codex": {
+      "command": [
+        "codex",
+        "--version"
+      ],
+      "version": "codex-cli 0.167.1",
+      "stderr": "WARNING: proceeding, even though we could not create PATH aliases: Read-only file system (os error 30)"
+    }
+  },
+  "audit": {
+    "official_cases": {
+      "project": {
+        "source_files": {
+          "SKILL.md": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a"
+        },
+        "extension_source_files": {
+          "SKILL.md": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a"
+        },
+        "generated_sha256": "df21d0121b3384c06590d7f19803fb3986df4db09517fff43c0e0f558a477dd6",
+        "official_calls": 4,
+        "scope": "project"
+      },
+      "global": {
+        "source_files": {
+          "SKILL.md": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a"
+        },
+        "extension_source_files": {
+          "SKILL.md": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a"
+        },
+        "generated_sha256": "df21d0121b3384c06590d7f19803fb3986df4db09517fff43c0e0f558a477dd6",
+        "official_calls": 4,
+        "scope": "global"
+      },
+      "references-control": {
+        "source_files": {
+          "SKILL.md": "c5de2749fedc0d1201e9bc4e544a0bbbb27073bf2d5293e5b00e657fb171b19b",
+          "references/t095-note.md": "bc859fb799e72408aa8ca06a4a5f5a29bb7d895c472b4bf5b7a80482d17c3bb4"
+        },
+        "extension_source_files": {
+          "SKILL.md": "c5de2749fedc0d1201e9bc4e544a0bbbb27073bf2d5293e5b00e657fb171b19b",
+          "references/t095-note.md": "bc859fb799e72408aa8ca06a4a5f5a29bb7d895c472b4bf5b7a80482d17c3bb4"
+        },
+        "generated_sha256": "79b41820963966d9b0bfde71146cde287e2925be65dcbba3dbb735e5ef55b920",
+        "official_calls": 4,
+        "scope": "project",
+        "attachment": {
+          "reference": "references/t095-note.md",
+          "actual_readable": false
+        }
+      },
+      "references-bridged": {
+        "source_files": {
+          "SKILL.md": "c5de2749fedc0d1201e9bc4e544a0bbbb27073bf2d5293e5b00e657fb171b19b",
+          "references/t095-note.md": "bc859fb799e72408aa8ca06a4a5f5a29bb7d895c472b4bf5b7a80482d17c3bb4"
+        },
+        "extension_source_files": {
+          "SKILL.md": "c5de2749fedc0d1201e9bc4e544a0bbbb27073bf2d5293e5b00e657fb171b19b",
+          "references/t095-note.md": "bc859fb799e72408aa8ca06a4a5f5a29bb7d895c472b4bf5b7a80482d17c3bb4"
+        },
+        "generated_sha256": "1d82e59be1b7a76976b0f59536fb3e6642cb18dbf226ff579f59d5350645c1da",
+        "official_calls": 4,
+        "scope": "project",
+        "attachment": {
+          "reference": ".specify/extensions/modes/references/t095-note.md",
+          "actual_readable": true
+        }
+      }
+    },
+    "negative_cases_zero_official_calls": 11,
+    "discovery_cases": 3,
+    "host_cases": {
+      "global": {
+        "case": "global",
+        "exit": 0,
+        "timeout": false,
+        "elapsed_seconds": 36.246,
+        "args": [
+          "codex",
+          "exec",
+          "--cd",
+          "/tmp/foundry-t095-20261111-ed900wvy/official-cases/global/project",
+          "--skip-git-repo-check",
+          "--sandbox",
+          "read-only",
+          "--json",
+          "--color",
+          "never",
+          "--output-last-message",
+          "/tmp/foundry-t095-20261111-ed900wvy/host/global/final.txt",
+          "-"
+        ],
+        "model_override": false,
+        "changed": [],
+        "discovery_and_load_are_separate": "发现用隔离测试用户的实际skills/list；本回合用既有认证运行时，在只读项目明确请求读取已发现的实际路径，不称自然语言行为验证",
+        "full_read_command_ids": {
+          "speckit-modes-increment": [
+            "item_2"
+          ],
+          "implementation-preparation": [
+            "item_1"
+          ]
+        },
+        "note": "明确请求下实际全文读取；自然语言完整行为未验"
+      },
+      "references-bridged": {
+        "case": "references-bridged",
+        "exit": 0,
+        "timeout": false,
+        "elapsed_seconds": 51.198,
+        "args": [
+          "codex",
+          "exec",
+          "--cd",
+          "/tmp/foundry-t095-20261111-ed900wvy/official-cases/references-bridged/project",
+          "--skip-git-repo-check",
+          "--sandbox",
+          "read-only",
+          "--json",
+          "--color",
+          "never",
+          "--output-last-message",
+          "/tmp/foundry-t095-20261111-ed900wvy/host/references-bridged/final.txt",
+          "-"
+        ],
+        "model_override": false,
+        "changed": [],
+        "discovery_and_load_are_separate": "发现用隔离测试用户的实际skills/list；本回合用既有认证运行时，在只读项目明确请求读取已发现的实际路径，不称自然语言行为验证",
+        "full_read_command_ids": {
+          "implementation-preparation": [
+            "item_2"
+          ],
+          "speckit-modes-increment": [
+            "item_3"
+          ]
+        },
+        "note": "明确请求下实际全文读取；自然语言完整行为未验"
+      }
+    },
+    "official_tests": {
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    "package_checks": {
+      "lint": "退出1，collections.ts entries原有两项错误",
+      "check-types": "退出0",
+      "test": "12项通过、退出0",
+      "target-eslint": "退出0",
+      "build": "按明确指令暂跳过"
+    },
+    "production_sources_and_registration_scripts_unchanged": true,
+    "limits": [
+      "仅Linux与本机宿主版本",
+      "实际发现和明确请求下读取分开验证，非T099普通自然语言行为",
+      "正式生产安装器/真实挂载尚未实施",
+      "无build/dist消费或真实用户效果"
+    ]
+  },
+  "archive": {
+    "archive": "<source-workspace>/specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t095/retained.tar.gz",
+    "bytes": 2929395,
+    "sha256": "5aadecfe661d7cea00b3f475963727b202c4e0553367ea78fa81f042a7ecb1e2",
+    "files_verified": 1005,
+    "file_members": 1006,
+    "safe_extract_all_hashes_match": true,
+    "omitted_symlinks_recorded": 7,
+    "profile_and_credentials_excluded": true,
+    "selected_credential_patterns_no_hits": 3,
+    "complete_scan_claim": false,
+    "initial_archive_preserved": "/tmp/foundry-t095-20261111-ed900wvy/archive-initial.tar.gz"
+  },
+  "review": {
+    "source": "collaboration review_t095 实际返回",
+    "verdict": "T095限定范围可收口",
+    "critical": [],
+    "important": [],
+    "minor": [],
+    "read_only": true,
+    "no_subagents": true,
+    "coding_control_ruling": "codingRoot是本测试显式选择的正常发现控制组，正式skill/manifest未加coding依赖；后续生产实现不得照搬为必需安装前置",
+    "reviewed_initial_archive_sha256": "e5b07677bfb0bb72e27ef9056929ff046e653734c57294cdecf33102da0a9796",
+    "reviewed_source_files": 994,
+    "declined": [
+      "build/dist及构建消费",
+      "T066旧登记/孤立残留/六旧hooks",
+      "T067等生产实现",
+      "T099自然语言/显式业务行为",
+      "其他平台和宿主版本",
+      "真实挂载与用户效果"
+    ],
+    "parent_ruling": "均保留原Task边界和未验事实，不追加验收，也不将隔离结果推广为完整交付；否则会使用户误判实际可用范围"
+  },
+  "source_scope": "项目与测试用户全局分开，正式入口始终绑定明确项目",
+  "discovery_scope": "真实skills/list，无模型调用；不是目录枚举",
+  "read_scope": "既有认证运行时对真实发现路径明确只读加载，非自然语言业务行为验证",
+  "failure_history": [
+    "缺候选模块的明确红灯",
+    "Node子进程EPERM及外层审批后真实执行",
+    "目录链链接反例先红后绿",
+    "附件文件/目录冲突先红后绿",
+    "已有扩展未知目录先红后绿",
+    "未桥接附件实际不可达的对照"
+  ],
+  "limitations": [
+    "仅Linux与本机宿主版本",
+    "实际发现和明确请求下读取分开验证，非T099普通自然语言行为",
+    "正式生产安装器/真实挂载尚未实施",
+    "无build/dist消费或真实用户效果"
+  ],
+  "parent_check": {
+    "new_document_links": 14,
+    "all_107_task_ids_and_order_preserved": true,
+    "checkbox_changes": [
+      {
+        "id": "T095",
+        "before": " ",
+        "after": "x"
+      }
+    ],
+    "paused_and_history_preserved": true,
+    "FR_SC_definitions_preserved": true,
+    "formal_sources_scripts_constitution_pointer_plan_contract_preserved": true,
+    "other_nine_mvu_preserved": true
+  },
+  "task_scope_accepted": true,
+  "next_task": "T066，未开始；无阶段批准"
+}

@@ -1,0 +1,8 @@
+{
+  "packageName": null,
+  "mcp": false,
+  "skill": {
+    "nuxt-ui-styling": {},
+    "vue-reactivity": {}
+  }
+}

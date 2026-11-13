@@ -1,0 +1,339 @@
+{
+  "scope": "T105正式维护源官方安装下的宿主行为；不计构建通过或全项目验收",
+  "results": [
+    {
+      "stage": "normal-adjustment",
+      "exit": 1,
+      "timeout": false,
+      "elapsed_seconds": 0.234,
+      "session_id": null,
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-tv10-20261110/cases/positive-a",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t105-20261111-y_bus3xn/host/normal-adjustment/final.txt",
+        "-"
+      ],
+      "raw_directory": "/tmp/foundry-t105-20261111-y_bus3xn/host/normal-adjustment",
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "changed": [],
+      "turn_completed": false,
+      "full_text_reads": {
+        "skill": [],
+        "constitution": [],
+        "approval": []
+      },
+      "business_and_tests_unchanged": true,
+      "failed_commands": [],
+      "events_count": 0
+    },
+    {
+      "stage": "normal-adjustment",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 122.57,
+      "session_id": "01a1c827-68e6-76b2-91ba-923a52bc09f8",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-tv10-20261110/cases/positive-a",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t105-20261111-y_bus3xn/host/normal-adjustment-attempt-1794359388214231807/final.txt",
+        "-"
+      ],
+      "raw_directory": "/tmp/foundry-t105-20261111-y_bus3xn/host/normal-adjustment-attempt-1794359388214231807",
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "changed": [
+        "specs/demo/001-order/implementation/T001.md"
+      ],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          6
+        ],
+        "constitution": [
+          14
+        ],
+        "approval": [
+          21
+        ]
+      },
+      "business_and_tests_unchanged": true,
+      "failed_commands": [],
+      "events_count": 47
+    },
+    {
+      "stage": "save-failure",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 80.626,
+      "session_id": "01a1c829-fc2b-70d1-87c2-c87e31a4920e",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-tv10-20261110/cases/positive-a",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t105-20261111-y_bus3xn/host/save-failure/final.txt",
+        "-"
+      ],
+      "raw_directory": "/tmp/foundry-t105-20261111-y_bus3xn/host/save-failure",
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "changed": [],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          8,
+          15
+        ],
+        "constitution": [
+          12
+        ],
+        "approval": [
+          15
+        ]
+      },
+      "business_and_tests_unchanged": true,
+      "failed_commands": [
+        {
+          "event": 19,
+          "command": "/bin/bash -lc \"python3 -B - <<'PY'\nfrom pathlib import Path\np = Path('specs/demo/001-order/implementation/T002.md')\noriginal = p.read_text(encoding='utf-8')\nold = '先在test_order.py保留现有小计验收，新增总额测试，再实现calculate_total。'\nnew = '先在test_order.py保留现有小计验收，新增总额测试，再实现calculate_total：先核对整数分小计与运费输入，再计算总额。'\nassert original.count(old) == 1\nupdated = original.replace(old, new)\nupdated += '\\\\n2026-11-11执行顺序补充：依据本轮实际用户指示，在待讨论方案中明确先核对整数分小计与运费输入，再计算总额；此次指示仅确认该顺序补充，不代表认可T002整体方案或放行业务实施。原Task身份、目标、依赖及验收保持。\\\\n'\nassert '\\\\r' not in updated and updated.endswith('\\\\n')\nassert all(line == line.rstrip() for line in updated.splitlines())\ntry:\n    p.write_text(updated, encoding='utf-8')\nexcept OSError as exc:\n    print(f'保存失败：{type(exc).__name__}: {exc}')\n    final = p.read_text(encoding='utf-8')\n    print('读回与原文一致：', final == original)\n    print(final)\n    raise SystemExit(1)\nfinal = p.read_text(encoding='utf-8')\nassert final == updated\nprint('保存、格式检查及完整读回通过：')\nprint(final)\nPY\"",
+          "exit": 1,
+          "output": "保存失败：PermissionError: [Errno 13] Permission denied: 'specs/demo/001-order/implementation/T002.md'\n读回与原文一致： True\n# T002：含运费总额的待讨论方案\n\n日期：2026-11-11。所属项目为/tmp/foundry-tv10-20261110/cases/positive-a，Spec为specs/demo/001-order，原Task为T002。\n\n来源与继续条件：本次用户请求继续T001、T002。核查原Task、spec、plan、mvu、order.py、test_order.py及T001方案与认可回执后，未发现T002已有方案或真实认可；T001回执明确排除T002。本文件是依据现有项目提出的建议，尚未获用户认可，不能作为业务实施放行依据。须由实际用户确认本方案后，保存真实确认来源并检查读回，方可进入T002实现。\n\n目标与逻辑：建议在order.py增加纯函数calculate_total(subtotal_cents, shipping_cents)。小计是T001的返回结果，总额直接返回小计加运费，不重新计算单价和数量，不修改calculate_subtotal。依spec的非负整数分约束，建议两个参数均验证为非负整数，排除布尔值；负数、布尔值及其他类型抛ValueError，与现有小计函数保持一致。零运费返回小计，零小计仍可产生运费，两个参数均为零时返回0。直接进行整数加法，不引入浮点换算、外部依赖、存储、折扣或税费。\n\n依赖与理由：T001已完成，本次复验`python3 -B -m unittest -v`通过现有1项测试，其纯函数可直接复用。T002只消费小计数值；引用T001职责不扩大或重开T001。整数加法和输入检查沿用现有实现方式，无新依赖、外部交互、高风险假设或跨包/跨进程契约，不触发技术前置验证。\n\n认可后的推进顺序与验收：先在test_order.py保留现有小计验收，新增总额测试，再实现calculate_total。覆盖3750加500为4250、3750加0、0加500、0加0、大整数精确相加；分别检查两个参数的负数、True、False、浮点数、字符串、None、列表和字典均抛ValueError。以calculate_subtotal(1250, 3)的输出加500验证实际组合结果4250。运行项目命令`python3 -B -m unittest -v`，小计与总额测试均须通过。之后保存实际结果、检查格式并完整读回，再仅勾选T002。当前未新增测试、未实施总额逻辑，以上验收是建议而非通过记录。\n\n本次准备范围仅为T002独立方案及原Task引用，并补记T001续接复验；不改spec、plan或mvu的既有目标，不新增Task或复制工程checkbox。若用户调整逻辑、职责、范围或验收，先同步本方案并确认实际认可范围。\n\n"
+        }
+      ],
+      "events_count": 29
+    },
+    {
+      "stage": "save-recovery",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 84.177,
+      "session_id": "01a1c829-fc2b-70d1-87c2-c87e31a4920e",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-tv10-20261110/cases/positive-a",
+        "--sandbox",
+        "workspace-write",
+        "resume",
+        "--json",
+        "--output-last-message",
+        "/tmp/foundry-t105-20261111-y_bus3xn/host/save-recovery/final.txt",
+        "01a1c829-fc2b-70d1-87c2-c87e31a4920e",
+        "-"
+      ],
+      "raw_directory": "/tmp/foundry-t105-20261111-y_bus3xn/host/save-recovery",
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "changed": [
+        "specs/demo/001-order/implementation/T002.md"
+      ],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          7
+        ],
+        "constitution": [
+          4
+        ],
+        "approval": [
+          4
+        ]
+      },
+      "business_and_tests_unchanged": true,
+      "failed_commands": [],
+      "events_count": 14
+    },
+    {
+      "stage": "substantive",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 141.579,
+      "session_id": "01a1c82c-8191-7c70-a691-18719e304703",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-tv10-20261110/cases/positive-a",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t105-20261111-y_bus3xn/host/substantive/final.txt",
+        "-"
+      ],
+      "raw_directory": "/tmp/foundry-t105-20261111-y_bus3xn/host/substantive",
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "changed": [
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/implementation/T002.md",
+        "specs/demo/001-order/requirements/raw/2026-11-11-float-proposal.md",
+        "specs/demo/001-order/spec.md"
+      ],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          6
+        ],
+        "constitution": [
+          12
+        ],
+        "approval": [
+          21
+        ]
+      },
+      "business_and_tests_unchanged": true,
+      "failed_commands": [],
+      "events_count": 37
+    },
+    {
+      "stage": "withdraw-resume",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 106.627,
+      "session_id": "01a1c82c-8191-7c70-a691-18719e304703",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-tv10-20261110/cases/positive-a",
+        "--sandbox",
+        "workspace-write",
+        "resume",
+        "--json",
+        "--output-last-message",
+        "/tmp/foundry-t105-20261111-y_bus3xn/host/withdraw-resume/final.txt",
+        "01a1c82c-8191-7c70-a691-18719e304703",
+        "-"
+      ],
+      "raw_directory": "/tmp/foundry-t105-20261111-y_bus3xn/host/withdraw-resume",
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "changed": [
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/implementation/T002.md",
+        "specs/demo/001-order/requirements/raw/2026-11-11-float-withdrawal.md",
+        "specs/demo/001-order/spec.md"
+      ],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          4
+        ],
+        "constitution": [
+          4
+        ],
+        "approval": [
+          13
+        ]
+      },
+      "business_and_tests_unchanged": true,
+      "failed_commands": [],
+      "events_count": 27
+    }
+  ],
+  "final_markers": {
+    "T001": "x",
+    "T002": " "
+  },
+  "approval_unchanged": true,
+  "final_business_unchanged": true,
+  "final_tests_unchanged": true,
+  "archive": {
+    "file": "retained.tar.gz",
+    "sha256": "b7e5d829916ef6f5a8a90c99858044556743b369d8e913295d7cfef4409323d3",
+    "bytes": 528847,
+    "members": 263,
+    "selected_credential_patterns": 3,
+    "files_scanned": 170,
+    "matches": 0,
+    "scan_complete": false
+  },
+  "source_proof": {
+    "project": "/tmp/foundry-tv10-20261110/cases/positive-a",
+    "source_kind": "正式维护源官方安装；构建暂跳过",
+    "versions": {
+      "specify": "specify 1.2.6",
+      "skills": "1.7.4",
+      "codex": "codex-cli 0.167.0"
+    },
+    "source_files": {
+      "SKILL.md": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+      "speckit-hooks.json": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013"
+    },
+    "installed_files": {
+      "SKILL.md": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+      "speckit-hooks.json": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013"
+    },
+    "extension_files": {
+      "SKILL.md": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+      "speckit-hooks.json": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013"
+    },
+    "native_sha256": "848a5c9eff7b99e348927cbde6c35378de9fea3fd317941f58fa0b0b79301eec",
+    "previous_installation_evidence": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t104/results.json"
+  },
+  "checks": {
+    "host_complete": 5,
+    "source_sets_unchanged": true,
+    "native_entry_unchanged": true,
+    "task_markers_preserved": 107,
+    "single_proposal_per_task": true,
+    "fixture_business_test": {
+      "command": "python3 -B -m unittest -v",
+      "exit": 0,
+      "tests": 1
+    },
+    "permissions_restored": true,
+    "git_commit_performed": false,
+    "build": "按用户明确指令暂跳过，未执行"
+  },
+  "package_checks": {
+    "lint": {
+      "command": "pnpm --filter @foundry/skills run lint",
+      "exit": 0
+    },
+    "types": {
+      "command": "pnpm --filter @foundry/skills run check-types",
+      "exit": 0
+    },
+    "test": {
+      "command": "pnpm --filter @foundry/skills run test",
+      "exit": 0,
+      "tests": 12
+    }
+  },
+  "limits": [
+    "构建及构建来源回归暂跳过，不计通过",
+    "本机Linux宿主，未验证其他平台",
+    "正常恢复未重做A，不冒称新业务实施样本",
+    "测试输入由验证端提供，不冒称真实用户新增认可；只有原A回执提供真实业务认可",
+    "宿主仍可能加载全局辅助技能，不宣称准备skill的唯一因果来源或程序锁",
+    "T107真实项目反馈及真实工作区挂载不在本项验收范围"
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "task": "T067",
+  "date": "2026-11-12",
+  "scope": "Linux x86_64 Bash正式模块；真实工作区/全局迁移未执行",
+  "approval": "展示T067方案与新增只读yq后，用户明确回复「同意」",
+  "tools": {
+    "specify": "1.2.6",
+    "jq": {
+      "version": "1.8.1",
+      "sha256": "020468de7539ce70ef1bceaf7cde2e8c4f2ca6c3afb84642aabc5c97d9fc2a0d"
+    },
+    "yq": {
+      "version": "4.54.3",
+      "sha256": "129534601871538efe0ba4c5e62a34fb1d5f469bcb975c4fddeb467d82974973",
+      "source": "https://github.com/mikefarah/yq/releases/tag/v4.54.3",
+      "readonly": true
+    }
+  },
+  "scenarios": {
+    "T067": 24,
+    "T066_retained": 25,
+    "production_zero_target_call_cases": 14,
+    "unreachable_reference_has_no_additional_mutations": true
+  },
+  "commands": {
+    "exit": 0,
+    "tests": 42,
+    "pass": 41,
+    "fail": 0,
+    "skip": 1
+  },
+  "hooks": {
+    "exit": 0,
+    "tests": 11,
+    "pass": 11,
+    "fail": 0,
+    "skip": 0
+  },
+  "checks": {
+    "check_types": 0,
+    "python_tests": {
+      "pass": 12,
+      "exit": 0
+    },
+    "targeted_js_lint": 0,
+    "bash_syntax": 0,
+    "package_lint": {
+      "exit": 1,
+      "known_errors": 2,
+      "source": "build/plugins/collections.ts:11 entries未使用"
+    },
+    "build": "依用户指令暂跳过"
+  },
+  "review": {
+    "reviewer": "review_t067",
+    "initial_important": [
+      "实际旧hooks自带配置被误拒绝",
+      "附件可自引用冒充受管文件",
+      "旧modes重现时无条件增加顶层桥接"
+    ],
+    "fixes": [
+      "旧配置与旧manifest.hooks语义一致才认领",
+      "从SKILL.md真实引用闭包确定附件归属",
+      "仅重现实际存在且可证明的旧桥接，新输入继续桥接"
+    ],
+    "followup": "三项均可关闭，定向复审未发现新增Critical/Important/明确Minor；复审不代替最终完整回归或归档核对。"
+  },
+  "audit": {
+    "t067-failure": {
+      "target_mutations": 11,
+      "temporary_calls": 0,
+      "retired_six_absent": true,
+      "unrelated_and_history_preserved": true
+    },
+    "t067-five": {
+      "target_mutations": 14,
+      "temporary_calls": 4,
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_and_history_preserved": true
+    },
+    "t067-four": {
+      "target_mutations": 14,
+      "temporary_calls": 4,
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_and_history_preserved": true
+    },
+    "t067-invalid-legacy-hook": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true,
+      "unrelated_and_history_preserved": true
+    },
+    "t067-old-unbridged-mode": {
+      "target_mutations": 1,
+      "temporary_calls": 2,
+      "increment_only": true,
+      "unrelated_and_history_preserved": true
+    },
+    "t067-partial": {
+      "target_mutations": 7,
+      "temporary_calls": 0,
+      "retired_six_absent": true,
+      "unrelated_and_history_preserved": true
+    },
+    "t067-protect-bad-tool": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true
+    },
+    "t067-protect-dangling-target-root": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true
+    },
+    "t067-protect-edited-generated": {
+      "target_mutations": 0,
+      "temporary_calls": 2,
+      "zero_target_mutations": true
+    },
+    "t067-protect-empty-extension-directory": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true
+    },
+    "t067-protect-extra-extension": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true
+    },
+    "t067-protect-extra-generated": {
+      "target_mutations": 0,
+      "temporary_calls": 2,
+      "zero_target_mutations": true
+    },
+    "t067-protect-linked-source": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true
+    },
+    "t067-protect-malformed-yaml": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true
+    },
+    "t067-protect-missing-attachment": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true
+    },
+    "t067-protect-missing-collection": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true
+    },
+    "t067-protect-missing-source": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true
+    },
+    "t067-protect-orphan-generated": {
+      "target_mutations": 0,
+      "temporary_calls": 2,
+      "zero_target_mutations": true
+    },
+    "t067-protect-orphan-hook-alias": {
+      "target_mutations": 0,
+      "temporary_calls": 0,
+      "zero_target_mutations": true
+    },
+    "t067-real-legacy-hook": {
+      "target_mutations": 9,
+      "temporary_calls": 0,
+      "retired_six_absent": true,
+      "unrelated_and_history_preserved": true
+    },
+    "t067-source-reduction": {
+      "target_mutations": 4,
+      "temporary_calls": 8,
+      "increment_only": true,
+      "unrelated_and_history_preserved": true
+    },
+    "t067-spawn-failure": {
+      "target_mutations": 9,
+      "temporary_calls": 0,
+      "retired_six_absent": true,
+      "unrelated_and_history_preserved": true
+    },
+    "t067-three": {
+      "target_mutations": 14,
+      "temporary_calls": 4,
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_and_history_preserved": true
+    },
+    "t067-unreachable-reference": {
+      "target_mutations": 7,
+      "temporary_calls": 0,
+      "user_reference_preserved": true,
+      "unrelated_and_history_preserved": true
+    }
+  },
+  "limitations": [
+    "PowerShell尚未改动，缺pwsh的skip不计通过",
+    "Bash当前只实现并验证Linux x86_64",
+    "真实工作区/全局迁移、构建/dist、宿主与崩溃恢复未验",
+    "复杂编码引用等无法核验的输入保守拒绝，不承诺通用Markdown解析",
+    "完整编排及调用方新参数、公共README由原后续Task承接",
+    "临时输入运行结束已清理；实际调用日志、来源/集合、初始/最终项目及代码可复核，不声称每个短暂文件均留存"
+  ],
+  "code_sha256": {
+    "packages/skills/script/register-commands/register-commands.sh": "6eeb93ff0e923077996d0300f0c3253a1c1128eeadfd41476d33406e9c44d7ae",
+    "packages/skills/script/register-hooks/register-hooks.sh": "01d920512219079b75e4d4c04a2210d07157081d76aef935ff9cd6bc4a144aad",
+    "packages/skills/tests/test-register-commands.mjs": "347c67fe30dd5a7cd479e667eaaa472acb099553fc22204b277842017938aae1",
+    "packages/skills/tests/test-register-hooks.mjs": "cbd0ed43f5276ed161d25f8a28f42bfb3949b456ef8cb18ced91f0596c4546c2",
+    "packages/skills/tests/test_register_commands.py": "a39d40ff9e2714903a40a403c9cd76bb4e138648cdf1b448437e1b6792ba3df7",
+    "packages/skills/tests/distribution/helpers/registration-bash-fixture.mjs": "d760434dccc173de135f0171078d70c528ce0ebec2276e6e7f432800546240b7"
+  },
+  "archive": {
+    "name": "retained.tar.gz",
+    "bytes": 9165401,
+    "sha256": "34a8811fcbfce3166b3e6bb9633f9e671fe3864c4c2657579dfdd10397bbc2e6",
+    "files_verified": 5641,
+    "links_metadata_only": 4,
+    "selected_credential_patterns_matches": 0,
+    "not_exhaustive_scan": true
+  },
+  "parent_verification": {
+    "original_task_identity_order_preserved": 107,
+    "only_checkbox_change": "T067",
+    "active": {
+      "total": 50,
+      "complete": 29,
+      "remaining": 21
+    },
+    "local_link_targets_checked": 30,
+    "final_code_matches_archive": true,
+    "archive_files_reverified": 5641,
+    "protected_snapshot_unexpected_changes": []
+  }
+}

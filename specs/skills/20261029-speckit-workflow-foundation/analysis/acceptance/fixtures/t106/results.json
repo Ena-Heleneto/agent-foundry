@@ -1,0 +1,533 @@
+{
+  "stages": {
+    "prep": {
+      "stage": "prep",
+      "project": "/tmp/foundry-t106-20261111-49y73izb/cases/prep",
+      "exit": -15,
+      "timeout": true,
+      "elapsed_seconds": 240.04,
+      "session_id": "01a1c8a3-eddb-7d03-88dc-333e1c10d15a",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t106-20261111-49y73izb/cases/prep",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t106-20261111-49y73izb/host/prep/final.txt",
+        "-"
+      ],
+      "changed": [
+        "specs/skills/001-workflow/implementation/T002.md",
+        "specs/skills/001-workflow/mvu.md",
+        "specs/skills/001-workflow/plan.md",
+        "specs/skills/001-workflow/requirements/README.md",
+        "specs/skills/001-workflow/requirements/discussions/2026-11-10-decision.md",
+        "specs/skills/001-workflow/requirements/prompts/skills-distribution.md",
+        "specs/skills/001-workflow/requirements/raw/2026-11-10-history.md",
+        "specs/skills/001-workflow/spec.md",
+        "specs/skills/001-workflow/tasks.md"
+      ],
+      "model_override": false,
+      "full_skill_in_tool_output": true,
+      "native_entry_in_tool_output": true,
+      "permission_error_in_tool_output": false,
+      "completed_commands": 15
+    },
+    "prep-failure": {
+      "stage": "prep-failure",
+      "project": "/tmp/foundry-t106-20261111-49y73izb/cases/prep-failure",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 137.486,
+      "session_id": "01a1c8a3-eddb-7d12-90b9-7a9b6d3632d5",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t106-20261111-49y73izb/cases/prep-failure",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t106-20261111-49y73izb/host/prep-failure/final.txt",
+        "-"
+      ],
+      "changed": [
+        "specs/skills/001-workflow/requirements/discussions/2026-11-11-history-sync.md",
+        "specs/skills/001-workflow/requirements/raw/2026-11-10-implement-first.md"
+      ],
+      "model_override": false,
+      "full_skill_in_tool_output": true,
+      "native_entry_in_tool_output": true,
+      "permission_error_in_tool_output": true,
+      "completed_commands": 13
+    },
+    "prep-finish": {
+      "stage": "prep-finish",
+      "project": "/tmp/foundry-t106-20261111-49y73izb/cases/prep",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 67.993,
+      "session_id": "01a1c8a3-eddb-7d03-88dc-333e1c10d15a",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t106-20261111-49y73izb/cases/prep",
+        "--sandbox",
+        "workspace-write",
+        "resume",
+        "--json",
+        "--output-last-message",
+        "/tmp/foundry-t106-20261111-49y73izb/host/prep-finish/final.txt",
+        "01a1c8a3-eddb-7d03-88dc-333e1c10d15a",
+        "-"
+      ],
+      "changed": [],
+      "model_override": false,
+      "full_skill_in_tool_output": false,
+      "native_entry_in_tool_output": false,
+      "permission_error_in_tool_output": false,
+      "completed_commands": 1
+    },
+    "prep-recovery": {
+      "stage": "prep-recovery",
+      "project": "/tmp/foundry-t106-20261111-49y73izb/cases/prep-failure",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 201.089,
+      "session_id": "01a1c8a3-eddb-7d12-90b9-7a9b6d3632d5",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t106-20261111-49y73izb/cases/prep-failure",
+        "--sandbox",
+        "workspace-write",
+        "resume",
+        "--json",
+        "--output-last-message",
+        "/tmp/foundry-t106-20261111-49y73izb/host/prep-recovery/final.txt",
+        "01a1c8a3-eddb-7d12-90b9-7a9b6d3632d5",
+        "-"
+      ],
+      "changed": [
+        "specs/skills/001-workflow/implementation/T002.md",
+        "specs/skills/001-workflow/mvu.md",
+        "specs/skills/001-workflow/plan.md",
+        "specs/skills/001-workflow/requirements/README.md",
+        "specs/skills/001-workflow/spec.md",
+        "specs/skills/001-workflow/tasks.md"
+      ],
+      "model_override": false,
+      "full_skill_in_tool_output": false,
+      "native_entry_in_tool_output": false,
+      "permission_error_in_tool_output": false,
+      "completed_commands": 9
+    },
+    "increment": {
+      "stage": "increment",
+      "project": "/tmp/foundry-t106-20261111-49y73izb/cases/increment",
+      "exit": -15,
+      "timeout": true,
+      "elapsed_seconds": 240.116,
+      "session_id": "01a1c8b8-fd8b-7d93-911c-7523641ee06a",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t106-20261111-49y73izb/cases/increment",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t106-20261111-49y73izb/host/increment/final.txt",
+        "-"
+      ],
+      "changed": [
+        "specs/skills/001-workflow/mvu.md",
+        "specs/skills/001-workflow/requirements/README.md",
+        "specs/skills/001-workflow/requirements/discussions/2026-11-11-scope-sync.md",
+        "specs/skills/001-workflow/requirements/raw/2026-11-10-history.md",
+        "specs/skills/001-workflow/spec.md"
+      ],
+      "model_override": false,
+      "full_skill_in_tool_output": true,
+      "native_entry_in_tool_output": true,
+      "permission_error_in_tool_output": false,
+      "completed_commands": 15
+    },
+    "increment-repeat": {
+      "stage": "increment-repeat",
+      "project": "/tmp/foundry-t106-20261111-49y73izb/cases/increment",
+      "exit": -15,
+      "timeout": true,
+      "elapsed_seconds": 240.134,
+      "session_id": "01a1c8b8-fd8b-7d93-911c-7523641ee06a",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t106-20261111-49y73izb/cases/increment",
+        "--sandbox",
+        "workspace-write",
+        "resume",
+        "--json",
+        "--output-last-message",
+        "/tmp/foundry-t106-20261111-49y73izb/host/increment-repeat/final.txt",
+        "01a1c8b8-fd8b-7d93-911c-7523641ee06a",
+        "-"
+      ],
+      "changed": [
+        "specs/skills/001-workflow/mvu.md",
+        "specs/skills/001-workflow/plan.md",
+        "specs/skills/001-workflow/tasks.md"
+      ],
+      "model_override": false,
+      "full_skill_in_tool_output": false,
+      "native_entry_in_tool_output": false,
+      "permission_error_in_tool_output": false,
+      "completed_commands": 7
+    },
+    "increment-finish": {
+      "stage": "increment-finish",
+      "project": "/tmp/foundry-t106-20261111-49y73izb/cases/increment",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 79.506,
+      "session_id": "01a1c8b8-fd8b-7d93-911c-7523641ee06a",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t106-20261111-49y73izb/cases/increment",
+        "--sandbox",
+        "workspace-write",
+        "resume",
+        "--json",
+        "--output-last-message",
+        "/tmp/foundry-t106-20261111-49y73izb/host/increment-finish/final.txt",
+        "01a1c8b8-fd8b-7d93-911c-7523641ee06a",
+        "-"
+      ],
+      "changed": [],
+      "model_override": false,
+      "full_skill_in_tool_output": false,
+      "native_entry_in_tool_output": false,
+      "permission_error_in_tool_output": false,
+      "completed_commands": 1
+    }
+  },
+  "projects": {
+    "prep": {
+      "raw": "specs/skills/001-workflow/requirements/raw/2026-11-10-history.md",
+      "raw_sha256": "d967a1775ef9b646550cb5b5cca22c6250834760cfd85ff353b175bcd74baa14",
+      "raw_original_block_preserved": true,
+      "original_task_markers": {
+        "T001": "x",
+        "T002": " ",
+        "T003": " ",
+        "T004": " ",
+        "T005": " ",
+        "T006": " ",
+        "T009": " "
+      },
+      "current_task_markers": {
+        "T001": "x",
+        "T002": " ",
+        "T003": " ",
+        "T004": " ",
+        "T005": " ",
+        "T006": " ",
+        "T009": " "
+      },
+      "links_checked": 24,
+      "protected_files": "unchanged",
+      "old_scheme": "retained"
+    },
+    "prep-failure": {
+      "raw": "specs/skills/001-workflow/requirements/raw/2026-11-10-implement-first.md",
+      "raw_sha256": "438b5dccbdbcf4bf3075619963ccc9318cc141635ac29ee248558f162c0db302",
+      "raw_original_block_preserved": true,
+      "original_task_markers": {
+        "T001": "x",
+        "T002": " ",
+        "T003": " ",
+        "T004": " ",
+        "T005": " ",
+        "T006": " ",
+        "T009": " "
+      },
+      "current_task_markers": {
+        "T001": "x",
+        "T002": " ",
+        "T003": " ",
+        "T004": " ",
+        "T005": " ",
+        "T006": " ",
+        "T009": " "
+      },
+      "links_checked": 34,
+      "protected_files": "unchanged",
+      "old_scheme": "retained"
+    },
+    "increment": {
+      "raw": "specs/skills/001-workflow/requirements/raw/2026-11-10-history.md",
+      "raw_sha256": "d967a1775ef9b646550cb5b5cca22c6250834760cfd85ff353b175bcd74baa14",
+      "raw_original_block_preserved": true,
+      "original_task_markers": {
+        "T001": "x",
+        "T002": " ",
+        "T003": " ",
+        "T004": " ",
+        "T005": " ",
+        "T006": " ",
+        "T009": " "
+      },
+      "current_task_markers": {
+        "T001": "x",
+        "T003": " ",
+        "T004": " ",
+        "T005": " ",
+        "T006": " ",
+        "T007": " ",
+        "T002": " ",
+        "T008": " ",
+        "T009": " "
+      },
+      "links_checked": 39,
+      "protected_files": "unchanged",
+      "old_scheme": "retained"
+    }
+  },
+  "increment_repeat_raw_preserved": true,
+  "package_checks": {
+    "package-lint": {
+      "args": [
+        "pnpm",
+        "--filter",
+        "@foundry/skills",
+        "run",
+        "lint"
+      ],
+      "exit": 0,
+      "output_tail": "$ eslint .\n"
+    },
+    "package-types": {
+      "args": [
+        "pnpm",
+        "--filter",
+        "@foundry/skills",
+        "run",
+        "check-types"
+      ],
+      "exit": 0,
+      "output_tail": "$ tsc --noEmit\n"
+    },
+    "package-test": {
+      "args": [
+        "pnpm",
+        "--filter",
+        "@foundry/skills",
+        "run",
+        "test"
+      ],
+      "exit": 0,
+      "output_tail": "$ python -B -m unittest discover -s tests -p \"test_*.py\"\n............\n----------------------------------------------------------------------\nRan 12 tests in 0.891s\n\nOK\n"
+    },
+    "skill-lint": {
+      "args": [
+        "pnpm",
+        "exec",
+        "eslint",
+        "--no-ignore",
+        "packages/skills/src/workflow/implementation-preparation/SKILL.md",
+        "packages/skills/src/workflow/task-increment/SKILL.md"
+      ],
+      "exit": 0,
+      "output_tail": ""
+    },
+    "prep-validate": {
+      "args": [
+        "<source-home>/.cache/uv/archive-v0/om6AD6JxRTroJuBL/bin/python",
+        "<source-home>/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "packages/skills/src/workflow/implementation-preparation"
+      ],
+      "exit": 0,
+      "output_tail": "Skill is valid!\n"
+    },
+    "increment-validate": {
+      "args": [
+        "<source-home>/.cache/uv/archive-v0/om6AD6JxRTroJuBL/bin/python",
+        "<source-home>/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "packages/skills/src/workflow/task-increment"
+      ],
+      "exit": 1,
+      "output_tail": "Unexpected key(s) in SKILL.md frontmatter: destructive. Allowed properties are: allowed-tools, description, license, metadata, name\n"
+    },
+    "increment-before-validate": {
+      "args": [
+        "<source-home>/.cache/uv/archive-v0/om6AD6JxRTroJuBL/bin/python",
+        "<source-home>/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "/tmp/foundry-t106-20261111-49y73izb/before/packages/skills/src/workflow/task-increment"
+      ],
+      "exit": 1,
+      "output_tail": "Unexpected key(s) in SKILL.md frontmatter: destructive. Allowed properties are: allowed-tools, description, license, metadata, name\n"
+    }
+  },
+  "root_checks": {
+    "task_identities": 107,
+    "checkbox_changes": [
+      [
+        [
+          " ",
+          "T106"
+        ],
+        [
+          "x",
+          "T106"
+        ]
+      ]
+    ],
+    "links_checked": 36,
+    "original_requirements": "unchanged except navigation",
+    "governance_profile_plan": "unchanged",
+    "old_skill_bodies": "byte-identical after removing additions",
+    "FR_SC": "unchanged"
+  },
+  "review": {
+    "reviewer": "review_t106",
+    "scope": "只读源码与写前副本、实际宿主工具事件/文件和验证记录",
+    "critical": [],
+    "important": [],
+    "minor": [
+      "审查时正式记录尚缺原始证据定位，按既定计划归档并补链接"
+    ],
+    "completion_at_review": "Increment恢复仍待验，不能据当时证据整项通过",
+    "next_actual_evidence": "increment-finish现已真实结束，后续另请只补核此前待验条件；不改写原审查事实",
+    "followup": {
+      "critical": [],
+      "important": [],
+      "prior_minor_resolved": true,
+      "scope": "仅补核原待验Increment结束与原文hash、正式证据定位/归档；不是重新改写前次审查",
+      "conclusion": "原T106需求追溯、消费与恢复范围可收口，其他未验保留"
+    }
+  },
+  "micro": {
+    "method": "每项为一次新上下文只读场景题；控制组完整读取两个原技能但无本轮新增指导，准备组仅准备技能已补指导。场景题微测不代表真实文件行为、真实用户确认或稳定性统计。控制组与准备组均回答A准备/B规划/C普通进度。原微题见对应agent首条任务消息；原输入只抽取真实历史表达的一部分用于压力场景，完整宿主回归另取未改写的原始块。",
+    "scenario": "已有Spec/plan/mvu/tasks和未获认可方案；11月10日暂停三模式并优先Implement的真实变化，11月11日续做，原文未归档、AI已有润色长稿、用户赶时间只想简报，治理要求可追溯。分别判断准备、规划、仅问进度的动作。",
+    "control": [
+      {
+        "agent": "t106_control_1",
+        "manual": "A缺原文/摘要动作，B有来源区分但缺简洁摘要与导航。",
+        "answer_normalized": "A：先核对宪章、原 Task 和方案。未认可方案不能据‘开始’直接实施；新范围使旧方案失效，先同步上游，再修订 implementation/<Task ID>.md，核实‘第二种’所指及认可范围后继续。\nB：按 Spec 分类布局补存 11 月 10 日原意，注明 11 日续接；润色提示词标为 AI 整理，不能冒充原话。spec.md 移除三模式测试范围；plan.md、mvu.md、tasks.md 标注三模式暂停、Implement 优先，保留身份与历史；不写 AGENTS。格式检查、读回并调用分析技能。\nC：仅问进度则读取、简报现状，不据此改规划或授权实施。"
+      },
+      {
+        "agent": "t106_control_2",
+        "manual": "A缺原文/摘要落盘，B保留来源区分但缺摘要导航。",
+        "answer_normalized": "A：普通‘开始当前Task’也触发实施准备。读宪章及Spec材料，核对11月10日要求、11月11日续接及‘第二种’所指。原实施方案未通过，不据AI长提示词开工；范围变化先同步spec.md及受影响plan.md、mvu.md、tasks.md，再讨论implementation/<Task ID>.md。\nB：Increment按Spec既有分类位置保存来源、原意、调整理由，区分用户表达、AI润色与待确认项；原文未归档须明示，不伪造原话。spec移除所指测试范围，关联材料标注三模式暂停、Implement优先；保留历史与原Task身份，不写AGENTS。逐份格式检查、读回并刷新分析；简报变化及缺项。\nC：仅问进度只读汇报，不自动执行上述变更。本微样本不构成真实确认。"
+      },
+      {
+        "agent": "t106_control_3",
+        "manual": "A保存讨论但未要求原话归档和摘要，B归档表达但遗漏摘要导航。",
+        "answer_normalized": "A．‘开始当前Task’：复核宪章、四项材料及原方案；原方案未获认可，不能直接实施。先核实‘第二种’的具体内容；按Spec布局保存讨论来源、范围变化及待确认项，再修订implementation/<Task ID>.md、格式检查、读回并补tasks引用；不写AGENTS。\nB．Increment：归档本轮提供的用户表达，注明事件为11月10日、11月11日续接、原聊天未归档；AI长提示词标为润色稿，不能冒充原话或认可。依据治理同步spec.md的模式暂停及测试范围变化；冲突的必要验证先明确影响。依次更新mvu.md、plan.md、tasks.md，保留ID、历史和未通过方案；检查读回后调用artifact-spec-analysis，不自动实施。\nC．仅问进度：只读核对并简报实际变化、阻塞和下一步，不触发上述规划写入或把旧描述当新授权。"
+      },
+      {
+        "agent": "t106_control_4",
+        "manual": "A缺原文/摘要，B来源记述完整些但无独立简洁导航。",
+        "answer_normalized": "A：先读宪章及 Spec/plan/mvu/tasks、原方案和证据。范围、验收已变，原方案未获认可，不能直接开工。核实‘第二种’指向；按治理同步上游，再讨论并保存 implementation/<Task ID>.md，检查读回后补 tasks 引用。\nB：按 Spec 既有分类记录变更来源：11月10日提出、11月11日续接；注明原文未归档，AI润色稿不能冒充原话或认可。明确测试范围及必要验证冲突后更新 spec.md；依次同步 mvu.md、plan.md、tasks.md，标注三模式暂停、Implement优先，保留身份和历史，不写 AGENTS。逐份检查读回，再调用 artifact-spec-analysis；规划完成不代表实施获准。\nC：仅问进度时只读核对并简报进展、差异和阻塞，不据旧聊天新增需求或改文件。"
+      },
+      {
+        "agent": "t106_control_5",
+        "manual": "A缺原文/摘要，B缺简洁摘要与链接导航。",
+        "answer_normalized": "A：先读宪章及 spec/plan/mvu/tasks、原方案和证据；需求已实质变化，原方案未获认可，不能开工。先同步受影响上游，再讨论保存 implementation/<Task ID>.md，检查读回后补 Task 引用。\nB：按 Spec 既有分类保存来源记录：11月10日聊天、11月11日续接，原文未归档；AI长提示词单列，不冒充原话。spec.md 标注三模式暂停、移除其测试范围；核清‘第二种’指代，同步 plan.md、mvu.md、tasks.md 的 Implement 优先顺序、依赖和验收，保留历史及必要验证。检查读回后调用综合分析；不写 AGENTS，不自动实施。\nC：仅问进度则读取事实、简报差异及阻塞，不触发上述规划落盘。"
+      }
+    ],
+    "prep_guided": [
+      {
+        "agent": "t106_prep_1",
+        "observed_A": "先将可见原话存requirements/raw，区分11月10日来源与11月11日续做，AI长稿另存；更新README并链接有效要求，核实第二种、未认可不实施。",
+        "manual": "原文/摘要和认可边界均出现；短答未逐项列全摘要内容，不能由微题单独判完整落盘。"
+      },
+      {
+        "agent": "t106_prep_2",
+        "observed_A": "先归档可见原话，标来源、续做及不可见范围；润色长稿另存，更新README；第二种须核对，方案未认可不能开工。",
+        "manual": "符合新增处理顺序，具体落盘质量待宿主验证。"
+      },
+      {
+        "agent": "t106_prep_3",
+        "observed_A": "保存原话到raw，区分表达与续做日期和AI整理，读回后更新README及已确认定义；未认可不实施。",
+        "manual": "原文与摘要职责明确，实际文件链接另验。"
+      },
+      {
+        "agent": "t106_prep_4",
+        "observed_A": "保存可见原话、来源与续做日期，AI长稿另存；更新摘要链接来源；核实第二种，旧方案未认可不实施。",
+        "manual": "符合来源链/认可保护，未逐项写出摘要字段不当作已完整文件输出。"
+      },
+      {
+        "agent": "t106_prep_5",
+        "observed_A": "原话存raw、注明两日期，AI稿另存，检查读回后更新README及明确要求，旧方案未认可不能开工。",
+        "manual": "五个样本均补出原文/摘要职责；仅有限样本，不作长期或唯一因果结论。"
+      }
+    ],
+    "transcription_note": "control的verbatim保留表达及动作内容，统一了引号/代码排版，非逐字原始消息副本；prep_guided为人工摘要，未冒充原话。原始独立消息在对应agent上下文可追溯。",
+    "increment_guided": [
+      {
+        "agent": "t106_increment_1",
+        "observed": "沿原文来源归档，区分两日期及AI稿；先来源读回，再摘要及确认上游，然后mvu/plan/tasks；仅Spec复用、进度不重归档。"
+      },
+      {
+        "agent": "t106_increment_2",
+        "observed": "先读摘要与有效定义；原文放raw，AI稿另存，区分表达/续做日期；来源→摘要→上游→mvu/plan/tasks；普通续接不当新要求。"
+      },
+      {
+        "agent": "t106_increment_3",
+        "observed": "保留可见输入及日期，缺失来源明示，整理稿另存；来源读回后摘要/确认定义，再mvu/plan/tasks；仅进度只报告。"
+      },
+      {
+        "agent": "t106_increment_4",
+        "observed": "按真实来源/日期归档可见原话，AI稿和讨论另存；检查后摘要及定义，再mvu/plan/tasks；旧聊天不当新指令。"
+      },
+      {
+        "agent": "t106_increment_5",
+        "observed": "原文/讨论→检查读回→简短摘要链接来源→确认上游→mvu/plan/tasks，未确认只待定，重复不重归档。"
+      }
+    ],
+    "manual_conclusion": "五个控制样本均未给出完整原文与简洁摘要导航处理；五个准备指导及五个规划指导样本均补出该职责，原认可/历史/仅进度边界保持。短答不等同完整摘要文件，日期/来源/链接及恢复由独立宿主实际文件验证；不把样本数量当稳定性或唯一因果证明。"
+  },
+  "archive": {
+    "file": "retained.tar.gz",
+    "bytes": 728730,
+    "sha256": "0fba713e4e938886ad38bbf67dd25c8b8f89b4815c415cb19118872f80cbef95",
+    "members": 366,
+    "selected_credential_patterns": 3,
+    "files_scanned": 239,
+    "matches": 0,
+    "scan_complete": false,
+    "parent_profile_included": false
+  },
+  "limits": [
+    "prep和increment首轮各240秒超时，原失败保留；同会话续接正常结束另列，不抵首次失败",
+    "外层首次只读环境初始化失败，审批后外层启动；内层仍workspace-write",
+    "Linux本机默认模型，可能加载全局辅助skill，不推断唯一因果或全平台保证",
+    "当前维护源官方skills本地安装；非build/dist、正式modes生成或当前hook完整接线验证",
+    "真实历史输入回放和人工结构夹具不冒充新用户确认、真实业务或长期画像效果",
+    "原destructive字段写前后被通用validator拒绝；准备validator通过，不宣称全部通用校验通过",
+    "原文与摘要本Task已验；同一综合分析能力缺失仍未完成，T062～T064不据此通过"
+  ],
+  "final_status": {
+    "T106": "completed within original non-build scope",
+    "MVU-006": "in_progress; analysis unimplemented",
+    "other_tasks": "unchanged",
+    "archive_checkpoint": "原始归档含回填前检查和首次审查，本结构化结果保留后续补核和最终回填检查"
+  }
+}

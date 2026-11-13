@@ -1,0 +1,44 @@
+[
+  {
+    "source": "packages/skills/build/distribution/dependencies.ts",
+    "archived": "retired-source/packages/skills/build/distribution/dependencies.ts",
+    "bytes": 7232,
+    "sha256": "eb9d675c334948e425a3544ab475cce6a33d3e6337d4fc24ce1ac7b7b45baa8e"
+  },
+  {
+    "source": "packages/skills/build/distribution/export.ts",
+    "archived": "retired-source/packages/skills/build/distribution/export.ts",
+    "bytes": 4764,
+    "sha256": "0abd93200068b328986f91e0f557921c6489441b6d7b854dd85fd8b2bd4955cc"
+  },
+  {
+    "source": "packages/skills/build/distribution/models.ts",
+    "archived": "retired-source/packages/skills/build/distribution/models.ts",
+    "bytes": 3200,
+    "sha256": "8aee59c376f4aa4ae33b25b70e4625819f5f1981e1d27a63bde97b259a255554"
+  },
+  {
+    "source": "packages/skills/build/distribution/source-files.ts",
+    "archived": "retired-source/packages/skills/build/distribution/source-files.ts",
+    "bytes": 4964,
+    "sha256": "3d8fd2b2978e00beace791e1aef5b09d2282a27f57bd23e8eac913c551273733"
+  },
+  {
+    "source": "packages/skills/build/distribution/source.ts",
+    "archived": "retired-source/packages/skills/build/distribution/source.ts",
+    "bytes": 9345,
+    "sha256": "b27d7a56f681bf8c243a94d24987d638c084a521900885169c05aee34f9df0ed"
+  },
+  {
+    "source": "packages/skills/build/distribution/validate.ts",
+    "archived": "retired-source/packages/skills/build/distribution/validate.ts",
+    "bytes": 10835,
+    "sha256": "ff43f292d44e3ebe8587eec2bd3ef3e32e15c7b3857076836e261bbecd776942"
+  },
+  {
+    "source": "packages/skills/tests/distribution/source-plan.test.mjs",
+    "archived": "retired-source/packages/skills/tests/distribution/source-plan.test.mjs",
+    "bytes": 25553,
+    "sha256": "5a34d1034486c9b5bf420c2aafe6e1529e280b097b916e06a300c29d35ad7381"
+  }
+]

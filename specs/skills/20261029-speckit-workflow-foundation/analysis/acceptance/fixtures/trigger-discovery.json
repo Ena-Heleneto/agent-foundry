@@ -1,0 +1,696 @@
+{
+  "scope": "独立描述识别，非宿主自动加载验证",
+  "cases": [
+    [
+      "P1",
+      "给已有订单功能实现一个创建接口，任务和数据模型都已经有了。"
+    ],
+    [
+      "P2",
+      "我们给商城增加退货功能，先帮我规划开发步骤。现在还没有正式任务清单。"
+    ],
+    [
+      "P3",
+      "继续做结算，余额接口已经验证，扣费接口还缺，页面需要这两个接口。"
+    ],
+    [
+      "P4",
+      "我是 Tutor 模式，今天用户只练习当前 Task 的查询接口，请准备这一小步的工程指导。"
+    ],
+    [
+      "P5",
+      "按 Increment 规划这个业务功能的实现步骤，目标和 MVU 已有，暂时不写代码。"
+    ],
+    [
+      "P6",
+      "Direct 下按我的思路继续开发库存功能，先查依赖，今天只做库存查询。"
+    ],
+    [
+      "P7",
+      "Pair 下只讨论订单接口和页面应该怎样衔接，先不代写代码。"
+    ],
+    [
+      "P8",
+      "Add a refund endpoint to the existing checkout feature; the data layer is already implemented."
+    ],
+    [
+      "N1",
+      "只把按钮文字从保存改成确认，不改变行为。"
+    ],
+    [
+      "N2",
+      "解释一下 HTTP 403 和 404 的区别，不改代码。"
+    ],
+    [
+      "N3",
+      "只修正文档中的错别字并格式化 Markdown。"
+    ],
+    [
+      "N4",
+      "调整卡片的背景颜色和间距，不改变功能或数据流。"
+    ]
+  ],
+  "baseline_description": "在已有业务目标与任务中，需要规划或实施一个小业务节点、单个接口，或判断多个接口与页面的衔接时使用。",
+  "candidate_description": "需要规划、实现或继续开发业务功能、业务接口，或安排数据、后端、验证与页面之间的开发步骤和依赖时使用。适用于从业务目标细化实施路径、单接口开发、页面接入和中断后续做；不以已有正式任务、MVU、Spec Kit 或协作模式为触发前提。仅修改文案、格式、视觉样式，或只解释概念且不涉及业务实现路径时不使用。",
+  "baseline": [
+    [
+      {
+        "id": "P1",
+        "load": true,
+        "reason": "已有订单功能、任务和数据模型，当前要实施单个创建接口，符合描述。"
+      },
+      {
+        "id": "P2",
+        "load": false,
+        "reason": "请求从尚无正式任务清单的新退货功能开始规划，不满足已有业务目标与任务的前提。"
+      },
+      {
+        "id": "P3",
+        "load": true,
+        "reason": "已有结算任务，需要补齐扣费接口并判断两个接口与页面的衔接，符合描述。"
+      },
+      {
+        "id": "P4",
+        "load": true,
+        "reason": "围绕当前 Task 的单个查询接口准备工程指导，属于已有任务中规划小业务节点。"
+      },
+      {
+        "id": "P5",
+        "load": true,
+        "reason": "已有目标和 MVU，当前规划业务实现步骤，符合已有业务目标与任务中的节点规划场景。"
+      },
+      {
+        "id": "P6",
+        "load": true,
+        "reason": "继续已有库存开发任务且只做库存查询，需要核查依赖并实施小业务节点。"
+      },
+      {
+        "id": "P7",
+        "load": true,
+        "reason": "讨论订单接口与页面如何衔接，直接符合描述中的接口与页面衔接判断场景。"
+      },
+      {
+        "id": "P8",
+        "load": true,
+        "reason": "在已有结算功能和数据层基础上新增单个退款接口，符合单接口实施场景。"
+      },
+      {
+        "id": "N1",
+        "load": false,
+        "reason": "仅修改按钮文案，不涉及业务节点、接口实施或衔接判断。"
+      },
+      {
+        "id": "N2",
+        "load": false,
+        "reason": "仅解释 HTTP 状态码知识，不涉及已有业务任务的规划或实施。"
+      },
+      {
+        "id": "N3",
+        "load": false,
+        "reason": "仅修正文档错字和格式，不涉及业务节点或接口。"
+      },
+      {
+        "id": "N4",
+        "load": false,
+        "reason": "仅调整视觉样式且不改变功能或数据流，不涉及业务节点或接口衔接。"
+      }
+    ],
+    [
+      {
+        "id": "P1",
+        "load": true,
+        "reason": "已有订单功能、任务和数据模型，当前要实施单个创建接口，直接符合描述。"
+      },
+      {
+        "id": "P2",
+        "load": false,
+        "reason": "请求从头规划新增退货功能且尚无任务清单，未体现描述要求的已有任务和小业务节点范围。"
+      },
+      {
+        "id": "P3",
+        "load": true,
+        "reason": "已有结算目标，需补齐扣费接口并判断两个接口与页面的衔接，符合描述。"
+      },
+      {
+        "id": "P4",
+        "load": true,
+        "reason": "已有当前 Task 且只规划查询接口这一小步，Tutor 工程指导可以并用该技能。"
+      },
+      {
+        "id": "P5",
+        "load": false,
+        "reason": "虽然已有目标和 MVU，但请求规划整个业务功能，未限定小业务节点、单个接口或接口页面衔接。"
+      },
+      {
+        "id": "P6",
+        "load": true,
+        "reason": "已有库存开发任务，当前仅实施库存查询并核查依赖，属于一个小业务节点。"
+      },
+      {
+        "id": "P7",
+        "load": true,
+        "reason": "请求判断订单接口与页面怎样衔接，符合描述且不要求必须写代码。"
+      },
+      {
+        "id": "P8",
+        "load": true,
+        "reason": "已有结算功能及数据层，当前新增一个退款接口，属于单个接口实施。"
+      },
+      {
+        "id": "N1",
+        "load": false,
+        "reason": "仅修改按钮文字，不涉及业务节点、接口实施或页面数据衔接。"
+      },
+      {
+        "id": "N2",
+        "load": false,
+        "reason": "仅解释 HTTP 状态码概念，不涉及已有业务任务的规划或实施。"
+      },
+      {
+        "id": "N3",
+        "load": false,
+        "reason": "仅修正文档和 Markdown 格式，不属于描述中的业务交付范围。"
+      },
+      {
+        "id": "N4",
+        "load": false,
+        "reason": "仅调整视觉样式且不改变功能或数据流，不涉及描述中的业务节点或衔接。"
+      }
+    ],
+    [
+      {
+        "id": "P1",
+        "load": true,
+        "reason": "已有任务与数据模型，实施创建订单这个单接口符合技能描述。"
+      },
+      {
+        "id": "P2",
+        "load": false,
+        "reason": "请求从新增退货功能开始规划，且尚无正式任务清单，不满足描述中的已有业务目标与任务前提。"
+      },
+      {
+        "id": "P3",
+        "load": true,
+        "reason": "已有结算业务正在实施，需要补充扣费接口并判断两个接口与页面的衔接。"
+      },
+      {
+        "id": "P4",
+        "load": true,
+        "reason": "围绕已有 Task 的查询接口准备局部工程指导，属于规划单个接口的小业务节点。"
+      },
+      {
+        "id": "P5",
+        "load": true,
+        "reason": "业务目标与 MVU 已有，规划其实现步骤属于既有业务上下文中的节点规划，无需已经进入编码。"
+      },
+      {
+        "id": "P6",
+        "load": true,
+        "reason": "继续既有库存开发并限定为库存查询，查依赖与实施这个小业务节点符合描述。"
+      },
+      {
+        "id": "P7",
+        "load": true,
+        "reason": "讨论既有订单业务接口与页面的衔接直接符合描述，不要求实际编写代码。"
+      },
+      {
+        "id": "P8",
+        "load": true,
+        "reason": "在已有结算功能及数据层基础上新增退款接口，属于单个业务接口的实施。"
+      },
+      {
+        "id": "N1",
+        "load": false,
+        "reason": "仅修改按钮文案，不涉及业务节点或接口的规划实施及衔接。"
+      },
+      {
+        "id": "N2",
+        "load": false,
+        "reason": "仅解释 HTTP 状态码知识，不涉及已有业务目标与任务的交付。"
+      },
+      {
+        "id": "N3",
+        "load": false,
+        "reason": "仅修正文档与格式，不涉及业务节点或接口的规划实施。"
+      },
+      {
+        "id": "N4",
+        "load": false,
+        "reason": "仅调整视觉样式且不改变功能或数据流，不涉及描述中的业务节点交付或衔接。"
+      }
+    ],
+    [
+      {
+        "id": "P1",
+        "load": true,
+        "reason": "已有任务和数据模型，实施单个创建接口直接符合描述。"
+      },
+      {
+        "id": "P2",
+        "load": false,
+        "reason": "当前尚无任务清单，要求规划整个新增退货功能，不明确属于已有任务中的小业务节点。"
+      },
+      {
+        "id": "P3",
+        "load": true,
+        "reason": "需要继续实施扣费接口并判断它与余额接口及页面的衔接，符合描述。"
+      },
+      {
+        "id": "P4",
+        "load": true,
+        "reason": "围绕已有 Task 的单个查询接口准备工程指导，属于规划小业务节点，可与 Tutor 并用。"
+      },
+      {
+        "id": "P5",
+        "load": true,
+        "reason": "已有目标和 MVU，规划相应业务单元的实现步骤属于规划业务节点，可与 Increment 并用。"
+      },
+      {
+        "id": "P6",
+        "load": true,
+        "reason": "已有库存开发任务，本次只实施库存查询并检查依赖，符合小业务节点范围。"
+      },
+      {
+        "id": "P7",
+        "load": true,
+        "reason": "判断订单接口与页面如何衔接直接符合描述，讨论阶段也适用。"
+      },
+      {
+        "id": "P8",
+        "load": true,
+        "reason": "在已有结算功能与数据层基础上新增单个退款接口，符合描述。"
+      },
+      {
+        "id": "N1",
+        "load": false,
+        "reason": "只修改按钮文案，不涉及业务节点实施、接口或页面衔接。"
+      },
+      {
+        "id": "N2",
+        "load": false,
+        "reason": "仅解释 HTTP 状态码知识，不涉及已有业务任务的规划或实施。"
+      },
+      {
+        "id": "N3",
+        "load": false,
+        "reason": "仅做文档文字与格式修正，不在描述的业务节点或接口范围内。"
+      },
+      {
+        "id": "N4",
+        "load": false,
+        "reason": "仅调整视觉样式，不涉及业务功能、接口或数据衔接。"
+      }
+    ],
+    [
+      {
+        "id": "P1",
+        "load": true,
+        "reason": "已有订单目标、任务和数据模型，实施单个创建接口符合技能描述。"
+      },
+      {
+        "id": "P2",
+        "load": false,
+        "reason": "请求仍处于新增退货功能的初步规划阶段，明确尚无正式任务清单，未满足描述中的已有业务目标与任务条件。"
+      },
+      {
+        "id": "P3",
+        "load": true,
+        "reason": "继续既有结算业务，既需实施扣费接口又需判断两个接口与页面的衔接，符合描述。"
+      },
+      {
+        "id": "P4",
+        "load": true,
+        "reason": "当前 Task 已存在，指导实施其中一个查询接口属于描述覆盖的单接口小步工作。"
+      },
+      {
+        "id": "P5",
+        "load": true,
+        "reason": "已有目标和 MVU，需要规划业务实现步骤，适合按小业务节点组织实施规划，且描述不要求立即编码。"
+      },
+      {
+        "id": "P6",
+        "load": true,
+        "reason": "既有库存业务中只推进库存查询并检查依赖，属于单个业务节点的实施。"
+      },
+      {
+        "id": "P7",
+        "load": true,
+        "reason": "判断既有订单接口与页面的衔接直接符合技能描述，即使暂不写代码也适用。"
+      },
+      {
+        "id": "P8",
+        "load": true,
+        "reason": "在已有结算功能和数据层基础上新增单个退款接口，符合单接口实施场景。"
+      },
+      {
+        "id": "N1",
+        "load": false,
+        "reason": "只替换按钮文字，不涉及业务节点实施或接口与页面衔接。"
+      },
+      {
+        "id": "N2",
+        "load": false,
+        "reason": "只解释 HTTP 状态码概念，不涉及已有业务任务的规划或实施。"
+      },
+      {
+        "id": "N3",
+        "load": false,
+        "reason": "文档纠错和格式化不属于业务节点、接口或页面衔接工作。"
+      },
+      {
+        "id": "N4",
+        "load": false,
+        "reason": "纯视觉样式调整不改变功能或数据流，不涉及描述所指业务实施与衔接。"
+      }
+    ]
+  ],
+  "candidate": [
+    [
+      {
+        "id": "P1",
+        "load": true,
+        "reason": "请求实现已有订单功能的创建接口，属于单业务接口开发。"
+      },
+      {
+        "id": "P2",
+        "load": true,
+        "reason": "请求为新增退货业务规划开发步骤，且描述明确不要求已有正式任务清单。"
+      },
+      {
+        "id": "P3",
+        "load": true,
+        "reason": "请求中断后继续结算业务，并涉及余额、扣费接口与页面之间的开发依赖。"
+      },
+      {
+        "id": "P4",
+        "load": true,
+        "reason": "请求为当前业务查询接口准备工程实施指导，Tutor 模式和单步范围不影响触发。"
+      },
+      {
+        "id": "P5",
+        "load": true,
+        "reason": "请求规划业务功能实施步骤，属于从业务目标细化实施路径，暂不写代码也适用。"
+      },
+      {
+        "id": "P6",
+        "load": true,
+        "reason": "请求继续开发库存查询业务接口并检查依赖，属于业务开发及步骤安排。"
+      },
+      {
+        "id": "P7",
+        "load": true,
+        "reason": "请求讨论订单接口与页面的衔接，涉及业务实现路径和页面接入，暂不写代码也适用。"
+      },
+      {
+        "id": "P8",
+        "load": true,
+        "reason": "请求为现有结算功能新增退款接口，属于数据层已有情况下的单业务接口开发。"
+      },
+      {
+        "id": "N1",
+        "load": false,
+        "reason": "请求仅修改按钮文案且不改变行为，属于描述明确排除的文案修改。"
+      },
+      {
+        "id": "N2",
+        "load": false,
+        "reason": "请求只解释 HTTP 状态码概念，不涉及业务实现路径。"
+      },
+      {
+        "id": "N3",
+        "load": false,
+        "reason": "请求仅修正文档错字和 Markdown 格式，属于描述明确排除的文案与格式修改。"
+      },
+      {
+        "id": "N4",
+        "load": false,
+        "reason": "请求仅调整视觉样式且不改变功能或数据流，属于描述明确排除的范围。"
+      }
+    ],
+    [
+      {
+        "id": "P1",
+        "load": true,
+        "reason": "请求实现订单创建业务接口，属于单接口业务开发。"
+      },
+      {
+        "id": "P2",
+        "load": true,
+        "reason": "请求从退货业务目标规划开发步骤，且无需已有正式任务清单。"
+      },
+      {
+        "id": "P3",
+        "load": true,
+        "reason": "请求继续结算开发并处理扣费接口与页面之间的依赖。"
+      },
+      {
+        "id": "P4",
+        "load": true,
+        "reason": "请求为当前业务查询接口准备实施指导，Tutor 模式与任务范围不排除技能适用。"
+      },
+      {
+        "id": "P5",
+        "load": true,
+        "reason": "请求规划业务功能的实现步骤，即使暂不编码也属于业务实施路径规划。"
+      },
+      {
+        "id": "P6",
+        "load": true,
+        "reason": "请求继续开发库存查询并检查依赖，符合业务功能续做和单接口开发范围。"
+      },
+      {
+        "id": "P7",
+        "load": true,
+        "reason": "请求讨论订单接口与页面的接入衔接，涉及业务实现路径和依赖安排。"
+      },
+      {
+        "id": "P8",
+        "load": true,
+        "reason": "请求为现有结算功能新增退款业务接口，数据层已完成不影响技能适用。"
+      },
+      {
+        "id": "N1",
+        "load": false,
+        "reason": "请求仅修改按钮文案且不改变行为，属于明确排除的纯文案修改。"
+      },
+      {
+        "id": "N2",
+        "load": false,
+        "reason": "请求只解释 HTTP 状态码概念，不涉及业务实现路径。"
+      },
+      {
+        "id": "N3",
+        "load": false,
+        "reason": "请求仅修正文档错别字和格式，属于明确排除的文字与格式修改。"
+      },
+      {
+        "id": "N4",
+        "load": false,
+        "reason": "请求仅调整视觉样式且不改变功能或数据流，属于明确排除范围。"
+      }
+    ],
+    [
+      {
+        "id": "P1",
+        "load": true,
+        "reason": "创建订单接口属于业务接口实现，已有任务和数据模型不影响触发。"
+      },
+      {
+        "id": "P2",
+        "load": true,
+        "reason": "退货功能需要从业务目标规划开发步骤，且不要求已有正式任务清单。"
+      },
+      {
+        "id": "P3",
+        "load": true,
+        "reason": "继续结算开发需要安排已验证接口、待实现接口与页面之间的依赖。"
+      },
+      {
+        "id": "P4",
+        "load": true,
+        "reason": "当前查询接口的工程指导涉及单接口业务实现路径，Tutor 模式不排除适用。"
+      },
+      {
+        "id": "P5",
+        "load": true,
+        "reason": "规划业务功能实现步骤属于适用范围，即使暂不写代码且已有 MVU。"
+      },
+      {
+        "id": "P6",
+        "load": true,
+        "reason": "继续开发库存查询并检查依赖属于业务接口开发与步骤安排。"
+      },
+      {
+        "id": "P7",
+        "load": true,
+        "reason": "讨论订单接口与页面的衔接涉及业务实现路径及依赖，无须立即代写代码。"
+      },
+      {
+        "id": "P8",
+        "load": true,
+        "reason": "增加退款接口属于业务接口实现，数据层已完成不影响触发。"
+      },
+      {
+        "id": "N1",
+        "load": false,
+        "reason": "仅修改按钮文案且不改变行为，属于明确排除范围。"
+      },
+      {
+        "id": "N2",
+        "load": false,
+        "reason": "仅解释 HTTP 状态码概念，不涉及业务实现路径。"
+      },
+      {
+        "id": "N3",
+        "load": false,
+        "reason": "仅修正文档错别字并调整格式，属于明确排除范围。"
+      },
+      {
+        "id": "N4",
+        "load": false,
+        "reason": "仅调整视觉样式且不改变功能或数据流，属于明确排除范围。"
+      }
+    ],
+    [
+      {
+        "id": "P1",
+        "load": true,
+        "reason": "实现已有业务功能的创建接口属于单接口开发，即使任务和模型已存在也适用。"
+      },
+      {
+        "id": "P2",
+        "load": true,
+        "reason": "从退货业务目标规划开发步骤符合触发条件，且无需已有正式任务清单。"
+      },
+      {
+        "id": "P3",
+        "load": true,
+        "reason": "继续结算开发并安排已验证接口、缺失接口和页面之间的依赖符合触发条件。"
+      },
+      {
+        "id": "P4",
+        "load": true,
+        "reason": "为业务查询接口准备工程实施指导属于单接口开发路径，Tutor 模式不影响适用。"
+      },
+      {
+        "id": "P5",
+        "load": true,
+        "reason": "规划业务功能实施步骤符合触发条件，已有 MVU 和暂不编码均不排除适用。"
+      },
+      {
+        "id": "P6",
+        "load": true,
+        "reason": "继续库存功能并检查依赖、实现查询接口属于业务开发，Direct 模式不影响适用。"
+      },
+      {
+        "id": "P7",
+        "load": true,
+        "reason": "讨论业务接口与页面衔接涉及实施路径及依赖安排，即使暂不编码也适用。"
+      },
+      {
+        "id": "P8",
+        "load": true,
+        "reason": "为现有结算功能添加退款接口属于业务接口开发，数据层已实现不排除适用。"
+      },
+      {
+        "id": "N1",
+        "load": false,
+        "reason": "仅修改按钮文案且不改变行为，属于明确排除的文案调整。"
+      },
+      {
+        "id": "N2",
+        "load": false,
+        "reason": "仅解释 HTTP 状态码概念，不涉及业务实现路径。"
+      },
+      {
+        "id": "N3",
+        "load": false,
+        "reason": "仅修正文档文字与格式，属于明确排除的调整。"
+      },
+      {
+        "id": "N4",
+        "load": false,
+        "reason": "仅调整视觉样式且不改变功能或数据流，属于明确排除的样式修改。"
+      }
+    ],
+    [
+      {
+        "id": "P1",
+        "load": true,
+        "reason": "请求实现业务创建接口，已有任务和数据模型不影响触发。"
+      },
+      {
+        "id": "P2",
+        "load": true,
+        "reason": "请求从退货业务目标规划开发步骤，无正式任务清单仍适用。"
+      },
+      {
+        "id": "P3",
+        "load": true,
+        "reason": "请求继续结算开发，并涉及余额、扣费接口与页面的依赖安排。"
+      },
+      {
+        "id": "P4",
+        "load": true,
+        "reason": "请求为业务查询接口准备实施指导，单步任务和 Tutor 模式不限制触发。"
+      },
+      {
+        "id": "P5",
+        "load": true,
+        "reason": "请求规划业务功能实现步骤，即使已有目标和 MVU 且暂不编码也适用。"
+      },
+      {
+        "id": "P6",
+        "load": true,
+        "reason": "请求继续库存业务开发并检查查询接口依赖，符合业务实施与依赖安排范围。"
+      },
+      {
+        "id": "P7",
+        "load": true,
+        "reason": "请求讨论业务接口与页面的衔接，属于业务实现路径和依赖安排。"
+      },
+      {
+        "id": "P8",
+        "load": true,
+        "reason": "请求新增退款业务接口，数据层已实现仍属于单接口开发。"
+      },
+      {
+        "id": "N1",
+        "load": false,
+        "reason": "仅修改按钮文案且不改变行为，属于明确排除范围。"
+      },
+      {
+        "id": "N2",
+        "load": false,
+        "reason": "仅解释 HTTP 状态码概念，不涉及业务实现路径。"
+      },
+      {
+        "id": "N3",
+        "load": false,
+        "reason": "仅修正文档错别字和 Markdown 格式，属于明确排除范围。"
+      },
+      {
+        "id": "N4",
+        "load": false,
+        "reason": "仅调整视觉样式且不改变功能或数据流，属于明确排除范围。"
+      }
+    ]
+  ],
+  "application": "当前响应：\n我会应用 business-node-delivery 技能，先规划“提交退货申请接口”。今天的预期结果是明确该接口的开发范围、依赖和验收方法，页面安排在后续接入。完整业务目标仍是“用户可提交退货申请并看到申请结果”；提交接口只是其中一步。\n\n建议按以下顺序推进：\n1. 数据设计与实现：明确申请关联的订单及商品、申请数量、原因和初始状态，并确认退货资格、可退数量及重复申请规则。先核查现有数据结构，再决定需要新增或复用哪些存储；订单查询按题设列为待核查的复用项，目前没有读取实现，不能认定它已满足接口依赖。\n2. 后端业务与接口：复用适用的订单查询能力，从可信登录身份核对订单归属，执行资格、数量和重复申请校验，再保存申请并返回申请标识及初始状态。保存方式及并发重复提交的处理需结合真实数据层确定。\n3. 验证逻辑：计划以自动测试和实际接口请求验证正常提交、未登录、他人订单、不符合退货条件、超量和重复提交，以及保存失败等适用场景；观察响应、持久化状态和是否产生重复申请。编译、类型检查及 lint 按项目规范执行，不能代替业务验证。以上均为计划，尚未执行，不能计为通过。\n4. 前端页面：今天不进入页面实现。接口验证满足要求后，再接入提交表单、错误反馈及提交后的状态展示。用户要持续看到申请结果，还需要明确结果状态由谁更新、通过什么查询能力读取；现有“订单查询”不等于已有“退货申请结果查询”。页面接入前核对这些依赖，并在接入后验证实际提交、反馈和结果展示。\n\n下一动作：\n先按目标项目既有流程核对有效规范和订单查询实现，澄清会影响提交接口的数据与业务规则，将以上规划交由原有流程形成正式任务。题设要求正式任务和操作授权齐备后才进入实现；目前两项前置尚未齐备，因此只继续允许的规划与核查，不自动建正式任务、不修改业务代码、不写业务数据或调用业务服务。后续实际工作沿用项目既有任务和记录布局保存范围、依赖、真实验证证据与未测项，不另建节点编号、状态或专用记录体系。\n\n实际读取的来源：\n<source-workspace>/packages/skills/src/skills/coding/business-node-delivery/SKILL.md\n项目规范、业务目标、订单查询可复用及授权条件仅来自本次给定场景，未读取或核验商城项目文件。\n\n验证边界：\n本文件是 AI 技能应用测试中的规划响应，不是实际接口实现、业务验证结果或真实用户验收，也不表示用户已授权实施或认可业务成果。\n",
+  "checks": {
+    "python": {
+      "chunk_id": "029cf5",
+      "wall_time_seconds": 2.9184e-05,
+      "exit_code": 1,
+      "original_token_count": 826,
+      "output": "...F....F...............\n======================================================================\nFAIL: test_delivered_modes_link_project_governance (test_artifacts.ArtifactTests.test_delivered_modes_link_project_governance) (skill='task-pair')\n线下交付文件仍包含完整治理引用。\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<source-workspace>/packages/skills/tests/test_artifacts.py\", line 66, in test_delivered_modes_link_project_governance\n    self.assert_project_governance_is_reachable(path.read_text())\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\n  File \"<source-workspace>/packages/skills/tests/test_artifacts.py\", line 29, in assert_project_governance_is_reachable\n    self.assertIn(anchor, anchors, f'治理锚点不可达：{reference}')\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'vii-任务与子任务规则' not found in {'vi-阶段门禁与协作授权', 'ii-产物契约与一致性', 'iii-业务闭环mvu与技术前置验证', '开发工作流', 'spec-kit-工作流宪章', 'governance', 'i-工作流职责与边界', 'iv-最小充分验证', '产物目录与定位', 'v-增量规划与范围控制', 'vii-任务与内联步骤', 'core-principles'} : 治理锚点不可达：.specify/memory/constitution.md#vii-任务与子任务规则\n\n======================================================================\nFAIL: test_mode_sources_link_project_governance (test_artifacts.ArtifactTests.test_mode_sources_link_project_governance) (skill='task-pair')\n迁移后的模式正文仍提供正确治理入口。\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<source-workspace>/packages/skills/tests/test_artifacts.py\", line 58, in test_mode_sources_link_project_governance\n    self.assert_project_governance_is_reachable(path.read_text())\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\n  File \"<source-workspace>/packages/skills/tests/test_artifacts.py\", line 29, in assert_project_governance_is_reachable\n    self.assertIn(anchor, anchors, f'治理锚点不可达：{reference}')\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'vii-任务与子任务规则' not found in {'vi-阶段门禁与协作授权', 'ii-产物契约与一致性', 'iii-业务闭环mvu与技术前置验证', '开发工作流', 'spec-kit-工作流宪章', 'governance', 'i-工作流职责与边界', 'iv-最小充分验证', '产物目录与定位', 'v-增量规划与范围控制', 'vii-任务与内联步骤', 'core-principles'} : 治理锚点不可达：.specify/memory/constitution.md#vii-任务与子任务规则\n\n----------------------------------------------------------------------\nRan 24 tests in 1.598s\n\nFAILED (failures=2)\n[ELIFECYCLE] Test failed. See above for more details.\nError: ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL\n\n  × \"pnpm recursive run\" failed in <source-home>/workspace/ena/foundry/feature/\n  │ speckit-workflow-extensions/packages/skills\n\n"
+    },
+    "consumer": {
+      "chunk_id": "582453",
+      "wall_time_seconds": 2.3578e-05,
+      "exit_code": 1,
+      "original_token_count": 3878,
+      "output": "Warning: truncated output (original token count: 3878)\nTotal output lines: 145\n\n✖ 一次构建同时交付 mcp、skills 与 script，不输出旧 manifest 或空 JS (647.885324ms)\n✖ 构建原样复制脚本，不解析依赖或执行入口 (234.395507ms)\n✖ 交付命令脚本脱离源码可执行，不包含测试或缓存 (206.149871ms)\n✖ 缺少任何已约定源目录时构建失败，不静默漏交付 (616.74066ms)\n✖ MCP 清单递归收录正文和附件，稳定重建并自动反映源增删改 (309.452619ms)\n✔ 手写清单、重复身份及非法元数据必须阻止构建 (1433.6052ms)\n✔ 真实 MCP 测试技能及附属说明存在，源码没有维护 manifest (2.336061ms)\nℹ tests 7\nℹ suites 0\nℹ pass 2\nℹ fail 5\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 4018.784058\n\n✖ failing tests:\n\ntest at packages/skills/tests/distribution/test-build-config.mjs:70:1\n✖ 一次构建同时交付 mcp、skills 与 script，不输出旧 manifest 或空 JS (647.885324ms)\n  Build failed with 1 error:\n  \n  [plugin foundry-skills-distribution]\n  Error: spawnSync git EPERM\n      at Object.spawnSync (node:internal/child_process:1191:20)\n      at spawnSync (node:child_process:929:24)\n      at execFileSync (node:child_process:972:15)\n      at PluginContextImpl.buildStart (file://<source-workspace>/packages/skills/node_modules/.vite-temp/vite.config.ts.timestamp-1794223469105-fc3f10acdcd908.mjs:1103:59)\n      at PluginContextImpl.handler (file://<source-workspace>/node_modules/.pnpm/vite@8.3.6_@types+node@25.9.9_esbuild@0.28.2_jiti@2.7.0_sass-embedded@1.108.0_sass@1.108.0_terser@5.51.2_yaml@2.8.3/node_modules/vite/dist/node/chunks/node.js:35023:13)\n      at plugin (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/bindingify-input-options-CM8bmcLg.mjs:1665:17)\n      at file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/bindingify-input-options-CM8bmcLg.mjs:2146:21\n      at plugin.<computed> (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/bindingify-input-options-CM8bmcLg.mjs:2343:18)\n      at aggregateBindingErrorsIntoJsError (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/error-BJ9uQLIS.mjs:50:18)\n      at unwrapBindingResult (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/error-BJ9uQLIS.mjs:20:128)\n      at #build (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/rolldown-DWd2aEL4.mjs:146:34)\n      at async buildEnvironment (file://<source-workspace>/node_modules/.pnpm/vite@8.3.6_@types+node@25.9.9_esbuild@0.28.2_jiti@2.7.0_sass-embedded@1.108.0_sass@1.108.0_terser@5.51.2_yaml@2.8.3/node_modules/vite/dist/node/chunks/node.js:34764:66)\n      at async Object.build (file://<source-workspace>/node_modules/.pnpm/vite@8.3.6_@types+node@25.9.9_esbuild@0.28.2_jiti@2.7.0_sass-embedded@1.108.0_sass@1.108.0_terser@5.51.2_yaml@2.8.3/node_modules/vite/dist/node/chunks/node.js:35185:19)\n      at async TestContext.<anonymous> (file://<source-workspace>/packages/skills/tests/distribution/test-build-config.mjs:76:5)\n      at async Test.run (node:internal/test_runner/test:1409:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {\n    errors: [Getter/Setter]\n  }\n\ntest at packages/skills/tests/distribution/test-build-config.mjs:93:1\n✖ 构建原样复制脚本，不…1878 tokens truncated…y/feature/speckit-workflow-extensions/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/bindingify-input-options-CM8bmcLg.mjs:2146:21\\n' +\n    '    at plugin.<computed> (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/bindingify-input-options-CM8bmcLg.mjs:2343:18)'\n  \n      at async TestContext.<anonymous> (file://<source-workspace>/packages/skills/tests/distribution/test-build-config.mjs:202:7)\n      at async Test.run (node:internal/test_runner/test:1409:7)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: [Error],\n    expected: /ENOENT|源目录/u,\n    operator: 'rejects',\n    diff: 'simple'\n  }\n\ntest at packages/skills/tests/distribution/test-build-config.mjs:228:1\n✖ MCP 清单递归收录正文和附件，稳定重建并自动反映源增删改 (309.452619ms)\n  Build failed with 1 error:\n  \n  [plugin foundry-skills-distribution]\n  Error: spawnSync git EPERM\n      at Object.spawnSync (node:internal/child_process:1191:20)\n      at spawnSync (node:child_process:929:24)\n      at execFileSync (node:child_process:972:15)\n      at PluginContextImpl.buildStart (file://<source-workspace>/packages/skills/node_modules/.vite-temp/vite.config.ts.timestamp-1794223470650-83cd8a6131aab.mjs:1103:59)\n      at PluginContextImpl.handler (file://<source-workspace>/node_modules/.pnpm/vite@8.3.6_@types+node@25.9.9_esbuild@0.28.2_jiti@2.7.0_sass-embedded@1.108.0_sass@1.108.0_terser@5.51.2_yaml@2.8.3/node_modules/vite/dist/node/chunks/node.js:35023:13)\n      at plugin (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/bindingify-input-options-CM8bmcLg.mjs:1665:17)\n      at file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/bindingify-input-options-CM8bmcLg.mjs:2146:21\n      at plugin.<computed> (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/bindingify-input-options-CM8bmcLg.mjs:2343:18)\n      at aggregateBindingErrorsIntoJsError (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/error-BJ9uQLIS.mjs:50:18)\n      at unwrapBindingResult (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/error-BJ9uQLIS.mjs:20:128)\n      at #build (file://<source-workspace>/node_modules/.pnpm/rolldown@1.2.16/node_modules/rolldown/dist/shared/rolldown-DWd2aEL4.mjs:146:34)\n      at async buildEnvironment (file://<source-workspace>/node_modules/.pnpm/vite@8.3.6_@types+node@25.9.9_esbuild@0.28.2_jiti@2.7.0_sass-embedded@1.108.0_sass@1.108.0_terser@5.51.2_yaml@2.8.3/node_modules/vite/dist/node/chunks/node.js:34764:66)\n      at async Object.build (file://<source-workspace>/node_modules/.pnpm/vite@8.3.6_@types+node@25.9.9_esbuild@0.28.2_jiti@2.7.0_sass-embedded@1.108.0_sass@1.108.0_terser@5.51.2_yaml@2.8.3/node_modules/vite/dist/node/chunks/node.js:35185:19)\n      at async TestContext.<anonymous> (file://<source-workspace>/packages/skills/tests/distribution/test-build-config.mjs:239:5)\n      at async Test.run (node:internal/test_runner/test:1409:7)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {\n    errors: [Getter/Setter]\n  }\n"
+    }
+  }
+}

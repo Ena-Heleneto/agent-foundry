@@ -1,0 +1,18 @@
+{
+  "source": "本父会话实际异步回执",
+  "date": "2026-11-10",
+  "questionItemId": "[\"request_user_input_async\",\"call_8204484040364f9bb9d527eaf43d1d07\",0]",
+  "answer": "认可该新示例的两个 Task 方案",
+  "project": "/tmp/foundry-tv10-20261110/round3/cases/shared-contract",
+  "spec": "specs/demo/001-order",
+  "tasks": {
+    "T001": "order.py: calculate_subtotal，非负整数分单价乘非负整数数量，排除bool，非法抛ValueError",
+    "T002": "shipping.py: calculate_total，非负整数分小计加非负整数分运费，排除bool，非法抛ValueError"
+  },
+  "scope": "两Task分别保存格式检查读回后实施，通过各自unittest才勾选；允许同逻辑局部校验函数",
+  "exclusions": [
+    "旧positive-a的T002",
+    "T103整体验收",
+    "T104"
+  ]
+}

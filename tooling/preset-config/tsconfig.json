@@ -1,0 +1,14 @@
+{
+  "extends": "./src/tsconfig-json/tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": [
+    "build/**/*.mjs",
+    "src/**/*.js"
+  ]
+}

@@ -1,0 +1,9 @@
+Agent Foundry 的自有材料采用根 LICENSE 中的 ISC。
+
+两个 specs 中的历史验收归档包含 GitHub Spec Kit 的官方脚本、模板、渲染指令和其派生片段。上游来源：https://github.com/github/spec-kit/tree/v1.2.6 。对应 GitHub 部分及其派生内容继续保留 MIT，不由本仓库 ISC 替换。完整通知见 licenses/SPEC-KIT-MIT.txt，各派生归档亦附同一原文。
+
+公开副本对机器路径、私人记录引用和两份私人核查材料做显式派生；原件保留在来源仓库。原有 SHA 和报告只代表历史原件，公开副本的对应摘要见 migration-manifest.json 和各归档 _PUBLIC_DERIVATION.json。它们不是新仓库的工程、发布或用户验收结果。
+
+Node/Python 依赖的声明和锁文件不构成依赖源码的重新许可；各依赖保留自身许可证。
+
+独立回归配套：packages/skills/tests/fixtures/specify/.specify 中的脚本与核心模板包含 GitHub Spec Kit 来源和安装渲染内容，继续适用上述 MIT；overrides 中自有增补依 ISC。foundry-dev 夹具用于保留原工作区初始化行为，不是新根的安装入口。

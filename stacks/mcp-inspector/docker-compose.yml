@@ -1,0 +1,37 @@
+# 线上编排：foundry-skills-mcp 自托管部署（无鉴权，须置于受信网络/反向代理之后）。
+# 不提供 Dockerfile——直接以官方 uv 镜像挂载仓库源码运行。
+name: mcp-inspector
+
+services:
+  mcp-server:
+    image: ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+    working_dir: /repo/apps/mcp
+    command: ["uv", "run", "foundry-skills-mcp", "--http", "--host", "0.0.0.0"]
+    volumes:
+      # 仓库源码只读挂载（apps/mcp 与 packages/skills/dist 均在仓库内）
+      - ../../:/repo:ro
+      # uv 依赖缓存与虚拟环境放入命名卷，避免污染宿主机工作区
+      - uv-cache:/opt/uv-cache
+      - mcp-venv:/opt/venv
+    environment:
+      UV_CACHE_DIR: /opt/uv-cache
+      UV_PROJECT_ENVIRONMENT: /opt/venv
+    ports:
+      - "8787:8787"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python3",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8787/healthz', timeout=5)",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  uv-cache:
+  mcp-venv:

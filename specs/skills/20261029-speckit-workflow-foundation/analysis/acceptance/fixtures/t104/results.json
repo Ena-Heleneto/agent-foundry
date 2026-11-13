@@ -1,0 +1,248 @@
+{
+  "scope": "T104正式维护源局部回归，不计构建交付或完整T104通过",
+  "results": [
+    {
+      "case": "explicit-no-plan",
+      "source_kind": "正式维护源的官方源码安装；非构建产物",
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "elapsed_seconds": 87.33,
+      "model_override": false,
+      "source_full_text_events": [
+        6,
+        22
+      ],
+      "constitution_full_text_events": [
+        13
+      ],
+      "business_unchanged": true,
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      },
+      "changed": [
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/tasks.md"
+      ],
+      "raw_directory": "/tmp/foundry-tv10-20261110/raw/explicit-no-plan-attempt-3"
+    },
+    {
+      "case": "positive-a",
+      "source_kind": "正式维护源的官方源码安装；非构建产物",
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "elapsed_seconds": 89.273,
+      "model_override": false,
+      "source_full_text_events": [
+        5,
+        18
+      ],
+      "constitution_full_text_events": [
+        11
+      ],
+      "business_unchanged": true,
+      "markers": {
+        "T001": "x",
+        "T002": " "
+      },
+      "changed": [
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/implementation/T002.md",
+        "specs/demo/001-order/tasks.md"
+      ],
+      "raw_directory": "/tmp/foundry-tv10-20261110/raw/positive-a-attempt-2",
+      "approval_full_text_events": [
+        18
+      ],
+      "independent_unittest": {
+        "exit": 0,
+        "output": "test_subtotal (test_order.SubtotalTests.test_subtotal) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+      }
+    }
+  ],
+  "build_validated": false,
+  "T104_complete": false,
+  "limitations": [
+    "仅当前Linux宿主",
+    "未复验构建产物",
+    "A为已完成样例的正常恢复核查，非重新实施样例",
+    "宿主仍可读取全局辅助技能，不归因于唯一来源"
+  ],
+  "archive": {
+    "file": "retained.tar.gz",
+    "sha256": "6487dc47f3a7b250059bc061ab4b5a2f717f2d2b47e9f641ccd97391f54922c1",
+    "bytes": 118183,
+    "members": 126,
+    "sensitive_pattern_scan": "所选三类凭证模式未命中，不宣称完备扫描"
+  },
+  "checks": {
+    "package_lint": {
+      "command": "pnpm --filter @foundry/skills run lint",
+      "first_exit": 0,
+      "intermediate_exit": 1,
+      "intermediate_reason": "并行分发新增文件存在11项lint问题",
+      "final_exit": 0,
+      "log": "package-lint-final.log"
+    },
+    "check_types": {
+      "command": "pnpm --filter @foundry/skills run check-types",
+      "exit": 0,
+      "log": "package-types-final.log"
+    },
+    "existing_tests": {
+      "command": "pnpm --filter @foundry/skills run test",
+      "exit": 0,
+      "tests": 11
+    },
+    "build": {
+      "command": "pnpm --filter @foundry/skills run build",
+      "exit": 1,
+      "observed_error": "技能打包构建重做中：旧实现已存档，新构建尚未实现（T065～T070）；本次未生成产物。",
+      "raw_log_retained": false,
+      "generated_new_artifact": false
+    },
+    "skill_validation": {
+      "command": "quick_validate.py packages/skills/src/skills/workflow/implementation-preparation",
+      "exit": 0,
+      "result": "Skill is valid!"
+    },
+    "markdown": {
+      "source_ignore_warning_resolved_by": "pnpm exec eslint --no-ignore --fix packages/skills/src/skills/workflow/implementation-preparation/SKILL.md",
+      "source_bytes_unchanged": true
+    },
+    "source_control_red": {
+      "retained_T103_case": "control-no-guidance-attempt-2",
+      "observed_exit": 0,
+      "observed_changed": [
+        "order.py",
+        "specs/demo/001-order/tasks.md"
+      ]
+    }
+  },
+  "official_source_installation": {
+    "positive-a": {
+      "case": "positive-a",
+      "project": "/tmp/foundry-tv10-20261110/cases/positive-a",
+      "versions": {
+        "specify": "specify 1.2.6",
+        "skills": "1.7.4"
+      },
+      "official_cli": "/tmp/foundry-t104-20261111/npm-cache/_npx/0757c8f0298e564a/node_modules/skills/bin/cli.mjs",
+      "source": "<source-workspace>/packages/skills/src/skills/workflow/implementation-preparation",
+      "source_kind": "正式维护源；尚非构建产物",
+      "source_files": {
+        "SKILL.md": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+        "speckit-hooks.json": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013"
+      },
+      "installed": "/tmp/foundry-tv10-20261110/cases/positive-a/.agents/skills/implementation-preparation",
+      "installed_files": {
+        "SKILL.md": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+        "speckit-hooks.json": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013"
+      },
+      "extension_files": {
+        "SKILL.md": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+        "speckit-hooks.json": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013"
+      },
+      "native_before_sha256": "848a5c9eff7b99e348927cbde6c35378de9fea3fd317941f58fa0b0b79301eec",
+      "native_after_sha256": "848a5c9eff7b99e348927cbde6c35378de9fea3fd317941f58fa0b0b79301eec",
+      "registered_hook": [
+        {
+          "extension": "implementation-preparation",
+          "command": "implementation-preparation",
+          "enabled": true,
+          "optional": false,
+          "priority": 20,
+          "prompt": "以用户明确的目标项目和 Spec 为准，完整读取 implementation-preparation skill，依目标项目现行工作流治理核对拟实施的原 Task、相关材料、认可范围、保存结果、必要前置及授权；返回本次实际可继续范围、待讨论或恢复部分，不用一次准备放行其他 Task。",
+          "description": "实施前完整读取共同准备，核对当前 Task 的适用方案与继续范围",
+          "condition": null
+        }
+      ],
+      "commands": [
+        [
+          "node",
+          "/tmp/foundry-t104-20261111/npm-cache/_npx/0757c8f0298e564a/node_modules/skills/bin/cli.mjs",
+          "add",
+          "<source-workspace>/packages/skills/src/skills/workflow/implementation-preparation",
+          "--skill",
+          "implementation-preparation",
+          "--agent",
+          "codex",
+          "--copy",
+          "--yes"
+        ],
+        [
+          "<source-home>/.cache/uv/archive-v0/om6AD6JxRTroJuBL/bin/specify",
+          "extension",
+          "add",
+          "--dev",
+          "/tmp/foundry-t104-20261111/extension-input/positive-a",
+          "--force"
+        ]
+      ],
+      "build_validated": false
+    },
+    "explicit-no-plan": {
+      "case": "explicit-no-plan",
+      "project": "/tmp/foundry-tv10-20261110/cases/explicit-no-plan",
+      "versions": {
+        "specify": "specify 1.2.6",
+        "skills": "1.7.4"
+      },
+      "official_cli": "/tmp/foundry-t104-20261111/npm-cache/_npx/0757c8f0298e564a/node_modules/skills/bin/cli.mjs",
+      "source": "<source-workspace>/packages/skills/src/skills/workflow/implementation-preparation",
+      "source_kind": "正式维护源；尚非构建产物",
+      "source_files": {
+        "SKILL.md": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+        "speckit-hooks.json": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013"
+      },
+      "installed": "/tmp/foundry-tv10-20261110/cases/explicit-no-plan/.agents/skills/implementation-preparation",
+      "installed_files": {
+        "SKILL.md": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+        "speckit-hooks.json": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013"
+      },
+      "extension_files": {
+        "SKILL.md": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+        "speckit-hooks.json": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013"
+      },
+      "native_before_sha256": "848a5c9eff7b99e348927cbde6c35378de9fea3fd317941f58fa0b0b79301eec",
+      "native_after_sha256": "848a5c9eff7b99e348927cbde6c35378de9fea3fd317941f58fa0b0b79301eec",
+      "registered_hook": [
+        {
+          "extension": "implementation-preparation",
+          "command": "implementation-preparation",
+          "enabled": true,
+          "optional": false,
+          "priority": 20,
+          "prompt": "以用户明确的目标项目和 Spec 为准，完整读取 implementation-preparation skill，依目标项目现行工作流治理核对拟实施的原 Task、相关材料、认可范围、保存结果、必要前置及授权；返回本次实际可继续范围、待讨论或恢复部分，不用一次准备放行其他 Task。",
+          "description": "实施前完整读取共同准备，核对当前 Task 的适用方案与继续范围",
+          "condition": null
+        }
+      ],
+      "commands": [
+        [
+          "node",
+          "/tmp/foundry-t104-20261111/npm-cache/_npx/0757c8f0298e564a/node_modules/skills/bin/cli.mjs",
+          "add",
+          "<source-workspace>/packages/skills/src/skills/workflow/implementation-preparation",
+          "--skill",
+          "implementation-preparation",
+          "--agent",
+          "codex",
+          "--copy",
+          "--yes"
+        ],
+        [
+          "<source-home>/.cache/uv/archive-v0/om6AD6JxRTroJuBL/bin/specify",
+          "extension",
+          "add",
+          "--dev",
+          "/tmp/foundry-t104-20261111/extension-input/explicit-no-plan",
+          "--force"
+        ]
+      ],
+      "build_validated": false
+    }
+  }
+}

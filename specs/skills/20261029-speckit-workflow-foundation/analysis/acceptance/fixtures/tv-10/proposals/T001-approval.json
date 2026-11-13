@@ -1,0 +1,17 @@
+{
+  "source": "当前T103父会话的实际用户异步回执；不是被测会话内模拟用户消息",
+  "date": "2026-11-10",
+  "questionItemId": "[\"request_user_input_async\",\"call_0ec1482ba542407aa070c7646e742cf0\",0]",
+  "answer": "认可示例 A 方案",
+  "scope": {
+    "project": "/tmp/foundry-tv10-20261110/cases/positive-a",
+    "spec": "specs/demo/001-order",
+    "task": "T001",
+    "proposal": "订单小计calculate_subtotal：非负整数分单价乘非负整数数量，排除布尔，非法输入抛ValueError，零值返回0；按既有unittest验收"
+  },
+  "exclusions": [
+    "T002加运费",
+    "T103整体验收",
+    "生产交付"
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "task": "T064",
+  "date": "2026-11-11",
+  "scope": "当前Spec的完整分析创建、变化刷新与部分保存受阻恢复；隔离行为及实际阅读产物分别留证",
+  "stages": {
+    "change": {
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 285.798,
+      "session_id": "01a1c9e4-041a-7bc1-bfb9-5980ba66ab2b",
+      "changed": [
+        "specs/skills/001-workflow/analysis/spec-analysis/README.md",
+        "specs/skills/001-workflow/analysis/spec-analysis/flows.md",
+        "specs/skills/001-workflow/mvu.md",
+        "specs/skills/001-workflow/plan.md",
+        "specs/skills/001-workflow/tasks.md"
+      ],
+      "analysis_full_read": [
+        "item_10",
+        "item_13",
+        "item_20"
+      ],
+      "increment_full_read": [
+        "item_3"
+      ],
+      "native_tasks_full_read": [],
+      "mvu_full_read": true,
+      "mandatory_hook_emitted": false
+    },
+    "create": {
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 77.455,
+      "session_id": "01a1c9d9-af98-7ce3-a6f8-c5522fb877ae",
+      "changed": [],
+      "analysis_full_read": [
+        "item_6"
+      ],
+      "increment_full_read": [],
+      "native_tasks_full_read": [
+        "item_2"
+      ],
+      "mvu_full_read": true,
+      "mandatory_hook_emitted": false
+    },
+    "create-environment-first": {
+      "exit": 1,
+      "timeout": false,
+      "elapsed_seconds": 0.192,
+      "session_id": null,
+      "changed": [],
+      "analysis_full_read": [],
+      "increment_full_read": [],
+      "native_tasks_full_read": [],
+      "mvu_full_read": false,
+      "mandatory_hook_emitted": false
+    },
+    "create-ready": {
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 344.729,
+      "session_id": "01a1c9d9-af98-7ce3-a6f8-c5522fb877ae",
+      "changed": [
+        "specs/skills/001-workflow/analysis/spec-analysis/README.md",
+        "specs/skills/001-workflow/analysis/spec-analysis/flows.md",
+        "specs/skills/001-workflow/mvu.md",
+        "specs/skills/001-workflow/tasks.md"
+      ],
+      "analysis_full_read": [
+        "item_8",
+        "item_16"
+      ],
+      "increment_full_read": [],
+      "native_tasks_full_read": [],
+      "mvu_full_read": true,
+      "mandatory_hook_emitted": true
+    },
+    "failure": {
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 285.452,
+      "session_id": "01a1c9e4-06b2-7962-95a5-740be4748749",
+      "changed": [
+        "specs/skills/001-workflow/analysis/spec-analysis/README.md",
+        "specs/skills/001-workflow/mvu.md",
+        "specs/skills/001-workflow/plan.md",
+        "specs/skills/001-workflow/tasks.md"
+      ],
+      "analysis_full_read": [
+        "item_10",
+        "item_19"
+      ],
+      "increment_full_read": [
+        "item_2"
+      ],
+      "native_tasks_full_read": [],
+      "mvu_full_read": true,
+      "mandatory_hook_emitted": false
+    },
+    "recover": {
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 190.601,
+      "session_id": "01a1c9e4-06b2-7962-95a5-740be4748749",
+      "changed": [
+        "specs/skills/001-workflow/analysis/spec-analysis/README.md",
+        "specs/skills/001-workflow/analysis/spec-analysis/flows.md"
+      ],
+      "analysis_full_read": [
+        "item_1",
+        "item_8"
+      ],
+      "increment_full_read": [],
+      "native_tasks_full_read": [],
+      "mvu_full_read": true,
+      "mandatory_hook_emitted": false
+    },
+    "repeat": {
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 92.504,
+      "session_id": "01a1c9e8-f685-7bc3-a304-8da834c42c62",
+      "changed": [],
+      "analysis_full_read": [
+        "item_2",
+        "item_3",
+        "item_8"
+      ],
+      "increment_full_read": [
+        "item_2"
+      ],
+      "native_tasks_full_read": [],
+      "mvu_full_read": true,
+      "mandatory_hook_emitted": false
+    }
+  },
+  "formal_installation": {
+    "versions": {
+      "specify": "specify 1.2.6",
+      "skills": "1.7.4",
+      "codex": "codex-cli 0.167.1"
+    },
+    "source_kind": "正式维护源官方安装；非构建产物/正式安装器接线",
+    "source": "<source-workspace>/packages/skills/src/workflow/artifact-spec-analysis",
+    "source_files": {
+      "SKILL.md": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323"
+    },
+    "installed_files": {
+      "SKILL.md": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323"
+    },
+    "extension_files": {
+      "SKILL.md": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323"
+    },
+    "collection_source": "<source-workspace>/packages/skills/src/workflow/collection.config.json",
+    "collection_sha256": "b263511f1d5bcbbdc425d3453ed9d126d15be0b97a9b2dc5c7da134caee0f77d",
+    "declared_hook": {
+      "after_tasks": {
+        "prompt": "以当前任务生成操作的目标 Spec 为准，完整读取 artifact-spec-analysis 并传入所属 Spec 最新需求及确认、spec、plan、同级 mvu、tasks、必要证据、已有分析索引和目标位置，沿目标项目现行治理及格式要求创建或刷新分析、检查并读回；Increment 规划保存后显式复用同一能力，不注册 after_increment。",
+        "enabled": true,
+        "optional": false,
+        "priority": 20,
+        "condition": null
+      }
+    },
+    "registered_hook": [
+      {
+        "extension": "artifact-spec-analysis",
+        "command": "artifact.spec.analysis",
+        "enabled": true,
+        "optional": false,
+        "priority": 20,
+        "prompt": "以当前任务生成操作的目标 Spec 为准，完整读取 artifact-spec-analysis 并传入所属 Spec 最新需求及确认、spec、plan、同级 mvu、tasks、必要证据、已有分析索引和目标位置，沿目标项目现行治理及格式要求创建或刷新分析、检查并读回；Increment 规划保存后显式复用同一能力，不注册 after_increment。",
+        "description": "Spec Kit 任务生成后或 Increment 规划保存后，需要创建或刷新所属 Spec 的逐功能综合分析时使用。",
+        "condition": null
+      }
+    ],
+    "native_before": {
+      "SKILL.md": "1086d7885df1188d00e7d5eb4715e678b4340b893e8f24ae748d823b13599a56"
+    },
+    "native_after": {
+      "SKILL.md": "1086d7885df1188d00e7d5eb4715e678b4340b893e8f24ae748d823b13599a56"
+    },
+    "commands": [
+      [
+        "node",
+        "/tmp/foundry-t104-20261111/npm-cache/_npx/0757c8f0298e564a/node_modules/skills/bin/cli.mjs",
+        "add",
+        "<source-workspace>/packages/skills/src/workflow/artifact-spec-analysis",
+        "--skill",
+        "artifact-spec-analysis",
+        "--agent",
+        "codex",
+        "--copy",
+        "--yes"
+      ],
+      [
+        "node",
+        "/tmp/foundry-t104-20261111/npm-cache/_npx/0757c8f0298e564a/node_modules/skills/bin/cli.mjs",
+        "add",
+        "<source-workspace>/packages/skills/src/workflow/task-increment",
+        "--skill",
+        "task-increment",
+        "--agent",
+        "codex",
+        "--copy",
+        "--yes"
+      ],
+      [
+        "<source-home>/.cache/uv/archive-v0/om6AD6JxRTroJuBL/bin/specify",
+        "extension",
+        "add",
+        "--dev",
+        "/tmp/foundry-t064-20261111-kz0wpfo4/extension-input/artifact-spec-analysis",
+        "--force"
+      ]
+    ],
+    "build_validated": false
+  },
+  "checks": {
+    "complete_creation_after_native_tasks": true,
+    "same_formal_analysis_after_increment": true,
+    "real_history_preserved_and_linked": true,
+    "partial_analysis_saved_and_unwritable_target_stopped": true,
+    "host_did_not_attempt_protected_write": true,
+    "independent_write_probe_errno": 13,
+    "recovery_same_session_only_original_analysis": true,
+    "repeat_all_35_files_identical": true,
+    "no_task_or_mvu_duplication_or_second_status": true,
+    "links_by_case": {
+      "flow": 53,
+      "failure": 58
+    },
+    "business_and_user_acceptance": "未运行",
+    "build_dist": "按原指令暂跳过"
+  },
+  "parent_analysis_links_initial": {
+    "checked": 62,
+    "failures": []
+  },
+  "archive": {
+    "archive": "<source-workspace>/specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t064/retained.tar.gz",
+    "bytes": 1576354,
+    "sha256": "4edf967145e788328e1ccf8f61ace433ba12f764fe9fedf3a37a8afb33944456",
+    "files_verified": 444,
+    "file_members": 445,
+    "safe_extract_and_full_hash_match": true,
+    "profile_excluded": true,
+    "selected_credential_patterns": 3,
+    "selected_credential_hits": 0,
+    "initial_archive_preserved": "/tmp/foundry-t064-20261111-kz0wpfo4/archive-initial.tar.gz"
+  },
+  "credential_scan": {
+    "patterns": 3,
+    "hits": [],
+    "complete_scan_claim": false
+  },
+  "review": {
+    "source": "collaboration review_t064 的实际只读返回",
+    "verdict": "T064有限范围可收口",
+    "critical": [],
+    "important": [],
+    "minor": [],
+    "read_only": true,
+    "no_nested_agents": true,
+    "reviewed_initial_archive_sha256": "e4d16ff2dffd8c4f59a5d8b88a361ebbdafba28c4346ed493aeaeca139840cb0",
+    "initial_archive_members": 422,
+    "initial_source_files": 421,
+    "declined": [
+      "构建/dist",
+      "正式安装器接线与真实挂载",
+      "其他平台",
+      "图渲染",
+      "真实用户阅读效果",
+      "整个暂存区和后续Task"
+    ],
+    "parent_ruling": "上述项目均保持原未验边界，未作为本Task已通过结果或扩大验收；错误把隔离结果推广为完整交付会误导用户，故明确限制。"
+  },
+  "build": "用户明确暂跳过，未运行",
+  "production_code_changed": false,
+  "limitations": [
+    "仅Linux隔离宿主，非真实工作区挂载",
+    "无build/dist消费",
+    "未渲染图示或取得真实用户阅读反馈"
+  ],
+  "parent_final_check": {
+    "new_document_links_and_anchors": 77,
+    "all_107_task_ids_and_order_preserved": true,
+    "checkbox_changes": [
+      {
+        "id": "T064",
+        "before": " ",
+        "after": "x"
+      }
+    ],
+    "paused_and_historical_sections_preserved": true,
+    "FR_SC_definitions_preserved": true,
+    "formal_sources_config_constitution_feature_pointer_plan_preserved": true,
+    "analysis_has_no_second_checkbox_or_activity_definition": true
+  },
+  "task_scope_accepted": true,
+  "next_task": "T095，未开始；无阶段批准"
+}
