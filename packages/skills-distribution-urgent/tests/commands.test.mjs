@@ -44,7 +44,8 @@ function prepareCodexProject(sandbox) {
 }
 
 /**
- * 以真实官方CLI安装合法YAML旧集合，正文使用获准历史摘要中的原字节。
+ * 以真实官方CLI安装合法YAML旧集合，正文来自固定历史夹具。
+ * 与当前维护源分离，确保正文更新后仍验证真实旧版到新版的迁移。
  * @param {object} sandbox 当前独占项目。
  * @param {string[]} modes 旧正式入口后缀。
  */
@@ -55,7 +56,7 @@ function installLegacyModes(sandbox, modes) {
    */
   const input = path.join(sandbox.root, 'legacy-source')
   fs.mkdirSync(path.join(input, 'skills/task-increment'), { recursive: true })
-  fs.copyFileSync(path.join(packageRoot, 'src/workflow/task-increment/SKILL.md'), path.join(input, 'skills/task-increment/SKILL.md'))
+  fs.copyFileSync(path.join(packageRoot, 'tests/fixtures/legacy-increment/SKILL.md'), path.join(input, 'skills/task-increment/SKILL.md'))
   fs.writeFileSync(path.join(input, 'extension.yml'), `schema_version: '1.0'\nextension:\n  id: modes\n  name: Historical Modes\n  version: '1.0.0'\n  description: 合法历史迁移样本\nrequires:\n  speckit_version: '==1.2.6'\nprovides:\n  commands:\n${modes.map(name => `    - name: speckit.modes.${name}\n      file: skills/task-increment/SKILL.md\n      description: 历史入口${name}`).join('\n')}\n`)
   /**
    * 真正的官方工具负责登记和生成入口，测试不手写registry。
