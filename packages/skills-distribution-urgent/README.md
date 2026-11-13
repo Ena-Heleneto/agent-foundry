@@ -1,6 +1,6 @@
 # 技能紧急交付：Linux / Codex 项目级
 
-本包在当前工作区的 packages/skills-distribution-urgent 维护独立源码和 dist，当前实测并允许的组合为 Linux x86_64、Codex、项目级复制安装；其他Linux架构尚未验证。交付采用官方 skills 安装与同版公共脚本显式挂载两步，工作流只注册 Increment 及本次所选适用 hooks。当前尚无已发布的公开来源，不能将本文变量示例视为现成下载地址。
+本包在当前工作区的 packages/skills-distribution-urgent 维护独立源码和 dist，当前实测并允许的组合为 Linux x86_64、Codex、项目级复制安装；其他Linux架构尚未验证。交付采用官方 skills 安装与同版公共脚本显式挂载两步，工作流只注册 Increment 及本次所选适用 hooks。本文变量须替换为实际核验的固定公开来源；本地候选不构成公开交付，不能将变量示例视为现成下载地址。
 
 ## 内容与支持边界
 
@@ -55,11 +55,11 @@ PREPARED_SPECIFY_126 必须指向调用者已准备的真实1.2.6可执行文件
 
 构建只通过Vite复制原始资产，不执行运行脚本。payload精确为skills、script、README、LICENSE与release.json；files列出清单自身之外的全部文件，候选摘要包含清单自身。任意相关源码、说明、依赖或提交身份变化后，须重新构建、同源双构建及适用真实消费验证；不能拼接旧脚本清单或将夹具提交冒认正式来源。
 
-## 本地暂停与后续迁移
+## 迁后验证与公开交付
 
-维护者须完成全部必需本地检查、正文附件和精确文件全集、官方两步安装挂载、Codex实际完整读取、用户保护与失败恢复、自有bare Git发布工具验证，并以实际证据判断本地结果。全部本地验证结束后暂停，不自动迁仓、建仓、推送或发布；本地成功不等于公开版本交付通过。
+维护者须完成全部必需本地检查、正文附件和精确文件全集、官方两步安装挂载、Codex实际完整读取、用户保护与失败恢复、自有bare Git发布工具验证，并以实际证据判断本地结果。必需前置满足时，沿已有授权连续推进后续验证，不设置本地完成后的固定暂停点；推送和发布仍须对应具体候选的明确授权。本地成功不等于公开版本交付通过。
 
-后续由用户一并迁移 packages/skills-distribution-urgent、packages/skills、specs/skills、apps/mcp 到采用ISC的新开源仓库。四处目录不等于完备的新根工程：catalog、preset-config、scripts/dev及.specify等依赖须在新仓库维护等价配置和检查。MCP仍消费旧主线manifest，源码同行不代表该契约已兼容，也不授权线上部署。eval源码可保留，正式技能发布/列出/安装仍为0；specs正文、附件和压缩归档须逐项核对私有引用，保留原仓库私有历史，不能仅排除.specify后直接公开。
+packages/skills-distribution-urgent、packages/skills、specs/skills、apps/mcp已迁入当前ISC仓库。共享预设位于packages/preset-config，catalog、初始化脚本和独立测试夹具由当前根维护；每次冻结仍须核对真实依赖及检查结果，迁仓本身不代表原功能均已交付。MCP仍消费旧主线manifest，源码同行不代表该契约已兼容，也不授权线上部署。eval源码可保留，正式技能发布/列出/安装仍为0；公开派生归档、正文和附件的来源处置见根migration-manifest.json与licenses/README.md，原仓库私有历史不随迁。
 
 迁后核对真实源码与依赖、重新检查和冻结候选，再按绑定目标、版本、sourceRevision与candidateDigest的明确授权处理发布。匿名文件全集与真实公开来源两步消费仍需独立验收；没有公开目标时保持未执行，不编造地址或版本。
 
