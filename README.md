@@ -1,6 +1,6 @@
 # Agent Foundry
 
-技能源码、分发工具、Spec Kit 工作流扩展与MCP服务的独立monorepo。自有材料采用ISC，第三方许可见THIRD-PARTY-NOTICES.txt。
+技能源码、分发工具、Spec Kit 工作流扩展与MCP服务的独立monorepo。自有材料采用ISC，第三方许可见[许可与来源说明](licenses/README.md)。
 
 ## 目录
 
@@ -8,7 +8,7 @@
 - apps/mcp：Python/FastMCP服务与测试。
 - packages/skills：用户手写中的主线来源。
 - packages/skills-distribution-urgent：Linux/Codex项目级紧急分发。
-- tooling/preset-config：ESLint/TypeScript最小共享预设。
+- packages/preset-config：ESLint、TypeScript、UnoCSS与Nuxt共享预设，通过包exports供工作区消费。
 - specs/skills：原规格、任务、方案及历史证据。
 - stacks/mcp-inspector：MCP Compose与Inspector配置。
 
