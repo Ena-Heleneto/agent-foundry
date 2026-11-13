@@ -43,11 +43,6 @@ export default function vitePluginSkill(): Plugin {
         return resolvedId
     },
 
-    load(id) {
-      if (id === resolvedId)
-        return `consola.info('Hello from virtual entry!')`
-    },
-
     generateBundle(_options, bundle) {
       Object.entries(bundle).forEach(([fileName, output]) => {
         if (output.type === 'chunk' && output.isEntry && output.facadeModuleId === resolvedId) {
