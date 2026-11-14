@@ -7,6 +7,7 @@ import process from 'node:process'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 import { parse } from 'yaml'
+import workflowCollection from '../src/workflow/collection.config.ts'
 import { bashFixture, bashIntegration, legacyHookLayout } from './distribution/helpers/registration-bash-fixture.mjs'
 import { migrationCli, migrationFixture, officialCall, retiredHookIds, snapshot } from './distribution/helpers/registration-fixture.mjs'
 
@@ -198,9 +199,11 @@ function fixture() {
   fs.mkdirSync(path.join(project, '.specify'), { recursive: true })
   fs.writeFileSync(path.join(project, '.specify/init-options.json'), JSON.stringify({ ai: 'codex', ai_skills: true, speckit_version: '1.2.6' }))
   /**
-   * 真实集合用于准备输入，不恢复生产逐技能配置。
+   * 源码从 TS 集合准备输入，独立交付仍读取调用方提供的 JSON 配置。
    */
-  const collection = JSON.parse(fs.readFileSync(path.join(skillsSource, 'collection.config.json'), 'utf8'))
+  const collection = skillsSource === path.join(packageRoot, 'src/workflow')
+    ? workflowCollection
+    : JSON.parse(fs.readFileSync(path.join(skillsSource, 'collection.config.json'), 'utf8'))
   fs.writeFileSync(path.join(root, 'collection.config.json'), JSON.stringify(collection))
   /**
    * 每个来源都含正文及附件，以验证完整复制。

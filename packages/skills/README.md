@@ -81,4 +81,4 @@ hooks唯一来源已集中到对应集合的collection.config.json，使用skill
 
 ## 综合分析技能的当前来源
 
-artifact-spec-analysis正式维护于[src/workflow/artifact-spec-analysis/SKILL.md](src/workflow/artifact-spec-analysis/SKILL.md)，after_tasks唯一声明在[workflow集合配置](src/workflow/collection.config.json)。任务生成后的分析与Increment规划保存后的显式刷新复用同一正文，按功能解释当前需求、方案、闭环及任务，并保留缺项和未验边界。此维护源及集合声明不代表旧注册脚本已适配、构建产物已交付或真实项目挂载已完成；当前分发与平台接入仍按原任务核验。
+artifact-spec-analysis正式维护于[src/workflow/artifact-spec-analysis/SKILL.md](src/workflow/artifact-spec-analysis/SKILL.md)，after_tasks唯一声明在[workflow集合配置](src/workflow/collection.config.ts)。workflow 集合已转为 TS 维护，五项技能显式设置 `enabled: true`，原 hooks 参数保留；临时手动挂载脚本将 TS 配置导出为临时 JSON，供现有注册器消费。任务生成后的分析与Increment规划保存后的显式刷新复用同一正文，按功能解释当前需求、方案、闭环及任务，并保留缺项和未验边界。此维护源及集合声明不代表完整分发或真实项目挂载已验；当前分发与平台接入仍按原任务核验。

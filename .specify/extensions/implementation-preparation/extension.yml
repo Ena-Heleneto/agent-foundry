@@ -1,0 +1,19 @@
+schema_version: '1.0'
+extension:
+  id: implementation-preparation
+  name: implementation-preparation
+  version: 1.0.0
+  description: Foundry workflow hook
+
+requires:
+  speckit_version: ==1.4.1.dev0
+
+provides: {}
+hooks:
+  before_implement:
+    prompt: 以用户明确的目标项目和 Spec 为准，完整读取 implementation-preparation skill，依目标项目现行工作流治理核对拟实施的原 Task、相关材料、认可范围、保存结果、必要前置及授权；返回本次实际可继续范围、待讨论或恢复部分，不用一次准备放行其他 Task。
+    enabled: true
+    optional: false
+    priority: 20
+    condition: null
+    command: implementation-preparation

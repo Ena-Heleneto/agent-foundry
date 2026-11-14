@@ -1,12 +1,3 @@
-// {
-//   "packageName": null,
-//   "mcp": false,
-//   "skill": {
-//     "nuxt-ui-styling": {},
-//     "vue-reactivity": {}
-//   }
-// }
-
 import { defineCollectionHandle } from '#utils/define-collection-handle'
 
 export default defineCollectionHandle({

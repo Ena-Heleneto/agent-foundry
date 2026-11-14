@@ -14,7 +14,7 @@ async function parseCollectionOption(dir: string) {
   const enabledSkills = Object.entries(skill)
     .filter(([, option]) => option.enabled)
     .map(([name]) => ({ name, url: join(dir, name) }))
-  return { collection: packageName, enabledSkills, url: join('dist', 'curl', 'skill', packageName) }
+  return { collection: packageName, enabledSkills, url: join('dist', 'skill', packageName) }
 }
 
 export default function vitePluginSkill(): Plugin {
@@ -36,11 +36,14 @@ export default function vitePluginSkill(): Plugin {
     name: 'vite-plugin-skill',
     apply: 'build',
 
-    config: () => ({ build: { rolldownOptions: { input: { installer: virtualId } } } }),
-
     resolveId(id) {
       if (id === virtualId)
         return resolvedId
+    },
+
+    load(id) {
+      if (id === resolvedId)
+        return 'export {}'
     },
 
     generateBundle(_options, bundle) {
