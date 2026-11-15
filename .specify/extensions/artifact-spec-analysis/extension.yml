@@ -1,19 +1,23 @@
-schema_version: '1.0'
-extension:
-  id: artifact-spec-analysis
-  name: artifact-spec-analysis
-  version: 1.0.0
-  description: Foundry workflow hook
-
-requires:
-  speckit_version: ==1.4.1.dev0
-
-provides: {}
-hooks:
-  after_tasks:
-    prompt: 以当前任务生成操作的目标 Spec 为准，完整读取 artifact-spec-analysis 并传入所属 Spec 最新需求及确认、spec、plan、同级 mvu、tasks、必要证据、已有分析索引和目标位置，沿目标项目现行治理及格式要求创建或刷新分析、检查并读回；Increment 规划保存后显式复用同一能力，不注册 after_increment。
-    enabled: true
-    optional: false
-    priority: 20
-    condition: null
-    command: artifact-spec-analysis
+{
+  "schema_version": "1.0",
+  "extension": {
+    "id": "artifact-spec-analysis",
+    "name": "artifact-spec-analysis",
+    "version": "1.0.0",
+    "description": "Foundry workflow hook"
+  },
+  "requires": {
+    "speckit_version": "==1.4.1.dev0"
+  },
+  "provides": {},
+  "hooks": {
+    "after_tasks": {
+      "prompt": "以当前任务生成操作的目标 Spec 为准，完整读取 artifact-spec-analysis 并传入所属 Spec 最新需求及确认、spec、plan、同级 mvu、tasks、必要证据、已有分析索引和目标位置，沿目标项目现行治理及格式要求创建或刷新分析、检查并读回；Increment 规划保存后显式复用同一能力，不注册 after_increment。",
+      "enabled": true,
+      "optional": false,
+      "priority": 20,
+      "condition": null,
+      "command": "artifact-spec-analysis"
+    }
+  }
+}
