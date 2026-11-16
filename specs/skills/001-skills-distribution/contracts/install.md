@@ -1,5 +1,11 @@
 # 安装与公共入口契约
 
+## 2026-11-16 当前主线适配
+
+当前安装、版本、辅助包及报告遵循[curl交付契约](curl-delivery.md)。公开install.sh使用最新入口；技能位置参数默认latest，辅助包固定到所选技能记录，二者不要求同curl版本。仅hidden所需包失败不阻止已独立核验技能安装，结果为安装实际成功、hidden失败及非零退出。
+
+主线数组release.json与单版release-manifest.json分开；新主线schema2不能直接交给下文旧schema1/Node解析器。原Node公共挂载和跨平台目标保留后置，现场旧源码已移到script/old，不据旧路径运行或自动恢复。下文11月14日“只解析URL”“node-jq已固定”等是当时记录；当前源码已有基础复制而依赖未固定，均不是本轮新能力通过。紧急版入口不变。
+
 ## 当前 curl 参数与临时依赖（2026-11-14）
 
 依据[后续讨论](../requirements/discussions/2026-11-14-install-shell-flow.md#当前脚本参数版本表及依赖准备)，主线 curl 采用 `bash install.sh [version]`，首个参数省略时为 `latest`。当前获取的 `release.json` 是包含 `version`、`url` 的 JSON 数组，最新记录在首条，latest 取首条，明确版本必须唯一匹配；字段无效、空表、未知/重复的指定版本、非 HTTPS 或含空白控制字符的 URL 均失败，不回退其他版本。

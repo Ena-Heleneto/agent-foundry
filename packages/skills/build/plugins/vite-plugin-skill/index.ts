@@ -1,36 +1,20 @@
 import type { Plugin } from 'vite'
-import type { CollectionOption } from '#utils/define-collection-handle'
-import { globSync, readdirSync } from 'node:fs'
+// import { execFile } from 'node:child_process'
 import { cp } from 'node:fs/promises'
-import { dirname, join } from 'node:path'
-import process from 'node:process'
-import { pathToFileURL } from 'node:url'
+// import { rename } from 'node:fs/promises'
+// import { promisify } from 'node:util'
+import { scanSkills } from '#build/utils/scan-skills'
 
-async function parseCollectionOption(dir: string) {
-  const _dir = pathToFileURL(join(dir, 'collection.config.ts')).href
-  const collectionModule: { default: CollectionOption } = await import(_dir)
-  const content = collectionModule.default
-  const { packageName, skill } = content
-  const enabledSkills = Object.entries(skill)
-    .filter(([, option]) => option.enabled)
-    .map(([name]) => ({ name, url: join(dir, name) }))
-  return { collection: packageName, enabledSkills, url: join('dist', 'skill', packageName) }
-}
-
+/**
+ * 在 writeBundle 中等待技能复制完成，向统一发布目录交付技能内容。
+ * 压缩包构建由后续流水线统一处理。
+ *
+ * @returns 技能构建插件。
+ */
 export default function vitePluginSkill(): Plugin {
+  // const execFileAsync = promisify(execFile)
   const virtualId = 'virtual:skill'
   const resolvedId = `\0${virtualId}`
-
-  const sourceDir = join(process.cwd(), 'src')
-  const entity = readdirSync(sourceDir, { withFileTypes: true })
-    .filter(entry => !entry.isSymbolicLink())
-    .filter(entry => entry.isDirectory())
-    .map(entry => ({ name: entry.name, path: join(sourceDir, entry.name) }))
-    .sort((left, right) => left.name < right.name ? -1 : left.name > right.name ? 1 : 0)
-
-  const availableSkills = new Set(globSync('*/*/SKILL.md', { cwd: sourceDir })
-    .map(file => dirname(join(sourceDir, file))),
-  )
 
   return {
     name: 'vite-plugin-skill',
@@ -58,13 +42,11 @@ export default function vitePluginSkill(): Plugin {
     },
 
     async writeBundle() {
-      const collections = await Promise.all(entity.map(({ path }) => parseCollectionOption(path)))
-      const selectedSkills = collections.flatMap(({ collection, enabledSkills, url }) =>
-        enabledSkills
-          .filter(skill => availableSkills.has(skill.url))
-          .map(skill => ({ collection, name: skill.name, source: skill.url, target: join(url, skill.name) })))
-
+      const selectedSkills = await scanSkills()
       await Promise.all(selectedSkills.map(({ source, target }) => cp(source, target, { recursive: true })))
+      // 统一归档由后续流水线负责，保留原命令供迁移时参考。
+      // await execFileAsync('tar', ['--exclude=skill/skill.tar.gz', '-czf', 'dist/skill.tar.gz', '-C', 'dist', 'skill'])
+      // await rename('dist/skill.tar.gz', 'dist/skill/skill.tar.gz')
     },
     closeBundle() {},
   }

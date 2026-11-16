@@ -1,0 +1,55 @@
+{
+  "reason": "timeout",
+  "readyAtNs": 1794817381065631622,
+  "finishedAtNs": 1794817561734974685,
+  "sourceOffset": 7806618,
+  "savedCount": 5,
+  "skippedNonVisibleOrOtherEvents": 43,
+  "receipts": [
+    {
+      "itemId": "msg_0d3f8b5adc88a2be016afabd6b2ab887d0bbbfeda5d75c1f4c",
+      "role": "assistant",
+      "sourceCompletedAtMs": 1794817389406,
+      "observedAtNs": 1794817389406487560,
+      "savedAndReadBackAtNs": 1794817389407291067,
+      "fileMtimeNs": 1794817389404902533,
+      "textLength": 75
+    },
+    {
+      "itemId": "call_5b7ebbc29e354a5e856cc90aff6c85ad",
+      "role": "assistant",
+      "sourceCompletedAtMs": 1794817390577,
+      "observedAtNs": 1794817390578021401,
+      "savedAndReadBackAtNs": 1794817390583055506,
+      "fileMtimeNs": 1794817390580923864,
+      "textLength": 72
+    },
+    {
+      "itemId": "01a1e375-30ec-7242-864e-543878bc0b3c",
+      "role": "user",
+      "sourceCompletedAtMs": 1794817470705,
+      "observedAtNs": 1794817470706437343,
+      "savedAndReadBackAtNs": 1794817470706805211,
+      "fileMtimeNs": 1794817470702285238,
+      "textLength": 263
+    },
+    {
+      "itemId": "msg_0d3f8b5adc88a2be016afabdc77bec87d0a95f5afc21c6f7d6",
+      "role": "assistant",
+      "sourceCompletedAtMs": 1794817480658,
+      "observedAtNs": 1794817480659341027,
+      "savedAndReadBackAtNs": 1794817480659663439,
+      "fileMtimeNs": 1794817480654368564,
+      "textLength": 46
+    },
+    {
+      "itemId": "msg_0d3f8b5adc88a2be016afabdd5aab887d08a70619cc2902051",
+      "role": "assistant",
+      "sourceCompletedAtMs": 1794817519703,
+      "observedAtNs": 1794817519703544599,
+      "savedAndReadBackAtNs": 1794817519703890320,
+      "fileMtimeNs": 1794817519698733486,
+      "textLength": 85
+    }
+  ]
+}

@@ -1,5 +1,44 @@
 # 数据模型：可追溯分发与阶段结果
 
+当前版本模型按[统一版本确认](requirements/raw/2026-11-16-unified-release-version.md)统一：package.json.version 是唯一源版本，scripts.version 等于所选技能 version；保留按对象分文件的发布记录，但整版全部固定对象核验成功后才登记和更新发现。
+
+## 2026-11-16 主线有效模型：三种版本事实与独立阶段结果
+
+依据[本次澄清](spec.md#session-2026-11-16)，字段格式集中在[当前curl契约](contracts/curl-delivery.md)。本节用于主线；下文旧Release/安装请求/收据/逐技能hooks等仅在仍适用的历史消费者范围内有效，紧急版schema1和两步消费不变。不建立任务数据库、永久指纹或第二套工程checkbox。
+
+### 版本与发布引用
+
+| 实体                   | 字段与关系                                                                          | 不变量及生命周期                                                           |
+| ---------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| SourceVersions         | releaseVersion来自package.json.version；同次skillVersion=curlVersion=releaseVersion | 一个受维护SemVer；仅改脚本也递增；源码、当前构建、已发布分别判断           |
+| SkillRelease           | schemaVersion=2、kind=skill-release、version/sourceRevision、skills/files           | 文件清单是单版对象，不能用release.json数组替代；源身份精确到实际完整提交   |
+| CurlScriptBundle       | version/interfaceVersion、files、hiddenPaths、归档bytes/sha256                      | version等于所选技能发布版本，可旧于最新入口；脚本或技能变化须新整体版本    |
+| SkillPublicationRecord | version、技能url/bytes/sha256/md5、manifest引用、固定scripts引用、实际核验事实      | 只在发布及远端核验成功后登记；同技能版本的内容、地址和辅助关联不可变       |
+| CurlPublicationRecord  | curlVersion、sourceRevision、入口及辅助目录/归档文件表、固定R2地址                  | 与同次技能记录version/sourceRevision一致；固定对象不覆盖，不套最新入口HEAD |
+| DiscoverySnapshot      | 索引原字节摘要、选中记录、实际entryVersion/entryDigest                              | 每次启动只解析一次；最新入口与历史辅助包版本可不同，不因中途latest变化换包 |
+
+源发布记录位于dist外，重建只投影已核验历史。`dist/curl/release.json`按最新已发布技能在前；单版清单为`release-manifest.json`。技能候选文件全集是files加单版清单自身，辅助目录全集是辅助files加manifest.json；两个清单均不包含自身摘要。可变发现材料与固定对象、候选索引分开保存，避免成功登记回写冻结候选。
+
+当前本地归档路径为 `dist/skill/skill.tar.gz` 与 `dist/curl/scripts.tar.gz`，包内根分别为 `skill/`、`script/`，均不包含归档自身。每次构建的长度和摘要对应本次实际归档，不要求跨构建相同；一旦选定发布候选，记录及重试仍绑定同一份冻结字节。现有局部归档不等于已生成上述版本/文件清单或登记发布成功。
+
+### 路径与成功集合
+
+隐匿生成源当前是curl插件中的hidden-install.template.ts；独立.sh已交付并随scripts.tar.gz归档，旧手写源路径不作为必须恢复项。当前模板已有路径和Git/排除基础逻辑，但安装调用、SuccessfulSelection与阶段协议尚未接入，模型字段不能据模板或归档存在标为已实现。
+
+`InstallMapping`保存name/category/sourceDirectory/installRelativeDirectory/requiresSkills：sourceDirectory是`skill/<集合>/<目录>`，当前installRelativeDirectory展平为`<目录>`。在正式获准集合内核对名称、目录映射和跨集合目标唯一；不把eval或未选配置自动纳入正式候选。
+
+`HiddenPathTemplate`保存skillName、installRelativeDirectory、`@@AGENT_SKILLS_ROOT@@/<目录>`。构建枚举只是候选；`SuccessfulSelection`由本次安装或同版完整重验生成，保存name、实际installedPath、安装映射及事实依据。可处理集合为模板候选、本次显式选择、实际成功集合的交集；再核对项目内、独占和未跟踪，不能从历史安装根反推本次事实。
+
+运行替换当前只验证`.agents/skills`。占位符未替换、构建绝对路径、集合误拼入安装层、共享路径或已跟踪目标不能进入排除；特殊字符按Git规则转义。`.git`缺失或为文件沿保守支持范围跳过，不向父仓库扩张。
+
+### 一次运行结果
+
+`RunReport`记录request、entryVersion/entryDigest、selectedSkillVersion/catalogDigest、scripts.version/interfaceVersion/digest、逐技能结果、installation/hidden/hooks/commands与overall/retry/coverageLimits。实际阶段为success/skipped/failed/not-run，overall为success/partial/failed；这些只描述本次运行，不是Task状态。
+
+技能逐项沿pending→staged→verified→installed/reused，任何已核验完整成功项可进入后置步骤。仅hidden包获取或校验失败可发生在技能写入前：继续独立核验通过的技能安装，hidden=failed；installation实际成功后overall=partial、退出1。参数/静态前提失败退出2，无请求步骤失败才退出0；技能自身失败不得预先标安装成功。
+
+无hidden请求时不执行hidden脚本；脚本包、路径或协议失败都不得执行未核验代码。结果文件是本次私有临时材料，读取后由入口按实际Git效果核查，清理不抹去报告中的成功事实。暂缓挂载及未实现选项要明确说明，不能填success；最终平台、挂载与公开消费验收保持原要求。
+
 ## 紧急版数据增量（2026-11-12）
 
 对应FR-003/061～067、SC-019和Clarify B，接口见[紧急契约](contracts/urgent-release.md)。以下只定义输入和一次运行证据，不增设任务状态、永久指纹、registry副本或服务；原主线模型从“当前集合配置”起保留。

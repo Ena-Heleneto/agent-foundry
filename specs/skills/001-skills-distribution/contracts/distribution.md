@@ -1,6 +1,12 @@
 # 发布目录与构建契约
 
-## 当前集合内容契约（2026-11-11）
+## 2026-11-16 当前主线产物边界
+
+有效主线布局为平级 dist/skill 与 dist/curl；技能包最终位于 dist/skill/skill.tar.gz，包内根 skill/，先在目录外压缩再移入并排除既有归档。install.sh 原字节交付，hidden 模板按 FR-075 派生到 curl/script，再归档为 curl/scripts.tar.gz，包内根 script/。目录与归档同时保留，均不包含归档自身；按本次真实产物计算校验值，不要求跨构建哈希一致。技能清单名 release-manifest.json、数组版本索引等正式材料仍待实现，完整设计见[curl交付契约](curl-delivery.md)。
+
+独立插件各自读源，不恢复旧BaseBuildPlan共享上下文或统一扫描API；最终复核不得依赖writeBundle偶然顺序。模板允许的路径注入与普通原字节附件分开比较。正式归档过滤eval，不能以全量dist作为公开集合。下文旧三目录、MCP清单和Git源发布模板不覆盖本节；MCP内容继续后置，紧急版schema1及公开集合公式保持。
+
+## 历史集合内容契约（2026-11-11，未被替代的内容保护继续适用）
 
 以spec的FR-053～060及[独立插件讨论](../requirements/discussions/2026-11-11-independent-plugins.md)为准：自动发现集合，只复制skill清单列出的技能至dist同名集合，配置原字节交付。缺配置默认packageName=null、mcp=false、skill={}，不交付技能。逐事件hook独立保存参数和扩展属性，command/description留未来生成器读取来源；frontmatter及附件保持，MCP目录为空。
 

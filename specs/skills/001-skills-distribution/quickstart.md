@@ -1,5 +1,71 @@
 # 验证指南：构建、流水线与技能发布共同交付
 
+## 2026-11-16 当前验证入口：技能安装与可选隐匿
+
+先读[当前curl契约](contracts/curl-delivery.md)、[模型](data-model.md)和[本轮研究](research.md)。本节替代下文冲突的旧三目录、官方主线入口、Git下载根及旧源码路径用法；紧急版既有验收指南继续按自身范围。所有安装操作只在自有临时消费项目执行，不在当前用户项目试装；真实R2需要另有地址和授权。Plan与Tasks已保存；下列新业务验证步骤仍须按实际证据执行，不能从文档存在推断已运行。
+
+### 前提与工程检查
+
+当前源码已有技能复制、隐匿Bash生成、原字节入口及两个独立归档；仍缺正式发布白名单/清单、安全解包、完整选择、辅助包下载调用和阶段报告。先复用hidden-install.template.ts及现有插件，不恢复旧.sh源或重复实现归档。局部构建不代表现在就能完成真实安装；原Task准备及完整接口验收保持。构建准备遵守根AGENTS，使用pnpm 12和适用Node；初始化用pnpm install，本轮文档同步未执行初始化。归档验证基线为GNU tar/gzip，其他构建平台另证。
+
+在仓库根运行以下真实已有入口，记录失败、缺前置和未执行，不能删旧测试断言求绿：
+
+```bash
+pnpm --filter @foundry/skills run lint
+pnpm --filter @foundry/skills run check-types
+pnpm --filter @foundry/skills run build
+pnpm --filter @foundry/skills run test
+pnpm --filter @foundry/skills run test:distribution
+```
+
+本轮文档检查单独运行`pnpm exec eslint --fix --no-ignore <本次Markdown路径>`。没有根pnpm test；当前旧分发测试可能引用已移动或归档模块，按实际结果定位有效性，不把测试入口存在算作已通过。`build:candidate`属于紧急严格候选，不能替代主线新设计的验证。
+
+### 构建材料与本次归档核验
+
+执行包build后，检查 `dist/skill/skill.tar.gz` 与 `dist/curl/scripts.tar.gz`，包内根分别为 `skill/`、`script/`。在临时目录解开，逐文件比对路径与字节和本次被归档目录100%一致；技能目录比对排除归档自身，辅助包不得混入install.sh。入口与install.source.sh按原字节比较。每次按本次真实归档计算摘要，不要求两次构建的压缩包哈希相同；再次构建仍须排除旧技能包，构建结束dist根不残留中间skill.tar.gz。
+
+局部输出可先用以下命令检查；正式manifest、版本及公开白名单仍须按原任务补齐，不把目录列表代替全集/字节核验：
+
+```bash
+tar -tzf packages/skills/dist/skill/skill.tar.gz
+tar -tzf packages/skills/dist/curl/scripts.tar.gz
+cmp packages/skills/build/plugins/vite-plugin-curl/install.source.sh packages/skills/dist/curl/install.sh
+```
+
+完整验收仍须用缺模板、错误占位符、重名安装目录、符号链接和危险输出根作反例；危险输入清理前失败，write=false零目录/归档新增。当前技能包按启用清单归档，正式公开归档还须按获准清单过滤eval及内部材料，不能直接发布现有全量包。验证所有当前产物版本等于package.json.version，scripts.version等于对应技能version；仅改脚本也须新整体版本，拒绝旧版helper混入新版技能。清理dist不得丢失持久发布记录，单纯build不增加发布成功记录；发布重试复用选定冻结包，不通过重建覆盖同版远端对象。
+
+### 安装与隐匿场景
+
+准备具有两版技能、各自同版helper和一个较新入口的本地发布夹具；夹具保留HTTPS及摘要/成员核验链路，网络替身只替换传输，不跳过验证。每个场景使用独立HOME及项目，明确列出替身覆盖边界；真实R2另行验证，不把本地夹具记为远端通过。
+
+实现契约参数后，已核验的本地入口按以下形式在自有消费目录执行；版本和技能必须来自本次真实夹具，示例变量须先赋值，不是公开可运行命令：
+
+```bash
+bash "$VERIFIED_INSTALL" "$SKILL_VERSION" --agent codex --skill "$SKILL_NAME" --no-mount --hidden
+```
+
+| 场景输入                                     | 必须观察的结果                                                         |
+| -------------------------------------------- | ---------------------------------------------------------------------- |
+| 两版技能，各有同版helper，均调用最新入口     | 各取所选技能及固定helper，不热切换；入口/技能/helper版本和摘要可追溯   |
+| 无版本、显式旧版本、空表、未知或重复版本     | latest只取首条，显式唯一；非法输入零技能提交，不回退其他版本           |
+| 整包、分类、单技能、多技能及重复选择         | 选择恰当、去重、附件完整；eval拒绝，缺依赖要求显式补选                 |
+| 默认关闭hidden，helper不可用                 | 技能独立安装；hidden脚本执行0，Git排除零写入                           |
+| 开启hidden，仅helper下载失败或摘要不符       | 技能仍完整安装，hidden失败、overall部分失败、非零退出，未核验脚本执行0 |
+| helper错版本、未知接口、缺脚本或非法成员     | 不执行、不给另一个包、不回退入口；结果区分安装与辅助失败               |
+| 技能归档摘要错、附件缺失、非法成员           | 技能不进入提交，不因hidden容错放宽技能完整性                           |
+| 已存在用户同名、另一版本、修改或已跟踪内容   | 保留原内容，报告冲突；部分成功仅将完整成功项交给hidden                 |
+| 普通Git仓库，模板含多技能而只安装部分        | 排除仅对应本次成功集合；未选/失败/历史内容不误隐藏                     |
+| 无.git、父仓库子目录、.git文件、项目外global | 明确跳过或覆盖限制；不改父仓库、全局配置或共享文件                     |
+| 规则权限失败、反向规则、特殊路径、重复安装   | 保留原规则和成功技能，核对实际效果，重复无新增规则，失败不误报成功     |
+
+每次保留逐技能文件对照、入口/包身份、stdout/stderr、退出码及阶段结果；Git效果用目标项目的`git check-ignore -v`、`git ls-files`及`git status --short`联合核验。新场景纳入原安装/隐匿测试骨架，具体测试文件与新增命令由Tasks/原Task详细方案确定，本指南不伪造尚不存在的测试入口。
+
+### 后置验收与恢复
+
+修复失败材料后使用同一技能版本和固定关联重试，重新核对真实文件；内容相同复用与冲突保护按原要求，不能强制覆盖用户修改。原Node入口、PowerShell、其他agent/global、真实挂载及旧入口迁移保留交付目标，未实际覆盖的组合逐项列未验证。本轮不恢复其实施，也不删除旧验收。
+
+真实发布另在迁后公开仓库具备授权与真实R2前提后，只上传冻结对象、远端比对全部字节，同次技能/curl记录的版本与源码身份一致，所有固定对象核验成功后才登记完整发布并更新发现材料；模拟环境不抵扣独立使用者、完整矩阵或最终SC-019。紧急版仍按其已有候选及官方两步验证，不按此主线脚本重做或重发。
+
 ## 紧急版验证导航（2026-11-12）
 
 依据[最新spec](spec.md)、[工作区输入及Clarify B](requirements/raw/2026-11-12-workspace-local-handoff.md)、[紧急契约](contracts/urgent-release.md)及[模型](data-model.md)。本地实施位置为当前工作区packages/skills-distribution-urgent；所有必需本地验证通过后按[连续推进豁免](requirements/raw/2026-11-12-urgent-continuous-exemption.md)继续，不逐阶段或逐Task重复确认；迁仓/建仓/推送/发布仍核对适用明确授权。源码可保留eval，正式技能发布、发现及安装仍排除eval。
@@ -331,7 +397,7 @@ bash <独立副本>/script/install-skills/install-skills.sh --source-dir <本地
 
 ## C：历史最小公共材料核验重现
 
-本节复验旧技能集合和固定官方包，不代替当前 Increment/准备 hook 移交。内部最小核验模块已实现，模块接口见 [内部核验说明](../../../packages/skills/script/mount-entry/README.md)，实际结果见 [MVU-C 验收记录](analysis/acceptance/mvu-c.md)。外部分发唯一入口为 node script/index.mjs 加参数，当前先接现有安装骨架，实际挂载仍待 T006。先准备固定版本 skills@1.7.4 npm 包，将 FOUNDRY_SKILLS_PACKAGE 指向该包目录；Bash 可将 FOUNDRY_JQ 指向已取得的 jq 1.8.1 官方二进制，否则内部模块会自行准备并核验。实验在自有 /tmp 目录执行，未提供真实公开来源。
+本节复验旧技能集合和固定官方包，不代替当前 Increment/准备 hook 移交。内部最小核验模块已实现，模块接口见 [内部核验说明](../../../packages/skills/script/old/mount-entry/README.md)，实际结果见 [MVU-C 验收记录](analysis/acceptance/mvu-c.md)。外部分发唯一入口为 node script/index.mjs 加参数，当前先接现有安装骨架，实际挂载仍待 T006。先准备固定版本 skills@1.7.4 npm 包，将 FOUNDRY_SKILLS_PACKAGE 指向该包目录；Bash 可将 FOUNDRY_JQ 指向已取得的 jq 1.8.1 官方二进制，否则内部模块会自行准备并核验。实验在自有 /tmp 目录执行，未提供真实公开来源。
 
 ```bash
 pnpm --filter @foundry/skills run test:distribution -- --mvu C

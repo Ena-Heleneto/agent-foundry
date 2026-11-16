@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-requested_version="${1:-latest}"
+requested_version='latest'
+hidden=false
+
+for argument in "$@"; do
+  case "$argument" in
+    --hidden) hidden=true ;;
+    *) requested_version="${argument:-latest}" ;;
+  esac
+done
 
 release_url='https://downloads.example.com/releases/0.1.0'
 

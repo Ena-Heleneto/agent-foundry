@@ -7,6 +7,7 @@
   "license": "ISC",
   "publishConfig": { "registry": "https://npm.pkg.github.com" },
   "imports": {
+    "#package.json": "./package.json",
     "#src/*": "./src/*.ts",
     "#utils/*": "./utils/*.ts",
     "#build/*": "./build/*.ts"

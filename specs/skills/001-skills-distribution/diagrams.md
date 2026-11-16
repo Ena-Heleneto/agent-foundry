@@ -1,5 +1,61 @@
 # 技术流程图：分发核验与阶段状态
 
+## 2026-11-16 最新入口与固定辅助包
+
+本图为当前主线设计，替代下文旧Node唯一启动、双安装入口及Git主线发布假设。图示不代表实现通过，紧急版仍采用自身两步流程。
+
+```mermaid
+flowchart LR
+    A[最新install入口] --> B[一次读取技能索引并固定记录]
+    B --> C[所选技能版本及单版清单]
+    B --> D[该记录固定关联的辅助包]
+    C --> E[技能完整性和来源核验]
+    D --> F[包摘要 成员及协议核验]
+    F --> G[已核验隐匿脚本]
+    E --> H[逐技能提交与成功集合]
+    H --> G
+```
+
+大白话：入口可以更新，历史技能仍用其登记过的脚本包；同次发布统一读取package.json.version；实际最新入口可新于所选技能和它的同版辅助包，分别追溯实际来源。代码位置：`packages/skills/build/plugins/vite-plugin-curl/install.source.sh`（当前只有基础技能下载复制，关联及阶段核验待实现）；持久记录和新清单位置见[curl契约](contracts/curl-delivery.md)。
+
+## 2026-11-16 隐匿失败不抹去安装成功
+
+```mermaid
+flowchart TD
+    A[技能内容独立核验通过] --> B[提交已核验技能]
+    B --> C{本次请求隐匿吗}
+    C -->|否| D[hidden跳过 安装按实际结果报告]
+    C -->|是| E{固定辅助包及协议核验通过吗}
+    E -->|否| F[不执行辅助脚本]
+    F --> G[保留安装 hidden失败 总体部分失败]
+    E -->|是| H[模板候选与本次成功集合取交集]
+    H --> I[检查本地Git并追加精确规则]
+    I --> J[核验Git实际效果并独立报告]
+```
+
+大白话：只有技能自己核验失败才不能进入提交；隐匿包失败不阻止独立安装，已成功技能保留。图画出的是依赖关系，不要求串行下载阻塞安装；即使包错误先于技能写入发现，也按同一规则处理。代码位置：入口`install.source.sh`与`vite-plugin-curl/hidden-install.template.ts`；独立Bash输出与归档已接线，下载调用及成功集合协议仍待原安装/隐匿Task验证。
+
+## 2026-11-16 构建派生与最终归档
+
+```mermaid
+flowchart LR
+    A[集合配置与启用技能] --> B[技能插件独立扫描并复制]
+    A --> C[curl插件独立扫描]
+    D[hidden源模板] --> C
+    V[package.json.version 统一源版本] --> B
+    V --> C
+    B --> E[目录外归档再移入skill/skill.tar.gz 排除旧包]
+    C --> F[生成script目录及独立install入口]
+    F --> G[压缩script为curl/scripts.tar.gz]
+    E --> H[分别解包与本次内容比对 校验值对应各自产物]
+    G --> H
+```
+
+大白话：两个插件各自扫描、交付和打包，不等待对方的目录；skill包最终放进skill目录，script包放在script目录外，都不包含自身。代码位置：`packages/skills/build/plugins/vite-plugin-skill/index.ts`、`vite-plugin-curl/index.ts`与唯一`vite.config.ts`；上述基础归档已有实现，正式过滤、清单和版本仍待原Task。不要求跨构建哈希相同，发布时冻结选定产物；图中校验值表示核验关系，不表示插件已生成校验文件或安装入口已接通。
+
+<details>
+<summary>历史技术图（旧入口与旧推进顺序，当前依赖以logic-flow为准）</summary>
+
 2026-11-10 按当前 spec、plan 与数据模型同步 Increment、实施准备、旧入口迁移及 Agent 在线来源；唯一公开入口仍为 node script/index.mjs。下图区分已具备的只读数据查询与后续安装、挂载流程，图示不代表完整平台或业务验收。来源：[plan.md](plan.md)、[data-model.md](data-model.md)。
 
 ## 本次优先交付链：构建及占位 → Actions → 真实挂载
@@ -247,3 +303,5 @@ flowchart TD
 大白话：四处源码指紧急目录、packages/skills、specs/skills、apps/mcp；公开源码可以保留eval，但技能发布和安装仍排除它。tag指向承载精确公开文件的无父提交，sourceRevision则追溯对应的新仓库源码，两者不能混写。网络断连先回读，不从退出码推断没有发布；源码迁移、发布与匿名消费分别需要真实证据。
 
 计划位置：迁后新仓库根配置、紧急包内部发布工具、skills-v<version>和自有Linux/Codex消费项目；许可/依赖/私有依据与MCP旧manifest缺口进入迁移说明。原PlatformReceipt与full/ready资格不参与，不伪造Actions收据。本图只作文本结构核验，未声明渲染通过。
+
+</details>
