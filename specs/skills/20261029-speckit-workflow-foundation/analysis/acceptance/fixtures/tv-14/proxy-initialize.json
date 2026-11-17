@@ -1,0 +1,11 @@
+{
+  "operation": "codex app-server proxy / initialize only",
+  "timeout_seconds": 6,
+  "response": null,
+  "elapsed_seconds": 6.008,
+  "exit_code_after_probe_cleanup": -15,
+  "thread_requests_sent": 0,
+  "model_requests_sent": 0,
+  "configuration_changed": false,
+  "interpretation": "仅握手观察，不将连接失败解释为宿主全局不支持；不将探针清理当主代理会话结束"
+}

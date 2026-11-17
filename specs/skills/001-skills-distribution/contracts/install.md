@@ -2,9 +2,14 @@
 
 ## 2026-11-16 当前主线适配
 
-当前安装、版本、辅助包及报告遵循[curl交付契约](curl-delivery.md)。公开install.sh使用最新入口；技能位置参数默认latest，辅助包固定到所选技能记录，二者不要求同curl版本。仅hidden所需包失败不阻止已独立核验技能安装，结果为安装实际成功、hidden失败及非零退出。
+最新install.sh按一次固定的release.json记录下载一个统一包；新正式入口要求bytes/SHA-256，安全解包后核对根VERSION、映射和所选技能，才逐项安装。字段/参数与顺序见[curl契约](curl-delivery.md)，不另下helper，不要求随包文件JSON。数组记录与紧急旧schema1不可混用。
 
-主线数组release.json与单版release-manifest.json分开；新主线schema2不能直接交给下文旧schema1/Node解析器。原Node公共挂载和跨平台目标保留后置，现场旧源码已移到script/old，不据旧路径运行或自动恢复。下文11月14日“只解析URL”“node-jq已固定”等是当时记录；当前源码已有基础复制而依赖未固定，均不是本轮新能力通过。紧急版入口不变。
+统一包下载/核验失败时零技能提交、零辅助执行；包已通过且技能完整时，后置hidden缺件/接口/执行失败独立报告并保留安装，取消旧“另一个包下载失败”的前提。选择/依赖、用户同名修改、tracked保护、同文件系统暂存及成功集合保持原目标。入口实际字节身份与所选技能版本分别记录，不能用latest查询证明已执行入口。
+
+当前源码仍为占位地址、MD5、未固定node-jq和基础全量项目复制，hidden只解析，无根VERSION/成员安全/完整选择与报告；这些是待适配事实，不是本轮验证通过。固定临时依赖/缓存、在线Agent元数据和原Node/PowerShell/global目标保持，尚未支持参数在目标写入前明确拒绝，script/old不自动搬回。紧急版官方安装及显式第二步不变。
+
+<details>
+<summary>此前契约与历史接口（未被替代的保护和最终验收继续适用）</summary>
 
 ## 当前 curl 参数与临时依赖（2026-11-14）
 
@@ -108,3 +113,5 @@ curl 方式自动取得并验证运行材料、准备自身依赖、安装所选
 ## Agent 在线来源
 
 安装或官方预检每次在线解析 skills 的 npm latest，使用同一发布包的 Agent 路径规则；不固定版本、提交或数量；来源直接定义于 script/install-skills/read-agents.mjs，不维护 packages/skills/distribution、agents.json 或替代声明。官方建议中 skills@后面的实际版本来自该次解析，用户按报告原样执行；后续调用重新获取。上述原生命令仅为模板，实际 all/category 建议显式列出所选名称，避免星号扩大到未检查的内容。预检不启动 npx，不写缓存、锁、收据或暂存；网络/完整性/布局失败退出2且目标零写入，不回退旧表。本地 source-dir 也必须在线查询 Agent 规则；不存在离线静态表回退。元数据、官方 HTTPS 包地址、SHA-512 integrity、包内版本及规则布局均须通过校验，读取器不执行 CLI 入口或安装代码。所需 Node、tar 和平台工具须提前具备。自有技能的 version 与不可变发布来源不受此 Agent 数据策略影响。
+
+</details>

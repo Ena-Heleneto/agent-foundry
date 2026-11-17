@@ -2,9 +2,14 @@
 
 ## 2026-11-16 当前隐匿接口与挂载边界
 
-近期仅推进技能安装和可选隐匿；Spec Kit/hook/Increment的原最终验收保留但本轮不恢复实现。独立hidden源、构建占位符、成功集合交集、协议1、Git检查及独立失败报告集中在[curl契约](curl-delivery.md)。辅助包取所选技能的固定关联，而入口始终最新；仅hidden包失败时保留并继续独立安装，不执行未核验脚本。
+近期只推进技能安装和可选hidden，Spec Kit/hooks/Increment继续后置；原正式同版核验、先hooks后commands、旧入口保护及实际宿主完整加载验收保持，不以新包下载完成抵扣。字段及hidden协议集中在[curl契约](curl-delivery.md)，统一包不强制随包逐文件JSON，后置挂载仍须实际正文/附件/声明同版核验。
 
-下文旧script目录和Node公共挂载内容是后续适配参考，现场script/old不由本规划搬回。无映射/无.git/共享或已跟踪文件按各自适用规则判断，不以目录有文件推定挂载或hidden通过；其他agent、全局及三平台的完整目标与实际未验分别报告，紧急版已验两步不受影响。
+hidden从已核验同版统一包取得，未知接口不执行；处理模板候选、本次选择和完整成功集合的交集。统一包整体失败不安装；技能完整且已实际安装后，只有hidden模块/执行失败可保留安装并报告部分失败。生成脚本路径必须过滤正式白名单，不能按历史目录存在性认定成功。
+
+本地.git/父仓库/.git文件、tracked、共享路径及global项目外限制保持，不忽略整个agent目录、不取消跟踪；当前只先验.agents/skills前缀。旧script路径仅作适配参考，不自动恢复script/old。紧急版自身候选和两步消费不受主线布局影响。
+
+<details>
+<summary>此前契约与历史接口（未被替代的保护和最终验收继续适用）</summary>
 
 **本次共同交付的前置边界（2026-11-10）**：打包构建全部重做，挂载运行源码保留原状态；新产物仍须通过本契约的同版文件、官方迁移和实际加载验证。所选正式workflow来源缺失只阻断对应完整候选及消费，不阻断纯MCP或稳定内容的构建实验。候选与CI统一见 [build-pipeline.md](build-pipeline.md)，不能把保留核验骨架描述为完整挂载已实现。
 
@@ -84,3 +89,5 @@ hooks、commands 独立报告 success/skipped/failed/not-run；重试重新核�
 ## 历史：2026-11-04 hook 配置归属修正（已由集合集中配置替代）
 
 每个声明 hooks 的技能在 SKILL.md 同目录维护 speckit-hooks.json，内容是以事件为键的 hooks 映射。该配置随技能及附件原样构建、安装；register-hooks 从 --skills-dir/<技能>/speckit-hooks.json 读取并直接组装临时 extension.yml。脚本目录不维护或构建 definitions 副本，缺少任一必需配置时在首次官方安装前失败。
+
+</details>

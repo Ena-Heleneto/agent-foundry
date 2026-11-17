@@ -2,9 +2,14 @@
 
 ## 2026-11-16 当前主线产物边界
 
-有效主线布局为平级 dist/skill 与 dist/curl；技能包最终位于 dist/skill/skill.tar.gz，包内根 skill/，先在目录外压缩再移入并排除既有归档。install.sh 原字节交付，hidden 模板按 FR-075 派生到 curl/script，再归档为 curl/scripts.tar.gz，包内根 script/。目录与归档同时保留，均不包含归档自身；按本次真实产物计算校验值，不要求跨构建哈希一致。技能清单名 release-manifest.json、数组版本索引等正式材料仍待实现，完整设计见[curl交付契约](curl-delivery.md)。
+开发输出为dist/VERSION及平级skill/、curl/；唯一配置已注册三个插件，skill/curl内压缩代码保持注释。正式流水线独立筛选获准三分类、同版运行材料、根VERSION、说明和实际许可，再形成一个skills-<version>.tar.gz；包内直接保留相同根路径。具体布局/映射见[curl契约](curl-delivery.md)。
 
-独立插件各自读源，不恢复旧BaseBuildPlan共享上下文或统一扫描API；最终复核不得依赖writeBundle偶然顺序。模板允许的路径注入与普通原字节附件分开比较。正式归档过滤eval，不能以全量dist作为公开集合。下文旧三目录、MCP清单和Git源发布模板不覆盖本节；MCP内容继续后置，紧急版schema1及公开集合公式保持。
+不生成两个旧tar.gz，不强制随包release-manifest.json或script/manifest.json。逐文件全集、摘要、来源和附件核验保存在流水线证据，缺件/多件/未公开材料仍拒绝；不能直接递归公开开发dist。hidden生成路径也须按正式选择过滤，不通过删除eval/profile目录掩盖辅助脚本内身份。
+
+包README以packages/skills/README.md为来源但须冻结前改成当前可用行为，真实ISC取仓库根LICENSE，第三方材料保留其实际许可和通知；不能以package字段或旧README当成已核验。新根VERSION已有实现，正式归档及完整检查尚未交付。MCP内容规则继续后置，紧急schema1及其精确payload公式不变。
+
+<details>
+<summary>此前契约与历史接口（未被替代的保护和最终验收继续适用）</summary>
 
 ## 历史集合内容契约（2026-11-11，未被替代的内容保护继续适用）
 
@@ -98,3 +103,5 @@ Increment 复用缩减后的 register-commands.sh、.ps1 与 README；外部 Nod
 ## 历史：2026-11-04 平台执行修正（已由唯一 Node 入口替代）
 
 本包运行入口直接使用环境对应的 .sh/.ps1；安装、hooks 和五指令不经 Node 转发。skills 方式仍由用户手动执行同版公共平台脚本，curl 方式自动串联安装与挂载；两者复用同环境的平台实现。CLI 版本使用 FOUNDRY_SPECIFY_VERSION 或默认 1.2.6。构建只原样复制，Node/TypeScript 仅用于构建、测试或官方工具所需环境；不交付自有 TS/JS/Python 安装核心、Node 分发器或嵌套 package.json。后续任务不得重新创建已取消的转发层。
+
+</details>
