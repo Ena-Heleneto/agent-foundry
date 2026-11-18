@@ -1,0 +1,19 @@
+{
+  "checked_at_ns": 1794982327414792714,
+  "previous_final_saved_before_next_user": true,
+  "previous_final_proof": "t115-native-primary-2026-11-18.json",
+  "original_recorder_process_missing": true,
+  "original_exec_session_unavailable": true,
+  "stop_cause": "unknown",
+  "stop_time_known": false,
+  "same_current_thread_and_source_verified": true,
+  "confirmed_prefix_verified": true,
+  "visible_gap_started_with_current_user_question": true,
+  "resumed_via_existing_protocol": true,
+  "question_recovered": true,
+  "confirmed_records_after_recovery": 5,
+  "unconfirmed_count": 0,
+  "unresolved_gap_count": 0,
+  "recovery_counted_as_realtime": false,
+  "task_complete": false
+}

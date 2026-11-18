@@ -1,8 +1,14 @@
 # 发布目录与构建契约
 
+## 2026-11-18 目标产物增量
+
+主线获准运行脚本唯一位于 `dist/script/`：安装入口为 `install.sh`，隐匿辅助脚本为 `hidden-install.sh`；统一归档内直接对应 `script/`。curl 插件交付安装入口、script 插件派生 hidden，每项资产各有唯一责任方；curl 输出分区仍保留映射等非脚本数据，技能正文附件和根VERSION保持。构建不执行脚本，不新增独立脚本包，不收录 old、模板源码或测试工具。
+
+前轮仅新增未注册骨架；本轮按后续授权已迁移模板与生成逻辑并接入配置，当前四插件中 curl 原字节交付 install.sh、script 派生 hidden，旧 curl 脚本输出和占位 JS 已移除。局部构建与字节验证见[T077](../implementation/T077.md)，正式候选仍待后续；目标布局详见[curl契约](curl-delivery.md)。下方三插件事实记录迁移前过渡状态。
+
 ## 2026-11-16 当前主线产物边界
 
-开发输出为dist/VERSION及平级skill/、curl/；唯一配置已注册三个插件，skill/curl内压缩代码保持注释。正式流水线独立筛选获准三分类、同版运行材料、根VERSION、说明和实际许可，再形成一个skills-<version>.tar.gz；包内直接保留相同根路径。具体布局/映射见[curl契约](curl-delivery.md)。
+目标开发输出为dist/VERSION及平级skill/、script/、curl/非脚本数据；当前唯一配置仍注册三个插件，skill/curl内压缩代码保持注释。正式流水线独立筛选获准三分类、同版运行材料、根VERSION、说明和实际许可，再形成一个skills-<version>.tar.gz；包内直接保留相同根路径。具体布局/映射见[curl契约](curl-delivery.md)。
 
 不生成两个旧tar.gz，不强制随包release-manifest.json或script/manifest.json。逐文件全集、摘要、来源和附件核验保存在流水线证据，缺件/多件/未公开材料仍拒绝；不能直接递归公开开发dist。hidden生成路径也须按正式选择过滤，不通过删除eval/profile目录掩盖辅助脚本内身份。
 

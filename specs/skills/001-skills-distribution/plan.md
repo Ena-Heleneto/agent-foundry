@@ -1,6 +1,42 @@
 # 实施方案：统一发布包、技能安装与可选隐匿
 
-**实际 Git 分支**：`feature/init`。**功能定位**：`001-skills-distribution`。**日期**：2026-11-16。setup-plan返回的BRANCH是功能定位，不是新建或切换Git分支。
+## 2026-11-18 局部增量：显式开启集合插件
+
+本轮请求覆盖此前“存在即加载”的设计：`CollectionOption` 增加可选布尔 `plugin`，`defineCollectionHandle` 合并 `plugin: false`。引擎先读取集合 `collection.config.ts`，仅 `plugin === true` 时扫描 `src/<集合>/plugin/vite-plugin-*/index.ts`，沿原普通目录/入口、稳定排序、工厂导入及 Vite 原生返回结构约定。未配置、关闭或缺配置的集合不加载插件；`script` 和技能开关独立。
+
+本次局部实施顺序为：先用隔离夹具验证禁用不导入、启用目录边界和坏入口错误；再补配置、引擎及唯一 Vite 配置接线；最后运行定向 Node 测试、类型检查、ESLint 与临时目录构建。沿用现有依赖及当前工作区，保留用户未提交内容和 `index_copy.ts`，不接管脚本迁移或业务子插件，不改变原任务状态。下方自动加载规划保留当时语境，当前接口以本节及 Spec FR-076 为准。
+
+## 2026-11-18 当前规划：自动发现集合子插件
+
+本次按用户“使用子代理执行 speckit-plan，我们在 build/plugins 下新建一个引擎插件”的要求，消费[最新 Spec](spec.md) FR-076～078，增量执行 Phase 0/1。实际 Git 分支为 `feature/init`；显式功能定位 `001-skills-distribution` 配合 `SPECIFY_FEATURE_NO_PERSIST=1` 运行 setup-plan，已有 Plan 未被模板覆盖，共享 `.specify/feature.json` 未改。已解析扩展配置，before_plan/after_plan 均无已注册 hook。
+
+**总体方案**：在 `build/plugins/vite-plugin-engine/index.ts` 导出异步工厂，配置加载时扫描 `src/*/plugins/vite-plugin-*/index.ts`；默认来源锚定该包的 `src/`，允许传入绝对来源目录用于隔离验证。只发现固定深度的普通目录与普通入口，不跟随符号链接，按集合名、插件目录名排序后顺序导入并调用默认导出的无参工厂。工厂返回 Vite `PluginOption`，引擎返回 `Promise<PluginOption[]>`；Promise、嵌套数组和 false 等值交由 Vite 原生处理，引擎不手工运行钩子或维护共享上下文。不存在子插件目录或匹配入口时该集合贡献空数组；真实读取、导入、非函数默认导出或工厂执行失败时带入口定位报错，停止配置加载。
+
+**完整目标与本轮实现边界**：未来 workflow 子插件生成一个自包含的 `script/speckit-mount.sh`，先只含 Increment；hidden 的扫描、模板与生成逻辑回迁 curl，curl 交付安装入口及 hidden，移除旧 script 插件。所有运行资产仍在 `dist/script/`。本轮主代理仅按已确认方向新增引擎发现/加载能力；Speckit 子插件、生成 sh、curl 回迁及配置接线均不因本次规划被记为已实现。引擎发现不读取 `collection.config.ts`，不受 `script` 或技能启用配置控制。
+
+**技术背景与必要前置**：沿用 ESM、严格 TypeScript、Node 内置 fs/path/url 与已装 Vite 8.3.8，不新增依赖；现场 Node 为 24.22.2、pnpm 为 12.16.1。已有集合扫描已使用动态导入 `.ts`，已装 Vite 的 `PluginOption` 与配置解析源码支持异步及嵌套数组；最低 Node 22.20.0 本轮未独立实测。固定入口约定、返回类型与失败边界见[构建契约](contracts/build-pipeline.md)，依据和替代方案见[研究](research.md)。动态导入失败、错误默认导出、工厂抛错及真实 Vite 消费由隔离夹具验证，未通过前不依赖引擎继续生成业务脚本；验证不运行真实挂载。
+
+**Phase 1 与宪章复核**：增量同步研究、模型、构建/curl 契约、指南、同级闭环及技术图，保留既有正文和证据。复用下方唯一同级闭环文件入口，不新增业务身份、任务或 checkbox；本轮未执行 Tasks，不改其依赖、完成事实及原认可。工程检查按本轮实际实现范围执行，正式过滤、统一归档、安装保护、真实挂载和紧急版原范围仍须各自验收。需求已确认、实现授权限定引擎新增，Phase 0/1 未发现未解决设计选项或需豁免的宪章冲突；本节优先于下方旧插件归属目标，历史阶段记录保留。
+
+## 2026-11-18 续接：Tasks 后局部迁移
+
+依据[后续明确授权](requirements/raw/2026-11-18-unified-script-directory.md)，已完成 Tasks 及 after_tasks 综合分析增量同步，随后按[T077局部方案与结果](implementation/T077.md)迁移现有生成逻辑并接线。hidden 模板移入脚本插件目录；按用户后续纠正，curl 插件读取同目录安装源并交付 `script/install.sh`，script 插件只扫描技能并派生 `script/hidden-install.sh`。四插件已注册，仅保留技能虚拟入口驱动构建，无空 curl 虚拟 JS。输出目录统一不要求所有脚本由同一插件生成。新脚本目录的真实构建及字节验证不代替完整协议、正式过滤、发布记录或统一归档；原依赖和工程 checkbox 保持。
+
+下方“只新增骨架”“模板暂留原位”“Tasks 尚未同步”记录前轮阶段，本次已按局部授权续接；不据此扩大其他未完成任务的可实施范围。
+
+## 2026-11-18 规划增量：脚本统一目录与独立插件
+
+依据[最新 Spec](spec.md)及[本轮目录与后续推进输入](requirements/raw/2026-11-18-unified-script-directory.md)，本轮执行 speckit-plan Phase 0/1，复用既有方案。先以显式功能目录及 `SPECIFY_FEATURE_NO_PERSIST=1` 运行 setup-plan，现有 Plan 未被模板覆盖，共享 `.specify/feature.json` 保持其他会话定位；返回的 `BRANCH=001-skills-distribution` 是功能标识，实际 Git 分支仍为 `feature/init`。扩展配置未注册 before_plan/after_plan，不触发额外操作。
+
+**目标架构**：`vite-plugin-curl` 读取自身 `install.source.sh`，原字节交付 `script/install.sh`；`vite-plugin-script` 扫描技能并由同目录 hidden 模板派生 `script/hidden-install.sh`。所有获准运行脚本都在 `dist/script/`，每项资产只有一个负责插件。技能插件保留 `dist/skill/`，版本插件保留根 VERSION。`curl/skills.tsv`、版本表和远端 curl 对象路径沿既有方案，不因本地脚本目录变更自动改名；不复制另一套源或模板。
+
+**分步边界**：用户明确选择“只新增插件骨架，迁移和接线留后续”；本次新增限定为 `build/plugins/vite-plugin-script/index.ts` 的工厂骨架，返回 `name: vite-plugin-script` 与 `apply: build`，暂不注册配置、创建虚拟入口或生成资产。当前三个已注册插件及旧 curl 脚本输出仍是源码事实。后续局部切换已注册脚本插件并复用技能虚拟入口；按最终纠正保留 curl 的安装入口 emit，将 hidden emit 移到 script，逐项核对无重复资产，不保留空 curl 虚拟入口。不能把仅有骨架或文档目标当作已完成迁移，也不把“新增插件”扩大为接管完整手写任务。
+
+**研究及质量**：沿用现有 Vite 资产交付与模板，不引入新依赖、协议或外部交互；替代方案和前置验证见研究。Phase 1 后复核，Spec 目标、Plan 设计、同级闭环职责及唯一工程 checkbox 分开，没有新增闭环或状态系统。脚本迁移通过后仍须原单包、安装、隐匿及发布验收；骨架只验证声明及包类型/lint，不重复全链测试。
+
+**未同步范围**：本轮同步研究、模型、受影响契约、验证指南和同级闭环；未执行 Tasks，不改变 Task 身份、依赖、工程 checkbox、原实施认可，也不刷新任务图或综合分析。后续实施准备须核对这些材料中的旧路径；原历史、归档及紧急版保持。主代理在规划结束后按本轮局部授权处理插件新增，规划子代理不编辑产品代码。
+
+**实际 Git 分支**：`feature/init`。**功能定位**：`001-skills-distribution`。**日期**：2026-11-18。setup-plan返回的BRANCH是功能定位，不是新建或切换Git分支。
 
 ## 2026-11-16 当前规划：统一包与根 VERSION
 
@@ -10,7 +46,7 @@
 
 ### Summary
 
-保留唯一Vite配置及技能、curl、版本三个插件：复制启用技能、原字节交付入口、生成隐匿Bash及根dist/VERSION。插件内归档继续保持注释。后续工程流水线在内容生成完成后，独立核对正式白名单、身份/依赖、正文/引用附件、运行材料、说明和真实许可证，在独占暂存根形成统一包并冻结该次字节。文件核验记录留在流水线，不强制装入逐文件JSON。
+保留唯一Vite配置；目标由技能插件复制启用技能、curl插件原字节交付入口、脚本插件生成隐匿Bash、版本插件交付根dist/VERSION；发现及非脚本数据沿既有方案处理。当前仍为三个已注册插件，新增骨架不自动完成切换。插件内归档继续保持注释。后续工程流水线在内容生成完成后，独立核对正式白名单、身份/依赖、正文/引用附件、运行材料、说明和真实许可证，在独占暂存根形成统一包并冻结该次字节。文件核验记录留在流水线，不强制装入逐文件JSON。
 
 安装从最新已发布install.sh启动，一次固定release.json记录，取得所选版本统一包；先核验长度与SHA-256，安全解包后核对根VERSION，再选择和逐技能安装。隐匿脚本从同一已核验包取得，不再下载第二包。统一包失败时零技能提交、零脚本执行；包通过且所选技能完整时，后置隐匿缺件、协议或执行失败保留安装，独立报告部分失败。Spec Kit/hooks/Increment近期继续暂缓，原最终门禁不降低。
 
@@ -33,7 +69,7 @@
 
 ### 总体方案与推荐顺序
 
-先核对现有内容构建和根版本，保留用户手写插件；补齐发布前来源与完整性检查，再由流水线一次归档。当前开发dist不能直接递归压缩为正式包。包名采用skills-<version>.tar.gz，根布局保留VERSION、skill/、curl/、README及许可；这是本次规划选择，非新增用户原话，也不是已生成产物。
+先核对现有内容构建和根版本，保留用户手写插件；补齐发布前来源与完整性检查，再由流水线一次归档。当前开发dist不能直接递归压缩为正式包。包名采用skills-<version>.tar.gz，根布局保留VERSION、skill/、script/、curl/非脚本数据、README及许可；这是本次规划选择，非新增用户原话，也不是已生成产物。
 
 随后接版本记录投影、固定一次调用的下载/摘要、安全解包和选择验证，再做目标同文件系统暂存、最小来源标记、提交与中断恢复；首次清理后的独立重试同时验证来源版本和完整字节，不认领未知同名内容。隐匿先以真实模板和自有Git验证成功集合协议，后接实际安装结果；仅对模板候选、本次选择和完整成功集合的交集操作。轻量技能映射是非执行数据，不恢复逐文件JSON。
 
@@ -68,9 +104,10 @@ Phase 1后复核：总体方案、闭环详情、唯一工程checkbox与候选�
 
 ```text
 packages/skills/
-├── vite.config.ts                       # 现有唯一配置，三个插件
+├── vite.config.ts                       # 唯一配置；四插件，复用技能虚拟入口
 ├── build/plugins/vite-plugin-skill/      # 现有技能复制
-├── build/plugins/vite-plugin-curl/       # 现有入口及隐匿模板
+├── build/plugins/vite-plugin-curl/       # 安装源及入口原字节交付
+├── build/plugins/vite-plugin-script/     # 技能扫描及hidden模板派生
 ├── build/plugins/vite-plugin-version/   # 现有根VERSION
 ├── build/utils/                         # 复用扫描，后续补发布校验
 ├── build/ci/                            # 计划：检查、统一归档、候选与发布驱动
@@ -80,7 +117,8 @@ packages/skills/
 └── dist/                               # 仅内容生成；不能直接全量公开
     ├── VERSION
     ├── skill/
-    └── curl/
+    ├── script/                         # 目标：install.sh、hidden-install.sh
+    └── curl/                           # 目标仅保留非脚本数据
 ```
 
 流水线使用本次拥有且位于dist外的临时暂存/候选目录，输出归档不放在被归档目录内。临时根及CI驱动的具体文件沿原Task方案确定，本次不创建工具、发布记录或Actions配置。功能文档仍在本Spec原位置，不新增整份方案快照或另一套规划目录。

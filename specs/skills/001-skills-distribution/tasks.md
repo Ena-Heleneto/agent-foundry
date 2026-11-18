@@ -1,5 +1,15 @@
 # 任务清单：构建、流水线与技能发布共同交付
 
+## 2026-11-18 当前任务同步：独立脚本插件与目录迁移
+
+依据[最新目录及局部迁移授权](requirements/raw/2026-11-18-unified-script-directory.md)、[当前 Plan](plan.md)、实际读取的同级[mvu](mvu.md)、模型、研究、契约及验证指南，本轮执行 speckit-tasks 增量同步；不重建已有任务或改变依赖、工程 checkbox。83个原工程记录、79项有效范围和既有完成事实保持。
+
+T077承接 `vite-plugin-script` 的技能扫描与 hidden 脚本生成职责，以及 hidden 模板迁入该插件目录；按用户后续纠正，`vite-plugin-curl` 读取同目录 `install.source.sh` 并原字节交付安装入口。脚本资产统一为 `script/install.sh`、`script/hidden-install.sh`，每项由一个插件生成；输出目录统一不要求所有脚本由同一插件生成。必要配置接线须在同一局部改动核对。T034后续在迁移后的真实模板补完整协议，T069核验同版 script 运行材料并由流水线统一归档；`curl/skills.tsv` 等非脚本数据和远端对象设计保持。
+
+用户本轮明确要求先由子代理生成 Tasks 再局部迁移，这是对上一轮“只新增骨架”的后续授权；不扩大为完整 T077、T034 或发布实现。T077的T076/T094/T034依赖及全部整体验收保持，局部移动不因这些整体前置未完成而冒认整项通过，也不阻止用户明确请求的源码职责迁移。实施准备、实际核验及结果由协调者在原T077方案留证，本轮任务生成不预填成功。after_tasks 实际执行 artifact-spec-analysis 刷新已有功能分析及必要图示。
+
+唯一末尾T040继续覆盖旧路径注释、迁移说明及开发遗留的用途核对；保护历史原话、归档、验收和紧急版。紧急T078～T093正文、候选及发布前置保持，不由本次主线局部授权启动外部操作。
+
 ## 2026-11-17 当前任务同步：统一包与根 VERSION
 
 依据[本轮上下文修复](requirements/discussions/2026-11-17-context-repair.md)、[最新Spec](spec.md)、[当前Plan](plan.md)、实际读取的同级[mvu](mvu.md)、[模型](data-model.md)、[研究](research.md)、[curl契约](contracts/curl-delivery.md)及[验证指南](quickstart.md)，增量适配原任务。原ID、显式依赖、checkbox与完成事实保持，不重做任务体系；下方历史日期、旧双包及归档证据不覆盖本节与当前待办正文。
@@ -688,7 +698,7 @@ T076复核现有技能复制；T077只交付原字节入口、有效hidden模板
 
 ### T034
 
-- [ ] T034 [US4] 交付独立hidden脚本及精确本地排除逻辑，落点 `packages/skills/build/plugins/vite-plugin-curl/hidden-install.template.ts` 及其生成的Bash正文。
+- [ ] T034 [US4] 交付独立hidden脚本及精确本地排除逻辑，落点 `packages/skills/build/plugins/vite-plugin-script/hidden-install.template.ts` 及其生成的Bash正文。
 
 **依赖**：T033。
 
@@ -704,15 +714,17 @@ T076复核现有技能复制；T077只交付原字节入口、有效hidden模板
 
 ### T077
 
-- [ ] T077 [US7] 交付原字节入口与同版路径派生辅助内容，落点 `packages/skills/build/plugins/vite-plugin-curl/index.ts`、`install.source.sh`、`hidden-install.template.ts`及`packages/skills/vite.config.ts`。
+- [ ] T077 [US7] 交付原字节入口与同版路径派生辅助内容，落点 `packages/skills/build/plugins/vite-plugin-script/index.ts`、同目录`hidden-install.template.ts`、保留的`packages/skills/build/plugins/vite-plugin-curl/install.source.sh`、原curl插件及`packages/skills/vite.config.ts`。
 
 **依赖**：T076、T094、T034。
 
-**范围与约束**：复用已接入模板和入口，不重复实现已有生成能力。入口源原字节emit为curl/install.sh，hidden由真实模板派生到curl/script/hidden-install.sh，保留协议1标记与@@AGENT_SKILLS_ROOT@@前缀。按T034和正式范围核对路径、跨集合同名及成功集合协议；开发候选与T069筛选后的正式路径区分，不因profile/eval启用扩大发布。变量在各插件函数内，可调用无状态scanSkills，不依赖另一插件写出顺序。插件只生成内容，旧压缩调用保持注释；不生成独立scripts.tar.gz、manifest或分区VERSION，统一包交T069流水线处理。
+**范围与约束**：复用已有模板和入口，将技能扫描及hidden脚本生成职责迁入script插件，hidden模板随之移动；按用户最终纠正，安装源读取及入口生成保留curl插件；不重复实现已有生成能力。curl插件唯一将入口源原字节emit为script/install.sh，script插件由同目录真实模板唯一派生script/hidden-install.sh；必要配置与虚拟入口同步核对，避免旧路径或重复资产。原协议1标记要求与@@AGENT_SKILLS_ROOT@@前缀保持，纯迁移不冒认当前模板已具备完整协议。按T034和正式范围核对路径、跨集合同名及成功集合协议；开发候选与T069筛选后的正式路径区分，不因profile/eval启用扩大发布。变量在各插件函数内，可调用无状态scanSkills，不依赖另一插件写出顺序。插件只生成内容，旧压缩调用保持注释；不生成独立scripts.tar.gz、manifest或分区VERSION，统一包交T069流水线处理。
 
-**整体验收**：原字节入口、实际模板派生Bash、协议标记和路径与对应来源一致；缺模板、未知标记/路径和危险输入在清理前拒绝，不能输出空成功脚本。write=false零目录/归档写入，构建不执行源或交付脚本，也不生成两个旧归档。根VERSION由已接线插件取package.json.version，目标包检查及现有复制回归有真实结果；T069统一归档，T070独立读盘和消费复核，当前内容生成不当作安装通过。
+**整体验收**：全部获准运行脚本位于dist/script，dist/curl下运行脚本为0；原字节入口、实际模板派生Bash、协议标记和路径与对应来源一致；移动模板字节保持，清理失效import后无重复脚本生成。缺模板、未知标记/路径和危险输入在清理前拒绝，不能输出空成功脚本。write=false零目录/归档写入，构建不执行源或交付脚本，也不生成两个旧归档。根VERSION由已接线插件取package.json.version，目标包检查及现有复制回归有真实结果；T069统一归档，T070独立读盘和消费复核，当前内容生成不当作安装通过。
 
-**依据与方案**：FR-072～075、SC-020；MVU-008；C3/C4归档前置；[当前curl契约](contracts/curl-delivery.md)、[验证指南](quickstart.md)。正式开工前核对原Task、已有适用认可与实际源码，讨论并保存读回`implementation/T077.md`；本次生成不预填方案或替代认可。
+**本轮局部授权**：先生成Tasks，再移动扫描/脚本生成逻辑及hidden模板；仅此迁移与必要接线由协调者执行。局部构建/路径/字节核验不代替T034成功集合协议、T094发布记录或T069正式包验收，T077工程checkbox保持待办。
+
+**依据与方案**：FR-072～075、SC-020；MVU-008；C3/C4归档前置；[当前curl契约](contracts/curl-delivery.md)、[验证指南](quickstart.md)。[T077局部迁移方案及结果](implementation/T077.md)按本轮明确授权保存并读回；完整协议、正式范围及发布前置仍须原Task准备，不因局部迁移完成而勾选整项。
 
 ### T069
 
@@ -720,7 +732,7 @@ T076复核现有技能复制；T077只交付原字节入口、有效hidden模板
 
 **依赖**：T077、T094。
 
-**范围与约束**：沿原Release/附件/格式职责复用三个内容插件，不恢复已归档BaseBuildPlan或旧模块。流水线在独占暂存根核对获准coding/frontend/workflow技能身份、依赖、正文/引用附件、必要脚本、README和真实许可证；排除eval/profile/画像/凭据及未公开MCP。核验已生成根VERSION等于package.json.version。生成非执行curl/skills.tsv映射（name/category/sourceDirectory/installRelativeDirectory/requiresSkills，格式1），与获准目录双向一致；按原Task适配TS集合requiresSkills字段，未知依赖/环/碰撞拒绝，不能把TS配置交给消费者执行。统一归档skills-<version>.tar.gz放在暂存目录之外，根直接含VERSION、skill/、curl/、说明和许可，不带dist外层。T094的持久记录派生包外release.json下载表。安装映射、identity及Eve等原适用格式目标保持，未实现格式明确拒绝并留T019/T038验证。
+**范围与约束**：沿原Release/附件/格式职责复用技能、curl入口、hidden脚本及根版本插件，非脚本数据沿原方案处理，不恢复已归档BaseBuildPlan或旧模块。流水线在独占暂存根核对获准coding/frontend/workflow技能身份、依赖、正文/引用附件、必要脚本、README和真实许可证；排除eval/profile/画像/凭据及未公开MCP。核验已生成根VERSION等于package.json.version。生成非执行curl/skills.tsv映射（name/category/sourceDirectory/installRelativeDirectory/requiresSkills，格式1），与获准目录双向一致；按原Task适配TS集合requiresSkills字段，未知依赖/环/碰撞拒绝，不能把TS配置交给消费者执行。统一归档skills-<version>.tar.gz放在暂存目录之外，根直接含VERSION、skill/、script/、curl/非脚本数据、说明和许可，不带dist外层。T094的持久记录派生包外release.json下载表。安装映射、identity及Eve等原适用格式目标保持，未实现格式明确拒绝并留T019/T038验证。
 
 **整体验收**：先保留危险来源/缺件/额外文件、链接/越界/大小写/重名及write=false风险骨架，再接正式归档；打包前正文附件/引用/依赖/说明/许可核对齐全，缺件不能被整包SHA掩盖。真实归档解出全集与本次正式暂存字节100%一致，归档不含自身或第二个技能/helper包；无随包release-manifest.json或script/manifest.json不得单独拒绝。TSV缺列/多列/重复名/未知格式/非法路径/依赖与目录不符均失败，发布技能不得预占.foundry-source。证据含真实完整sourceRevision及实际输入，文件表和候选索引留包外；两次构建比较内容，选定归档按真实长度/SHA冻结，不在构建登记发布成功。
 
@@ -881,7 +893,7 @@ T076复核现有技能复制；T077只交付原字节入口、有效hidden模板
 
 **范围与约束**：用户手写主入口，沿T004已验下载骨架接统一包；一次固定release.json原字节及所选记录，版本位置参数默认latest，入口实际身份与所选包身份分别核验，不回退入口/技能或换包。固定版本node-jq仅装本次deps与独占npm缓存，通过完整路径调用，不改全局PATH或目标。先按T016已证伪规则核对长度/SHA和成员，后私有解包，再核对formatVersion、根VERSION、TSV及所选完整结构；不另下helper，不强制逐文件JSON，清理仅本次材料。
 
-**整体验收**：较新入口实际消费两版各自固定统一包；实际入口按其自身版本记录核验，历史包内curl/install.sh按该历史版entry记录核验，包内根VERSION等于所选版本，不能强求最新入口与历史包同号；全表非法、未知格式/版本、错误地址/长度/摘要/成员及VERSION均准确拒绝。统一包失败零安装/零辅助执行；同包hidden后置失败由独立阶段报告，未请求hidden零执行。HOME下载与目标同文件系统暂存分开，不能把跨文件系统移动宣称为原子提交；网络/依赖/解包/核验失败有真实结果。
+**整体验收**：较新入口实际消费两版各自固定统一包；实际入口按其自身版本记录核验，历史包内script/install.sh按该历史版entry记录核验，包内根VERSION等于所选版本，不能强求最新入口与历史包同号；全表非法、未知格式/版本、错误地址/长度/摘要/成员及VERSION均准确拒绝。统一包失败零安装/零辅助执行；同包hidden后置失败由独立阶段报告，未请求hidden零执行。HOME下载与目标同文件系统暂存分开，不能把跨文件系统移动宣称为原子提交；网络/依赖/解包/核验失败有真实结果。
 
 **依据与方案**：FR-068～074、SC-020；MVU-002，原T017下载目标；[当前curl契约](contracts/curl-delivery.md)、[验证指南](quickstart.md)。正式开工前核对原Task、已有适用认可与实际源码，讨论并保存读回`implementation/T017.md`；本次生成不预填方案或替代认可。
 
@@ -1492,7 +1504,7 @@ T094与T076可在不同文件独立推进，仍按原依赖在T077及后续T069�
 | FR-026/027/031/034～036、SC-011/013                | T052真实反馈、T030/T031公开边界与T039/T040资料及开发清理，双方不互勾                                    |
 | FR-032/033、SC-012暂停                             | T053原文及未完成保留，不作为本期前置或通过                                                              |
 | FR-037～044、SC-014～017                           | T066/T055/T071/T056/T058/T059，T030/T037完整门禁，T060本地、T061/T062迁后、T032/T038真实用户与旧版      |
-| FR-048～060                                        | T072～T075旧事实，T076当前技能复制、T077独立curl职责，不恢复旧工厂/扫描通信约束                         |
+| FR-048～060                                        | T072～T075旧事实，T076当前技能复制、T077独立脚本插件职责，不恢复旧工厂/扫描通信约束                     |
 | FR-061～067、SC-019                                | 原T078～T093全范围与证据保持，T040仅汇总；不混入主线新schema/R2路径                                     |
 | FR-068～070                                        | 新T094源版本/持久记录、T069根标记核验/索引投影、T017消费、T056/T062核验后登记、T031说明                 |
 | FR-071                                             | T017固定npm依赖/本次私有deps缓存与清理、T016/T020/T021失败证据                                          |

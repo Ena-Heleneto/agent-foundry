@@ -13,7 +13,10 @@ import unittest
 from unittest.mock import patch
 
 
-SCRIPT = Path(__file__).resolve().parents[1] / "src/profile/shadow-profile/scripts/shadow_runtime.py"
+# 保留已撤回的记录器候选回归；该脚本不再随 Skill 交付。
+SCRIPT = (Path(__file__).resolve().parents[3]
+          / "specs/skills/20261029-speckit-workflow-foundation/history"
+          / "retired-shadow-runtime-2026-11-18/scripts/shadow_runtime.py")
 
 
 class ShadowRuntimeTests(unittest.TestCase):
@@ -96,6 +99,45 @@ class ShadowRuntimeTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertEqual([r["item_id"] for r in self.records()], ["user-1", "user-2"])
 
+    def test_async_question_metadata_is_not_promoted_to_user_answer(self):
+        """已观察的异步题目仍归Agent，重复A分别保留，不猜造点击或题目关联。"""
+        question = self.message("call-synthetic-question", "合成题目\n- 测试选项 A\n- 测试选项 B",
+                                "AgentMessage", turn="question-turn", phase="final_answer")
+        question["payload"]["item"].update(delivery="async", questions=[
+            {"title": "合成题目", "options": ["测试选项 A", "测试选项 B"]}])
+        first = self.message("first-answer", "A", turn="first-answer-turn")
+        second = self.message("second-answer", "A", turn="second-answer-turn")
+        for event in (first, second):
+            event["payload"]["item"]["content"][0]["type"] = "text"
+        self.write_source([question, first,
+                           {"type": "event_msg", "payload": {"type": "turn_aborted"}}, second])
+        result = self.capture()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        rows = self.records()
+        self.assertEqual([r["role"] for r in rows], ["assistant", "user", "user"])
+        self.assertEqual([r["text"] for r in rows],
+                         ["合成题目\n- 测试选项 A\n- 测试选项 B", "A", "A"])
+        self.assertEqual([r["item_id"] for r in rows],
+                         ["call-synthetic-question", "first-answer", "second-answer"])
+        self.assertNotIn("questions", rows[1])
+        self.assertNotIn("delivery", rows[1])
+
+    def test_long_unicode_text_parts_are_saved_without_truncation_or_insertions(self):
+        """长中文/emoji/换行分段不得截断，也不得在分段之间插入新字符。"""
+        first = "中文🙂\n**段落**\n" * 2000
+        second = "末段\n" * 1000
+        event = self.message("long-user", first)
+        event["payload"]["item"]["content"].append(
+            {"type": "text", "text": second, "text_elements": []})
+        self.write_source([event])
+        result = self.capture()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        rows = self.records()
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["text"], first + second)
+        self.assertEqual(rows[0]["text_parts"], [first, second])
+        self.assertEqual(rows[0]["role"], "user")
+
     def test_rejects_changed_payload_for_same_identity(self):
         """同一身份内容变化不能被静默当成重复或覆盖原文。"""
         self.write_source([self.message("user-1", "原文"), self.message("user-1", "被替换")])
@@ -142,7 +184,17 @@ class ShadowRuntimeTests(unittest.TestCase):
         spec.loader.exec_module(module)
         store = module.RawStore(self.project, self.memory, "thread-test")
         row = module.visible_record(self.message("user-1", "未确认原文"), "thread-test", 123)
-        with patch.object(module.os, "fsync", side_effect=[OSError("模拟同步失败"), None]):
+        real_fsync = module.os.fsync
+        failed = False
+
+        def fail_raw_once(fd):
+            nonlocal failed
+            if Path(f"/proc/self/fd/{fd}").resolve() == self.raw and not failed:
+                failed = True
+                raise OSError("模拟原文同步失败")
+            return real_fsync(fd)
+
+        with patch.object(module.os, "fsync", side_effect=fail_raw_once):
             with self.assertRaises(module.CaptureError) as failure:
                 store.append(row)
         self.assertEqual(failure.exception.code, "save_failed")
@@ -160,7 +212,11 @@ class ShadowRuntimeTests(unittest.TestCase):
         row = module.visible_record(self.message("user-1", "本次原文"), "thread-test", 123)
         external = module.visible_record(self.message("user-2", "外部追加"), "thread-test", 456)
 
-        def append_then_fail(_fd):
+        real_fsync = module.os.fsync
+
+        def append_then_fail(fd):
+            if Path(f"/proc/self/fd/{fd}").resolve() != self.raw:
+                return real_fsync(fd)
             with self.raw.open("ab") as target:
                 target.write((json.dumps(external, ensure_ascii=False) + "\n").encode())
             raise OSError("同步期间出现外部写入")

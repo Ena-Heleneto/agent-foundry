@@ -1,0 +1,34 @@
+{
+  "checked_at_ns": 1794972192099784769,
+  "task": "T114",
+  "scope": "原任务最小宿主/保存/实际分析派发及共同保存技术骨架，不是完整业务链或正式长期启用。",
+  "actual_dispatch_tool": "collaboration.spawn_agent",
+  "returned_task_name": "/root/t114_saved_resume",
+  "actual_saved_prefix_analysis_record_count": 16,
+  "input_sha256": "d62fc8dc90914bee4345b9b6d0973b79e6ff5056d582e6a6f5f473dbd94f4454",
+  "consumed_refs_match_saved_prefix": true,
+  "saved_prefix_still_present_unmodified": true,
+  "parent_native_source_comparison_passed": true,
+  "new_personal_conclusion_count": 0,
+  "analysis_completed_outside_capture_lock": true,
+  "native_primary_final_verified": true,
+  "fixed_lock_contention_and_release_verified": true,
+  "unknown_coverage_rejected": true,
+  "target_recording_tests_passed": 17,
+  "acceptance_probe_tests_passed": 6,
+  "package_python_total": 29,
+  "package_python_failures": 3,
+  "package_python_failure_scope": "既有test_register_commands缺旧脚本，未修改断言或接管该工作线。",
+  "downstream_not_claimed_passed": [
+    "T115完整覆盖/三轮/恢复与非文本引用",
+    "T116产品snapshot/commit/重试/精简入口",
+    "T117完整并发发布与遗忘",
+    "T118最终来源及正式启用"
+  ],
+  "limitations": [
+    "长文本回归使用已观察完成事件结构的合成输入，不能称人工原生长输入实测。",
+    "900秒测试停止和测试一恢复写入的缺口保留，连续三轮实时仍未据此通过。",
+    "只对已声明的Linux/0.169.0完成事件候选提供技术证据，不推广到未知宿主或输入形态。",
+    "正式资料根和本人画像未启用此候选。"
+  ]
+}

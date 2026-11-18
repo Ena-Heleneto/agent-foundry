@@ -14,6 +14,7 @@
     "pinia",
     "pnpm",
     "Rustfs",
+    "speckit",
     "unocss",
     "unplugin",
     "unref",

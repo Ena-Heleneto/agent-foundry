@@ -1,38 +1,26 @@
 import type { Plugin } from 'vite'
-// import { execFile } from 'node:child_process'
 import { readFile } from 'node:fs/promises'
-// import { promisify } from 'node:util'
+import { createHiddenInstallScript } from '#build/plugins/vite-plugin-curl/hidden-install.template'
 import { scanSkills } from '#build/utils/scan-skills'
-import { createHiddenInstallScript } from './hidden-install.template.ts'
 
 /**
- * 交付 curl 入口及按启用技能清单生成的隐匿脚本。
- * 压缩包构建由后续流水线统一处理。
+ * 原字节交付 curl 安装入口，并由启用技能派生隐匿脚本。
+ *
+ * @returns 向统一脚本目录写出两个安装脚本的构建插件。
  */
 export default function vitePluginCurl(): Plugin {
-  // const execFileAsync = promisify(execFile)
-  const virtualId = 'virtual:curl'
-  const resolvedId = `\0${virtualId}`
   return {
     name: 'vite-plugin-curl',
     apply: 'build',
-    resolveId(id) {
-      if (id === virtualId)
-        return resolvedId
-    },
-    load(id) {
-      if (id === resolvedId)
-        return 'export {}'
-    },
-    async generateBundle(_options, _bundle) {
+    async generateBundle() {
+      const source = await readFile(new URL(import.meta.resolve('#install.source.sh')))
+      this.emitFile({ type: 'asset', fileName: 'script/install.sh', source })
+
+      /**
+       * 启用技能只用于派生隐匿候选路径。
+       */
       const enabledSkills = await scanSkills()
-      const source = await readFile(new URL('./install.source.sh', import.meta.url))
-      this.emitFile({ type: 'asset', fileName: 'curl/install.sh', source })
-      this.emitFile({ type: 'asset', fileName: 'curl/script/hidden-install.sh', source: createHiddenInstallScript(enabledSkills) })
+      this.emitFile({ type: 'asset', fileName: 'script/hidden-install.sh', source: createHiddenInstallScript(enabledSkills) })
     },
-    // 统一归档由后续流水线负责，保留原命令供迁移时参考。
-    // async writeBundle() {
-    //   await execFileAsync('tar', ['-czf', 'dist/curl/scripts.tar.gz', '-C', 'dist/curl', 'script'])
-    // },
   }
 }

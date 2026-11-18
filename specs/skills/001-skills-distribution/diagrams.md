@@ -1,5 +1,21 @@
 # 技术流程图：统一包核验与独立结果
 
+## 2026-11-18 配置加载时发现集合子插件
+
+```mermaid
+flowchart LR
+    A[Vite加载配置] --> H{集合 plugin 为 true}
+    H -->|是| B[扫描单数 plugin 目录固定入口]
+    H -->|否| I[跳过集合子插件]
+    B --> C[按集合名和插件名排序]
+    C --> D[依次导入并调用默认工厂]
+    D --> E[返回插件数组]
+    E --> F[Vite解析异步和嵌套结果]
+    F --> G[Vite执行实际构建钩子]
+```
+
+大白话：引擎只把集合里的插件找出来并创建，什么时候运行构建逻辑由 Vite 负责。目标代码位置：`packages/skills/build/plugins/vite-plugin-engine/index.ts` 及 `packages/skills/vite.config.ts` 接线；扫描模式为 `src/*/plugin/vite-plugin-*/index.ts`，坏入口使配置加载失败，无入口正常返回空数组。本轮新增默认关闭的配置开关并补齐引擎接线，验证以实际执行为准，不据此认定挂载脚本生成或 curl 回迁已完成。
+
 ## 2026-11-16 最新入口与固定统一包
 
 当前设计替代旧双包、manifest及helper下载前提。图示不是已通过证据，代码和字段见[curl契约](contracts/curl-delivery.md)。
@@ -39,12 +55,14 @@ flowchart TD
 
 大白话：容错只针对包已可信之后的隐匿步骤；发布前缺必需hidden仍应拒绝正式候选。位置：install.source.sh和hidden-install.template.ts，模板已有Git/排除基础，成功集合/接口标记/完整报告待原任务实施。共享配置、tracked内容及项目外路径不误报隐藏。
 
-## 2026-11-16 内容生成与流水线统一归档
+## 2026-11-18 内容生成与流水线统一归档
 
 ```mermaid
 flowchart LR
     A[TS集合与正文附件] --> B[技能插件独立扫描复制]
-    A --> C[curl插件独立扫描生成入口及hidden]
+    A --> C[脚本插件扫描并派生hidden]
+    S[安装源install.source.sh] --> K[curl插件原字节交付install.sh]
+    K --> E
     V[package.json.version] --> D[版本插件输出根VERSION]
     B --> E[可检查开发dist]
     C --> E
@@ -56,7 +74,7 @@ flowchart LR
     I --> J[解包全集字节对照并冻结该次归档]
 ```
 
-大白话：插件只生成内容，正式归档由后续流水线完成；开发dist不直接全量发布。位置：现有三个vite-plugin目录、scan-skills.ts及计划的build/ci。逐文件证据留包外，不新增随包JSON；双构建比较内容，不要求两个压缩包哈希相同。
+大白话：插件只生成内容，正式归档由后续流水线完成；开发dist不直接全量发布。位置：vite-plugin-skill、vite-plugin-script、vite-plugin-version与负责安装入口原字节交付的vite-plugin-curl，复用scan-skills.ts及计划的build/ci。图示为迁移目标，Tasks后协调者按局部授权迁移hidden模板到script插件目录，并核对唯一输出；当前未由本图证明构建成功。逐文件证据留包外，不新增随包JSON；双构建比较内容，不要求两个压缩包哈希相同。
 
 ## 2026-11-16 固定发布与发现更新
 

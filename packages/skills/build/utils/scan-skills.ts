@@ -1,32 +1,49 @@
 import type { CollectionOption } from '#utils/define-collection-handle'
-import { globSync, readdirSync } from 'node:fs'
+import { globSync, lstatSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import process from 'node:process'
 import { pathToFileURL } from 'node:url'
 
 /**
- * 读取集合配置，保留启用技能及集合对应的输出目录。
+ * 按目录名顺序读取一级集合的配置。
+ *
+ * @param sourceDir 集合来源目录。
+ * @param options 配置读取选项，默认跳过没有普通配置文件的集合。
+ * @param options.requireConfig 是否要求每个集合的配置均可导入。
+ * @returns 各集合的源目录和配置。
  */
-async function parseCollectionOption(dir: string) {
+export async function scanCollections(sourceDir: string, { requireConfig = false } = {}) {
   /**
-   * 将集合配置路径转换为动态导入使用的文件 URL。
+   * 仅枚举普通集合目录，并按名称排序。
    */
-  const configurationUrl = pathToFileURL(join(dir, 'collection.config.ts')).href
+  const names = readdirSync(sourceDir, { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .map(entry => entry.name)
+    .sort()
+
   /**
-   * 集合配置模块提供包名与技能启用状态。
+   * 并行读取集合配置，保持目录的扫描顺序。
    */
-  const collectionModule: { default: CollectionOption } = await import(configurationUrl)
-  /**
-   * 集合名和技能配置共同决定本次候选内容。
-   */
-  const { packageName, skill } = collectionModule.default
-  /**
-   * 启用技能保留名称及其源目录路径。
-   */
-  const enabledSkills = Object.entries(skill)
-    .filter(([, option]) => option.enabled)
-    .map(([name]) => ({ name, url: join(dir, name) }))
-  return { collection: packageName, enabledSkills, url: join('dist', 'skill', packageName) }
+  const collections = await Promise.all(names.map(async (name) => {
+    /**
+     * 集合的实际源目录，可与配置声明的包名不同。
+     */
+    const directory = join(sourceDir, name)
+    /**
+     * 集合顶层的 TypeScript 配置文件。
+     */
+    const configurationPath = join(directory, 'collection.config.ts')
+    if (!requireConfig && !lstatSync(configurationPath, { throwIfNoEntry: false })?.isFile())
+      return
+
+    /**
+     * 集合模块默认导出的配置。
+     */
+    const { default: config }: { default: CollectionOption } = await import(pathToFileURL(configurationPath).href)
+    return { directory, config }
+  }))
+
+  return collections.filter(collection => collection !== undefined)
 }
 
 /**
@@ -37,26 +54,22 @@ async function parseCollectionOption(dir: string) {
  */
 export async function scanSkills(sourceDir = join(process.cwd(), 'src')) {
   /**
-   * 一级集合目录排除符号链接，并按名称保持原有扫描顺序。
-   */
-  const entity = readdirSync(sourceDir, { withFileTypes: true })
-    .filter(entry => !entry.isSymbolicLink())
-    .filter(entry => entry.isDirectory())
-    .map(entry => ({ name: entry.name, path: join(sourceDir, entry.name) }))
-    .sort((left, right) => left.name < right.name ? -1 : left.name > right.name ? 1 : 0)
-
-  /**
    * 仅将包含 SKILL.md 的二级目录视为可交付技能。
    */
   const availableSkills = new Set(globSync('*/*/SKILL.md', { cwd: sourceDir })
     .map(file => dirname(join(sourceDir, file))),
   )
   /**
-   * 并行读取集合配置，结果顺序仍对应排序后的集合目录。
+   * 技能交付要求一级集合目录提供配置。
    */
-  const collections = await Promise.all(entity.map(({ path }) => parseCollectionOption(path)))
-  return collections.flatMap(({ collection, enabledSkills, url }) =>
-    enabledSkills
-      .filter(skill => availableSkills.has(skill.url))
-      .map(skill => ({ collection, name: skill.name, source: skill.url, target: join(url, skill.name) })))
+  const collections = await scanCollections(sourceDir, { requireConfig: true })
+  return collections.flatMap(({ directory, config: { packageName, skill } }) =>
+    Object.entries(skill)
+      .filter(([name, { enabled }]) => enabled && availableSkills.has(join(directory, name)))
+      .map(([name]) => ({
+        collection: packageName,
+        name,
+        source: join(directory, name),
+        target: join('dist', 'skill', packageName, name),
+      })))
 }

@@ -1,0 +1,17 @@
+{
+  "synthetic_only": true,
+  "checked_at_ns": 1794966725819391911,
+  "lock_contention_blocked": true,
+  "holder_exit_released_lock": true,
+  "kernel_waiter_matches_lock": true,
+  "concurrent_distinct_new_events": 2,
+  "fixed_lock_inode_unchanged": true,
+  "concurrent_replay_duplicates": 0,
+  "recorded_count": 6,
+  "rejected_without_raw_write": {
+    "control": "unsupported_source",
+    "nontext": "unsupported_source",
+    "coverage": "unsupported_coverage"
+  },
+  "full_control_or_nontext_support": false
+}

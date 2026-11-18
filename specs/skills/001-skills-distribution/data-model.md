@@ -1,20 +1,39 @@
 # 数据模型：统一发布与阶段结果
 
+## 2026-11-18 最新模型：配置期集合子插件
+
+集合配置增加 `plugin?: boolean`，由 `defineCollectionHandle` 默认补为 `false`；仅严格 `true` 时启用下列发现及加载关系。无持久清单、插件状态库或新运行协议。
+
+| 对象         | 字段或约定                                                                 | 关系与校验                                                                                   |
+| ------------ | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| 子插件入口   | `src/<集合>/plugin/vite-plugin-<名称>/index.ts`                           | 只接纳固定深度普通目录和普通文件；按集合名、插件名排序，入口缺省不代表失败                   |
+| 子插件模块   | 默认导出无参工厂 `() => PluginOption`                                      | 由文件 URL 导入，非函数默认导出、导入或工厂错误须带入口定位失败                              |
+| 引擎结果     | `Promise<PluginOption[]>`                                                  | 每个入口贡献工厂返回值，Promise/嵌套数组/false 等由 Vite 解析；引擎不调用构建钩子            |
+| 脚本资产目标 | `script/install.sh`、`script/hidden-install.sh`、`script/speckit-mount.sh` | 前两项 owner 为 curl 插件，挂载脚本 owner 为 workflow 子插件，每个 outputPath 只有一个责任方 |
+
+引擎默认来源锚定包内 src，也可显式传入绝对来源目录。发现由 `CollectionOption.plugin` 控制，与 `CollectionOption.script`、skill.enabled 无关联；未配置、关闭或缺配置时不导入子插件。已安装来源事实保持既有模型。curl 接回 hidden、workflow 生成挂载脚本仍是目标分工，不能据本模型认定已迁移；下方旧 owner/source 说明保留当时事实，目标以本节及[构建契约](contracts/build-pipeline.md)为准。
+
+## 2026-11-18 脚本路径模型增量
+
+本轮不新增持久状态或数据格式。统一包中安装入口与 hidden 的包内相对路径更新为 `script/install.sh`、`script/hidden-install.sh`，本地对应 `dist/script/`；`ScriptAsset` 仅描述构建责任，安装入口的 source 为 curl 目录安装源、owner 为 `vite-plugin-curl`；hidden 的 source 为 script 目录模板、owner 为 `vite-plugin-script`；outputPath 唯一且必须位于 `script/` 下。同一资产不得同时由 curl 和 script 插件交付。只有未注册工厂骨架时不产生这类资产，也不代表切换已完成。
+
+`curl/skills.tsv` 仍是非执行技能映射，远端发现及固定入口地址保持；PublicationRecord 的入口字节来自本地 `script/install.sh`，其远端引用无需与包内路径同名。VERSION、skill/正文附件、SuccessfulSelection、来源标记及 hidden 结果字段不变。现行 formatVersion=1 仍是尚未发布的目标设计；如后续发现已有真实旧格式发布，须明确兼容或拒绝，不静默把两种包路径解释为同一格式。完整字段与边界见[curl契约](contracts/curl-delivery.md)。
+
 ## 2026-11-16 主线有效模型：一个包与三种版本事实
 
 依据[最新规格](spec.md)及[单包与清单取舍](requirements/raw/2026-11-16-defer-file-manifest.md)。本节替代原SkillRelease/CurlScriptBundle双包及强制files清单模型；字段格式统一见[curl契约](contracts/curl-delivery.md)。下方紧急schema1与历史消费者保留原适用范围，不建立工程状态数据库、永久指纹或第二套checkbox。
 
 ### 构建、候选与发布
 
-| 实体                  | 字段与关系                                                                                   | 校验及生命周期                                                                     |
-| --------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| SourceVersions        | releaseVersion取package.json.version；同次技能/入口/辅助材料同号                             | 仅一个受维护SemVer；只改脚本也递增；源码版本、构建版本、已发布事实不同             |
-| UnifiedPackage        | formatVersion=1、version、archivePath/bytes/sha256/md5；根VERSION、skill/、curl/、说明和许可 | 一次归档完整正式集合；不强制随包逐文件JSON，不另有helper归档                       |
-| BuildVerification     | 真实sourceRevision/inputDigest、实际依赖与工具、正式身份映射、逐文件证据及检查结果           | 证据在候选包外；独立读盘核对正文附件、必要材料及获准范围；相关输入须与真实提交一致 |
-| CandidateContentIndex | version/sourceRevision、归档及独立入口身份、公开对象全集、验证证据摘要、candidateDigest      | 冻结本次实际字节；两次构建比较公开内容而非tar元数据；开发/isolated不自动ready      |
-| PublicationRecord     | version/sourceRevision/candidateDigest、统一包固定引用、固定入口引用、远端核验与持久保存依据 | 只登记全部固定对象已核验的整版；同版本不同字节/地址拒绝；无发布时空数组            |
-| DiscoverySnapshot     | 索引原字节摘要、选中唯一记录、实际入口版本及摘要、包固定引用                                 | 一次调用固定，不因中途latest更新换包；入口可新于包                                 |
-| DiscoveryUpdate       | 预期旧索引ETag/字节摘要、新发现字节、授权引用及实际更新结果                                  | 独立于已冻结候选与固定对象；更新失败保留旧可用索引和已上传事实                     |
+| 实体                  | 字段与关系                                                                                                      | 校验及生命周期                                                                     |
+| --------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| SourceVersions        | releaseVersion取package.json.version；同次技能/入口/辅助材料同号                                                | 仅一个受维护SemVer；只改脚本也递增；源码版本、构建版本、已发布事实不同             |
+| UnifiedPackage        | formatVersion=1、version、archivePath/bytes/sha256/md5；根VERSION、skill/、script/、curl/非脚本数据、说明和许可 | 一次归档完整正式集合；不强制随包逐文件JSON，不另有helper归档                       |
+| BuildVerification     | 真实sourceRevision/inputDigest、实际依赖与工具、正式身份映射、逐文件证据及检查结果                              | 证据在候选包外；独立读盘核对正文附件、必要材料及获准范围；相关输入须与真实提交一致 |
+| CandidateContentIndex | version/sourceRevision、归档及独立入口身份、公开对象全集、验证证据摘要、candidateDigest                         | 冻结本次实际字节；两次构建比较公开内容而非tar元数据；开发/isolated不自动ready      |
+| PublicationRecord     | version/sourceRevision/candidateDigest、统一包固定引用、固定入口引用、远端核验与持久保存依据                    | 只登记全部固定对象已核验的整版；同版本不同字节/地址拒绝；无发布时空数组            |
+| DiscoverySnapshot     | 索引原字节摘要、选中唯一记录、实际入口版本及摘要、包固定引用                                                    | 一次调用固定，不因中途latest更新换包；入口可新于包                                 |
+| DiscoveryUpdate       | 预期旧索引ETag/字节摘要、新发现字节、授权引用及实际更新结果                                                     | 独立于已冻结候选与固定对象；更新失败保留旧可用索引和已上传事实                     |
 
 统一包根VERSION只含版本及结尾换行，不使用skill/VERSION或curl/VERSION。包内实际文件全集由流水线核对；release-manifest.json、script/manifest.json本期不生成也不作为安装必需项。候选索引和平台收据可继续是流水线JSON，但不装入技能包，不为满足旧files公式恢复消费者清单。
 

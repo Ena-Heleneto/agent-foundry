@@ -1,5 +1,25 @@
 # 验证指南：统一发布包、安装与可选隐匿
 
+## 2026-11-18 当前验证范围：引擎发现与加载
+
+本轮补齐默认关闭的 `plugin` 开关、引擎及唯一 Vite 配置接线，接口见[构建契约](contracts/build-pipeline.md)。已有依赖与 Node 环境就绪后，对 `packages/skills/build/plugins/vite-plugin-engine/index.ts` 执行定向 ESLint，运行 `pnpm --filter @foundry/skills run check-types`；定向测试运行 `node --test packages/skills/tests/distribution/vite-plugin-engine.test.mjs`；包构建仅证明当前启用集合的实际结果，不能据此认定业务子插件已生成挂载脚本。
+
+必要的隔离验证使用临时 src，按 `src/<集合>/plugin/vite-plugin-<名称>/index.ts` 放置测试入口：仅 `plugin: true` 被发现，script 关闭或技能未启用不影响；无配置、未声明及 `plugin: false` 的集合即使存在坏插件也不导入；无子插件返回空数组；多个集合/入口按名称稳定加载；增加或移除入口后新的配置加载反映变化；链接和更深附件不作为入口。工厂用加载记录验证已创建插件且尚未执行构建钩子，再通过真实 Vite 内存构建消费异步、嵌套数组及 false 返回值，验证实际钩子生效且 write=false 不落盘。
+
+反例包括模块导入失败、默认导出非函数及工厂抛错，均须带入口定位失败，不将坏插件静默当空结果。隔离测试来源显式传绝对路径，另在不同 cwd 核对默认来源仍锚定包内 src。实际验证结果由本轮执行输出核对，不由文档保存推定通过；最低 Node 22.20.0、其他平台与真实挂载分别未验。
+
+**本轮局部验证**：5 项引擎 Node 测试、包类型检查、改动代码的定向 ESLint 及真实 Vite 构建通过。原有 Python 测试 39 项中 3 项失败：`test_cli_failure_is_reported`、`test_every_run_reinstalls_all_sources`、`test_installs_increment_and_attachments`，均因缺少 `script/register-commands/register-commands.sh`，改动前已复现。Markdown 的 `pnpm exec eslint --fix` 已执行，但规格被现有忽略规则跳过，不计 Markdown lint 通过。完整分发、最低 Node、其他平台及真实挂载未执行。
+
+后续生成/回迁才核对一个自包含 `dist/script/speckit-mount.sh`、curl 唯一生成安装及 hidden、入口原字节和 hidden 模板派生。所有真实安装、挂载及发布验证仍按各自有效前置执行，不为测试引擎在当前项目注册扩展。
+
+## 2026-11-18 分步验证：脚本插件骨架与目录迁移
+
+依据[本轮输入及后续迁移授权](requirements/raw/2026-11-18-unified-script-directory.md)，先完成规划和插件骨架，再由子代理执行Tasks及综合分析，随后已迁移扫描/脚本生成和hidden模板并接入配置。局部检查命令及真实结果见[T077](implementation/T077.md)；完整正式包及消费仍待后续，不执行安装或发布来验证纯构建迁移。
+
+迁移接线后，沿下方已有包 build 命令验证：curl 插件只交付安装入口，script 插件只派生 hidden；两者各有唯一资产，`dist/script/install.sh` 与 curl 目录安装源原字节一致，`dist/script/hidden-install.sh` 与 `vite-plugin-script/hidden-install.template.ts` 派生一致，所有获准运行脚本都在 `dist/script/`；枚举 `dist/curl/` 下运行脚本必须为0。缺任一必需脚本、两插件重复交付、意外带入 old/测试/构建源码不能通过。write=false须无写盘副作用，根VERSION和技能附件保持原验收。
+
+下面内容构建示例可用于当前局部迁移的检查。任务图、综合分析和 Tasks 已同步目标路径，完整业务实施仍须核对原任务及其方案，不据目录存在声称可发布。
+
 ## 2026-11-16 当前验证入口：统一包
 
 先读[curl契约](contracts/curl-delivery.md)、[模型](data-model.md)及[研究](research.md)。本节替代旧双包、分区VERSION及强制manifest验证；历史命令保留当时范围。当前仅完成规划，本轮未运行构建、产品测试、下载安装或发布；真实R2、最低运行时和全矩阵仍待验。
@@ -24,10 +44,10 @@ pnpm --filter @foundry/skills run test:distribution
 
 ### 当前内容构建检查
 
-运行包build后，根dist/VERSION应为package.json.version及换行，技能启用内容和附件与源字节一致，curl/install.sh与install.source.sh一致，hidden脚本与真实模板输出一致；插件内归档保持注释，不应生成两个旧tar.gz。开发输出可含内部集合，不能因此宣告可公开。
+运行包build后，根dist/VERSION应为package.json.version及换行，技能启用内容和附件与源字节一致，script/install.sh与install.source.sh一致，hidden脚本与真实模板输出一致；插件内归档保持注释，不应生成两个旧tar.gz。开发输出可含内部集合，不能因此宣告可公开。
 
 ```bash
-cmp packages/skills/build/plugins/vite-plugin-curl/install.source.sh packages/skills/dist/curl/install.sh
+cmp packages/skills/build/plugins/vite-plugin-curl/install.source.sh packages/skills/dist/script/install.sh
 cat packages/skills/dist/VERSION
 ```
 
@@ -35,9 +55,9 @@ cat packages/skills/dist/VERSION
 
 ### 待实现的正式归档与候选验证
 
-流水线在独占暂存根收集获准三分类、同版curl材料、根VERSION、当前说明与真实许可。技能映射必须与目录双向相等，hidden候选不带eval/profile。缺正文/引用附件、安装目录碰撞、链接、越界、过时README或缺许可的反例不能通过正式候选。
+流水线在独占暂存根收集获准三分类、同版script运行材料及curl映射数据、根VERSION、当前说明与真实许可。技能映射必须与目录双向相等，hidden候选不带eval/profile。缺正文/引用附件、安装目录碰撞、链接、越界、过时README或缺许可的反例不能通过正式候选。
 
-归档为skills-<version>.tar.gz，内部根直接为VERSION/skill/curl/说明及许可，不带dist外层；归档位于被归档目录之外。解包文件全集和字节与本次正式暂存100%一致，包内没有两个独立技能/helper归档。没有release-manifest.json或script/manifest.json本身不得导致失败；发现release.json、候选证据等包外材料不混入安装根。
+归档为skills-<version>.tar.gz，内部根直接为VERSION/skill/script/curl非脚本数据/说明及许可，不带dist外层；归档位于被归档目录之外。解包文件全集和字节与本次正式暂存100%一致，包内没有两个独立技能/helper归档。没有release-manifest.json或script/manifest.json本身不得导致失败；发现release.json、候选证据等包外材料不混入安装根。
 
 两次同源构建比较正式内容及解包后文件全集/字节，不要求tar/gzip原字节哈希相同。对选定候选归档求实际长度与SHA-256并冻结，随后重试不得重建替换。清理dist不丢失发布记录；仅build不新增已发布行。真实源版本及输入须实际提交，不以环境变量/夹具SHA冒认产品输入。
 

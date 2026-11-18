@@ -1,8 +1,8 @@
 # 技能分发功能综合分析
 
-本分析沿2026-11-16既有入口，由本轮after_tasks的artifact-spec-analysis依据[2026-11-17上下文修复](../../requirements/discussions/2026-11-17-context-repair.md)增量刷新。输入为[最新规格及确认](../../spec.md#session-2026-11-16)、[原话](../../requirements/raw/2026-11-16-curl-script-archive.md)、[当前Plan](../../plan.md)、明确读取的同级[闭环详情](../../mvu.md)、[任务清单](../../tasks.md)、[模型](../../data-model.md)、[研究](../../research.md)及[当前curl契约](../../contracts/curl-delivery.md)。这里解释功能、关系和限制；工程checkbox只在tasks，闭环活动详情只在mvu，不在分析中复制完成比例或另建状态系统。
+本分析沿2026-11-16既有入口，由2026-11-18本轮after_tasks的artifact-spec-analysis依据[统一脚本目录与后续迁移授权](../../requirements/raw/2026-11-18-unified-script-directory.md)增量刷新。输入为[最新规格及确认](../../spec.md)、[历史上下文修复](../../requirements/discussions/2026-11-17-context-repair.md)、[当前Plan](../../plan.md)、明确读取的同级[闭环详情](../../mvu.md)、[任务清单](../../tasks.md)、[模型](../../data-model.md)、[研究](../../research.md)及[当前curl契约](../../contracts/curl-delivery.md)。这里解释功能、关系和限制；工程checkbox只在tasks，闭环活动详情只在mvu，不在分析中复制完成比例或另建状态系统。
 
-当前按[流水线单包确认](../../requirements/raw/2026-11-16-unified-pipeline-package.md)及[暂缓逐文件JSON](../../requirements/raw/2026-11-16-defer-file-manifest.md)阅读：三个插件生成内容与根VERSION，旧压缩调用保持注释。T069拟由流水线检查正式范围后形成统一包，核验记录留包外，不恢复双包或随包manifest。设计与任务已同步，正式业务仍待验收，本文不更新工程checkbox。
+当前按[流水线单包确认](../../requirements/raw/2026-11-16-unified-pipeline-package.md)及[暂缓逐文件JSON](../../requirements/raw/2026-11-16-defer-file-manifest.md)阅读：技能插件生成内容、curl插件原字节交付install入口、script插件派生hidden、版本插件生成根VERSION；当前局部切换及模板移动由协调者在Tasks后按明确授权实施，本文不提前记录其成功。旧压缩调用保持注释。T069拟由流水线检查正式范围后形成统一包，核验记录留包外，不恢复双包或随包manifest。设计与任务已同步，正式业务仍待验收，本文不更新工程checkbox。
 
 ## 按需取得完整公开技能
 
@@ -34,7 +34,7 @@
 
 维护者能检查技能与脚本目录，流水线再将获准内容归档为一个包；使用者只有显式hidden时才调用同包隐匿模块。发布前缺必需脚本不能放行，运行时未核验或未知协议代码绝不执行；隐匿失败保留成功安装，不将整个agent根或共享文件隐藏。
 
-本轮重新核对后，实际hidden源是curl插件的hidden-install.template.ts；已有逐行Bash生成、占位符、本地Git及排除基础逻辑。旧.sh路径只剩.gitkeep不代表没有隐匿实现。[T033](../../tasks.md#t033)复用[T007](../../tasks.md#t007)真实Git边界而非新建测试专用原型，[T034](../../tasks.md#t034)复用现有模板补齐成功集合与结果协议，由[T077](../../tasks.md#t077)复用现有模板接线和路径注入，只生成独立Bash内容；[T069](../../tasks.md#t069)将获准路径、映射、附件和许可校验后归入统一包，不生成辅助manifest或第二归档。模板已有生成基础，安装调用和成功集合协议仍未接通；不重复版本插件或恢复旧.sh源。原入口保持原字节，派生辅助模板的路径数据是明确例外；无状态scanSkills可共用，不能靠插件执行偶然顺序或共享可变context同步。
+本轮Tasks生成时，hidden模板仍位于curl插件目录，已有逐行Bash生成、占位符、本地Git及排除基础逻辑；用户明确授权将其原字节移至 `build/plugins/vite-plugin-script/hidden-install.template.ts`，技能扫描与hidden脚本生成由该插件负责。用户后续明确安装入口构建留在 curl：该插件读取 `vite-plugin-curl/install.source.sh`，原字节交付 `dist/script/install.sh`；script 只派生 `dist/script/hidden-install.sh`。输出目录统一不等于所有脚本由同一插件生成，每项资产只能emit一次。模板移动与必要构建接线是原T077的局部工作，实际结果沿该Task方案核对，不由任务生成或分析保存推定完成。旧.sh路径只剩.gitkeep不代表没有隐匿实现。[T033](../../tasks.md#t033)复用[T007](../../tasks.md#t007)真实Git边界而非新建测试专用原型，[T034](../../tasks.md#t034)复用现有模板补齐成功集合与结果协议，由[T077](../../tasks.md#t077)承接script插件、迁移后的模板接线和路径注入，只生成独立Bash内容；[T069](../../tasks.md#t069)将获准路径、映射、附件和许可校验后归入统一包，不生成辅助manifest或第二归档。模板已有生成基础，安装调用和成功集合协议仍未接通；不重复版本插件或恢复旧.sh源。原入口保持原字节，派生辅助模板的路径数据是明确例外；无状态scanSkills可共用，不能靠插件执行偶然顺序或共享可变context同步。
 
 [T035](../../tasks.md#t035)等待真实安装及归档，将本次installed/reused完整集合交给已核验脚本，处理模板候选、选择、成功集合的交集；[T036](../../tasks.md#t036)验证真实用户流程及支持边界，挂载后独占路径另由[T028](../../tasks.md#t028)补集成。原MVU-004在这里从Git边界走向真实材料消费：check-ignore、索引和status证明精确效果，未选和失败项仍可见，重复规则为零；无Git、父仓库子目录、.git文件及项目外global路径按约定跳过或报告限制。技术数据流统一见[归档与隐匿技术图](../../diagrams.md)，不在分析再复制一套。
 
@@ -85,4 +85,4 @@
 | MVU里程碑  | 各功能说明可观察验收，活动详情与依据统一在[mvu](../../mvu.md)                                 |
 | MVU流转图  | [里程碑流转和两线关系](flows.md)，任务身份沿原清单                                            |
 
-本次文档同步未重新构建、安装、运行新业务测试、渲染Mermaid或发布；此前局部构建及两个归档解包验证不补齐正式白名单/附件许可、安全解包、历史统一包兼容、真实Git新协议、其他平台或R2证据。当前TS配置与旧JSON文字、模板已接线而安装协议未接通、旧模块位置的实际差异均由原Task准备处理，不在分析中自动修改源码或原验收。文件存在、注册成功或本分析被生成均不代表正式宿主完整加载与门禁行为已经通过。
+本次Tasks与after_tasks分析仅保存文档，未重新构建、安装、运行新业务测试、渲染Mermaid或发布；协调者后续迁移及检查另由T077方案留证。此前局部构建及两个归档解包验证不补齐正式白名单/附件许可、安全解包、历史统一包兼容、真实Git新协议、其他平台或R2证据。当前TS配置与旧JSON文字、模板已接线而安装协议未接通、旧模块位置的实际差异均由原Task准备处理，不在分析中自动修改源码或原验收。文件存在、注册成功或本分析被生成均不代表正式宿主完整加载与门禁行为已经通过。

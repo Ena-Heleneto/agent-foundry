@@ -1,0 +1,283 @@
+{
+  "synthetic_only": true,
+  "verified_at_ns": 1794966377766500836,
+  "actual_dispatch_tool": "collaboration.spawn_agent",
+  "returned_task_name": "/root/t114_analysis_probe",
+  "observed_completion": "collaboration FINAL_ANSWER received",
+  "grouped_dispatch_count": 1,
+  "persisted_input_count": 6,
+  "triggering_count": 4,
+  "nontriggering_count": 2,
+  "parent_and_analyzer_decisions_agree": true,
+  "consumed_refs_match_saved_input": true,
+  "raw_sha256": "63a9fc413fd39ec96c4f8a347f48520614db424cc1ae8fa91f3d800a56c0cfee",
+  "parent_decisions": [
+    {
+      "item_id": "synthetic-item-1",
+      "kind": "preference",
+      "reason": "明确要求本合成项目后续讨论先给结论，范围限定于该情境"
+    },
+    {
+      "item_id": "synthetic-item-2",
+      "kind": "goal",
+      "reason": "明确提出持续两个月的离线导出交付目标"
+    },
+    {
+      "item_id": "synthetic-item-3",
+      "kind": "correction",
+      "reason": "明确更正范围为CSV并排除PDF"
+    },
+    {
+      "item_id": "synthetic-item-4",
+      "kind": "manual",
+      "reason": "明确要求分析已存合成对话"
+    },
+    {
+      "item_id": "synthetic-item-5",
+      "kind": null,
+      "reason": "当前执行确认，不形成持续性认识"
+    },
+    {
+      "item_id": "synthetic-item-6",
+      "kind": null,
+      "reason": "仅引用Agent建议且明确尚未同意，不能归为本人偏好"
+    }
+  ],
+  "isolated_analysis": {
+    "acceptance_id": "T114",
+    "synthetic": true,
+    "scope": "仅用于人工合成项目的隔离验收认识；不形成真实用户结论或画像。",
+    "analysis_basis": "独立读取指定已保存合成输入；未读取父代理判定。",
+    "decisions": [
+      {
+        "source_ref": {
+          "thread_id": "t114-synthetic-input",
+          "turn_id": "synthetic-turn-1",
+          "item_id": "synthetic-item-1",
+          "source_completed_at": 2001,
+          "source_offset": 155
+        },
+        "should_trigger": true,
+        "trigger_type": "preference",
+        "triple": {
+          "context": "在这个合成项目后续讨论方案时。",
+          "understanding": "明确要求先给结论，再补依据；只在指定项目与方案讨论情境适用，不能扩张为所有场景的永久偏好。",
+          "sources": [
+            {
+              "thread_id": "t114-synthetic-input",
+              "turn_id": "synthetic-turn-1",
+              "item_id": "synthetic-item-1",
+              "source_completed_at": 2001,
+              "source_offset": 155
+            }
+          ]
+        },
+        "certainty": "明确表达，范围受限"
+      },
+      {
+        "source_ref": {
+          "thread_id": "t114-synthetic-input",
+          "turn_id": "synthetic-turn-2",
+          "item_id": "synthetic-item-2",
+          "source_completed_at": 2002,
+          "source_offset": 510
+        },
+        "should_trigger": true,
+        "trigger_type": "goal",
+        "triple": {
+          "context": "合成项目接下来两个月的功能推进。",
+          "understanding": "阶段目标是让离线导出成为可独立交付的功能；这是有期限的项目目标，输入没有可确定的日历起止日期。",
+          "sources": [
+            {
+              "thread_id": "t114-synthetic-input",
+              "turn_id": "synthetic-turn-2",
+              "item_id": "synthetic-item-2",
+              "source_completed_at": 2002,
+              "source_offset": 510
+            }
+          ]
+        },
+        "certainty": "明确目标，未验证交付状态"
+      },
+      {
+        "source_ref": {
+          "thread_id": "t114-synthetic-input",
+          "turn_id": "synthetic-turn-3",
+          "item_id": "synthetic-item-3",
+          "source_completed_at": 2003,
+          "source_offset": 889
+        },
+        "should_trigger": true,
+        "trigger_type": "correction",
+        "triple": {
+          "context": "对前述合成项目离线导出目标的范围修订。",
+          "understanding": "当前导出范围只包含 CSV，排除 PDF；原阶段目标仍保留，只修订其功能范围。保留原表达与更正来源，不推断用户一贯排斥 PDF，也不声称此前已明确包含 PDF。",
+          "sources": [
+            {
+              "thread_id": "t114-synthetic-input",
+              "turn_id": "synthetic-turn-2",
+              "item_id": "synthetic-item-2",
+              "source_completed_at": 2002,
+              "source_offset": 510
+            },
+            {
+              "thread_id": "t114-synthetic-input",
+              "turn_id": "synthetic-turn-3",
+              "item_id": "synthetic-item-3",
+              "source_completed_at": 2003,
+              "source_offset": 889
+            }
+          ]
+        },
+        "certainty": "明确更正",
+        "corrects_source_refs": [
+          {
+            "thread_id": "t114-synthetic-input",
+            "turn_id": "synthetic-turn-2",
+            "item_id": "synthetic-item-2",
+            "source_completed_at": 2002,
+            "source_offset": 510
+          }
+        ],
+        "superseded_scope": "离线导出格式的未限定范围",
+        "preserved_scope": "两个月内实现可独立交付的离线导出功能"
+      },
+      {
+        "source_ref": {
+          "thread_id": "t114-synthetic-input",
+          "turn_id": "synthetic-turn-4",
+          "item_id": "synthetic-item-4",
+          "source_completed_at": 2004,
+          "source_offset": 1235
+        },
+        "should_trigger": true,
+        "trigger_type": "manual_analysis",
+        "triple": {
+          "context": "针对这段合成对话的本次分析请求。",
+          "understanding": "明确要求整理有助于持续协作的认识，足以触发本次手动分析；该分析请求本身不证明长期偏好或稳定人格特征。",
+          "sources": [
+            {
+              "thread_id": "t114-synthetic-input",
+              "turn_id": "synthetic-turn-4",
+              "item_id": "synthetic-item-4",
+              "source_completed_at": 2004,
+              "source_offset": 1235
+            }
+          ]
+        },
+        "certainty": "明确操作请求"
+      },
+      {
+        "source_ref": {
+          "thread_id": "t114-synthetic-input",
+          "turn_id": "synthetic-turn-5",
+          "item_id": "synthetic-item-5",
+          "source_completed_at": 2005,
+          "source_offset": 1584
+        },
+        "should_trigger": false,
+        "trigger_type": null,
+        "triple": {
+          "context": "当前用例执行的即时确认与顺序安排。",
+          "understanding": "收到并先运行当前用例属于本次操作指令；不足以触发偏好、阶段目标、纠正或手动分析，也不能推断长期采取某种测试顺序。",
+          "sources": [
+            {
+              "thread_id": "t114-synthetic-input",
+              "turn_id": "synthetic-turn-5",
+              "item_id": "synthetic-item-5",
+              "source_completed_at": 2005,
+              "source_offset": 1584
+            }
+          ]
+        },
+        "non_trigger_reason": "普通确认与单次行动顺序，不具有要求分析或可持续认识的明确表达。"
+      },
+      {
+        "source_ref": {
+          "thread_id": "t114-synthetic-input",
+          "turn_id": "synthetic-turn-6",
+          "item_id": "synthetic-item-6",
+          "source_completed_at": 2006,
+          "source_offset": 1894
+        },
+        "should_trigger": false,
+        "trigger_type": null,
+        "triple": {
+          "context": "引用 Agent 所提出的英文使用建议，且明确未同意。",
+          "understanding": "英文建议属于 Agent 表达，不能归为合成用户偏好；未同意也不能反推其偏好中文。本条是归属边界反例，没有现成的错误用户结论需要形成更正。",
+          "sources": [
+            {
+              "thread_id": "t114-synthetic-input",
+              "turn_id": "synthetic-turn-6",
+              "item_id": "synthetic-item-6",
+              "source_completed_at": 2006,
+              "source_offset": 1894
+            }
+          ]
+        },
+        "non_trigger_reason": "他人建议的引用与未同意声明，不建立本人的语言偏好。"
+      }
+    ],
+    "consumed_source_refs": [
+      {
+        "thread_id": "t114-synthetic-input",
+        "turn_id": "synthetic-turn-1",
+        "item_id": "synthetic-item-1",
+        "source_completed_at": 2001,
+        "source_offset": 155
+      },
+      {
+        "thread_id": "t114-synthetic-input",
+        "turn_id": "synthetic-turn-2",
+        "item_id": "synthetic-item-2",
+        "source_completed_at": 2002,
+        "source_offset": 510
+      },
+      {
+        "thread_id": "t114-synthetic-input",
+        "turn_id": "synthetic-turn-3",
+        "item_id": "synthetic-item-3",
+        "source_completed_at": 2003,
+        "source_offset": 889
+      },
+      {
+        "thread_id": "t114-synthetic-input",
+        "turn_id": "synthetic-turn-4",
+        "item_id": "synthetic-item-4",
+        "source_completed_at": 2004,
+        "source_offset": 1235
+      },
+      {
+        "thread_id": "t114-synthetic-input",
+        "turn_id": "synthetic-turn-5",
+        "item_id": "synthetic-item-5",
+        "source_completed_at": 2005,
+        "source_offset": 1584
+      },
+      {
+        "thread_id": "t114-synthetic-input",
+        "turn_id": "synthetic-turn-6",
+        "item_id": "synthetic-item-6",
+        "source_completed_at": 2006,
+        "source_offset": 1894
+      }
+    ],
+    "coverage": {
+      "input_records": 6,
+      "triggering_records": 4,
+      "non_triggering_records": 2
+    },
+    "limitations": [
+      "输入均为人工合成。",
+      "未验证任何真实协作成效。",
+      "不从单次业务选择推断永久特征。",
+      "未读取或更新真实画像、源码和任务文件。"
+    ]
+  },
+  "real_user_profile_modified": false,
+  "product_snapshot_commit_retry_verified": false,
+  "limitations": [
+    "人工合成输入，由主代理本轮判断并合并实际派发；不是自动产品调度完成。",
+    "没有持久snapshot/commit、重试预留、精简入口或共同发布；保留原后续Task职责。"
+  ]
+}

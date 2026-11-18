@@ -1,5 +1,9 @@
 # 构建、迁移与发布流水线契约
 
+## 2026-11-18 本地脚本与远端对象映射
+
+统一包的脚本内容来自 `dist/script/`，其中 install.sh 由 curl 插件读取源后原字节交付，hidden-install.sh 由 script 插件扫描和模板派生，归档内为 `script/install.sh` 和 `script/hidden-install.sh`；独立固定/最新入口远端对象仍沿下方 curl 地址，上传入口字节取本地 `script/install.sh` 并与包内入口一致。映射与版本表等非脚本数据保持原位置，不因本地目录统一新增第二包或改变已发布对象。局部职责迁移及用户后续纠正见原 T077 方案，归档及真实发布仍须后续验收。
+
 ## 2026-11-16 主线 R2 与发现材料
 
 主线固定对象采用skills/<version>/skills-<version>.tar.gz和curl/<version>/install.sh；可变发现为curl/release.json及curl/install.sh。同次版本取package.json.version，技能与hidden从统一包取得，无独立helper归档。发布对象及索引字段集中在[curl契约](curl-delivery.md)，下方旧Git tag/raw/tree和双包清单公式仅留历史，不约束新R2发布器；紧急Git候选不变。

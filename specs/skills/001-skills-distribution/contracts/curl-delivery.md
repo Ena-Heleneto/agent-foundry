@@ -1,5 +1,19 @@
 # 当前主线 curl 交付契约
 
+## 2026-11-18 最新目标：curl 接回隐匿脚本生成
+
+[Spec](../spec.md) FR-078 确认将现有 `vite-plugin-script` 的启用技能扫描、hidden 模板和生成逻辑移回 `vite-plugin-curl`，由 curl 同时交付 `script/install.sh` 和 `script/hidden-install.sh`，迁移后移除旧 script 插件；入口保持安装源原字节，hidden 的候选路径、前缀占位及成功集合限制保持。后续 workflow 子插件另外生成 `script/speckit-mount.sh`，引擎的自动发现接口见[构建契约](build-pipeline.md)。
+
+这是目标归属调整，当前源码仍由 script 插件派生 hidden；本轮仅规划并由主代理新增引擎，不执行回迁或运行消费。统一包、公开入口和脚本路径不因插件归属改变，版本、下载、摘要及独立失败报告继续沿本契约。下方原迁移结果保留历史，不视为已完成本次回迁。
+
+## 2026-11-18 有效增量：脚本统一归属与路径
+
+依据[最新 Spec](../spec.md)和[目录及后续迁移授权](../requirements/raw/2026-11-18-unified-script-directory.md)，本地及统一包内的运行脚本分别统一为 `dist/script/`、`script/`。按用户最终纠正，`vite-plugin-curl` 原字节交付安装入口，`vite-plugin-script` 只扫描技能并派生 hidden；两个脚本各有一个责任插件。前轮只新增骨架，后续已完成局部迁移及构建验证，见[T077结果](../implementation/T077.md)；统一包与运行调用仍是后续目标，不由本地构建推定已交付。
+
+安装源及其读取/emit逻辑位于 curl 插件，hidden 模板已原字节移至 script 插件目录，由后者承担扫描和派生；输出分别为 `script/install.sh`、`script/hidden-install.sh`，避免双重交付及旧路径残留。输出目录统一不要求所有脚本由同一插件生成。非脚本 `curl/skills.tsv`、下载版本表及远端 `curl/<version>/install.sh`、`curl/install.sh` 的职责和地址保持，固定入口对象字节从 `script/install.sh` 取值。脚本源码落在哪里不决定公开路径，不复制另一套模板。
+
+格式1沿当前尚未发布的统一布局设计调整；如后续识别到真实旧格式版本，先明确兼容/拒绝策略，不静默回退 `curl/script/` 或执行未核验代码。本次迁移只调整构建交付，不新增运行调用，不改变原失败保护及候选门禁。
+
 ## 2026-11-16 有效设计：统一包与根 VERSION
 
 依据[最新Spec](../spec.md)、[流水线单包确认](../requirements/raw/2026-11-16-unified-pipeline-package.md)和[暂缓随包逐文件JSON](../requirements/raw/2026-11-16-defer-file-manifest.md)。本节是Plan Phase 1设计，替代下方双包、分区VERSION、scripts下载引用及强制manifest消费；不代表代码已经实现。旧契约保留追溯，紧急版schema1和官方安装加显式挂载不变。
@@ -14,8 +28,8 @@
 | -------------------------------------- | -------------------------------------------------------------------------------------------- |
 | VERSION                                | 当前dist/VERSION，须等于所选统一版本                                                         |
 | skill/<分类>/<目录>/                   | 仅coding/frontend/workflow获准启用技能；完整正文和普通/二进制附件，不带eval/profile          |
-| curl/install.sh                        | install.source.sh原字节；保留同版入口供追溯，运行不因选择历史包而改用它                      |
-| curl/script/hidden-install.sh          | 真实TS模板派生Bash；正式候选路径只含获准技能，接口标记见下文                                 |
+| script/install.sh                      | install.source.sh原字节；保留同版入口供追溯，运行不因选择历史包而改用它                      |
+| script/hidden-install.sh               | 真实TS模板派生Bash；正式候选路径只含获准技能，接口标记见下文                                 |
 | curl/skills.tsv                        | 流水线生成的最小身份/依赖/路径映射，非执行数据，不是逐文件清单                               |
 | README.md、LICENSE及实际必要第三方通知 | 包说明在冻结前改成当前可用行为，真实ISC可取仓库根LICENSE；第三方实际许可与来源不能被统一改标 |
 
@@ -29,16 +43,16 @@
 
 release.json继续是数组，最新已发布记录在首条，latest取首条，显式版本要求唯一匹配。全表拒绝重复版本、非法类型、未知格式、不合法URL或摘要，不只校验选中行。字段如下：
 
-| 字段                                   | 格式及语义                                                                       |
-| -------------------------------------- | -------------------------------------------------------------------------------- |
-| version                                | 唯一SemVer，与包根VERSION一致                                                    |
-| formatVersion                          | 正整数，当前统一布局及映射为1；未知格式明确拒绝                                  |
-| url                                    | 对应版本固定包HTTPS URL，无空白/控制字符                                         |
-| bytes                                  | 实际归档长度，正安全整数                                                         |
-| sha256                                 | 64位十六进制，正式入口必需，不以MD5降级                                          |
-| md5                                    | 32位十六进制，过渡记录保留；存在时也须合法，不能代替sha256                       |
-| sourceRevision                         | 实际源码完整40位Git提交，来自流水线核验，不由入口推测当前HEAD                    |
-| entry.url / entry.bytes / entry.sha256 | 同次版本固定入口及实际身份，入口版本为该行version；与包内curl/install.sh字节一致 |
+| 字段                                   | 格式及语义                                                                         |
+| -------------------------------------- | ---------------------------------------------------------------------------------- |
+| version                                | 唯一SemVer，与包根VERSION一致                                                      |
+| formatVersion                          | 正整数，当前统一布局及映射为1；未知格式明确拒绝                                    |
+| url                                    | 对应版本固定包HTTPS URL，无空白/控制字符                                           |
+| bytes                                  | 实际归档长度，正安全整数                                                           |
+| sha256                                 | 64位十六进制，正式入口必需，不以MD5降级                                            |
+| md5                                    | 32位十六进制，过渡记录保留；存在时也须合法，不能代替sha256                         |
+| sourceRevision                         | 实际源码完整40位Git提交，来自流水线核验，不由入口推测当前HEAD                      |
+| entry.url / entry.bytes / entry.sha256 | 同次版本固定入口及实际身份，入口版本为该行version；与包内script/install.sh字节一致 |
 
 无manifest、scripts.url或第二包关联。缺SHA的旧记录不能被新正式入口自动当合格包；已有真实历史如需支持，先取得对应字节核验并适配合法格式，不能补造记录。本期无真实历史时，跨版本兼容由隔离样本验证，真实历史部分仍待验。
 
@@ -63,9 +77,9 @@ name及技能目录段限定为小写字母/数字与内部连字符组成的非
 
 ### 隐匿内部调用协议1
 
-模板源复用vite-plugin-curl/hidden-install.template.ts，运行产物保持独立Bash；构建把获准安装相对路径和@@AGENT_SKILLS_ROOT@@标记写入确定的数据位置，不全局替换任意Shell正文。生成脚本头部只读标记为`# foundry-hidden-interface: 1`；入口在执行前读取并核对，未知接口不执行，不依赖随包JSON。
+模板源复用vite-plugin-script/hidden-install.template.ts，运行产物保持独立Bash；构建把获准安装相对路径和@@AGENT_SKILLS_ROOT@@标记写入确定的数据位置，不全局替换任意Shell正文。生成脚本头部只读标记为`# foundry-hidden-interface: 1`；入口在执行前读取并核对，未知接口不执行，不依赖随包JSON。
 
-内部调用沿现有设计：`bash <已核验绝对路径>/curl/script/hidden-install.sh --project <绝对项目> --agent-root .agents/skills --successful-skills-file <绝对JSON文件> --result-file <绝对新结果文件>`。参数分开透传，不拼求值字符串；临时成功集合JSON包含name/installRelativeDirectory/installedPath及本次完整性事实，不是随包逐文件清单。
+内部调用沿现有设计：`bash <已核验绝对路径>/script/hidden-install.sh --project <绝对项目> --agent-root .agents/skills --successful-skills-file <绝对JSON文件> --result-file <绝对新结果文件>`。参数分开透传，不拼求值字符串；临时成功集合JSON包含name/installRelativeDirectory/installedPath及本次完整性事实，不是随包逐文件清单。
 
 允许处理集合为正式模板候选、本次显式选择、完整成功集合的交集。只核对明确项目本地.git，缺失/父仓库子目录/.git文件按当前保守范围跳过，不向上找、不初始化。追加前核对未跟踪及项目内独占路径，保留原exclude、转义精确锚定路径、去重，再以check-ignore/ls-files/status核对效果。当前只验证.agents/skills前缀；项目外global、共享配置、已跟踪内容不声称隐藏成功，不取消跟踪或修改全局配置。
 

@@ -8,6 +8,8 @@
   "publishConfig": { "registry": "https://npm.pkg.github.com" },
   "imports": {
     "#package.json": "./package.json",
+    "#install.source.sh": "./build/plugins/vite-plugin-curl/install.source.sh",
+    "#src": "./src",
     "#src/*": "./src/*.ts",
     "#utils/*": "./utils/*.ts",
     "#build/*": "./build/*.ts"
@@ -24,6 +26,7 @@
     "@foundry/preset-config": "workspace:*",
     "@types/node": "catalog:types",
     "consola": "catalog:shared",
+    "defu": "catalog:shared",
     "vite": "catalog:build",
     "yaml": "catalog:shared"
   }
