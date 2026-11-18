@@ -1,0 +1,24 @@
+{
+  "case": "baseline",
+  "label": "baseline-ordinary",
+  "command": [
+    "codex",
+    "exec",
+    "--json",
+    "-c",
+    "sandbox_mode=\"workspace-write\"",
+    "-c",
+    "approval_policy=\"never\"",
+    "--cd",
+    "/tmp/foundry-t119-step1-7mz1ua0j/baseline",
+    "-"
+  ],
+  "prompt": "闭包是什么，用一句话解释。",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 17.376,
+  "events": 4,
+  "session_id": "01a1ef5d-8c71-70a1-bb3c-54e3cb935bab",
+  "stderr_line_count": 0,
+  "stderr_errors": []
+}

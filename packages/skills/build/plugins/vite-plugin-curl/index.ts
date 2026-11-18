@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
 import { readFile } from 'node:fs/promises'
 import { createHiddenInstallScript } from '#build/plugins/vite-plugin-curl/hidden-install.template'
-import { scanSkills } from '#build/utils/scan-skills'
+import { scanSkills } from '#utils/scan-skills'
 
 /**
  * 原字节交付 curl 安装入口，并由启用技能派生隐匿脚本。

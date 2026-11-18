@@ -3,7 +3,7 @@ import type { Plugin } from 'vite'
 import { cp } from 'node:fs/promises'
 // import { rename } from 'node:fs/promises'
 // import { promisify } from 'node:util'
-import { scanSkills } from '#build/utils/scan-skills'
+import { scanSkills } from '#utils/scan-skills'
 
 /**
  * 在 writeBundle 中等待技能复制完成，向统一发布目录交付技能内容。

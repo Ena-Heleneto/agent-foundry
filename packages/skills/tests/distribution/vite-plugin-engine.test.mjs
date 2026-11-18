@@ -43,7 +43,9 @@ test('缺省、false 和缺配置的集合不会导入子插件', async (t) => {
   const root = fixture(t)
   configure(root, 'default')
   configure(root, 'disabled', { plugin: false })
-  for (const name of ['default', 'disabled', 'unconfigured']) {
+  configure(root, 'string', { plugin: 'true' })
+  configure(root, 'number', { plugin: 1 })
+  for (const name of ['default', 'disabled', 'unconfigured', 'string', 'number']) {
     write(root, `${name}/plugin/vite-plugin-broken/index.ts`, 'throw new Error("禁用集合不应加载")')
   }
   assert.deepEqual(await engine.default(root), [])
@@ -60,7 +62,25 @@ test('true 扫描单数 plugin 目录，独立于 script 和技能开关', async
   write(root, 'enabled/plugin/attachment/vite-plugin-deep/index.ts', 'throw new Error("不递归附件")')
   write(root, 'outside/index.ts', 'throw new Error("不跟随链接")')
   symlinkSync(join(root, 'outside'), join(root, 'enabled/plugin/vite-plugin-link'), 'dir')
+  mkdirSync(join(root, 'enabled/plugin/vite-plugin-linked-entry'))
+  symlinkSync(join(root, 'outside/index.ts'), join(root, 'enabled/plugin/vite-plugin-linked-entry/index.ts'))
+  configure(root, 'linked-root', { plugin: true })
+  write(root, 'outside/vite-plugin-broken/index.ts', 'throw new Error("不跟随插件根链接")')
+  symlinkSync(join(root, 'outside'), join(root, 'linked-root/plugin'), 'dir')
+  symlinkSync(join(root, 'enabled'), join(root, 'linked-collection'), 'dir')
   assert.deepEqual((await engine.default(root)).map(plugin => plugin.name), ['demo'])
+})
+
+test('移除入口后重新加载配置不再发现该插件', async (t) => {
+  /**
+   * 同一来源重复扫描时只读取仍存在的入口，不缓存插件名单。
+   */
+  const root = fixture(t)
+  configure(root, 'enabled', { plugin: true })
+  write(root, 'enabled/plugin/vite-plugin-demo/index.ts', 'export default () => ({ name: "demo" })')
+  assert.deepEqual((await engine.default(root)).map(plugin => plugin.name), ['demo'])
+  rmSync(join(root, 'enabled/plugin/vite-plugin-demo/index.ts'))
+  assert.deepEqual(await engine.default(root), [])
 })
 
 test('启用集合缺少插件目录或入口时正常返回空结果', async (t) => {

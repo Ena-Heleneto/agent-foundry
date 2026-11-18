@@ -19,7 +19,7 @@
 **当前实现**
 
 - workflow 配置为 `plugin: true`、`script: false`。`src/workflow/plugin/vite-plugin-speckit-mount/index.ts` 已提供只声明名称的 Vite 插件工厂，原 `src/workflow/script/speckit-mount.sh` 已移除。
-- Vite 配置已注册引擎。引擎通过 `#src` 定位来源目录，调用 `scanCollections` 筛选 `plugin === true` 的集合，当前返回空插件数组。子插件入口的发现、加载和挂载脚本生成仍待实现。
+- Vite 配置已注册引擎。引擎通过 `#src` 定位来源目录，调用 `scanCollections` 筛选 `plugin === true` 的集合，按集合和插件目录名稳定加载固定深度的普通入口，不跟随符号链接；导入并调用默认无参工厂后将结果交给 Vite，异步及嵌套插件结果可正常消费。实际配置已发现 Speckit 子插件，挂载脚本生成仍待实现。
 - `vite-plugin-curl` 已接回启用技能扫描、隐匿脚本生成和 `hidden-install.template.ts`，统一交付 `dist/script/install.sh` 与 `dist/script/hidden-install.sh`。旧 `vite-plugin-script` 及其 Vite 注册已移除。
 
 具体的技能与扩展注册内容映射，以及扫描结果无适用技能时的产物处理规则，留待讨论确认。

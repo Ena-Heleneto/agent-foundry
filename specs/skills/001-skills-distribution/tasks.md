@@ -562,7 +562,7 @@ T076复核现有技能复制；T077只交付原字节入口、有效hidden模板
 
 ### T094
 
-- [ ] T094 [P] 建立统一源版本、整版持久发布记录及校验能力，落点 `packages/skills/package.json`（读取version）、计划的`packages/skills/releases/releases.json`和`packages/skills/build/utils/release-records.ts`。
+- [ ] T094 [P] 建立统一源版本、整版持久发布记录及校验能力，落点 `packages/skills/package.json`（读取version）、计划的`packages/skills/releases/releases.json`和`packages/skills/utils/release-records.ts`。
 
 **依赖**：T075。
 
@@ -670,7 +670,7 @@ T076复核现有技能复制；T077只交付原字节入口、有效hidden模板
 
 ### T076
 
-- [ ] T076 [US7] 完成当前技能复制插件及集合来源适配核验，落点 `packages/skills/build/plugins/vite-plugin-skill/index.ts`、`packages/skills/build/utils/scan-skills.ts`、`packages/skills/vite.config.ts`。
+- [ ] T076 [US7] 完成当前技能复制插件及集合来源适配核验，落点 `packages/skills/build/plugins/vite-plugin-skill/index.ts`、`packages/skills/utils/scan-skills.ts`、`packages/skills/vite.config.ts`。
 
 **依赖**：T075。
 
@@ -728,7 +728,7 @@ T076复核现有技能复制；T077只交付原字节入口、有效hidden模板
 
 ### T069
 
-- [ ] T069 [US7] 核验正式发布材料并由流水线生成统一包，落点现有`packages/skills/build/plugins/vite-plugin-skill/index.ts`、`build/utils/`与计划的`packages/skills/build/ci/`。
+- [ ] T069 [US7] 核验正式发布材料并由流水线生成统一包，落点现有`packages/skills/build/plugins/vite-plugin-skill/index.ts`、`utils/`与计划的`packages/skills/build/ci/`。
 
 **依赖**：T077、T094。
 

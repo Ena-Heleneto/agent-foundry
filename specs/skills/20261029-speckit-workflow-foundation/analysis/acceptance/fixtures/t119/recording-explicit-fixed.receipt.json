@@ -1,0 +1,24 @@
+{
+  "case": "explicit-fixed",
+  "label": "recording-explicit-fixed",
+  "command": [
+    "codex",
+    "exec",
+    "--json",
+    "-c",
+    "sandbox_mode=\"workspace-write\"",
+    "-c",
+    "approval_policy=\"never\"",
+    "--cd",
+    "/tmp/foundry-t119-step1-7mz1ua0j/explicit-fixed",
+    "-"
+  ],
+  "prompt": "请使用 $conversation-recording 保存当前可见对话，然后用一句话解释闭包。",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 36.797,
+  "events": 13,
+  "session_id": "01a1ef61-a4a4-7863-9a8f-a9b9c413a2d9",
+  "stderr_line_count": 0,
+  "stderr_errors": []
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "case": "recording",
+    "copy_output": "update(已更新): conversation-recording\n完成: 新建 0，更新 1，跳过 0，冲突 0",
+    "sha256": "329123de86fd98850f2f451b204fdbc92fa738f92d689c70afd7a2d7069b01ab",
+    "diff_exit_code": 0
+  },
+  {
+    "case": "explicit-fixed",
+    "copy_output": "copy: conversation-recording\n完成: 新建 1，更新 0，跳过 0，冲突 0",
+    "sha256": "329123de86fd98850f2f451b204fdbc92fa738f92d689c70afd7a2d7069b01ab",
+    "diff_exit_code": 0
+  }
+]

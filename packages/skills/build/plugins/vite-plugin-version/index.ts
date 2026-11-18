@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite'
-import { readPackageVersion } from '#build/utils/read-package-version'
+import { readPackageVersion } from '#utils/read-package-version'
 
 /**
  * 在构建生成阶段交付统一版本文件 VERSION，内容来自当前包的版本声明。

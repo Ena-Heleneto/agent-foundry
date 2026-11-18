@@ -91,7 +91,7 @@ flowchart TD
     T075 --> T094
 ```
 
-代码/计划位置：packages/skills/build/plugins/vite-plugin-skill、vite-plugin-curl、build/utils，build/ci及releases/releases.json；协议与输出见[当前契约](../contracts/curl-delivery.md)。T094与T076仍按原依赖在T077汇合，T034先交真实源，T069负责统一归档，T070在实际安装之后；图中文字更新不改变边。
+代码/计划位置：packages/skills/build/plugins/vite-plugin-skill、vite-plugin-curl、utils，build/ci及releases/releases.json；协议与输出见[当前契约](../contracts/curl-delivery.md)。T094与T076仍按原依赖在T077汇合，T034先交真实源，T069负责统一归档，T070在实际安装之后；图中文字更新不改变边。
 
 ## 主线后置：CI、真实挂载、完整验收与收尾
 

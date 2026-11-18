@@ -109,7 +109,7 @@ packages/skills/
 ├── build/plugins/vite-plugin-curl/       # 安装源及入口原字节交付
 ├── build/plugins/vite-plugin-script/     # 技能扫描及hidden模板派生
 ├── build/plugins/vite-plugin-version/   # 现有根VERSION
-├── build/utils/                         # 复用扫描，后续补发布校验
+├── utils/                               # 包内工具：集合配置、扫描与版本读取，后续补发布校验
 ├── build/ci/                            # 计划：检查、统一归档、候选与发布驱动
 ├── releases/releases.json               # 计划：统一已核验发布记录，dist外
 ├── script/old/                          # 保留旧模块，不自动恢复
