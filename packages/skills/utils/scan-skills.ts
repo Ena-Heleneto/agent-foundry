@@ -50,7 +50,7 @@ export async function scanCollections(sourceDir: string, { requireConfig = false
  * 扫描集合配置与技能正文，返回实际可交付的启用技能。
  *
  * @param sourceDir 集合来源目录，默认使用当前包的 src。
- * @returns 包含集合、名称、源目录及目标目录的技能清单。
+ * @returns 包含集合、名称、源目录、目标目录及原技能配置的清单。
  */
 export async function scanSkills(sourceDir = join(process.cwd(), 'src')) {
   /**
@@ -66,10 +66,11 @@ export async function scanSkills(sourceDir = join(process.cwd(), 'src')) {
   return collections.flatMap(({ directory, config: { packageName, skill } }) =>
     Object.entries(skill)
       .filter(([name, { enabled }]) => enabled && availableSkills.has(join(directory, name)))
-      .map(([name]) => ({
+      .map(([name, config]) => ({
         collection: packageName,
         name,
         source: join(directory, name),
         target: join('dist', 'skill', packageName, name),
+        config,
       })))
 }

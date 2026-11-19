@@ -1,5 +1,17 @@
 # 实施方案：统一发布包、技能安装与可选隐匿
 
+## 2026-11-19 后续局部实施：Increment 命令生成
+
+用户明确只补 Speckit 剩余命令。现有扫描结果的 command 经官方名称规则解析为扩展命名空间和命令文件名；构建期读取源技能 description，生成引用项目内已装技能的短命令，继续用同一 Bash 和官方扩展注册接口。运行前先核对目标技能存在，缺件时不开始注册；JSON/YAML 序列化和 Shell 字面量处理沿已有能力，不新增依赖。原生成器改名 mount-script.ts 以覆盖 hook 与命令职责，具体做法和验证沿 [T077](implementation/T077.md)。
+
+本轮不补其他主线插件或安装发布流程，原 Task 状态和依赖保持；bug-report 仍按最新 Spec 移除。下方旧“只生成 hooks”“两个 command 待办”保留先前范围，当前交付为三个 hooks 加 Increment 的一个挂载脚本。
+
+## 2026-11-19 局部续接：按技能 hook 配置生成脚本
+
+按最新 Spec 和[本轮来源](requirements/raw/2026-11-19-hook-script-generation.md)，扫描器在原技能结果保留配置，workflow 子插件从有效 hook 生成单个自包含 Bash，以 JSON-as-YAML 嵌入逐技能官方扩展输入。运行时调用环境已有 specify，注册、冲突及目标写入交官方 CLI，临时输入通过退出 trap 清理；不新建安装核心或依赖。空有效 hook 不输出脚本，两个 command 仅保留声明，本轮不生成其业务入口。
+
+本次属于原 T077 的明确局部代写，原工程依赖和 checkbox 不变，具体做法及验证沿 [T077](implementation/T077.md)；下方旧“集合不含工具配置”“首版只生成 Increment”及先前未接线阶段不覆盖本次范围。Linux、当前真实 CLI 和受控失败边界分别核验，不外推其他平台或版本。闭环详情继续见同级 mvu.md。
+
 ## 2026-11-18 局部增量：显式开启集合插件
 
 本轮请求覆盖此前“存在即加载”的设计：`CollectionOption` 增加可选布尔 `plugin`，`defineCollectionHandle` 合并 `plugin: false`。引擎先读取集合 `collection.config.ts`，仅 `plugin === true` 时扫描 `src/<集合>/plugin/vite-plugin-*/index.ts`，沿原普通目录/入口、稳定排序、工厂导入及 Vite 原生返回结构约定。未配置、关闭或缺配置的集合不加载插件；`script` 和技能开关独立。

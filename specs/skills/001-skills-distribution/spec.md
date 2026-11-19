@@ -1,5 +1,27 @@
 # 功能规格：技能内容发布、选择安装、可选隐匿与安装后挂载
 
+## 2026-11-19 后续局部实施：Increment 命令生成
+
+按[本轮明确范围](requirements/raw/2026-11-19-hook-script-generation.md#后续补全-increment-命令生成)，Speckit 子插件同时消费启用技能的 hook 和 command。当前 workflow 三个 hooks 与 Increment 共用单个 `dist/script/speckit-mount.sh`；命令名称来自集合声明，描述来自源技能 frontmatter，命令文件引用目标项目已安装的 `.agents/skills/task-increment/SKILL.md` 并保留字面量 `$ARGUMENTS`。本次只补命令生成及注册，不执行规划业务或接管其他主线插件。
+
+仅命令来源也须生成有效脚本，禁用技能不读元数据；非法命令名称或缺失有效描述在生成时失败。运行时在任何注册前核对被引用的已装技能正文，缺件零注册；原 hook 参数、官方冲突处理、失败码及临时目录清理规则保持。实际工程及真实 CLI 边界见 [T077](implementation/T077.md)，宿主调用源技能、重装迁移、完整分发及其他平台仍独立验收；下方“Increment 待生成”只记录前轮状态。
+
+## 2026-11-19 后续范围调整：移除主线 bug-report
+
+依据[本会话移除请求](requirements/raw/2026-11-19-hook-script-generation.md#后续移除-bug-report)，主线移除 bug-report 技能来源、集合声明及开发挂载选择，workflow 当前保留四项技能、三个 hook 和唯一待生成的 Increment command。此前有关新增 bug-report 指令的要求对主线撤出，旧正文保留历史语境；紧急版独立来源及其既有候选不随本次主线调整改变，不以删除主线源码宣称已卸载其他项目或安装副本。
+
+## 2026-11-19 后续纠正：curl 安装入口路径
+
+按[本会话路径纠正](requirements/raw/2026-11-19-hook-script-generation.md#后续入口路径纠正)，安装入口由 curl 插件原字节交付至 `dist/curl/install.sh`，替代此前 `dist/script/install.sh` 的安排；`hidden-install.sh` 和 `speckit-mount.sh` 继续位于 `dist/script/`。本次只修正入口输出路径，不改变入口正文、辅助脚本及统一包的其他要求；下方旧“全部运行脚本统一 dist/script”的入口部分不再适用，历史构建证据保持当时路径。
+
+## 2026-11-19 局部续接：配置声明驱动 hook 脚本
+
+依据[本会话配置及脚本生成请求](requirements/raw/2026-11-19-hook-script-generation.md)，集合技能项重新承载 `hook` 事件映射和独立 `command` 名称。三个有效 hook 分别为 before_implement、after_tasks、after_converge；bug-report 与 Increment 均有 command 声明。本次明确实施范围仅为 hook 脚本生成，替代下方“首版只生成 Increment”和集合不得声明工具挂载配置的安排，两个命令的脚本生成仍待后续实施。
+
+workflow 子插件根据启用且存在正文的技能配置生成单个 `dist/script/speckit-mount.sh`，显式禁用事件不注册；没有有效 hook 时不交付空脚本。每技能按官方 hooks-only 结构嵌入扩展声明，事件参数和提示词作为数据保留；构建不执行脚本、不写入目标项目。使用者在已初始化的项目根用 Bash 运行脚本时，才创建独占临时扩展目录并调用环境中的 `specify extension add --dev`；成功或失败均清理临时输入，官方失败停止后续项并保留退出码，既有注册的冲突沿官方默认处理。
+
+局部方案及实际证据见 [T077](implementation/T077.md)。这不代表完整 Task、命令入口、重装迁移、实际技能派发、平台矩阵或发布已完成；紧急版和主线其他手写插件保持。
+
 ## 2026-11-18 最新确认：自动加载集合子插件，构建生成挂载脚本
 
 用户要求将 Speckit 脚本生成写成集合子 Vite 插件，在 `packages/skills/build/plugins/` 下新增引擎插件，扫描 src 下集合目录内的子插件并统一返回给 `vite.config.ts`；同时将 `vite-plugin-script` 的现有逻辑移回 `vite-plugin-curl`。对子插件启用方式，用户明确确认：“先不用，只要存在就自动加载吧”。当时随后要求：“修改spec，不要走spec流程，不要走实施流程”。2026-11-18 后续明确新增集合 `plugin` 布尔开关，缺省 `false`，为 `true` 时扫描集合的单数 `plugin/` 目录；此要求替代此前“存在即加载”的选择。

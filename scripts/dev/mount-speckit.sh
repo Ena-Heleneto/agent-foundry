@@ -15,7 +15,7 @@ while [[ $# -gt 0 ]]; do
       printf '%s\n' \
         '用法：bash scripts/dev/mount-speckit.sh [--project <项目目录>] [--cli <specify路径>]' \
         '默认项目为本仓库，使用 PATH 中的 specify；仅支持 Linux x86_64 / Codex 项目级。' \
-        '复制 implementation-preparation、artifact-spec-analysis、artifact-project-description、bug-report。' \
+        '复制 implementation-preparation、artifact-spec-analysis、artifact-project-description。' \
         '随后注册 before_implement、after_tasks、after_converge，最后注册 speckit-modes-increment。' \
         '目标同名技能有差异时停止；已注册扩展由现有注册器核验并交给官方 CLI 刷新。'
       exit 0 ;;
@@ -42,7 +42,7 @@ export FOUNDRY_SPECIFY_VERSION="$cli_version"
 source_root="$repo_root/packages/skills/src/workflow"
 module_root="$repo_root/packages/skills/script"
 skills_root="$project/.agents/skills"
-skills=(implementation-preparation artifact-spec-analysis artifact-project-description bug-report)
+skills=(implementation-preparation artifact-spec-analysis artifact-project-description)
 # 复用注册器的路径检查；source 本文件只加载函数，不执行注册。
 source "$module_root/register-commands/register-commands.sh"
 fr_path "$project/.specify"

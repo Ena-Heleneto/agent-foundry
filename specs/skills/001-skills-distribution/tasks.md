@@ -714,6 +714,10 @@ T076复核现有技能复制；T077只交付原字节入口、有效hidden模板
 
 ### T077
 
+**2026-11-19 后续局部命令生成**：用户明确选择仅补 Speckit 的 Increment。方案和实际结果沿[原 T077](implementation/T077.md)，当前单个 sh 同时交付三个 hooks 和 Increment 命令；主线 bug-report 保持移除，完整依赖及 checkbox 不变。下方“两个 command 待生成”保留前轮范围，不作为当前结果。
+
+**2026-11-19 局部续接**：用户明确要求根据技能 hook 配置生成脚本，本次仅由 workflow 子插件交付自包含 speckit-mount.sh；配置来源、认可范围、做法和实证沿[同一 T077 方案](implementation/T077.md)保存。下方旧 script 插件职责不覆盖 Spec 顶部及当前 curl 回迁事实；完整依赖、整体目标和 checkbox 保持，两个 command 的生成及完整挂载仍待后续。
+
 - [ ] T077 [US7] 交付原字节入口与同版路径派生辅助内容，落点 `packages/skills/build/plugins/vite-plugin-script/index.ts`、同目录`hidden-install.template.ts`、保留的`packages/skills/build/plugins/vite-plugin-curl/install.source.sh`、原curl插件及`packages/skills/vite.config.ts`。
 
 **依赖**：T076、T094、T034。

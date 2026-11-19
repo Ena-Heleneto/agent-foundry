@@ -1,7 +1,8 @@
 import { defineCollectionHandle } from '#utils/define-collection-handle'
 
 /**
- * 声明工作流集合的启用技能和交付选项，并开启集合子插件。
+ * 声明工作流集合的启用技能、逐事件 hook 及 Increment 命令，并开启集合子插件。
+ * 挂载声明供子插件后续生成脚本，不在配置加载时执行注册。
  */
 export default defineCollectionHandle({
   packageName: 'workflow',
@@ -9,10 +10,43 @@ export default defineCollectionHandle({
   plugin: true,
   script: false,
   skill: {
-    'artifact-project-description': { enabled: true },
-    'artifact-spec-analysis': { enabled: true },
-    'bug-report': { enabled: true },
-    'implementation-preparation': { enabled: true },
-    'task-increment': { enabled: true },
+    'artifact-project-description': {
+      enabled: true,
+      hook: {
+        after_converge: {
+          prompt: '当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；输入=FD/spec.md、plan.md、tasks.md、实际验收与交付；目标=FD/descriptions/project-description.md；旧候选=FD/project-description.md；仅真正结案后幂等更新；新路径优先、缺失兼容旧根候选，双路径内容不同报告冲突并停止写入，旧快照保留；调用方提供治理与授权，Markdown 保存后执行 pnpm exec eslint --fix <实际目标> 并读回核对。',
+          optional: false,
+          priority: 20,
+        },
+      },
+    },
+    'artifact-spec-analysis': {
+      enabled: true,
+      hook: {
+        after_tasks: {
+          prompt: '以当前任务生成操作的目标 Spec 为准，完整读取 artifact-spec-analysis 并传入所属 Spec 最新需求及确认、spec、plan、同级 mvu、tasks、必要证据、已有分析索引和目标位置，沿目标项目现行治理及格式要求创建或刷新分析、检查并读回；Increment 规划保存后显式复用同一能力，不注册 after_increment。',
+          enabled: true,
+          optional: false,
+          priority: 20,
+          condition: null,
+        },
+      },
+    },
+    'implementation-preparation': {
+      enabled: true,
+      hook: {
+        before_implement: {
+          prompt: '以用户明确的目标项目和 Spec 为准，完整读取 implementation-preparation skill，依目标项目现行工作流治理核对拟实施的原 Task、相关材料、认可范围、保存结果、必要前置及授权；返回本次实际可继续范围、待讨论或恢复部分，不用一次准备放行其他 Task。',
+          enabled: true,
+          optional: false,
+          priority: 20,
+          condition: null,
+        },
+      },
+    },
+    'task-increment': {
+      enabled: true,
+      command: 'speckit.modes.increment',
+    },
   },
 })

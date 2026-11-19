@@ -1,0 +1,10 @@
+{
+  "observed_unix_ms": 1795056371922,
+  "turn_id": "01a1f1b0-cb68-7bd3-b302-7ccc57aeed3b",
+  "normal_answer_final_ms": 1795056325091,
+  "analysis_final_ms": 1795056337099,
+  "normal_answer_preceded_analysis_finish": true,
+  "main_wait_agent_calls": 0,
+  "summary_file_absent": true,
+  "conclusion_E04_saved": true
+}

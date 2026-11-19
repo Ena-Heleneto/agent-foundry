@@ -1,5 +1,7 @@
 # 任务清单：Implement共同准备与轻量业务规划
 
+> **结案状态：异常终止（2026-11-19）**。依据用户本轮决定，本 Spec 及全部未完成 Task 终止推进。已完成事实、验收证据与历史记录保留；正文中的旧待办、下一步和恢复安排不再作为执行授权。详见[异常终止结案记录](analysis/acceptance/revision-summary.md)。
+
 ## 2026-11-18 当前任务生成：profile 四个独立 Skill
 
 **目标与输入**：沿用本 Spec，消费 [三项真实澄清](spec.md#session-2026-11-18)、[当前 Plan](plan.md#2026-11-18-profile-集合拆分方案)、[研究 R71～R76](research.md#2026-11-18-四个独立-skill-的研究结论)、[资料模型](data-model.md#2026-11-18-四个独立-skill-的资料模型)、[交接契约](contracts/shadow-profile.md)、[TV-14](quickstart.md#tv-14完整对话惰性分析与共同发布)和 [MVU-011](mvu.md#mvu-011)。本轮仅更新任务、闭环职责及分析/图示导航，不实施 Skill、修改集合源码、复制安装或执行真实宿主演练。原分工、暂停和构建暂跳过保持。
@@ -82,13 +84,21 @@
 
 ### T119
 
-- [ ] T119 验证四个独立 Skill 的最小宿主交接候选，来源为 packages/skills/src/profile/{conversation-recording,conversation-summary,conversation-analysis,shadow-profile}/SKILL.md，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/profile-four-skills-host.md
+- [ ] T119 验证四个独立 Skill 的最小宿主交接候选，来源为 packages/skills/src/profile/{conversation-recording,conversation-summary,conversation-analysis,shadow-profile}/SKILL.md，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/profile-four-skills-host.md；**状态：异常终止**（2026-11-19）
 
 **方案准备（2026-11-18）**：[T119 单任务方案](implementation/T119.md)已按当前材料整理，包含最小来源、隔离交接、真实宿主用例和停止条件。用户“继续”承接方案准备；具体方案待真实讨论认可，保存和读回不自动完成本 Task 或授权其他 Task。
 
 **第一步开工（2026-11-18）**：方案保存读回后用户明确“先开始第一步”，据[本次认可](implementation/T119.md#2026-11-18-第一步的实际认可)只执行来源保护、无候选对照及独立落盘候选的隔离验证；后续摘要/分析/画像步骤仍未进入，T119 checkbox 保持未完成。
 
 **第一步实际结果（2026-11-19 整理）**：conversation-recording 最小候选已建立；真实 CLI 的自然入口、启用后普通追问及修复后新显式入口均有全文读取、主 AI 保存读回和原文核对。首轮显式入口误记自动附加 Skill 正文，保留失败并修复来源判断后复验。上一轮 final 补存及末轮缺口可查，独立项目未生成摘要/画像；[实际证据](analysis/acceptance/profile-four-skills-host.md)说明版本与有限范围。仅完成第一步，后续步骤未运行，不勾选本 Task。
+
+**第二步开工（2026-11-19）**：用户在主 AI 说明新增摘要候选及隔离三轮交接验证后回复“开始吧”，认可范围保存并读回于[原方案](implementation/T119.md#2026-11-19-第二步的实际认可)。本次只验证记录与摘要链，不启动分析/画像交接或其他 Task；完成事实沿实际证据追加，checkbox 保持。
+
+**第二步实际结果（2026-11-19）**：新增 conversation-summary 最小来源，并在记录候选中明确启用摘要后的真实子代理交接。仅记录的旧对照暴露主 AI 自写摘要，按失败保留；最终记录来源缺摘要入口时继续保存原文并报告未完成。同一真实 CLI 会话启用一轮及后续三轮均完成主 AI 原文读回、真实摘要子代理加载/亲自保存读回、主 AI 文件核验；11 条原文和 4 个摘要锚点逐条可追溯，上一轮 final 补存及末轮缺口可辨，见[实际证据](analysis/acceptance/profile-four-skills-host.md#2026-11-19-第二步记录与摘要真实交接)。分析/画像及其他 Task 未进入，T119 仍不勾选。
+
+**第三步三源分支（2026-11-19）**：用户承接下一步说明回复“继续”，沿[原方案追加范围](implementation/T119.md#2026-11-19-第三步的实际认可与执行安排)新增最小 conversation-analysis，保护旧画像来源，先以记录/摘要/分析三源验证。真实摘要子代理在读原文后保持等待，独立分析在摘要提交前保存结论；v1 等待分析才回答的缺陷保留，补充条件后重复制，v2 普通答复早于分析完成 12008 毫秒且主 AI 等待调用为 0。明确放行后原摘要执行者保存读回 4 个摘要、覆盖 12 条原文；分析 E01～E04 覆盖 M01～M09，末轮缺口可辨，见[实际证据](analysis/acceptance/profile-four-skills-host.md#2026-11-19-第三步摘要在途时的独立分析)。仅相应分支完成，第四/第五步、四源整体、其他 Task 及 checkbox 保持。
+
+**第四步三源分支（2026-11-19）**：用户承接下一步说明回复“开始把”，沿[原方案认可及安排](implementation/T119.md#2026-11-19-第四步的实际认可与执行安排)，复用未变化的最终三源，在新普通项目用同名空目录阻挡摘要。原摘要子代理真实保存返回 Errno 21，之后自然更正的原文读回、独立分析 E03 保存和正常问答均在障碍移除前发生。仅移除身份及内容相符的本次空目录后，同一摘要执行者补存读回 3 个摘要、覆盖 9 条原文；恢复未新增结论，两份故障证据及 E01～E03 字节保留，见[实际证据](analysis/acceptance/profile-four-skills-host.md#2026-11-19-第四步摘要实际保存失败时的独立分析)。第五步、四源整体及其他 Task 未进入，T119 checkbox 保持未完成。
 
 **依赖与范围**：复用 T113/T114 的适用证据及当前设计；C3 每轮发现/实际派发/正常协作持续和 C4 跨执行者文件交接尚无当前路线的完整通过证据，不满足技术豁免。本 Task 先建立最小候选，验证后保留同一来源供 T115/T120/T121/T116 增量完善。
 
@@ -106,7 +116,7 @@
 
 **当前证据（2026-11-18）**：接收/保存收据及缺口持久化、inspect和来源前缀核验恢复已实现；27项范围及6项探针通过，审查两项漏记路径均修复并复核。完整副本已实际消费；新0.169.1子会话按未知版本拒收，当前0.169.0主会话已启动新版隔离观察。最终副本三轮完整往返、普通final及真实非文本引用待验，详见[验收页](analysis/acceptance/shadow-conversation-memory.md)；本项不勾选，不放行T116。
 
-- [ ] T115 [US14] 在 packages/skills/src/profile/conversation-recording/SKILL.md 完善主 AI 独立原文记录及读回交接；复核 implementation/T115.md 的适用认可，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/shadow-ai-recording-2026-11-18.md
+- [ ] T115 [US14] 在 packages/skills/src/profile/conversation-recording/SKILL.md 完善主 AI 独立原文记录及读回交接；复核 implementation/T115.md 的适用认可，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/shadow-ai-recording-2026-11-18.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T119](#t119) 的独立记录分支通过。T114 只保留原候选事实；本 Task 不等待摘要、分析、画像和集合配置完成。下方既有实施进展仍按单技能发生时范围理解，不能视为拆分后的认可或验收。
 
@@ -118,7 +128,7 @@
 
 ### T120
 
-- [ ] T120 [P] [US14] 在 packages/skills/src/profile/conversation-summary/SKILL.md 实现已读回原文上的独立子代理摘要，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/conversation-summary.md
+- [ ] T120 [P] [US14] 在 packages/skills/src/profile/conversation-summary/SKILL.md 实现已读回原文上的独立子代理摘要，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/conversation-summary.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：T119 摘要派发分支及 T115 的原文/交接结果；可与 T121 并行，来源文件、证据文件及用例资料根各自独立。本 Task 的单写入者验收不依赖 T117；涉及多个写入者争用同一文件的用例不在本 Task 执行，统一由 T117 汇合验证，不反向成为本 Task 的完成条件。
 
@@ -126,7 +136,7 @@
 
 ### T121
 
-- [ ] T121 [P] [US14] 在 packages/skills/src/profile/shadow-profile/SKILL.md 收敛有效结论驱动的独立画像入口维护，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/profile-entry.md
+- [ ] T121 [P] [US14] 在 packages/skills/src/profile/shadow-profile/SKILL.md 收敛有效结论驱动的独立画像入口维护，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/profile-entry.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：T119 结论/画像交接分支和 T115 的可追溯来源；与 T120 分别修改不同来源及证据，可并行。保留旧 T108～T111 事实，不将单技能记录责任继续留在本 Skill。
 
@@ -134,7 +144,7 @@
 
 ### T116
 
-- [ ] T116 [US14] 在 packages/skills/src/profile/conversation-analysis/SKILL.md 实现独立语义分析、有限重试及有效结论向影子画像交接，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/shadow-conversation-memory.md
+- [ ] T116 [US14] 在 packages/skills/src/profile/conversation-analysis/SKILL.md 实现独立语义分析、有限重试及有效结论向影子画像交接，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/shadow-conversation-memory.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T119](#t119) 分析/画像交接分支、[T115](#t115) 和 [T121](#t121)；不依赖 T120 已完成或摘要已保存。消费已定模型/契约及真实已存范围，不再等待已回答的预算/时效政策。
 
@@ -144,7 +154,7 @@
 
 ### T117
 
-- [ ] T117 [US14] 在 packages/skills/src/profile/{conversation-recording,conversation-summary,conversation-analysis,shadow-profile}/SKILL.md 先验证同根条件提交，再完善多会话合并和遗忘拒收，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/shadow-conversation-memory.md
+- [ ] T117 [US14] 在 packages/skills/src/profile/{conversation-recording,conversation-summary,conversation-analysis,shadow-profile}/SKILL.md 先验证同根条件提交，再完善多会话合并和遗忘拒收，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/shadow-conversation-memory.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T115](#t115)、[T120](#t120)、[T121](#t121) 和 [T116](#t116)。C3/C4 共享提交首先证伪，先证明再填充依赖该假设的合并/遗忘逻辑；本机 flock 实验仅复用其文件操作范围。
 
@@ -156,7 +166,7 @@
 
 ### T122
 
-- [ ] T122 [US14] 在 packages/skills/src/profile/collection.config.ts 声明四个启用 Skill 并核对源码交付集合，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/profile-collection.md
+- [ ] T122 [US14] 在 packages/skills/src/profile/collection.config.ts 声明四个启用 Skill 并核对源码交付集合，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/profile-collection.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：T115/T120/T121/T116 四源具备及 T117 的当前提交规则。只改 profile 集合声明，沿现有 defineCollectionHandle 结构保持 mcp: false，四项 enabled: true，目录名与各自 name 一致；不接管主线未完成构建插件、紧急版集合或发布挂载工作。
 
@@ -164,7 +174,7 @@
 
 ### T118
 
-- [ ] T118 [US14] 从 packages/skills/src/profile/{conversation-recording,conversation-summary,conversation-analysis,shadow-profile}/ 四份最终来源精确复制并真实复验，使用 scripts/dev/actions/link-skills/link-skills.sh，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/shadow-conversation-memory.md
+- [ ] T118 [US14] 从 packages/skills/src/profile/{conversation-recording,conversation-summary,conversation-analysis,shadow-profile}/ 四份最终来源精确复制并真实复验，使用 scripts/dev/actions/link-skills/link-skills.sh，证据保存于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/shadow-conversation-memory.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T117](#t117)、[T120](#t120) 和 [T122](#t122)。先在自有隔离项目复验，真实目标项目复制/配置修改须在当时明确授权范围内。
 
@@ -327,7 +337,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T112
 
-- [ ] T112 [US14] 核查真实协作的本人画像应用与复制交付边界于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/shadow-profile.md
+- [ ] T112 [US14] 核查真实协作的本人画像应用与复制交付边界于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/shadow-profile.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T111](#t111)。独立于旧 E1/T075、旧画像 T060/T061 和未来正式安装，不增加这些无关前置。
 
@@ -357,7 +367,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T104
 
-- [ ] T104 [US12] 沿TV-10通过骨架交付共同准备于 packages/skills/src/workflow/implementation-preparation/SKILL.md 及 packages/skills/src/workflow/collection.config.json
+- [ ] T104 [US12] 沿TV-10通过骨架交付共同准备于 packages/skills/src/workflow/implementation-preparation/SKILL.md 及 packages/skills/src/workflow/collection.config.json；**状态：异常终止**（2026-11-19）
 
 **2026-11-14 当前执行定位修正**：before_implement 的唯一维护声明为集合配置的 `skill.implementation-preparation.hook.before_implement`；正文、集合声明和实际必要附件分别核对完整集合/摘要，不再要求当前来源含逐技能 speckit-hooks.json。旧方案及 2026-11-11～12 验收中的原路径、“两文件”及临时配置保留历史事实，不回写其证据，也不重建旧文件。本次仅修正文档，原身份、checkbox、范围和完整验收保持；实际安装/注册及构建仍按原未验条件处理。
 
@@ -381,7 +391,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T105
 
-- [ ] T105 [US1] 核验轻量清单与单Task方案的原生消费于 .specify/templates/overrides/tasks-template.md 和 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/task-inline.md
+- [ ] T105 [US1] 核验轻量清单与单Task方案的原生消费于 .specify/templates/overrides/tasks-template.md 和 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/task-inline.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T104](#t104)的正式维护源、隔离官方安装/登记及完整读取职责，已有局部证据；其构建产物相关职责按本轮指令暂跳过，不要求整项勾选才开始本Task。仍须讨论本Task方案，不以该调整自动记T105通过或已开工。
 
@@ -397,7 +407,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T096
 
-- [ ] T096 [US8] 收敛Increment无Task参数、轻量清单与画像消费于 packages/skills/src/workflow/task-increment/SKILL.md
+- [ ] T096 [US8] 收敛Increment无Task参数、轻量清单与画像消费于 packages/skills/src/workflow/task-increment/SKILL.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T105](#t105)、[T085](#t085)、[T088](#t088)。当前消费T105已有[实际证据](analysis/acceptance/task-inline.md#t105-正式来源的轻量任务与方案消费)的非构建职责，按暂跳过安排不等待其构建来源复验或整体checkbox；本Task自身方案、授权及必要行为验证不豁免。
 
@@ -555,7 +565,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T070
 
-- [ ] T070 [US2] 同步当前选择映射与唯一入口编排于 packages/skills/script/mount-entry/、packages/skills/script/index.mjs 及对应测试/README.md
+- [ ] T070 [US2] 同步当前选择映射与唯一入口编排于 packages/skills/script/mount-entry/、packages/skills/script/index.mjs 及对应测试/README.md；**状态：异常终止**（2026-11-19）
 
 **本会话状态：跳过，由其他会话处理**。依据[用户指令](requirements/raw/2026-11-12-publishing-mounting-other-session.md)，安装入口与挂载编排不在本会话重复实施；保留未完成checkbox和原验收，收到实际交付证据后再核对依赖。
 
@@ -565,7 +575,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T097
 
-- [ ] T097 [US2] 完成Bash安装来源及工作区刷新当前接入于 packages/skills/script/install-skills/install-skills.sh 和 scripts/dev/actions/link-skills/link-skills.sh
+- [ ] T097 [US2] 完成Bash安装来源及工作区刷新当前接入于 packages/skills/script/install-skills/install-skills.sh 和 scripts/dev/actions/link-skills/link-skills.sh；**状态：异常终止**（2026-11-19）
 
 **本会话状态：跳过，由其他会话处理**。依据[用户指令](requirements/raw/2026-11-12-publishing-mounting-other-session.md)，技能安装来源与工作区刷新不在本会话重复实施；保留未完成checkbox和原验收，收到实际交付证据后再核对依赖。
 
@@ -575,7 +585,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T071
 
-- [ ] T071 [US2] 验证当前完整刷新、构建与消费检查于 packages/skills/tests/、scripts/dev/nuxt-prepare/ 和 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/four-modes-engineering.md
+- [ ] T071 [US2] 验证当前完整刷新、构建与消费检查于 packages/skills/tests/、scripts/dev/nuxt-prepare/ 和 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/four-modes-engineering.md；**状态：异常终止**（2026-11-19）
 
 **本会话边界**：发布/安装/挂载相关实现与同类工程检查由其他会话处理并提供证据，本会话只保留工作流逻辑与必要消费核验；构建继续按原指令暂跳过，不将未执行项计通过。
 
@@ -591,7 +601,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T099
 
-- [ ] T099 [US11] 验证TV-09自然语言及显式入口实际消费于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/entry-discovery-behavior.md
+- [ ] T099 [US11] 验证TV-09自然语言及显式入口实际消费于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/entry-discovery-behavior.md；**状态：异常终止**（2026-11-19）
 
 **当前会话已暂停（2026-11-12）**：用户在“开始吧”后明确“那我们就先暂停吧”。仅完成只读环境预检，当前已知安装仍旧或缺项，用户确认另一会话尚未交付可用新环境；真实使用验证未执行。暂停及原认可/恢复依据见[本Task续接记录](implementation/T099.md#2026-11-12-开始认可预检与暂停)。只在用户明确继续后按实际可用环境与原前置恢复，不自动安装/挂载或重跑已完成工作，checkbox保持未完成。
 
@@ -613,7 +623,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T093
 
-- [ ] T093 [US8] 验证独立coding自然发现与当前加载后职责于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/trigger-discovery.md
+- [ ] T093 [US8] 验证独立coding自然发现与当前加载后职责于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/trigger-discovery.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T099](#t099)、[T096](#t096)、[T104](#t104)、[T092](#t092)
 
@@ -627,7 +637,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T094
 
-- [ ] T094 [US2] 核验独立coding同版交付及消费于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/business-delivery-engineering.md
+- [ ] T094 [US2] 核验独立coding同版交付及消费于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/business-delivery-engineering.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T093](#t093)、[T071](#t071)
 
@@ -635,7 +645,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T100
 
-- [ ] T100 [US2] 核验当前入口同版交付说明于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/entry-discovery-delivery.md
+- [ ] T100 [US2] 核验当前入口同版交付说明于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/entry-discovery-delivery.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T099](#t099)、[T094](#t094)
 
@@ -643,7 +653,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T072
 
-- [ ] T072 [US2] 续做一次性真实受管迁移于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/managed-migration.md
+- [ ] T072 [US2] 续做一次性真实受管迁移于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/managed-migration.md；**状态：异常终止**（2026-11-19）
 
 **本会话状态：跳过，由其他会话处理**。依据[用户指令](requirements/raw/2026-11-12-publishing-mounting-other-session.md)，实际挂载迁移不在本会话重复实施；保留未完成checkbox和原验收，收到实际交付证据后再核对依赖。
 
@@ -653,7 +663,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T073
 
-- [ ] T073 [US2] 核验完整迁移后的独立同版消费于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/independent-consumption.md
+- [ ] T073 [US2] 核验完整迁移后的独立同版消费于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/independent-consumption.md；**状态：异常终止**（2026-11-19）
 
 **本会话边界**：本会话消费其他会话已交付的真实安装/挂载结果，不重复实施发布、安装或迁移；交付与必要前置缺失时仅保持相关消费步骤待核，不改原验收。
 
@@ -669,7 +679,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T086
 
-- [ ] T086 核验原生及同一分析完整MVU消费于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/mvu-document.md
+- [ ] T086 核验原生及同一分析完整MVU消费于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/mvu-document.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T073](#t073)、[T064](#t064)、[T094](#t094)、[T105](#t105)
 
@@ -677,7 +687,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T074
 
-- [ ] T074 同步分发消费规划与契约于 specs/skills/001-skills-distribution/plan.md、tasks.md 和 contracts/mount.md
+- [ ] T074 同步分发消费规划与契约于 specs/skills/001-skills-distribution/plan.md、tasks.md 和 contracts/mount.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T086](#t086)、[T100](#t100)
 
@@ -685,7 +695,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T075
 
-- [ ] T075 完成E1当前工程移交审阅于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/engineering-handoff.md
+- [ ] T075 完成E1当前工程移交审阅于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/engineering-handoff.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T074](#t074)、[T071](#t071)、[T099](#t099)、[T105](#t105)、[T106](#t106)、[T061](#t061)、[T064](#t064)、[T094](#t094)
 
@@ -699,7 +709,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T076
 
-- [ ] T076 [US8] 在真实分发上下文验收Increment并回链 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/increment-behavior.md
+- [ ] T076 [US8] 在真实分发上下文验收Increment并回链 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/increment-behavior.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T075](#t075)
 
@@ -713,7 +723,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T107
 
-- [ ] T107 [US12] 在真实原Task验收讨论后实施并保存 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/implement-behavior.md
+- [ ] T107 [US12] 在真实原Task验收讨论后实施并保存 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/implement-behavior.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T075](#t075)
 
@@ -727,7 +737,7 @@ T071等混合Task仅跳过重复的发布/安装/挂载实现与同类检查，�
 
 ### T080
 
-- [ ] T080 在有效序列末尾核对清理及总体结案于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/revision-summary.md
+- [ ] T080 在有效序列末尾核对清理及总体结案于 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/revision-summary.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：[T075](#t075)、[T076](#t076)、[T107](#t107)、[T112](#t112)、[T118](#t118)
 
@@ -1329,7 +1339,7 @@ TV-04 继续使用 T082 原 new/reuse/mixed/none 现场，先完整保存本轮�
 
 **当前安排（2026-11-08）**：用户要求跳过本次使用验收，保留原验收定义与未完成状态；不阻止 T057～T059 及调度中心独立推进，未来有实际使用证据时再据实回填。
 
-- [ ] T079 [US6] 在调度中心 Spec 同步验收 Direct 并回链 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/direct-behavior.md
+- [ ] T079 [US6] 在调度中心 Spec 同步验收 Direct 并回链 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/direct-behavior.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：T056、T072 提前入口步骤的真实通过证据，以及所选调度中心 Task 的必要技术前置。
 
@@ -1403,7 +1413,7 @@ TV-04 继续使用 T082 原 new/reuse/mixed/none 现场，先完整保存本轮�
 
 **研发安排：暂停；本项三模式验收已移出当前 Spec 范围，不作为本期补测或结案前置。**
 
-- [ ] T077 [US3] 在真实分发 Task 验收 Tutor 并回链 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/tutor-behavior.md
+- [ ] T077 [US3] 在真实分发 Task 验收 Tutor 并回链 specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/tutor-behavior.md；**状态：异常终止**（2026-11-19）
 
 **依赖**：T075。
 
@@ -1420,7 +1430,7 @@ TV-04 继续使用 T082 原 new/reuse/mixed/none 现场，先完整保存本轮�
 
 **研发安排：暂停；本项三模式验收已移出当前 Spec 范围，不作为本期补测或结案前置。**
 
-- [ ] T078 [US3] 共同整理学习报告并保存 personal-hub 既有草稿于 apps/personal-hub/content/blog/
+- [ ] T078 [US3] 共同整理学习报告并保存 personal-hub 既有草稿于 apps/personal-hub/content/blog/；**状态：异常终止**（2026-11-19）
 
 **依赖**：T077。
 

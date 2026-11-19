@@ -4,17 +4,20 @@ import { createHiddenInstallScript } from '#build/plugins/vite-plugin-curl/hidde
 import { scanSkills } from '#utils/scan-skills'
 
 /**
- * 原字节交付 curl 安装入口，并由启用技能派生隐匿脚本。
+ * 向 curl 目录原字节交付安装入口，并向 script 目录交付派生的隐匿脚本。
  *
- * @returns 向统一脚本目录写出两个安装脚本的构建插件。
+ * @returns 分别交付 curl 入口和隐匿脚本的构建插件。
  */
 export default function vitePluginCurl(): Plugin {
   return {
     name: 'vite-plugin-curl',
     apply: 'build',
     async generateBundle() {
+      /**
+       * 安装入口保持源文件字节，使用独立 curl 路径供首次获取。
+       */
       const source = await readFile(new URL(import.meta.resolve('#install.source.sh')))
-      this.emitFile({ type: 'asset', fileName: 'script/install.sh', source })
+      this.emitFile({ type: 'asset', fileName: 'curl/install.sh', source })
 
       /**
        * 启用技能只用于派生隐匿候选路径。

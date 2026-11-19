@@ -1,0 +1,23 @@
+{
+  "target": "docs/user-shadow/conversations/2026-11-19.md",
+  "actual_save_call": "target.write_text(summary_text, encoding='utf-8')",
+  "save_api": "pathlib.Path.write_text",
+  "actual_save_attempt_count": 1,
+  "save_result": {
+    "success": false,
+    "exception_type": "IsADirectoryError",
+    "exception": "[Errno 21] Is a directory: '/tmp/foundry-t119-step4-6yig4ais/failure/docs/user-shadow/conversations/2026-11-19.md'",
+    "repr": "IsADirectoryError(21, 'Is a directory')",
+    "errno": 21,
+    "filename": "/tmp/foundry-t119-step4-6yig4ais/failure/docs/user-shadow/conversations/2026-11-19.md"
+  },
+  "post_target_type": "directory",
+  "post_directory_snapshot": [],
+  "original_target_type_preserved": true,
+  "original_directory_contents_preserved": true,
+  "summary_saved": false,
+  "summary_read_back": false,
+  "retry_attempted": false,
+  "alternate_summary_path_used": false,
+  "recovery": "本次不得修复、重试或转存；恢复需用户另行处理既有目标路径后再明确恢复。"
+}

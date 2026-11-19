@@ -1,0 +1,7 @@
+{
+  "stdout": "copy: conversation-recording\ncopy: conversation-summary\n完成: 新建 2，更新 0，跳过 0，冲突 0\n",
+  "skills": [
+    "conversation-recording",
+    "conversation-summary"
+  ]
+}

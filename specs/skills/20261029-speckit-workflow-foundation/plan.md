@@ -1,5 +1,7 @@
 # 实施计划：Implement 实施准备与轻量业务规划
 
+> **结案状态：异常终止（2026-11-19）**。依据用户本轮决定，本 Spec 及全部未完成 Task 终止推进。已完成事实、验收证据与历史记录保留；正文中的旧待办、下一步和恢复安排不再作为执行授权。详见[异常终止结案记录](analysis/acceptance/revision-summary.md)。
+
 <a id="2026-11-18-当前方案主-ai-记录后再分析"></a>
 
 ## 2026-11-18 profile 集合拆分方案
@@ -32,7 +34,7 @@ packages/skills/src/profile/
 └── shadow-profile/SKILL.md
 ```
 
-这是拟交付结构。旧 `shadow-profile/SKILL.md` 及其集合声明仍保留，T119 第一步已新增 `conversation-recording/SKILL.md` 最小候选并完成限定独立验证，见[实际证据](analysis/acceptance/profile-four-skills-host.md)。摘要和分析的另外两份来源尚未建立，集合未增加候选；不将第一步当作四入口交付。四个入口的行为、成功与故障边界见[专项契约](contracts/shadow-profile.md)，资料与恢复见[数据模型](data-model.md)，调用和提交关系见[技术图](diagrams.md)。
+这是拟交付结构。T119 已有 `conversation-recording`、`conversation-summary` 和 `conversation-analysis` 三个最小来源：独立记录、连续三轮摘要、摘要在途及[摘要真实保存失败时的独立分析与恢复](analysis/acceptance/profile-four-skills-host.md#2026-11-19-第四步摘要实际保存失败时的独立分析)已有本机限定证据。第三/四步以三源证伪原文到结论交接，第四步未再修改来源。旧 `shadow-profile/SKILL.md` 的混合职责及其集合声明保持，未以旧来源冒认拆分后的画像入口；四源整体消费与画像自动交接仍待后续。集合未增加候选，T119 整体及四入口交付仍未完成。四个入口的行为、成功与故障边界见[专项契约](contracts/shadow-profile.md)，资料与恢复见[数据模型](data-model.md)，调用和提交关系见[技术图](diagrams.md)。
 
 ### 宪章核对
 
