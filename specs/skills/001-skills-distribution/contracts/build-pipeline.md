@@ -1,5 +1,17 @@
 # 构建、流水线与技能发布的节点契约
 
+## 2026-11-20 容器构建输入与导出
+
+`packages/skills/deploy/Dockerfile` 按用户[构建用途确认](../requirements/raw/2026-11-20-dockerfile.md#用户明确镜像用途)，从仓库根上下文读取必要根清单及 preset-config/skills 两包源码，按锁文件安装依赖并依次构建。默认 Node 26.8.1、pnpm 12.8.1；依赖安装跳过根文档站准备，所需共享预设显式生成。Dockerfile 专属忽略文件排除主机依赖、旧输出及非构建资料，artifacts 阶段只导出 skills/dist 内容，不附带 dist 外层或构建工具。容器产物和同源本地产物的文件全集及字节须一致；当前开发输出仍不等于正式发布白名单，归档/上传沿后续任务。命令及实证见[容器构建验收](../analysis/acceptance/docker-build.md)。
+
+## 2026-11-20 缺安装源文件的失败边界
+
+用户确认缺安装入口源文件时直接报错即可：实际构建须明确指出缺失源并非零退出，该场景不要求保留旧 dist 或恢复旧输出。已有 ENOENT/退出 1 实证满足此项，不再安排提前读取或输出回滚作为修复前置；其他危险技能输入的原校验保持。[确认原文](../requirements/raw/2026-11-19-engine-output-directory.md#2026-11-20-缺安装源文件的失败要求)
+
+## 2026-11-19 引擎统一入口
+
+引擎在子插件生成完成后的后置钩子，从本次 bundle 的 `engine/` Shell 资产生成 `engine/install.sh`。按相对路径稳定排序，仅调用 `.sh`，不执行 JS 或数据文件；入口路径由引擎独占，子插件占用该名则构建失败。空集合也交付可成功退出的入口，write=false 只在内存生成。运行时相对入口自身定位脚本，预检查全部目标文件及父路径，缺件或软链接报错后零调用；通过后逐项 Bash 执行并透传参数、保留调用方工作目录，首次失败停止并保留退出码。[原话及方案](../implementation/T077.md#2026-11-19-局部续接引擎生成统一调用入口)
+
 ## 2026-11-19 引擎子插件输出
 
 引擎为子插件通过 `emitFile` 发出的文件添加 `engine/` 前缀，保留显式声明的相对路径。Vite 使用最终路径分配文件引用并按本次构建配置写出。包内默认构建根为 `dist/`，当前 workflow 挂载脚本位于 `dist/engine/script/speckit-mount.sh`。安装入口兼容旧包内的 `script/speckit-mount.sh`。[用户原话](../requirements/raw/2026-11-19-engine-output-directory.md)

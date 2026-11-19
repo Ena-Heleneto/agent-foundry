@@ -4,6 +4,36 @@ import { lstatSync, readdirSync } from 'node:fs'
 import { join, posix } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { scanCollections } from '#utils/scan-skills'
+import { createEngineInstallScript } from './install-script.ts'
+
+/**
+ * 在子插件输出完成后生成统一入口，空脚本集合也交付有效入口。
+ *
+ * @returns 最后收集 engine 内 Shell 资产的构建插件。
+ */
+function engineInstallPlugin(): Plugin {
+  return {
+    name: 'vite-plugin-engine-install',
+    apply: 'build',
+    enforce: 'post',
+    generateBundle: {
+      order: 'post',
+      handler(_options, bundle) {
+        if (bundle['engine/install.sh'])
+          this.error('引擎统一入口路径已被占用：engine/install.sh')
+
+        /**
+         * 只消费本次实际生成的脚本资产，保留相对 engine 的稳定调用顺序。
+         */
+        const scripts = Object.values(bundle)
+          .filter(output => output.type === 'asset' && output.fileName.startsWith('engine/') && output.fileName.endsWith('.sh'))
+          .map(output => output.fileName.slice('engine/'.length))
+          .sort()
+        this.emitFile({ type: 'asset', fileName: 'engine/install.sh', source: createEngineInstallScript(scripts) })
+      },
+    },
+  }
+}
 
 /**
  * 保留不同 Vite 钩子的参数、返回值和执行上下文。
@@ -115,10 +145,10 @@ function scopePluginOutput(option: PluginOption): PluginOption {
 }
 
 /**
- * 按稳定顺序加载已启用的集合插件，并将它们发出的文件归入 engine 目录。
+ * 加载已启用的集合插件，将产物归入 engine 并生成统一调用入口。
  *
  * @param sourceDir 集合来源目录，缺省通过 #src 定位当前包的 src。
- * @returns 保留嵌套结构与产物前缀的子插件配置，由 Vite 执行。
+ * @returns 子插件及后置入口生成插件，由 Vite 执行各自构建钩子。
  * @throws 子插件导入或工厂调用失败时，附带实际入口路径。
  */
 export default async function vitePluginEngine(
@@ -156,5 +186,5 @@ export default async function vitePluginEngine(
       }
     }
   }
-  return plugins
+  return [...plugins, engineInstallPlugin()]
 }

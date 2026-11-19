@@ -1,5 +1,13 @@
 # 验证指南：统一发布包、安装与可选隐匿
 
+## 2026-11-20 容器构建验证
+
+从仓库根按[容器构建说明](../../../packages/skills/deploy/README.md)使用 `packages/skills/deploy/Dockerfile`，以新的空目录接收本地导出，核对根 VERSION、skill 正文附件和四份 Shell。与同源本地 dist 比较路径全集及字节，逐项执行 Bash 语法检查，确认无构建工具或旧输出混入。实际容器构建及 21 文件对照结果见[验收记录](analysis/acceptance/docker-build.md)，不能据此视为正式范围过滤或发布通过。
+
+## 2026-11-19 引擎统一入口验证
+
+构建后核对 `dist/engine/install.sh` 与同版子插件脚本，执行 Bash 语法检查。在独占项目从包外目录运行该入口，验证子脚本按路径顺序执行、参数原值和当前项目目录保留；缺后续脚本或父目录为链接时任何子脚本均未运行，首项失败后不运行后续项并保留退出码。空子脚本集合正常退出，普通资产不执行，write=false 不落盘；子插件增删后重新生成名单。真实安装源应调用统一入口，`--no-mount` 不调用，缺入口或子脚本失败保留已安装技能。下方原安装器直调 Speckit 的测试说明保留历史范围，当前实际结果沿 [T077](implementation/T077.md)。
+
 ## 2026-11-19 引擎产物路径验证
 
 运行 `pnpm --filter @foundry/skills run build`，读取 `packages/skills/dist/engine/script/speckit-mount.sh` 并执行 `bash -n`。引擎测试验证显式相对路径、自动命名的资产及入口块都归在 `engine/`。安装测试验证新旧两种包内挂载路径。[实际验证](implementation/T077.md#2026-11-19-引擎子插件产物归档目录)

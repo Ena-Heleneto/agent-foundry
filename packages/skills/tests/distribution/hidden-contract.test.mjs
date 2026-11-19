@@ -7,6 +7,7 @@ import process from 'node:process'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 import { createHiddenInstallScript } from '../../build/plugins/vite-plugin-curl/hidden-install.template.ts'
+import { createEngineInstallScript } from '../../build/plugins/vite-plugin-engine/install-script.ts'
 import { createSandbox } from './sandbox.mjs'
 
 /**
@@ -260,9 +261,9 @@ test('项目反向规则使隐匿失效时返回失败并保留实际技能', (t
 })
 
 /**
- * 打包真实模板和普通技能，替换远端下载及 npm 下载 jq 的外部步骤。
+ * 打包真实隐匿及引擎模板和普通技能，替换远端下载及 npm 下载 jq 的外部步骤。
  */
-function installerFixture(t, names, hiddenScript, mountPath = 'engine/script/speckit-mount.sh') {
+function installerFixture(t, names, hiddenScript, mountPath = 'engine/script/speckit-mount.sh', mountSource = 'printf "mounted\\n" > mount-result\n') {
   /**
    * 离线测试用系统 jq 提供与 node-jq 相同的 CLI，uv 仅供入口前置探测。
    */
@@ -286,7 +287,9 @@ function installerFixture(t, names, hiddenScript, mountPath = 'engine/script/spe
   for (const name of names)
     write(source, `skill/coding/${name}/SKILL.md`, name)
   write(source, 'script/hidden-install.sh', hiddenScript ?? createHiddenInstallScript([...names, 'historical'].map(name => ({ name }))))
-  write(source, mountPath, 'printf "mounted\\n" > mount-result\n')
+  write(source, mountPath, mountSource)
+  if (mountPath.startsWith('engine/'))
+    write(source, 'engine/install.sh', createEngineInstallScript([mountPath.slice('engine/'.length)]))
   assert.equal(run(sandbox, 'tar', ['-czf', archive, '-C', source, '.']).status, 0)
   write(sandbox.root, 'release.json', JSON.stringify([
     { version: '0.1.0', url: 'https://fixture.invalid/content.tar.gz', md5: createHash('md5').update(readFileSync(archive)).digest('hex') },
@@ -338,6 +341,7 @@ test('安装入口仅在 --hidden 时隐匿本次复制的技能', (t) => {
     assert.equal(readFileSync(join(sandbox.project, '.agents/skills/current/SKILL.md'), 'utf8'), 'current')
     assert.equal(ignored(sandbox, 'current'), options.length > 0)
     assert.equal(ignored(sandbox, 'historical'), false)
+    assert.equal(existsSync(join(sandbox.project, 'mount-result')), false)
   }
 })
 
@@ -390,19 +394,52 @@ test('同包隐匿协议未知时保留安装并继续默认挂载', (t) => {
   assert.equal(ignored(sandbox, 'current'), false)
 })
 
-test('默认挂载兼容包内原脚本路径', (t) => {
+test('缺引擎入口时保留技能并报错，不直接调用旧业务脚本', (t) => {
   /**
-   * 此包只包含迁移前的挂载路径。
+   * 此包只有旧业务脚本，没有本次约定的统一入口。
    */
   const sandbox = installerFixture(t, ['current'], undefined, 'script/speckit-mount.sh')
   if (!sandbox)
     return
   /**
-   * 直接验证挂载脚本实际执行。
+   * 缺入口不能被业务脚本的存在掩盖。
+   */
+  const result = install(sandbox)
+  assert.equal(result.status, 2, result.stderr)
+  assert.match(result.stderr, /engine\/install\.sh/u)
+  assert.equal(existsSync(join(sandbox.project, 'mount-result')), false)
+  assert.equal(readFileSync(join(sandbox.project, '.agents/skills/current/SKILL.md'), 'utf8'), 'current')
+})
+
+test('安装器经真实引擎入口执行其他子插件脚本', (t) => {
+  /**
+   * 安装器无需知道该子插件的业务名称或目录。
+   */
+  const sandbox = installerFixture(t, ['current'], undefined, 'engine/custom/other-plugin.sh')
+  if (!sandbox)
+    return
+  /**
+   * 通过真实归档、解包、复制及生成入口观察最终业务效果。
    */
   const result = install(sandbox)
   assert.equal(result.status, 0, result.stderr)
   assert.equal(readFileSync(join(sandbox.project, 'mount-result'), 'utf8'), 'mounted\n')
+  assert.equal(readFileSync(join(sandbox.project, '.agents/skills/current/SKILL.md'), 'utf8'), 'current')
+})
+
+test('安装器保留经引擎执行的子脚本失败码及已安装技能', (t) => {
+  /**
+   * 子脚本使用独立退出码证明安装器没有误报成功或改写错误。
+   */
+  const sandbox = installerFixture(t, ['current'], undefined, 'engine/custom/failure.sh', 'exit 31\n')
+  if (!sandbox)
+    return
+  /**
+   * 安装成功和后置业务失败分别通过文件及退出码观察。
+   */
+  const result = install(sandbox)
+  assert.equal(result.status, 31, result.stderr)
+  assert.equal(readFileSync(join(sandbox.project, '.agents/skills/current/SKILL.md'), 'utf8'), 'current')
 })
 
 test('隐匿脚本退出 0 且缺少核验明细时保留安装并报告隐匿失败', (t) => {

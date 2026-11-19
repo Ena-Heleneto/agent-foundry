@@ -1,5 +1,9 @@
 # 当前主线 curl 交付契约
 
+## 2026-11-19 安装后调用引擎入口
+
+安装源在技能复制成功后调用同包 `engine/install.sh`，由该入口执行本次子插件 Shell 资产。`--no-mount` 继续跳过整个调用阶段，隐匿的可选性和独立结果保持；缺统一入口、入口或其父路径为软链接时报告安装后步骤失败，保留已经安装的技能。子脚本的运行顺序、预检查与失败传播见[引擎入口契约](build-pipeline.md#2026-11-19-引擎统一入口)。本节替代下方安装源直接查找 Speckit 新旧路径的历史约定；本地产物新增 `dist/engine/install.sh`。[用户原话](../requirements/raw/2026-11-19-engine-output-directory.md#后续统一调用入口)
+
 ## 2026-11-19 本地构建与 R2 下载表
 
 当前本地产物为 `dist/VERSION`、`dist/skill/`、`dist/curl/install.sh`、`dist/script/hidden-install.sh` 和 `dist/engine/script/speckit-mount.sh`。安装时优先读取包内 `engine/script/speckit-mount.sh`，也支持原包内的 `script/speckit-mount.sh`。[引擎产物目录](build-pipeline.md#2026-11-19-引擎子插件输出)

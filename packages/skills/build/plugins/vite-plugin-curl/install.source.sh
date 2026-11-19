@@ -172,18 +172,12 @@ fi
 printf '请求版本：%s\n下载地址：%s\n下载文件：%s\nMD5 校验：通过\n解压目录：%s\n安装目录：%s\n' "$version" "$download_url" "$downloaded_content" "$extract_dir" "$skills_root"
 
 if [[ "$auto_mount" == true ]]; then
-  mount_path='engine/script/speckit-mount.sh'
-  if [[ ! -L "$extract_dir/engine" && ! -L "$extract_dir/engine/script" &&
-    ! -e "$extract_dir/$mount_path" && ! -L "$extract_dir/$mount_path" ]]; then
-    mount_path='script/speckit-mount.sh'
-  fi
-  mount_script="$extract_dir/$mount_path"
-  if [[ ! -f "$mount_script" || -L "$mount_script" || -L "${mount_script%/*}" ||
-    ( "$mount_path" == engine/* && -L "$extract_dir/engine" ) ]]; then
-    printf '技能已安装，技能包缺少可用的挂载脚本：%s\n' "$mount_path" >&2
+  engine_script="$extract_dir/engine/install.sh"
+  if [[ ! -f "$engine_script" || -L "$engine_script" || -L "$extract_dir/engine" ]]; then
+    printf '技能已安装，技能包缺少可用的引擎入口：engine/install.sh\n' >&2
     exit 2
   fi
-  bash -- "$mount_script"
+  bash -- "$engine_script"
 fi
 
 exit "$hidden_status"

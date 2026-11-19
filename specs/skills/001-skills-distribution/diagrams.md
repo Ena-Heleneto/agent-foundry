@@ -1,5 +1,19 @@
 # 技术流程图：统一包核验与独立结果
 
+## 2026-11-19 安装后经引擎调用子脚本
+
+```mermaid
+flowchart LR
+  A[安装源复制技能成功] --> B{是否跳过挂载}
+  B -->|否| C[engine/install.sh]
+  C --> D[预检查本次子脚本]
+  D --> E[按路径顺序 Bash 调用]
+  E --> F[首次失败停止并返回原码]
+  B -->|是| G[保留纯安装结果]
+```
+
+代码位置：`build/plugins/vite-plugin-curl/install.source.sh` 调用入口，引擎 `build/plugins/vite-plugin-engine/index.ts` 收集本次输出，`install-script.ts` 生成入口正文。全部位置以 `packages/skills/` 为根；路径解析以同包入口位置为准，业务脚本仍在目标项目目录运行。实际证据见 [T077](implementation/T077.md)。
+
 ## 2026-11-18 配置加载时发现集合子插件
 
 ```mermaid

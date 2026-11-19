@@ -1,5 +1,19 @@
 # 功能规格：技能内容发布、选择安装、可选隐匿与安装后挂载
 
+## 2026-11-20 当前续接：本地链路实证保存，转向 Dockerfile
+
+按[本轮请求](requirements/raw/2026-11-20-dockerfile.md)，同步当前交付事实：本地构建输出 11 项技能、正文及附件共 16 文件，加根 VERSION 与四份 Shell 共 21 文件。安装源原字节交付至 `dist/curl/install.sh`，经 `dist/engine/install.sh` 调度子插件脚本；实际本地测试归档消费、隐匿及真实 CLI 注册已验证，相关 53 项回归通过，证据及独立未验边界见[本地闭环记录](analysis/acceptance/local-build-loop.md)。缺安装源文件明确报错即可，按下节确认不追加旧输出恢复。以上事实不自动完成原 T076/T077、三项既有旧测试失败、正式归档或公开发布验收。
+
+用户随后明确镜像用途为[构建](requirements/raw/2026-11-20-dockerfile.md#用户明确镜像用途)。`packages/skills/deploy/Dockerfile` 以仓库根目录为上下文，提供 Node 26.8.1 与 pnpm 12 的技能构建环境，复用当前 workspace 依赖、锁文件和 Vite 命令生成 dist。构建需要的共享 preset-config 先按其自身命令生成，不复制主机 node_modules 或旧 dist 代替容器内构建。最终导出阶段只交付 skills 的构建内容，源码输入限制在必要根清单和两个包的构建来源；不加入 MCP 服务、上传 R2 或其他部署行为。镜像内实际构建、导出全集及字节须验证后留证，镜像存在或 Dockerfile 保存不算通过。
+
+## 2026-11-20 缺安装入口源文件的确认
+
+按[本轮确认](requirements/raw/2026-11-19-engine-output-directory.md#2026-11-20-缺安装源文件的失败要求)，缺少 `install.source.sh` 时构建明确报错并非零退出即可，不要求该场景保留旧 dist，也不新增回滚或恢复步骤。已有测试已观察到实际 ENOENT 及退出 1；上轮将旧 dist 清空列为未闭环属于额外要求，撤回该待修复判断。此确认仅针对缺安装入口源文件，不撤回技能路径、软链接及同名冲突的既有校验。
+
+## 2026-11-19 局部续接：引擎统一脚本入口
+
+依据[用户后续请求](requirements/raw/2026-11-19-engine-output-directory.md#后续统一调用入口)，引擎生成 `dist/engine/install.sh`，调用本次集合子插件生成到 `engine/` 的 Shell 脚本。安装入口在技能复制成功后调用该统一入口，`--no-mount` 继续跳过这一步。子插件脚本按包内相对路径稳定排序，运行定位以引擎脚本自身目录为准，保留目标项目工作目录和传入参数；任一子脚本失败即停止并保留退出码。没有子脚本时生成可成功退出的空入口，非 Shell 资产不调用；脚本缺失或链接在执行前报错。下方安装器直接选择 Speckit 新旧路径的做法保留历史语境，当前调用链以本节为准；本次不扩展正式包、发布或完整挂载验收。
+
 ## 2026-11-19 当前确认：先验本地构建，R2 维护唯一版本表
 
 当前先推进本地内容构建。构建以 `packages/skills/package.json.version` 生成唯一的 `dist/VERSION`，在 `dist/skill/` 复制技能及附件，交付 `dist/curl/install.sh` 和 `dist/script/hidden-install.sh`。版本表及发布状态独立于本地构建。[用户确认](requirements/raw/2026-11-19-r2-version-table.md)
