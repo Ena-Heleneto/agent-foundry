@@ -1,5 +1,9 @@
 # 构建、流水线与技能发布的节点契约
 
+## 2026-11-19 引擎子插件输出
+
+引擎为子插件通过 `emitFile` 发出的文件添加 `engine/` 前缀，保留显式声明的相对路径。Vite 使用最终路径分配文件引用并按本次构建配置写出。包内默认构建根为 `dist/`，当前 workflow 挂载脚本位于 `dist/engine/script/speckit-mount.sh`。安装入口兼容旧包内的 `script/speckit-mount.sh`。[用户原话](../requirements/raw/2026-11-19-engine-output-directory.md)
+
 ## 2026-11-18 最新接口：自动加载集合子插件
 
 依据[Spec](../spec.md) FR-076～078，引擎是配置期插件工厂，入口为 `build/plugins/vite-plugin-engine/index.ts`；接收可选的绝对 src 来源目录，缺省锚定包内 src，返回 `Promise<PluginOption[]>`。唯一 Vite 配置接收该结果，与现有公共插件共同注册，构建钩子统一交由 Vite 调度。

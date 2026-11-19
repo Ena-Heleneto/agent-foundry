@@ -42,7 +42,7 @@
 
 ### 版本、下载表与 MD5 过渡
 
-- **决定**：唯一源仍为packages/skills/package.json.version，构建只派生dist/VERSION。采用一份dist外packages/skills/releases/releases.json保存整版已核验事实，未有真实发布时为空数组；release.json从其生成，保留version/url及兼容md5，新增统一包bytes/sha256和格式版本。新正式入口必须使用SHA-256，不回退MD5。
+- **决定**：唯一源仍为packages/skills/package.json.version，构建只派生dist/VERSION。按[2026-11-19 用户确认](requirements/raw/2026-11-19-r2-version-table.md)，已发布状态只在 R2 的 `curl/release.json` 持久维护。现有方案的 version/url、兼容 MD5、归档 bytes/SHA-256 和格式版本在流水线阶段复核。新正式入口必须使用SHA-256，不回退MD5。
 - **理由与现场**：当前入口仅使用MD5、直接tar解包，未核对VERSION；node-jq尚未固定，下载根仍为示例。当前源码、当前构建、冻结候选、远端已核验与公开可发现分别判断。统一版本和单包不需要维护两份跨文件提交的技能/curl发布记录；入口固定身份仍须可追溯，不能把远端latest标记冒认为实际执行版本。
 - **备选**：完全删md5会使现有入口无法解析过渡记录；保留MD5核验作为新入口降级则降低原正式摘要要求。不承诺已有MD5旧包可被新正式入口接受；无SHA记录须重新核验并形成合法记录，或明确拒绝。历史样本先用隔离夹具，不伪造真实发布史。
 
@@ -63,7 +63,7 @@
 - **决定**：后置发布器优先验证R2 S3条件写；固定对象使用仅创建语义，可变索引使用旧ETag条件更新。上传对象身份、匿名下载SHA和发现结果分别留证，ETag仅作并发令牌，不当作包SHA。不新建Worker、桶、域名或外部协调服务。
 - **官方依据**：Cloudflare文档列出PutObject的If-None-Match/If-Match条件与失败响应，适合规划固定对象创建和索引比较更新；客户端与目标权限仍待实测。[Conditional operations](https://developers.cloudflare.com/r2/api/s3/conditional-operations/)
 - **恢复限制**：响应丢失后的404不能单独证明原写失败；公开域名缓存也可能与源站状态不同。由此推导后续验证须包含同一冻结对象条件重试、身份读回及公开缓存观察，不能无条件覆写。[Consistency model](https://developers.cloudflare.com/r2/reference/consistency/)
-- **持久决定及备选**：固定对象全核验后，先按适用仓库写授权回存releases/releases.json并读回持久提交，再更新发现。无人授权回存时报告“远端已核验、记录未持久保存”，停止发现；临时runner磁盘或会过期artifact不作唯一来源。回存提交身份在包外回执保存，不嵌入自身文件。相较两份技能/curl记录，一份整版记录减少部分提交；不建设数据库/任务状态服务。
+- **版本表归属**。已发布状态只在 R2 持久化，依据真实固定对象核验结果更新。流水线的写入、断连与读取验证已列入后置任务。源码提交仍是构建追溯依据。
 - **发现决定及备选**：入口与版本表各自条件写不构成事务，先更新并核验兼容入口，再更新索引；后步失败保留旧索引和已更新入口。普通新版本高于已发布最高SemVer，旧候选重试不推进latest；冲突读回保留其他版本行，新合并字节需受适用授权约束。拒绝盲写或按重试时间把旧版置顶；消费仍按首条，不自行排序。授权绑定具体bucket/prefix/origin和候选/发现字节，不能复用旧Git目标授权。
 
 ### 前置验证及结论

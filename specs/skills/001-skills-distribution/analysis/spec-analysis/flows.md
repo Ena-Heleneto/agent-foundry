@@ -18,7 +18,7 @@ flowchart TD
     J --> F
 ```
 
-大白话：统一包下载或核验失败不能装；包可信且技能完整之后，仅hidden模块失败保留成功安装。位置：vite-plugin-curl读取安装源并交付script/install.sh，hidden模板迁至vite-plugin-script，由该插件扫描并派生script/hidden-install.sh；Tasks生成时迁移尚未执行，原模板接线已有基础，归档已从插件撤出并交后续流水线，安装调用及成功集合协议仍缺；Task关联为T012/T016～T021和T033～T036，实际代码及范围见[功能分析](README.md)。非Spec Kit及挂载条件属于后置阶段，不在本图假装已经执行。
+大白话：统一包下载或核验失败不能装；包可信且技能完整之后，仅hidden模块失败保留成功安装。位置：vite-plugin-curl 生成 dist/curl/install.sh 和 dist/script/hidden-install.sh。归档及隐匿成功集合接入留后续任务，Task关联为T012/T016～T021和T033～T036，实际代码及范围见[功能分析](README.md)。非Spec Kit及挂载条件属于后置阶段，不在本图假装已经执行。
 
 ## 主线里程碑流转
 
@@ -35,7 +35,7 @@ flowchart LR
     I --> J[按原末尾任务清理与核对结案]
 ```
 
-大白话：每一步都以该职责的真实输入和验收放行下一步；当前局部演示不等于整条链完成。用户本次只授权T077的扫描/脚本生成及模板迁移，不能据此跳过正式hidden协议和发布材料前置，或把T077整项勾选。统一版本及发布记录可与内容核对在不同文件推进，再在归档汇合；完整平台/挂载近期后置，未验事实仍保留。实际/计划位置为build/plugins、script/old、build/ci、workflow与analysis/acceptance；Task职责和原MVU-001/002/004/005/008/009分别在[原清单](../../tasks.md)及[mvu](../../mvu.md)，不在本图复制它们的当前状态。
+大白话：每一步都以该职责的真实输入和验收放行下一步；当前局部演示不等于整条链完成。当前先核对本地构建。T076 的输入检查、T034 的隐匿材料及 T077 的输出可独立于版本表推进。流水线后续进行正式归档与 R2 版本表管理。完整平台/挂载近期后置，未验事实仍保留。实际/计划位置为build/plugins、script/old、build/ci、workflow与analysis/acceptance；Task职责和原MVU-001/002/004/005/008/009分别在[原清单](../../tasks.md)及[mvu](../../mvu.md)，不在本图复制它们的当前状态。
 
 ## 两条线的公开交付关系
 

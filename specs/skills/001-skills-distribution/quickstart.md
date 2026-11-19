@@ -1,5 +1,9 @@
 # 验证指南：统一发布包、安装与可选隐匿
 
+## 2026-11-19 引擎产物路径验证
+
+运行 `pnpm --filter @foundry/skills run build`，读取 `packages/skills/dist/engine/script/speckit-mount.sh` 并执行 `bash -n`。引擎测试验证显式相对路径、自动命名的资产及入口块都归在 `engine/`。安装测试验证新旧两种包内挂载路径。[实际验证](implementation/T077.md#2026-11-19-引擎子插件产物归档目录)
+
 ## 2026-11-18 当前验证范围：引擎发现与加载
 
 本轮补齐默认关闭的 `plugin` 开关、引擎及唯一 Vite 配置接线，接口见[构建契约](contracts/build-pipeline.md)。已有依赖与 Node 环境就绪后，对 `packages/skills/build/plugins/vite-plugin-engine/index.ts` 执行定向 ESLint，运行 `pnpm --filter @foundry/skills run check-types`；定向测试运行 `node --test packages/skills/tests/distribution/vite-plugin-engine.test.mjs`；包构建仅证明当前启用集合的实际结果，不能据此认定业务子插件已生成挂载脚本。

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import test from 'node:test'
@@ -94,7 +94,7 @@ test('启用集合缺少插件目录或入口时正常返回空结果', async (t
   assert.deepEqual(await engine.default(root), [])
 })
 
-test('按集合和插件名排序，并将异步嵌套插件交给真实 Vite 执行', async (t) => {
+test('按稳定顺序加载异步嵌套插件，并将它们发出的文件写到 engine 下', async (t) => {
   /**
    * 导入顺序与生成资产共同验证发现及 Vite 接线边界。
    */
@@ -105,7 +105,23 @@ test('按集合和插件名排序，并将异步嵌套插件交给真实 Vite �
     write(root, `${collection}/plugin/vite-plugin-${name}/index.ts`, `
       export default async () => [false, [{
         name: '${collection}-${name}',
-        generateBundle() { this.emitFile({ type: 'asset', fileName: '${collection}-${name}.txt', source: 'loaded' }) }
+        buildStart() {
+          if ('${collection}-${name}' === 'a-a') {
+            this.emitFile({ type: 'asset', name: 'automatic.txt', source: 'automatic' })
+            this.emitFile({ type: 'chunk', id: 'virtual:engine-entry', name: 'engine-entry' })
+          }
+        },
+        generateBundle: {
+          order: 'post',
+          handler(_, bundle) {
+            const id = this.emitFile({ type: 'asset', fileName: 'reports/${collection}-${name}.txt', source: 'loaded' })
+            if ('${collection}-${name}' === 'a-a') {
+              if (!bundle['direct.txt'])
+                throw new Error('子插件生成钩子的 order 未生效')
+              this.emitFile({ type: 'asset', fileName: 'reference.txt', source: this.getFileName(id) })
+            }
+          },
+        }
       }]]
     `)
   }
@@ -125,17 +141,35 @@ test('按集合和插件名排序，并将异步嵌套插件交给真实 Vite �
     plugins: [plugins, {
       name: 'test-entry',
       resolveId(id) {
-        if (id === 'virtual:test')
-          return '\0virtual:test'
+        if (id === 'virtual:test' || id === 'virtual:engine-entry')
+          return `\0${id}`
       },
       load(id) {
-        if (id === '\0virtual:test')
-          return 'export {}'
+        if (id === '\0virtual:test' || id === '\0virtual:engine-entry')
+          return 'export const value = 1'
+      },
+      generateBundle() {
+        this.emitFile({ type: 'asset', fileName: 'direct.txt', source: 'top-level' })
       },
     }],
     build: { write: false, rolldownOptions: { input: 'virtual:test' } },
   })
-  assert.deepEqual(result.output.filter(item => item.type === 'asset').map(item => item.fileName).sort(), ['a-a.txt', 'a-z.txt', 'b-z.txt'])
+  /**
+   * 显式目录和文件名保留，自动命名文件也位于 engine 内。
+   */
+  const assets = new Map(result.output.filter(item => item.type === 'asset').map(item => [item.fileName, item.source]))
+  assert.deepEqual([...assets.keys()].filter(file => assets.get(file) !== 'automatic').sort(), [
+    'direct.txt',
+    'engine/reference.txt',
+    'engine/reports/a-a.txt',
+    'engine/reports/a-z.txt',
+    'engine/reports/b-z.txt',
+  ])
+  assert.equal(assets.get('direct.txt'), 'top-level')
+  assert.equal(assets.get('engine/reference.txt'), 'engine/reports/a-a.txt')
+  assert.match([...assets.entries()].find(([, source]) => source === 'automatic')?.[0] ?? '', /^engine\/.*automatic.*\.txt$/u)
+  assert.match(result.output.find(item => item.type === 'chunk' && item.facadeModuleId === '\0virtual:engine-entry')?.fileName ?? '', /^engine\/.*engine-entry.*\.js$/u)
+  assert.equal(existsSync(join(root, 'dist')), false)
 })
 
 test('已匹配的坏插件报错并保留实际入口路径', async (t) => {

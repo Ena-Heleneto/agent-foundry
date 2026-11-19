@@ -3,10 +3,12 @@ set -euo pipefail
 
 requested_version='latest'
 hidden=false
+auto_mount=true
 
 for argument in "$@"; do
   case "$argument" in
     --hidden) hidden=true ;;
+    --no-mount) auto_mount=false ;;
     *) requested_version="${argument:-latest}" ;;
   esac
 done
@@ -89,13 +91,99 @@ working_directory="$PWD"
 skills_root="$working_directory/.agents/skills"
 mkdir -p -- "$skills_root"
 
+successful_skills=()
+install_status=0
 while IFS= read -r -d '' skill_directory; do
   skill_name="${skill_directory##*/}"
-  if [[ -e "$skills_root/$skill_name" ]]; then
-    printf '目标技能已存在，拒绝覆盖：%s\n' "$skills_root/$skill_name" >&2
-    exit 2
+  installed_path="$skills_root/$skill_name"
+  if [[ -e "$installed_path" || -L "$installed_path" ]]; then
+    printf '目标技能已存在，拒绝覆盖：%s\n' "$installed_path" >&2
+    install_status=2
+    break
   fi
-  cp -R -- "$skill_directory" "$skills_root/$skill_name"
+  if cp -R -- "$skill_directory" "$installed_path"; then
+    successful_skills+=("$installed_path")
+  else
+    install_status=$?
+    break
+  fi
 done < "$skill_directories"
 
+# 只从本次下载的包运行隐匿脚本，名单和结果随临时目录清理。
+hide_successful_skills() {
+  local hidden_script="$extract_dir/script/hidden-install.sh"
+  local successful_file="$download_dir/successful-skills.json"
+  local result_file="$download_dir/hidden-result.json"
+  local interface hidden_exit=0
+
+  if [[ ! -f "$hidden_script" || -L "$hidden_script" || -L "$extract_dir/script" ]]; then
+    printf '技能包缺少可用的隐匿脚本：script/hidden-install.sh\n' >&2
+    return 1
+  fi
+  if ! { IFS= read -r _ && IFS= read -r interface; } < "$hidden_script" ||
+    [[ "$interface" != '# foundry-hidden-interface: 1' ]]; then
+    printf '技能包的隐匿脚本协议不受支持。\n' >&2
+    return 1
+  fi
+  if ! "$jq_cli" -n --args '
+    $ARGS.positional | map(. as $installedPath | (split("/") | last) as $name
+      | {name: $name, installRelativeDirectory: $name, installedPath: $installedPath, complete: true})
+  ' -- "${successful_skills[@]}" > "$successful_file"; then
+    return 1
+  fi
+  bash -- "$hidden_script" --project "$working_directory" --agent-root .agents/skills \
+    --successful-skills-file "$successful_file" --result-file "$result_file" || hidden_exit=$?
+
+  if ! "$jq_cli" -er --argjson code "$hidden_exit" '
+    select(type == "object" and (.reasonCode | type == "string")
+      and ([.processed, .skipped, .failed] | all(type == "array")))
+    | if .status == "success" and $code == 0 and (.processed | length > 0) and (.failed | length == 0)
+        then "隐匿成功：\(.processed | length) 项"
+      elif .status == "skipped" and $code == 0 and (.processed | length == 0) and (.failed | length == 0)
+        then "跳过隐匿：\(.reasonCode)"
+      elif .status == "failed" and $code == 1 then "隐匿失败：\(.reasonCode)"
+      else empty end
+  ' "$result_file"; then
+    printf '无法核对隐匿脚本的运行结果。\n' >&2
+    return 1
+  fi
+  return "$hidden_exit"
+}
+
+hidden_status=0
+if [[ "$hidden" == true ]] && (("${#successful_skills[@]}" > 0)); then
+  if ! hide_successful_skills; then
+    hidden_status=1
+    if ((install_status == 0)); then
+      printf '技能已安装，隐匿失败。\n' >&2
+    else
+      printf '技能部分安装成功，隐匿失败。\n' >&2
+    fi
+  fi
+fi
+
+if ((install_status != 0)); then
+  if (("${#successful_skills[@]}" > 0)); then
+    printf '技能部分安装成功：%s 项。\n' "${#successful_skills[@]}" >&2
+  fi
+  exit "$install_status"
+fi
+
 printf '请求版本：%s\n下载地址：%s\n下载文件：%s\nMD5 校验：通过\n解压目录：%s\n安装目录：%s\n' "$version" "$download_url" "$downloaded_content" "$extract_dir" "$skills_root"
+
+if [[ "$auto_mount" == true ]]; then
+  mount_path='engine/script/speckit-mount.sh'
+  if [[ ! -L "$extract_dir/engine" && ! -L "$extract_dir/engine/script" &&
+    ! -e "$extract_dir/$mount_path" && ! -L "$extract_dir/$mount_path" ]]; then
+    mount_path='script/speckit-mount.sh'
+  fi
+  mount_script="$extract_dir/$mount_path"
+  if [[ ! -f "$mount_script" || -L "$mount_script" || -L "${mount_script%/*}" ||
+    ( "$mount_path" == engine/* && -L "$extract_dir/engine" ) ]]; then
+    printf '技能已安装，技能包缺少可用的挂载脚本：%s\n' "$mount_path" >&2
+    exit 2
+  fi
+  bash -- "$mount_script"
+fi
+
+exit "$hidden_status"

@@ -1,5 +1,7 @@
 # 数据模型：统一发布与阶段结果
 
+当前构建的子插件输出路径为 `engine/<插件相对产物路径>`，相对于构建输出根。默认构建的 workflow 挂载脚本由此落到 `dist/engine/script/speckit-mount.sh`。[构建契约](contracts/build-pipeline.md#2026-11-19-引擎子插件输出)
+
 ## 2026-11-18 最新模型：配置期集合子插件
 
 集合配置增加 `plugin?: boolean`，由 `defineCollectionHandle` 默认补为 `false`；仅严格 `true` 时启用下列发现及加载关系。无持久清单、插件状态库或新运行协议。
@@ -17,7 +19,7 @@
 
 本轮不新增持久状态或数据格式。统一包中安装入口与 hidden 的包内相对路径更新为 `script/install.sh`、`script/hidden-install.sh`，本地对应 `dist/script/`；`ScriptAsset` 仅描述构建责任，安装入口的 source 为 curl 目录安装源、owner 为 `vite-plugin-curl`；hidden 的 source 为 script 目录模板、owner 为 `vite-plugin-script`；outputPath 唯一且必须位于 `script/` 下。同一资产不得同时由 curl 和 script 插件交付。只有未注册工厂骨架时不产生这类资产，也不代表切换已完成。
 
-`curl/skills.tsv` 仍是非执行技能映射，远端发现及固定入口地址保持；PublicationRecord 的入口字节来自本地 `script/install.sh`，其远端引用无需与包内路径同名。VERSION、skill/正文附件、SuccessfulSelection、来源标记及 hidden 结果字段不变。现行 formatVersion=1 仍是尚未发布的目标设计；如后续发现已有真实旧格式发布，须明确兼容或拒绝，不静默把两种包路径解释为同一格式。完整字段与边界见[curl契约](contracts/curl-delivery.md)。
+`curl/skills.tsv` 仍是非执行技能映射，远端发现及固定入口地址保持；PublicationRecord 的固定入口字节取本地 `dist/curl/install.sh`，远端引用与本地路径分别核对。VERSION、skill/正文附件、SuccessfulSelection、来源标记及 hidden 结果字段不变。现行 formatVersion=1 仍是尚未发布的目标设计；如后续发现已有真实旧格式发布，须明确兼容或拒绝，不静默把两种包路径解释为同一格式。完整字段与边界见[curl契约](contracts/curl-delivery.md)。
 
 ## 2026-11-16 主线有效模型：一个包与三种版本事实
 
@@ -31,13 +33,13 @@
 | UnifiedPackage        | formatVersion=1、version、archivePath/bytes/sha256/md5；根VERSION、skill/、script/、curl/非脚本数据、说明和许可 | 一次归档完整正式集合；不强制随包逐文件JSON，不另有helper归档                       |
 | BuildVerification     | 真实sourceRevision/inputDigest、实际依赖与工具、正式身份映射、逐文件证据及检查结果                              | 证据在候选包外；独立读盘核对正文附件、必要材料及获准范围；相关输入须与真实提交一致 |
 | CandidateContentIndex | version/sourceRevision、归档及独立入口身份、公开对象全集、验证证据摘要、candidateDigest                         | 冻结本次实际字节；两次构建比较公开内容而非tar元数据；开发/isolated不自动ready      |
-| PublicationRecord     | version/sourceRevision/candidateDigest、统一包固定引用、固定入口引用、远端核验与持久保存依据                    | 只登记全部固定对象已核验的整版；同版本不同字节/地址拒绝；无发布时空数组            |
+| PublicationRecord     | R2 版本表中的 version/sourceRevision/candidateDigest、统一包固定引用、固定入口引用与远端核验依据                    | 仅在 R2 维护已核验整版；同版本不同字节或地址拒绝            |
 | DiscoverySnapshot     | 索引原字节摘要、选中唯一记录、实际入口版本及摘要、包固定引用                                                    | 一次调用固定，不因中途latest更新换包；入口可新于包                                 |
 | DiscoveryUpdate       | 预期旧索引ETag/字节摘要、新发现字节、授权引用及实际更新结果                                                     | 独立于已冻结候选与固定对象；更新失败保留旧可用索引和已上传事实                     |
 
 统一包根VERSION只含版本及结尾换行，不使用skill/VERSION或curl/VERSION。包内实际文件全集由流水线核对；release-manifest.json、script/manifest.json本期不生成也不作为安装必需项。候选索引和平台收据可继续是流水线JSON，但不装入技能包，不为满足旧files公式恢复消费者清单。
 
-计划持久记录为packages/skills/releases/releases.json，替代尚未创建的双文件记录。固定对象核验后，先按适用仓库写授权回存并读回releases/releases.json的持久提交，再更新发现；没有回存授权时保留明确缺口并停止发现，不自动提交/推送，不把临时checkout或会过期artifact当永久来源。持久提交身份写入包外回执，不写回自身。仅build、仅上传、远端核验失败均不新增成功发布行。已发布记录的固定内容不可变，发现更新结果单独保存，不回写冻结候选。
+已发布状态的唯一持久来源是 R2 中的 `curl/release.json`。后续发布流水线基于同版固定对象的真实核验结果更新该表，并保存本次候选与核验依据。仓库负责源码，构建目录只保存当前产物，发布表的维护独立于这两者。
 
 发现更新先入口后索引，两次条件写分别留证，不声明多对象事务。普通新版本高于已发布最高SemVer，旧版重试不回退latest；冲突先读回并保留其他版本，新合并字节须在适用授权内。发布授权绑定bucket/prefix/origin及version/sourceRevision/candidateDigest、对象和发现字节摘要，旧Git目标授权无效。
 
@@ -61,7 +63,7 @@
 
 hidden默认关闭且执行0；开启时只从已核验同版包读取协议标记并调用独立Bash。统一包通过且所选技能完整时，只有hidden缺件、接口不兼容或执行失败可独立失败：实际安装成功仍保留，overall=partial、退出1；若安装自身仅部分成功，也必须保留逐项失败且不得把installation标成success；不再出现“另下helper包失败仍继续安装”。参数/静态前提错误退出2；运行步骤失败退出1；所有请求步骤成功或明确不适用才退出0。暂缓挂载要明确not-run或skipped及原因，尚未实现的请求不能伪报成功，原最终验收保持。
 
-当前模板已有Git/排除基础，入口已有基础MD5下载复制；新模型、TSV、SHA消费、成功集合与完整报告均尚未交付。不能把设计表、根VERSION或目录存在性当作产品通过。
+当前安装入口基于 MD5 下载和复制，开启 `--hidden` 时向同包脚本传递本次成功复制目标。临时记录包含 `name`、`installRelativeDirectory`、`installedPath` 和 `complete`。脚本独立报告实际排除结果。完整模型、TSV、SHA 消费与逐技能报告仍由对应任务验收。
 
 ## 紧急版数据增量（2026-11-12）
 

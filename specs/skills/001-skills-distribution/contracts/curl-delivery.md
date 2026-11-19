@@ -1,5 +1,11 @@
 # 当前主线 curl 交付契约
 
+## 2026-11-19 本地构建与 R2 下载表
+
+当前本地产物为 `dist/VERSION`、`dist/skill/`、`dist/curl/install.sh`、`dist/script/hidden-install.sh` 和 `dist/engine/script/speckit-mount.sh`。安装时优先读取包内 `engine/script/speckit-mount.sh`，也支持原包内的 `script/speckit-mount.sh`。[引擎产物目录](build-pipeline.md#2026-11-19-引擎子插件输出)
+
+版本表仅在 R2 维护，构建独立于该表。单包归档及下载表更新留流水线阶段。当前本地路径和版本表落点以本节为准。[版本表确认](../requirements/raw/2026-11-19-r2-version-table.md)
+
 ## 2026-11-18 最新目标：curl 接回隐匿脚本生成
 
 [Spec](../spec.md) FR-078 确认将现有 `vite-plugin-script` 的启用技能扫描、hidden 模板和生成逻辑移回 `vite-plugin-curl`，由 curl 同时交付 `script/install.sh` 和 `script/hidden-install.sh`，迁移后移除旧 script 插件；入口保持安装源原字节，hidden 的候选路径、前缀占位及成功集合限制保持。后续 workflow 子插件另外生成 `script/speckit-mount.sh`，引擎的自动发现接口见[构建契约](build-pipeline.md)。
@@ -77,23 +83,23 @@ name及技能目录段限定为小写字母/数字与内部连字符组成的非
 
 ### 隐匿内部调用协议1
 
-模板源复用vite-plugin-script/hidden-install.template.ts，运行产物保持独立Bash；构建把获准安装相对路径和@@AGENT_SKILLS_ROOT@@标记写入确定的数据位置，不全局替换任意Shell正文。生成脚本头部只读标记为`# foundry-hidden-interface: 1`；入口在执行前读取并核对，未知接口不执行，不依赖随包JSON。
+模板源为 `packages/skills/build/plugins/vite-plugin-curl/hidden-install.template.ts`，由构建生成 `script/hidden-install.sh`。构建把候选安装相对路径和 `@@AGENT_SKILLS_ROOT@@` 标记写入固定数据参数。生成脚本第二行标记为 `# foundry-hidden-interface: 1`，入口在执行前核对该标记。
 
-内部调用沿现有设计：`bash <已核验绝对路径>/script/hidden-install.sh --project <绝对项目> --agent-root .agents/skills --successful-skills-file <绝对JSON文件> --result-file <绝对新结果文件>`。参数分开透传，不拼求值字符串；临时成功集合JSON包含name/installRelativeDirectory/installedPath及本次完整性事实，不是随包逐文件清单。
+内部调用使用 `bash <已核验绝对路径>/script/hidden-install.sh --project <绝对项目> --agent-root .agents/skills --successful-skills-file <绝对JSON文件> --result-file <绝对新结果文件>`。临时成功名单为 JSON 数组，每项包含 `name`、`installRelativeDirectory`、`installedPath` 和布尔值 `complete`。当前入口在 `cp -R` 成功后收集目标路径，仅当显式传入 `--hidden` 且已有成功项时写出名单并调用。
 
 允许处理集合为正式模板候选、本次显式选择、完整成功集合的交集。只核对明确项目本地.git，缺失/父仓库子目录/.git文件按当前保守范围跳过，不向上找、不初始化。追加前核对未跟踪及项目内独占路径，保留原exclude、转义精确锚定路径、去重，再以check-ignore/ls-files/status核对效果。当前只验证.agents/skills前缀；项目外global、共享配置、已跟踪内容不声称隐藏成功，不取消跟踪或修改全局配置。
 
-结果文件保存status=success/skipped/failed、reasonCode、实际处理/跳过/失败路径和限制。退出0为成功或明确不适用，退出1为失败；结果/退出码矛盾不能判成功。结果文件只属于本次临时运行，入口读回实际效果后清理，不形成永久收据。
+结果文件包含 `status`（`success`、`skipped` 或 `failed`）、`reasonCode`、`processed`、`skipped` 和 `failed`。已处理项是项目相对路径，跳过项和失败项记录路径及原因。成功或明确不适用时退出 0，运行失败时退出 1。入口核对结果和退出码，名单和结果随本次临时目录清理。
 
 ### 独立结果与发布后置
 
 未请求hidden时执行次数0且零排除新增。统一包核验通过且installation整体成功后，hidden缺件、未知协议或Git失败报告“安装成功、隐匿失败”、overall=partial与非零退出。若技能仅部分安装成功，则保留逐项失败/未执行事实，报告“安装部分成功、隐匿失败”；hidden只处理完整成功项，不能把installation改成success。统一包获取/核验失败与hidden失败是不同前提，不能套用下方旧双包容错。静态参数/前提错误退出2；运行失败退出1；请求步骤均成功或明确不适用才退出0。挂载近期暂缓，不能伪报hooks/commands成功，原最终验收保留。
 
-持久发布记录采用dist外releases/releases.json，只登记全部固定对象已核验的整版。固定对象全部核验后，先按适用授权回存该文件并读回仓库持久提交，再推进发现；临时runner或会过期artifact不作唯一来源。没有相应回存/推送授权则停止发现，报告固定对象已核验但记录未持久保存，不自动提交/推送。回存提交身份在包外回执保存，不写入自身，原候选sourceRevision不变。
+发布版本表 `curl/release.json` 的唯一持久来源为 R2。后续流水线以已核验的固定统一包和同版固定入口为依据维护表。仓库只提供源码及当前源版本，本地构建不依赖版本表。候选和当次核验凭证沿原流水线边界留存。
 
 两个发现对象不是事务：先条件更新并核验兼容新旧记录的入口，再按预期旧ETag更新版本表；后步失败保留旧完整索引和已更新入口，分别报告。普通新版本高于当前最高已发布SemVer；旧版重试只核对/补齐自身事实，不回退latest或入口。消费端仍按首条，不自行排序。竞争时停止本次发现写入并读回，不丢其他行；合并后的新字节须在适用授权范围内再更新，禁止盲写或用旧授权放行不同摘要。
 
-R2授权绑定预配置bucket、固定prefix、公开HTTPS origin、version/sourceRevision/candidateDigest、对象及发现新字节摘要，并覆盖适用记录回存/发现动作；旧Git repository-only授权不适用R2。具体记录字段见模型。候选文件表和平台收据在包外，发现材料另行绑定更新字节与授权。R2条件写、权限、断连/并发及公开缓存必须先验证，不能复制紧急Git算法作为通过；官方依据与技术前置见[研究](../research.md)。本轮不写桶、不发布、不自动回存提交记录，不改变工程checkbox。
+R2授权绑定预配置bucket、固定prefix、公开HTTPS origin、version/sourceRevision/candidateDigest、对象及发现新字节摘要，并覆盖适用的 R2 发现更新；旧Git repository-only授权不适用R2。具体记录字段见模型。候选文件表和平台收据在包外，发现材料另行绑定更新字节与授权。R2条件写、权限、断连/并发及公开缓存必须先验证，不能复制紧急Git算法作为通过；官方依据与技术前置见[研究](../research.md)。版本表更新机制在流水线阶段复核，当前先验本地构建。
 
 <details>
 <summary>历史双包契约与此前同步边界（不作为当前实施前置）</summary>
