@@ -1,4 +1,4 @@
-name: 构建技能并上传 R2
+name: skill-prod
 
 on:
   workflow_dispatch:
