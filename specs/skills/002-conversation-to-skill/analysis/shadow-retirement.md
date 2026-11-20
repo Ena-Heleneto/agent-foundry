@@ -29,3 +29,21 @@ T003 共用资料契约仍位于记录维护目录，SHA-256 为 `c0b0cde608b75c
 - 记录沙箱、安装隐匿、挂载及主线构建相关 Node 回归 61/61，历史影子画像 Python 回归 27/27。目标包 lint、check-types 及同步测试 JS 的 ESLint 均返回 0。
 - 扩展运行 `node --test packages/skills/tests/distribution/*.test.mjs` 有 69 项通过、51 项失败、4 项跳过。在同一 Node 24.22.2 与依赖下隔离复跑清理前的 `361a16b`，数量、失败项目名单和退出码一致。失败涉及旧在线 Agent 读取器、集合入口和试验构建夹具等既有路径，相关断言保持原样。
 - Markdown 执行项目要求的 ESLint。`specs/**` 受仓库既有规则忽略，以文件读回、本地引用和 `git diff --check` 补核对。
+
+## 当前工作区复核（2026-11-20）
+
+本节对应本轮一致性分析 I1 及[修订授权](../requirements/raw/2026-11-20-analysis-remediation.md)，追加当前现场与修复结果，不覆盖上文历史验收。修复前工作区无已跟踪改动，`.agents/skills/shadow-profile/` 为普通目录，仅包含一份 `SKILL.md`，声明 `name: shadow-profile`，SHA-256 为 `3c35847b795e1cc90fe3d503168cbd31849d607fe0a90abf4d2ab963ebc1049e`。该文件与上文归档原件不同；本轮不能确定其重新出现的来源或时间。
+
+主线 `profile/collection.config.ts` 已无旧启用项，现有 Bash 同步已经具备清理当前项目单份旧生成正文、跳过退役来源的能力。复用 T028/T029 的已有方案，在当前项目执行：
+
+```bash
+bash scripts/dev/actions/link-skills/link-skills.sh packages/skills/src/profile .agents/skills
+```
+
+实际退出 0，输出 `remove(已退役): shadow-profile`，新建、更新、跳过和冲突均为 0。同步后旧安装目录不存在，另外 13 个安装项的文件字节或链接目标与同步前一致。未手改安装副本，未修改同步脚本或集合配置，也未重跑历史归档和构建任务。
+
+使用本机 `codex-cli 0.170.0` 新启动 `codex app-server --listen stdio://`，完成初始化后向 `skills/list` 传入仓库根与 `packages/skills` 两个绝对目录及 `forceReload: true`。两处 `shadow-profile` 结果均为空，两处均能发现 `speckit-plan`，宿主返回的错误列表均为空。当前对话已经载入的技能目录不是此次重新发现的证据；上述结果来自新进程的实际响应。
+
+本轮只恢复旧入口退役状态及修订资料约定，不代表新记录流程已可用。T028 的历史完成事实保留，T029 继续等待 T014 的新记录最终入口验收及旧入口仍未发现的补验。记录自采集边界和同轮提交重试的真实业务样例也仍由原任务取证。
+
+本轮另运行 `node --test scripts/dev/actions/link-skills/test-link-skills.mjs`：4 项通过、0 失败，PowerShell 项因无可用 `pwsh` 跳过；测试写入均在临时沙箱。对全部 14 份新增或修改的 Markdown 执行 `pnpm exec eslint --fix`，退出 0，但均被现有忽略规则跳过，不记为正文 lint 通过。另读回检查 151 条本地文件及锚点引用、围栏和工程 checkbox 边界，均无错误；32 项任务的身份、顺序和勾选与修订前一致，`git diff --check` 通过。未执行新记录、提交重试或派发的产品验收。
