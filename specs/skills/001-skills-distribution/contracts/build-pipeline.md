@@ -1,5 +1,15 @@
 # 构建、流水线与技能发布的节点契约
 
+## 2026-11-20 引擎按需辅助脚本
+
+`vitePluginEngine()` 以无参工厂注册。该工厂是引擎入口模块的唯一独立函数声明，组织目录发现、子插件产物归档和统一入口注册。集合扫描使用技能包的 `src` 目录，全局扫描使用引擎模块旁的 `sub-plugins` 目录。
+
+引擎自动发现全局子插件 `vite-plugin-engine/sub-plugins/vite-plugin-hidden-install`。该插件将候选路径插入压缩后的 Bash 源脚本，交付 `dist/engine/script/hidden-install.sh`。统一入口收到 `--hidden` 时执行隐匿并核对结果，其余 `engine/` 下的 Shell 资产进入默认挂载清单。[隐匿脚本调用](curl-delivery.md#2026-11-20-隐匿脚本调用)
+
+## 2026-11-20 当前容器打包阶段
+
+`packages/skills/deploy/Dockerfile` 当前提供 `build` 阶段。以仓库根为上下文执行 `COPY . .`，在 `/workspace` 运行 `mise install` 与 `mise exec -- pnpm install`，再运行 `mise exec -- pnpm run build:packages`。共享预设与技能包由仓库的构建任务处理，技能产物位于该阶段的 `/workspace/packages/skills/dist`。容器内构建、与同源本地产物的对比及后续导出各按实际验证结果记录。[现行规格](../spec.md#2026-11-20-主线打包与包内引擎入口)
+
 ## 2026-11-20 容器构建输入与导出
 
 `packages/skills/deploy/Dockerfile` 按用户[构建用途确认](../requirements/raw/2026-11-20-dockerfile.md#用户明确镜像用途)，从仓库根上下文读取必要根清单及 preset-config/skills 两包源码，按锁文件安装依赖并依次构建。默认 Node 26.8.1、pnpm 12.8.1；依赖安装跳过根文档站准备，所需共享预设显式生成。Dockerfile 专属忽略文件排除主机依赖、旧输出及非构建资料，artifacts 阶段只导出 skills/dist 内容，不附带 dist 外层或构建工具。容器产物和同源本地产物的文件全集及字节须一致；当前开发输出仍不等于正式发布白名单，归档/上传沿后续任务。命令及实证见[容器构建验收](../analysis/acceptance/docker-build.md)。

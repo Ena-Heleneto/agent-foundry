@@ -17,6 +17,7 @@ allowBuilds:
 catalog:
   '@nuxt/content': ^3.16.0
   eslint-plugin-slop: ^0.1.3
+  sh-syntax: 0.8.7
 
 catalogs:
   build:

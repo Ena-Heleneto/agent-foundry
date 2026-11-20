@@ -109,75 +109,41 @@ while IFS= read -r -d '' skill_directory; do
   fi
 done < "$skill_directories"
 
-# 只从本次下载的包运行隐匿脚本，名单和结果随临时目录清理。
-hide_successful_skills() {
-  local hidden_script="$extract_dir/script/hidden-install.sh"
-  local successful_file="$download_dir/successful-skills.json"
-  local result_file="$download_dir/hidden-result.json"
-  local interface hidden_exit=0
-
-  if [[ ! -f "$hidden_script" || -L "$hidden_script" || -L "$extract_dir/script" ]]; then
-    printf '技能包缺少可用的隐匿脚本：script/hidden-install.sh\n' >&2
-    return 1
-  fi
-  if ! { IFS= read -r _ && IFS= read -r interface; } < "$hidden_script" ||
-    [[ "$interface" != '# foundry-hidden-interface: 1' ]]; then
-    printf '技能包的隐匿脚本协议不受支持。\n' >&2
-    return 1
-  fi
-  if ! "$jq_cli" -n --args '
-    $ARGS.positional | map(. as $installedPath | (split("/") | last) as $name
-      | {name: $name, installRelativeDirectory: $name, installedPath: $installedPath, complete: true})
-  ' -- "${successful_skills[@]}" > "$successful_file"; then
-    return 1
-  fi
-  bash -- "$hidden_script" --project "$working_directory" --agent-root .agents/skills \
-    --successful-skills-file "$successful_file" --result-file "$result_file" || hidden_exit=$?
-
-  if ! "$jq_cli" -er --argjson code "$hidden_exit" '
-    select(type == "object" and (.reasonCode | type == "string")
-      and ([.processed, .skipped, .failed] | all(type == "array")))
-    | if .status == "success" and $code == 0 and (.processed | length > 0) and (.failed | length == 0)
-        then "隐匿成功：\(.processed | length) 项"
-      elif .status == "skipped" and $code == 0 and (.processed | length == 0) and (.failed | length == 0)
-        then "跳过隐匿：\(.reasonCode)"
-      elif .status == "failed" and $code == 1 then "隐匿失败：\(.reasonCode)"
-      else empty end
-  ' "$result_file"; then
-    printf '无法核对隐匿脚本的运行结果。\n' >&2
-    return 1
-  fi
-  return "$hidden_exit"
-}
-
-hidden_status=0
-if [[ "$hidden" == true ]] && (("${#successful_skills[@]}" > 0)); then
-  if ! hide_successful_skills; then
-    hidden_status=1
-    if ((install_status == 0)); then
-      printf '技能已安装，隐匿失败。\n' >&2
-    else
-      printf '技能部分安装成功，隐匿失败。\n' >&2
-    fi
-  fi
-fi
-
 if ((install_status != 0)); then
+  auto_mount=false
   if (("${#successful_skills[@]}" > 0)); then
     printf '技能部分安装成功：%s 项。\n' "${#successful_skills[@]}" >&2
   fi
-  exit "$install_status"
+else
+  printf '请求版本：%s\n下载地址：%s\n下载文件：%s\nMD5 校验：通过\n解压目录：%s\n安装目录：%s\n' "$version" "$download_url" "$downloaded_content" "$extract_dir" "$skills_root"
 fi
 
-printf '请求版本：%s\n下载地址：%s\n下载文件：%s\nMD5 校验：通过\n解压目录：%s\n安装目录：%s\n' "$version" "$download_url" "$downloaded_content" "$extract_dir" "$skills_root"
-
-if [[ "$auto_mount" == true ]]; then
-  engine_script="$extract_dir/engine/install.sh"
-  if [[ ! -f "$engine_script" || -L "$engine_script" || -L "$extract_dir/engine" ]]; then
-    printf '技能已安装，技能包缺少可用的引擎入口：engine/install.sh\n' >&2
-    exit 2
+engine_args=()
+engine_status=0
+if [[ "$hidden" == true ]] && (("${#successful_skills[@]}" > 0)); then
+  successful_file="$download_dir/successful-skills.json"
+  if "$jq_cli" -n --args '
+    $ARGS.positional | map(. as $installedPath | (split("/") | last) as $name
+      | {name: $name, installRelativeDirectory: $name, installedPath: $installedPath, complete: true})
+  ' -- "${successful_skills[@]}" > "$successful_file"; then
+    engine_args=(
+      --hidden
+      --project "$working_directory"
+      --agent-root .agents/skills
+      --successful-skills-file "$successful_file"
+      --result-file "$download_dir/hidden-result.json"
+    )
+  else
+    printf '隐匿失败：无法保存本次安装的成功名单。\n' >&2
+    engine_status=1
   fi
-  bash -- "$engine_script"
 fi
 
-exit "$hidden_status"
+if [[ "$auto_mount" == true ]] || (("${#engine_args[@]}" > 0)); then
+  if [[ "$auto_mount" == false ]]; then
+    engine_args=(--no-mount "${engine_args[@]}")
+  fi
+  FOUNDRY_ENGINE_JQ="$jq_cli" bash -- "$extract_dir/engine/install.sh" "${engine_args[@]}" || engine_status=$?
+fi
+((install_status == 0)) || exit "$install_status"
+exit "$engine_status"

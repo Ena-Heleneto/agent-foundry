@@ -2,14 +2,16 @@
 
 ## 会话先保存，再继续任务
 
-代码位置（规划）为 `packages/skills/src/profile/conversation-recording/` 的接入与写入配套。先核对交互式会话的工作目录及原会话来源，再为本仓库范围内的会话建立记录。详情确认后索引才能指到真实内容。
+规则位置为规划中的 `packages/skills/src/profile/conversation-recording/SKILL.md`。AI 用现有工具核对工作目录和原会话来源，在首条消息出现时为范围内的会话建档。详情确认后索引才能指到真实内容。
 
 ```mermaid
 flowchart TD
-    A["开启或恢复会话"] --> I{"交互式且本次工作目录和会话来源均在本仓库？"}
+    A["收到新内容或恢复已有会话"] --> I{"交互式且本次工作目录和会话来源均在本仓库？"}
     I -->|是| B["确认会话身份和原归档日期"]
     I -->|否| J["按原会话流程继续"]
-    B --> C["收到新的可记录内容"]
+    B --> K{"当前内容属于提交步骤或结果回复？"}
+    K -->|是，跳过写入| G
+    K -->|否| C["首条消息时建档，后续内容续写原文件"]
     C --> D{"写入成功？"}
     D -->|是| E["核对详情与附件，更新索引"]
     D -->|否| F["标记实际缺口"]
@@ -21,7 +23,7 @@ flowchart TD
 
 ## 父代理分别判断两个阶段
 
-代码位置（规划）为 `packages/skills/src/profile/conversation-extraction/` 与 `packages/skills/src/profile/conversation-analysis/`。能支持一条特点时启动提炼。此前确认的特点也可直接进入分析判断。
+规则位于规划中的提炼和分析 Skill 入口。父代理通过已有工具派发，能支持一条特点时启动提炼。此前确认的特点也可直接进入分析判断。
 
 ```mermaid
 flowchart TD
@@ -38,7 +40,7 @@ flowchart TD
 
 ## 删除后如何处理迟到的旧分析
 
-代码位置（规划）为 `packages/skills/src/profile/conversation-analysis/` 的规则维护配套。删除对当前产物生效，之后重新使用真实材料仍可形成规则。
+规则位于规划中的 `packages/skills/src/profile/conversation-analysis/SKILL.md`。AI 用现有工具删除当前规则，之后仍可用真实材料重新形成规则。
 
 ```mermaid
 flowchart TD
@@ -51,7 +53,7 @@ flowchart TD
 
 ## 多个父会话更新同一份协作 Skill
 
-代码位置（规划）为 `packages/skills/src/profile/conversation-analysis/scripts/rules.ts`、`skill-output.ts` 及 `rule-maintenance.ts`。以同一资料区和协作 Skill 为写入协调范围，版本核对与采纳在同一边界内完成，删除也使用该边界。图只解释采纳决策，文件保存失败及恢复沿[数据模型](data-model.md)说明。
+规则位于规划中的 `packages/skills/src/profile/conversation-analysis/SKILL.md`。以同一资料区和协作 Skill 为写入协调范围，AI 使用现有工具在同一边界内核对版本、采纳与删除。并发效果由 T019、T022 和 T026 核对，失败及恢复见[数据模型](data-model.md)。
 
 ```mermaid
 flowchart TD

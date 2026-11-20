@@ -7,6 +7,7 @@ import { join } from 'node:path'
 import process from 'node:process'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
+import { minifyShellScript } from '../../utils/minify-shell-script.ts'
 
 /**
  * 为真实构建准备独占来源和旧产物，结束后清理整个测试项目。
@@ -157,6 +158,93 @@ test('普通附件保持字节且禁用技能的链接不阻止构建', (t) => {
   assert.equal(readFileSync(join(fixture.output, 'skill/workflow/sample/SKILL.md'), 'utf8'), '# 示例技能\n')
   assert.deepEqual(readFileSync(join(fixture.output, 'skill/workflow/sample/references/中文 附件.bin')), Buffer.from([0, 255, 128, 10]))
   assert.equal(existsSync(join(fixture.output, 'skill/workflow/disabled')), false)
+})
+
+test('真实构建交付压缩的 curl 入口及可选隐匿脚本', (t) => {
+  /**
+   * 启用技能为隐匿脚本提供实际候选，并验证引擎的默认发现路径。
+   */
+  const fixture = skillFixture(t)
+  /**
+   * 真实包配置必须完成插件加载和资产交付。
+   */
+  const result = buildSkills(fixture.root)
+  assert.ifError(result.error)
+  assert.equal(result.status, 0, result.stderr)
+  /**
+   * curl 入口产物使用源脚本压缩后的内容。
+   */
+  const curlScript = readFileSync(join(fixture.output, 'curl/install.sh'), 'utf8')
+  /**
+   * 从实际安装源独立计算期望产物。
+   */
+  const curlSource = readFileSync(new URL('../../build/plugins/vite-plugin-curl/install.source.sh', import.meta.url), 'utf8')
+  assert.deepEqual(curlScript.match(/^#.*$/gmu), ['#!/usr/bin/env bash'])
+  assert.doesNotMatch(curlScript.trimEnd(), /^[ \t]|^\n|\\$/mu)
+  assert.equal(curlScript, minifyShellScript(curlSource))
+  /**
+   * 用脚本实际输出验证协议、候选及新的包内位置。
+   */
+  const hiddenScript = readFileSync(join(fixture.output, 'engine/script/hidden-install.sh'), 'utf8')
+  /**
+   * 源脚本可以独立压缩，构建产物仅将其中的空候选列表替换为真实数据。
+   */
+  const hiddenSource = readFileSync(new URL('../../build/plugins/vite-plugin-engine/sub-plugins/vite-plugin-hidden-install/hidden-install.source.sh', import.meta.url), 'utf8')
+  /**
+   * 产物的固定部分以源脚本单独压缩的结果为准。
+   */
+  const compactSource = minifyShellScript(hiddenSource, { preserveHeaderLines: 2 })
+  assert.ok(compactSource.split('\n').includes('candidate_paths=\'[]\''), '压缩源脚本后必须保留候选路径赋值行')
+  assert.equal(hiddenScript, compactSource.replace(/^candidate_paths='\[\]'$/mu, 'candidate_paths=\'["@@AGENT_SKILLS_ROOT@@/sample"]\''))
+  assert.match(hiddenScript, /^#!\/usr\/bin\/env bash\n# foundry-hidden-interface: 1\n/u)
+  assert.doesNotMatch(hiddenScript.trimEnd(), /^[ \t]|^\n|\\$/mu)
+  assert.deepEqual(hiddenScript.match(/^#.*$/gmu), ['#!/usr/bin/env bash', '# foundry-hidden-interface: 1'])
+  assert.match(hiddenScript, /^records=.*-- "\$successful_file"\).*$/mu)
+  assert.match(hiddenScript, /^\}.*-cRn.*>&3$/mu)
+  /**
+   * 最终交付文件必须可以由 Bash 解析。
+   */
+  const syntax = spawnSync('bash', ['-n'], { input: hiddenScript, encoding: 'utf8' })
+  assert.ifError(syntax.error)
+  assert.equal(syntax.status, 0, syntax.stderr)
+  assert.equal(existsSync(join(fixture.output, 'script/hidden-install.sh')), false)
+  assert.equal(existsSync(join(fixture.output, 'engine/helpers/hidden-install.sh')), false)
+  assert.match(readFileSync(join(fixture.output, 'engine/install.sh'), 'utf8'), /^#!\/usr\/bin\/env bash\n# foundry-engine-interface: 1\n/u)
+})
+
+test('脚本压缩保留引号和 heredoc 中的井号与换行', () => {
+  /**
+   * 普通注释和参数数据同时包含井号，并用续行连接参数。
+   */
+  const source = [
+    '#!/usr/bin/env bash',
+    '# 顶部说明',
+    'show() {',
+    '  printf \'%s\\n\' \\',
+    '    "参数 # 井号" \\',
+    '    \'首行',
+    '  # 参数续行 \\ 路径\' # 行尾说明',
+    '  cat <<\'TEXT\'',
+    '# 文档数据',
+    '  文档缩进',
+    'TEXT',
+    '}',
+    'show',
+    '',
+  ].join('\n')
+  /**
+   * Bash 执行压缩输出，核对语法处理保留了实际参数和文档内容。
+   */
+  const script = minifyShellScript(source)
+  assert.match(script, /^#!\/usr\/bin\/env bash\n/u)
+  assert.doesNotMatch(script, /顶部说明|行尾说明|\\\n/u)
+  /**
+   * 使用 Bash 读取压缩结果，验证带格式的数据字节。
+   */
+  const result = spawnSync('bash', ['-s'], { input: script, encoding: 'utf8' })
+  assert.ifError(result.error)
+  assert.equal(result.status, 0, result.stderr)
+  assert.equal(result.stdout, '参数 # 井号\n首行\n  # 参数续行 \\ 路径\n# 文档数据\n  文档缩进\n')
 })
 
 test('重名技能使真实 Vite 构建在清理旧产物前失败', (t) => {

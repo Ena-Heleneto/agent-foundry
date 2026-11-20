@@ -1,5 +1,13 @@
 # 规格质量检查清单：技能发布、选择安装与挂载
 
+## 2026-11-20 主线打包与包内引擎复核
+
+- [现行规格](../spec.md#2026-11-20-主线打包与包内引擎入口) 明确了固定子插件目录、压缩产物、统一入口和容器阶段范围。四个验收场景覆盖发现顺序、资产与源脚本的对应关系、参数组合及部分失败、同源容器构建。现行用户输入见[后续确认](../requirements/raw/2026-11-19-engine-output-directory.md#2026-11-20-构建压缩与安装调度)，增量复核无新增待澄清项。
+- 本地执行 `mise exec -- pnpm run build:packages`，共享预设与技能包均完成构建，两项均为实际执行。
+- 本地执行 `mise exec -- node --test --test-reporter=spec packages/skills/tests/distribution/{vite-plugin-engine,vite-plugin-skill,hidden-contract,speckit-mount}.test.mjs`，60 项全部通过，涵盖压缩入口消费及归档安装夹具。
+- 当前 Dockerfile 的输入、命令及阶段产物已对照[构建契约](../contracts/build-pipeline.md#2026-11-20-当前容器打包阶段)。现行 Dockerfile 的容器构建与产物对比本轮未执行，正式归档、支持平台、R2 发布及独立使用者验收须分别取证。
+- 下游差异见 [Plan](../plan.md) 的受限输入和 artifacts 导出安排，以及 [Tasks](../tasks.md) 中 T077 的原字节和旧脚本目录描述。这些记录中的交付路径及构建步骤待按现行规格对齐。
+
 ## 2026-11-19 R2 版本表及本地构建复核
 
 - 已按[用户原话](../requirements/raw/2026-11-19-r2-version-table.md)明确 R2 是发布版本表的唯一持久来源，流水线维护安排后置。

@@ -7,12 +7,187 @@ import { scanCollections } from '#utils/scan-skills'
 import { createEngineInstallScript } from './install-script.ts'
 
 /**
- * 在子插件输出完成后生成统一入口，空脚本集合也交付有效入口。
+ * 按顺序加载全局与集合子插件，限定子插件输出路径并交付引擎入口。
  *
- * @returns 最后收集 engine 内 Shell 资产的构建插件。
+ * @returns 子插件及后置入口生成插件，由 Vite 执行各自构建钩子。
+ * @throws 子插件导入、解析或工厂调用失败时，附带实际入口路径。
  */
-function engineInstallPlugin(): Plugin {
-  return {
+export default async function vitePluginEngine(): Promise<PluginOption[]> {
+  /**
+   * 从包内定位全局和集合子插件目录，全局优先，集合沿用扫描顺序及 plugin 开关。
+   */
+  const directories = [
+    { root: fileURLToPath(new URL('./sub-plugins', import.meta.url)), source: '全局' },
+    ...(await scanCollections(fileURLToPath(import.meta.resolve('#src'))))
+      .filter(({ config }) => config.plugin === true)
+      .map(({ directory }) => ({ root: join(directory, 'plugin'), source: '集合' })),
+  ]
+
+  /**
+   * 发出文件时补齐稳定名称，并将产物及源码映射限制在 engine 下。
+   */
+  const emissionProxy: ProxyHandler<Rolldown.PluginContext['emitFile']> = {
+    apply(emitFile, _context, [file]: [Rolldown.EmittedFile]) {
+      /**
+       * 显式文件名保留，缺省名称由声明名称及内容散列生成。
+       */
+      let fileName: string
+      if (file.type === 'prebuilt-chunk') {
+        fileName = file.fileName
+      }
+      else if (file.fileName != null) {
+        fileName = file.fileName
+      }
+      else {
+        /**
+         * 缺少声明名称时使用文件类型作为名称。
+         */
+        const name = file.name || (file.type === 'asset' ? 'asset' : 'chunk')
+        /**
+         * 同名文件按资产内容或入口模块区分。
+         */
+        const hash = createHash('sha256').update(file.type === 'asset' ? file.source : file.id).digest('hex').slice(0, 12)
+        /**
+         * 资产保留扩展名，动态入口块使用 js 扩展名。
+         */
+        const extension = posix.extname(name)
+        fileName = file.type === 'chunk'
+          ? `${name}-${hash}.js`
+          : `${name.slice(0, name.length - extension.length)}-${hash}${extension}`
+      }
+
+      /**
+       * 预构建块的源码映射路径与产物路径使用相同的校验。
+       */
+      const paths: [string, string?] = [fileName]
+      if (file.type === 'prebuilt-chunk' && file.sourcemapFileName !== undefined)
+        paths[1] = file.sourcemapFileName
+
+      paths.forEach((path, index, filenames) => {
+        if (path === undefined)
+          return
+
+        /**
+         * 按产物路径约定统一分隔符并拒绝越出 engine 的路径。
+         */
+        const relativePath = path.replaceAll('\\', '/')
+        if (!relativePath || posix.isAbsolute(relativePath) || /^[a-z]:/i.test(relativePath) || relativePath.split('/').includes('..'))
+          throw new Error(`子插件产物路径必须位于 engine 目录内：${path}`)
+        filenames[index] = posix.join('engine', relativePath)
+      })
+
+      return emitFile(file.type === 'prebuilt-chunk'
+        ? { ...file, fileName: paths[0], sourcemapFileName: paths[1] }
+        : { ...file, fileName: paths[0] })
+    },
+  }
+
+  /**
+   * 给 emitFile 加上路径处理，其他钩子上下文方法沿用原接收者。
+   */
+  const contextProxy: ProxyHandler<Rolldown.PluginContext> = {
+    get(context, key) {
+      if (key === 'emitFile')
+        return new Proxy(context.emitFile.bind(context), emissionProxy)
+
+      /**
+       * 文件引用查询等方法继续使用构建器提供的上下文。
+       */
+      const value: unknown = Reflect.get(context, key, context)
+      return typeof value === 'function' ? value.bind(context) : value
+    },
+  }
+
+  /**
+   * 保留各类钩子的参数、接收者及返回值。
+   */
+  type PluginHook = (this: unknown, ...args: never[]) => unknown
+
+  /**
+   * 处理各类 Vite 钩子的参数和返回值，只代理具有 emitFile 的上下文。
+   */
+  const hookProxy: ProxyHandler<PluginHook> = {
+    apply(hook, context: unknown, args) {
+      if (typeof context !== 'object' || context === null || !('emitFile' in context) || typeof context.emitFile !== 'function')
+        return Reflect.apply(hook, context, args)
+
+      return Reflect.apply(hook, new Proxy(context as Rolldown.PluginContext, contextProxy), args)
+    },
+  }
+
+  /**
+   * 子插件按来源和名称依次装入，Vite 负责调度它们的钩子。
+   */
+  const plugins: PluginOption[] = []
+  for (const { root, source } of directories) {
+    if (!lstatSync(root, { throwIfNoEntry: false })?.isDirectory())
+      continue
+
+    /**
+     * 按目录名顺序发现普通子插件目录，全局扫描跳过备份。
+     */
+    const names = readdirSync(root, { withFileTypes: true })
+      .filter(entry => entry.isDirectory()
+        && entry.name.startsWith('vite-plugin-')
+        && (source !== '全局' || !entry.name.endsWith('_copy')))
+      .map(entry => entry.name)
+      .sort()
+
+    for (const name of names) {
+      /**
+       * 只读取约定位置的普通 index.ts 文件。
+       */
+      const entryPath = join(root, name, 'index.ts')
+      if (!lstatSync(entryPath, { throwIfNoEntry: false })?.isFile())
+        continue
+
+      try {
+        /**
+         * 子插件工厂按发现顺序导入和调用。
+         */
+        const { default: createPlugin }: { default: () => PluginOption } = await import(pathToFileURL(entryPath).href)
+        if (typeof createPlugin !== 'function')
+          throw new TypeError('默认导出必须是 Vite 插件工厂')
+
+        /**
+         * 工厂结果保留 Vite 选项的数组层级和待解析的 Promise。
+         */
+        const pluginOption = await Promise.resolve(createPlugin()).then(function scopeOption(this: ProxyHandler<PluginHook>, option: PluginOption): PluginOption {
+          if (!option)
+            return option
+          if (Array.isArray(option))
+            return option.map(scopeOption, this)
+          if (option instanceof Promise)
+            return option.then(scopeOption.bind(this))
+
+          /**
+           * 复制插件及其原型，通过原生代理处理钩子调用。
+           */
+          const plugin: Plugin = Object.assign(Object.create(Object.getPrototypeOf(option)), option)
+          for (const [key, hook] of Object.entries(option as Plugin)) {
+            if (key === 'api')
+              continue
+            if (typeof hook === 'function') {
+              Reflect.set(plugin, key, new Proxy(hook as PluginHook, this))
+            }
+            else if (hook && typeof hook === 'object' && typeof hook.handler === 'function') {
+              Reflect.set(plugin, key, { ...hook, handler: new Proxy(hook.handler as PluginHook, this) })
+            }
+          }
+          return plugin
+        }.bind(hookProxy))
+        plugins.push(pluginOption)
+      }
+      catch (cause) {
+        throw new Error(`加载${source}子插件失败：${entryPath}`, { cause })
+      }
+    }
+  }
+
+  /**
+   * 末尾注册入口生成钩子，使用本次构建的 Shell 资产汇总挂载清单。
+   */
+  plugins.push({
     name: 'vite-plugin-engine-install',
     apply: 'build',
     enforce: 'post',
@@ -23,168 +198,20 @@ function engineInstallPlugin(): Plugin {
           this.error('引擎统一入口路径已被占用：engine/install.sh')
 
         /**
-         * 只消费本次实际生成的脚本资产，保留相对 engine 的稳定调用顺序。
+         * 选择自动挂载脚本并按相对路径排序，隐匿脚本由引擎按参数选择。
          */
         const scripts = Object.values(bundle)
-          .filter(output => output.type === 'asset' && output.fileName.startsWith('engine/') && output.fileName.endsWith('.sh'))
+          .filter(output =>
+            output.type === 'asset'
+            && output.fileName.startsWith('engine/')
+            && output.fileName !== 'engine/script/hidden-install.sh'
+            && output.fileName.endsWith('.sh'),
+          )
           .map(output => output.fileName.slice('engine/'.length))
           .sort()
         this.emitFile({ type: 'asset', fileName: 'engine/install.sh', source: createEngineInstallScript(scripts) })
       },
     },
-  }
-}
-
-/**
- * 保留不同 Vite 钩子的参数、返回值和执行上下文。
- */
-type PluginHook = (this: unknown, ...args: never[]) => unknown
-
-/**
- * 将子插件的相对输出地址限定在构建根的 engine 目录内。
- */
-function enginePath(fileName: string): string {
-  /**
-   * 统一以 Vite 产物使用的正斜杠解释路径。
-   */
-  const relativePath = fileName.replaceAll('\\', '/')
-  if (!relativePath || posix.isAbsolute(relativePath) || /^[a-z]:/i.test(relativePath) || relativePath.split('/').includes('..'))
-    throw new Error(`集合子插件产物路径必须位于 engine 目录内：${fileName}`)
-  return posix.join('engine', relativePath)
-}
-
-/**
- * 为未指定 fileName 的资产或入口块生成稳定名称。
- */
-function defaultFileName(file: Rolldown.EmittedAsset | Rolldown.EmittedChunk): string {
-  /**
-   * 名称来自插件声明，缺省按文件类型取名。
-   */
-  const name = file.name || (file.type === 'asset' ? 'asset' : 'chunk')
-  /**
-   * 同名的不同资产内容或不同入口模块使用不同的文件名。
-   */
-  const hash = createHash('sha256').update(file.type === 'asset' ? file.source : file.id).digest('hex').slice(0, 12)
-  if (file.type === 'chunk')
-    return `${name}-${hash}.js`
-
-  /**
-   * 资产后缀保留原用途，散列放在扩展名之前。
-   */
-  const extension = posix.extname(name)
-  return `${name.slice(0, name.length - extension.length)}-${hash}${extension}`
-}
-
-/**
- * 在 Vite 为引用分配文件名之前指定 engine 内的实际输出路径。
- */
-function scopeEmission(file: Rolldown.EmittedFile): Rolldown.EmittedFile {
-  if (file.type === 'prebuilt-chunk') {
-    return {
-      ...file,
-      fileName: enginePath(file.fileName),
-      sourcemapFileName: file.sourcemapFileName === undefined ? undefined : enginePath(file.sourcemapFileName),
-    }
-  }
-  return { ...file, fileName: enginePath(file.fileName ?? defaultFileName(file)) }
-}
-
-/**
- * 为子插件提供带输出前缀的 emitFile，同时保留 Vite 的其他上下文方法。
- */
-function scopeHook(hook: PluginHook): PluginHook {
-  return function (this: unknown, ...args) {
-    if (typeof this !== 'object' || this === null || !('emitFile' in this) || typeof this.emitFile !== 'function')
-      return hook.apply(this, args)
-
-    /**
-     * 只替换当前钩子的文件发出方法，其他方法使用原始上下文。
-     */
-    const context = new Proxy(this as Pick<Rolldown.PluginContext, 'emitFile'>, {
-      get(target, key) {
-        if (key === 'emitFile')
-          return (file: Rolldown.EmittedFile) => target.emitFile(scopeEmission(file))
-
-        /**
-         * 保留其他上下文方法的原接收者，包括 Vite 的文件引用查询。
-         */
-        const value: unknown = Reflect.get(target, key, target)
-        return typeof value === 'function' ? value.bind(target) : value
-      },
-    })
-    return hook.apply(context, args)
-  }
-}
-
-/**
- * 保留 Vite 的异步和嵌套插件结构，为其中的文件生成钩子限定产物路径。
- */
-function scopePluginOutput(option: PluginOption): PluginOption {
-  if (!option)
-    return option
-  if (Array.isArray(option))
-    return option.map(scopePluginOutput)
-  if (option instanceof Promise)
-    return option.then(scopePluginOutput)
-
-  /**
-   * 保留原插件配置和钩子元数据，包装其中能发出文件的上下文。
-   */
-  const plugin: Plugin = Object.assign(Object.create(Object.getPrototypeOf(option)), option)
-  for (const [key, hook] of Object.entries(option)) {
-    if (key === 'api')
-      continue
-    if (typeof hook === 'function') {
-      Reflect.set(plugin, key, scopeHook(hook as PluginHook))
-    }
-    else if (hook && typeof hook === 'object' && typeof hook.handler === 'function') {
-      Reflect.set(plugin, key, { ...hook, handler: scopeHook(hook.handler as PluginHook) })
-    }
-  }
-  return plugin
-}
-
-/**
- * 加载已启用的集合插件，将产物归入 engine 并生成统一调用入口。
- *
- * @param sourceDir 集合来源目录，缺省通过 #src 定位当前包的 src。
- * @returns 子插件及后置入口生成插件，由 Vite 执行各自构建钩子。
- * @throws 子插件导入或工厂调用失败时，附带实际入口路径。
- */
-export default async function vitePluginEngine(
-  sourceDir = fileURLToPath(import.meta.resolve('#src')),
-): Promise<PluginOption[]> {
-  const enabledCollections = (await scanCollections(sourceDir)).filter(({ config }) => config.plugin === true)
-
-  /**
-   * 保存按集合及插件名排列的子插件配置，各自生成 engine 内的文件。
-   */
-  const plugins: PluginOption[] = []
-  for (const { directory } of enabledCollections) {
-    const pluginDirectory = join(directory, 'plugin')
-    if (!lstatSync(pluginDirectory, { throwIfNoEntry: false })?.isDirectory())
-      continue
-
-    const names = readdirSync(pluginDirectory, { withFileTypes: true })
-      .filter(entry => entry.isDirectory() && entry.name.startsWith('vite-plugin-'))
-      .map(entry => entry.name)
-      .sort()
-
-    for (const name of names) {
-      const entryPath = join(pluginDirectory, name, 'index.ts')
-      if (!lstatSync(entryPath, { throwIfNoEntry: false })?.isFile())
-        continue
-
-      try {
-        const { default: createPlugin }: { default: () => PluginOption } = await import(pathToFileURL(entryPath).href)
-        if (typeof createPlugin !== 'function')
-          throw new TypeError('默认导出必须是 Vite 插件工厂')
-        plugins.push(scopePluginOutput(await createPlugin()))
-      }
-      catch (cause) {
-        throw new Error(`加载集合子插件失败：${entryPath}`, { cause })
-      }
-    }
-  }
-  return [...plugins, engineInstallPlugin()]
+  })
+  return plugins
 }

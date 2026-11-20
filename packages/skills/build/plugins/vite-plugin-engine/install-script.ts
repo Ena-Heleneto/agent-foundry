@@ -1,38 +1,31 @@
+import { readFileSync } from 'node:fs'
+
 /**
- * 生成调用本次子插件 Shell 资产的统一入口，保留项目目录及参数。
+ * 将本次自动挂载的脚本路径写入引擎入口的 Bash 源码。
  *
  * @param scripts 已按稳定顺序排列的 engine 内相对脚本路径。
- * @returns 预检查全部脚本后按序执行的独立 Bash 正文。
+ * @returns 协调可选隐匿及自动挂载的 Bash 入口。
+ * @throws 源脚本读取失败或缺少唯一的挂载列表时抛错。
  */
 export function createEngineInstallScript(scripts: string[]): string {
-  return [
-    '#!/usr/bin/env bash',
-    'set -euo pipefail',
-    '',
-    `engine_root="$(cd -- "$(dirname -- "\${BASH_SOURCE[0]}")" && pwd -P)"`,
+  /**
+   * 引擎运行逻辑在同目录的 Bash 源脚本中维护。
+   */
+  const source = readFileSync(new URL('./install.source.sh', import.meta.url), 'utf8')
+  /**
+   * 空数组所在行是自动挂载路径的唯一插入位置。
+   */
+  const sections = source.split(/^scripts=\(\)$/mu)
+  if (sections.length !== 2)
+    throw new Error('引擎 install.source.sh 必须恰好包含一行 scripts=()')
+
+  /**
+   * 每条路径作为一个 Bash 字面量，保留文件名中有特殊含义的字符。
+   */
+  const scriptList = [
     'scripts=(',
     ...scripts.map(script => `  '${script.replaceAll('\'', '\'\\\'\'')}'`),
     ')',
-    '',
-    `for relative_script in "\${scripts[@]}"; do`,
-    '  script="$engine_root/$relative_script"',
-    '  if [[ ! -f "$script" || -L "$script" ]]; then',
-    '    printf \'引擎子脚本缺失或不可用：%s\\n\' "$relative_script" >&2',
-    '    exit 2',
-    '  fi',
-    `  parent="\${script%/*}"`,
-    '  while [[ "$parent" != "$engine_root" ]]; do',
-    '    if [[ -L "$parent" ]]; then',
-    '      printf \'引擎子脚本路径包含软链接：%s\\n\' "$relative_script" >&2',
-    '      exit 2',
-    '    fi',
-    `    parent="\${parent%/*}"`,
-    '  done',
-    'done',
-    '',
-    `for relative_script in "\${scripts[@]}"; do`,
-    '  bash -- "$engine_root/$relative_script" "$@"',
-    'done',
-    '',
   ].join('\n')
+  return sections.join(scriptList)
 }

@@ -1,5 +1,13 @@
 # 当前主线 curl 交付契约
 
+## 2026-11-20 隐匿脚本调用
+
+curl 插件使用 `minifyShellScript` 压缩安装源，交付至 `dist/curl/install.sh`。安装器通过同包 `engine/install.sh` 触发后续操作。指定 `--hidden` 且成功名单非空时，向该入口传入 `--hidden`、项目路径、安装根、成功名单及结果文件路径。引擎核对隐匿脚本路径和协议 1 标记，优先从 `engine/script/hidden-install.sh` 读取，缺失时检查包根下的 `script/hidden-install.sh`。[构建契约](build-pipeline.md#2026-11-20-引擎按需辅助脚本)
+
+引擎入口第二行标记为 `# foundry-engine-interface: 1`。安装器直接调用同包入口，参数按随包引擎的实现处理。入口缺失时由 Bash 返回退出码。引擎从安装器的 `FOUNDRY_ENGINE_JQ` 接收 jq 路径，向隐匿脚本传入 `FOUNDRY_HIDDEN_JQ`，用于读写协议 1 的 JSON。
+
+每次安装最多调用一次引擎入口。`--no-mount` 关闭自动挂载，显式请求的隐匿仍由引擎处理。部分复制失败时，引擎只处理已成功复制的隐匿候选，安装器返回原复制错误码。
+
 ## 2026-11-19 安装后调用引擎入口
 
 安装源在技能复制成功后调用同包 `engine/install.sh`，由该入口执行本次子插件 Shell 资产。`--no-mount` 继续跳过整个调用阶段，隐匿的可选性和独立结果保持；缺统一入口、入口或其父路径为软链接时报告安装后步骤失败，保留已经安装的技能。子脚本的运行顺序、预检查与失败传播见[引擎入口契约](build-pipeline.md#2026-11-19-引擎统一入口)。本节替代下方安装源直接查找 Speckit 新旧路径的历史约定；本地产物新增 `dist/engine/install.sh`。[用户原话](../requirements/raw/2026-11-19-engine-output-directory.md#后续统一调用入口)

@@ -2,6 +2,8 @@
 
 核查日期：2026-11-20。依据为 [T001 方案](../implementation/T001.md)、[功能规格](../spec.md)、[总体方案](../plan.md)、[业务闭环](../mvu.md)及[原任务](../tasks.md)。本报告只证明现状核查，不作为新记录、真实派发或最终消费已通过的证据。
 
+后续按用户确认提前退役，下述现场和原判断按 T001 核查时理解。旧候选链接指向原字节快照，退役后的实际交付与发现见[退役证据](shadow-retirement.md)。
+
 ## 本次来源与版本
 
 工作分支为 `feature/init`，基准提交为 `7287ea8ab923de8f257d447e62fcc282072f62fb`。工作区已有未提交改动，以下事实以本轮实际文件及其 SHA-256 为准，不能仅凭提交号复现全部现场。主线技能包版本为 `0.1.0`。
@@ -21,10 +23,10 @@
 
 | 候选 | 可复用的原则或内容 | 新规格要求替换或补齐的部分 | 承接位置 |
 | --- | --- | --- | --- |
-| [conversation-recording](../../../../packages/skills/src/profile/conversation-recording/SKILL.md) | 保存真实可见原文、区分用户发言与宿主注入上下文、写前重读与写后核验、不伪造来源、只补可核实缺项、失败后继续用户工作 | 当前按项目内日期原文写入，排除工具原始参数/返回及附件原件，末轮依赖下一轮补存；还明确排除宿主日志接入。须改为仓库内交互入口自动接入、每会话成对文档、完整可得工具/附件、正常末轮及仓库外资料区，旧摘要/分析分支不直接保留 | T004～T014 |
-| [conversation-summary](../../../../packages/skills/src/profile/conversation-summary/SKILL.md) | 实际子代理亲自读文件、保存与回传，父代理核验产物；交接保留来源和缺口 | 当前产物是按日摘要，既不逐特点独立成文，也不提供新特点资格判断；不把该目录改名便视为提炼完成，不增加强制摘要阶段 | 新建提炼入口的 T015～T017；旧摘要候选本次保持原样 |
-| [conversation-analysis](../../../../packages/skills/src/profile/conversation-analysis/SKILL.md) | 区分明确表达、一次性决定与观察；证据追溯、更正和情境保留；派发与实际完成分开确认 | 当前直接从原文生成按日结论，并回接 shadow-profile。须改为消费已确认特点，生成规则及可携带目录的独立候选，再由父代理协调版本采纳；需要补规则关联、维护及迟到结果保护 | T018～T026 |
-| [shadow-profile](../../../../packages/skills/src/profile/shadow-profile/SKILL.md) | 仅作为旧行为和历史依据；原样归档范围已明确 | 不作为新入口或首次提炼材料。新记录验收前不移走源码、不删除安装副本；后续核对完整字节再归档和退役 | T027～T029，前置为 T014 |
+| [conversation-recording](../../20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t119/step4/sources/conversation-recording/SKILL.md) | 保存真实可见原文、区分用户发言与宿主注入上下文、写前重读与写后核验、不伪造来源、只补可核实缺项、失败后继续用户工作 | 当前按项目内日期原文写入，排除工具原始参数/返回及附件原件，末轮依赖下一轮补存；还明确排除宿主日志接入。须改为仓库内交互入口自动接入、每会话成对文档、完整可得工具/附件、正常末轮及仓库外资料区，旧摘要/分析分支不直接保留 | T004～T014 |
+| [conversation-summary](../../20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t119/step4/sources/conversation-summary/SKILL.md) | 实际子代理亲自读文件、保存与回传，父代理核验产物；交接保留来源和缺口 | 当前产物是按日摘要，既不逐特点独立成文，也不提供新特点资格判断；不把该目录改名便视为提炼完成，不增加强制摘要阶段 | 新建提炼入口的 T015～T017；旧摘要候选本次保持原样 |
+| [conversation-analysis](../../20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t119/step4/sources/conversation-analysis/SKILL.md) | 区分明确表达、一次性决定与观察；证据追溯、更正和情境保留；派发与实际完成分开确认 | 当前直接从原文生成按日结论，并回接 shadow-profile。须改为消费已确认特点，生成规则及可携带目录的独立候选，再由父代理协调版本采纳；需要补规则关联、维护及迟到结果保护 | T018～T026 |
+| [shadow-profile](../archive/shadow-profile/SKILL.md) | 仅作为旧行为和历史依据；原样归档范围已明确 | 不作为新入口或首次提炼材料。新记录验收前不移走源码、不删除安装副本；后续核对完整字节再归档和退役 | T027～T029，前置为 T014 |
 
 以上复用指有选择地沿用规则和交接经验，不表示旧候选已经覆盖新运行能力。原始对话与私人资料不复制进技能源；首次提炼沿新流程确认记录执行。
 
