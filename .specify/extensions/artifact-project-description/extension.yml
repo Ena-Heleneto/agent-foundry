@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "extension": {
+    "id": "artifact-project-description",
+    "name": "artifact-project-description",
+    "version": "1.0.0",
+    "description": "Foundry workflow hook"
+  },
+  "requires": {
+    "speckit_version": "==1.4.1.dev0"
+  },
+  "provides": {},
+  "hooks": {
+    "after_converge": {
+      "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；输入=FD/spec.md、plan.md、tasks.md、实际验收与交付；目标=FD/descriptions/project-description.md；旧候选=FD/project-description.md；仅真正结案后幂等更新；新路径优先、缺失兼容旧根候选，双路径内容不同报告冲突并停止写入，旧快照保留；调用方提供治理与授权，Markdown 保存后执行 pnpm exec eslint --fix <实际目标> 并读回核对。",
+      "optional": false,
+      "priority": 20,
+      "command": "artifact-project-description"
+    }
+  }
+}

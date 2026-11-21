@@ -1,0 +1,20 @@
+{
+  "removed_at_unix_ms": 1795057637921,
+  "path": "/tmp/foundry-t119-step4-6yig4ais/failure/docs/user-shadow/conversations/2026-11-19.md",
+  "project_relative": "docs/user-shadow/conversations/2026-11-19.md",
+  "device_before": 75,
+  "inode_before": 8763,
+  "same_as_created_obstacle": true,
+  "empty_before_removal": true,
+  "removed_only_empty_directory": true,
+  "conclusions_before_recovery_sha256": "5239109ac6a02dc5f3d6ec5690f61750048afff83e90d4b8492bc7090da5b6d9",
+  "failure_evidence_hashes_before_recovery": {
+    "docs/user-shadow/evidence/summary-2026-11-19-save-result.json": "668ca5b9ca0758b9ddbf9545019876b27e623121499e583211ab0c80c3ebf5cd",
+    "docs/user-shadow/evidence/summary-2026-11-19-precheck.json": "8ae9990eccec88926a02ac72f8dabb34db1d258b31cab9d835c7f30f416c4a85"
+  },
+  "source_version_unchanged": {
+    "conversation-analysis": "03d166cae2ab20e2c47cd496202399640a4d1275e8492729705936b7455e12ea",
+    "conversation-recording": "01e680eebc7d07079e4227253b545d3dc6a9dabc2e32bb1f83f600da7a3053f0",
+    "conversation-summary": "a76a2a38cab9e0d977d7419d5366863b64d36882fbd759775a0d82fbd56921e1"
+  }
+}

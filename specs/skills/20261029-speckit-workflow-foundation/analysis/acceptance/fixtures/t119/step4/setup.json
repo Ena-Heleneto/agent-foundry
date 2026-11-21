@@ -1,0 +1,40 @@
+{
+  "repo": "/home/by152/workspace/ena/agent-foundry/feature/init",
+  "base": "/tmp/foundry-t119-step4-6yig4ais",
+  "project": "/tmp/foundry-t119-step4-6yig4ais/failure",
+  "source_hashes": {
+    "conversation-analysis": "03d166cae2ab20e2c47cd496202399640a4d1275e8492729705936b7455e12ea",
+    "conversation-recording": "01e680eebc7d07079e4227253b545d3dc6a9dabc2e32bb1f83f600da7a3053f0",
+    "conversation-summary": "a76a2a38cab9e0d977d7419d5366863b64d36882fbd759775a0d82fbd56921e1"
+  },
+  "protected_hashes": {
+    "packages/skills/src/profile/shadow-profile/SKILL.md": "d9fe13c9d53f23230ac1063f513d38cab67e7109cd7e042d5e1b44cfb40c3cc4",
+    "packages/skills/src/profile/collection.config.ts": "bc57a788afa9556424548fabc412ee12ad8323d42005566dbe642507dd3f18ec",
+    ".agents/skills/shadow-profile/SKILL.md": "3c35847b795e1cc90fe3d503168cbd31849d607fe0a90abf4d2ab963ebc1049e"
+  },
+  "obstacle": {
+    "project_relative": "docs/user-shadow/conversations/2026-11-19.md",
+    "device": 75,
+    "inode": 8763,
+    "empty": true
+  },
+  "copy": {
+    "command": [
+      "bash",
+      "/home/by152/workspace/ena/agent-foundry/feature/init/scripts/dev/actions/link-skills/link-skills.sh",
+      "/tmp/foundry-t119-step4-6yig4ais/source",
+      "/tmp/foundry-t119-step4-6yig4ais/failure/.agents/skills"
+    ],
+    "stdout": "copy: conversation-analysis\ncopy: conversation-recording\ncopy: conversation-summary\n完成: 新建 3，更新 0，跳过 0，冲突 0\n",
+    "complete_directory_set": [
+      "conversation-analysis",
+      "conversation-recording",
+      "conversation-summary"
+    ],
+    "bytes_equal": true
+  },
+  "other_scope_hashes": {
+    "packages/skills/src/workflow/collection.config.ts": "2fbb724ee9717409b10cd865c36646f90dc3e68a690bfcd5c7fd4f1b05f1b166",
+    "packages/skills/utils/define-collection-handle.ts": "0cb35094eb9616c8120dd25d8c01f877b4f58db265b4a2f1c6f1c963dca6d517"
+  }
+}

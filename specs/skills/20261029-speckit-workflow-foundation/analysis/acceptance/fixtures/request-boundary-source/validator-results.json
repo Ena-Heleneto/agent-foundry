@@ -1,0 +1,46 @@
+[
+  {
+    "version": "baseline",
+    "skill": "task-increment",
+    "command": [
+      "/usr/bin/python3",
+      "<source-home>/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+      "/tmp/foundry-request-implementation-20261112/baseline/task-increment"
+    ],
+    "exit_code": 1,
+    "log": "baseline-task-increment-validator.log"
+  },
+  {
+    "version": "baseline",
+    "skill": "implementation-preparation",
+    "command": [
+      "/usr/bin/python3",
+      "<source-home>/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+      "/tmp/foundry-request-implementation-20261112/baseline/implementation-preparation"
+    ],
+    "exit_code": 1,
+    "log": "baseline-implementation-preparation-validator.log"
+  },
+  {
+    "version": "candidate",
+    "skill": "task-increment",
+    "command": [
+      "/usr/bin/python3",
+      "<source-home>/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+      "/tmp/foundry-request-implementation-20261112/candidate/task-increment"
+    ],
+    "exit_code": 1,
+    "log": "candidate-task-increment-validator.log"
+  },
+  {
+    "version": "candidate",
+    "skill": "implementation-preparation",
+    "command": [
+      "/usr/bin/python3",
+      "<source-home>/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+      "/tmp/foundry-request-implementation-20261112/candidate/implementation-preparation"
+    ],
+    "exit_code": 1,
+    "log": "candidate-implementation-preparation-validator.log"
+  }
+]

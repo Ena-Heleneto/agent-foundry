@@ -1,0 +1,97 @@
+{
+  "scope": "T119 第四步三源：摘要真实保存失败、自然更正的独立分析及恢复；不代表四入口整体完成",
+  "parent_thread_id": "01a1f1c0-26b8-74b1-ac37-83ac9705284a",
+  "summary_thread_id": "01a1f1c1-aa95-75c1-bbbd-90d225a00e6f",
+  "analysis_thread_id": "01a1f1c1-c9c7-71a3-b36b-4ceba8d3418c",
+  "raw_comparisons": [
+    {
+      "phase": "failed",
+      "turn_id": "01a1f1c0-e453-7ce0-927a-32d98e9f4b5b",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03"
+      ],
+      "body_role_order_match": true,
+      "prefix_preserved": true,
+      "current_final_not_presaved": true
+    },
+    {
+      "phase": "before-recovery",
+      "turn_id": "01a1f1c3-91be-78a2-8e8e-1d5ca422da0c",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06"
+      ],
+      "body_role_order_match": true,
+      "prefix_preserved": true,
+      "current_final_not_presaved": true
+    },
+    {
+      "phase": "recovered",
+      "turn_id": "01a1f1c5-da44-78f1-9f83-81f03311c581",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09"
+      ],
+      "body_role_order_match": true,
+      "prefix_preserved": true,
+      "current_final_not_presaved": true
+    }
+  ],
+  "actual_failed_save_call_item": "exec-0289b97c-bba0-43f9-a7d7-e1c413a07b69",
+  "failed_save_call_completed_at_ms": 1795057409245,
+  "save_attempts_before_recovery": 1,
+  "actual_exception": "IsADirectoryError",
+  "errno": 21,
+  "correction_trigger_anchor": "M05",
+  "analysis_dispatch_item": "call_73d218b760ed439e83e865a0c36dafb6",
+  "analysis_dispatch_at_ms": 1795057534330,
+  "correction_analysis_write_at_ms": 1795057556209,
+  "obstacle_removed_at_ms": 1795057637921,
+  "analysis_saved_before_obstacle_recovery": true,
+  "main_wait_agent_calls_in_normal_correction_turn": 0,
+  "original_summary_agent_recovered": true,
+  "recovered_summary_anchors": [
+    "R01",
+    "R02",
+    "R03"
+  ],
+  "conclusions_preserved": [
+    "E01",
+    "E02",
+    "E03"
+  ],
+  "conclusions_bytes_unchanged_on_recovery": true,
+  "original_failure_evidence_bytes_preserved": true,
+  "parent_did_not_write_summary_or_conclusions": true,
+  "final_source_hashes": {
+    "conversation-analysis": "03d166cae2ab20e2c47cd496202399640a4d1275e8492729705936b7455e12ea",
+    "conversation-recording": "01e680eebc7d07079e4227253b545d3dc6a9dabc2e32bb1f83f600da7a3053f0",
+    "conversation-summary": "a76a2a38cab9e0d977d7419d5366863b64d36882fbd759775a0d82fbd56921e1"
+  },
+  "protected_hashes": {
+    "packages/skills/src/profile/shadow-profile/SKILL.md": "d9fe13c9d53f23230ac1063f513d38cab67e7109cd7e042d5e1b44cfb40c3cc4",
+    "packages/skills/src/profile/collection.config.ts": "bc57a788afa9556424548fabc412ee12ad8323d42005566dbe642507dd3f18ec",
+    ".agents/skills/shadow-profile/SKILL.md": "3c35847b795e1cc90fe3d503168cbd31849d607fe0a90abf4d2ab963ebc1049e"
+  },
+  "comparison_note": "仅排除宿主事件末尾单个结构换行，内部正文不归一化；所有输入为合成演练，不是真实本人画像。",
+  "unverified": [
+    "T119 第五步画像自动交接及反例",
+    "四源整体消费",
+    "完整摘要/分析恢复矩阵、有限重试",
+    "共享提交、根替换及遗忘",
+    "本人真实应用"
+  ]
+}

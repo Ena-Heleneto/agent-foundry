@@ -1,0 +1,34 @@
+{
+  "name": "@foundry/skills",
+  "type": "module",
+  "version": "0.1.0",
+  "private": false,
+  "description": "ENA suite 自定义 agent skill 内容包（scripts/dev 软链挂载源，发布渠道推后到有真实消费者时启用）",
+  "license": "ISC",
+  "publishConfig": { "registry": "https://npm.pkg.github.com" },
+  "imports": {
+    "#package.json": "./package.json",
+    "#install.source.sh": "./build/plugins/vite-plugin-curl/install.source.sh",
+    "#src": "./src",
+    "#src/*": "./src/*.ts",
+    "#utils/*": "./utils/*.ts",
+    "#build/*": "./build/*.ts"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint .",
+    "check-types": "tsc --noEmit",
+    "test": "python -B -m unittest discover -s tests -p \"test_*.py\"",
+    "test:distribution": "node tests/distribution/test-distribution.mjs"
+  },
+  "devDependencies": {
+    "@foundry/preset-config": "workspace:*",
+    "@types/node": "catalog:types",
+    "consola": "catalog:shared",
+    "defu": "catalog:shared",
+    "sh-syntax": "0.8.7",
+    "vite": "catalog:build",
+    "yaml": "catalog:shared"
+  }
+}

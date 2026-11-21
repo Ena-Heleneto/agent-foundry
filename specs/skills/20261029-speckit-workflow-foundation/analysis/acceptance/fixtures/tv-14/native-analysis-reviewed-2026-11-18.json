@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "host_profile": "codex-0.169.0-item-completed",
+  "scope": "analysis-subagent",
+  "started_at_ns": 1794966781550606170,
+  "runtime_sha256": "e8ba82a4a2c322de5469f1cc573682e7339a6004a81739bcfc361959217efc5e",
+  "real_memory_enabled": false,
+  "model_message_saves": 0,
+  "checked_at_ns": 1794966829942181421,
+  "recorded_count": 1,
+  "native_final_count": 1,
+  "text_role_phase_order_identity_equal": true,
+  "final_completed_at_ms": 1794966829905,
+  "final_observed_at_ns": 1794966829906124761,
+  "final_saved_and_read_back_at_ns": 1794966829936760959,
+  "saved_before_next_user_input": true,
+  "primary_final_verified": false,
+  "cleanup_complete": true
+}

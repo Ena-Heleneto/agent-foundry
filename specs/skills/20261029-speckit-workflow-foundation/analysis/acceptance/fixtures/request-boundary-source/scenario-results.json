@@ -1,0 +1,60 @@
+{
+  "coverage": "独立只读场景判断，非真实用户使用/自然发现/安装消费",
+  "baseline": [
+    {
+      "agent": "/root/boundary_baseline_increment",
+      "skill": "task-increment",
+      "cases": {
+        "A": "停止本技能规划写入；缺plan，当前技能没有独立文档修订分支，用户授权Spec尚未修改",
+        "B": "先同步上游再更新MVU和任务，不写业务代码",
+        "C": "先澄清具体变更，不按无描述分支重排"
+      },
+      "regression_observed": [
+        "A：Spec修订被误载的规划前置挡住"
+      ]
+    },
+    {
+      "agent": "/root/boundary_baseline_preparation",
+      "skill": "implementation-preparation",
+      "cases": {
+        "A": "独立文档修订，不需要Plan/MVU/Task",
+        "B": "仅规划，不要求单Task实施方案",
+        "C": "实施准备复用已有有效认可，核查后交回实施"
+      },
+      "regression_observed": []
+    }
+  ],
+  "baseline_sources": {
+    "task-increment": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a",
+    "implementation-preparation": "50510c75e684f753c972c61c3a523a1a59a9022b3ddfb78d73f60af024da46ea"
+  },
+  "candidate": [
+    {
+      "agent": "/root/boundary_after_increment",
+      "skill": "task-increment",
+      "cases": {
+        "A": "退出本技能的实施规划分支，将请求交回调用方，在已确认范围内修订原Spec；不要求Plan/MVU/Task，不阻止调用方修订",
+        "B": "先同步获确认的Spec，再修改受影响规划，不进入代码",
+        "C": "先澄清具体修改，不当成无描述重排"
+      },
+      "scope": "只读规则判定，未执行文件写入或实际用户验收"
+    },
+    {
+      "agent": "/root/boundary_after_preparation",
+      "skill": "implementation-preparation",
+      "cases": {
+        "A": "只修Spec，不进入正式Task实施准备，不因规划材料缺失阻止",
+        "B": "规划调整不要求单Task认可方案，也不自动写业务代码",
+        "C": "实际核对材料后复用已有有效认可，不重复审批"
+      },
+      "scope": "只读规则判定，未执行文件写入或实际用户验收"
+    }
+  ],
+  "review": {
+    "agent": "/root/review_request_boundary",
+    "critical": 0,
+    "important": 0,
+    "minor": 0,
+    "scope": "只读源码差异审查，未验证真实自然发现/正式安装/用户效果"
+  }
+}

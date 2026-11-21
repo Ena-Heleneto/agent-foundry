@@ -1,0 +1,80 @@
+{
+  "sourceCommit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f",
+  "purpose": "仅供官方迁移测试构造旧登记，不能作为当前注册或发布来源。",
+  "hooks": {
+    "artifact-issue-description": {
+      "after_specify": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；输入=FD/spec.md 原始需求；目标=FD/descriptions/issue-description.md；旧候选=FD/issue-description.md；新旧任一已有文件跳过自动生成；新路径优先、缺失兼容旧根候选，双路径内容不同报告冲突并停止写入，旧快照保留；调用方提供治理与授权，Markdown 保存后执行 pnpm exec eslint --fix <实际目标> 并读回核对。",
+        "optional": false,
+        "priority": 20
+      }
+    },
+    "artifact-pr-description": {
+      "after_clarify": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；输入=FD/spec.md 澄清结论；目标=FD/descriptions/pr-description.md；旧候选=FD/pr-description.md；新旧任一已有文件跳过自动生成；新路径优先、缺失兼容旧根候选，双路径内容不同报告冲突并停止写入，旧快照保留；调用方提供治理与授权，Markdown 保存后执行 pnpm exec eslint --fix <实际目标> 并读回核对。",
+        "optional": false,
+        "priority": 20
+      }
+    },
+    "mvu-gate": {
+      "before_plan": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；操作意图=识别风险；输入=治理 III、FD/spec.md 与方案；回传=计划执行者；要求 FD/plan.md 的 MVU 判定包含 C1-C4 命中事实、三项豁免和待验证假设/验收信号；治理文档=.specify/memory/constitution.md；仅执行本次门禁或校验，不另建状态系统。",
+        "optional": false,
+        "priority": 10
+      },
+      "after_plan": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；操作意图=核查计划；输入=治理 III、FD/plan.md；回传=缺失项位置或扫描/豁免结论；失败明确报告，不静默通过，按原约定不阻断原命令完成；治理文档=.specify/memory/constitution.md；仅执行本次门禁或校验，不另建状态系统。",
+        "optional": false,
+        "priority": 10
+      },
+      "before_tasks": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；操作意图=安排前置验证；输入=治理 III、FD/plan.md 的 MVU 判定；回传=任务执行者；FD/tasks.md 为每项生成有信号/骨架保留的前置任务并显式阻塞下游；治理文档=.specify/memory/constitution.md；仅执行本次门禁或校验，不另建状态系统。",
+        "optional": false,
+        "priority": 10
+      },
+      "after_tasks": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；操作意图=核查依赖；输入=治理 III、FD/plan.md、FD/tasks.md；回传=缺失标记、前置任务、信号与依赖位置；失败明确报告，不静默通过，按原约定不阻断原命令完成；治理文档=.specify/memory/constitution.md；仅执行本次门禁或校验，不另建状态系统。",
+        "optional": false,
+        "priority": 10
+      },
+      "before_implement": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；操作意图=实施门禁；输入=治理 III、FD/plan.md、FD/tasks.md 与实际证据；未验阻止下游，新风险先报告确认，通过保留骨架，失败回计划；读取当前用户协作约定，按原生工程验收与断点继续；治理文档=.specify/memory/constitution.md；仅执行本次门禁或校验，不另建状态系统。",
+        "optional": false,
+        "priority": 10
+      }
+    },
+    "artifact-business-flow": {
+      "after_plan": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；输入=FD/plan.md、FD/spec.md 及可用研究；目标=FD/diagrams/business-flow.md；旧候选=FD/business-flow.md；标准=一图一事、术语大白话、代码/产物位置；新路径优先、缺失兼容旧根候选，双路径内容不同报告冲突并停止写入，旧快照保留；调用方提供治理与授权，Markdown 保存后执行 pnpm exec eslint --fix <实际目标> 并读回核对。",
+        "optional": false,
+        "priority": 20
+      }
+    },
+    "artifact-logic-flow": {
+      "after_tasks": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；输入=FD/tasks.md 的有效任务/依赖/并行/检查点，排除归档失效做法；目标=FD/diagrams/logic-flow.md；旧候选=FD/logic-flow.md；新路径优先、缺失兼容旧根候选，双路径内容不同报告冲突并停止写入，旧快照保留；调用方提供治理与授权，Markdown 保存后执行 pnpm exec eslint --fix <实际目标> 并读回核对。",
+        "optional": false,
+        "priority": 20
+      }
+    },
+    "explainer-doc-sync": {
+      "before_implement": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；操作意图=提示知识点，只有用户明确指出才生成或复用；文档目标=已有站点或 FD/explainers/<主题>.md；引用目标=FD/tasks.md 随行文档节；调用方提供治理与授权，Markdown 保存后执行 pnpm exec eslint --fix <实际目标> 并读回核对。",
+        "optional": true,
+        "priority": 20
+      },
+      "after_implement": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；操作意图=校验本轮生成或复用的知识说明及引用；文档范围=已有站点或 FD/explainers/；引用目标=FD/tasks.md 随行文档节，缺引用才补齐，无资料不建空节；调用方提供治理与授权，Markdown 保存后执行 pnpm exec eslint --fix <实际目标> 并读回核对。",
+        "optional": false,
+        "priority": 20
+      }
+    },
+    "artifact-project-description": {
+      "after_converge": {
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析并校验为仓库内 FD；输入=FD/spec.md、plan.md、tasks.md、实际验收与交付；目标=FD/descriptions/project-description.md；旧候选=FD/project-description.md；仅真正结案后幂等更新；新路径优先、缺失兼容旧根候选，双路径内容不同报告冲突并停止写入，旧快照保留；调用方提供治理与授权，Markdown 保存后执行 pnpm exec eslint --fix <实际目标> 并读回核对。",
+        "optional": false,
+        "priority": 20
+      }
+    }
+  }
+}

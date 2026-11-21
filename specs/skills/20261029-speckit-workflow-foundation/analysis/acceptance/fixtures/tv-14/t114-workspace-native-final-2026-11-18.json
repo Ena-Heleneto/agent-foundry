@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "scope": "installed_T114_workspace_root",
+  "runtime_sha256": "e8ba82a4a2c322de5469f1cc573682e7339a6004a81739bcfc361959217efc5e",
+  "started_at_ns": 1794982909254442226,
+  "observation_creates_no_recorder": true,
+  "checked_at_ns": 1794983003087600760,
+  "recorded_count": 5,
+  "native_final_count": 1,
+  "text_role_phase_order_identity_equal": true,
+  "saved_before_next_user_input": true,
+  "final_saved_and_read_back_at_ns": 1794983002998494041,
+  "workspace_recorder_left_running": true
+}

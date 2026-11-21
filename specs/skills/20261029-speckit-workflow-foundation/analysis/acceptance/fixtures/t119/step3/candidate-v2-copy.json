@@ -1,0 +1,15 @@
+{
+  "command": [
+    "bash",
+    "/home/by152/workspace/ena/agent-foundry/feature/init/scripts/dev/actions/link-skills/link-skills.sh",
+    "/tmp/foundry-t119-step3-qcbpc735/candidate-input",
+    "/tmp/foundry-t119-step3-qcbpc735/candidate/.agents/skills"
+  ],
+  "stdout": "update(已更新): conversation-analysis\nupdate(已更新): conversation-recording\nskip(已是最新): conversation-summary\n完成: 新建 0，更新 2，跳过 1，冲突 0\n",
+  "hashes": {
+    "conversation-recording": "01e680eebc7d07079e4227253b545d3dc6a9dabc2e32bb1f83f600da7a3053f0",
+    "conversation-summary": "a76a2a38cab9e0d977d7419d5366863b64d36882fbd759775a0d82fbd56921e1",
+    "conversation-analysis": "03d166cae2ab20e2c47cd496202399640a4d1275e8492729705936b7455e12ea"
+  },
+  "bytes_equal": true
+}

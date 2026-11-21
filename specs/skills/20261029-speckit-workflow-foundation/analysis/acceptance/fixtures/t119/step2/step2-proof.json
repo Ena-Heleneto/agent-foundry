@@ -1,0 +1,161 @@
+{
+  "scope": "T119 第二步；同一宿主启用一轮及后续三轮普通交互，目标文件单写入者",
+  "comparison": "完整可见正文、角色及顺序；仅去除宿主文本事件末尾单个结构换行，围栏分隔换行不计正文，不泛化复杂空白支持",
+  "baseline": "仅记录候选下主 AI 自写摘要，无摘要子代理；保留为失败对照",
+  "parent_thread_id": "01a1f197-28f9-7481-b949-c39383b9079f",
+  "turns": [
+    {
+      "label": "pair-enable",
+      "turn_id": "01a1f197-2c75-7e22-bf33-b26d3e5bce28",
+      "child_thread_id": "01a1f197-de94-7b22-99f4-b69ef3afe851",
+      "dispatch_kind": "started",
+      "raw_anchors": [
+        "M01",
+        "M02"
+      ],
+      "summary_anchors": [
+        "R01"
+      ],
+      "raw_messages_match_visible_source": true,
+      "old_raw_prefix_unchanged": true,
+      "parent_skill_load_and_raw_read_before_dispatch": true,
+      "child_skill_load_raw_read_summary_write_readback": true,
+      "parent_summary_readback": true,
+      "parent_file_change_writes_summary": false,
+      "all_raw_anchors_referenced": true,
+      "current_final_not_presaved": true,
+      "last_parent_read_before_dispatch_item": "exec-c1ab7cdf-97c6-4078-901f-0fc6d1f01449",
+      "child_write_item": "exec-ebe54a90-4025-4685-9099-134eb1457801",
+      "child_readback_item": "exec-48b2c0a3-9241-414d-a471-05346a6043de",
+      "parent_readback_item": "exec-9434f9d1-d23b-44df-b93c-ba8354853879"
+    },
+    {
+      "label": "pair-round1",
+      "turn_id": "01a1f198-e51e-7d72-ae15-220804e5ea79",
+      "child_thread_id": "01a1f197-de94-7b22-99f4-b69ef3afe851",
+      "dispatch_kind": "interacted",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05"
+      ],
+      "summary_anchors": [
+        "R01",
+        "R02"
+      ],
+      "raw_messages_match_visible_source": true,
+      "old_raw_prefix_unchanged": true,
+      "parent_skill_load_and_raw_read_before_dispatch": true,
+      "child_skill_load_raw_read_summary_write_readback": true,
+      "parent_summary_readback": true,
+      "parent_file_change_writes_summary": false,
+      "all_raw_anchors_referenced": true,
+      "current_final_not_presaved": true,
+      "last_parent_read_before_dispatch_item": "exec-b926f946-f662-4b81-834c-027ce81cde13",
+      "child_write_item": "exec-57ee3ac5-0ed1-4501-85f5-a86d937b1975",
+      "child_readback_item": "exec-9484a53f-5328-42b4-8896-8f89bc05f67d",
+      "parent_readback_item": "exec-cdccfd11-255e-443f-8ea0-1bc19c6b3422"
+    },
+    {
+      "label": "pair-round2",
+      "turn_id": "01a1f19a-36af-7f40-b13e-e01bd2a08adc",
+      "child_thread_id": "01a1f197-de94-7b22-99f4-b69ef3afe851",
+      "dispatch_kind": "interacted",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08"
+      ],
+      "summary_anchors": [
+        "R01",
+        "R02",
+        "R03"
+      ],
+      "raw_messages_match_visible_source": true,
+      "old_raw_prefix_unchanged": true,
+      "parent_skill_load_and_raw_read_before_dispatch": true,
+      "child_skill_load_raw_read_summary_write_readback": true,
+      "parent_summary_readback": true,
+      "parent_file_change_writes_summary": false,
+      "all_raw_anchors_referenced": true,
+      "current_final_not_presaved": true,
+      "last_parent_read_before_dispatch_item": "exec-d61c2555-ba0e-4b7b-a9bd-b24dddbe0f55",
+      "child_write_item": "exec-ad4d15a4-7f0f-4875-8927-f04ab11ec418",
+      "child_readback_item": "exec-08b7e192-b258-409c-b6d3-36d478c4e856",
+      "parent_readback_item": "exec-7c106683-3fa1-4fbf-862a-306dfe6d1d76"
+    },
+    {
+      "label": "pair-round3",
+      "turn_id": "01a1f19b-f918-78d0-84ed-a9f8b2deb24c",
+      "child_thread_id": "01a1f197-de94-7b22-99f4-b69ef3afe851",
+      "dispatch_kind": "interacted",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11"
+      ],
+      "summary_anchors": [
+        "R01",
+        "R02",
+        "R03",
+        "R04"
+      ],
+      "raw_messages_match_visible_source": true,
+      "old_raw_prefix_unchanged": true,
+      "parent_skill_load_and_raw_read_before_dispatch": true,
+      "child_skill_load_raw_read_summary_write_readback": true,
+      "parent_summary_readback": true,
+      "parent_file_change_writes_summary": false,
+      "all_raw_anchors_referenced": true,
+      "current_final_not_presaved": true,
+      "last_parent_read_before_dispatch_item": "exec-98d04786-f560-4a4c-8b33-122f587b3904",
+      "child_write_item": "exec-0f5948de-6942-4259-8c1d-8769d4022281",
+      "child_readback_item": "exec-2607770f-5ceb-4e19-b68b-c15f78b99e02",
+      "parent_readback_item": "exec-b041a1b6-492f-422e-8c17-9370489f6aac"
+    }
+  ],
+  "protected_hashes": {
+    "packages/skills/src/profile/shadow-profile/SKILL.md": "d9fe13c9d53f23230ac1063f513d38cab67e7109cd7e042d5e1b44cfb40c3cc4",
+    "packages/skills/src/profile/collection.config.ts": "bc57a788afa9556424548fabc412ee12ad8323d42005566dbe642507dd3f18ec",
+    ".agents/skills/shadow-profile/SKILL.md": "3c35847b795e1cc90fe3d503168cbd31849d607fe0a90abf4d2ab963ebc1049e"
+  },
+  "final_sources_equal_copies": true,
+  "no_spec_kit_or_project_routing": true,
+  "no_analysis_or_profile_artifacts": true,
+  "not_verified": [
+    "T119 第三至第五步",
+    "摘要失败/恢复完整矩阵",
+    "T117 共享提交、根替换及遗忘",
+    "T118 最终四源消费",
+    "T112 本人真实应用"
+  ],
+  "recording_without_summary_skill": {
+    "label": "recording-only-final",
+    "source_sha256": "b32c3a88498551c4259a205d7698503decab165f31caf6642e392abe56913741",
+    "project_files": [
+      "docs/user-shadow.recording-control.md",
+      "docs/user-shadow/conversations/raw/2026-11-19.md",
+      "docs/user-shadow/coverage.md"
+    ],
+    "raw_matches_user_and_visible_commentary": true,
+    "no_summary_artifact_or_child_dispatch": true,
+    "final_reports_missing_skill_and_continues_answer": true,
+    "final_not_presaved": true
+  },
+  "verification_harness_correction": "首次回归清单断言遗漏 Skill 允许的覆盖说明，退出 1；读回实际 coverage.md 确认仅记录缺口及恢复入口后，核对三文件清单及其内容通过；未修改产品或放松摘要/原文断言。"
+}

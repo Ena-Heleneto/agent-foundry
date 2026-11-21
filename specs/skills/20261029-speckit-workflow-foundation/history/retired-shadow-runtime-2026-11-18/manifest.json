@@ -1,0 +1,14 @@
+{
+  "packages/skills/src/profile/shadow-profile/SKILL.md": {
+    "archive": "SKILL.before.md",
+    "sha256": "8d02d669ab1f5af5fb2268f9c809bb0a5ea933597fe92afc01ee14b10fa2349c"
+  },
+  "packages/skills/src/profile/shadow-profile/scripts/shadow_runtime.py": {
+    "archive": "scripts/shadow_runtime.py",
+    "sha256": "3190b66cc2f40912ce0d1ec5aebd0e54f2a599c6fbf135850346ca4fce9374b4"
+  },
+  "packages/skills/src/profile/shadow-profile/references/host-contract.md": {
+    "archive": "references/host-contract.md",
+    "sha256": "a77a8ea19fafc4608efe68e29d9b9aab0663e32d286f9561ad1b76f58c6af173"
+  }
+}

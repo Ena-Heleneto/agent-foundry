@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "host_profile": "codex-0.169.0-item-completed",
+  "scope": "primary",
+  "started_at_ns": 1794974853514608455,
+  "runtime_sha256": "3190b66cc2f40912ce0d1ec5aebd0e54f2a599c6fbf135850346ca4fce9374b4",
+  "real_memory_enabled": false,
+  "model_message_saves": 0,
+  "checked_at_ns": 1794974989655934385,
+  "recorded_count": 2,
+  "native_final_count": 1,
+  "text_role_phase_order_identity_equal": true,
+  "final_completed_at_ms": 1794974989542,
+  "final_observed_at_ns": 1794974989549731396,
+  "final_saved_and_read_back_at_ns": 1794974989581297875,
+  "saved_before_next_user_input": true,
+  "primary_final_verified": true,
+  "cleanup_complete": true
+}

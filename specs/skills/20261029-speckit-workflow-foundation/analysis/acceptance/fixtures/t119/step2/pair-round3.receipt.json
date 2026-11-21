@@ -1,0 +1,24 @@
+{
+  "label": "pair-round3",
+  "project": "/tmp/foundry-t119-step2-ytn2iqb6/candidate",
+  "command": [
+    "codex",
+    "exec",
+    "--json",
+    "-c",
+    "sandbox_mode=\"workspace-write\"",
+    "-c",
+    "approval_policy=\"never\"",
+    "resume",
+    "01a1f197-28f9-7481-b949-c39383b9079f",
+    "-"
+  ],
+  "prompt": "好。",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 75.894,
+  "events": 15,
+  "session_id": "01a1f197-28f9-7481-b949-c39383b9079f",
+  "stderr_line_count": 0,
+  "stderr_errors": []
+}

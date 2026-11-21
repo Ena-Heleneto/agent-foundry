@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.nuxt/
+.output/
+.turbo/
+.data/
+.cache/
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+pnpm-lock.yaml
+.agents/skills/
+skills-lock.json

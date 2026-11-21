@@ -1,0 +1,33 @@
+{
+  "status_at_observation": "capturing_after_same_session_recovery",
+  "checked_at_ns": 1794971368322043379,
+  "host_profile": "codex-0.169.0-item-completed",
+  "isolated_memory_only": true,
+  "observation_window_seconds": null,
+  "capture_ready_verified": true,
+  "verified_saved_count": 12,
+  "verified_distinct_turn_count": 4,
+  "raw_and_source_equal_for_checked_receipts": true,
+  "model_message_saves": 0,
+  "multi_turn_acceptance": "pending",
+  "limitations": [
+    "只对实际收据覆盖作核对，未接入前历史不计本次自动保存。",
+    "当前不足多轮验收；900秒是测试窗口，不是会话结束或分析时限。"
+  ],
+  "verified_user_message_count": 3,
+  "complete_user_and_final_rounds": 2,
+  "test_alarm_exit_code": 142,
+  "latest_test_input_live_capture_verified": true,
+  "stop_observation": "原5条已存，测试一尚未由该次运行保存；后续恢复须与实时保存分开。",
+  "first_test_window_seconds": 900,
+  "test_one_saved_on_recovery": true,
+  "original_five_record_prefix_unchanged": true,
+  "original_events_replayed_without_duplicate_receipts": true,
+  "duplicate_identity_count": 0,
+  "recovery_scope": "当前仍运行会话内，原合法起点重读去重；原5条不重复，新增源事件恢复写入，不能计作到达时实时保存。",
+  "post_recovery_new_commentary_automatically_saved": true,
+  "test_two_saved_live": true,
+  "test_two_saved_before_current_agent_commentary": true,
+  "previous_turn_ordinary_final_automatically_saved": true,
+  "all_visible_source_events_in_verified_prefix_match": true
+}

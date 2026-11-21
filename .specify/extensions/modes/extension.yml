@@ -1,0 +1,15 @@
+schema_version: '1.0'
+extension:
+  id: modes
+  name: Increment
+  version: 1.0.0
+  description: Foundry Increment
+
+requires:
+  speckit_version: ==1.4.1.dev0
+
+provides:
+  commands:
+    - name: speckit.modes.increment
+      file: skills/task-increment/SKILL.md
+      description: 用户在已有 Spec Kit 方案上需要规划或增量调整业务闭环、任务拆分、依赖或推进顺序时使用。仅修订 Spec 的需求定义、业务规则或验收表述且不涉及实施规划变化时不使用。

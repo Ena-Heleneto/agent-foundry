@@ -1,0 +1,41 @@
+{
+  "kind": "isolated_native_cli_with_local_model_fixture",
+  "cliVersion": "0.169.0",
+  "currentChatAttached": false,
+  "automaticRecords": [
+    {
+      "role": "assistant",
+      "itemId": "item_1",
+      "phase": null,
+      "text": "AUTO_FIXTURE_COMMENTARY_28A6",
+      "observedAtNs": 1794817092365063349,
+      "writtenAtNs": 1794817092365303443
+    },
+    {
+      "role": "assistant",
+      "itemId": "item_2",
+      "phase": null,
+      "text": "AUTO_FIXTURE_FINAL_93D1",
+      "observedAtNs": 1794817092365404831,
+      "writtenAtNs": 1794817092365506880
+    }
+  ],
+  "eventTypes": [
+    "thread.started",
+    "item.completed",
+    "turn.started",
+    "item.completed",
+    "item.completed",
+    "turn.completed"
+  ],
+  "startedAtNs": 1794817086829594863,
+  "turnCompletedEventSeen": true,
+  "exitCode": -15,
+  "httpRequestCount": 1,
+  "httpPaths": [
+    "/v1/responses"
+  ],
+  "matchedCommentary": true,
+  "matchedFinal": true,
+  "finishedAtNs": 1794817095849062479
+}

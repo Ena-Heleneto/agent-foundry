@@ -1,0 +1,267 @@
+{
+  "purpose": "T103本轮静态证据索引，不是安装状态或工程进度来源",
+  "date": "2026-11-10",
+  "T103_complete": false,
+  "versions": {
+    "specify": "1.2.6",
+    "skills": "1.7.4",
+    "codex_cli": "0.167.0",
+    "configured_default_model": "gpt-6.1-sol",
+    "configured_default_effort": "high",
+    "model_override": false
+  },
+  "candidate_files_sha256": {
+    "SKILL.md": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+    "speckit-hooks.json": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013"
+  },
+  "cases": [
+    {
+      "case": "condition-false",
+      "verdict": "OBSERVED_STOP_WITHOUT_BUSINESS",
+      "runtime_exit": 0,
+      "events": 27,
+      "changed_files": [],
+      "candidate_full_text_in_tool_return": true,
+      "constitution_full_text_in_tool_return": true,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "initial_capture_scope": "whole_project_tree",
+      "raw_directory": "raw/condition-false"
+    },
+    {
+      "case": "condition-illegal",
+      "verdict": "OBSERVED_STOP_WITHOUT_BUSINESS",
+      "runtime_exit": 0,
+      "events": 26,
+      "changed_files": [],
+      "candidate_full_text_in_tool_return": true,
+      "constitution_full_text_in_tool_return": true,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [
+        "brainstorming",
+        "using-superpowers"
+      ],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "initial_capture_scope": "whole_project_tree",
+      "raw_directory": "raw/condition-illegal"
+    },
+    {
+      "case": "condition-true",
+      "verdict": "OBSERVED_STOP_WITHOUT_BUSINESS",
+      "runtime_exit": 0,
+      "events": 35,
+      "changed_files": [
+        ".gitignore",
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/tasks.md"
+      ],
+      "candidate_full_text_in_tool_return": true,
+      "constitution_full_text_in_tool_return": true,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "initial_capture_scope": "whole_project_tree",
+      "raw_directory": "raw/condition-true"
+    },
+    {
+      "case": "configuration-broken",
+      "verdict": "INCONCLUSIVE_MALFORMED_YAML_PATH",
+      "runtime_exit": 0,
+      "events": 30,
+      "changed_files": [],
+      "candidate_full_text_in_tool_return": true,
+      "constitution_full_text_in_tool_return": true,
+      "yaml_parser_unavailable": true,
+      "external_skill_files_read": [
+        "brainstorming",
+        "using-superpowers"
+      ],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "initial_capture_scope": "whole_project_tree",
+      "raw_directory": "raw/configuration-broken"
+    },
+    {
+      "case": "configuration-missing",
+      "verdict": "OBSERVED_STOP_WITHOUT_BUSINESS",
+      "runtime_exit": 0,
+      "events": 25,
+      "changed_files": [],
+      "candidate_full_text_in_tool_return": true,
+      "constitution_full_text_in_tool_return": true,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "initial_capture_scope": "whole_project_tree",
+      "raw_directory": "raw/configuration-missing"
+    },
+    {
+      "case": "control-no-guidance",
+      "verdict": "CONTROL_RED",
+      "runtime_exit": 0,
+      "events": 30,
+      "changed_files": [
+        "order.py",
+        "specs/demo/001-order/tasks.md"
+      ],
+      "candidate_full_text_in_tool_return": false,
+      "constitution_full_text_in_tool_return": false,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [
+        "executing-plans",
+        "test-driven-development",
+        "using-git-worktrees",
+        "using-superpowers",
+        "verification-before-completion"
+      ],
+      "task_markers_after": {
+        "T001": "x",
+        "T002": " "
+      },
+      "initial_capture_scope": "focused_files",
+      "raw_directory": "raw/control-no-guidance-attempt-2"
+    },
+    {
+      "case": "discussion-only",
+      "verdict": "OBSERVED_EXPLANATION_ONLY",
+      "runtime_exit": 0,
+      "events": 13,
+      "changed_files": [],
+      "candidate_full_text_in_tool_return": false,
+      "constitution_full_text_in_tool_return": false,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "initial_capture_scope": "whole_project_tree",
+      "raw_directory": "raw/discussion-only"
+    },
+    {
+      "case": "explicit-no-plan",
+      "verdict": "OBSERVED_STOP_WITHOUT_BUSINESS",
+      "runtime_exit": 0,
+      "events": 22,
+      "changed_files": [],
+      "candidate_full_text_in_tool_return": true,
+      "constitution_full_text_in_tool_return": true,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "initial_capture_scope": "focused_files",
+      "raw_directory": "raw/explicit-no-plan"
+    },
+    {
+      "case": "hook-disabled",
+      "verdict": "OBSERVED_STOP_WITHOUT_BUSINESS",
+      "runtime_exit": 0,
+      "events": 20,
+      "changed_files": [],
+      "candidate_full_text_in_tool_return": true,
+      "constitution_full_text_in_tool_return": true,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [
+        "brainstorming",
+        "using-superpowers"
+      ],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "initial_capture_scope": "whole_project_tree",
+      "raw_directory": "raw/hook-disabled"
+    },
+    {
+      "case": "natural-no-plan",
+      "verdict": "OBSERVED_STOP_WITHOUT_BUSINESS",
+      "runtime_exit": 0,
+      "events": 32,
+      "changed_files": [
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/tasks.md"
+      ],
+      "candidate_full_text_in_tool_return": true,
+      "constitution_full_text_in_tool_return": true,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "initial_capture_scope": "whole_project_tree",
+      "raw_directory": "raw/natural-no-plan"
+    },
+    {
+      "case": "no-constitution-no-hook",
+      "verdict": "OBSERVED_STOP_WITHOUT_BUSINESS",
+      "runtime_exit": 0,
+      "events": 20,
+      "changed_files": [],
+      "candidate_full_text_in_tool_return": true,
+      "constitution_full_text_in_tool_return": false,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "initial_capture_scope": "whole_project_tree",
+      "raw_directory": "raw/no-constitution-no-hook"
+    },
+    {
+      "case": "positive-a",
+      "verdict": "OBSERVED_APPROVED_A_ONLY",
+      "runtime_exit": 0,
+      "events": 44,
+      "changed_files": [
+        ".gitignore",
+        "order.py",
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/tasks.md"
+      ],
+      "candidate_full_text_in_tool_return": true,
+      "constitution_full_text_in_tool_return": true,
+      "yaml_parser_unavailable": false,
+      "external_skill_files_read": [],
+      "task_markers_after": {
+        "T001": "x",
+        "T002": " "
+      },
+      "initial_capture_scope": "whole_project_tree",
+      "raw_directory": "raw/positive-a"
+    }
+  ],
+  "remaining": [
+    "独立验证坏YAML实际解析错误路径",
+    "hook调用失败及准备skill缺失/过期/不可读",
+    "方案保存失败及恢复",
+    "连续Task与真实并行边界",
+    "中断恢复、普通调整与实质变化",
+    "跨Task影响与共同认可范围"
+  ],
+  "limits": [
+    "仅本机当前宿主配置中的样本，不承诺跨平台或所有请求",
+    "部分场景实际加载了全局辅助技能，不能唯一归因停止于候选",
+    "configuration-broken真实错误是YAML解析器不可用，未单独覆盖坏YAML解析路径",
+    "前期两个样本只采集重点文件摘要，后续采集项目全树；范围逐例列明"
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "case": "recording",
+    "source_files": [
+      "SKILL.md"
+    ],
+    "source_sha256": "4c0db0171e633ab3951c6b8f7027fbbcaf7f93f7f0824b8b0fb55d8542b07c37",
+    "copy_sha256": "4c0db0171e633ab3951c6b8f7027fbbcaf7f93f7f0824b8b0fb55d8542b07c37",
+    "copy_output": "copy: conversation-recording\n完成: 新建 1，更新 0，跳过 0，冲突 0",
+    "diff_exit_code": 0
+  },
+  {
+    "case": "explicit",
+    "source_files": [
+      "SKILL.md"
+    ],
+    "source_sha256": "4c0db0171e633ab3951c6b8f7027fbbcaf7f93f7f0824b8b0fb55d8542b07c37",
+    "copy_sha256": "4c0db0171e633ab3951c6b8f7027fbbcaf7f93f7f0824b8b0fb55d8542b07c37",
+    "copy_output": "copy: conversation-recording\n完成: 新建 1，更新 0，跳过 0，冲突 0",
+    "diff_exit_code": 0
+  }
+]

@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "scope": "local-workspace-host-consumption",
+  "version": "0.1.0",
+  "sourceRevision": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f",
+  "candidateDigest": "498f5e8984061c21344ed3c4566ceb5dea1ce0e1301f0fb01342e396b8bdc8e6",
+  "cliVersionObserved": "0.167.2",
+  "modelSelection": "existing-selection-not-overridden",
+  "modelIdentityInJsonl": null,
+  "fullSuite": {
+    "tests": 133,
+    "passed": 133,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 426396.791543
+  },
+  "hostMainDurationMs": 248944.100476,
+  "cases": [
+    {
+      "case": "after_tasks",
+      "outcome": "completed",
+      "traceBytes": 111171,
+      "commandCount": 41,
+      "nonzeroCommandCount": 0,
+      "readCommandCount": 31,
+      "logicalReadIdCount": 1,
+      "readFiles": [
+        {
+          "path": ".agents/skills/artifact-project-description/SKILL.md",
+          "bytes": 1675,
+          "sha256": "68aa274a0649da3a16eca2df56403564ac6f948f9bff5368c5c58825e02053ac",
+          "chunkOffsets": [
+            0
+          ]
+        },
+        {
+          "path": ".agents/skills/artifact-spec-analysis/SKILL.md",
+          "bytes": 3484,
+          "sha256": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323",
+          "chunkOffsets": [
+            0,
+            2047
+          ]
+        },
+        {
+          "path": ".agents/skills/bug-report/SKILL.md",
+          "bytes": 1421,
+          "sha256": "ad19b3aff08b3d448e43feb46fbcf56d009eec57105935436557434603adebc6",
+          "chunkOffsets": [
+            0
+          ]
+        },
+        {
+          "path": ".agents/skills/business-node-delivery/SKILL.md",
+          "bytes": 3404,
+          "sha256": "2e0b8d03e3a7e8c3cf33adf92232d44ecd1b1b461775efbe7bdbdd3492a27cd1",
+          "chunkOffsets": [
+            0,
+            2046
+          ]
+        },
+        {
+          "path": ".agents/skills/document-changed-symbols/SKILL.md",
+          "bytes": 4691,
+          "sha256": "049b5d4f7e8b68f759d14f5ca98d13e94984731efef276f5c21b6c6258e1dacc",
+          "chunkOffsets": [
+            0,
+            2047,
+            4095
+          ]
+        },
+        {
+          "path": ".agents/skills/document-changed-symbols/references/test-prompts.md",
+          "bytes": 1591,
+          "sha256": "817c590ca9b7324eaf37c8aa4560b301f32d8395b052c5f844c62deff79e3038",
+          "chunkOffsets": [
+            0
+          ]
+        },
+        {
+          "path": ".agents/skills/implementation-preparation/SKILL.md",
+          "bytes": 4811,
+          "sha256": "50510c75e684f753c972c61c3a523a1a59a9022b3ddfb78d73f60af024da46ea",
+          "chunkOffsets": [
+            0,
+            2048,
+            4095
+          ]
+        },
+        {
+          "path": ".agents/skills/nuxt-ui-styling/SKILL.md",
+          "bytes": 5227,
+          "sha256": "0fb02df099d6751f65e83f3d8a3945340114eefc8b6718e220af118ce3a99735",
+          "chunkOffsets": [
+            0,
+            2046,
+            4094
+          ]
+        },
+        {
+          "path": ".agents/skills/nuxt-ui-styling/references/attribute-conflicts.md",
+          "bytes": 1891,
+          "sha256": "417c746d59a4a9f7f68976a884ab6d196266304118c102c959e10b752c5fede2",
+          "chunkOffsets": [
+            0
+          ]
+        },
+        {
+          "path": ".agents/skills/nuxt-ui-styling/references/rule-verification.md",
+          "bytes": 1162,
+          "sha256": "6f47315857912ea6a1c5989b022e0eb45535e2a860748df29eb9370ca2957dac",
+          "chunkOffsets": [
+            0
+          ]
+        },
+        {
+          "path": ".agents/skills/task-increment/SKILL.md",
+          "bytes": 23172,
+          "sha256": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a",
+          "chunkOffsets": [
+            0,
+            2048,
+            4096,
+            6143,
+            8190,
+            10237,
+            12283,
+            14331,
+            16378,
+            18424,
+            20470,
+            22517
+          ]
+        },
+        {
+          "path": ".agents/skills/vue-reactivity/SKILL.md",
+          "bytes": 1786,
+          "sha256": "fb6aacad0eec0034e8e89fa40d483137b895633a46505258ac4363bb1bf0fc15",
+          "chunkOffsets": [
+            0
+          ]
+        }
+      ],
+      "readTotalBytes": 54315,
+      "entryDelegatesBeforeSource": null,
+      "processExitCode": 0,
+      "processSignal": null,
+      "traceSha256": "1c987b3e34660dcb3f49a6cd6ef09ab1c62ba4b8ab4e58eb2dc66e84a299d172",
+      "rawTraceProjectRelativePath": "probe/results/after_tasks/events.jsonl"
+    },
+    {
+      "case": "before_implement",
+      "outcome": "stopped",
+      "traceBytes": 26802,
+      "commandCount": 11,
+      "nonzeroCommandCount": 1,
+      "readCommandCount": 3,
+      "logicalReadIdCount": 1,
+      "readFiles": [
+        {
+          "path": ".agents/skills/implementation-preparation/SKILL.md",
+          "bytes": 4811,
+          "sha256": "50510c75e684f753c972c61c3a523a1a59a9022b3ddfb78d73f60af024da46ea",
+          "chunkOffsets": [
+            0,
+            2048,
+            4095
+          ]
+        }
+      ],
+      "readTotalBytes": 4811,
+      "entryDelegatesBeforeSource": null,
+      "processExitCode": 0,
+      "processSignal": null,
+      "traceSha256": "5cbded3b4b55e815f75449014f845d743cafa44d07ee871e3940c501f1592ef7",
+      "rawTraceProjectRelativePath": "probe/results/before_implement/events.jsonl"
+    },
+    {
+      "case": "after_converge",
+      "outcome": "stopped",
+      "traceBytes": 17151,
+      "commandCount": 10,
+      "nonzeroCommandCount": 0,
+      "readCommandCount": 1,
+      "logicalReadIdCount": 1,
+      "readFiles": [
+        {
+          "path": ".agents/skills/artifact-project-description/SKILL.md",
+          "bytes": 1675,
+          "sha256": "68aa274a0649da3a16eca2df56403564ac6f948f9bff5368c5c58825e02053ac",
+          "chunkOffsets": [
+            0
+          ]
+        }
+      ],
+      "readTotalBytes": 1675,
+      "entryDelegatesBeforeSource": null,
+      "processExitCode": 0,
+      "processSignal": null,
+      "traceSha256": "d7e27f96abe93846e73ab6d96489b35997c171bb34b21892b75d33927aea2222",
+      "rawTraceProjectRelativePath": "probe/results/after_converge/events.jsonl"
+    },
+    {
+      "case": "increment",
+      "outcome": "completed",
+      "traceBytes": 94780,
+      "commandCount": 28,
+      "nonzeroCommandCount": 1,
+      "readCommandCount": 15,
+      "logicalReadIdCount": 1,
+      "readFiles": [
+        {
+          "path": ".agents/skills/artifact-spec-analysis/SKILL.md",
+          "bytes": 3484,
+          "sha256": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323",
+          "chunkOffsets": [
+            0,
+            2047
+          ]
+        },
+        {
+          "path": ".agents/skills/speckit-modes-increment/SKILL.md",
+          "bytes": 652,
+          "sha256": "ddbc79e83a15d9f1e013ecdf11737ec5eb7da0d546f5ac7a46dfe13d2b00779a",
+          "chunkOffsets": [
+            0
+          ]
+        },
+        {
+          "path": ".agents/skills/task-increment/SKILL.md",
+          "bytes": 23172,
+          "sha256": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a",
+          "chunkOffsets": [
+            0,
+            2048,
+            4096,
+            6143,
+            8190,
+            10237,
+            12283,
+            14331,
+            16378,
+            18424,
+            20470,
+            22517
+          ]
+        }
+      ],
+      "readTotalBytes": 27308,
+      "entryDelegatesBeforeSource": true,
+      "processExitCode": 0,
+      "processSignal": null,
+      "traceSha256": "cbb2c3dd6ca52d599f18fe9e8f2868ec02f53afe619a2e426297340ec97fe646",
+      "rawTraceProjectRelativePath": "probe/results/increment/events.jsonl"
+    }
+  ],
+  "businessSentinel": {
+    "path": "business/sentinel.txt",
+    "bytes": 85,
+    "sha256": "e54c12a39cd2f770e340d0b41b74f3142a8e04abfcb59a01f7ff408749efaae9",
+    "unchanged": true
+  },
+  "taskIdentityScopeAcceptancePreserved": true,
+  "taskStates": {
+    "T001": "incomplete",
+    "T002": "incomplete"
+  },
+  "mvuIds": [
+    "MVU-001",
+    "MVU-002"
+  ],
+  "planMvuFileLinkCount": 1,
+  "businessAcceptanceOrClosureClaimed": false
+}

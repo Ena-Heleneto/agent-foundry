@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "case": "continuous-resume",
+      "exit": -15,
+      "timed_out": true,
+      "changed": [],
+      "task_markers_after": {
+        "T001": "x",
+        "T002": " "
+      },
+      "B_not_implemented": true,
+      "hook_exit_23_observed": false,
+      "filesystem_error_observed": false,
+      "events": 19
+    },
+    {
+      "case": "hook-failure",
+      "exit": 0,
+      "timed_out": false,
+      "changed": [],
+      "task_markers_after": {
+        "T001": " ",
+        "T002": " "
+      },
+      "B_not_implemented": true,
+      "hook_exit_23_observed": true,
+      "filesystem_error_observed": false,
+      "events": 25,
+      "candidate_full_text_read": true
+    }
+  ],
+  "deadline_utc": "2026-11-10T12:16:30Z",
+  "save_failure": "未启动：时间预算不足",
+  "verdicts": {
+    "hook-failure": "OBSERVED_FAILURE_AND_STOP",
+    "continuous-resume": "TIME_LIMIT_NOT_PASSED"
+  },
+  "started_at_utc": "2026-11-10 12:08:08 UTC",
+  "worker_deadline_utc": "2026-11-10 12:16:30 UTC",
+  "archive": {
+    "file": "retained-round2.tar.gz",
+    "sha256": "5def17a748a7ec566a7d8f5ee02012379e6be7f1d018ec7f1d63a3accfb3bbee",
+    "bytes": 138067
+  }
+}
