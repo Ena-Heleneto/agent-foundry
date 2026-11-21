@@ -1,0 +1,498 @@
+{
+  "date": "2026-11-17",
+  "scope": "T114_authorized_isolated_CLI_lifecycle_probe",
+  "observation_limit": "只保存本实验的事件元数据；不同迭代字段沿实际结果保留，不将拟采用的阻断策略视为已成功，也不将清理视为正常结束。",
+  "runs": [
+    {
+      "scope": "isolated_linux_codex_cli_hooks_only",
+      "version": "codex-cli 0.169.0",
+      "current_chat_capture_started": false,
+      "cases": [
+        {
+          "case": "normal",
+          "model_input_sent": false,
+          "started_at_ns": 1794894224849665078,
+          "start_seen_before_close": false,
+          "alive_before_close": true,
+          "close_requested_at_ns": 1794894239907091101,
+          "exited_after_requested_close": false,
+          "exit_code_before_cleanup": null,
+          "exit_observed_at_ns": null,
+          "receipts_before_cleanup": [],
+          "diagnostic_markers": {
+            "trust_prompt": false,
+            "login_prompt": false,
+            "hook_failure": false,
+            "update_prompt": false
+          },
+          "cleanup_required": true,
+          "process_reaped": true
+        }
+      ]
+    },
+    {
+      "scope": "isolated_linux_codex_cli_hooks_only",
+      "version": "codex-cli 0.169.0",
+      "current_chat_capture_started": false,
+      "cases": [
+        {
+          "case": "normal",
+          "model_input_sent": false,
+          "started_at_ns": 1794894305813583952,
+          "start_seen_before_close": false,
+          "alive_before_close": true,
+          "close_requested_at_ns": 1794894320846258804,
+          "exited_after_requested_close": false,
+          "exit_code_before_cleanup": null,
+          "exit_observed_at_ns": null,
+          "receipts_before_cleanup": [],
+          "terminal_byte_count": 9732,
+          "diagnostic_markers": {
+            "trust_prompt": false,
+            "login_prompt": false,
+            "hook_failure": false,
+            "update_prompt": false,
+            "welcome_prompt": false,
+            "model_selection": false,
+            "error_marker": false,
+            "loading_marker": true,
+            "cursor_query": true
+          },
+          "cleanup_required": true,
+          "process_reaped": true
+        }
+      ]
+    },
+    {
+      "scope": "isolated_linux_codex_cli_hooks_only",
+      "version": "codex-cli 0.169.0",
+      "current_chat_capture_started": false,
+      "cases": [
+        {
+          "case": "normal",
+          "synthetic_prompt_submitted": true,
+          "started_at_ns": 1794894413157169027,
+          "start_seen_before_close": false,
+          "alive_before_close": true,
+          "close_requested_at_ns": 1794894428158562439,
+          "exited_after_requested_close": false,
+          "exit_code_before_cleanup": null,
+          "exit_observed_at_ns": null,
+          "receipts_before_cleanup": [],
+          "pre_model_request_hook_observed": false,
+          "terminal_byte_count": 9890,
+          "diagnostic_markers": {
+            "trust_prompt": false,
+            "login_prompt": false,
+            "hook_failure": false,
+            "update_prompt": false,
+            "welcome_prompt": false,
+            "model_selection": false,
+            "error_marker": false,
+            "loading_marker": true,
+            "cursor_query": true
+          },
+          "cleanup_required": true,
+          "process_reaped": true
+        }
+      ]
+    },
+    {
+      "scope": "isolated_linux_codex_cli_hooks_only",
+      "version": "codex-cli 0.169.0",
+      "current_chat_capture_started": false,
+      "cases": [
+        {
+          "case": "normal",
+          "synthetic_prompt_submitted": true,
+          "no_daemon": true,
+          "started_at_ns": 1794894455776814138,
+          "start_seen_before_close": false,
+          "alive_before_close": true,
+          "close_requested_at_ns": 1794894470808222565,
+          "exited_after_requested_close": false,
+          "exit_code_before_cleanup": null,
+          "exit_observed_at_ns": null,
+          "receipts_before_cleanup": [],
+          "pre_model_request_hook_observed": false,
+          "terminal_byte_count": 9700,
+          "diagnostic_markers": {
+            "trust_prompt": false,
+            "login_prompt": false,
+            "hook_failure": false,
+            "update_prompt": false,
+            "welcome_prompt": false,
+            "model_selection": false,
+            "error_marker": false,
+            "loading_marker": true,
+            "cursor_query": true
+          },
+          "cleanup_required": true,
+          "process_reaped": true
+        }
+      ]
+    },
+    {
+      "scope": "isolated_linux_codex_cli_hooks_only",
+      "version": "codex-cli 0.169.0",
+      "current_chat_capture_started": false,
+      "cases": [
+        {
+          "case": "normal",
+          "transport": "exec",
+          "synthetic_prompt_submitted": true,
+          "user_config_ignored": true,
+          "started_at_ns": 1794894570036471468,
+          "start_seen_before_close": false,
+          "submit_barrier_reached": false,
+          "alive_before_close": false,
+          "close_requested_at_ns": 1794894577363899062,
+          "exited_after_requested_close": true,
+          "exit_code_before_cleanup": 0,
+          "exit_observed_at_ns": 1794894577363904933,
+          "receipts_before_cleanup": [],
+          "pre_model_request_hook_observed": false,
+          "cleanup_required": false,
+          "process_reaped": true,
+          "stderr_present": true,
+          "cli_json_event_types": [
+            "thread.started",
+            "item.completed",
+            "item.completed",
+            "turn.started",
+            "item.completed",
+            "turn.completed"
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "isolated_linux_codex_cli_hooks_only",
+      "version": "codex-cli 0.169.0",
+      "current_chat_capture_started": false,
+      "cases": [
+        {
+          "case": "normal",
+          "transport": "exec",
+          "synthetic_prompt_submitted": true,
+          "user_config_ignored": true,
+          "started_at_ns": 1794894667145634262,
+          "start_seen_before_close": false,
+          "submit_barrier_reached": false,
+          "alive_before_close": false,
+          "close_requested_at_ns": 1794894669003218019,
+          "exited_after_requested_close": true,
+          "exit_code_before_cleanup": 1,
+          "exit_observed_at_ns": 1794894669003223819,
+          "receipts_before_cleanup": [],
+          "pre_model_request_hook_observed": false,
+          "cleanup_required": false,
+          "process_reaped": true,
+          "stderr_present": true,
+          "stderr_markers": {
+            "untrusted": true,
+            "config files are disabled": false,
+            "hook": false,
+            "trust": true,
+            "error": true,
+            "warning": true
+          },
+          "local_guard_request_count": 1,
+          "external_model_provider_configured": false,
+          "cli_json_event_types": [
+            "thread.started",
+            "item.completed",
+            "item.completed",
+            "turn.started",
+            "error",
+            "turn.failed"
+          ],
+          "cli_item_types": [
+            "error",
+            "error"
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "isolated_linux_codex_cli_hooks_only",
+      "version": "codex-cli 0.169.0",
+      "current_chat_capture_started": false,
+      "cases": [
+        {
+          "case": "normal",
+          "transport": "exec",
+          "synthetic_prompt_submitted": true,
+          "hook_source": "inline",
+          "user_config_ignored": true,
+          "started_at_ns": 1794894708883822177,
+          "start_seen_before_close": true,
+          "submit_barrier_reached": true,
+          "alive_before_close": true,
+          "close_requested_at_ns": 1794894710540257290,
+          "exited_after_requested_close": true,
+          "exit_code_before_cleanup": 0,
+          "exit_observed_at_ns": 1794894712508387529,
+          "receipts_before_cleanup": [
+            {
+              "event": "SessionStart",
+              "session_id": "01a1e80f-c0fc-7573-8763-29b4ce4ea250",
+              "turn_id": null,
+              "source": "startup",
+              "reason": null,
+              "observed_at_ns": 1794894710505250221,
+              "cwd_matches": true,
+              "transcript_path_provided": false
+            },
+            {
+              "event": "UserPromptSubmit",
+              "session_id": "01a1e80f-c0fc-7573-8763-29b4ce4ea250",
+              "turn_id": "01a1e80f-c150-7f42-9ee0-71c0de2ba0d8",
+              "source": null,
+              "reason": null,
+              "observed_at_ns": 1794894710523586780,
+              "cwd_matches": true,
+              "transcript_path_provided": false
+            },
+            {
+              "event": "SessionEnd",
+              "session_id": "01a1e80f-c0fc-7573-8763-29b4ce4ea250",
+              "turn_id": null,
+              "source": null,
+              "reason": "other",
+              "observed_at_ns": 1794894710571508707,
+              "cwd_matches": true,
+              "transcript_path_provided": false
+            }
+          ],
+          "pre_model_request_hook_observed": false,
+          "cleanup_required": false,
+          "process_reaped": true,
+          "stderr_present": true,
+          "stderr_markers": {
+            "untrusted": true,
+            "config files are disabled": false,
+            "hook": false,
+            "trust": true,
+            "error": true,
+            "warning": true
+          },
+          "local_guard_request_count": 0,
+          "external_model_provider_configured": false,
+          "cli_json_event_types": [
+            "thread.started",
+            "item.completed",
+            "item.completed",
+            "turn.started",
+            "turn.completed"
+          ],
+          "cli_item_types": [
+            "error",
+            "error"
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "isolated_linux_codex_cli_hooks_only",
+      "version": "codex-cli 0.169.0",
+      "current_chat_capture_started": false,
+      "cases": [
+        {
+          "case": "normal",
+          "transport": "exec",
+          "synthetic_prompt_submitted": true,
+          "hook_source": "inline",
+          "user_config_ignored": true,
+          "started_at_ns": 1794894749273897575,
+          "start_seen_before_close": true,
+          "submit_barrier_reached": true,
+          "alive_before_close": true,
+          "close_requested_at_ns": 1794894750930259673,
+          "exited_after_requested_close": true,
+          "exit_code_before_cleanup": 0,
+          "exit_observed_at_ns": 1794894753149064145,
+          "receipts_before_cleanup": [
+            {
+              "event": "SessionStart",
+              "session_id": "01a1e810-5ec4-73d0-91ca-13b2a5c66f93",
+              "turn_id": null,
+              "source": "startup",
+              "reason": null,
+              "observed_at_ns": 1794894750894211602,
+              "cwd_matches": true,
+              "transcript_path_provided": false
+            },
+            {
+              "event": "UserPromptSubmit",
+              "session_id": "01a1e810-5ec4-73d0-91ca-13b2a5c66f93",
+              "turn_id": "01a1e810-5f1b-7321-8e40-aefc1b1928c7",
+              "source": null,
+              "reason": null,
+              "observed_at_ns": 1794894750913729761,
+              "cwd_matches": true,
+              "transcript_path_provided": false
+            },
+            {
+              "event": "SessionEnd",
+              "session_id": "01a1e810-5ec4-73d0-91ca-13b2a5c66f93",
+              "turn_id": null,
+              "source": null,
+              "reason": "other",
+              "observed_at_ns": 1794894750961514089,
+              "cwd_matches": true,
+              "transcript_path_provided": false
+            }
+          ],
+          "pre_model_request_hook_observed": false,
+          "cleanup_required": false,
+          "process_reaped": true,
+          "stderr_present": true,
+          "stderr_markers": {
+            "untrusted": true,
+            "config files are disabled": false,
+            "hook": false,
+            "trust": true,
+            "error": true,
+            "warning": true
+          },
+          "local_guard_request_count": 0,
+          "external_model_provider_configured": false,
+          "cli_json_event_types": [
+            "thread.started",
+            "item.completed",
+            "item.completed",
+            "turn.started",
+            "turn.completed"
+          ],
+          "cli_item_types": [
+            "error",
+            "error"
+          ]
+        },
+        {
+          "case": "sigterm",
+          "transport": "exec",
+          "synthetic_prompt_submitted": true,
+          "hook_source": "inline",
+          "user_config_ignored": true,
+          "started_at_ns": 1794894753933270883,
+          "start_seen_before_close": true,
+          "submit_barrier_reached": true,
+          "alive_before_close": true,
+          "close_requested_at_ns": 1794894755338748322,
+          "exited_after_requested_close": true,
+          "exit_code_before_cleanup": -15,
+          "exit_observed_at_ns": 1794894755370567382,
+          "receipts_before_cleanup": [
+            {
+              "event": "SessionStart",
+              "session_id": "01a1e810-70f1-7b02-a438-fa67c18d8e85",
+              "turn_id": null,
+              "source": "startup",
+              "reason": null,
+              "observed_at_ns": 1794894755301008295,
+              "cwd_matches": true,
+              "transcript_path_provided": false
+            },
+            {
+              "event": "UserPromptSubmit",
+              "session_id": "01a1e810-70f1-7b02-a438-fa67c18d8e85",
+              "turn_id": "01a1e810-7148-7d90-8ae1-b5f2608ac8b0",
+              "source": null,
+              "reason": null,
+              "observed_at_ns": 1794894755321424365,
+              "cwd_matches": true,
+              "transcript_path_provided": false
+            }
+          ],
+          "pre_model_request_hook_observed": false,
+          "cleanup_required": false,
+          "process_reaped": true,
+          "stderr_present": true,
+          "stderr_markers": {
+            "untrusted": true,
+            "config files are disabled": false,
+            "hook": false,
+            "trust": true,
+            "error": true,
+            "warning": true
+          },
+          "local_guard_request_count": 0,
+          "external_model_provider_configured": false,
+          "cli_json_event_types": [
+            "thread.started",
+            "item.completed",
+            "item.completed",
+            "turn.started"
+          ],
+          "cli_item_types": [
+            "error",
+            "error"
+          ]
+        },
+        {
+          "case": "sigkill",
+          "transport": "exec",
+          "synthetic_prompt_submitted": true,
+          "hook_source": "inline",
+          "user_config_ignored": true,
+          "started_at_ns": 1794894756083243698,
+          "start_seen_before_close": true,
+          "submit_barrier_reached": true,
+          "alive_before_close": true,
+          "close_requested_at_ns": 1794894757789071573,
+          "exited_after_requested_close": true,
+          "exit_code_before_cleanup": -9,
+          "exit_observed_at_ns": 1794894757804788221,
+          "receipts_before_cleanup": [
+            {
+              "event": "SessionStart",
+              "session_id": "01a1e810-7956-7762-b8ea-7bd955de46ac",
+              "turn_id": null,
+              "source": "startup",
+              "reason": null,
+              "observed_at_ns": 1794894757744562847,
+              "cwd_matches": true,
+              "transcript_path_provided": false
+            },
+            {
+              "event": "UserPromptSubmit",
+              "session_id": "01a1e810-7956-7762-b8ea-7bd955de46ac",
+              "turn_id": "01a1e810-79af-7af1-b959-2f6ff058ce03",
+              "source": null,
+              "reason": null,
+              "observed_at_ns": 1794894757763585563,
+              "cwd_matches": true,
+              "transcript_path_provided": false
+            }
+          ],
+          "pre_model_request_hook_observed": false,
+          "cleanup_required": false,
+          "process_reaped": true,
+          "stderr_present": true,
+          "stderr_markers": {
+            "untrusted": true,
+            "config files are disabled": false,
+            "hook": false,
+            "trust": true,
+            "error": true,
+            "warning": true
+          },
+          "local_guard_request_count": 0,
+          "external_model_provider_configured": false,
+          "cli_json_event_types": [
+            "thread.started",
+            "item.completed",
+            "item.completed",
+            "turn.started"
+          ],
+          "cli_item_types": [
+            "error",
+            "error"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "scope": "T119 第一步独立落盘；后续步骤未执行",
+  "host": "codex-cli 0.170.0",
+  "candidate_v1_sha256": "4c0db0171e633ab3951c6b8f7027fbbcaf7f93f7f0824b8b0fb55d8542b07c37",
+  "candidate_v2_sha256": "329123de86fd98850f2f451b204fdbc92fa738f92d689c70afd7a2d7069b01ab",
+  "old_shadow_unchanged_sha256": "d9fe13c9d53f23230ac1063f513d38cab67e7109cd7e042d5e1b44cfb40c3cc4",
+  "checks": [
+    {
+      "case": "recording",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05"
+      ],
+      "visible_text_role_order_match": true,
+      "comparison_boundary": "可见正文逐条一致；CLI 消息末尾换行与 Markdown 围栏分隔换行不计为正文字符",
+      "new_final_prewrite": false,
+      "injected_skill_body_recorded": false,
+      "summary_profile_or_spec_kit_created": false
+    },
+    {
+      "case": "explicit-fixed",
+      "raw_anchors": [
+        "M01",
+        "M02"
+      ],
+      "visible_text_role_order_match": true,
+      "comparison_boundary": "可见正文逐条一致；CLI 消息末尾换行与 Markdown 围栏分隔换行不计为正文字符",
+      "new_final_prewrite": false,
+      "injected_skill_body_recorded": false,
+      "summary_profile_or_spec_kit_created": false
+    },
+    {
+      "case": "recording",
+      "previous_final_backfilled": true
+    }
+  ],
+  "read_proof": {
+    "recording-natural": {
+      "full_skill_read_event_indices": [
+        6
+      ],
+      "last_visible_message_event_index": 15
+    },
+    "recording-explicit": {
+      "full_skill_read_event_indices": [
+        6,
+        12
+      ],
+      "last_visible_message_event_index": 13
+    },
+    "recording-followup": {
+      "full_skill_read_event_indices": [
+        3
+      ],
+      "last_visible_message_event_index": 11
+    },
+    "recording-explicit-fixed": {
+      "full_skill_read_event_indices": [
+        4
+      ],
+      "last_visible_message_event_index": 11
+    }
+  },
+  "baseline_no_project_artifacts": true,
+  "explicit_v1_failed_auto_injected_skill_body": true,
+  "task_checkbox_unchanged": true,
+  "reasoning_events_excluded": true,
+  "notes": [
+    "源和最终隔离副本字节一致；自然启用使用 v1，普通追问与修复后显式入口实际消费 v2。",
+    "除可见正文核对外，复杂空白、长文、非文本、暂停/恢复及故障全矩阵仍由 T115 等后续原 Task 验证。"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "status": "installed_ready_for_user_acceptance",
+  "checked_at_ns": 1794982849169277234,
+  "task": "T114",
+  "scope": "current-workspace-trial",
+  "source_manifest": {
+    "source_commit": "26f7539b635cf237d44b3e75d74d20790ad73d9e",
+    "source_package": "packages/skills/src/profile/shadow-profile/",
+    "files": {
+      "SKILL.md": "be35264cfa638cad3c0b20a73f0b1503793bc878d083d477be0c0c116190f518",
+      "references/host-contract.md": "f1815a6385eb9ccbc5a72841e781f3b004e0e54c0855e99537929778ffe10048",
+      "scripts/shadow_runtime.py": "e8ba82a4a2c322de5469f1cc573682e7339a6004a81739bcfc361959217efc5e"
+    },
+    "scope": "T114-workspace-trial",
+    "contains_T115_increment": false
+  },
+  "installed_files_equal": true,
+  "installed_skill_and_reference_read": true,
+  "project_entry_updated": true,
+  "actual_host_profile": "codex-0.169.0-item-completed",
+  "workspace_raw_root": ".specify/memory/user-shadow/conversations/raw/",
+  "source_start": "current_installation_request",
+  "historical_cache_imported": false,
+  "saved_rows_at_check": 4,
+  "text_role_phase_order_identity_equal": true,
+  "saved_receipts_equal_rows": true,
+  "model_message_saves": 0,
+  "switch_result": {
+    "installed_capture_ready": true,
+    "old_isolated_capture_stopped": true,
+    "raw_count": 3
+  },
+  "regression_target": "installed_T114_copy",
+  "native_final": "waiting_for_actual_final",
+  "new_host_versions_validated": false,
+  "cross_host_restart_continuity": "not_verified",
+  "user_acceptance": "not_yet_given",
+  "T115_to_T118_completed": false,
+  "installed_regression_tests": {
+    "total": 17,
+    "passed": 17
+  }
+}

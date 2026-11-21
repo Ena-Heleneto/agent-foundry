@@ -1,4 +1,69 @@
-# 数据模型：可追溯分发与阶段结果
+# 数据模型：统一发布与阶段结果
+
+当前构建的子插件输出路径为 `engine/<插件相对产物路径>`，相对于构建输出根。默认构建的 workflow 挂载脚本由此落到 `dist/engine/script/speckit-mount.sh`。[构建契约](contracts/build-pipeline.md#2026-11-19-引擎子插件输出)
+
+## 2026-11-18 最新模型：配置期集合子插件
+
+集合配置增加 `plugin?: boolean`，由 `defineCollectionHandle` 默认补为 `false`；仅严格 `true` 时启用下列发现及加载关系。无持久清单、插件状态库或新运行协议。
+
+| 对象         | 字段或约定                                                                 | 关系与校验                                                                                   |
+| ------------ | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| 子插件入口   | `src/<集合>/plugin/vite-plugin-<名称>/index.ts`                           | 只接纳固定深度普通目录和普通文件；按集合名、插件名排序，入口缺省不代表失败                   |
+| 子插件模块   | 默认导出无参工厂 `() => PluginOption`                                      | 由文件 URL 导入，非函数默认导出、导入或工厂错误须带入口定位失败                              |
+| 引擎结果     | `Promise<PluginOption[]>`                                                  | 每个入口贡献工厂返回值，Promise/嵌套数组/false 等由 Vite 解析；引擎不调用构建钩子            |
+| 脚本资产目标 | `script/install.sh`、`script/hidden-install.sh`、`script/speckit-mount.sh` | 前两项 owner 为 curl 插件，挂载脚本 owner 为 workflow 子插件，每个 outputPath 只有一个责任方 |
+
+引擎默认来源锚定包内 src，也可显式传入绝对来源目录。发现由 `CollectionOption.plugin` 控制，与 `CollectionOption.script`、skill.enabled 无关联；未配置、关闭或缺配置时不导入子插件。已安装来源事实保持既有模型。curl 接回 hidden、workflow 生成挂载脚本仍是目标分工，不能据本模型认定已迁移；下方旧 owner/source 说明保留当时事实，目标以本节及[构建契约](contracts/build-pipeline.md)为准。
+
+## 2026-11-18 脚本路径模型增量
+
+本轮不新增持久状态或数据格式。统一包中安装入口与 hidden 的包内相对路径更新为 `script/install.sh`、`script/hidden-install.sh`，本地对应 `dist/script/`；`ScriptAsset` 仅描述构建责任，安装入口的 source 为 curl 目录安装源、owner 为 `vite-plugin-curl`；hidden 的 source 为 script 目录模板、owner 为 `vite-plugin-script`；outputPath 唯一且必须位于 `script/` 下。同一资产不得同时由 curl 和 script 插件交付。只有未注册工厂骨架时不产生这类资产，也不代表切换已完成。
+
+`curl/skills.tsv` 仍是非执行技能映射，远端发现及固定入口地址保持；PublicationRecord 的固定入口字节取本地 `dist/curl/install.sh`，远端引用与本地路径分别核对。VERSION、skill/正文附件、SuccessfulSelection、来源标记及 hidden 结果字段不变。现行 formatVersion=1 仍是尚未发布的目标设计；如后续发现已有真实旧格式发布，须明确兼容或拒绝，不静默把两种包路径解释为同一格式。完整字段与边界见[curl契约](contracts/curl-delivery.md)。
+
+## 2026-11-16 主线有效模型：一个包与三种版本事实
+
+依据[最新规格](spec.md)及[单包与清单取舍](requirements/raw/2026-11-16-defer-file-manifest.md)。本节替代原SkillRelease/CurlScriptBundle双包及强制files清单模型；字段格式统一见[curl契约](contracts/curl-delivery.md)。下方紧急schema1与历史消费者保留原适用范围，不建立工程状态数据库、永久指纹或第二套checkbox。
+
+### 构建、候选与发布
+
+| 实体                  | 字段与关系                                                                                                      | 校验及生命周期                                                                     |
+| --------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| SourceVersions        | releaseVersion取package.json.version；同次技能/入口/辅助材料同号                                                | 仅一个受维护SemVer；只改脚本也递增；源码版本、构建版本、已发布事实不同             |
+| UnifiedPackage        | formatVersion=1、version、archivePath/bytes/sha256/md5；根VERSION、skill/、script/、curl/非脚本数据、说明和许可 | 一次归档完整正式集合；不强制随包逐文件JSON，不另有helper归档                       |
+| BuildVerification     | 真实sourceRevision/inputDigest、实际依赖与工具、正式身份映射、逐文件证据及检查结果                              | 证据在候选包外；独立读盘核对正文附件、必要材料及获准范围；相关输入须与真实提交一致 |
+| CandidateContentIndex | version/sourceRevision、归档及独立入口身份、公开对象全集、验证证据摘要、candidateDigest                         | 冻结本次实际字节；两次构建比较公开内容而非tar元数据；开发/isolated不自动ready      |
+| PublicationRecord     | R2 版本表中的 version/sourceRevision/candidateDigest、统一包固定引用、固定入口引用与远端核验依据                    | 仅在 R2 维护已核验整版；同版本不同字节或地址拒绝            |
+| DiscoverySnapshot     | 索引原字节摘要、选中唯一记录、实际入口版本及摘要、包固定引用                                                    | 一次调用固定，不因中途latest更新换包；入口可新于包                                 |
+| DiscoveryUpdate       | 预期旧索引ETag/字节摘要、新发现字节、授权引用及实际更新结果                                                     | 独立于已冻结候选与固定对象；更新失败保留旧可用索引和已上传事实                     |
+
+统一包根VERSION只含版本及结尾换行，不使用skill/VERSION或curl/VERSION。包内实际文件全集由流水线核对；release-manifest.json、script/manifest.json本期不生成也不作为安装必需项。候选索引和平台收据可继续是流水线JSON，但不装入技能包，不为满足旧files公式恢复消费者清单。
+
+已发布状态的唯一持久来源是 R2 中的 `curl/release.json`。后续发布流水线基于同版固定对象的真实核验结果更新该表，并保存本次候选与核验依据。仓库负责源码，构建目录只保存当前产物，发布表的维护独立于这两者。
+
+发现更新先入口后索引，两次条件写分别留证，不声明多对象事务。普通新版本高于已发布最高SemVer，旧版重试不回退latest；冲突先读回并保留其他版本，新合并字节须在适用授权内。发布授权绑定bucket/prefix/origin及version/sourceRevision/candidateDigest、对象和发现字节摘要，旧Git目标授权无效。
+
+### 技能身份与路径
+
+`InstallMapping`包含name、category、sourceDirectory、installRelativeDirectory、requiresSkills。来源name取正文声明，category取获准集合，sourceDirectory为skill/<集合>/<目录>，当前安装映射展平为<目录>；声明名、目录名不互相冒充，跨集合目标同名拒绝。构建消费计划扩展的skill[目录].requiresSkills声明名数组（缺省空数组，当前类型尚未支持），缺依赖不静默补装。
+
+同版curl/skills.tsv只保存上述最小映射及格式标记，不含逐文件path/bytes/sha256。它是经整包校验后的非执行数据，不能source或eval；映射与正式目录双向一致，缺失/非法时技能安装不能继续。构建端可读现有TS配置，消费端不动态执行该配置；详细TSV约束由契约定义。
+
+`HiddenPathTemplate`保存skillName、installRelativeDirectory和@@AGENT_SKILLS_ROOT@@/<目录>；正式候选不能夹带eval/profile路径。`SuccessfulSelection`为本次installed/reused完整项，包含name、实际installedPath、映射及本次核验依据；临时成功集合文件不属于被暂缓的随包逐文件JSON，也不是永久收据。
+
+安装器专用.foundry-source在逐技能暂存时生成，与技能原子提交；只存格式、统一版本、真实源提交、名称及源目录，不存文件哈希或工程状态。保留路径不得在发布技能中预占；首次安装后清理临时目录，下一次独立调用须同时校验来源标记和对可信包的正文/附件全集比对，才能reused。缺标记/错版本/用户额外文件仍冲突，不从同字节擅自认领；详情见curl契约。
+
+可隐匿集合严格为模板候选、本次显式选择、完整成功集合的交集，再核验项目内归属、独占和未跟踪。当前前缀只验证.agents/skills；未替换标记、构建路径、集合层误拼、共享或tracked目标不能生成规则。无.git、父仓库子目录和.git文件沿保守支持约定跳过，不扩大到父仓库。
+
+### 一次安装与结果
+
+`RunReport`记录request、entryIdentity、discoveryDigest、selectedVersion、packageIdentity、formatVersion、逐技能结果、installation/hidden/hooks/commands、overall/retry/coverageLimits。阶段status采用success/skipped/failed/not-run；overall采用success/partial/failed。它描述本次实际运行，不是Task工程状态。
+
+主流程为record-fixed→package-verified→members-checked→extracted→version-verified→selection-verified→逐技能staged→verified→installed/reused。包下载/长度/SHA/成员安全/根VERSION失败时不进入技能提交或辅助执行；选中技能结构失败不能算成功。同文件系统暂存比对后才提交，冲突或中断保留已确认完整技能，未完成项failed或not-run。
+
+hidden默认关闭且执行0；开启时只从已核验同版包读取协议标记并调用独立Bash。统一包通过且所选技能完整时，只有hidden缺件、接口不兼容或执行失败可独立失败：实际安装成功仍保留，overall=partial、退出1；若安装自身仅部分成功，也必须保留逐项失败且不得把installation标成success；不再出现“另下helper包失败仍继续安装”。参数/静态前提错误退出2；运行步骤失败退出1；所有请求步骤成功或明确不适用才退出0。暂缓挂载要明确not-run或skipped及原因，尚未实现的请求不能伪报成功，原最终验收保持。
+
+当前安装入口基于 MD5 下载和复制，开启 `--hidden` 时向同包脚本传递本次成功复制目标。临时记录包含 `name`、`installRelativeDirectory`、`installedPath` 和 `complete`。脚本独立报告实际排除结果。完整模型、TSV、SHA 消费与逐技能报告仍由对应任务验收。
 
 ## 紧急版数据增量（2026-11-12）
 

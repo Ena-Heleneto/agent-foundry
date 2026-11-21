@@ -1,0 +1,17 @@
+{
+  "synthetic_only": true,
+  "checked_at_ns": 1794966079600312292,
+  "lock_contention_blocked": null,
+  "holder_exit_released_lock": true,
+  "fixed_lock_inode_unchanged": true,
+  "concurrent_replay_duplicates": 0,
+  "recorded_count": 6,
+  "rejected_without_raw_write": {
+    "control": "unsupported_source",
+    "nontext": "unsupported_source",
+    "coverage": "unsupported_coverage"
+  },
+  "full_control_or_nontext_support": false,
+  "proof_scope": "审查前只有200ms无保存及持锁进程退出后成功的观察；内核等待事实见store-reviewed-2026-11-18.json",
+  "original_lock_contention_blocked": true
+}

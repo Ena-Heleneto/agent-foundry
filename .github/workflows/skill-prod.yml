@@ -1,0 +1,69 @@
+name: skill-prod
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    name: 构建并上传技能产物
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: 检出源码
+        uses: actions/checkout@v4
+
+      - name: 检查 R2 配置
+        env:
+          R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
+          R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          : "${R2_ACCOUNT_ID:?请配置 R2_ACCOUNT_ID 仓库变量}"
+          : "${R2_BUCKET_NAME:?请配置 R2_BUCKET_NAME 仓库变量}"
+          : "${AWS_ACCESS_KEY_ID:?请配置 R2_ACCESS_KEY_ID Secret}"
+          : "${AWS_SECRET_ACCESS_KEY:?请配置 R2_SECRET_ACCESS_KEY Secret}"
+          aws --version
+
+      - name: 准备 Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 构建并导出 dist
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: packages/skills/deploy/Dockerfile
+          target: artifacts
+          outputs: type=local,dest=${{ runner.temp }}/skills-dist
+
+      - name: 检查导出产物
+        env:
+          DIST_DIRECTORY: ${{ runner.temp }}/skills-dist
+        run: |
+          set -euo pipefail
+          test -s "$DIST_DIRECTORY/skills.tar.gz"
+          test -s "$DIST_DIRECTORY/VERSION"
+          test -s "$DIST_DIRECTORY/curl/install.sh"
+          tar -tzf "$DIST_DIRECTORY/skills.tar.gz" >/dev/null
+
+      - name: 上传 dist 到 R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          AWS_EC2_METADATA_DISABLED: 'true'
+          R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
+          R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
+          R2_PREFIX: ${{ vars.R2_PREFIX || 'skills-builds' }}
+          DIST_DIRECTORY: ${{ runner.temp }}/skills-dist
+        run: |
+          set -euo pipefail
+          destination="s3://${R2_BUCKET_NAME}/${R2_PREFIX%/}/${GITHUB_SHA}/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}/"
+          aws s3 cp "$DIST_DIRECTORY/" "$destination" \
+            --recursive --only-show-errors \
+            --endpoint-url "https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
+          printf '技能产物已上传至 `%s`\n' "$destination" >> "$GITHUB_STEP_SUMMARY"

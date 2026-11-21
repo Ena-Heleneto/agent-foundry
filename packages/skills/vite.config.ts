@@ -1,18 +1,19 @@
 import { defineConfig } from 'vite'
-// import skillCollectionsPlugin from './build/plugins/collections.js'
-// import createDirectoriesPlugin from './build/plugins/create-directories.js'
-import vitePluginSkill from '#build/plugins/vite-plugin-skill.plugin'
+import vitePluginCurl from '#build/plugins/vite-plugin-curl/index'
+import vitePluginEngine from '#build/plugins/vite-plugin-engine/index'
+import vitePluginSkill from '#build/plugins/vite-plugin-skill/index'
+import vitePluginVersion from '#build/plugins/vite-plugin-version/index'
 /**
- * 注册独立目录插件及现有技能资产插件，统一输出到dist。
- * 虚拟入口仅驱动构建流程，不作为文件交付。
+ * 注册技能、curl、统一版本插件及集合插件引擎，统一输出到 dist。
+ * 复用技能虚拟入口驱动构建，不交付占位 JS 文件。
  */
 export default defineConfig({
   publicDir: false,
   // plugins: [skillCollectionsPlugin(), createDirectoriesPlugin()],
-  plugins: [vitePluginSkill()],
+  plugins: [vitePluginSkill(), vitePluginCurl(), vitePluginVersion(), vitePluginEngine()],
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    rolldownOptions: { input: 'virtual:skill' },
+    rolldownOptions: { input: ['virtual:skill'] },
   },
 })

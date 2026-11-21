@@ -1,0 +1,18 @@
+# 项目级 MCP 服务，供 Codex CLI、桌面端与 IDE 扩展读取。
+[mcp_servers.filesystem]
+command = "pnpm"
+args = ["dlx", "-y", "@modelcontextprotocol/server-filesystem", "/tmp"]
+cwd = "/tmp"
+
+[mcp_servers.nuxt-ui]
+url = "https://ui.nuxt.com/mcp"
+startup_timeout_sec = 90
+
+[mcp_servers.nuxt]
+command = "pnpm"
+args = ["--reporter=silent", "dlx", "mcp-remote@0.16.5", "https://nuxt.com/mcp", "--transport", "http-only"]
+startup_timeout_sec = 180
+
+[mcp_servers.context7]
+command = "pnpm"
+args = ["dlx", "@upstash/context7-mcp"]

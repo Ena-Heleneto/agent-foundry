@@ -1,0 +1,45 @@
+name: skill-release
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: skills-test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: 技能测试（${{ matrix.suite }}）
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [python, node]
+    steps:
+      - name: 检出源码
+        uses: actions/checkout@v4
+
+      - name: 准备仓库工具链
+        uses: jdx/mise-action@v5
+
+      - name: 安装工作区依赖
+        run: pnpm install
+
+      - name: 构建技能及依赖包
+        run: pnpm run build:packages
+
+      - name: 运行 Python 单元测试
+        if: matrix.suite == 'python'
+        run: pnpm --filter @foundry/skills run test
+
+      - name: 检查 Node 分发测试前置
+        if: matrix.suite == 'node'
+        run: jq --version
+
+      - name: 运行 Node 分发测试
+        if: matrix.suite == 'node'
+        run: node --test packages/skills/tests/distribution/*.test.mjs

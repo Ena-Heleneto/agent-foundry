@@ -1,0 +1,22 @@
+{
+  "sampleCount": 5,
+  "userCount": 1,
+  "assistantCount": 4,
+  "userReplyAnswerExact": true,
+  "markerAExact": true,
+  "markerBExact": true,
+  "uniqueSourceIds": true,
+  "sampleLatenciesMs": [
+    1.291,
+    6.056,
+    1.805,
+    1.663,
+    0.89
+  ],
+  "minMs": 0.89,
+  "maxMs": 6.056,
+  "verifiedAtNs": 1794817575448744992,
+  "inputForm": "async_question_reply_wrapper",
+  "automaticMechanism": "inotify file append event; no read_thread polling or model save call",
+  "prototypeSha256": "ae1f240ecc323cd0c5b7ca45fda7e5161506f7cfe344c5f083fda4e34f41d26b"
+}

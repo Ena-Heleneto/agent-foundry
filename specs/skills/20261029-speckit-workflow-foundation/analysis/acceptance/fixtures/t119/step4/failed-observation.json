@@ -1,0 +1,10 @@
+{
+  "observed_unix_ms": 1795057488285,
+  "actual_save_attempt_count": 1,
+  "exception_type": "IsADirectoryError",
+  "errno": 21,
+  "directory_identity_unchanged": true,
+  "obstacle_empty": true,
+  "summary_thread_id": "01a1f1c1-aa95-75c1-bbbd-90d225a00e6f",
+  "analysis_thread_id": "01a1f1c1-c9c7-71a3-b36b-4ceba8d3418c"
+}

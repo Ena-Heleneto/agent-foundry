@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-17",
+  "scope": "T114_current_thread_metadata_and_existing_server_readiness_only",
+  "source_observation": {
+    "observed_at": "2026-11-17T05:30:44.933289+00:00",
+    "thread_identity_provided": true,
+    "exact_thread_filename_matches": 1,
+    "session_meta_type_matches": true,
+    "thread_id_matches": true,
+    "cwd_matches": true,
+    "source_cli_version": "0.169.0",
+    "event_type_counts": {
+      "task_started": 1,
+      "thread_settings_applied": 1,
+      "item_completed": 30,
+      "token_count": 8
+    },
+    "structured_visible_completed_counts": {
+      "UserMessage": 1,
+      "AgentMessage": 3
+    },
+    "assistant_phase_counts": {
+      "commentary": 3
+    },
+    "observed_visible_event_identity_complete": true,
+    "incomplete_or_invalid_lines_observed": 0,
+    "environment_presence": {
+      "CODEX_THREAD_ID": true,
+      "CODEX_TURN_ID": false,
+      "CODEX_SESSION_ID": true,
+      "CODEX_THREAD_LOG_PATH": false,
+      "CODEX_TRANSCRIPT_PATH": false,
+      "CODEX_LIFECYCLE_FD": false,
+      "CODEX_SESSION_END_FD": false
+    }
+  },
+  "daemon_version_observation": {
+    "command": "codex app-server daemon version",
+    "exit_code": 0,
+    "stderr_present": false,
+    "cli_version": "0.167.0",
+    "managed_codex_version": "0.169.0",
+    "app_server_version": "0.169.0",
+    "socket_path_provided": true,
+    "managed_executable_provided": true,
+    "private_paths_persisted": false
+  },
+  "proxy_observations": [
+    {
+      "observed_at": "2026-11-17T05:31:07.610239+00:00",
+      "scope": "existing_app_server_proxy_initialize_only",
+      "executable_version": "0.167.0",
+      "explicit_socket": false,
+      "timeout_seconds": 10,
+      "request_sent": true,
+      "response_received": false,
+      "stdout_ready": false,
+      "stderr_ready": false,
+      "process_running_at_observation": true,
+      "probe_exit_code": -15,
+      "probe_reaped": true
+    },
+    {
+      "observed_at": "2026-11-17T05:32:22.008045+00:00",
+      "scope": "existing_managed_app_server_explicit_socket_initialize_only",
+      "executable_version": "0.169.0",
+      "explicit_socket": true,
+      "timeout_seconds": 10,
+      "request_sent": true,
+      "response_received": false,
+      "stdout_ready": false,
+      "stderr_ready": false,
+      "process_running_at_observation": true,
+      "probe_exit_code": -15,
+      "probe_reaped": true
+    }
+  ],
+  "limits": {
+    "capture_started": false,
+    "transcript_text_copied": false,
+    "new_app_server_started": false,
+    "thread_list_or_read_rpc_sent": false,
+    "model_request_sent": false,
+    "hooks_or_configuration_changed": false,
+    "lifecycle_handle_verified": false,
+    "normal_or_abnormal_session_end_test_executed": false,
+    "semantic_dispatch_test_executed": false,
+    "global_host_support_conclusion": false,
+    "proxy_nonresponse_root_cause_established": false
+  },
+  "candidate_status": "unsupported",
+  "failure_signals": ["lifecycle_unavailable"]
+}

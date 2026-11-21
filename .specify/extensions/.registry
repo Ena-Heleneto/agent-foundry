@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "extensions": {
+    "modes": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:46ccc8e657b96685151008d07a595d69f93ad6a918a407d3bb66b43601afe1b5",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "codex": [
+          "speckit.modes.increment"
+        ]
+      },
+      "registered_skills": [],
+      "installed_at": "2026-11-14T01:51:52.655343+00:00"
+    },
+    "implementation-preparation": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:0411c49de5316c4de97e0cfbfad6fd0ef387a3b0afd67ee57c05c143755968d0",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {},
+      "registered_skills": [],
+      "installed_at": "2026-11-14T13:39:24.772801+00:00"
+    },
+    "artifact-spec-analysis": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:fc1ac9314e3817154f43691fdb24407fcdfd47d86c168d062c2c833a4a148f40",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {},
+      "registered_skills": [],
+      "installed_at": "2026-11-14T13:39:25.008653+00:00"
+    },
+    "artifact-project-description": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:ab8f261f8e0280b2d00c02717c083aa1c9b32ebc3666bebd09f20e7fae29f3e2",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {},
+      "registered_skills": [],
+      "installed_at": "2026-11-14T13:39:25.277486+00:00"
+    }
+  }
+}

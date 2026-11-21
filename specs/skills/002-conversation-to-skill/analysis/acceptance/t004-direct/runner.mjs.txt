@@ -1,0 +1,25 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import os from 'node:os'
+import { execFileSync, spawnSync } from 'node:child_process'
+const helperPath = path.join(process.cwd(), 'packages/skills/tests/conversation-workflow/helpers/sandbox.mjs')
+const { createConversationSandbox } = await import(helperPath)
+const sandbox = createConversationSandbox()
+try {
+  const probeDir = process.argv[2]
+  const codex = fs.realpathSync(execFileSync('/bin/sh', ['-c', 'command -v codex'], { encoding: 'utf8' }).trim())
+  const state = path.join(sandbox.root, 'codex-state')
+  fs.mkdirSync(state)
+  const fixture = path.join(process.cwd(), 'packages/skills/tests/conversation-workflow/helpers/recording-host.py')
+  const mounts = [[codex, 'codex'], [fixture, 'recording-host.py'], [path.join(probeDir, 'direct-probe.py'), 'direct-probe.py']]
+  for (const [, target] of mounts) fs.writeFileSync(path.join(sandbox.root, target), '')
+  const args = ['--die-with-parent', '--unshare-user', '--unshare-net', '--unshare-pid', '--ro-bind', '/', '/', '--dev', '/dev', '--proc', '/proc', '--tmpfs', '/tmp', '--bind', sandbox.root, sandbox.root, '--bind', state, os.homedir()]
+  for (const [source, target] of mounts) args.push('--ro-bind', source, path.join(sandbox.root, target))
+  args.push('--chdir', sandbox.root, '--', '/usr/bin/python3', path.join(sandbox.root, 'direct-probe.py'), path.join(sandbox.root, 'codex'), sandbox.root)
+  const result = spawnSync('/usr/bin/bwrap', args, { encoding: 'utf8', env: { HOME: os.homedir(), LANG: 'C.UTF-8', PATH: '/usr/bin:/bin:/usr/sbin:/sbin', TERM: 'xterm-256color' }, timeout: 110000, maxBuffer: 4 * 1024 * 1024 })
+  fs.writeFileSync(path.join(probeDir, 'stdout.json'), result.stdout ?? '')
+  fs.writeFileSync(path.join(probeDir, 'stderr.txt'), result.stderr ?? '')
+  console.log(JSON.stringify({ probeDir, status: result.status, error: result.error?.message, stderr: result.stderr?.slice(-2200) }))
+  process.exitCode = result.status === 0 ? 0 : 1
+}
+finally { sandbox.cleanup() }

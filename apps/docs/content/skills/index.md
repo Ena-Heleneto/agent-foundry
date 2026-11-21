@@ -32,3 +32,5 @@ description: 九项正式技能的用途与使用时机；正文及附件以对�
 九项技能的完整来源在packages/skills-distribution-urgent/src下的coding、frontend和workflow集合。references目录属于技能内容，不能只取SKILL.md而丢失必要附件。
 
 主线同时保留临时来源和eval评估样本。主线eval选择配置仍有待对齐的实验状态；本页列出的九项正式技能不包含这些样本，也不将历史验收候选当成新技能。
+
+主线 `packages/skills` 已移除 bug-report 的技能来源及挂载声明，workflow 当前保留四项技能。本页九项清单对应紧急版独立来源，不作为主线当前清单。

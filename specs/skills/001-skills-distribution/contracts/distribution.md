@@ -1,6 +1,23 @@
 # 发布目录与构建契约
 
-## 当前集合内容契约（2026-11-11）
+## 2026-11-18 目标产物增量
+
+主线获准运行脚本唯一位于 `dist/script/`：安装入口为 `install.sh`，隐匿辅助脚本为 `hidden-install.sh`；统一归档内直接对应 `script/`。curl 插件交付安装入口、script 插件派生 hidden，每项资产各有唯一责任方；curl 输出分区仍保留映射等非脚本数据，技能正文附件和根VERSION保持。构建不执行脚本，不新增独立脚本包，不收录 old、模板源码或测试工具。
+
+前轮仅新增未注册骨架；本轮按后续授权已迁移模板与生成逻辑并接入配置，当前四插件中 curl 原字节交付 install.sh、script 派生 hidden，旧 curl 脚本输出和占位 JS 已移除。局部构建与字节验证见[T077](../implementation/T077.md)，正式候选仍待后续；目标布局详见[curl契约](curl-delivery.md)。下方三插件事实记录迁移前过渡状态。
+
+## 2026-11-16 当前主线产物边界
+
+目标开发输出为dist/VERSION及平级skill/、script/、curl/非脚本数据；当前唯一配置仍注册三个插件，skill/curl内压缩代码保持注释。正式流水线独立筛选获准三分类、同版运行材料、根VERSION、说明和实际许可，再形成一个skills-<version>.tar.gz；包内直接保留相同根路径。具体布局/映射见[curl契约](curl-delivery.md)。
+
+不生成两个旧tar.gz，不强制随包release-manifest.json或script/manifest.json。逐文件全集、摘要、来源和附件核验保存在流水线证据，缺件/多件/未公开材料仍拒绝；不能直接递归公开开发dist。hidden生成路径也须按正式选择过滤，不通过删除eval/profile目录掩盖辅助脚本内身份。
+
+包README以packages/skills/README.md为来源但须冻结前改成当前可用行为，真实ISC取仓库根LICENSE，第三方材料保留其实际许可和通知；不能以package字段或旧README当成已核验。新根VERSION已有实现，正式归档及完整检查尚未交付。MCP内容规则继续后置，紧急schema1及其精确payload公式不变。
+
+<details>
+<summary>此前契约与历史接口（未被替代的保护和最终验收继续适用）</summary>
+
+## 历史集合内容契约（2026-11-11，未被替代的内容保护继续适用）
 
 以spec的FR-053～060及[独立插件讨论](../requirements/discussions/2026-11-11-independent-plugins.md)为准：自动发现集合，只复制skill清单列出的技能至dist同名集合，配置原字节交付。缺配置默认packageName=null、mcp=false、skill={}，不交付技能。逐事件hook独立保存参数和扩展属性，command/description留未来生成器读取来源；frontmatter及附件保持，MCP目录为空。
 
@@ -92,3 +109,5 @@ Increment 复用缩减后的 register-commands.sh、.ps1 与 README；外部 Nod
 ## 历史：2026-11-04 平台执行修正（已由唯一 Node 入口替代）
 
 本包运行入口直接使用环境对应的 .sh/.ps1；安装、hooks 和五指令不经 Node 转发。skills 方式仍由用户手动执行同版公共平台脚本，curl 方式自动串联安装与挂载；两者复用同环境的平台实现。CLI 版本使用 FOUNDRY_SPECIFY_VERSION 或默认 1.2.6。构建只原样复制，Node/TypeScript 仅用于构建、测试或官方工具所需环境；不交付自有 TS/JS/Python 安装核心、Node 分发器或嵌套 package.json。后续任务不得重新创建已取消的转发层。
+
+</details>

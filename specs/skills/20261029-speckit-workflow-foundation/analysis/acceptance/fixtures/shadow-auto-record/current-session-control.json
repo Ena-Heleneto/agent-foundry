@@ -1,0 +1,14 @@
+{
+  "samplePath": "/tmp/shadow-main-record-probe-20261116/records.jsonl",
+  "beforeHash": "4b91a6a443898e616343ce22ce4b3970ff50bfd9057c09c5a46bcdf161760a3d",
+  "beforeCount": 4,
+  "beforeMtimeNs": 1794816095034952186,
+  "sampledAtNs": 1794816926251701888,
+  "afterHash": "4b91a6a443898e616343ce22ce4b3970ff50bfd9057c09c5a46bcdf161760a3d",
+  "afterCount": 4,
+  "afterMtimeNs": 1794816095034952186,
+  "checkedAtNs": 1794817097999135674,
+  "unchanged": true,
+  "newVisibleMarker": "AUTO_RECORD_CONTROL_6F2A",
+  "markerPresent": false
+}

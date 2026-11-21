@@ -1,0 +1,89 @@
+{
+  "status": "partial_native_rounds_and_nontext_pending",
+  "checked_at_ns": 1794974920564033054,
+  "runtime_sha256": "3190b66cc2f40912ce0d1ec5aebd0e54f2a599c6fbf135850346ca4fce9374b4",
+  "source_copy": {
+    "complete_skill_copy_equal": true,
+    "file_count": 3,
+    "files": {
+      "SKILL.md": "9426655ededf0f9d1f8762b1eb24267c9d1de94e0da3dfd0f994feff7ba30fa0",
+      "references/host-contract.md": "a53c39e3f237473a9088614da581bb49480bee1c0146a4936b603e7e78f8119a",
+      "scripts/shadow_runtime.py": "3190b66cc2f40912ce0d1ec5aebd0e54f2a599c6fbf135850346ca4fce9374b4"
+    },
+    "syntax_valid": true
+  },
+  "target_runtime_and_coverage_tests": {
+    "total": 27,
+    "passed": 27
+  },
+  "probe_regressions": {
+    "total": 6,
+    "passed": 6
+  },
+  "package_tests": {
+    "total": 39,
+    "passed": 36,
+    "failed": 3,
+    "failure_cause": "existing_missing_register_commands_script"
+  },
+  "typecheck": "passed",
+  "review": {
+    "critical": 0,
+    "important_found": 2,
+    "important_fixed_and_reverified": 2
+  },
+  "current_live": {
+    "source_profile": "codex-0.169.0-item-completed",
+    "capture_ready": true,
+    "observed_saved_count": 1,
+    "received_count": 1,
+    "unconfirmed_count": 0,
+    "gap_count": 0,
+    "text_role_phase_order_identity_equal": true,
+    "model_message_saves": 0,
+    "completed_normal_rounds": 0,
+    "continuing_observation": true
+  },
+  "new_subagent_skill_consumption": {
+    "observed_cli_version": "0.169.1",
+    "capture": {
+      "exit_code": 2,
+      "event": "error",
+      "gap_persisted": true,
+      "output_fields": [
+        "error",
+        "event",
+        "gap_persisted",
+        "message"
+      ],
+      "error": "unsupported_source",
+      "message": "来源声明版本尚未验证"
+    },
+    "inspect": {
+      "received_count": 0,
+      "raw_count": 0,
+      "recorded_count": 0,
+      "received_coverage": [],
+      "recorded_coverage": [],
+      "unconfirmed_source_refs": [],
+      "received_but_not_saved": [],
+      "analyzed_coverage": null,
+      "profile_coverage": null,
+      "gaps": [
+        {
+          "error": "unsupported_source",
+          "source_offset": null,
+          "detected_at_ns": 1794974725501940022,
+          "resolved_at_ns": null
+        }
+      ]
+    },
+    "inspect_exit_code": 0,
+    "normal_rounds_counted": 0
+  },
+  "native_final": "separate_pending_observation",
+  "formal_memory_enabled": false,
+  "formal_raw_directory_exists": false,
+  "nontext_support": "pending_actual_host_reference_fields",
+  "task_checkbox_changed": false
+}
