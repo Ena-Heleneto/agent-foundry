@@ -27,7 +27,7 @@ jobs:
         uses: jdx/mise-action@v5
 
       - name: 安装工作区依赖
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: 构建技能及依赖包
         run: pnpm run build:packages
