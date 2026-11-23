@@ -1,0 +1,1098 @@
+{
+  "version": "codex-cli 0.170.0",
+  "controlledEndpoint": true,
+  "realModel": false,
+  "terminalStatus": 0,
+  "noHooks": true,
+  "expected": {
+    "shortArguments": [
+      "中文 带空格",
+      "--option=a b"
+    ],
+    "longUtf8Bytes": 163854,
+    "longSha256": "d54776d7dc49adf2ac01e031b4241a5c88267857817aa950d7d43e430f8f64ed",
+    "binarySha256": "a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d",
+    "pngSha256": "732f50938c0eca57fdaf930b57c01173f4a306e001f1f0f697ec32a6bc57bbab"
+  },
+  "imageInputs": [
+    {
+      "keys": [
+        "type",
+        "image_url",
+        "detail"
+      ],
+      "bytes": 98,
+      "sha256": "732f50938c0eca57fdaf930b57c01173f4a306e001f1f0f697ec32a6bc57bbab",
+      "matchesOriginal": true
+    }
+  ],
+  "calls": [
+    {
+      "callId": "call_f84a3e6b916848aba810d2ba1c6f7f5f",
+      "case": "short",
+      "name": "exec_command",
+      "namespace": null,
+      "arguments": {
+        "cmd": "python3 -c 'import os,json,sys;print(json.dumps({'\"'\"'threadId'\"'\"':os.environ.get('\"'\"'CODEX_THREAD_ID'\"'\"'),'\"'\"'cwd'\"'\"':os.getcwd(),'\"'\"'args'\"'\"':sys.argv[1:],'\"'\"'text'\"'\"':'\"'\"'短输出 α\\r\\n末行  '\"'\"'},ensure_ascii=False))' '中文 带空格' '--option=a b'",
+        "workdir": "/tmp/foundry-conversation-GnEKVQ/repository-outside",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 1000
+      },
+      "output": "Chunk ID: d48fdb\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 50\nOutput:\n{\"threadId\": \"01a208bb-6710-7413-9477-b97794357220\", \"cwd\": \"/tmp/foundry-conversation-GnEKVQ/repository-outside\", \"args\": [\"中文 带空格\", \"--option=a b\"], \"text\": \"短输出 α\\r\\n末行  \"}\n"
+    },
+    {
+      "callId": "call_6e5afdd8936b4a54b3c1c3e2b40ee893",
+      "case": "long",
+      "name": "exec_command",
+      "namespace": null,
+      "arguments": {
+        "cmd": "python3 -c 'import sys;sys.stdout.write('\"'\"'开始\\n'\"'\"'+'\"'\"'片段 α\\n'\"'\"'*16384+'\"'\"'结束\\n'\"'\"')'",
+        "workdir": "/tmp/foundry-conversation-GnEKVQ/repository",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 600
+      },
+      "output": "Chunk ID: 54c439\nWall time: 0.0001 seconds\nProcess exited with code 0\nOriginal token count: 40964\nOutput:\nWarning: truncated output (original token count: 40964)\nTotal output lines: 16386\n\n开始\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片…40364 tokens truncated…α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n结束\n"
+    },
+    {
+      "callId": "call_d0b2a23bec334440ab894844b5d79e7d",
+      "case": "stream",
+      "name": "exec_command",
+      "namespace": null,
+      "arguments": {
+        "cmd": "python3 -c 'import time;print('\"'\"'STREAM_A'\"'\"',flush=True);time.sleep(1.6);print('\"'\"'STREAM_B'\"'\"',flush=True)'",
+        "workdir": "/tmp/foundry-conversation-GnEKVQ/repository",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 600
+      },
+      "output": "Chunk ID: 264be1\nWall time: 1.0008 seconds\nProcess running with session ID 14448\nOriginal token count: 3\nOutput:\nSTREAM_A\n"
+    },
+    {
+      "callId": "call_1a804006d605405b86e7a8e901ace022",
+      "case": "long-expanded",
+      "name": "exec_command",
+      "namespace": null,
+      "arguments": {
+        "cmd": "python3 -c 'import sys;sys.stdout.write('\"'\"'开始\\n'\"'\"'+'\"'\"'片段 α\\n'\"'\"'*16384+'\"'\"'结束\\n'\"'\"')'",
+        "workdir": "/tmp/foundry-conversation-GnEKVQ/repository",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 50000
+      },
+      "output": "Chunk ID: 563a38\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 40964\nOutput:\nWarning: truncated output (original token count: 40964)\nTotal output lines: 16386\n\n开始\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片…76927 chars truncated…α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n结束\n"
+    },
+    {
+      "callId": "call_4f9ba06a19a7414298d10878e56af442",
+      "case": "long-file",
+      "name": "exec_command",
+      "namespace": null,
+      "arguments": {
+        "cmd": "python3 -c 'import sys;sys.stdout.write('\"'\"'开始\\n'\"'\"'+'\"'\"'片段 α\\n'\"'\"'*16384+'\"'\"'结束\\n'\"'\"')' | tee /tmp/foundry-conversation-GnEKVQ/records/long-original.txt",
+        "workdir": "/tmp/foundry-conversation-GnEKVQ/repository",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 600
+      },
+      "output": "Chunk ID: 1beac5\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 40964\nOutput:\nWarning: truncated output (original token count: 40964)\nTotal output lines: 16386\n\n开始\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片…40364 tokens truncated…α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n结束\n"
+    },
+    {
+      "callId": "call_294603d9d3844e4187271d700391e03f",
+      "case": "long-file-check",
+      "name": "exec_command",
+      "namespace": null,
+      "arguments": {
+        "cmd": "python3 -c 'from pathlib import Path;import hashlib,json;p=Path('\"'\"'/tmp/foundry-conversation-GnEKVQ/records/long-original.txt'\"'\"');b=p.read_bytes();print(json.dumps({'\"'\"'bytes'\"'\"':len(b),'\"'\"'sha256'\"'\"':hashlib.sha256(b).hexdigest()}))'",
+        "workdir": "/tmp/foundry-conversation-GnEKVQ/repository",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 600
+      },
+      "output": "Chunk ID: ee7bde\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 24\nOutput:\n{\"bytes\": 163854, \"sha256\": \"d54776d7dc49adf2ac01e031b4241a5c88267857817aa950d7d43e430f8f64ed\"}\n"
+    },
+    {
+      "callId": "call_c88bc6e22fa241a28f25ca11c3a101a8",
+      "case": "copy",
+      "name": "exec_command",
+      "namespace": null,
+      "arguments": {
+        "cmd": "python3 -c 'from pathlib import Path;import hashlib,json;src=Path('\"'\"'/tmp/foundry-conversation-GnEKVQ/input/附件 原件.bin'\"'\"');dst=Path('\"'\"'/tmp/foundry-conversation-GnEKVQ/records/附件 副本.bin'\"'\"');dst.write_bytes(src.read_bytes());print(json.dumps({'\"'\"'originalSha256'\"'\"':hashlib.sha256(src.read_bytes()).hexdigest(),'\"'\"'savedSha256'\"'\"':hashlib.sha256(dst.read_bytes()).hexdigest(),'\"'\"'bytes'\"'\"':len(dst.read_bytes())}))'",
+        "workdir": "/tmp/foundry-conversation-GnEKVQ/repository",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 600
+      },
+      "output": "Chunk ID: 52a5fe\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 46\nOutput:\n{\"originalSha256\": \"a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d\", \"savedSha256\": \"a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d\", \"bytes\": 6}\n"
+    },
+    {
+      "callId": "call_20856c78236246208f1cd411cfb3f0ab",
+      "case": "mcp",
+      "name": "attachment",
+      "namespace": "mcp__fixture",
+      "arguments": {
+        "label": "工具附件 α 带空格"
+      },
+      "output": [
+        {
+          "type": "input_text",
+          "text": "Wall time: 0.0023 seconds\nOutput:"
+        },
+        {
+          "type": "input_text",
+          "text": "{\"label\": \"工具附件 α 带空格\", \"path\": \"/tmp/foundry-conversation-GnEKVQ/input/tool-image.png\", \"sha256\": \"732f50938c0eca57fdaf930b57c01173f4a306e001f1f0f697ec32a6bc57bbab\"}"
+        },
+        {
+          "type": "input_image",
+          "image_url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKUlEQVR4nO3NQQkAAAgEsItmNJtrCh/CYP9lqk9FIBAIBAKBQCAQfAkWQ4T8WzNiji4AAAAASUVORK5CYII=",
+          "detail": "high"
+        }
+      ]
+    },
+    {
+      "callId": "call_1350f369a7a0496ea1ed82d9e93eddfd",
+      "case": "tool-image-copy",
+      "name": "exec_command",
+      "namespace": null,
+      "arguments": {
+        "cmd": "python3 -c 'from pathlib import Path;import hashlib,json;source=Path('\"'\"'/tmp/foundry-conversation-GnEKVQ/input/tool-image.png'\"'\"');data=source.read_bytes();assert hashlib.sha256(data).hexdigest()=='\"'\"'732f50938c0eca57fdaf930b57c01173f4a306e001f1f0f697ec32a6bc57bbab'\"'\"';saved=Path('\"'\"'/tmp/foundry-conversation-GnEKVQ/records/工具 附件.png'\"'\"');saved.write_bytes(data);print(json.dumps({'\"'\"'sha256'\"'\"':hashlib.sha256(saved.read_bytes()).hexdigest()}))'",
+        "workdir": "/tmp/foundry-conversation-GnEKVQ/repository",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 600
+      },
+      "output": "Chunk ID: c1492b\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 20\nOutput:\n{\"sha256\": \"732f50938c0eca57fdaf930b57c01173f4a306e001f1f0f697ec32a6bc57bbab\"}\n"
+    },
+    {
+      "callId": "call_21c06db3b6d74264830fe17737185bf6",
+      "case": "stream-poll",
+      "name": "write_stdin",
+      "namespace": null,
+      "arguments": {
+        "session_id": 14448,
+        "chars": "",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 600
+      },
+      "output": "Chunk ID: a763c8\nWall time: 0.1002 seconds\nProcess exited with code 0\nOriginal token count: 3\nOutput:\nSTREAM_B\n"
+    },
+    {
+      "callId": "call_027cd98688664a8baedd15a38d465332",
+      "case": "spawn",
+      "name": "spawn_agent",
+      "namespace": "multi_agent_v1",
+      "arguments": {
+        "message": "T005_CHILD_SYNTHETIC 仅返回 T005_CHILD_RETURN_ALPHA",
+        "fork_context": false
+      },
+      "output": "{\"agent_id\":\"01a208bb-6e6c-7321-9699-b1ed02da5ab9\",\"nickname\":\"Avicenna\"}"
+    },
+    {
+      "callId": "call_9af8baa07c944ed78c6200f28a9739db",
+      "case": "child-wait",
+      "name": "wait_agent",
+      "namespace": "multi_agent_v1",
+      "arguments": {
+        "targets": [
+          "01a208bb-6e6c-7321-9699-b1ed02da5ab9"
+        ],
+        "timeout_ms": 10000
+      },
+      "output": "{\"status\":{\"01a208bb-6e6c-7321-9699-b1ed02da5ab9\":{\"completed\":\"T005_CHILD_RETURN_ALPHA\"}},\"timed_out\":false}"
+    },
+    {
+      "callId": "call_17a20713ac8546d889d96edc09ce0b2e",
+      "case": "child-interaction",
+      "name": "send_input",
+      "namespace": "multi_agent_v1",
+      "arguments": {
+        "target": "01a208bb-6e6c-7321-9699-b1ed02da5ab9",
+        "message": "T005_CHILD_SYNTHETIC_FOLLOWUP 仅返回 T005_CHILD_RETURN_BETA"
+      },
+      "output": "{\"submission_id\":\"01a208bb-6eb0-7050-8fcc-2cc78e1da4e2\"}"
+    },
+    {
+      "callId": "call_9d6b3c2043aa42c6a1721d481d2c93c0",
+      "case": "child-wait-followup",
+      "name": "wait_agent",
+      "namespace": "multi_agent_v1",
+      "arguments": {
+        "targets": [
+          "01a208bb-6e6c-7321-9699-b1ed02da5ab9"
+        ],
+        "timeout_ms": 10000
+      },
+      "output": "{\"status\":{\"01a208bb-6e6c-7321-9699-b1ed02da5ab9\":{\"completed\":\"T005_CHILD_RETURN_BETA\"}},\"timed_out\":false}"
+    }
+  ],
+  "requestToolNames": [
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ],
+    [
+      "exec_command",
+      "write_stdin",
+      "list_mcp_resources",
+      "list_mcp_resource_templates",
+      "read_mcp_resource",
+      "request_user_input",
+      "view_image",
+      "multi_agent_v1",
+      "mcp__codex_tui",
+      "mcp__fixture",
+      "get_goal",
+      "create_goal",
+      "update_goal",
+      null
+    ]
+  ],
+  "namespaceTools": {
+    "multi_agent_v1": [
+      {
+        "name": "close_agent",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "target": {
+              "type": "string",
+              "description": "Agent id to close (from spawn_agent)."
+            }
+          },
+          "required": [
+            "target"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "resume_agent",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Agent id to resume."
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "send_input",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "interrupt": {
+              "type": "boolean",
+              "description": "True interrupts the current task and handles this message immediately; false or omitted queues it."
+            },
+            "items": {
+              "type": "array",
+              "description": "Structured input items. Use this to pass explicit mentions (for example app:// connector paths).",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "audio_url": {
+                    "type": "string",
+                    "description": "Audio data URL when type is audio."
+                  },
+                  "image_url": {
+                    "type": "string",
+                    "description": "Image URL when type is image."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Display name when type is skill or mention."
+                  },
+                  "path": {
+                    "type": "string",
+                    "description": "Path when type is local_image/local_audio/skill, or structured mention target such as app://<connector-id> or plugin://<plugin-name>@<marketplace-name> when type is mention."
+                  },
+                  "text": {
+                    "type": "string",
+                    "description": "Text content when type is text."
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Input item type: text, image, local_image, audio, local_audio, skill, or mention."
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "message": {
+              "type": "string",
+              "description": "Legacy plain-text message to send to the agent. Use either message or items."
+            },
+            "target": {
+              "type": "string",
+              "description": "Agent id to message (from spawn_agent)."
+            }
+          },
+          "required": [
+            "target"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "spawn_agent",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "fork_context": {
+              "type": "boolean",
+              "description": "True forks the current thread history into the new agent; false or omitted starts with only the initial prompt."
+            },
+            "items": {
+              "type": "array",
+              "description": "Structured input items. Use this to pass explicit mentions (for example app:// connector paths).",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "audio_url": {
+                    "type": "string",
+                    "description": "Audio data URL when type is audio."
+                  },
+                  "image_url": {
+                    "type": "string",
+                    "description": "Image URL when type is image."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Display name when type is skill or mention."
+                  },
+                  "path": {
+                    "type": "string",
+                    "description": "Path when type is local_image/local_audio/skill, or structured mention target such as app://<connector-id> or plugin://<plugin-name>@<marketplace-name> when type is mention."
+                  },
+                  "text": {
+                    "type": "string",
+                    "description": "Text content when type is text."
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Input item type: text, image, local_image, audio, local_audio, skill, or mention."
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "message": {
+              "type": "string",
+              "description": "Initial plain-text task for the new agent. Use either message or items."
+            },
+            "model": {
+              "type": "string",
+              "description": "Model override for the new agent. Omit unless an explicit override is needed."
+            },
+            "reasoning_effort": {
+              "type": "string",
+              "description": "Reasoning effort override for the new agent. Omit to inherit the parent effort."
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "wait_agent",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "targets": {
+              "type": "array",
+              "description": "Agent ids to wait on. Pass multiple ids to wait for whichever finishes first.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "timeout_ms": {
+              "type": "number",
+              "description": "Timeout in milliseconds. Defaults to 30000, min 10000, max 3600000. Prefer longer waits (minutes) to avoid busy polling."
+            }
+          },
+          "required": [
+            "targets"
+          ],
+          "additionalProperties": false
+        }
+      }
+    ],
+    "mcp__codex_tui": [
+      {
+        "name": "create_thread",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "model": {
+              "type": "string"
+            },
+            "prompt": {
+              "type": "string",
+              "description": "Maximum 1,000 UTF-8 bytes."
+            },
+            "title": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "prompt"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "create_worktree",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "allowAsync": {
+              "type": "boolean",
+              "enum": [
+                true
+              ]
+            },
+            "ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "allowAsync"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "fork_thread",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "threadId": {
+              "type": "string"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "get_worktree_creation_status",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "operationId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "operationId"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "list_archived_threads",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "cursor": {
+              "type": "string"
+            },
+            "limit": {
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "list_threads",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "list_worktrees",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "cursor": {
+              "type": "string"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "read_thread",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "cursor": {
+              "type": "string"
+            },
+            "includeOutputs": {
+              "type": "boolean"
+            },
+            "maxOutputCharsPerItem": {
+              "type": "integer"
+            },
+            "threadId": {
+              "type": "string"
+            },
+            "turnLimit": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "threadId"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "send_message_to_thread",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "model": {
+              "type": "string"
+            },
+            "prompt": {
+              "type": "string",
+              "description": "Maximum 1,000 UTF-8 bytes."
+            },
+            "threadId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "threadId",
+            "prompt"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "set_thread_archived",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "archived": {
+              "type": "boolean"
+            },
+            "threadId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "archived"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "set_thread_title",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "threadId": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "title"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "wait_threads",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "targets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "afterCursor": {
+                    "type": "string"
+                  },
+                  "threadId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "threadId"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "timeoutMs": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "targets"
+          ],
+          "additionalProperties": false
+        }
+      }
+    ],
+    "mcp__fixture": [
+      {
+        "name": "attachment",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "label"
+          ]
+        }
+      }
+    ]
+  },
+  "toolNames": [
+    "exec_command",
+    "write_stdin",
+    "list_mcp_resources",
+    "list_mcp_resource_templates",
+    "read_mcp_resource",
+    "request_user_input",
+    "view_image",
+    "multi_agent_v1",
+    "mcp__codex_tui",
+    "mcp__fixture",
+    "get_goal",
+    "create_goal",
+    "update_goal",
+    null
+  ],
+  "longFile": {
+    "bytes": 163854,
+    "sha256": "d54776d7dc49adf2ac01e031b4241a5c88267857817aa950d7d43e430f8f64ed"
+  },
+  "auxiliaryRequests": 1,
+  "savedAttachmentSha256": "a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d",
+  "savedToolImageSha256": "732f50938c0eca57fdaf930b57c01173f4a306e001f1f0f697ec32a6bc57bbab",
+  "userImageOriginalPathInInitialInput": true,
+  "sessionMetadata": [
+    {
+      "id": "01a208bb-6e6c-7321-9699-b1ed02da5ab9",
+      "timestamp": "2026-11-23T14:07:10.959Z",
+      "cwd": "/tmp/foundry-conversation-GnEKVQ/repository",
+      "source": {
+        "subagent": {
+          "thread_spawn": {
+            "parent_thread_id": "01a208bb-6710-7413-9477-b97794357220",
+            "depth": 1,
+            "agent_path": null,
+            "agent_nickname": "Avicenna",
+            "agent_role": null
+          }
+        }
+      },
+      "cli_version": "0.170.0"
+    },
+    {
+      "id": "01a208bb-6710-7413-9477-b97794357220",
+      "timestamp": "2026-11-23T14:07:09.076Z",
+      "cwd": "/tmp/foundry-conversation-GnEKVQ/repository",
+      "source": "cli",
+      "cli_version": "0.170.0"
+    }
+  ],
+  "persistedParentCalls": [
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_f84a3e6b916848aba810d2ba1c6f7f5f",
+      "name": "exec_command",
+      "namespace": null,
+      "argumentJson": "{\"cmd\": \"python3 -c 'import os,json,sys;print(json.dumps({'\\\"'\\\"'threadId'\\\"'\\\"':os.environ.get('\\\"'\\\"'CODEX_THREAD_ID'\\\"'\\\"'),'\\\"'\\\"'cwd'\\\"'\\\"':os.getcwd(),'\\\"'\\\"'args'\\\"'\\\"':sys.argv[1:],'\\\"'\\\"'text'\\\"'\\\"':'\\\"'\\\"'短输出 α\\\\r\\\\n末行  '\\\"'\\\"'},ensure_ascii=False))' '中文 带空格' '--option=a b'\", \"workdir\": \"/tmp/foundry-conversation-GnEKVQ/repository-outside\", \"yield_time_ms\": 1000, \"max_output_tokens\": 1000}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_6e5afdd8936b4a54b3c1c3e2b40ee893",
+      "name": "exec_command",
+      "namespace": null,
+      "argumentJson": "{\"cmd\": \"python3 -c 'import sys;sys.stdout.write('\\\"'\\\"'开始\\\\n'\\\"'\\\"'+'\\\"'\\\"'片段 α\\\\n'\\\"'\\\"'*16384+'\\\"'\\\"'结束\\\\n'\\\"'\\\"')'\", \"workdir\": \"/tmp/foundry-conversation-GnEKVQ/repository\", \"yield_time_ms\": 1000, \"max_output_tokens\": 600}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_d0b2a23bec334440ab894844b5d79e7d",
+      "name": "exec_command",
+      "namespace": null,
+      "argumentJson": "{\"cmd\": \"python3 -c 'import time;print('\\\"'\\\"'STREAM_A'\\\"'\\\"',flush=True);time.sleep(1.6);print('\\\"'\\\"'STREAM_B'\\\"'\\\"',flush=True)'\", \"workdir\": \"/tmp/foundry-conversation-GnEKVQ/repository\", \"yield_time_ms\": 1000, \"max_output_tokens\": 600}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_1a804006d605405b86e7a8e901ace022",
+      "name": "exec_command",
+      "namespace": null,
+      "argumentJson": "{\"cmd\": \"python3 -c 'import sys;sys.stdout.write('\\\"'\\\"'开始\\\\n'\\\"'\\\"'+'\\\"'\\\"'片段 α\\\\n'\\\"'\\\"'*16384+'\\\"'\\\"'结束\\\\n'\\\"'\\\"')'\", \"workdir\": \"/tmp/foundry-conversation-GnEKVQ/repository\", \"yield_time_ms\": 1000, \"max_output_tokens\": 50000}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_4f9ba06a19a7414298d10878e56af442",
+      "name": "exec_command",
+      "namespace": null,
+      "argumentJson": "{\"cmd\": \"python3 -c 'import sys;sys.stdout.write('\\\"'\\\"'开始\\\\n'\\\"'\\\"'+'\\\"'\\\"'片段 α\\\\n'\\\"'\\\"'*16384+'\\\"'\\\"'结束\\\\n'\\\"'\\\"')' | tee /tmp/foundry-conversation-GnEKVQ/records/long-original.txt\", \"workdir\": \"/tmp/foundry-conversation-GnEKVQ/repository\", \"yield_time_ms\": 1000, \"max_output_tokens\": 600}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_294603d9d3844e4187271d700391e03f",
+      "name": "exec_command",
+      "namespace": null,
+      "argumentJson": "{\"cmd\": \"python3 -c 'from pathlib import Path;import hashlib,json;p=Path('\\\"'\\\"'/tmp/foundry-conversation-GnEKVQ/records/long-original.txt'\\\"'\\\"');b=p.read_bytes();print(json.dumps({'\\\"'\\\"'bytes'\\\"'\\\"':len(b),'\\\"'\\\"'sha256'\\\"'\\\"':hashlib.sha256(b).hexdigest()}))'\", \"workdir\": \"/tmp/foundry-conversation-GnEKVQ/repository\", \"yield_time_ms\": 1000, \"max_output_tokens\": 600}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_c88bc6e22fa241a28f25ca11c3a101a8",
+      "name": "exec_command",
+      "namespace": null,
+      "argumentJson": "{\"cmd\": \"python3 -c 'from pathlib import Path;import hashlib,json;src=Path('\\\"'\\\"'/tmp/foundry-conversation-GnEKVQ/input/附件 原件.bin'\\\"'\\\"');dst=Path('\\\"'\\\"'/tmp/foundry-conversation-GnEKVQ/records/附件 副本.bin'\\\"'\\\"');dst.write_bytes(src.read_bytes());print(json.dumps({'\\\"'\\\"'originalSha256'\\\"'\\\"':hashlib.sha256(src.read_bytes()).hexdigest(),'\\\"'\\\"'savedSha256'\\\"'\\\"':hashlib.sha256(dst.read_bytes()).hexdigest(),'\\\"'\\\"'bytes'\\\"'\\\"':len(dst.read_bytes())}))'\", \"workdir\": \"/tmp/foundry-conversation-GnEKVQ/repository\", \"yield_time_ms\": 1000, \"max_output_tokens\": 600}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_20856c78236246208f1cd411cfb3f0ab",
+      "name": "attachment",
+      "namespace": "mcp__fixture",
+      "argumentJson": "{\"label\": \"工具附件 α 带空格\"}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_1350f369a7a0496ea1ed82d9e93eddfd",
+      "name": "exec_command",
+      "namespace": null,
+      "argumentJson": "{\"cmd\": \"python3 -c 'from pathlib import Path;import hashlib,json;source=Path('\\\"'\\\"'/tmp/foundry-conversation-GnEKVQ/input/tool-image.png'\\\"'\\\"');data=source.read_bytes();assert hashlib.sha256(data).hexdigest()=='\\\"'\\\"'732f50938c0eca57fdaf930b57c01173f4a306e001f1f0f697ec32a6bc57bbab'\\\"'\\\"';saved=Path('\\\"'\\\"'/tmp/foundry-conversation-GnEKVQ/records/工具 附件.png'\\\"'\\\"');saved.write_bytes(data);print(json.dumps({'\\\"'\\\"'sha256'\\\"'\\\"':hashlib.sha256(saved.read_bytes()).hexdigest()}))'\", \"workdir\": \"/tmp/foundry-conversation-GnEKVQ/repository\", \"yield_time_ms\": 1000, \"max_output_tokens\": 600}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_21c06db3b6d74264830fe17737185bf6",
+      "name": "write_stdin",
+      "namespace": null,
+      "argumentJson": "{\"session_id\": 14448, \"chars\": \"\", \"yield_time_ms\": 1000, \"max_output_tokens\": 600}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_027cd98688664a8baedd15a38d465332",
+      "name": "spawn_agent",
+      "namespace": "multi_agent_v1",
+      "argumentJson": "{\"message\": \"T005_CHILD_SYNTHETIC 仅返回 T005_CHILD_RETURN_ALPHA\", \"fork_context\": false}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_9af8baa07c944ed78c6200f28a9739db",
+      "name": "wait_agent",
+      "namespace": "multi_agent_v1",
+      "argumentJson": "{\"targets\": [\"01a208bb-6e6c-7321-9699-b1ed02da5ab9\"], \"timeout_ms\": 10000}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_17a20713ac8546d889d96edc09ce0b2e",
+      "name": "send_input",
+      "namespace": "multi_agent_v1",
+      "argumentJson": "{\"target\": \"01a208bb-6e6c-7321-9699-b1ed02da5ab9\", \"message\": \"T005_CHILD_SYNTHETIC_FOLLOWUP 仅返回 T005_CHILD_RETURN_BETA\"}",
+      "matchesSentArguments": true
+    },
+    {
+      "threadId": "01a208bb-6710-7413-9477-b97794357220",
+      "turnId": "01a208bb-6729-7aa0-be0b-6bfe4dd945ee",
+      "callId": "call_9d6b3c2043aa42c6a1721d481d2c93c0",
+      "name": "wait_agent",
+      "namespace": "multi_agent_v1",
+      "argumentJson": "{\"targets\": [\"01a208bb-6e6c-7321-9699-b1ed02da5ab9\"], \"timeout_ms\": 10000}",
+      "matchesSentArguments": true
+    }
+  ]
+}

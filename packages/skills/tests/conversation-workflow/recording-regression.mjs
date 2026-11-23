@@ -42,6 +42,37 @@ function recordedPair(files, session) {
   return { detail, index, key }
 }
 
+/**
+ * 目录须等于仓库根或位于其真实子目录，同名前缀的兄弟目录不满足。
+ */
+function belongsToRepository(directory, repository) {
+  assert.ok(path.isAbsolute(directory))
+  assert.ok(path.isAbsolute(repository))
+  /**
+   * 观测保存的是宿主已解析的目录，以真实路径层级比对。
+   */
+  const relative = path.relative(repository, directory)
+  return relative !== '..' && !relative.startsWith(`..${path.sep}`) && !path.isAbsolute(relative)
+}
+
+/**
+ * 从实际项目入口、原线程和当前交互轮次验证续写所用的归属证据。
+ */
+function assertEligibleRecovery(recovery, session) {
+  /**
+   * 当前回包的目录与原会话目录必须独立取得并指向同一目标仓库。
+   */
+  const { repository, originalCwd, effectiveCwd, skillPath, proofReference } = recovery.scope
+  assert.equal(recovery.sessionId, session.sessionId)
+  assert.equal(recovery.turn.trigger, 'user')
+  assert.equal(originalCwd, session.originalCwd)
+  assert.equal(effectiveCwd, recovery.turn.cwd)
+  assert.ok(belongsToRepository(originalCwd, repository))
+  assert.ok(belongsToRepository(effectiveCwd, repository))
+  assert.ok(belongsToRepository(skillPath, repository))
+  assert.ok(proofReference)
+}
+
 test('对照实际跨午夜、两会话和同一句话的不同轮次', () => {
   assert.deepEqual(ordinary.emptyBeforePrompt, {})
   assert.equal(alpha.openedDate, beta.openedDate)
@@ -151,15 +182,27 @@ test('能从原会话详情定位附件且保存字节与原件摘要一致', ()
   assert.ok(detail.text.includes(reference) || detail.text.includes(encodeURI(reference)))
 })
 
-test('交互恢复归属无法核实时及 exec resume 均无记录写入或正文补读', () => {
-  assert.equal(resumes['outside-resume'].turn.trigger, 'user')
-  assert.equal(resumes['exec-resume'].turn.trigger, 'exec')
-  assert.notEqual(resumes['outside-resume'].actualLaunchCwd, resumes['outside-resume'].turn.cwd)
+test('交互恢复归属无法核实或不符时及 exec resume 均无记录写入或正文补读', () => {
   /**
-   * 两个恢复入口分别比对同一份原记录。
+   * 新观测在仓库内恢复仓库外来源；旧观测保留旧规则下的库外启动对照。
+   */
+  const outsideSource = resumes['outside-source-resume']
+  assert.equal((outsideSource ?? resumes['outside-resume']).turn.trigger, 'user')
+  assert.equal(resumes['exec-resume'].turn.trigger, 'exec')
+  if (outsideSource) {
+    assert.ok(belongsToRepository(outsideSource.turn.cwd, outsideSource.scope.repository))
+    assert.ok(!belongsToRepository(outsideSource.scope.originalCwd, outsideSource.scope.repository))
+    assert.notEqual(outsideSource.sessionId, alpha.sessionId)
+  }
+  else {
+    assert.notEqual(resumes['outside-resume'].actualLaunchCwd, resumes['outside-resume'].turn.cwd)
+    assert.equal(resumes['outside-resume'].sessionId, alpha.sessionId)
+  }
+  assert.equal(resumes['exec-resume'].sessionId, alpha.sessionId)
+  /**
+   * 每个对照都比对原有的记录区，并确认用户任务已完成。
    */
   for (const item of Object.values(resumes)) {
-    assert.equal(item.sessionId, alpha.sessionId)
     assert.ok(item.turn.finalReply.includes('对话记录合成基线'))
     assert.ok(Object.keys(item.before).length >= 2, '需保留可逐份比对的恢复前文件')
     assert.deepEqual(item.after, item.before)
@@ -177,10 +220,10 @@ test('可核实归属的两次恢复续写原文件并保留缺档', (context) =
    */
   let previous = recordedPair(eligibleResume.before, eligibleResume.session).detail.text
   /**
-   * 两次恢复都需要各自可核验的本次启动来源。
+   * 两次恢复分别核对当前轮次及已加载的入口。
    */
   for (const attempt of eligibleResume.launches) {
-    assert.ok(attempt.verifiedLaunchCwd && attempt.proofReference)
+    assertEligibleRecovery(attempt, eligibleResume.session)
     /**
      * 每次恢复仍指向同一会话的原日文件。
      */
@@ -268,7 +311,7 @@ test('可核实归属的提交后恢复仍保留两段修复并跳过提交事�
    * 满足归属条件的提交线程在恢复后读回的原文件和事件。
    */
   const recovery = commit.eligibleResume
-  assert.ok(recovery.verifiedLaunchCwd && recovery.proofReference)
+  assertEligibleRecovery(recovery, commit.observed)
   /**
    * 索引和详情仍使用该提交线程原开启日期。
    */

@@ -1,0 +1,45 @@
+"""对本次已知合成观测核对首末轮、顺序、日期及排除范围。"""
+import hashlib,json
+from pathlib import Path
+work=Path('/tmp/foundry-t004-t005-lJoI3d');data=json.loads((work/'live-observation.json').read_text())
+rows={row.get('case',row.get('mode')):row for row in data['rows']};threads={row['id']:row for row in data['threads']};record_root=Path('/tmp/foundry-conversation-lwxSrQ/records')
+assert data['sourceSha256']==data['installedSha256']
+for name in ('outside','exec','exec-resume','inside-resume-outside','outside-resume-inside'):
+ row=rows[name];assert row['recordsUnchanged'],name;assert row['businessExists'],name
+ assert row.get('status') in (None,0),name
+for name in ('foreground-metadata-scope','root','cross-midnight','daemon'):
+ row=rows[name];sid=row['threadIds'][-1];thread=threads[sid]
+ paths=list(record_root.glob('*/details/'+sid+'.md'));assert len(paths)==1,name
+ detail=paths[0].read_text()
+ turn=thread['turns'][0];messages=[item['text'] for item in turn['items'] if item['type']=='agentMessage']
+ assert messages and messages[-1] in detail,name
+ obs=row['observations']
+ assert any(not sample['businessExists'] and any(sid in p for p in sample.get('recordFiles',sample.get('records',{}))) for sample in obs),name
+ assert not any(sid in p for p in row.get('idleBeforePrompt',{})),name
+cross=rows['cross-midnight'];sid=cross['threadIds'][-1]
+assert cross['openDate']!=cross['firstPromptDate']
+assert len([p for p in cross['recordsAfter'] if sid in p and p.startswith(cross['openDate']+'/')])==2
+resume=rows['inside-resume'];assert set(resume['recordsBefore'])==set(resume['recordsAfter'])
+sid=resume['resumedId'];details=next(record_root.glob('*/details/'+sid+'.md')).read_text()
+turn=threads[sid]['turns'][2]
+final=[i['text'] for i in turn['items'] if i['type']=='agentMessage'][-1];assert final in details
+stop=rows['stop'];assert stop['userStopped'] and stop['recordsUnchanged'] and not stop['businessExists']
+assert threads[stop['threadIds'][-1]]['turns'][0]['status']=='interrupted'
+for thread in data['threads']:
+ path=Path(thread['path'])
+ header=json.loads(path.open().readline())['payload']
+ thread['cliVersion']=header.get('cli_version');thread['observedModels']=[]
+ for line in path.read_text().splitlines():
+  event=json.loads(line)
+  if event.get('type')=='turn_context':
+   model=event['payload'].get('model')
+   if model and model not in thread['observedModels']:thread['observedModels'].append(model)
+ for turn in thread['turns']:
+  for item in turn['items']:
+   if item['type']=='commandExecution' and '/superpowers/' in item.get('command',''):
+    output=item.pop('aggregatedOutput','')
+    item['omittedThirdPartyOutputSha256']=hashlib.sha256(output.encode()).hexdigest();item['omittedThirdPartyOutputBytes']=len(output.encode())
+data['projection']='仅已知合成线程；过滤推理条目，第三方技能正文保留实际输出SHA-256与字节数，其余参数及结果保留。'
+data['assertedChecks']=['source-install-equality','five-negative-record-snapshots','four-live-first-before-business-and-final-equality','cross-midnight-opening-date','same-file-resume','actual-interruption']
+(work/'live-verified.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'assertions':'passed','threads':len(data['threads']),'rows':len(data['rows']),'bytes':(work/'live-verified.json').stat().st_size,'versions':sorted({t['cliVersion'] for t in data['threads']}),'models':sorted({m for t in data['threads'] for m in t['observedModels']})},ensure_ascii=False))

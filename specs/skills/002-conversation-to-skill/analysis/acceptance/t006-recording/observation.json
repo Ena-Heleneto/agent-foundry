@@ -1,0 +1,374 @@
+{
+  "version": "codex-cli 0.170.0",
+  "root": "/tmp/foundry-conversation-fSXz1b",
+  "recordsRoot": "/tmp/foundry-conversation-fSXz1b/records",
+  "repository": "/tmp/foundry-conversation-fSXz1b/repository",
+  "opened": "2026-11-23",
+  "firstDay": "2026-11-24",
+  "resumeDay": "2026-11-24",
+  "threads": {
+    "alpha": {
+      "id": "01a208db-5b97-7203-b3df-33ff14707623",
+      "openingDate": "2026-11-23",
+      "events": [
+        {
+          "type": "user_message",
+          "text": "T006_SAME_USER_TEXT",
+          "phase": null
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_ALPHA_FINAL",
+          "phase": "final_answer"
+        },
+        {
+          "type": "user_message",
+          "text": "T006_SAME_USER_TEXT",
+          "phase": null
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_ALPHA_REPEATED",
+          "phase": "final_answer"
+        },
+        {
+          "type": "user_message",
+          "text": "T006_PARTIAL_WRITE_INPUT",
+          "phase": null
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_PARTIAL_BUSINESS_FINAL",
+          "phase": "final_answer"
+        },
+        {
+          "type": "user_message",
+          "text": "T006_PARTIAL_RETRY_INPUT",
+          "phase": null
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_PARTIAL_RETRY_FINAL",
+          "phase": "final_answer"
+        },
+        {
+          "type": "user_message",
+          "text": "T006_SINGLE_REPAIR_AND_COMMIT",
+          "phase": null
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_SINGLE_COMMIT_SUCCEEDED",
+          "phase": "commentary"
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_SINGLE_COMMIT_TURN_FINAL",
+          "phase": "final_answer"
+        },
+        {
+          "type": "user_message",
+          "text": "T006_REPAIR_AND_COMMIT",
+          "phase": null
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_FIRST_COMMIT_FAILED",
+          "phase": "commentary"
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_SECOND_COMMIT_SUCCEEDED",
+          "phase": "commentary"
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_GIT_TURN_FINAL",
+          "phase": "final_answer"
+        },
+        {
+          "type": "user_message",
+          "text": "T006_POST_COMMIT_INPUT",
+          "phase": null
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_POST_COMMIT_FINAL",
+          "phase": "final_answer"
+        },
+        {
+          "type": "user_message",
+          "text": "T006_STOPPED_TURN",
+          "phase": null
+        },
+        {
+          "type": "turn_aborted",
+          "reason": "interrupted"
+        },
+        {
+          "type": "user_message",
+          "text": "T006_RESUME_ONE_INPUT",
+          "phase": null
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_RESUME_ONE_FINAL",
+          "phase": "final_answer"
+        },
+        {
+          "type": "user_message",
+          "text": "T006_RESUME_TWO_INPUT",
+          "phase": null
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_RESUME_TWO_FINAL",
+          "phase": "final_answer"
+        }
+      ]
+    },
+    "beta": {
+      "id": "01a208db-5c2a-7950-9b7c-0e389339efef",
+      "openingDate": "2026-11-23",
+      "events": [
+        {
+          "type": "user_message",
+          "text": "T006_SAME_USER_TEXT",
+          "phase": null
+        },
+        {
+          "type": "assistant_message",
+          "text": "T006_BETA_FINAL",
+          "phase": "final_answer"
+        }
+      ]
+    }
+  },
+  "idle": {},
+  "firstAlpha": {
+    "calls": {
+      "call_e717c56dec574526b6c0a61624c927b3": {
+        "label": "business",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "printf 'T006_THREAD_ID=%s\\n' \"$CODEX_THREAD_ID\"; printf '%s\\n' T006_BUSINESS_TOOL; sha256sum '/tmp/foundry-conversation-fSXz1b/input/附件 原件.bin'",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository-outside",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: 614d53\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 49\nOutput:\nT006_THREAD_ID=01a208db-5b97-7203-b3df-33ff14707623\nT006_BUSINESS_TOOL\na0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d  /tmp/foundry-conversation-fSXz1b/input/附件 原件.bin\n"
+      }
+    },
+    "checkpoints": {
+      "business": {}
+    },
+    "windows": {}
+  },
+  "firstBeta": {
+    "calls": {
+      "call_8adbf5e0cd184d4d82f3dd085f6826ef": {
+        "label": "business",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "printf 'T006_THREAD_ID=%s\\n' \"$CODEX_THREAD_ID\"; printf '%s\\n' T006_BETA_TOOL",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository/projects/beta",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: b9a018\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 17\nOutput:\nT006_THREAD_ID=01a208db-5c2a-7950-9b7c-0e389339efef\nT006_BETA_TOOL\n"
+      }
+    },
+    "checkpoints": {
+      "business": {}
+    },
+    "windows": {}
+  },
+  "parallel": {},
+  "attachmentSha256": "a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d",
+  "fault": {
+    "calls": {
+      "call_90582b3a672948929937960adab463cd": {
+        "label": "fault-business",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "printf '%s\\n' T006_PARTIAL_CONTINUE",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository/projects/alpha",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: 128b1c\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 6\nOutput:\nT006_PARTIAL_CONTINUE\n"
+      }
+    },
+    "checkpoints": {
+      "fault-business": {}
+    },
+    "windows": {}
+  },
+  "faultErrno": "EISDIR",
+  "faultSnapshot": {},
+  "retry": {
+    "calls": {},
+    "checkpoints": {},
+    "windows": {}
+  },
+  "retrySnapshot": {},
+  "simpleCommit": {
+    "calls": {
+      "call_3cc56ffbfa7a4dfd85a52753f8c24df6": {
+        "label": "single-fix",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "printf '%s\\n' T006_SINGLE_FIX > README.md; git -c user.name=Fixture -c user.email=fixture@example.invalid -c commit.gpgsign=false -c core.hooksPath=/tmp/foundry-conversation-fSXz1b/empty-hooks add README.md; cat README.md",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: f3e342\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 4\nOutput:\nT006_SINGLE_FIX\n"
+      },
+      "call_a8d5a6f678a14d87b3db9a4331f955bb": {
+        "label": "commit-single",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "git -c user.name=Fixture -c user.email=fixture@example.invalid -c commit.gpgsign=false -c core.hooksPath=/tmp/foundry-conversation-fSXz1b/empty-hooks commit -m T006_SINGLE_COMMIT",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: 0db2ac\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 21\nOutput:\n[main f0ab273] T006_SINGLE_COMMIT\n 1 file changed, 1 insertion(+), 1 deletion(-)\n"
+      },
+      "call_f8443206c7a94b1291056712bcfb309f": {
+        "label": "commit-single-result",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "true",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: 5c5e5f\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 0\nOutput:\n"
+      }
+    },
+    "checkpoints": {
+      "single-fix": {},
+      "commit-single": {},
+      "commit-single-result": {}
+    },
+    "windows": {
+      "commit-single": {
+        "before": {},
+        "writeEvents": 0,
+        "after": {}
+      }
+    }
+  },
+  "commit": {
+    "calls": {
+      "call_ab23433e463a4f258b2c5123c715d032": {
+        "label": "before",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "printf '%s\\n' T006_FIX_BEFORE > README.md; cat README.md",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: b04515\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 4\nOutput:\nT006_FIX_BEFORE\n"
+      },
+      "call_443ecf01ddbb43ebacb9aefd7981b0de": {
+        "label": "commit-first",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "git -c user.name=Fixture -c user.email=fixture@example.invalid -c commit.gpgsign=false -c core.hooksPath=/tmp/foundry-conversation-fSXz1b/empty-hooks commit -m T006_COMMIT_FIRST",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: f68eea\nWall time: 0.0000 seconds\nProcess exited with code 1\nOriginal token count: 68\nOutput:\nOn branch main\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   README.md\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+      },
+      "call_e9350825abd44b838ce4ffbd5959e308": {
+        "label": "commit-first-result",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "true",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: 0d8b43\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 0\nOutput:\n"
+      },
+      "call_9fecc760fc284983ad94b1787b207ac3": {
+        "label": "repair",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "printf '%s\\n' T006_FIX_BETWEEN >> README.md; git -c user.name=Fixture -c user.email=fixture@example.invalid -c commit.gpgsign=false -c core.hooksPath=/tmp/foundry-conversation-fSXz1b/empty-hooks add README.md; cat README.md",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: 4334b4\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 9\nOutput:\nT006_FIX_BEFORE\nT006_FIX_BETWEEN\n"
+      },
+      "call_394ff1a108bb454ea1fe316caa774fdc": {
+        "label": "commit-second",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "git -c user.name=Fixture -c user.email=fixture@example.invalid -c commit.gpgsign=false -c core.hooksPath=/tmp/foundry-conversation-fSXz1b/empty-hooks commit -m T006_COMMIT_SECOND",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: c0fbb9\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 21\nOutput:\n[main 8336b3a] T006_COMMIT_SECOND\n 1 file changed, 2 insertions(+), 1 deletion(-)\n"
+      },
+      "call_9a24981ad7924d84bcc26525b374b8fe": {
+        "label": "commit-second-result",
+        "name": "exec_command",
+        "arguments": {
+          "cmd": "true",
+          "workdir": "/tmp/foundry-conversation-fSXz1b/repository",
+          "yield_time_ms": 1000,
+          "max_output_tokens": 1000
+        },
+        "output": "Chunk ID: 612a68\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 0\nOutput:\n"
+      }
+    },
+    "checkpoints": {
+      "before": {},
+      "commit-first": {},
+      "commit-first-result": {},
+      "repair": {},
+      "commit-second": {},
+      "commit-second-result": {}
+    },
+    "windows": {
+      "commit-first": {
+        "before": {},
+        "writeEvents": 0,
+        "after": {}
+      },
+      "commit-second": {
+        "before": {},
+        "writeEvents": 0,
+        "after": {}
+      }
+    }
+  },
+  "transientWriteControlEvents": 4,
+  "beforeResume": {},
+  "resumes": [
+    {},
+    {}
+  ],
+  "originalUnavailable": {
+    "visibleBeforeStop": true,
+    "removedSourceRows": 2,
+    "sourceAfterStopContainsText": false
+  },
+  "git": {
+    "status": "",
+    "worktree": "",
+    "index": "",
+    "subject": "T006_COMMIT_SECOND",
+    "previousSubject": "T006_SINGLE_COMMIT",
+    "readme": "T006_FIX_BEFORE\nT006_FIX_BETWEEN\n",
+    "changed": "README.md"
+  }
+}

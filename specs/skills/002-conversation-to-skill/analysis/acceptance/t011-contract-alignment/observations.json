@@ -1,0 +1,485 @@
+{
+  "date": "2026-11-24",
+  "environment": {
+    "codex": "0.171.0",
+    "model": "gpt-6.2-sol",
+    "sandbox": "workspace-write",
+    "sources": "临时主线构建、项目级安装副本"
+  },
+  "snapshot": {
+    "SKILL.md": "66b2b44d5c2303dc33c0ee658df68462bb0b13cc23505435fa09d69e05ffbe2e",
+    "references/event-capture.md": "69be17559e843bf87787af97028174bf8c496a7ad9d56a28456bc14f08072fb9",
+    "references/paired-save.md": "317debf508fb6ff38bcd91b3f077378c5d89c3fc70b13bfd15b691ae90b1633f",
+    "references/recording-timing.md": "6fd0430d177b51a588b6e4a33ac267f74fbb475596f853f7e6a0d9698ad312ca",
+    "references/resume-records.md": "1ff3bf60f7c159cf5748545c9df25981cc6c3846c31b224e464247357ec8b813",
+    "references/session-scope.md": "1c76731be180a9c6cedf2cdffb468ea27d0fae07a53c2a640a5763daf3a03f2e",
+    "references/storage-contract.md": "f11bfb9e9fd558be655d6ce91f972b8f9618faeff9f0492ea8eae4b00bc86440",
+    "references/write-failures.md": "6b6be6059d3ef842f3045d26e5cea1ed2042c054c8a50df0e1a9ebff85deb374"
+  },
+  "beforeFix": {
+    "thread": "01a20919-3f6f-7b51-9886-729b1ccde3d5",
+    "turn": "01a2093d-ad34-7d63-8a40-713c39268d80",
+    "trigger": "user",
+    "startLine": 285,
+    "endLine": 313,
+    "origin": "repository/projects/alpha",
+    "openedDate": "2026-11-23",
+    "positiveDate": "2026-11-24",
+    "final": "仓库根目录的 `README.md` 标题是「对话记录合成基线」。\n\n当前安装的会话记录技能与其存储契约对恢复目录的要求有冲突。本轮无法核实加载历史前的启动目录，因此跳过了自动记录。\n\nT011_UPGRADE_PROJECT_ENTRY_R4_RESUME_1_DONE",
+    "currentEventCheckLines": [
+      299
+    ],
+    "originalMetadataCheckLines": [],
+    "effectiveDirectoryCheckLines": [
+      299
+    ],
+    "installedReadLines": [
+      294,
+      299
+    ],
+    "bodyReadLines": []
+  },
+  "originalRecordDigests": {
+    "records/2026-11-23/details/01a20919-3f6f-7b51-9886-729b1ccde3d5.md": "5715b93d00a2c77158267b197907d4b9829c9c333b599e017af5e72e4f3a9586",
+    "records/2026-11-23/index/01a20919-3f6f-7b51-9886-729b1ccde3d5.md": "68d74dcd7dd1ddbd899577c02e356479762b4b4d0dd567a577fc7b8a00f9edef"
+  },
+  "afterFix": [
+    {
+      "thread": "01a20919-3f6f-7b51-9886-729b1ccde3d5",
+      "turn": "01a2093f-20cd-7071-b7fb-56d838ce8272",
+      "trigger": "user",
+      "startLine": 315,
+      "endLine": 359,
+      "origin": "repository/projects/alpha",
+      "openedDate": "2026-11-23",
+      "positiveDate": "2026-11-24",
+      "currentEventCheckLines": [
+        328,
+        340
+      ],
+      "originalMetadataCheckLines": [
+        335,
+        340
+      ],
+      "effectiveDirectoryCheckLines": [
+        328
+      ],
+      "installedReadLines": [
+        323,
+        328,
+        335
+      ],
+      "bodyReadLines": [
+        340
+      ],
+      "promptOccurrences": 1,
+      "finalOccurrences": 1,
+      "recordPaths": [
+        "records/2026-11-23/details/01a20919-3f6f-7b51-9886-729b1ccde3d5.md",
+        "records/2026-11-23/index/01a20919-3f6f-7b51-9886-729b1ccde3d5.md"
+      ],
+      "checkpointDigests": {
+        "records/2026-11-23/details/01a20919-3f6f-7b51-9886-729b1ccde3d5.md": "0a4f08893d8d3920870e0ea6f8012d2a00e9d9c18a0a41356e9c31fae0c83c34",
+        "records/2026-11-23/index/01a20919-3f6f-7b51-9886-729b1ccde3d5.md": "72fd93de028bec652567a04f88110c722a8e3c3067f661c498584ff23a96fac1"
+      }
+    },
+    {
+      "thread": "01a20919-3f6f-7b51-9886-729b1ccde3d5",
+      "turn": "01a20940-8651-7880-b5d1-e6326ea3953a",
+      "trigger": "user",
+      "startLine": 361,
+      "endLine": 396,
+      "origin": "repository/projects/alpha",
+      "openedDate": "2026-11-23",
+      "positiveDate": "2026-11-24",
+      "currentEventCheckLines": [
+        372
+      ],
+      "originalMetadataCheckLines": [
+        372
+      ],
+      "effectiveDirectoryCheckLines": [
+        372
+      ],
+      "installedReadLines": [
+        367,
+        372
+      ],
+      "bodyReadLines": [],
+      "promptOccurrences": 1,
+      "finalOccurrences": 1,
+      "recordPaths": [
+        "records/2026-11-23/details/01a20919-3f6f-7b51-9886-729b1ccde3d5.md",
+        "records/2026-11-23/index/01a20919-3f6f-7b51-9886-729b1ccde3d5.md"
+      ],
+      "checkpointDigests": {
+        "records/2026-11-23/details/01a20919-3f6f-7b51-9886-729b1ccde3d5.md": "84c99b71ce69382708f696251e3744fba82d20fea624e00c7adc756cf797b311",
+        "records/2026-11-23/index/01a20919-3f6f-7b51-9886-729b1ccde3d5.md": "d8996315ae0fce1a7e7845afc17269944523bd00fd6bfebb1b5e29b376963426"
+      }
+    }
+  ],
+  "negativeControls": [
+    {
+      "case": {
+        "thread": "01a2093f-9722-7b83-a506-b0a3f5014536",
+        "turn": "01a2093f-d169-7281-a803-7d44d1f7a5a8",
+        "trigger": "user",
+        "startLine": 29,
+        "endLine": 73,
+        "origin": "repository-outside",
+        "openedDate": "2026-11-23",
+        "positiveDate": "2026-11-24",
+        "currentEventCheckLines": [
+          59
+        ],
+        "originalMetadataCheckLines": [],
+        "effectiveDirectoryCheckLines": [
+          49
+        ],
+        "installedReadLines": [
+          39,
+          44,
+          59
+        ],
+        "bodyReadLines": []
+      },
+      "window": {
+        "case": "outside-resume",
+        "events": [
+          {
+            "path": ".git",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000200"
+          }
+        ],
+        "before": {
+          "records/2026-11-23/details/01a20921-ffd9-72a1-a3d9-0559f39735af.md": "1d931bda338be04458961bb4513c4cf8b79eca036356b2dc0f04407808fcd967",
+          "records/2026-11-23/index/01a20921-ffd9-72a1-a3d9-0559f39735af.md": "a597080937a18a5777507f3389df634459784ff2d8f37ad71a603d37af39369d"
+        },
+        "after": {
+          "records/2026-11-23/details/01a20921-ffd9-72a1-a3d9-0559f39735af.md": "1d931bda338be04458961bb4513c4cf8b79eca036356b2dc0f04407808fcd967",
+          "records/2026-11-23/index/01a20921-ffd9-72a1-a3d9-0559f39735af.md": "a597080937a18a5777507f3389df634459784ff2d8f37ad71a603d37af39369d"
+        }
+      }
+    },
+    {
+      "case": {
+        "thread": "01a20921-ffd9-72a1-a3d9-0559f39735af",
+        "turn": "01a20940-66e9-7940-9523-b2effaec3f3f",
+        "trigger": "exec",
+        "startLine": 175,
+        "endLine": 197,
+        "origin": "repository/projects/alpha",
+        "openedDate": "2026-11-23",
+        "positiveDate": "2026-11-24",
+        "currentEventCheckLines": [],
+        "originalMetadataCheckLines": [],
+        "effectiveDirectoryCheckLines": [
+          183
+        ],
+        "installedReadLines": [
+          183
+        ],
+        "bodyReadLines": []
+      },
+      "window": {
+        "case": "exec-resume",
+        "events": [
+          {
+            "path": ".git",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000100"
+          },
+          {
+            "path": ".aws",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".codex",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".agents",
+            "mask": "0x40000200"
+          },
+          {
+            "path": ".git",
+            "mask": "0x40000200"
+          }
+        ],
+        "before": {
+          "records/2026-11-23/details/01a20921-ffd9-72a1-a3d9-0559f39735af.md": "1d931bda338be04458961bb4513c4cf8b79eca036356b2dc0f04407808fcd967",
+          "records/2026-11-23/index/01a20921-ffd9-72a1-a3d9-0559f39735af.md": "a597080937a18a5777507f3389df634459784ff2d8f37ad71a603d37af39369d"
+        },
+        "after": {
+          "records/2026-11-23/details/01a20921-ffd9-72a1-a3d9-0559f39735af.md": "1d931bda338be04458961bb4513c4cf8b79eca036356b2dc0f04407808fcd967",
+          "records/2026-11-23/index/01a20921-ffd9-72a1-a3d9-0559f39735af.md": "a597080937a18a5777507f3389df634459784ff2d8f37ad71a603d37af39369d"
+        }
+      }
+    }
+  ],
+  "independentHostDirectoryEvents": [
+    {
+      "path": ".git",
+      "mask": "0x40000100"
+    },
+    {
+      "path": ".agents",
+      "mask": "0x40000100"
+    },
+    {
+      "path": ".codex",
+      "mask": "0x40000100"
+    },
+    {
+      "path": ".aws",
+      "mask": "0x40000100"
+    },
+    {
+      "path": ".aws",
+      "mask": "0x40000200"
+    },
+    {
+      "path": ".codex",
+      "mask": "0x40000200"
+    },
+    {
+      "path": ".agents",
+      "mask": "0x40000200"
+    },
+    {
+      "path": ".git",
+      "mask": "0x40000200"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+"""只读取本轮明确创建的合成线程，不枚举或读取其他会话。"""
+import json,subprocess,sys,select
+thread_id=sys.argv[1]
+p=subprocess.Popen(['codex','app-server','--stdio'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,text=True)
+def request(i,method,params):
+    p.stdin.write(json.dumps({'id':i,'method':method,'params':params})+'\n');p.stdin.flush()
+    while True:
+        if not select.select([p.stdout],[],[],15)[0]: raise TimeoutError(method+' 等待响应超时')
+        line=p.stdout.readline()
+        if not line: raise RuntimeError('proxy 提前关闭')
+        packet=json.loads(line)
+        if packet.get('id')==i:
+            if 'error' in packet: raise RuntimeError(packet['error'])
+            return packet['result']
+try:
+    request(1,'initialize',{'clientInfo':{'name':'foundry-synthetic-observer','version':'1'},'capabilities':{'experimentalApi':True}})
+    p.stdin.write('{"method":"initialized"}\n');p.stdin.flush()
+    result=request(2,'thread/read',{'threadId':thread_id,'includeTurns':True})
+    print(json.dumps(result,ensure_ascii=False))
+finally:
+    p.terminate();p.wait(timeout=5)

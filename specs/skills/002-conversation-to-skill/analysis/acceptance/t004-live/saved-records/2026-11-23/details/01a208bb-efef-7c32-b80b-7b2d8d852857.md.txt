@@ -1,0 +1,15 @@
+# T004 会话记录
+
+- 会话 ID：`01a208bb-efef-7c32-b80b-7b2d8d852857`
+- 原来源及初始目录：`/tmp/foundry-conversation-lwxSrQ/repository/projects/beta`
+- 本次入口目录：`/tmp/foundry-conversation-lwxSrQ/repository/projects/beta`
+- 入口证据：祖先链中与初始目录一致的 `codex` 入口使用了 `-C`，其独立参数中无 `exec`、`resume` 或 `--no-daemon`。
+- 开启日期证据：`rollout-2026-11-23T22-07-44-01a208bb-efef-7c32-b80b-7b2d8d852857.jsonl`
+
+## 用户
+
+请创建 business-daemon.txt，内容为 T004_LIVE_DAEMON，然后简短告诉我结果。
+
+## 助手最终回复
+
+已创建 [business-daemon.txt](/tmp/foundry-conversation-lwxSrQ/repository/projects/beta/business-daemon.txt)，内容为 `T004_LIVE_DAEMON`。
