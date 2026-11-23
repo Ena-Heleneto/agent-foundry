@@ -1,5 +1,23 @@
 # 构建、迁移与发布流水线契约
 
+## 2026-11-23 按环境上传构建产物
+
+| 入口 | 调用条件 | 公共输入与目标 |
+| --- | --- | --- |
+| `deploy-release.yml` | 由推送测试成功后的作业调用，接线保持冻结 | `target: release`，构建推送事件的提交并上传测试桶 |
+| `deploy-prod.yml` | `workflow_dispatch`，检出所选分支或标签对应的提交 | `target: prod`，独立构建并上传生产桶 |
+
+[测试环境部署草稿](../../../../.github/workflows/skill/deploy-release.yml)先通过 `workflow_call` 接收调用，以 `actions/checkout` 默认检出调用方事件的提交，用仓库 mise 配置准备工具链，再执行 `pnpm install --no-lockfile --ignore-scripts`。当前无根锁，安装跳过生命周期脚本以便将构建留在后续阶段。依次执行的阶段是依赖准备、构建、归档并校验、上传。按部署环境区分构建方式及推送测试接线保持冻结。
+
+[公共工作流草稿](../../../../.github/workflows/skill/deploy-common.yml)的 `workflow_call` 接收必填字符串 `target`，值为 `release` 或 `prod`。源码检出使用调用方事件的默认提交，上传路径使用该事件的 `GITHUB_SHA`。目标验证通过后，实际上传作业绑定对应 Environment。只在目标 Environment 配置 `SKILL_DEPLOY_R2_ACCOUNT_ID`、`SKILL_DEPLOY_R2_BUCKET_NAME` 及可选的 `SKILL_DEPLOY_R2_PREFIX`，并在调用作业按名称传递 `SKILL_DEPLOY_R2_ACCESS_KEY_ID` 和 `SKILL_DEPLOY_R2_SECRET_ACCESS_KEY`。这组名称与现有 `publish.yml` 使用的仓库级配置独立。缺少必需值、目标无效或构建校验失败时停止，凭据只在检查和上传步骤中使用。调用链沿用 `contents: read`，测试矩阵无 R2 凭据。
+
+Docker 导出到本次运行的独占目录，要求非空的 `skills.tar.gz`、`VERSION` 和 `curl/install.sh`，归档须能列出成员。用 AWS CLI 按现有方式上传 dist，前缀为 `s3://<桶>/<前缀>/<源码SHA>/<运行ID>-<重跑次数>/`，默认前缀为 `skills-builds`。仅在上传成功后输出成功路径。上传失败或取消时可能已有部分对象，重跑用新尝试路径。
+
+首次 `deploy-release` 部署验收从该运行的测试桶路径回读 `skills.tar.gz`，按同次构建字节的 SHA-256 核对。日常部署的交付是上传结果与实际对象路径。上传前缀下的 `curl/install.sh` 属于本次构建产物，公开安装入口和 `curl/release.json` 的更新仍按后续正式发布契约执行。[验证指南](../quickstart.md#2026-11-23-r2-流水线验证)
+
+<details>
+<summary>本次拉取的远端差异（待核对，不覆盖上方本地进度和冻结决定）</summary>
+
 ## 2026-11-23 统一发布与 R2 交接
 
 本节定义主线现行触发、候选交接和发布目标。实施顺序先接生产部署，后续补测试、测试发布和环境分发。下文先接只读检查的顺序、手动触发、候选单次授权、旧 Git 发布与容器输入对应此前方案。生产完整资格及真实消费条件沿当前 Spec。[现行规格](../spec.md#2026-11-23-主线技能构建与发布流水线) · [总体方案](../plan.md#2026-11-23-主线推送测试与发布) · [数据模型](../data-model.md#2026-11-23-流水线身份与发布结果)
@@ -48,6 +66,8 @@
 4. 条件失败、断连与权限差异分别留证。预期字节已存在可记录精确复用，已读旧 ETag 被替换时停止并核对现场。确认入口已更新而版本表未提交时，保留已核验的固定文件、兼容入口和旧表，记录部分完成及续接身份。响应未决时先读回确认实际状态，发现状态对账后才继续。
 
 生产环境只以符合条件的到达事件触发；上传成功、远端核验、发现更新与独立安装验收分别报告。测试与生产的远端资格分别实证。[正式入口与版本表](curl-delivery.md#2026-11-23-公开入口与测试取件) · [条件写研究](../research.md#r2-对象权限和恢复)
+
+</details>
 
 ## 2026-11-19 当前推进边界
 

@@ -1,5 +1,16 @@
 # 技术研究：统一发布包与安装消费
 
+## 2026-11-23 R2 环境隔离与首次验收
+
+- **工作流复用**。选择根目录的 `workflow_call`，由两入口固定传入环境。这样沿用各自的触发与权限，公共流程与调用入口取自同次提交。备选的步骤级 composite action 仍需两边分别维护作业配置，子目录工作流路径也不受 GitHub 支持。[GitHub 工作流复用](https://docs.github.com/en/actions/how-tos/reuse-automations/reuse-workflows)
+- **触发与目标隔离**。保留 release 矩阵及调用作业的成功依赖，保留 prod 手动所选 ref。在实际上传作业绑定 GitHub Environment，按名称传递所需 secrets，每套凭据只授权对应桶。环境变量在绑定后的作业步骤读取，避免用仓库或组织层同名配置作为默认目标。分支或标签删除仍可产生 push，GitHub 会为删除事件回退到默认分支 SHA，上传作业据删除标记跳过。备选的自由输入桶地址会把目标选择交给触发者，复制完整流程则增加两份维护点。[GitHub 触发事件](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows) · [GitHub 变量](https://docs.github.com/en/actions/reference/workflows-and-actions/variables#configuration-variable-precedence) · [R2 凭据权限](https://developers.cloudflare.com/r2/api/tokens/#permissions)
+- **归档回读与地址**。沿用 AWS CLI、`auto` 区域及每次运行的独立前缀。首次验收记录本次构建归档的 SHA-256，使用测试桶读权限从实际对象键下载并复算。重新构建、只检查对象存在或使用 ETag 均不能证明上传字节与该次产物一致。日常运行保留上传结果和对象路径即可。安装用 HTTPS 地址取决于实际可用的访问配置，等上传后核对。[R2 AWS CLI](https://developers.cloudflare.com/r2/examples/aws/aws-cli/) · [R2 读写一致性](https://developers.cloudflare.com/r2/reference/consistency/#operations-and-consistency) · [R2 公开访问](https://developers.cloudflare.com/r2/buckets/public-buckets/)
+
+现有生产流水线和 Dockerfile 是布局与上传参数的依据。实际仓库的 Environment 可用性、凭据范围、测试桶回读及安装地址还须按授权核验。
+
+<details>
+<summary>本次拉取的远端差异（待核对，不覆盖上方本地进度和冻结决定）</summary>
+
 ## 2026-11-23 推送测试与发布的技术取舍
 
 本轮研究以每次推送测试、开放 `release` PR 的源分支推送发布测试环境、`main` PR 实际合并发布生产，以及测试 R2 按提交下载两份产物为输入。以下为规划选型。真实事件、依赖安装和存储行为按[验证指南](quickstart.md#2026-11-23-推送测试与发布验证)实证。[规格](spec.md#2026-11-23-主线技能构建与发布流水线) · [选项 A](spec.md#session-2026-11-23)
@@ -37,6 +48,8 @@
 **理由与候选**。测试对象按生产者尝试分组，允许同版本不同提交或同提交重新构建分别定位，并保留原冻结字节。通过签名 URL 下载会将临时访问权传给持有地址的人，本增量能够以授权 S3 下载满足选项 A。长期对象令牌按桶授权，单纯设置前缀不隔离权限。低层命令可明确传递条件并读取错误码，适用于固定对象和发现更新。R2 条件写以单键生效，生产两个发现键之间保留中断窗口。并发、断连、错误分类、真实权限、公开缓存和两阶段读回分别实测。[R2 条件操作](https://developers.cloudflare.com/r2/api/s3/conditional-operations/) · [AWS CLI PutObject](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-object.html) · [结构化错误](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-error-format.html) · [R2 一致性和缓存](https://developers.cloudflare.com/r2/reference/consistency/)
 
 **验证边界**。平台预检选用支持条件头和 JSON 错误的 AWS CLI v2，记录实测版本。测试生命周期规则和真实访问策略由获授权维护者准备。真实两次测试下载归 T096，生产平台权限、条件写、缓存与消费归原生产验收任务。当前结果来自规则文档及工作区只读核查。
+
+</details>
 
 ## 2026-11-18 当前增量：布尔开关与单数目录
 

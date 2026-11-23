@@ -1,0 +1,31 @@
+name: deploy-release
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 检出触发事件的提交
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: 准备仓库工具链
+        uses: jdx/mise-action@v5
+
+      - name: 安装工作区依赖
+        run: pnpm install --no-lockfile --ignore-scripts
+
+      - name: 构建技能及依赖包
+        shell: bash
+        env:
+          pnpm_config_lockfile: 'false'
+          pnpm_config_verify_deps_before_run: 'false'
+        run: |
+          pnpm --filter @foundry/preset-config run build
+          pnpm --filter @foundry/skills run build

@@ -1,5 +1,30 @@
 # 验证指南：统一发布包、安装与可选隐匿
 
+## 2026-11-23 R2 流水线验证
+
+获得相应目标的运行授权后验证部署。准备已配置的 release／prod 环境及各自桶范围凭据。首次回读只需测试桶读权限、AWS CLI 与 SHA-256 工具。工作流输入和对象路径见[流水线契约](contracts/pipeline.md#2026-11-23-按环境上传构建产物)。
+
+1. 先用隔离配置核对缺少凭据或无法通过产物检查时上传未开始。用获准的提交验证 `deploy-release` 指向测试桶，摘要记录实际对象前缀。
+2. 为首次验收在同一次运行中临时记录上传前的 `sha256sum "$DIST_DIRECTORY/skills.tar.gz"` 摘要，并关联源码 SHA、运行 ID、重跑次数和实际归档对象键。验收结束后移除临时取证步骤。
+3. 将实际归档的 S3 路径填入 `R2_ARCHIVE_URI`，用实际 S3 端点填入 `R2_ENDPOINT`，将该次构建的摘要填入 `BUILT_ARCHIVE_SHA256`。在采用测试桶只读凭据及 `auto` 区域的环境中运行以下核对。
+
+   ```bash
+   download_dir="$(mktemp -d)"
+   aws s3 cp "$R2_ARCHIVE_URI" "$download_dir/skills.tar.gz" \
+     --endpoint-url "$R2_ENDPOINT" --region auto --only-show-errors &&
+     printf '%s  %s\n' "$BUILT_ARCHIVE_SHA256" "$download_dir/skills.tar.gz" |
+     sha256sum --check
+   ```
+
+   下载、摘要核验和运行身份对应均成功才通过首次验收。保存实际对象路径及核验结果，用真实可用的访问配置另行确认安装地址。
+
+4. 生产验证另按授权手动运行 `deploy-prod`。工作流文件须已在默认分支存在，再选择需构建的分支或标签。核对实际源码 SHA、独立构建及生产桶对象前缀。生产运行、安装地址和公开消费都用实际证据记录。[GitHub 手动触发条件](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_dispatch)
+
+推送测试的交接验收保持冻结。解冻后验证 Python 和 Node 两项通过才交接推送提交，并用失败样本确认部署跳过、该次尝试无新对象。
+
+<details>
+<summary>本次拉取的远端差异（待核对，不覆盖上方本地进度和冻结决定）</summary>
+
 ## 2026-11-23 推送测试与发布验证
 
 以下命令和场景用于对应步骤实现后的核验。就绪条件为干净的触发提交、其中的工作区依赖声明及 mise 配置。平台验证使用获授权的 GitHub 和 R2 目标。本地、隔离运行和真实环境结果分别留证。旧容器示例对应当时的实现。[流水线契约](contracts/pipeline.md#2026-11-23-统一发布与-r2-交接)
@@ -90,6 +115,8 @@ printf '%s  %s\n' "$SKILLS_TEST_ARCHIVE_SHA256" "$skills_download_dir/skills.tar
 在获授权的隔离目标先核对 AWS CLI v2 的实际版本、条件创建、带原 ETag 的更新、明确的对象缺失和条件失败错误码。用两个执行者和响应丢失输入覆盖同字节复用、异字节拒绝、旧 ETag 冲突、已经提交但响应丢失，以及最新入口先行而版本表失败。每次失败后读回实际字节并核对旧版本仍可取。
 
 生产具备适用授权且 `main` PR 实际合并后，核对已批准仓库及环境策略，读回 `authorizationRef` 与本次 PR、可信工作流、候选、两个 artifact ID、实际目标和对象键的绑定。确认首个写操作前发现对象的原 ETag 或明确缺失和待写 SHA-256 均有记录。然后从运行结果记录的固定 HTTPS 地址只读下载归档、固定入口和两份发现对象，例如 `curl --fail --show-error --location "$SKILLS_PROD_FIXED_ARCHIVE_URL" --output skills.tar.gz`。核对两个固定对象的字节与候选一致、解包全集一致、正式记录位于生产表中。读取常规公开 URL 验证缓存后的实际发现结果。在独立受支持项目使用实际最新入口安装指定固定版本并观察适用挂载。完整矩阵、真实用户、首次发布和旧版复验各自记录对应证据。[生产流程](contracts/pipeline.md#生产-r2-的写入和读回) · [正式消费布局](contracts/curl-delivery.md#2026-11-23-公开入口与测试取件)
+
+</details>
 
 ## 2026-11-20 容器构建验证
 
