@@ -3,9 +3,11 @@ import { defineCollectionHandle } from '#utils/define-collection-handle'
 /**
  * 声明工作流集合的启用技能、逐事件 hook 及 Increment 命令，并开启集合子插件。
  * 挂载声明供子插件后续生成脚本，不在配置加载时执行注册。
+ * 工作流集合参与发布构建。
  */
 export default defineCollectionHandle({
   packageName: 'workflow',
+  publish: true,
   mcp: false,
   plugin: true,
   script: false,

@@ -1,10 +1,12 @@
 import { defineCollectionHandle } from '#utils/define-collection-handle'
 
 /**
- * 旧影子画像退役后的 profile 集合，等待新流程按各自验收启用。
+ * 交付独立的会话记录 Skill，供项目按会话归属和触发规则使用。
  */
 export default defineCollectionHandle({
   packageName: 'profile',
   mcp: false,
-  skill: {},
+  skill: {
+    'conversation-recording': { enabled: true },
+  },
 })

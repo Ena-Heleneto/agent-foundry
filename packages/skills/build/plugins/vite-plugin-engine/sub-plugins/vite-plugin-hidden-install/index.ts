@@ -31,7 +31,7 @@ export function createHiddenInstallScript(enabledSkills: readonly { name: string
 }
 
 /**
- * 根据启用技能生成由引擎按需调用的隐匿辅助脚本。
+ * 在清理输出前按当次构建范围生成引擎隐匿脚本。
  *
  * @returns 在引擎 script 目录交付隐匿脚本的构建插件。
  */
@@ -39,8 +39,14 @@ export default function vitePluginHiddenInstall(): Plugin {
   return {
     name: 'vite-plugin-hidden-install',
     apply: 'build',
-    async generateBundle() {
-      const enabledSkills = await scanSkills()
+    /**
+     * 构建开始时交付与本次技能范围一致的隐匿脚本。
+     */
+    async buildStart() {
+      /**
+       * 发布构建仅将选择发布的集合加入隐匿候选。
+       */
+      const enabledSkills = await scanSkills(undefined, { publishOnly: this.environment.config.mode === 'release' })
       this.emitFile({ type: 'asset', fileName: 'script/hidden-install.sh', source: createHiddenInstallScript(enabledSkills) })
     },
   }

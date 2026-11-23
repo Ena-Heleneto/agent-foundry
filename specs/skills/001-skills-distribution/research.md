@@ -1,5 +1,43 @@
 # 技术研究：统一发布包与安装消费
 
+## 2026-11-23 推送测试与发布的技术取舍
+
+本轮研究以每次推送测试、开放 `release` PR 的源分支推送发布测试环境、`main` PR 实际合并发布生产，以及测试 R2 按提交下载两份产物为输入。以下为规划选型。真实事件、依赖安装和存储行为按[验证指南](quickstart.md#2026-11-23-推送测试与发布验证)实证。[规格](spec.md#2026-11-23-主线技能构建与发布流水线) · [选项 A](spec.md#session-2026-11-23)
+
+### GitHub 事件与源码提交
+
+**决定**。保留 `skill-release.yml` 的无分支和路径筛选 `push` 测试，移除按分支取消较早测试运行的设置，保留 Python 与 Node 两套测试。测试发布采用目标分支为 `release` 的 `pull_request_target/synchronize`，由受信工作流核对开放状态、同仓库来源、推送者授权，以及事件 `before != after == pull_request.head.sha`。生产发布采用目标分支为 `main` 的 `pull_request_target/closed`，要求实际合并且有可核实的授权合并身份。从本仓受保护的 `main` 历史核对并检出事件的 `merge_commit_sha`，覆盖 merge、squash 和 rebase。[GitHub 事件](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows) · [synchronize 事件 schema](https://github.com/github/rest-api-description/blob/main/descriptions/api.github.com/api.github.com.json) · [合并提交语义](https://docs.github.com/en/rest/pulls/pulls#get-a-pull-request) · [并发控制](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency)
+
+**理由与候选**。在 `push` job 中查询 PR，只能获得查询时刻的状态，期间 PR 可打开、关闭或改目标。普通 `pull_request` 使用 PR 合成合并上下文，遇到合并冲突或 fork 凭据限制会影响发布路径。所选事件保留变更快照并从受保护默认分支加载工作流。默认分支的工作流提交和待构建提交分别记录。生产只从本仓 `main` 获取已合入的内容，保留 checkout 对 fork 来源的保护。[默认分支与环境规则](https://github.blog/changelog/2025-11-07-actions-pull_request_target-and-environment-branch-protections-changes/) · [checkout 校验](https://github.com/actions/checkout/blob/main/src/unsafe-pr-checkout-helper.ts)
+
+**平台前置**。GitHub 公告在 2026 年 12 月 2 日起默认阻止公开仓库中的 `pull_request_target`。启用前在实际仓库按两份发布工作流的路径核对生效的显式放行策略。保护 `main` 的直接写入路径，并以真实事件验证直接推送或其他 PR 合并造成的间接关闭是否能被识别。发布资格只接受可核实的直接合并事实。由平台跳过标记或 `GITHUB_TOKEN` 递归保护抑制的事件与项目规则均需在预检中区分，缺必需结果则对应发布无法放行。[公开仓库事件策略](https://github.blog/changelog/2026-11-02-pull_request_target-blocked-by-default-december-2/) · [策略设置](https://docs.github.com/en/actions/how-tos/administer/control-workflow-execution) · [间接合并](https://docs.github.com/en/pull-requests/reference/pull-request-merges#indirect-merges) · [令牌触发限制](https://docs.github.com/en/actions/concepts/security/github_token#when-github_token-triggers-workflow-runs) · [跳过规则](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs)
+
+**生产合并判据**。选用本仓 `main` 的仓库活动与提交归属交叉核验。GitHub 仓库活动按 `pr_merge` 区别普通推送，提供分支、前后提交和操作者。提交关联接口用于确认引入提交的 PR 编号，与实际触发事件和该 PR 详情比对。已只读抽查 `pnpm/pnpm` 的 #18364 与 #18371，两条 `pr_merge.after` 对应各自唯一归属 PR 和其 `merge_commit_sha`。#18364 的活动操作者与 PR `merged_by` 相同。迁后仓库每种启用方式与间接关闭的具体响应仍须由 T061 实证。证据不足时生产放行失败。[仓库活动 API](https://docs.github.com/en/rest/repos/repos#list-repository-activities) · [提交关联 PR API](https://docs.github.com/en/rest/commits/commits#list-pull-requests-associated-with-a-commit) · [样本 PR](https://github.com/pnpm/pnpm/pull/18364)
+
+### Runner 构建和依赖证据
+
+**决定**。`publish` 的测试和生产发布复用现有 Ubuntu runner 和仓库 mise 配置。从触发提交的工作区声明和 catalog 无锁解析，使用 `pnpm install --no-lockfile --ignore-scripts`。构建命令维持 `pnpm_config_lockfile=false` 及 `pnpm_config_verify_deps_before_run=false`，依次运行两个包的现有 build。两份干净检出分别安装并记录实际构建依赖和工具，比较正式内容全集及字节。归档与独立安装脚本分别冻结长度和 SHA-256。[无锁要求原文](requirements/raw/2026-11-23-release-without-root-lock.md) · [pnpm 无锁安装](https://pnpm.io/cli/install#--no-lockfile) · [运行前依赖检查](https://pnpm.io/settings/build#verifydepsbeforerun)
+
+**理由与实测**。原方案选用冻结安装是为了固定依赖解析。用户确认主线沿用无锁安装，根锁继续由仓库现有规则忽略。版本范围内的实际解析可能随仓库源变化，候选证据因此记录两次安装所得的依赖。根 postinstall 会调用文档站准备，发布构建跳过生命周期钩子并显式构建共享预设。隔离副本的 pnpm 12.16.1 无锁安装成功，`build:packages` 在 Turbo 调用子包构建期间会生成根锁。相同输入改由 pnpm 依次运行两个现有包脚本，读取依赖快照后仍无根锁。正式双构建和真实 runner 由原任务继续验证。[锁文件忽略规则](../../../.gitignore) · [根构建脚本](../../../package.json) · [历史容器验收](analysis/acceptance/docker-build.md)
+
+**内容与复用**。原 tar 读取开发输出目录，正式暂存须先核对正文、依赖、许可及引擎内隐匿候选与白名单。保留此前用于追溯的包内安装入口副本，迁至 `curl/install.sh`，与独立发布件相同。历史 Python 36/39、Node 四文件 53/53 是不同范围的证据。两套现有测试的真实结果以实际候选为准。[本地历史验收](analysis/acceptance/local-build-loop.md) · [构建契约](contracts/build-pipeline.md#2026-11-23-runner-直接构建和正式归档)
+
+### 可信交接与运行证据
+
+**决定**。事件检查、构建与归档核验使用分离的只读 job。受信发布 job 在新 runner 上下载精确产物，校验后只上传冻结字节。发布凭据仅在相应环境的受信签发和 R2 交互步骤注入。构建保留 `persist-credentials: false`，发布流程禁用工作流缓存并避免共享 mise 缓存。用成功的必需 job、真实归档 ID、生产者 run/attempt 及对应的内容索引绑定本次交接。重跑发布 job 时记录新的发布 attempt 并核验原生产者 attempt 与有效期。
+
+**理由与候选**。同一运行的整体结论在发布结束后才产生。上传结果和指定 attempt 的 job 结果能给出发布前证据。按最新归档名称、当前分支 tip 或整次运行结论选择候选会丢失对应性。公开仓库的发布器和 Action 引用以经核验的受信提交为准。[环境设置](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments) · [缓存控制](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#cache-mode) · [尝试的 job 结果](https://docs.github.com/en/rest/actions/workflow-jobs#list-jobs-for-a-workflow-run-attempt) · [重跑](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs)
+
+**授权与字节身份**。自动触发沿已批准的仓库合并规则和部署目标。冻结摘要和发现快照在运行中产生，受信发布 job 在校验候选和环境后形成授权引用。发现对象的预期摘要在同目标队列中绑定。这样合并授权和随本次运行形成的字节证据各有可核验来源。[生产发布授权契约](contracts/pipeline.md#生产发布授权与候选绑定)
+
+### R2 对象、权限和恢复
+
+**决定**。采用分别配置的测试桶与生产桶。测试键复用现有按提交和运行尝试分组的结构，默认前缀为 `skills-builds/`，计划测试对象保留 14 天。测试验收使用有权限维护者的只读 S3 下载，运行结果提供两条未签名的 `s3://` 地址和文件摘要。生产固定对象继续使用版本键。生产发布 job 按目标串行排队，用 AWS CLI v2 的 `s3api` 条件创建固定键，源站与公开下载均核验后，再条件写入并依次核验最新入口和 `curl/release.json`。发布步骤使用限定到对应桶及此次对象、只允许 `GetObject`/`PutObject` 的短期凭据，签发凭据仅可用于其受信步骤。[R2 令牌](https://developers.cloudflare.com/r2/api/tokens/) · [短期凭据](https://developers.cloudflare.com/r2/api/s3/temporary-credentials/) · [对象生命周期](https://developers.cloudflare.com/r2/buckets/object-lifecycles/) · [发布排队](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency)
+
+**理由与候选**。测试对象按生产者尝试分组，允许同版本不同提交或同提交重新构建分别定位，并保留原冻结字节。通过签名 URL 下载会将临时访问权传给持有地址的人，本增量能够以授权 S3 下载满足选项 A。长期对象令牌按桶授权，单纯设置前缀不隔离权限。低层命令可明确传递条件并读取错误码，适用于固定对象和发现更新。R2 条件写以单键生效，生产两个发现键之间保留中断窗口。并发、断连、错误分类、真实权限、公开缓存和两阶段读回分别实测。[R2 条件操作](https://developers.cloudflare.com/r2/api/s3/conditional-operations/) · [AWS CLI PutObject](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-object.html) · [结构化错误](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-error-format.html) · [R2 一致性和缓存](https://developers.cloudflare.com/r2/reference/consistency/)
+
+**验证边界**。平台预检选用支持条件头和 JSON 错误的 AWS CLI v2，记录实测版本。测试生命周期规则和真实访问策略由获授权维护者准备。真实两次测试下载归 T096，生产平台权限、条件写、缓存与消费归原生产验收任务。当前结果来自规则文档及工作区只读核查。
+
 ## 2026-11-18 当前增量：布尔开关与单数目录
 
 本轮明确要求集合配置新增 `plugin?: boolean`，默认 `false`，仅 `true` 扫描集合 `plugin/`；替代下方此前“存在即加载、无集合开关”的选择。复用已存在的配置模块动态导入方式，保持固定入口、排序及 Vite 原生调度，不增加依赖。引擎及 Vite 配置接线限于扫描行为；业务子插件与脚本迁移不随之实施。

@@ -1,0 +1,257 @@
+{
+  "candidate": {
+    "mode": "同次启动的显式隔离验收",
+    "sha256": {
+      "SKILL.md": "eaedb6ef3c24be4dab99138353341b4f922a93e84e78215228aaf8630bb9d589",
+      "references/paired-save.md": "317debf508fb6ff38bcd91b3f077378c5d89c3fc70b13bfd15b691ae90b1633f",
+      "references/event-capture.md": "49651ba56deba232797f57fb487e9a0efd4797af3c28354b1db4e59640a00966",
+      "references/recording-timing.md": "6fd0430d177b51a588b6e4a33ac267f74fbb475596f853f7e6a0d9698ad312ca",
+      "references/write-failures.md": "3086e212d16f1096066f89b900024ea2f5c04181db08aa9b40770ae1835d1872",
+      "references/storage-contract.md": "54a8fb8c6c4bcea12b9c7b67b4745a2235a07b38bb734c59da94b31138cfe3d7",
+      "references/session-scope.md": "4e18293134d0400253d5d66184e98ad58df1a50ab65784d1d640d921b2cf7f3b",
+      "references/resume-records.md": "b33c16f3e88cdeccbcc7dfd5ab21e5d24a9dbeb8c462b6b2750ec9599c41a07d"
+    }
+  },
+  "cases": {
+    "index": {
+      "candidateRead": 38,
+      "failureRulesRead": 45,
+      "physicalFailure": {
+        "code": 21,
+        "message": "Is a directory",
+        "path": "/tmp/foundry-conversation-H01Q47/records/writable/records/2026-11-23/index/01a20783-4d8b-7320-b057-76fedd7f2c46.md"
+      },
+      "prompt": "请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。",
+      "turnId": "01a20783-4e2b-7012-9ccc-0742838aca1c",
+      "notice": [
+        {
+          "line": 190,
+          "text": "会话记录技能要求先提示保存缺口。本轮用户原文已写入详情并读回确认，索引文件的位置被目录占用，本轮索引待补。[本轮详情](/tmp/foundry-conversation-H01Q47/records/writable/records/2026-11-23/details/01a20783-4d8b-7320-b057-76fedd7f2c46.md#turn-01a20783-4e2b-7012-9ccc-0742838aca1c)"
+        }
+      ],
+      "businessLine": 192,
+      "businessToolId": "exec-43558a63-a95c-4e25-8e1f-7580f79b5046",
+      "businessOutput": "对话记录合成基线\n",
+      "finalReply": "对话记录合成基线",
+      "initialRecords": {
+        "records/2026-11-23/details/01a20783-4d8b-7320-b057-76fedd7f2c46.md": {
+          "bytes": 399,
+          "sha256": "4ebb46c3e184c366ab2389b048b9cc06b141b6b0c75bd3b78bef28d65f6f7835",
+          "text": "# 会话详情\n\n```json\n{\n  \"threadId\": \"01a20783-4d8b-7320-b057-76fedd7f2c46\",\n  \"repoRoot\": \"/tmp/foundry-conversation-H01Q47/repository\",\n  \"originalCwd\": \"/tmp/foundry-conversation-H01Q47/repository/projects/alpha\",\n  \"openingDate\": \"2026-11-23\",\n  \"entryEvidence\": {\n    \"source\": \"T012 既有合成记录\"\n  }\n}\n```\n\n## turn-b98fd113-cd4d-4dc4-afec-cd4b982ca608\n\nT006-已确认的合成详情\n"
+        }
+      },
+      "recordsAtBusiness": {
+        "records/2026-11-23/details/01a20783-4d8b-7320-b057-76fedd7f2c46.md": {
+          "bytes": 635,
+          "sha256": "a1babe363827a34a5f5ba42fc37ff628ef1d196ec0d95b6817751497fe7647db",
+          "text": "# 会话详情\n\n```json\n{\n  \"threadId\": \"01a20783-4d8b-7320-b057-76fedd7f2c46\",\n  \"repoRoot\": \"/tmp/foundry-conversation-H01Q47/repository\",\n  \"originalCwd\": \"/tmp/foundry-conversation-H01Q47/repository/projects/alpha\",\n  \"openingDate\": \"2026-11-23\",\n  \"entryEvidence\": {\n    \"source\": \"T012 既有合成记录\"\n  }\n}\n```\n\n## turn-b98fd113-cd4d-4dc4-afec-cd4b982ca608\n\nT006-已确认的合成详情\n\n## turn-01a20783-4e2b-7012-9ccc-0742838aca1c\n\n用户原文（无末尾换行），来源为 T012 已核实输入的 currentTurn.prompt。\n\n```text\n请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。\n```\n"
+        }
+      },
+      "afterFailure": {
+        "records/2026-11-23/details/01a20783-4d8b-7320-b057-76fedd7f2c46.md": {
+          "bytes": 1133,
+          "sha256": "531101f9d6dd8a34a8f2fd3bd1776b8dabdaaeb52dc13831fcd8dc7410949baa",
+          "text": "# 会话详情\n\n```json\n{\n  \"threadId\": \"01a20783-4d8b-7320-b057-76fedd7f2c46\",\n  \"repoRoot\": \"/tmp/foundry-conversation-H01Q47/repository\",\n  \"originalCwd\": \"/tmp/foundry-conversation-H01Q47/repository/projects/alpha\",\n  \"openingDate\": \"2026-11-23\",\n  \"entryEvidence\": {\n    \"source\": \"T012 既有合成记录\"\n  }\n}\n```\n\n## turn-b98fd113-cd4d-4dc4-afec-cd4b982ca608\n\nT006-已确认的合成详情\n\n## turn-01a20783-4e2b-7012-9ccc-0742838aca1c\n\n用户原文（无末尾换行），来源为 T012 已核实输入的 currentTurn.prompt。\n\n```text\n请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。\n```\n\n终端调用及可见回包（本轮唯一业务调用）。\n\n```json\n{\n  \"tool\": \"exec_command\",\n  \"args\": {\n    \"cmd\": \"head -n 1 ../../README.md\",\n    \"workdir\": \"/tmp/foundry-conversation-H01Q47/repository/projects/alpha\"\n  },\n  \"result\": {\n    \"chunk_id\": \"eee194\",\n    \"wall_time_seconds\": 4.3227e-05,\n    \"exit_code\": 0,\n    \"original_token_count\": 7,\n    \"output\": \"对话记录合成基线\\n\"\n  }\n}\n```\n\n助手待发送原文（无末尾换行）。\n\n```text\n对话记录合成基线\n```\n"
+        }
+      },
+      "retry": {
+        "turnId": "01a20784-16a8-7282-b768-dacc71813374",
+        "finalReply": "T012-INDEX-RETRIED",
+        "records": {
+          "records/2026-11-23/details/01a20783-4d8b-7320-b057-76fedd7f2c46.md": {
+            "bytes": 1133,
+            "sha256": "531101f9d6dd8a34a8f2fd3bd1776b8dabdaaeb52dc13831fcd8dc7410949baa",
+            "text": "# 会话详情\n\n```json\n{\n  \"threadId\": \"01a20783-4d8b-7320-b057-76fedd7f2c46\",\n  \"repoRoot\": \"/tmp/foundry-conversation-H01Q47/repository\",\n  \"originalCwd\": \"/tmp/foundry-conversation-H01Q47/repository/projects/alpha\",\n  \"openingDate\": \"2026-11-23\",\n  \"entryEvidence\": {\n    \"source\": \"T012 既有合成记录\"\n  }\n}\n```\n\n## turn-b98fd113-cd4d-4dc4-afec-cd4b982ca608\n\nT006-已确认的合成详情\n\n## turn-01a20783-4e2b-7012-9ccc-0742838aca1c\n\n用户原文（无末尾换行），来源为 T012 已核实输入的 currentTurn.prompt。\n\n```text\n请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。\n```\n\n终端调用及可见回包（本轮唯一业务调用）。\n\n```json\n{\n  \"tool\": \"exec_command\",\n  \"args\": {\n    \"cmd\": \"head -n 1 ../../README.md\",\n    \"workdir\": \"/tmp/foundry-conversation-H01Q47/repository/projects/alpha\"\n  },\n  \"result\": {\n    \"chunk_id\": \"eee194\",\n    \"wall_time_seconds\": 4.3227e-05,\n    \"exit_code\": 0,\n    \"original_token_count\": 7,\n    \"output\": \"对话记录合成基线\\n\"\n  }\n}\n```\n\n助手待发送原文（无末尾换行）。\n\n```text\n对话记录合成基线\n```\n"
+          },
+          "records/2026-11-23/index/01a20783-4d8b-7320-b057-76fedd7f2c46.md": {
+            "bytes": 657,
+            "sha256": "3ceb4b045a99e5f3da31e82afce32c7731cc38ad7c14168c2f9169e06d69048d",
+            "text": "# 会话索引\n\n```json\n{\n  \"threadId\": \"01a20783-4d8b-7320-b057-76fedd7f2c46\",\n  \"repoRoot\": \"/tmp/foundry-conversation-H01Q47/repository\",\n  \"originalCwd\": \"/tmp/foundry-conversation-H01Q47/repository/projects/alpha\",\n  \"openingDate\": \"2026-11-23\",\n  \"entryEvidence\": {\n    \"source\": \"T012 隔离候选的已核实输入\",\n    \"cli\": \"codex-cli 0.171.0\"\n  }\n}\n```\n\n## turn-01a20783-4e2b-7012-9ccc-0742838aca1c\n\n读取仓库 README 第一行。命令退出状态为 0，读到的第一行为「对话记录合成基线」。业务改动文件为无。\n\n[详情](../details/01a20783-4d8b-7320-b057-76fedd7f2c46.md#turn-01a20783-4e2b-7012-9ccc-0742838aca1c)\n"
+          }
+        }
+      }
+    },
+    "detail": {
+      "candidateRead": 40,
+      "failureRulesRead": 48,
+      "physicalFailure": {
+        "code": 21,
+        "message": "Is a directory",
+        "path": "/tmp/foundry-conversation-7ThwqA/records/writable/records/2026-11-23/details/01a20783-4d7f-7303-96d4-d9a88bd8f7ae.md"
+      },
+      "prompt": "请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。",
+      "turnId": "01a20783-4dfd-73e0-954c-6bea89acc96e",
+      "notice": [
+        {
+          "line": 124,
+          "text": "本轮的详情文件路径被目录占用，用户原文未能写入，索引也尚未建立。我会继续执行你指定的命令。"
+        }
+      ],
+      "businessLine": 126,
+      "businessToolId": "exec-ef833cfd-855d-45a4-8963-c6e22979485a",
+      "businessOutput": "对话记录合成基线\n",
+      "finalReply": "对话记录合成基线",
+      "initialRecords": {},
+      "recordsAtBusiness": {},
+      "afterFailure": {}
+    },
+    "attachment": {
+      "candidateRead": 39,
+      "failureRulesRead": 61,
+      "physicalFailure": {
+        "code": 21,
+        "message": "Is a directory",
+        "path": "/tmp/foundry-conversation-T2AJaF/records/writable/records/2026-11-23/details/attachments/01a20783-4d80-7402-b242-8e1e06be9321/T012-original.bin"
+      },
+      "prompt": "请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。",
+      "turnId": "01a20783-4dfe-7e01-be51-8bd669c4ca53",
+      "notice": [
+        {
+          "line": 227,
+          "text": "本轮请求已写入详情和索引并读回确认。`T012-original.bin` 的目标路径被目录占用，`fixture-t012-lost-text` 的原文已随来源关闭而丢失，两处缺口均已记入详情。 [本轮详情](/tmp/foundry-conversation-T2AJaF/records/writable/records/2026-11-23/details/01a20783-4d80-7402-b242-8e1e06be9321.md#turn-01a20783-4dfe-7e01-be51-8bd669c4ca53)"
+        }
+      ],
+      "businessLine": 229,
+      "businessToolId": "exec-e4d165d7-9591-4bf6-8437-390d2d88a92a",
+      "businessOutput": "对话记录合成基线\n",
+      "finalReply": "对话记录合成基线",
+      "initialRecords": {},
+      "recordsAtBusiness": {
+        "records/2026-11-23/details/01a20783-4d80-7402-b242-8e1e06be9321.md": {
+          "bytes": 1024,
+          "sha256": "5950581350a96ed863581e40f590a7a992660981f814fbee3aeccf2aeeeca16c",
+          "text": "# 会话记录\n\n- threadId: \"01a20783-4d80-7402-b242-8e1e06be9321\"\n- repoRoot: \"/tmp/foundry-conversation-T2AJaF/repository\"\n- originalCwd: \"/tmp/foundry-conversation-T2AJaF/repository/projects/alpha\"\n- openingDate: \"2026-11-23\"\n- entryEvidence: {\"source\": \"T012 隔离候选的已核实输入\", \"cli\": \"codex-cli 0.171.0\"}\n\n## turn-01a20783-4dfe-7e01-be51-8bd669c4ca53\n\n### 用户原文\n\n原文末尾无换行。\n~~~\n请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。\n~~~\n\n### 附件 fixture-t012-available-bin\n\n来源：/tmp/foundry-conversation-T2AJaF/input/附件 原件.bin\n\n原件保存缺口：T012-original.bin：Is a directory（/tmp/foundry-conversation-T2AJaF/records/writable/records/2026-11-23/details/attachments/01a20783-4d80-7402-b242-8e1e06be9321/T012-original.bin）\n\n### 附件 fixture-t012-lost-text\n\n原文缺档。来源：/tmp/foundry-conversation-T2AJaF/input/T012-lost-original.txt。原因：先前已识别该事件，原文在保存前随来源关闭而失去。\n"
+        },
+        "records/2026-11-23/index/01a20783-4d80-7402-b242-8e1e06be9321.md": {
+          "bytes": 586,
+          "sha256": "d018395eef075aecb6db349d57e7142535bdc45514cadbb5e6b6f90686b47430",
+          "text": "# 会话记录\n\n- threadId: \"01a20783-4d80-7402-b242-8e1e06be9321\"\n- repoRoot: \"/tmp/foundry-conversation-T2AJaF/repository\"\n- originalCwd: \"/tmp/foundry-conversation-T2AJaF/repository/projects/alpha\"\n- openingDate: \"2026-11-23\"\n- entryEvidence: {\"source\": \"T012 隔离候选的已核实输入\", \"cli\": \"codex-cli 0.171.0\"}\n\n## turn-01a20783-4dfe-7e01-be51-8bd669c4ca53\n\n- 要点：读取仓库 README.md 第一行。\n- 执行结果：尚未执行。\n- 业务改动文件：无。\n- [详情](../details/01a20783-4d80-7402-b242-8e1e06be9321.md#turn-01a20783-4dfe-7e01-be51-8bd669c4ca53)\n"
+        }
+      },
+      "afterFailure": {
+        "records/2026-11-23/details/01a20783-4d80-7402-b242-8e1e06be9321.md": {
+          "bytes": 1827,
+          "sha256": "5466edd826e1ca197923e030dd985627ceeccd31e6ad69de00c54fc24c76e792",
+          "text": "# 会话记录\n\n- threadId: \"01a20783-4d80-7402-b242-8e1e06be9321\"\n- repoRoot: \"/tmp/foundry-conversation-T2AJaF/repository\"\n- originalCwd: \"/tmp/foundry-conversation-T2AJaF/repository/projects/alpha\"\n- openingDate: \"2026-11-23\"\n- entryEvidence: {\"source\": \"T012 隔离候选的已核实输入\", \"cli\": \"codex-cli 0.171.0\"}\n\n## turn-01a20783-4dfe-7e01-be51-8bd669c4ca53\n\n### 用户原文\n\n原文末尾无换行。\n~~~\n请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。\n~~~\n\n### 附件 fixture-t012-available-bin\n\n来源：/tmp/foundry-conversation-T2AJaF/input/附件 原件.bin\n\n原件保存缺口：T012-original.bin：Is a directory（/tmp/foundry-conversation-T2AJaF/records/writable/records/2026-11-23/details/attachments/01a20783-4d80-7402-b242-8e1e06be9321/T012-original.bin）\n\n### 附件 fixture-t012-lost-text\n\n原文缺档。来源：/tmp/foundry-conversation-T2AJaF/input/T012-lost-original.txt。原因：先前已识别该事件，原文在保存前随来源关闭而失去。\n\n### 终端调用\n\n工作目录：/tmp/foundry-conversation-T2AJaF/repository/projects/alpha\n\n外层调用：functions.exec\n\n原文末尾无换行。\n~~~javascript\nconst params={cmd:\"head -n 1 ../../README.md\"}; const result=await tools.exec_command(params); store(\"t012_head\",{params,result}); text(result)\n~~~\n\n内部调用：exec_command\n\n原文末尾无换行。\n~~~json\n{\n  \"cmd\": \"head -n 1 ../../README.md\"\n}\n~~~\n\n### 终端回包\n\n原文末尾无换行。\n~~~json\n{\n  \"chunk_id\": \"aea13c\",\n  \"wall_time_seconds\": 0.027696776,\n  \"exit_code\": 0,\n  \"original_token_count\": 7,\n  \"output\": \"对话记录合成基线\\n\"\n}\n~~~\n\n### 终端输出原文\n\n原文以换行结束。\n~~~\n对话记录合成基线\n~~~\n\n### 助手回复（待发送）\n\n原文末尾无换行。\n~~~\n对话记录合成基线\n~~~\n"
+        },
+        "records/2026-11-23/index/01a20783-4d80-7402-b242-8e1e06be9321.md": {
+          "bytes": 594,
+          "sha256": "d03f0a3b40956b45a705f727f1788939a39c436fc064dec06094ccce4b3cfa71",
+          "text": "# 会话记录\n\n- threadId: \"01a20783-4d80-7402-b242-8e1e06be9321\"\n- repoRoot: \"/tmp/foundry-conversation-T2AJaF/repository\"\n- originalCwd: \"/tmp/foundry-conversation-T2AJaF/repository/projects/alpha\"\n- openingDate: \"2026-11-23\"\n- entryEvidence: {\"source\": \"T012 隔离候选的已核实输入\", \"cli\": \"codex-cli 0.171.0\"}\n\n## turn-01a20783-4dfe-7e01-be51-8bd669c4ca53\n\n- 要点：读取仓库 README.md 第一行。\n- 执行结果：命令退出状态 0。\n- 业务改动文件：无。\n- [详情](../details/01a20783-4d80-7402-b242-8e1e06be9321.md#turn-01a20783-4dfe-7e01-be51-8bd669c4ca53)\n"
+        }
+      },
+      "attachmentRecovery": {
+        "bytes": 6,
+        "sha256": "a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d",
+        "path": "records/2026-11-23/details/attachments/01a20783-4d80-7402-b242-8e1e06be9321/T012-original.bin",
+        "missingSourceEvent": "fixture-t012-lost-text"
+      },
+      "retry": {
+        "turnId": "01a20784-a70b-7870-b3c6-fa8f8a8c3496",
+        "finalReply": "T012-ATTACHMENT-RETRIED",
+        "records": {
+          "records/2026-11-23/details/01a20783-4d80-7402-b242-8e1e06be9321.md": {
+            "bytes": 1787,
+            "sha256": "6f5647eea9316c15e3f0ecde4334b29c04ce4b92a8b0940b1fba3ae8bad72d5a",
+            "text": "# 会话记录\n\n- threadId: \"01a20783-4d80-7402-b242-8e1e06be9321\"\n- repoRoot: \"/tmp/foundry-conversation-T2AJaF/repository\"\n- originalCwd: \"/tmp/foundry-conversation-T2AJaF/repository/projects/alpha\"\n- openingDate: \"2026-11-23\"\n- entryEvidence: {\"source\": \"T012 隔离候选的已核实输入\", \"cli\": \"codex-cli 0.171.0\"}\n\n## turn-01a20783-4dfe-7e01-be51-8bd669c4ca53\n\n### 用户原文\n\n原文末尾无换行。\n~~~\n请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。\n~~~\n\n### 附件 fixture-t012-available-bin\n\n来源：/tmp/foundry-conversation-T2AJaF/input/附件 原件.bin\n\n[T012-original.bin](attachments/01a20783-4d80-7402-b242-8e1e06be9321/T012-original.bin)，SHA-256：a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d\n\n### 附件 fixture-t012-lost-text\n\n原文缺档。来源：/tmp/foundry-conversation-T2AJaF/input/T012-lost-original.txt。原因：先前已识别该事件，原文在保存前随来源关闭而失去。\n\n### 终端调用\n\n工作目录：/tmp/foundry-conversation-T2AJaF/repository/projects/alpha\n\n外层调用：functions.exec\n\n原文末尾无换行。\n~~~javascript\nconst params={cmd:\"head -n 1 ../../README.md\"}; const result=await tools.exec_command(params); store(\"t012_head\",{params,result}); text(result)\n~~~\n\n内部调用：exec_command\n\n原文末尾无换行。\n~~~json\n{\n  \"cmd\": \"head -n 1 ../../README.md\"\n}\n~~~\n\n### 终端回包\n\n原文末尾无换行。\n~~~json\n{\n  \"chunk_id\": \"aea13c\",\n  \"wall_time_seconds\": 0.027696776,\n  \"exit_code\": 0,\n  \"original_token_count\": 7,\n  \"output\": \"对话记录合成基线\\n\"\n}\n~~~\n\n### 终端输出原文\n\n原文以换行结束。\n~~~\n对话记录合成基线\n~~~\n\n### 助手回复（待发送）\n\n原文末尾无换行。\n~~~\n对话记录合成基线\n~~~\n"
+          },
+          "records/2026-11-23/details/attachments/01a20783-4d80-7402-b242-8e1e06be9321/T012-original.bin": {
+            "bytes": 6,
+            "sha256": "a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d"
+          },
+          "records/2026-11-23/index/01a20783-4d80-7402-b242-8e1e06be9321.md": {
+            "bytes": 594,
+            "sha256": "d03f0a3b40956b45a705f727f1788939a39c436fc064dec06094ccce4b3cfa71",
+            "text": "# 会话记录\n\n- threadId: \"01a20783-4d80-7402-b242-8e1e06be9321\"\n- repoRoot: \"/tmp/foundry-conversation-T2AJaF/repository\"\n- originalCwd: \"/tmp/foundry-conversation-T2AJaF/repository/projects/alpha\"\n- openingDate: \"2026-11-23\"\n- entryEvidence: {\"source\": \"T012 隔离候选的已核实输入\", \"cli\": \"codex-cli 0.171.0\"}\n\n## turn-01a20783-4dfe-7e01-be51-8bd669c4ca53\n\n- 要点：读取仓库 README.md 第一行。\n- 执行结果：命令退出状态 0。\n- 业务改动文件：无。\n- [详情](../details/01a20783-4d80-7402-b242-8e1e06be9321.md#turn-01a20783-4dfe-7e01-be51-8bd669c4ca53)\n"
+          }
+        }
+      }
+    },
+    "root": {
+      "candidateRead": 38,
+      "failureRulesRead": 45,
+      "physicalFailure": {
+        "code": 20,
+        "message": "Not a directory",
+        "path": "/tmp/foundry-conversation-xBhCGz/records/writable/records/2026-11-23/index/01a20783-4d70-7c72-aafc-39c20265eb6c.md"
+      },
+      "prompt": "请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。",
+      "turnId": "01a20783-4e0c-7d43-bba0-22875e40f30a",
+      "notice": [
+        {
+          "line": 98,
+          "text": "会话记录技能发现资料根 `records/writable` 是普通文件，无法在其中保存本轮请求、执行结果和回复。本轮详情与索引均未保存。我会继续运行命令。"
+        }
+      ],
+      "businessLine": 100,
+      "businessToolId": "exec-78d6051c-0da4-4bf6-af64-d2d0f47802c5",
+      "businessOutput": "对话记录合成基线\n",
+      "finalReply": "对话记录合成基线",
+      "initialRecords": {
+        ".": {
+          "bytes": 24,
+          "sha256": "538213e155f2de7b8a192496f10e5cad375edd217a8207c565d68fcf143109c4",
+          "rootKind": "file"
+        }
+      },
+      "recordsAtBusiness": {
+        ".": {
+          "bytes": 24,
+          "sha256": "538213e155f2de7b8a192496f10e5cad375edd217a8207c565d68fcf143109c4",
+          "rootKind": "file"
+        }
+      },
+      "afterFailure": {
+        ".": {
+          "bytes": 24,
+          "sha256": "538213e155f2de7b8a192496f10e5cad375edd217a8207c565d68fcf143109c4",
+          "rootKind": "file"
+        }
+      }
+    }
+  },
+  "ordinary": {
+    "sessions": {}
+  },
+  "partial": {
+    "filesystemRejection": {
+      "code": 21,
+      "message": "Is a directory",
+      "path": "/tmp/foundry-conversation-H01Q47/records/writable/records/2026-11-23/index/01a20783-4d8b-7320-b057-76fedd7f2c46.md"
+    },
+    "seededDetail": "records/2026-11-23/details/01a20783-4d8b-7320-b057-76fedd7f2c46.md",
+    "before": {
+      "records/2026-11-23/details/01a20783-4d8b-7320-b057-76fedd7f2c46.md": {
+        "bytes": 399,
+        "sha256": "4ebb46c3e184c366ab2389b048b9cc06b141b6b0c75bd3b78bef28d65f6f7835",
+        "text": "# 会话详情\n\n```json\n{\n  \"threadId\": \"01a20783-4d8b-7320-b057-76fedd7f2c46\",\n  \"repoRoot\": \"/tmp/foundry-conversation-H01Q47/repository\",\n  \"originalCwd\": \"/tmp/foundry-conversation-H01Q47/repository/projects/alpha\",\n  \"openingDate\": \"2026-11-23\",\n  \"entryEvidence\": {\n    \"source\": \"T012 既有合成记录\"\n  }\n}\n```\n\n## turn-b98fd113-cd4d-4dc4-afec-cd4b982ca608\n\nT006-已确认的合成详情\n"
+      }
+    },
+    "after": {
+      "records/2026-11-23/details/01a20783-4d8b-7320-b057-76fedd7f2c46.md": {
+        "bytes": 1133,
+        "sha256": "531101f9d6dd8a34a8f2fd3bd1776b8dabdaaeb52dc13831fcd8dc7410949baa",
+        "text": "# 会话详情\n\n```json\n{\n  \"threadId\": \"01a20783-4d8b-7320-b057-76fedd7f2c46\",\n  \"repoRoot\": \"/tmp/foundry-conversation-H01Q47/repository\",\n  \"originalCwd\": \"/tmp/foundry-conversation-H01Q47/repository/projects/alpha\",\n  \"openingDate\": \"2026-11-23\",\n  \"entryEvidence\": {\n    \"source\": \"T012 既有合成记录\"\n  }\n}\n```\n\n## turn-b98fd113-cd4d-4dc4-afec-cd4b982ca608\n\nT006-已确认的合成详情\n\n## turn-01a20783-4e2b-7012-9ccc-0742838aca1c\n\n用户原文（无末尾换行），来源为 T012 已核实输入的 currentTurn.prompt。\n\n```text\n请用终端运行 head -n 1 ../../README.md，只原样回复读到的第一行。\n```\n\n终端调用及可见回包（本轮唯一业务调用）。\n\n```json\n{\n  \"tool\": \"exec_command\",\n  \"args\": {\n    \"cmd\": \"head -n 1 ../../README.md\",\n    \"workdir\": \"/tmp/foundry-conversation-H01Q47/repository/projects/alpha\"\n  },\n  \"result\": {\n    \"chunk_id\": \"eee194\",\n    \"wall_time_seconds\": 4.3227e-05,\n    \"exit_code\": 0,\n    \"original_token_count\": 7,\n    \"output\": \"对话记录合成基线\\n\"\n  }\n}\n```\n\n助手待发送原文（无末尾换行）。\n\n```text\n对话记录合成基线\n```\n"
+      }
+    },
+    "turn": {
+      "finalReply": "对话记录合成基线",
+      "calls": [
+        {
+          "input": "/bin/bash -lc 'head -n 1 ../../README.md'",
+          "callLine": 192
+        }
+      ],
+      "commentary": [
+        {
+          "line": 190,
+          "text": "会话记录技能要求先提示保存缺口。本轮用户原文已写入详情并读回确认，索引文件的位置被目录占用，本轮索引待补。[本轮详情](/tmp/foundry-conversation-H01Q47/records/writable/records/2026-11-23/details/01a20783-4d8b-7320-b057-76fedd7f2c46.md#turn-01a20783-4e2b-7012-9ccc-0742838aca1c)"
+        },
+        {
+          "line": 232,
+          "text": "终端回包和待发送原文也已写入详情并读回确认。索引路径仍被目录占用。"
+        }
+      ]
+    }
+  }
+}

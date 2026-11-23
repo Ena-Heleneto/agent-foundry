@@ -1,5 +1,96 @@
 # 验证指南：统一发布包、安装与可选隐匿
 
+## 2026-11-23 推送测试与发布验证
+
+以下命令和场景用于对应步骤实现后的核验。就绪条件为干净的触发提交、其中的工作区依赖声明及 mise 配置。平台验证使用获授权的 GitHub 和 R2 目标。本地、隔离运行和真实环境结果分别留证。旧容器示例对应当时的实现。[流水线契约](contracts/pipeline.md#2026-11-23-统一发布与-r2-交接)
+
+### 干净 runner 的构建和检查
+
+从仓库根按以下方式核对一次实际构建及流水线打包。在另一份干净检出上用同一源码和实际工具版本复验，保留两次归档的文件路径、长度和 SHA-256。
+
+```bash
+set -euo pipefail
+export SOURCE_REVISION="$(git rev-parse HEAD)"
+export RELEASE_DIRECTORY="$(mktemp -d)/release"
+mise install
+export pnpm_config_lockfile=false
+export pnpm_config_verify_deps_before_run=false
+mise exec -- pnpm install --no-lockfile --ignore-scripts
+mise exec -- pnpm --filter @foundry/preset-config run build
+mise exec -- pnpm --filter @foundry/skills run build --mode release
+mise exec -- node --input-type=module <<'JS'
+import { execFileSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
+import { parse } from './packages/skills/node_modules/yaml/dist/index.js'
+
+const { steps } = parse(readFileSync('.github/workflows/publish.yml', 'utf8')).jobs.upload
+for (const id of ['archive', 'build-evidence'])
+  execFileSync('bash', ['-c', steps.find(step => step.id === id).run], { stdio: 'inherit' })
+JS
+test ! -e pnpm-lock.yaml
+test -s "$RELEASE_DIRECTORY/evidence/build-verification.json"
+test -s packages/skills/dist/VERSION
+bash -n packages/skills/dist/curl/install.sh
+bash -n packages/skills/dist/engine/install.sh
+```
+
+预期共享预设及技能包可无锁直接构建，`VERSION` 匹配源版本，当次 `dist` 与解包后的文件路径及字节相同。保存两次实际构建依赖解析并比较版本，记录 Bash、Node、pnpm、Python、uv、tar 版本。冻结后的归档和独立入口再核对各自的长度及 SHA-256。安装及供应链检查失败时保留日志并停止对应候选。归档前读回最小安装说明，核对它使用当前入口、参数及同包引擎，公开地址待配置时有明确条件。将旧 Node 入口说明作为反例。T031 验证完整发布及迁移说明。[正式归档契约](contracts/build-pipeline.md#2026-11-23-runner-直接构建和正式归档)
+
+对该提交保留两套测试结果。先核对 Node 分发测试所需的 `jq` 和 `uv`。在准备好工作区依赖后运行现有测试入口。
+
+```bash
+pnpm_config_lockfile=false pnpm_config_verify_deps_before_run=false mise exec -- pnpm --filter @foundry/skills run test
+mise exec -- node --test packages/skills/tests/distribution/*.test.mjs
+```
+
+两套测试各自留退出码和源码 SHA。必需检查失败、缺工具或未运行均按实际范围记录。实现后的 `packages/skills/tests/distribution/pipeline-workflow.test.mjs` 隔离验证下列表格的事件、目标和假对象故障。
+
+### 主线同包引擎验收
+
+用同版独立归档验证 curl 对 `engine/install.sh` 的实际调用及项目、原始参数、退出码和取消行为。覆盖默认适用挂载、成功集合含工作流或仅其他分类、`--no-mount --hidden`、部分复制失败和缺引擎。关闭挂载时仍可执行显式隐匿。部分复制失败保留已成功项及原复制退出码。T019 记录各平台入口和运行前置，T027/T028 分别验证实际接线和官方注册、宿主加载。下方旧 Node 调度示例对应此前验证。[安装契约](contracts/install.md#主线现行安装入口) · [挂载契约](contracts/mount.md#主线现行挂载入口)
+
+### 平台事件与权限预检
+
+| 输入或操作 | 应观察的结果 |
+| --- | --- |
+| 同一分支连续两次投递可检出提交的 `push` | 两次各有 Python 与 Node 结果，构建身份分别对应推送提交。 |
+| 分支删除无可检出提交，或 GitHub 抑制 `push` 投递 | 分支删除记录跳过原因，平台抑制通过实际事件证据确认。缺必需测试结果时对应发布停止。 |
+| 开放 `release` PR 的源分支由有权者推送 | 测试发布取事件 `after`，后续分支推进不改变候选提交。 |
+| 仅打开、重新开放或改目标，fork 或无授权测试来源 | 无测试发布写入，事件检查和跳过原因可追溯。 |
+| 普通直接推送、关闭未合并、间接关闭、提交归属另一 PR | 生产写入为 0。保留实际 `main` 分支保护、活动和归属接口结果。 |
+| 实际合并到 `main`，含启用的 merge、squash、rebase 及已合并 fork PR | `pr_merge` 活动唯一，活动 `after` 等于事件合并 SHA，操作者和归属 PR 匹配，本仓 `main` 可达且实际 `HEAD` 精确一致。 |
+| 缺权限、过期或替换的归档、必需 job 失败 | 在上传前停止。重跑发布只在原收据和冻结字节仍有效时继续。 |
+| 两个发布环境的授权对象和运行范围 | 环境凭据仅限对应桶和对象，两个目标各自授权。仅生产授权策略核对通过且绑定本次候选时，受信 job 才可执行生产写入。 |
+
+检查公开仓库策略对两份工作流路径的实际判定、checkout 的 fork 保护和 runner 缓存。记录实际事件的 PR、操作者、触发提交、工作流来源、生产者尝试、归档 ID 和必需 job。T059 先核对只读 API 实例和失败输入。T061 在迁后仓库逐种验证合并方式及间接关闭，保留 PR 详情、`main` 活动 ID 和前后 SHA、操作者、关联 PR 和实际 `HEAD`。证据来源及字段沿流水线契约，找不到唯一匹配时对应生产放行停止。[事件契约](contracts/pipeline.md#事件提交与授权) · [事件研究](research.md#github-事件与源码提交)
+
+### 测试环境按提交下载
+
+对同一版本号的两次不同源分支推送，分别打开对应的运行摘要。每次以测试桶只读身份使用该摘要中的两个对象键、长度与 SHA-256，替换本地命令所用变量。两组读回使用各自的摘要与独立临时目录，操作在测试对象保留期内完成。
+
+```bash
+set -euo pipefail
+skills_download_dir="$(mktemp -d)"
+aws --profile "$SKILLS_TEST_READER_PROFILE" --endpoint-url "$SKILLS_TEST_R2_ENDPOINT" --region auto \
+  s3api get-object --bucket "$SKILLS_TEST_R2_BUCKET" --key "$SKILLS_TEST_ARCHIVE_KEY" \
+  "$skills_download_dir/skills.tar.gz" >/dev/null
+aws --profile "$SKILLS_TEST_READER_PROFILE" --endpoint-url "$SKILLS_TEST_R2_ENDPOINT" --region auto \
+  s3api get-object --bucket "$SKILLS_TEST_R2_BUCKET" --key "$SKILLS_TEST_ENTRY_KEY" \
+  "$skills_download_dir/install.sh" >/dev/null
+test "$(wc -c < "$skills_download_dir/skills.tar.gz")" -eq "$SKILLS_TEST_ARCHIVE_BYTES"
+test "$(wc -c < "$skills_download_dir/install.sh")" -eq "$SKILLS_TEST_ENTRY_BYTES"
+printf '%s  %s\n' "$SKILLS_TEST_ARCHIVE_SHA256" "$skills_download_dir/skills.tar.gz" \
+  "$SKILLS_TEST_ENTRY_SHA256" "$skills_download_dir/install.sh" | sha256sum --check -
+```
+
+预期两个提交的归档及入口地址各自可定位，长度和 SHA-256 全部通过。流水线同时保留 `cmp` 对应的逐字节核对结果。换成任一对象缺失、访问被拒或返回非对应字节的输入时，记录实际失败阶段。真实结果归 T096。[取件路径](contracts/pipeline.md#测试-r2-的取件协议)
+
+### 生产固定对象与发现验证
+
+在获授权的隔离目标先核对 AWS CLI v2 的实际版本、条件创建、带原 ETag 的更新、明确的对象缺失和条件失败错误码。用两个执行者和响应丢失输入覆盖同字节复用、异字节拒绝、旧 ETag 冲突、已经提交但响应丢失，以及最新入口先行而版本表失败。每次失败后读回实际字节并核对旧版本仍可取。
+
+生产具备适用授权且 `main` PR 实际合并后，核对已批准仓库及环境策略，读回 `authorizationRef` 与本次 PR、可信工作流、候选、两个 artifact ID、实际目标和对象键的绑定。确认首个写操作前发现对象的原 ETag 或明确缺失和待写 SHA-256 均有记录。然后从运行结果记录的固定 HTTPS 地址只读下载归档、固定入口和两份发现对象，例如 `curl --fail --show-error --location "$SKILLS_PROD_FIXED_ARCHIVE_URL" --output skills.tar.gz`。核对两个固定对象的字节与候选一致、解包全集一致、正式记录位于生产表中。读取常规公开 URL 验证缓存后的实际发现结果。在独立受支持项目使用实际最新入口安装指定固定版本并观察适用挂载。完整矩阵、真实用户、首次发布和旧版复验各自记录对应证据。[生产流程](contracts/pipeline.md#生产-r2-的写入和读回) · [正式消费布局](contracts/curl-delivery.md#2026-11-23-公开入口与测试取件)
+
 ## 2026-11-20 容器构建验证
 
 从仓库根按[容器构建说明](../../../packages/skills/deploy/README.md)使用 `packages/skills/deploy/Dockerfile`，以新的空目录接收本地导出，核对根 VERSION、skill 正文附件和四份 Shell。与同源本地 dist 比较路径全集及字节，逐项执行 Bash 语法检查，确认无构建工具或旧输出混入。实际容器构建及 21 文件对照结果见[验收记录](analysis/acceptance/docker-build.md)，不能据此视为正式范围过滤或发布通过。
@@ -111,6 +202,8 @@ bash "$VERIFIED_INSTALL" "$SKILL_VERSION" --agent codex --skill "$SKILL_NAME" --
 原Node/PowerShell、在线动态agent/global、真实挂载及旧入口迁移、最低Node、独立使用者和完整支持矩阵仍按原验收后置。未知未实现请求明确拒绝，不将本地Linux组合当全部支持。紧急版T090保留已有迁后候选，T091～T093另等具体候选授权及真实公开输入，不按本次统一包重建或重发。
 
 ## 紧急版验证导航（2026-11-12）
+
+紧急版自 2026-11-23 起全线冻结。本节的操作在用户明确恢复之后按所处阶段使用。[冻结决定](spec.md#2026-11-23-紧急版冻结)
 
 依据[最新spec](spec.md)、[工作区输入及Clarify B](requirements/raw/2026-11-12-workspace-local-handoff.md)、[紧急契约](contracts/urgent-release.md)及[模型](data-model.md)。本地实施位置为当前工作区packages/skills-distribution-urgent；所有必需本地验证通过后按[连续推进豁免](requirements/raw/2026-11-12-urgent-continuous-exemption.md)继续，不逐阶段或逐Task重复确认；迁仓/建仓/推送/发布仍核对适用明确授权。源码可保留eval，正式技能发布、发现及安装仍排除eval。
 

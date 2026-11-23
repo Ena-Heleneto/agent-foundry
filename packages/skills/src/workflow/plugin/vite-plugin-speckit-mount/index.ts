@@ -13,11 +13,14 @@ export default function vitePluginSpeckitMount(sourceDir = fileURLToPath(import.
   return {
     name: 'vite-plugin-speckit-mount',
     apply: 'build',
+    /**
+     * 根据当次构建范围生成工作流挂载脚本。
+     */
     async generateBundle() {
       /**
-       * 从包内集合根扫描，仅保留启用且具有正文的 workflow 技能。
+       * 发布模式仅为参与发布的工作流技能生成挂载。
        */
-      const skills = (await scanSkills(sourceDir))
+      const skills = (await scanSkills(sourceDir, { publishOnly: this.environment.config.mode === 'release' }))
         .filter(skill => skill.collection === 'workflow')
       /**
        * 挂载生成同时消费 hook 和 command，空声明不创建脚本资产。

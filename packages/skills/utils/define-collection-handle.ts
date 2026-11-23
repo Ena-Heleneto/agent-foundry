@@ -15,20 +15,24 @@ export interface SkillHookOption {
 /**
  * 声明技能是否交付，以及按事件组织的 hook 和独立命令名称。
  * 未声明 hook 或 command 的技能仅交付内容，挂载材料由集合子插件消费生成。
+ * requiresSkills 使用相关技能在正文中声明的名称，供正式包生成安装映射。
  */
 export interface CollectionSkillOption {
   enabled: boolean
   hook?: Record<string, SkillHookOption>
   command?: string
+  requiresSkills?: readonly string[]
 }
 
 /**
  * 声明集合内容及交付规则；plugin 缺省关闭，为 true 时扫描集合 plugin 目录。
  * script 缺省关闭，支持全部或相对文件选择；skill 保存启用和可选挂载声明。
+ * publish 为 true 时，该集合参与发布模式下的构建。
  */
 export interface CollectionOption {
   packageName: string
   mcp: boolean
+  publish?: boolean
   plugin?: boolean
   script?: boolean | string | readonly string[]
   skill: Record<string, CollectionSkillOption>

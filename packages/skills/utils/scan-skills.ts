@@ -40,14 +40,28 @@ function assertSkillFiles(path: string): void {
 }
 
 /**
- * 按目录名顺序读取一级集合的配置。
+ * 集合扫描使用的发布范围、配置类型及缺配置回调。
+ */
+interface CollectionScanOptions {
+  skipNonRegularConfig?: boolean
+  publishOnly?: boolean
+  onMissingConfig?: (configurationPath: string) => void
+}
+
+/**
+ * 按目录读取集合配置，并根据各集合的发布开关过滤。
  *
  * @param sourceDir 集合来源目录。
- * @param options 配置读取选项，默认跳过没有普通配置文件的集合。
- * @param options.requireConfig 是否要求每个集合的配置均可导入。
+ * @param options 集合配置读取选项。
+ * @param options.skipNonRegularConfig 是否跳过路径存在但类型为目录或软链接等的配置。
+ * @param options.publishOnly 是否仅扫描选择参加发布构建的集合。
+ * @param options.onMissingConfig 发现缺失配置时收到对应的文件路径。
  * @returns 各集合的源目录和配置。
  */
-export async function scanCollections(sourceDir: string, { requireConfig = false } = {}) {
+export async function scanCollections(
+  sourceDir: string,
+  { skipNonRegularConfig = true, publishOnly = false, onMissingConfig }: CollectionScanOptions = {},
+) {
   /**
    * 仅枚举普通集合目录，并按名称排序。
    */
@@ -68,13 +82,23 @@ export async function scanCollections(sourceDir: string, { requireConfig = false
      * 集合顶层的 TypeScript 配置文件。
      */
     const configurationPath = join(directory, 'collection.config.ts')
-    if (!requireConfig && !lstatSync(configurationPath, { throwIfNoEntry: false })?.isFile())
+    /**
+     * 检查配置路径是否存在，保留已有配置的文件类型。
+     */
+    const configuration = lstatSync(configurationPath, { throwIfNoEntry: false })
+    if (!configuration) {
+      onMissingConfig?.(configurationPath)
+      return
+    }
+    if (skipNonRegularConfig && !configuration.isFile())
       return
 
     /**
      * 集合模块默认导出的配置。
      */
     const { default: config }: { default: CollectionOption } = await import(pathToFileURL(configurationPath).href)
+    if (publishOnly && config.publish !== true)
+      return
     return { directory, config }
   }))
 
@@ -85,10 +109,14 @@ export async function scanCollections(sourceDir: string, { requireConfig = false
  * 扫描启用技能并拒绝异常目录名及软链接，返回可交付清单。
  *
  * @param sourceDir 集合来源目录，默认使用当前包的 src。
+ * @param options 扫描的发布范围及缺配置回调。
  * @returns 包含集合、名称、源目录、目标目录及原技能配置的清单。
- * @throws 启用项的名称非法或实际交付内容含软链接时报错。
+ * @throws 配置导入失败、启用项名称非法或实际交付内容含软链接时报错。
  */
-export async function scanSkills(sourceDir = join(process.cwd(), 'src')) {
+export async function scanSkills(
+  sourceDir = join(process.cwd(), 'src'),
+  options: Omit<CollectionScanOptions, 'skipNonRegularConfig'> = {},
+) {
   /**
    * 仅将包含 SKILL.md 的二级目录视为可交付技能。
    */
@@ -96,9 +124,9 @@ export async function scanSkills(sourceDir = join(process.cwd(), 'src')) {
     .map(file => dirname(join(sourceDir, file))),
   )
   /**
-   * 技能交付要求一级集合目录提供配置。
+   * 根据当前构建范围读取集合配置，再扫描其中启用的技能。
    */
-  const collections = await scanCollections(sourceDir, { requireConfig: true })
+  const collections = await scanCollections(sourceDir, { ...options, skipNonRegularConfig: false })
   return collections.flatMap(({ directory, config: { packageName, skill } }) =>
     Object.entries(skill)
       .filter(([, { enabled }]) => enabled)

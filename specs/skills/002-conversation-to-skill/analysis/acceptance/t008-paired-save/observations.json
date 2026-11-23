@@ -1,0 +1,179 @@
+{
+  "date": "2026-11-23",
+  "cli": "codex-cli 0.171.0",
+  "model": "gpt-6.2-sol",
+  "entry": {
+    "mode": "app-server 临时线程，显式保存上轮",
+    "candidate": "candidate/conversation-recording-probe/SKILL.md",
+    "referenceSha256": {
+      "storage-contract.md": "54a8fb8c6c4bcea12b9c7b67b4745a2235a07b38bb734c59da94b31138cfe3d7",
+      "session-scope.md": "4e18293134d0400253d5d66184e98ad58df1a50ab65784d1d640d921b2cf7f3b",
+      "paired-save.md": "07e8385e48db3b7fc8aec143a1b9bb0fc6f5fb95418a9b1bf8100328cc8011da"
+    },
+    "candidateSha256": "1af5f9c8c6b96307443c1f21091735136c1c022f7fb92750fd12953d5310c7a7",
+    "recordingReferenceReadEvent": "exec-ab901326-2489-4e6d-8e42-e1eea62fabe8",
+    "threadId": "01a20725-58f8-7b61-a99e-13f93b87907a",
+    "businessTurnId": "01a20725-5966-7211-8fc9-ee1d49c9fc6b",
+    "saveTurnId": "01a20725-78e9-7942-aee4-1d162704d542",
+    "finalReply": "T008-SAVE-END",
+    "publication": {
+      "toolEvent": "exec-7e403f7c-8342-4003-aaa1-63df9bf134ec",
+      "method": "先刷新临时文件，再用硬链接发布",
+      "publishEvent": "CREATE"
+    }
+  },
+  "filesystemEvents": [
+    {
+      "order": 256,
+      "event": "CREATE",
+      "path": "records/2026-11-23/details/attachments/01a20725-58f8-7b61-a99e-13f93b87907a/附件 原件.bin"
+    },
+    {
+      "order": 258,
+      "event": "OPEN",
+      "path": "records/2026-11-23/details/attachments/01a20725-58f8-7b61-a99e-13f93b87907a/附件 原件.bin"
+    },
+    {
+      "order": 259,
+      "event": "CLOSE_NOWRITE,CLOSE",
+      "path": "records/2026-11-23/details/attachments/01a20725-58f8-7b61-a99e-13f93b87907a/附件 原件.bin"
+    },
+    {
+      "order": 262,
+      "event": "CREATE",
+      "path": "records/2026-11-23/details/01a20725-58f8-7b61-a99e-13f93b87907a.md"
+    },
+    {
+      "order": 264,
+      "event": "OPEN",
+      "path": "records/2026-11-23/details/01a20725-58f8-7b61-a99e-13f93b87907a.md"
+    },
+    {
+      "order": 265,
+      "event": "CLOSE_NOWRITE,CLOSE",
+      "path": "records/2026-11-23/details/01a20725-58f8-7b61-a99e-13f93b87907a.md"
+    },
+    {
+      "order": 266,
+      "event": "OPEN",
+      "path": "records/2026-11-23/details/attachments/01a20725-58f8-7b61-a99e-13f93b87907a/附件 原件.bin"
+    },
+    {
+      "order": 267,
+      "event": "CLOSE_NOWRITE,CLOSE",
+      "path": "records/2026-11-23/details/attachments/01a20725-58f8-7b61-a99e-13f93b87907a/附件 原件.bin"
+    },
+    {
+      "order": 270,
+      "event": "CREATE",
+      "path": "records/2026-11-23/index/01a20725-58f8-7b61-a99e-13f93b87907a.md"
+    },
+    {
+      "order": 272,
+      "event": "OPEN",
+      "path": "records/2026-11-23/index/01a20725-58f8-7b61-a99e-13f93b87907a.md"
+    },
+    {
+      "order": 273,
+      "event": "CLOSE_NOWRITE,CLOSE",
+      "path": "records/2026-11-23/index/01a20725-58f8-7b61-a99e-13f93b87907a.md"
+    }
+  ],
+  "filesystemSequence": {
+    "attachmentWrite": 256,
+    "attachmentReadback": 259,
+    "detailWrite": 262,
+    "detailReadback": 265,
+    "indexFirstWrite": 268,
+    "indexWrite": 270,
+    "indexReadback": 273
+  },
+  "git": {
+    "status": "",
+    "worktreeDiff": "",
+    "indexDiff": "",
+    "initialRevision": "0757b91e8f3237f9fd15716500a54be7d6227a19",
+    "afterMatchesBefore": true
+  },
+  "ordinary": {
+    "sessions": {
+      "alpha": {
+        "sessionId": "01a20725-58f8-7b61-a99e-13f93b87907a",
+        "openedDate": "2026-11-23",
+        "originalCwd": "/tmp/foundry-conversation-TNqDxX/repository/projects/alpha"
+      }
+    },
+    "repository": "/tmp/foundry-conversation-TNqDxX/repository",
+    "outsideDirectory": "/tmp/foundry-conversation-TNqDxX/repository-outside",
+    "recordsRoot": "/tmp/foundry-conversation-TNqDxX/records/writable",
+    "after": {
+      "records/2026-11-23/index/01a20725-58f8-7b61-a99e-13f93b87907a.md": {
+        "bytes": 879,
+        "sha256": "33e65bc18521fbab7b06f6e428358ae82f8d455729533814efd4b78830fafc77",
+        "text": "# 会话记录\n\n- 宿主线程 UUID：`01a20725-58f8-7b61-a99e-13f93b87907a`\n- 原仓库根目录：`/tmp/foundry-conversation-TNqDxX/repository`\n- 首次有效工作目录：`/tmp/foundry-conversation-TNqDxX/repository/projects/alpha`\n- 本地开启日：`2026-11-23`\n- 入口证据\n\n```json\n{\n  \"host\": \"codex-cli 0.171.0\",\n  \"source\": \"app-server 临时线程，T008 显式保存样例\",\n  \"createdAt\": 1795416217\n}\n```\n\n## turn-01a20725-5966-7211-8fc9-ee1d49c9fc6b\n\n原始轮次 ID：`01a20725-5966-7211-8fc9-ee1d49c9fc6b`\n\n- 内容要点：用户要求从指定仓库外目录读取 README.md 的第一行，并指出附件原件。\n- 执行结果：`exec_command` 退出码为 0，读到 `T006-OUTSIDE-TOOL`，助手回复该行。\n- 实际改动文件：无。\n- [轮次详情](../details/01a20725-58f8-7b61-a99e-13f93b87907a.md#turn-01a20725-5966-7211-8fc9-ee1d49c9fc6b)\n"
+      },
+      "records/2026-11-23/details/01a20725-58f8-7b61-a99e-13f93b87907a.md": {
+        "bytes": 1627,
+        "sha256": "c4fd8e1f65c05c93877d44f3e44aca7c12f1c540ae0906ad880a6dda786aba28",
+        "text": "# 会话记录\n\n- 宿主线程 UUID：`01a20725-58f8-7b61-a99e-13f93b87907a`\n- 原仓库根目录：`/tmp/foundry-conversation-TNqDxX/repository`\n- 首次有效工作目录：`/tmp/foundry-conversation-TNqDxX/repository/projects/alpha`\n- 本地开启日：`2026-11-23`\n- 入口证据\n\n```json\n{\n  \"host\": \"codex-cli 0.171.0\",\n  \"source\": \"app-server 临时线程，T008 显式保存样例\",\n  \"createdAt\": 1795416217\n}\n```\n\n## turn-01a20725-5966-7211-8fc9-ee1d49c9fc6b\n\n原始轮次 ID：`01a20725-5966-7211-8fc9-ee1d49c9fc6b`\n\n### 用户原文\n\n事件 ID：`01a20725-5966-7211-8fc9-ee1d49c9fc6b/input/0`\n\n末尾有换行：否\n\n```text\n用终端文件工具在目录 /tmp/foundry-conversation-TNqDxX/repository-outside 运行 head -n 1 README.md，只回复实际读到的第一行。样例原件是 /tmp/foundry-conversation-TNqDxX/input/附件 原件.bin。\n```\n\n附件原件：[按字节保存的原件](attachments/01a20725-58f8-7b61-a99e-13f93b87907a/%E9%99%84%E4%BB%B6%20%E5%8E%9F%E4%BB%B6.bin)\n\nSHA-256：`a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d`\n\n### 工具活动\n\n事件 ID：`exec-3bd1ac87-d26b-4385-bd6a-c45a340a546a`\n\n工具名称：`exec_command`\n\n工作目录：`/tmp/foundry-conversation-TNqDxX/repository-outside`\n\n参数\n\n```json\n{\n  \"command\": \"/bin/bash -lc 'head -n 1 README.md'\",\n  \"workdir\": \"/tmp/foundry-conversation-TNqDxX/repository-outside\"\n}\n```\n\n退出码：`0`\n\n工具输出\n\n末尾有换行：是\n\n```text\nT006-OUTSIDE-TOOL\n```\n\n### 助手原文\n\n事件 ID：`msg_02c9e81048b4a61a016b03e0a1d57087d0aedb6ab19d01b684`\n\n末尾有换行：否\n\n```text\nT006-OUTSIDE-TOOL\n```\n"
+      },
+      "records/2026-11-23/details/attachments/01a20725-58f8-7b61-a99e-13f93b87907a/附件 原件.bin": {
+        "bytes": 6,
+        "sha256": "a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d"
+      }
+    },
+    "outsideTool": {
+      "tool": "exec_command",
+      "command": "/bin/bash -lc 'head -n 1 README.md'",
+      "output": "T006-OUTSIDE-TOOL\n",
+      "cwd": "/tmp/foundry-conversation-TNqDxX/repository-outside",
+      "callId": "exec-3bd1ac87-d26b-4385-bd6a-c45a340a546a"
+    },
+    "attachmentInput": {
+      "bytes": 6,
+      "sha256": "a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d"
+    },
+    "internalCalls": [
+      {
+        "tool": "exec_command",
+        "callId": "exec-7b2e4c27-784d-4096-be88-e7d844eb7660"
+      },
+      {
+        "tool": "exec_command",
+        "callId": "exec-e19b1289-30b5-4a74-b6d8-300dd7684cbd"
+      },
+      {
+        "tool": "exec_command",
+        "callId": "exec-ab901326-2489-4e6d-8e42-e1eea62fabe8"
+      },
+      {
+        "tool": "exec_command",
+        "callId": "exec-b00b7989-63b4-4d47-aa33-99ab0eb8af3d"
+      },
+      {
+        "tool": "exec_command",
+        "callId": "exec-23153713-cfeb-4f58-8e5b-354fbdaeee96"
+      },
+      {
+        "tool": "exec_command",
+        "callId": "exec-1198d961-ae42-46c6-b160-3f24a0f841b5"
+      },
+      {
+        "tool": "exec_command",
+        "callId": "exec-44a14b82-1fbd-453e-a3ff-722261a5ad42"
+      },
+      {
+        "tool": "exec_command",
+        "callId": "exec-59f96b62-d601-4200-b738-aba5be7425bb"
+      },
+      {
+        "tool": "exec_command",
+        "callId": "exec-7e403f7c-8342-4003-aaa1-63df9bf134ec"
+      }
+    ],
+    "retainedCallIds": [
+      "exec-3bd1ac87-d26b-4385-bd6a-c45a340a546a"
+    ],
+    "unexpectedRecordMaintenanceAfterReadback": []
+  }
+}

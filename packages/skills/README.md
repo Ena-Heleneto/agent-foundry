@@ -1,42 +1,28 @@
 # @foundry/skills
 
-可复用的 agent 技能内容包。`src/<集合>/<skill-name>/` 维护通用规则，skill 名全局唯一；当前集合为 coding、frontend、eval、workflow，新增一级目录自动参与构建。技能可按适用环境包含工具上下文；Spec Kit 项目读取其材料和治理，其他项目沿用现有任务体系。
+可复用的 agent 技能内容包。技能源位于 `src/<集合>/<技能>/`，由集合配置选择启用项。coding、frontend 和 workflow 在各自的 `collection.config.ts` 中设置 `publish: true`，参加发布构建。
 
-## 唯一脚本入口
+## 安装
 
-外部分发统一运行 `node script/index.mjs [参数]`，需要 Node ≥22.20.0，无 install/mount/hooks/commands 子命令。入口自动按操作系统选择内部 Bash 或 PowerShell 安装模块；内部安装流程按后续任务接入文件核验、所选 hooks 和五指令。各职责目录是内部模块，工作区已有集成和测试仍可直接调用。
+在 Linux 的 Codex 项目根目录运行同版 `curl/install.sh`。当前入口使用 Bash、curl、Node、npm、tar 和 uv，并在本次临时目录准备 jq。公开安装需先为脚本配置实际 HTTPS 发布地址，并提供包含版本、归档地址及 MD5 的版本表。源码当前使用示例下载地址。
 
-```text
-node script/index.mjs --source-dir <同版发布根绝对路径> --version 0.1.0 --agent codex --skill <技能名称> --no-mount
+```bash
+bash /path/to/curl/install.sh 0.1.0 --no-mount
 ```
 
-这是需要替换路径与名称的模板，当前尚无公开来源。--source <固定提交HTTPS根URL> 可替代 --source-dir；完整参数见 `node script/index.mjs --help`。当前安装骨架只实现 Linux x86_64 / Codex 项目级 / 显式 --skill，workflow 安装须显式 --no-mount；其余参数能力和自动原生挂载由分发后续任务填充，未支持请求明确失败，不会冒认成功。Node 入口不重新实现下载或安装核心，不需要第三方 Node 运行依赖。
+将示例中的脚本路径替换为实际下载位置。省略版本时使用版本表第一条。技能安装到项目的 `.agents/skills/`，由同包 `engine/install.sh` 运行后置步骤。`--no-mount` 跳过挂载，`--hidden` 对本次成功安装项应用本地 Git 排除规则。需要实际注册时，目标项目须已初始化 Spec Kit 并安装 Specify。
 
 ## 构建与验证
 
-当前采用一个 Vite 集合内容插件：扫描 `src` 一级目录，将每个集合原样复制到 `dist` 下同名目录，另创建空的 `dist/mcp`。不维护固定集合名单，新增目录无需修改插件。旧构建及六模块实现保留在[功能归档](../../specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/README.md)，不作为新实现的代码入口。
+Vite 按 `collection.config.ts` 的技能启用设置，将技能正文和附件复制到 `dist/skill/`，写出 `dist/VERSION`、`dist/curl/install.sh` 和 `dist/engine/`。发布流水线用 `build --mode release`，扫描时仅纳入设置了 `publish: true` 的集合，并在 `dist` 中生成安装映射、说明和许可。构建结束后，流水线单独用 `tar` 压缩当次 `dist`，再解包核对文件路径与字节。普通构建按各集合的技能启用设置生成本地产物。
 
 ```bash
 pnpm --filter @foundry/skills run lint
 pnpm --filter @foundry/skills run check-types
 pnpm --filter @foundry/skills run build
 pnpm --filter @foundry/skills run test
-node --test --test-isolation=none packages/skills/tests/distribution/collections.test.mjs
+node --test packages/skills/tests/distribution/{vite-plugin-skill,vite-plugin-engine,runner-archive}.test.mjs
 ```
-
-| 输入              | 输出               | 当前职责                                          |
-| ----------------- | ------------------ | ------------------------------------------------- |
-| `src/<任意集合>/` | `dist/<同名集合>/` | 技能正文、frontmatter、完整附件和集合配置原样交付 |
-| 无独立MCP来源目录 | `dist/mcp/`        | 预留空目录，内容和清单规则后续决定                |
-| `script/`         | 本轮不生成         | 安装、挂载等特定脚本另行处理                      |
-
-每集合维护 `collection.config.json`，字段为 `packageName`、`mcp`、`skill`。skill按技能目录名决定交付范围；空对象也表示选入，未列出的技能不读取或复制。无配置默认 `packageName: null`、`mcp: false`、`skill: {}`，只在dist生成配置。发布语义及MCP内容后续确定。
-
-技能配置使用 `skill.<名称>.hook.<事件>`，各事件独立保存 `prompt`、`optional`、`priority` 和其他属性。未知字段原样保留；`command`、`description` 留未来脚本生成时读取来源，SKILL.md frontmatter保持。插件全部声明位于工厂函数内，顶层只保留import及工厂导出。示例见[配置讨论](../../specs/skills/001-skills-distribution/requirements/discussions/2026-11-11-plugin-skill-config.md)。
-
-构建不编译或执行技能中的代码，不生成占位JS或逐技能hooks附件，不处理Release、安装投影或流水线。源码/配置/输出路径非法会在清理旧产物前失败；只允许输出到包根dist，拒绝来源及输出链接。正常重建清理旧产物，来源删除后输出不残留；`write=false`不落盘。
-
-原 `src/mcp/mcp-build-smoke` 已并入 `src/eval/mcp-build-smoke`，正文和附件原字节保留。MCP应用、上下文估算器的清单消费、旧安装/挂载和原T065固定目录契约仍需按新结构单独适配，不把本轮内容构建当完整安装或发布完成。实际检查与限制见[T073验收](../../specs/skills/001-skills-distribution/analysis/acceptance/plugin-skill-config.md)。
 
 ## 规则与挂载的边界
 

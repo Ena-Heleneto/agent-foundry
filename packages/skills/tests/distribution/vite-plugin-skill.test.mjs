@@ -68,6 +68,7 @@ function buildSkills(root) {
  * 证明异常输入在输出清理及越界复制之前被拒绝。
  * @param {ReturnType<typeof skillFixture>} fixture 测试项目。
  * @param {RegExp | string} diagnostic 需要定位的输入或文件。
+ * @returns {string} 可进一步核对来源的错误输出。
  */
 function assertRejectedInput(fixture, diagnostic) {
   /**
@@ -84,6 +85,7 @@ function assertRejectedInput(fixture, diagnostic) {
   assert.deepEqual(readdirSync(fixture.output), ['previous.txt'])
   assert.equal(readFileSync(join(fixture.output, 'previous.txt'), 'utf8'), '上一轮产物\n')
   assert.equal(existsSync(join(fixture.root, 'outside')), false)
+  return result.stderr
 }
 
 /**
@@ -210,6 +212,61 @@ test('真实构建交付压缩的 curl 入口及可选隐匿脚本', (t) => {
   assert.equal(existsSync(join(fixture.output, 'script/hidden-install.sh')), false)
   assert.equal(existsSync(join(fixture.output, 'engine/helpers/hidden-install.sh')), false)
   assert.match(readFileSync(join(fixture.output, 'engine/install.sh'), 'utf8'), /^#!\/usr\/bin\/env bash\n# foundry-engine-interface: 1\n/u)
+})
+
+test('缺集合配置时只警告一次并继续构建其他集合', (t) => {
+  /**
+   * 有效集合和缺配置集合共用同一次真实构建。
+   */
+  const fixture = skillFixture(t)
+  /**
+   * 没有集合清单的正文应留在来源目录。
+   */
+  const unselected = join(fixture.root, 'src/unconfigured/unselected')
+  mkdirSync(unselected, { recursive: true })
+  writeFileSync(join(unselected, 'SKILL.md'), '# 未选择技能\n')
+  /**
+   * 缺配置应报告实际路径，其他合法技能照常交付。
+   */
+  const result = buildSkills(fixture.root)
+  assert.ifError(result.error)
+  assert.equal(result.status, 0, result.stderr)
+  assert.equal(result.stderr.match(/缺少集合配置/gu)?.length, 1, result.stderr)
+  assert.ok(result.stderr.includes(join(fixture.root, 'src/unconfigured/collection.config.ts')), result.stderr)
+  assert.equal(readFileSync(join(fixture.output, 'skill/workflow/sample/SKILL.md'), 'utf8'), '# 示例技能\n')
+  assert.equal(existsSync(join(fixture.output, 'skill/unconfigured/unselected')), false)
+  assert.doesNotMatch(readFileSync(join(fixture.output, 'engine/script/hidden-install.sh'), 'utf8'), /unselected/u)
+})
+
+test('已有集合配置的依赖缺失时仍报错并保留旧产物', (t) => {
+  /**
+   * 配置文件存在，导入其中的依赖会失败。
+   */
+  const fixture = skillFixture(t)
+  writeFileSync(join(fixture.collection, 'collection.config.ts'), 'export { default } from "./missing-collection-dependency.ts"\n')
+
+  assertRejectedInput(fixture, 'missing-collection-dependency.ts')
+})
+
+test('仅大小写不同的技能安装名在清理输出前被拒绝', (t) => {
+  /**
+   * 默认 workflow 夹具已选择小写 sample。
+   */
+  const fixture = skillFixture(t)
+  /**
+   * 另一个集合的 Sample 会占用同一个大小写折叠安装位置。
+   */
+  const coding = join(fixture.root, 'src/coding')
+  mkdirSync(join(coding, 'Sample'), { recursive: true })
+  writeFileSync(join(coding, 'Sample/SKILL.md'), '# 大写名称\n')
+  writeSkillConfig(coding, 'coding', { Sample: { enabled: true } })
+
+  /**
+   * 冲突诊断需要让维护者定位两个实际技能目录。
+   */
+  const diagnostic = assertRejectedInput(fixture, /\.agents\/skills\/sample/iu)
+  assert.ok(diagnostic.includes(fixture.source), diagnostic)
+  assert.ok(diagnostic.includes(join(coding, 'Sample')), diagnostic)
 })
 
 test('脚本压缩保留引号和 heredoc 中的井号与换行', () => {

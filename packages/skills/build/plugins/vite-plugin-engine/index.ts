@@ -9,16 +9,17 @@ import { createEngineInstallScript } from './install-script.ts'
 /**
  * 按顺序加载全局与集合子插件，限定子插件输出路径并交付引擎入口。
  *
+ * @param publishOnly 是否只从选择发布的集合发现子插件。
  * @returns 子插件及后置入口生成插件，由 Vite 执行各自构建钩子。
  * @throws 子插件导入、解析或工厂调用失败时，附带实际入口路径。
  */
-export default async function vitePluginEngine(): Promise<PluginOption[]> {
+export default async function vitePluginEngine(publishOnly = false): Promise<PluginOption[]> {
   /**
    * 从包内定位全局和集合子插件目录，全局优先，集合沿用扫描顺序及 plugin 开关。
    */
   const directories = [
     { root: fileURLToPath(new URL('./sub-plugins', import.meta.url)), source: '全局' },
-    ...(await scanCollections(fileURLToPath(import.meta.resolve('#src'))))
+    ...(await scanCollections(fileURLToPath(import.meta.resolve('#src')), { publishOnly }))
       .filter(({ config }) => config.plugin === true)
       .map(({ directory }) => ({ root: join(directory, 'plugin'), source: '集合' })),
   ]

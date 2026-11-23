@@ -6,13 +6,29 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: skills-test-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
+  skip-push:
+    name: 记录无可检出提交的推送
+    if: ${{ github.event.deleted || github.event.after == '' || github.event.after == '0000000000000000000000000000000000000000' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - name: 记录跳过原因
+        shell: bash
+        env:
+          PUSH_DELETED: ${{ github.event.deleted }}
+        run: |
+          if [[ "$PUSH_DELETED" == "true" ]]; then
+            reason='推送删除了 Git 引用，无可检出的提交'
+          else
+            reason='推送事件未提供可检出的提交 SHA'
+          fi
+          printf '跳过技能测试。%s。\n' "$reason" | tee -a "$GITHUB_STEP_SUMMARY"
+
   test:
     name: 技能测试（${{ matrix.suite }}）
+    if: ${{ !github.event.deleted && github.event.after != '' && github.event.after != '0000000000000000000000000000000000000000' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     strategy:
@@ -22,12 +38,37 @@ jobs:
     steps:
       - name: 检出源码
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.after }}
+          persist-credentials: false
+
+      - name: 核对推送提交
+        id: verify-push
+        shell: bash
+        env:
+          PUSH_AFTER: ${{ github.event.after }}
+        run: |
+          expected_commit="$(git rev-parse --verify --end-of-options "$PUSH_AFTER^{commit}")"
+          actual_commit="$(git rev-parse --verify HEAD)"
+          if [[ "$actual_commit" != "$expected_commit" ]]; then
+            printf '推送提交与实际 HEAD 不一致。期望 %s，实际 %s。\n' "$expected_commit" "$actual_commit" >&2
+            exit 1
+          fi
+          printf '推送提交 %s\n' "$actual_commit"
 
       - name: 准备仓库工具链
         uses: jdx/mise-action@v5
 
+      - name: 记录工具版本
+        run: |
+          node --version
+          pnpm --version
+          python --version
+
       - name: 安装工作区依赖
-        run: pnpm install
+        run: |
+          pnpm install
+          pnpm --filter @foundry/skills list --depth 0
 
       - name: 构建技能及依赖包
         run: pnpm run build:packages
@@ -38,7 +79,9 @@ jobs:
 
       - name: 检查 Node 分发测试前置
         if: matrix.suite == 'node'
-        run: jq --version
+        run: |
+          jq --version
+          uv --version
 
       - name: 运行 Node 分发测试
         if: matrix.suite == 'node'

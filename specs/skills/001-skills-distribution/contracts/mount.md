@@ -1,5 +1,9 @@
 # 公共挂载与隐匿契约
 
+## 主线现行挂载入口
+
+主线 curl 从已核验同版归档直接调用 `engine/install.sh`。本次成功集合含适用 workflow 技能且挂载开启时，由引擎调用 `engine/script/speckit-mount.sh`，核验实际项目和选中材料，按所选 hooks、Increment 的依赖顺序执行。`--no-mount` 只关闭挂载，`--hidden` 仍可处理本次成功项。T027 核对入口调用、参数和阶段结果，T028 按原支持矩阵实证同包调用、官方注册和宿主加载。下方 Node 入口、旧脚本目录及官方第二步是此前方案的记录。[现行调用契约](curl-delivery.md#2026-11-20-隐匿脚本调用) · [T027](../tasks.md#t027) · [T028](../tasks.md#t028)
+
 ## 2026-11-16 当前隐匿接口与挂载边界
 
 近期只推进技能安装和可选hidden，Spec Kit/hooks/Increment继续后置；原正式同版核验、先hooks后commands、旧入口保护及实际宿主完整加载验收保持，不以新包下载完成抵扣。字段及hidden协议集中在[curl契约](curl-delivery.md)，统一包不强制随包逐文件JSON，后置挂载仍须实际正文/附件/声明同版核验。

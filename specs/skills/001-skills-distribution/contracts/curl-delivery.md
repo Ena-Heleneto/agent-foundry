@@ -1,5 +1,15 @@
 # 当前主线 curl 交付契约
 
+## 2026-11-23 公开入口与测试取件
+
+`publish` 工作流向测试和生产环境交付同一格式的统一归档和独立安装入口。归档的引擎路径为 `engine/install.sh` 与 `engine/script/`，包内追溯入口为 `curl/install.sh`。同版独立入口的字节与包内追溯入口一致。消费者通过公开最新入口选择版本，按所选包读取该版本的辅助脚本。[统一归档布局](build-pipeline.md#2026-11-23-runner-直接构建和正式归档)
+
+发布构建根据各集合的 `publish` 配置生成 `curl/skills.tsv`。映射的 `category` 取自当次参与发布的集合的 `packageName`，依赖取自 `skill[目录].requiresSkills`。
+
+生产源仍为固定版本包 `skills/<version>/skills-<version>.tar.gz`、固定入口 `curl/<version>/install.sh` 和可变的 `curl/install.sh`、`curl/release.json`，相对已配置的公开 HTTPS 根和生产前缀。沿用版本表数组及公开消费字段。选中项的固定包、版本、长度与 SHA-256 一次确定，旧版兼容字段按现行协议保留。生产实际地址和支持对应包格式的安装脚本在冻结前准备，发布器上传已核验字节。
+
+测试发布按提交和生成尝试提供归档与独立入口的受权下载地址，验收为两份文件均与对应候选字节一致。测试结果的定位和下载见流水线契约。[测试取件协议](pipeline.md#测试-r2-的取件协议)
+
 ## 2026-11-20 隐匿脚本调用
 
 curl 插件使用 `minifyShellScript` 压缩安装源，交付至 `dist/curl/install.sh`。安装器通过同包 `engine/install.sh` 触发后续操作。指定 `--hidden` 且成功名单非空时，向该入口传入 `--hidden`、项目路径、安装根、成功名单及结果文件路径。引擎核对隐匿脚本路径和协议 1 标记，优先从 `engine/script/hidden-install.sh` 读取，缺失时检查包根下的 `script/hidden-install.sh`。[构建契约](build-pipeline.md#2026-11-20-引擎按需辅助脚本)
@@ -95,9 +105,9 @@ name及技能目录段限定为小写字母/数字与内部连字符组成的非
 
 ### 隐匿内部调用协议1
 
-模板源为 `packages/skills/build/plugins/vite-plugin-curl/hidden-install.template.ts`，由构建生成 `script/hidden-install.sh`。构建把候选安装相对路径和 `@@AGENT_SKILLS_ROOT@@` 标记写入固定数据参数。生成脚本第二行标记为 `# foundry-hidden-interface: 1`，入口在执行前核对该标记。
+引擎隐匿子插件用同目录的 `hidden-install.source.sh` 和 `hidden-install.template.ts` 生成 `engine/script/hidden-install.sh`。构建把候选安装相对路径和 `@@AGENT_SKILLS_ROOT@@` 标记写入固定数据参数。生成脚本第二行标记为 `# foundry-hidden-interface: 1`，入口在执行前核对该标记。
 
-内部调用使用 `bash <已核验绝对路径>/script/hidden-install.sh --project <绝对项目> --agent-root .agents/skills --successful-skills-file <绝对JSON文件> --result-file <绝对新结果文件>`。临时成功名单为 JSON 数组，每项包含 `name`、`installRelativeDirectory`、`installedPath` 和布尔值 `complete`。当前入口在 `cp -R` 成功后收集目标路径，仅当显式传入 `--hidden` 且已有成功项时写出名单并调用。
+内部调用使用 `bash <包根绝对路径>/engine/script/hidden-install.sh --project <绝对项目> --agent-root .agents/skills --successful-skills-file <绝对JSON文件> --result-file <绝对新结果文件>`。临时成功名单为 JSON 数组，每项包含 `name`、`installRelativeDirectory`、`installedPath` 和布尔值 `complete`。当前入口在 `cp -R` 成功后收集目标路径，仅当显式传入 `--hidden` 且已有成功项时写出名单并调用。
 
 允许处理集合为正式模板候选、本次显式选择、完整成功集合的交集。只核对明确项目本地.git，缺失/父仓库子目录/.git文件按当前保守范围跳过，不向上找、不初始化。追加前核对未跟踪及项目内独占路径，保留原exclude、转义精确锚定路径、去重，再以check-ignore/ls-files/status核对效果。当前只验证.agents/skills前缀；项目外global、共享配置、已跟踪内容不声称隐藏成功，不取消跟踪或修改全局配置。
 

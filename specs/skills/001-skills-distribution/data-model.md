@@ -1,5 +1,23 @@
 # 数据模型：统一发布与阶段结果
 
+## 2026-11-23 流水线身份与发布结果
+
+以下为主线两类 R2 发布及每次推送检查的有效字段关系。沿用构建核验、候选内容索引和运行记录，测试目标增加按提交定位的结果，生产版本表保持原消费协议。[规格](spec.md#2026-11-23-主线技能构建与发布流水线) · [流水线契约](contracts/pipeline.md#2026-11-23-统一发布与-r2-交接)
+
+| 记录 | 最小相关字段 | 身份与约束 |
+| --- | --- | --- |
+| 触发记录 | repositoryId、eventName、action、workflowRevision、sourceRevision、actorId、可选 PR 编号及目标 | workflowRevision 是可信工作流提交。sourceRevision 是实际检出并验证的完整 40 位提交。普通推送取可检出的事件提交，测试取 `after`，生产取活动和归属核验通过的 `merge_commit_sha`。 |
+| 生产合并证据 | repositoryId、PR 编号、`ref`、活动 ID、`before`、`after`、合并者 ID、归属 PR | 本仓 `refs/heads/main` 的 `pr_merge` 活动唯一，`before != after == sourceRevision`，活动与 PR 合并者一致，归属为触发 PR。提交从受保护的 `main` 历史验证。 |
+| 构建核验 | sourceRevision、实际构建依赖解析、工具版本、检查结果、正式文件路径和字节证据 | 两次干净构建分别无锁安装，核对实际依赖和工具版本，再比较正式文件全集。归档及独立入口以本次选定实际字节核验。 |
+| 候选内容索引 | sourceRevision、version、formatVersion、归档与独立入口的 path/bytes/sha256、核验摘要、candidateDigest | version 等于本次 `package.json.version` 和根 `VERSION`，格式沿现行统一包协议。长度为实际正整数，SHA-256 为 64 位十六进制。内容和核验记录在包外冻结，生产专用 isolated/full 范围沿原候选规则。 |
+| 平台收据 | repositoryId、生产者 runId/runAttempt、payloadArtifactId、receiptArtifactId、平台摘要、内容索引摘要、createdAt/expiresAt | 记录时区分归档来源与取用它的发布 attempt。上传完成后记录真实 ID，回验生产者 attempt 的必需 job。重跑发布可复用未过期的原收据和同一字节。全量重建则产生自己的收据。 |
+| 测试发布记录 | sourceRevision、version、生产者 runId/runAttempt、测试桶、归档与入口的 S3 键、各自长度/SHA-256、读回结果、有效期 | 测试文件按完整提交和生产者尝试组合唯一定位。同一个 SemVer 的不同提交分别存在。两份文件均读回一致才报告可下载成功。测试结果留在运行记录。 |
+| 生产授权记录 | authorizationRef、已批准仓库/环境策略、workflowRevision、合并证据、目标、version、sourceRevision、candidateDigest、两个 artifact ID、对象键 | 受信发布 job 在候选身份与必需结果核对后生成记录。仓库及环境的批准是授权来源，候选冻结结果和平台收据确定本次具体字节与身份。重跑时核对当前保护与原候选。 |
+| 生产发布记录 | authorizationRef、version、sourceRevision、candidateDigest、生产 bucket/prefix/origin、固定对象引用、发现更新结果 | 已发布版本与固定对象字节绑定。读回校验成功后，在生产 `curl/release.json` 维护实际发布状态，版本表保留旧行。 |
+| 发现快照与更新 | authorizationRef、源站各对象实际字节及原 ETag 或明确缺失、待写字节 SHA-256、更新与源站/公开回读结果 | 队列中冻结预期字节并绑到同次授权。ETag 用于同键条件更新，固定内容按真实字节和 SHA-256 校验。入口和版本表分别保存结果。 |
+
+阶段沿 `check`、`candidate`、`publish`、`remote-verify` 记录 `success`、`failed`、`skipped` 或 `not-run`。两个测试对象有缺失或不一致时记录实际写入及读回失败，生产入口更新后版本表未成功时记录部分完成并保留旧表。测试交付资格来自实际测试事件、环境和内容核验，生产 `ready` 来自完整正式门禁及对应平台收据。生产的旧 Git 运行模型以及下文旧手动事件字段以本节的触发和对象身份为现行口径。
+
 当前构建的子插件输出路径为 `engine/<插件相对产物路径>`，相对于构建输出根。默认构建的 workflow 挂载脚本由此落到 `dist/engine/script/speckit-mount.sh`。[构建契约](contracts/build-pipeline.md#2026-11-19-引擎子插件输出)
 
 ## 2026-11-18 最新模型：配置期集合子插件

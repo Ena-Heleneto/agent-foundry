@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
+import process from 'node:process'
 import test from 'node:test'
-import { pathToFileURL } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { build } from 'vite'
 
 /**
@@ -122,6 +123,46 @@ test('启用集合缺少插件目录或入口时正常返回空结果', async (t
   configure(root, 'no-entry', { plugin: true })
   mkdirSync(join(root, 'src/no-entry/plugin/vite-plugin-empty'), { recursive: true })
   assert.deepEqual((await loadFixtureEngine(root)).map(plugin => plugin.name), ['vite-plugin-engine-install'])
+})
+
+test('隐匿脚本模板缺失时保留旧构建产物', (t) => {
+  /**
+   * 隔离包内加载真实引擎与隐匿插件，模板留空以复现缺件。
+   */
+  const root = fixture(t)
+  /**
+   * 隐匿子插件通过引擎的正常发现入口加载。
+   */
+  const hiddenPlugin = join(engineDirectory, 'sub-plugins/vite-plugin-hidden-install')
+  for (const relative of [
+    'utils/minify-shell-script.ts',
+    join(hiddenPlugin, 'index.ts'),
+    join(hiddenPlugin, 'hidden-install.template.ts'),
+  ])
+    write(root, relative, readFileSync(new URL(`../../${relative}`, import.meta.url)))
+  mkdirSync(join(root, 'node_modules'))
+  symlinkSync(fileURLToPath(new URL('../../node_modules/sh-syntax', import.meta.url)), join(root, 'node_modules/sh-syntax'), 'dir')
+  write(root, 'entry.js', 'export const value = 1')
+  write(root, 'dist/previous.txt', '上一轮产物\n')
+
+  /**
+   * 在独占包的工作目录运行写盘构建，观察缺件时的真实输出目录。
+   */
+  const result = spawnSync(process.execPath, ['--input-type=module', '--eval', `
+    import { build } from ${JSON.stringify(import.meta.resolve('vite'))}
+    import engine from './${engineDirectory}/index.ts'
+    await build({
+      configFile: false,
+      plugins: [engine()],
+      build: { emptyOutDir: true, rolldownOptions: { input: 'entry.js' } },
+    })
+  `], { cwd: root, encoding: 'utf8', timeout: 15_000 })
+
+  assert.ifError(result.error)
+  assert.ok(result.status > 0, result.stdout)
+  assert.match(result.stderr, /ENOENT.*hidden-install\.source\.sh/u)
+  assert.deepEqual(readdirSync(join(root, 'dist')), ['previous.txt'])
+  assert.equal(readFileSync(join(root, 'dist/previous.txt'), 'utf8'), '上一轮产物\n')
 })
 
 test('按稳定顺序加载异步嵌套插件，并将它们发出的文件写到 engine 下', async (t) => {

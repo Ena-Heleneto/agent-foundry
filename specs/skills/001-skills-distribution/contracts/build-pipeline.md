@@ -1,5 +1,18 @@
 # 构建、流水线与技能发布的节点契约
 
+## 2026-11-23 runner 直接构建和正式归档
+
+测试和生产发布共用一套构建与归档流程。每次运行构建触发提交，直接从本次构建输出打包、校验并上传。输入是受信事件核对的完整源码提交、其中的工作区包清单、`pnpm-workspace.yaml`、`mise.toml` 及工作区源码。沿仓库无锁约定记录实际依赖解析、工具版本和构建提交。本节替代下文的容器准备、镜像导出和旧归档根路径口径。[总体方案](../plan.md#2026-11-23-主线推送测试与发布) · [技术取舍](../research.md#runner-构建和依赖证据)
+
+1. 在干净 Linux runner 用仓库 mise 配置准备工具，执行 `pnpm install --no-lockfile --ignore-scripts`。设置 `pnpm_config_lockfile=false` 和 `pnpm_config_verify_deps_before_run=false`，依次运行 `pnpm --filter @foundry/preset-config run build` 和 `pnpm --filter @foundry/skills run build --mode release`。现有 `trustPolicy`、catalog 及依赖批准维持实际校验。安装及共享预设构建结果分别留证。依赖确有必需初始化时先验证并按现有 `allowBuilds` 执行对应步骤。[验证命令](../quickstart.md#干净-runner-的构建和检查)
+2. 发布模式扫描集合时，只纳入其 `collection.config.ts` 设置为 `publish: true` 的集合，当前由 coding、frontend 和 workflow 各自声明。技能启用项、集合插件和隐匿候选使用该范围。Vite 将技能正文、附件、脚本、非执行的 `curl/skills.tsv`、说明、ISC 许可及已有第三方通知写入当次 `dist`。映射的集合名取自配置的 `packageName`，并核对正文声明、引用附件和依赖。T069 提供当前入口、同包引擎和适用参数的安装说明。T031 在完整交付阶段补充正式发布、迁移与平台说明。
+3. 构建成功后，流水线在独立步骤核对当次 `dist/VERSION` 与 `package.json.version`，并用 `tar` 在 `dist` 之外生成 `skills-<version>.tar.gz`。归档成员为本次 `dist` 的全部文件。归档成员先校验类型及路径，再独立解包与 `dist` 逐字节比对。包内的 `curl/install.sh` 与独立交付的入口字节一致。[生产工作流](../../../../.github/workflows/publish.yml)
+4. 冻结本次归档和独立入口的真实长度、SHA-256 及原字节。工具链、检查结果、文件核验证据和候选摘要留在包外。通过校验的归档和入口交给同次运行的上传步骤。构建、归档、身份或内容验证失败时停止对应上传。
+
+T069 实施验收使用两份干净检出，沿同一个提交与工具版本复跑，比较实际构建依赖、正式文件全集及字节。单次发布运行构建一次并上传当次核验通过的产物。[T069 验收](../tasks.md#t069)
+
+生产上传使用以上步骤产生的完整正式候选与真实平台收据。测试上传使用同样的正式内容校验并记录其测试事件与环境。共用的 `publish` 工作流直接交接当次冻结字节。[交接契约](pipeline.md#2026-11-23-统一发布与-r2-交接)
+
 ## 2026-11-20 引擎按需辅助脚本
 
 `vitePluginEngine()` 以无参工厂注册。该工厂是引擎入口模块的唯一独立函数声明，组织目录发现、子插件产物归档和统一入口注册。集合扫描使用技能包的 `src` 目录，全局扫描使用引擎模块旁的 `sub-plugins` 目录。
