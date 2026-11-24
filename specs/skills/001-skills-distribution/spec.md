@@ -1,5 +1,7 @@
 # 功能规格：技能内容发布、选择安装、可选隐匿与安装后挂载
 
+> **状态：异常中止**
+
 ## 2026-11-23 主线 R2 测试与生产流水线
 
 2026-11-24 重写采用 `skills-` 前缀。`skills-deploy-release.yml`、`skills-test.yml` 和 `skills-deploy-common.yml` 位于 `.github/workflows/`。生产入口草稿为 `skills-deploy-prod.yml.example`。[重写原话](requirements/raw/2026-11-24-deploy-workflow-rewrite.md) · [流水线文件与调用契约](contracts/pipeline.md#2026-11-23-按环境上传构建产物)
