@@ -8,4 +8,6 @@ export default defineNuxtConfig({
   content: { experimental: { sqliteConnector: 'native' }, build: { markdown: { highlight: { theme: 'github-dark' } } } },
   eslint: { config: { standalone: false } },
   app: { head: { htmlAttrs: { lang: 'zh-CN' }, titleTemplate: '%s · Agent Foundry', meta: [{ name: 'theme-color', content: '#f8fafc' }] } },
+  devServer: { host: '0.0.0.0', port: 7000, allowedHosts: true },
+  devtools: { enabled: true },
 })

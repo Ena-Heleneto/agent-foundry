@@ -2,25 +2,25 @@
 
 ## 2026-11-23 R2 流水线验证
 
-获得相应目标的运行授权后验证部署。准备已配置的 release／prod 环境及各自桶范围凭据。首次回读只需测试桶读权限、AWS CLI 与 SHA-256 工具。工作流输入和对象路径见[流水线契约](contracts/pipeline.md#2026-11-23-按环境上传构建产物)。
+`skills-deploy-release` 接收 `feature/init` 分支的 `push` 和 `workflow_call` 调用。本地核对了分支过滤、调用路径、打包、归档摘要和模拟 R2 上传。维护者确认线上 `release` 环境已配置，首次实际运行和 R2 回读待验收。[流水线契约](contracts/pipeline.md#2026-11-23-按环境上传构建产物)
 
-1. 先用隔离配置核对缺少凭据或无法通过产物检查时上传未开始。用获准的提交验证 `deploy-release` 指向测试桶，摘要记录实际对象前缀。
-2. 为首次验收在同一次运行中临时记录上传前的 `sha256sum "$DIST_DIRECTORY/skills.tar.gz"` 摘要，并关联源码 SHA、运行 ID、重跑次数和实际归档对象键。验收结束后移除临时取证步骤。
-3. 将实际归档的 S3 路径填入 `R2_ARCHIVE_URI`，用实际 S3 端点填入 `R2_ENDPOINT`，将该次构建的摘要填入 `BUILT_ARCHIVE_SHA256`。在采用测试桶只读凭据及 `auto` 区域的环境中运行以下核对。
+1. 在 `release` Environment 配置 `SKILL_DEPLOY_RELEASE_R2_ACCOUNT_ID` 和 `SKILL_DEPLOY_RELEASE_R2_BUCKET_NAME`，并填写共用的 `SKILL_DEPLOY_R2_ACCESS_KEY_ID` 和 `SKILL_DEPLOY_R2_SECRET_ACCESS_KEY`。创建 R2 凭据时选择 `Object Read & Write`，授权测试桶和生产桶。获准后向 `feature/init` 推送待验收提交，核对 `github.sha`、`target: release` 和测试摘要里的「占位放行，真实测试未执行」。 [R2 凭据配置](https://developers.cloudflare.com/r2/get-started/s3/#2-generate-api-credentials)
+2. 从运行摘要取得上传前 `packages/skills/skills.tar.gz` 的 SHA-256，关联该次运行的提交、运行 ID、重跑次数及实际归档对象键。用上传摘要中的 `s3://<桶>/<提交 SHA>/<运行 ID>-<重跑次数>/` 核对归档和 `curl/install.sh` 两份对象。
+3. 将实际归档的 S3 路径填入 `R2_ARCHIVE_URI`，将实际 S3 端点填入 `R2_ENDPOINT`，将上传前的摘要填入 `BUILT_ARCHIVE_SHA256`。用测试桶只读凭据回读。
 
    ```bash
    download_dir="$(mktemp -d)"
-   aws s3 cp "$R2_ARCHIVE_URI" "$download_dir/skills.tar.gz" \
+   aws s3 cp "$R2_ARCHIVE_URI" "$download_dir/archive.tar.gz" \
      --endpoint-url "$R2_ENDPOINT" --region auto --only-show-errors &&
-     printf '%s  %s\n' "$BUILT_ARCHIVE_SHA256" "$download_dir/skills.tar.gz" |
+     printf '%s  %s\n' "$BUILT_ARCHIVE_SHA256" "$download_dir/archive.tar.gz" |
      sha256sum --check
    ```
 
-   下载、摘要核验和运行身份对应均成功才通过首次验收。保存实际对象路径及核验结果，用真实可用的访问配置另行确认安装地址。
+   下载及 SHA-256 比对均成功后保存归档对象键、运行标识和比对结果。
 
-4. 生产验证另按授权手动运行 `deploy-prod`。工作流文件须已在默认分支存在，再选择需构建的分支或标签。核对实际源码 SHA、独立构建及生产桶对象前缀。生产运行、安装地址和公开消费都用实际证据记录。[GitHub 手动触发条件](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_dispatch)
+4. 生产入口从 `skills-deploy-prod.yml.example` 接入，再按授权验证手动触发、所选 ref 的提交和生产桶路径。首次正式发布继续核对安装地址及公开消费。[GitHub 手动触发条件](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_dispatch)
 
-推送测试的交接验收保持冻结。解冻后验证 Python 和 Node 两项通过才交接推送提交，并用失败样本确认部署跳过、该次尝试无新对象。
+真实推送测试解冻后，以同次推送的 Python 和 Node 测试结果替换固定通过条件。两项均通过时才交接部署，任一失败时本次部署跳过。
 
 <details>
 <summary>本次拉取的远端差异（待核对，不覆盖上方本地进度和冻结决定）</summary>

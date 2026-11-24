@@ -2,13 +2,11 @@
 
 ## 2026-11-23 主线 R2 测试与生产流水线规划
 
-**概要**。按[现行规格](spec.md#2026-11-23-主线-r2-测试与生产流水线)和[首次验收澄清](spec.md#session-2026-11-23)，`deploy-release` 和 `deploy-prod` 各自构建并上传至对应 R2 桶。推送测试及其与部署的接线保持冻结。公开安装地址以实际上传后核验结果为准，公开入口及版本表留待后续发布。
+`.github/workflows/` 下的 `skills-deploy-release.yml` 接收 `feature/init` 分支的 `push` 和 `workflow_call` 调用。`skills-test.yml` 返回固定通过结果后，测试入口将 `target: release` 和两项 R2 密钥名称交给 `skills-deploy-common.yml`。公共工作流根据 `target` 分组取消旧运行，绑定 GitHub Environment，在同一 runner job 上完成精确提交检出、依赖安装、自动构建工作区依赖、构建技能包、打包、记录归档 SHA-256 和上传。[规格](spec.md#2026-11-23-主线-r2-测试与生产流水线) · [流水线契约](contracts/pipeline.md#2026-11-23-按环境上传构建产物)
 
-**技术背景与布局**。GitHub Actions 继续使用 Ubuntu 24.04，Docker Buildx 从仓库根构建 `packages/skills/deploy/Dockerfile` 的 `artifacts` 阶段，AWS CLI 经 R2 S3 API 上传本次导出。拟使用 `deploy-release.yml`、`deploy-prod.yml` 及公共文件 `skill-deploy-common.yml`，均直接放在 `.github/workflows/` 下。现有 `skill-release.yml` 承担 Python／Node 推送测试。技术选择依据见[研究](research.md#2026-11-23-r2-环境隔离与首次验收)，接口见[流水线契约](contracts/pipeline.md#2026-11-23-按环境上传构建产物)。
+检查 `release` 环境对应测试桶的配置，获准后向 `feature/init` 推送待构建提交。取该次运行摘要中的归档 SHA-256，从 R2 回读比对。随后从 `skills-deploy-prod.yml.example` 接入生产手动入口，按授权验证所选提交和目标桶。真实推送测试解冻后，用同次事件的测试结果替换固定放行。[验证指南](quickstart.md#2026-11-23-r2-流水线验证)
 
-**推进顺序**。部署阶段先核对两个 GitHub Environment 和每套凭据的桶范围，再接通公共部署流程并验证产物检查、目标路由和上传结果。首次测试环境部署验收从同一次成功上传的实际对象路径下载归档，比对该次构建归档的 SHA-256。生产入口按所选 ref 独立构建，真实生产桶上传需要对应授权与证据。推送测试及成功、失败两条路径的交接等测试流水线解冻后再接入和验收。验证步骤见[指南](quickstart.md#2026-11-23-r2-流水线验证)。
-
-**宪章检查与设计后复核**。复用现有 Actions 发布链闭环，测试桶路由、测试失败零上传、缺配置停止以及同次归档回读是可证伪的验收信号。现有工作流只提供测试和生产上传的实现依据，共用流程与测试桶验收仍待实施。真实桶、权限和安装地址分别在对应授权阶段核验；缺前置或未实跑时保留未验结果。设计未新增运行时服务、状态库或工程身份。Phase 0/1 只更新规划材料，原任务及新增测试流水线待办仍冻结。
+本地已核对 YAML、分支过滤、可复用工作流调用路径、归档摘要和模拟上传。真实 GitHub 环境绑定、R2 上传与回读、生产授权和公开安装来源分别记录各自的验收结果。当前公共构建使用 `release` 模式，环境构建差异待确认。
 
 <details>
 <summary>本次拉取的远端差异（待核对，不覆盖上方本地进度和冻结决定）</summary>

@@ -1,0 +1,24 @@
+name: skills-test
+
+on:
+  workflow_call:
+    outputs:
+      passed:
+        description: 测试放行结果
+        value: ${{ jobs.test.outputs.passed }}
+
+permissions: {}
+
+jobs:
+  test:
+    name: 测试放行（占位）
+    runs-on: ubuntu-24.04
+    outputs:
+      passed: ${{ steps.gate.outputs.passed }}
+    steps:
+      - name: 固定测试通过
+        id: gate
+        shell: bash
+        run: |
+          printf '%s\n' 'passed=true' >> "$GITHUB_OUTPUT"
+          printf '%s\n' '占位放行，真实测试未执行' >> "$GITHUB_STEP_SUMMARY"

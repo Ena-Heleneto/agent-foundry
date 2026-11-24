@@ -2,11 +2,11 @@
 
 ## 2026-11-23 R2 环境隔离与首次验收
 
-- **工作流复用**。选择根目录的 `workflow_call`，由两入口固定传入环境。这样沿用各自的触发与权限，公共流程与调用入口取自同次提交。备选的步骤级 composite action 仍需两边分别维护作业配置，子目录工作流路径也不受 GitHub 支持。[GitHub 工作流复用](https://docs.github.com/en/actions/how-tos/reuse-automations/reuse-workflows)
-- **触发与目标隔离**。保留 release 矩阵及调用作业的成功依赖，保留 prod 手动所选 ref。在实际上传作业绑定 GitHub Environment，按名称传递所需 secrets，每套凭据只授权对应桶。环境变量在绑定后的作业步骤读取，避免用仓库或组织层同名配置作为默认目标。分支或标签删除仍可产生 push，GitHub 会为删除事件回退到默认分支 SHA，上传作业据删除标记跳过。备选的自由输入桶地址会把目标选择交给触发者，复制完整流程则增加两份维护点。[GitHub 触发事件](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows) · [GitHub 变量](https://docs.github.com/en/actions/reference/workflows-and-actions/variables#configuration-variable-precedence) · [R2 凭据权限](https://developers.cloudflare.com/r2/api/tokens/#permissions)
-- **归档回读与地址**。沿用 AWS CLI、`auto` 区域及每次运行的独立前缀。首次验收记录本次构建归档的 SHA-256，使用测试桶读权限从实际对象键下载并复算。重新构建、只检查对象存在或使用 ETag 均不能证明上传字节与该次产物一致。日常运行保留上传结果和对象路径即可。安装用 HTTPS 地址取决于实际可用的访问配置，等上传后核对。[R2 AWS CLI](https://developers.cloudflare.com/r2/examples/aws/aws-cli/) · [R2 读写一致性](https://developers.cloudflare.com/r2/reference/consistency/#operations-and-consistency) · [R2 公开访问](https://developers.cloudflare.com/r2/buckets/public-buckets/)
+- **工作流复用**。工作流直接位于 `.github/workflows/`，文件和显示名使用 `skills-` 前缀。测试入口通过 `workflow_call` 串接 `skills-test` 与 `skills-deploy-common`，公共流程直接取调用上下文的 `github.sha`。[GitHub 工作流复用](https://docs.github.com/en/actions/how-tos/reuse-automations/reuse-workflows)
+- **环境与并发**。公共 job 按 `inputs.target` 绑定环境，并按同一目标分组取消旧运行。构建、打包和上传共享 runner 文件。上传步骤使用目标 Environment 的 R2 配置和桶范围凭据。[公共工作流](../../../.github/workflows/skills-deploy-common.yml) · [R2 凭据权限](https://developers.cloudflare.com/r2/api/tokens/#permissions)
+- **归档回读**。沿用 AWS CLI 和 `auto` 区域。首次测试桶验收从实际对象键下载同一次构建归档，并与上传前记录的 SHA-256 比对。日常预览部署记录结果和对象路径。安装用 HTTPS 地址按实际访问配置核对。[R2 AWS CLI](https://developers.cloudflare.com/r2/examples/aws/aws-cli/) · [验证指南](quickstart.md#2026-11-23-r2-流水线验证)
 
-现有生产流水线和 Dockerfile 是布局与上传参数的依据。实际仓库的 Environment 可用性、凭据范围、测试桶回读及安装地址还须按授权核验。
+本地验证覆盖调用关系、打包路径和上传命令。实际触发、GitHub 环境绑定和测试桶回读待验收。[当前实现](contracts/pipeline.md#2026-11-23-按环境上传构建产物)
 
 <details>
 <summary>本次拉取的远端差异（待核对，不覆盖上方本地进度和冻结决定）</summary>

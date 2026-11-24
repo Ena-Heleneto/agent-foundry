@@ -2,18 +2,27 @@
 
 ## 2026-11-23 按环境上传构建产物
 
-| 入口 | 调用条件 | 公共输入与目标 |
-| --- | --- | --- |
-| `deploy-release.yml` | 由推送测试成功后的作业调用，接线保持冻结 | `target: release`，构建推送事件的提交并上传测试桶 |
-| `deploy-prod.yml` | `workflow_dispatch`，检出所选分支或标签对应的提交 | `target: prod`，独立构建并上传生产桶 |
+| 文件 | 当前职责 |
+| --- | --- |
+| `skills-test.yml` | 通过 `workflow_call` 执行固定通过的测试占位。输出字符串 `passed=true`，在摘要记录真实测试未执行。 |
+| `skills-deploy-release.yml` | 接收 `feature/init` 分支的 `push` 和 `workflow_call` 调用。分支删除事件跳过部署。先调用测试，再用 `passed == 'true'` 放行公共流程。传 `target: release` 并按名传递两项 R2 密钥。 |
+| `skills-deploy-common.yml` | 通过 `workflow_call` 接收 `target` 和 R2 密钥。引用调用上下文的 `github.sha`，在同一 job 内构建、打包、记录归档 SHA-256 并上传。 |
+| `skills-deploy-prod.yml.example` | 待接入的生产草稿。计划使用 `workflow_dispatch` 和 `target: prod`，按授权部署所选提交。 |
 
-[测试环境部署草稿](../../../../.github/workflows/skill/deploy-release.yml)先通过 `workflow_call` 接收调用，以 `actions/checkout` 默认检出调用方事件的提交，用仓库 mise 配置准备工具链，再执行 `pnpm install --no-lockfile --ignore-scripts`。当前无根锁，安装跳过生命周期脚本以便将构建留在后续阶段。依次执行的阶段是依赖准备、构建、归档并校验、上传。按部署环境区分构建方式及推送测试接线保持冻结。
+[公共流程](../../../../.github/workflows/skills-deploy-common.yml)按 `target` 绑定 GitHub Environment，通过同一目标的并发组和 `cancel-in-progress: true` 取消正在运行的旧流程。构建使用 `github.sha` 检出触发提交，依次准备工具、安装依赖、构建工作区依赖、构建技能包和打包。[当前构建与打包](build-pipeline.md#现行-skills-工作流直接构建与打包)
 
-[公共工作流草稿](../../../../.github/workflows/skill/deploy-common.yml)的 `workflow_call` 接收必填字符串 `target`，值为 `release` 或 `prod`。源码检出使用调用方事件的默认提交，上传路径使用该事件的 `GITHUB_SHA`。目标验证通过后，实际上传作业绑定对应 Environment。只在目标 Environment 配置 `SKILL_DEPLOY_R2_ACCOUNT_ID`、`SKILL_DEPLOY_R2_BUCKET_NAME` 及可选的 `SKILL_DEPLOY_R2_PREFIX`，并在调用作业按名称传递 `SKILL_DEPLOY_R2_ACCESS_KEY_ID` 和 `SKILL_DEPLOY_R2_SECRET_ACCESS_KEY`。这组名称与现有 `publish.yml` 使用的仓库级配置独立。缺少必需值、目标无效或构建校验失败时停止，凭据只在检查和上传步骤中使用。调用链沿用 `contents: read`，测试矩阵无 R2 凭据。
+`release` Environment 的变量为 `SKILL_DEPLOY_RELEASE_R2_ACCOUNT_ID` 和 `SKILL_DEPLOY_RELEASE_R2_BUCKET_NAME`。`prod` 的变量为 `SKILL_DEPLOY_R2_ACCOUNT_ID` 和 `SKILL_DEPLOY_R2_BUCKET_NAME`。两个 Environment 使用同名的 `SKILL_DEPLOY_R2_ACCESS_KEY_ID` 和 `SKILL_DEPLOY_R2_SECRET_ACCESS_KEY`，填写同一对覆盖测试桶和生产桶的 R2 凭据。公共流程根据 `target` 选取对应环境的桶配置，在上传步骤中将共用密钥映射到 AWS CLI。
 
-Docker 导出到本次运行的独占目录，要求非空的 `skills.tar.gz`、`VERSION` 和 `curl/install.sh`，归档须能列出成员。用 AWS CLI 按现有方式上传 dist，前缀为 `s3://<桶>/<前缀>/<源码SHA>/<运行ID>-<重跑次数>/`，默认前缀为 `skills-builds`。仅在上传成功后输出成功路径。上传失败或取消时可能已有部分对象，重跑用新尝试路径。
+测试与生产各用自己的桶。构建上传目录为 `s3://<桶>/<源码 SHA>/<运行 ID>-<重跑次数>/`。
 
-首次 `deploy-release` 部署验收从该运行的测试桶路径回读 `skills.tar.gz`，按同次构建字节的 SHA-256 核对。日常部署的交付是上传结果与实际对象路径。上传前缀下的 `curl/install.sh` 属于本次构建产物，公开安装入口和 `curl/release.json` 的更新仍按后续正式发布契约执行。[验证指南](../quickstart.md#2026-11-23-r2-流水线验证)
+| 本次 job 的文件 | 目录下的对象 |
+| --- | --- |
+| `packages/skills/skills.tar.gz` | `skills-<version>.tar.gz`，版本取自 `packages/skills/dist/VERSION` |
+| `packages/skills/dist/curl/install.sh` | `curl/install.sh` |
+
+账号、桶或凭据缺失时上传步骤失败。两次上传成功后，运行摘要记录实际 R2 目录。上传失败或取消时可能已有部分对象，重跑使用新尝试路径。
+
+首次 `skills-deploy-release` 验收需要关联该次运行与实际归档对象键，从运行摘要取得上传前的 SHA-256，并下载同一对象比对。真实推送和 R2 回读待验收。正式发布再确认公开安装入口、`curl/release.json` 和适用授权。[验证指南](../quickstart.md#2026-11-23-r2-流水线验证)
 
 <details>
 <summary>本次拉取的远端差异（待核对，不覆盖上方本地进度和冻结决定）</summary>

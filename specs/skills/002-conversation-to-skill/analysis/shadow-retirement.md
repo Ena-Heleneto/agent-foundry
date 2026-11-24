@@ -47,3 +47,9 @@ bash scripts/dev/actions/link-skills/link-skills.sh packages/skills/src/profile 
 本轮只恢复旧入口退役状态及修订资料约定，不代表新记录流程已可用。T028 的历史完成事实保留，T029 继续等待 T014 的新记录最终入口验收及旧入口仍未发现的补验。记录自采集边界和同轮提交重试的真实业务样例也仍由原任务取证。
 
 本轮另运行 `node --test scripts/dev/actions/link-skills/test-link-skills.mjs`：4 项通过、0 失败，PowerShell 项因无可用 `pwsh` 跳过；测试写入均在临时沙箱。对全部 14 份新增或修改的 Markdown 执行 `pnpm exec eslint --fix`，退出 0，但均被现有忽略规则跳过，不记为正文 lint 通过。另读回检查 151 条本地文件及锚点引用、围栏和工程 checkbox 边界，均无错误；32 项任务的身份、顺序和勾选与修订前一致，`git diff --check` 通过。未执行新记录、提交重试或派发的产品验收。
+
+## 2026-11-24 新旧入口切换补验
+
+主线 `scanSkills` 返回一项 `profile/conversation-recording`，`shadow-profile` 为零。隔离目录运行主线常规同步后，再对归档源执行定向同步，实际返回 `skip(已退役来源): shadow-profile`，目标中的旧入口数量仍为零。同步回归的 Bash 和交付配置共 4 项通过，PowerShell 用例因无 `pwsh` 跳过。[T014 最终来源验收](recording-acceptance.md#2026-11-24-最终安装来源补验)
+
+T014 通过后，将同一主线构建产物同步到另一个临时仓库。新启动的 Codex CLI 0.171.0 通过 `skills/list` 强制发现，仓库根和 `projects/alpha` 各找到同一份项目级 `conversation-recording`，`shadow-profile` 的发现数均为零。以单次启动的 `developer_instructions` 启用记录，新开的前台会话实际读取安装入口。输入「读一下 README 的第一行。」后，索引链接打开详情，原请求和实际回复「对话记录合成基线」均可回查，隔离仓库 Git 快照一致。T029 补验通过。[宿主发现、实际读取及记录证据](acceptance/t029-recording-switch/observations.json)

@@ -1,40 +1,27 @@
 # 技术流程图：统一包核验与独立结果
 
-## 2026-11-23 事件身份和发布交接
+## 主线 R2 部署与产物交接
 
 ```mermaid
 flowchart TD
-    P["投递含可检出提交的 push"] --> Q["两套测试独立记录提交及结果"]
-    T["开放 release PR 收到新推送"] --> A["核对同仓库授权来源与事件 after"]
-    M["main PR 合并事件"] --> B["核对 main 合并活动、归属 PR 和精确提交"]
-    A --> C["只读 job 检出精确提交并直接构建"]
-    B --> C
-    C --> D["核验正式范围和适用说明后冻结归档"]
-    D --> E["独立发布 job 核对前置结果与精确归档 ID"]
-    E --> R{"事件对应的发布环境"}
-    R --> F["测试 R2 按提交保存并读回两份文件"]
-    R --> G["核对生产环境授权并绑定冻结候选"]
-    G --> H["生产 R2 按固定版本发布并核对发现"]
+    E["feature/init push 或 workflow_call"] --> R["skills-deploy-release"]
+    R --> T["skills-test 固定返回 passed=true"]
+    T -->|"通过，target=release"| C["skills-deploy-common 按环境分组"]
+    P["skills-deploy-prod.yml.example"] -.->|"生产待接入，target=prod"| C
+    C --> I
+    subgraph J["同一个 runner job"]
+        I["绑定目标环境，检出 github.sha"] --> A["安装依赖"]
+        A --> D["构建技能包的工作区依赖"]
+        D --> B["构建技能包"]
+        B --> Z["将 dist 打成压缩包"]
+        Z --> H["记录归档 SHA-256"]
+        H --> U["上传压缩包和安装脚本到对应 R2"]
+    end
+    U -->|"两份文件上传成功"| S["记录本次运行的 R2 目录"]
+    U -->|"失败"| F["记录失败及本次尝试"]
 ```
 
-推送测试由 `.github/workflows/skill-release.yml` 执行。测试和生产发布共用 `.github/workflows/publish.yml`，由事件确定构建提交和发布环境。发布 job 核对本次构建的文件，再取得相应环境的写入权限。共用 R2 读写计划位于 `packages/skills/build/ci/`。[事件与交接契约](contracts/pipeline.md#2026-11-23-统一发布与-r2-交接)
-
-## 2026-11-23 生产发现的条件更新
-
-```mermaid
-flowchart LR
-    A["按目标串行接收授权候选"] --> S["按源站快照绑定两个发现对象的待写字节"]
-    S --> B["条件创建两个固定对象并核验源站和公开字节"]
-    B --> C["按上次 ETag 更新并读回兼容入口"]
-    C --> D["按上次 ETag 更新并读回版本表"]
-    D --> E["报告发现更新与独立安装结果"]
-    B -->|冲突或未决| F["停止后续写入并核对实际对象"]
-    C -->|冲突或未决| F
-    D -->|响应未决| F
-    D -->|确认未提交| G["保留旧表和已确认对象并记录部分结果"]
-```
-
-上传和核验固定版本后才改变发现材料。两个发现对象分别写入，版本表失败时保留原有可用记录及已核验的兼容入口。计划位置为 `packages/skills/build/ci/publish.mjs` 和 `.github/workflows/publish.yml`。本节给出当前口径，下方历史流程对应当时的阶段说明。[生产写入契约](contracts/pipeline.md#生产-r2-的写入和读回)
+公共工作流为同一目标开启 `cancel-in-progress`。测试部署的 `push` 入口限定 `feature/init`，分支删除事件跳过部署。真实推送与测试桶回读待验收。[部署分析](analysis/spec-analysis/README.md#维护者流水线r2发布与独立迁移) · [流水线契约](contracts/pipeline.md#2026-11-23-按环境上传构建产物)
 
 ## 主线同包引擎调度
 

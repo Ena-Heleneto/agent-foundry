@@ -1,17 +1,27 @@
 # 构建、流水线与技能发布的节点契约
 
+## 现行 skills 工作流直接构建与打包
+
+`skills-deploy-common.yml` 在同一个 runner job 内处理当次构建与上传。构建按 `github.sha` 检出触发提交，使用 mise 和 `pnpm install --no-lockfile --ignore-scripts` 准备依赖。
+
+1. `pnpm --filter '@foundry/skills^...' run build` 自动构建技能包依赖的工作区包。
+2. `pnpm --filter @foundry/skills run build --mode release` 产出 `packages/skills/dist`，包括构建生成的 `VERSION` 和 `curl/install.sh`。技能包构建承担发布内容的核对。
+3. 独立打包步骤按相对路径排序，把 `dist` 的普通文件压成 `packages/skills/skills.tar.gz`，包内根路径对应 `dist` 内容。上传步骤读取固定路径的压缩包和同版 `dist/curl/install.sh`，从 `dist/VERSION` 取得 R2 对象版本。[上传契约](pipeline.md#2026-11-23-按环境上传构建产物)
+
+公共流程在上传前将本次归档的 SHA-256 写入运行摘要。测试桶首验使用该摘要回读比对。此前的构建及归档验收见下方 T069 记录。[验证指南](../quickstart.md#2026-11-23-r2-流水线验证)
+
 ## 2026-11-23 runner 直接构建和正式归档
 
-测试和生产发布共用一套构建与归档流程。每次运行构建触发提交，直接从本次构建输出打包、校验并上传。输入是受信事件核对的完整源码提交、其中的工作区包清单、`pnpm-workspace.yaml`、`mise.toml` 及工作区源码。沿仓库无锁约定记录实际依赖解析、工具版本和构建提交。本节替代下文的容器准备、镜像导出和旧归档根路径口径。[总体方案](../plan.md#2026-11-23-主线推送测试与发布) · [技术取舍](../research.md#runner-构建和依赖证据)
+测试和生产发布共用一套构建与归档流程。每次运行构建触发提交，直接从本次构建输出打包、校验并上传。输入是受信事件核对的完整源码提交、其中的工作区包清单、`pnpm-workspace.yaml`、`mise.toml` 及工作区源码。沿仓库无锁约定记录实际依赖解析、工具版本和构建提交。本节提供已验证的构建和归档做法。[现行部署方案](../plan.md#2026-11-23-主线-r2-测试与生产流水线规划) · [技术取舍](../research.md#runner-构建和依赖证据)
 
 1. 在干净 Linux runner 用仓库 mise 配置准备工具，执行 `pnpm install --no-lockfile --ignore-scripts`。设置 `pnpm_config_lockfile=false` 和 `pnpm_config_verify_deps_before_run=false`，依次运行 `pnpm --filter @foundry/preset-config run build` 和 `pnpm --filter @foundry/skills run build --mode release`。现有 `trustPolicy`、catalog 及依赖批准维持实际校验。安装及共享预设构建结果分别留证。依赖确有必需初始化时先验证并按现有 `allowBuilds` 执行对应步骤。[验证命令](../quickstart.md#干净-runner-的构建和检查)
 2. 发布模式扫描集合时，只纳入其 `collection.config.ts` 设置为 `publish: true` 的集合，当前由 coding、frontend 和 workflow 各自声明。技能启用项、集合插件和隐匿候选使用该范围。Vite 将技能正文、附件、脚本、非执行的 `curl/skills.tsv`、说明、ISC 许可及已有第三方通知写入当次 `dist`。映射的集合名取自配置的 `packageName`，并核对正文声明、引用附件和依赖。T069 提供当前入口、同包引擎和适用参数的安装说明。T031 在完整交付阶段补充正式发布、迁移与平台说明。
-3. 构建成功后，流水线在独立步骤核对当次 `dist/VERSION` 与 `package.json.version`，并用 `tar` 在 `dist` 之外生成 `skills-<version>.tar.gz`。归档成员为本次 `dist` 的全部文件。归档成员先校验类型及路径，再独立解包与 `dist` 逐字节比对。包内的 `curl/install.sh` 与独立交付的入口字节一致。[生产工作流](../../../../.github/workflows/publish.yml)
+3. 构建成功后，流水线在独立步骤核对当次 `dist/VERSION` 与 `package.json.version`，并用 `tar` 在 `dist` 之外生成 `skills-<version>.tar.gz`。归档成员为本次 `dist` 的全部文件。归档成员先校验类型及路径，再独立解包与 `dist` 逐字节比对。包内的 `curl/install.sh` 与独立交付的入口字节一致。[T069 归档记录](../implementation/T069.md#2026-11-23-流水线单独打包)
 4. 冻结本次归档和独立入口的真实长度、SHA-256 及原字节。工具链、检查结果、文件核验证据和候选摘要留在包外。通过校验的归档和入口交给同次运行的上传步骤。构建、归档、身份或内容验证失败时停止对应上传。
 
 T069 实施验收使用两份干净检出，沿同一个提交与工具版本复跑，比较实际构建依赖、正式文件全集及字节。单次发布运行构建一次并上传当次核验通过的产物。[T069 验收](../tasks.md#t069)
 
-生产上传使用以上步骤产生的完整正式候选与真实平台收据。测试上传使用同样的正式内容校验并记录其测试事件与环境。共用的 `publish` 工作流直接交接当次冻结字节。[交接契约](pipeline.md#2026-11-23-统一发布与-r2-交接)
+通用部署流程按目标配置调用已验证的构建和归档步骤，上传作业消费同次核验后的字节。完整正式发布仍需正式候选和真实平台证据。[交接契约](pipeline.md#2026-11-23-按环境上传构建产物)
 
 ## 2026-11-20 引擎按需辅助脚本
 

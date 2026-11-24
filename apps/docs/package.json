@@ -1,25 +1,23 @@
 {
-  "name": "@foundry/docs",
+  "name": "docs",
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "nuxt dev --port 3005",
+    "dev": "nuxt dev",
     "build": "nuxt build",
     "nuxt:prepare": "nuxt prepare",
     "lint": "eslint .",
     "check-types": "nuxt typecheck"
   },
-  "dependencies": {
-    "@nuxt/content": "catalog:",
-    "nuxt": "catalog:nuxt",
-    "vue": "catalog:frontend"
-  },
   "devDependencies": {
     "@foundry/preset-config": "workspace:*",
+    "@nuxt/content": "catalog:",
     "@nuxt/eslint": "catalog:nuxt",
     "@unocss/nuxt": "catalog:nuxt",
+    "nuxt": "catalog:nuxt",
     "typescript": "catalog:dev",
     "unocss": "catalog:dev",
+    "vue": "catalog:frontend",
     "vue-tsc": "catalog:dev"
   }
 }
