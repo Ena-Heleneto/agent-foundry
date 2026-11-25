@@ -1,4 +1,4 @@
-# 项目级 MCP 服务，供 Codex CLI、桌面端与 IDE 扩展读取。
+
 [mcp_servers.filesystem]
 command = "pnpm"
 args = ["dlx", "-y", "@modelcontextprotocol/server-filesystem", "/tmp"]
@@ -16,3 +16,10 @@ startup_timeout_sec = 180
 [mcp_servers.context7]
 command = "pnpm"
 args = ["dlx", "@upstash/context7-mcp"]
+
+[mcp_servers.playwright]
+command = "pnpm"
+args = ["dlx", "@playwright/mcp@latest"]
+
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"

@@ -1,0 +1,34 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -E -B /home/by152/workspace/ena/agent-foundry/feature/init/.agents/skills/conversation-recording/scripts/record.py ed842cc22b557f96a88988b8aebb2f6ed294cd944c7b0f511ed6f844562ab0d6"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -E -B /home/by152/workspace/ena/agent-foundry/feature/init/.agents/skills/conversation-recording/scripts/record.py ed842cc22b557f96a88988b8aebb2f6ed294cd944c7b0f511ed6f844562ab0d6"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -E -B /home/by152/workspace/ena/agent-foundry/feature/init/.agents/skills/conversation-recording/scripts/record.py ed842cc22b557f96a88988b8aebb2f6ed294cd944c7b0f511ed6f844562ab0d6"
+          }
+        ]
+      }
+    ]
+  }
+}

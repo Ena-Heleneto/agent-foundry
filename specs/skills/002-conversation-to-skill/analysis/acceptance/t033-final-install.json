@@ -1,0 +1,74 @@
+{
+  "host": "codex-cli 0.172.0",
+  "snapshot": "t035-isolated-recheck/final-hook-runtime.json",
+  "installedFilesMatched": 13,
+  "projectSkillPath": ".agents/skills/conversation-recording",
+  "projectHooksPath": ".codex/hooks.json",
+  "projectHooksSha256": "883fbb233c420bf045727b693ac4838870b6f992211dcd56a3bbbf9d8d482bbd",
+  "nativeDiscovery": [
+    {
+      "cwd": ".",
+      "projectSkillDiscovered": true,
+      "retiredEntryCount": 0,
+      "hooks": [
+        {
+          "name": "postToolUse",
+          "trust": "untrusted"
+        },
+        {
+          "name": "userPromptSubmit",
+          "trust": "untrusted"
+        },
+        {
+          "name": "stop",
+          "trust": "untrusted"
+        }
+      ]
+    },
+    {
+      "cwd": "packages/skills",
+      "projectSkillDiscovered": true,
+      "retiredEntryCount": 0,
+      "hooks": [
+        {
+          "name": "postToolUse",
+          "trust": "untrusted"
+        },
+        {
+          "name": "userPromptSubmit",
+          "trust": "untrusted"
+        },
+        {
+          "name": "stop",
+          "trust": "untrusted"
+        }
+      ]
+    }
+  ],
+  "isolatedRecordRoots": {
+    "custom": {
+      "root": "sample-notes/session-data",
+      "reason": "项目记录配置",
+      "ordinaryLaunch": true,
+      "promptAndFinal": true,
+      "visibleInGit": true
+    },
+    "agentTool": {
+      "root": ".specify/memory/conversation-recording",
+      "reason": "Spec Kit 项目资料",
+      "ordinaryLaunch": true,
+      "promptAndFinal": true,
+      "visibleInGit": true
+    },
+    "project": {
+      "root": ".",
+      "reason": "项目根下的 records 目录",
+      "ordinaryLaunch": true,
+      "promptAndFinal": true,
+      "visibleInGit": true
+    }
+  },
+  "expectedCurrentRecordRoot": ".specify/memory/conversation-recording",
+  "currentRootGitVisible": true,
+  "manualAcceptance": "pending"
+}

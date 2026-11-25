@@ -41,7 +41,7 @@ flowchart TD
 
 ## 正常最终回复的发送顺序
 
-现有记录时序规则位于 `references/recording-timing.md`。图中顺序表达 FR-002 的验收条件。T035 用分段回包核对终端看到首段前，真实文件已经保存并读回完整原文。 [记录时序规则](../../../packages/skills/src/profile/conversation-recording/references/recording-timing.md) · [现有宿主证据](research.md#最终回复发出前的保存与读回)
+图中是 FR-002 现行验收顺序。T035 优先验证 Codex 的 `Stop` 回调，在宿主发完回复后自动保存并读回全文。记录 Skill 当前时序规则随 T035 候选的正式切换更新。 [现有 Skill 时序](../../../packages/skills/src/profile/conversation-recording/references/recording-timing.md) · [宿主证据](research.md#正常最终回复结束后的保存与读回)
 
 ```mermaid
 sequenceDiagram
@@ -49,11 +49,11 @@ sequenceDiagram
     participant Recorder as 项目记录流程
     participant File as 项目主记录
     participant Terminal as 用户终端
-    Host->>Recorder: 交付本轮将发送的最终回复全文
+    Host->>Terminal: 正常发送回复，直到全文发完
+    Host->>Recorder: 提供本轮实发回复全文
     Recorder->>File: 保存回复原文
     File-->>Recorder: 读回全文并逐字核对
     Recorder-->>Host: 回复已保存并读回
-    Host->>Terminal: 发送最终回复的首段与后续内容
 ```
 
 ## 父代理分别判断两个阶段

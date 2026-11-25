@@ -10,7 +10,7 @@ T004 的首轮隔离实测使用 `codex-cli 0.170.0`，其项目 Hook 和 AI 直
 
 配置登记先核对同名目标与来源，再在项目内写入属于该记录入口的条目。重复安装验证只存在一份登记，语义保留无关条目，无法核实归属的冲突交回安装结果报告。运行期处理脚本随记录资源交付，安装入口只登记及核对，宿主调用时才执行记录。现有引擎会顺序执行收集到的 `engine/` 下的安装脚本，规划据此保留运行期脚本的独立职责。 [工作流挂载保护](../../../scripts/dev/mount-speckit.sh) · [引擎安装编排](../../../packages/skills/build/plugins/vite-plugin-engine/index.ts)
 
-**理由与已核对方式** Codex 对项目目录信任和非托管 Hook 定义复核分别判定。安装候选先放齐项目内文件，再在安装期间由用户通过原生 Codex 空会话完成所需信任，用 `/hooks` 或适用版本的 `hooks/list` 读回项目来源、当前定义和信任结果。已安装文件、项目已信任、Hook 已信任是各自可核实的事实。既有可信环境可核对当前定义后复用。干净环境能否走通这一路径仍待实测。仅复制 Skill 不能解决已复现的自动触发漏记，Spec Kit 的登记也没有提供 Codex 的 Hook 信任。 [Codex 项目配置](https://learn.chatgpt.com/docs/config-file/config-basic#configuration-precedence) · [Codex Hook 信任](https://learn.chatgpt.com/docs/hooks#review-and-trust-hooks) · [0.172.0 启动复核源码](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/tui/src/startup_hooks_review.rs#L231-L277)
+**理由与已核对方式** Codex 对项目目录信任和非托管 Hook 定义复核分别判定。安装候选先放齐项目内文件，再在安装期间由用户通过原生 Codex 空会话完成所需信任，用 `/hooks` 或适用版本的 `hooks/list` 读回项目来源、当前定义和信任结果。已安装文件、项目已信任、Hook 已信任是各自可核实的事实。既有可信环境可核对当前定义后复用。临时 Hook 已从干净隔离状态走通原生信任流程，正式安装仍须读回实际交付组件的来源、启用与信任。仅复制 Skill 不能解决已复现的自动触发漏记，Spec Kit 的登记也没有提供 Codex 的 Hook 信任。 [Codex 项目配置](https://learn.chatgpt.com/docs/config-file/config-basic#configuration-precedence) · [Codex Hook 信任](https://learn.chatgpt.com/docs/hooks#review-and-trust-hooks) · [原生首次启用实测](analysis/recording-acceptance.md#t035-原生首次启用与首末轮联动) · [0.172.0 启动复核源码](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/tui/src/startup_hooks_review.rs#L231-L277)
 
 ### 用户原话的自动保存及范围
 
@@ -18,11 +18,13 @@ T004 的首轮隔离实测使用 `codex-cli 0.170.0`，其项目 Hook 和 AI 直
 
 **范围前置** 已信任的 `codex exec` 也会执行 Hook。0.172.0 的 `UserPromptSubmit` 输入没有交互触发类型，安装路径和回调工作目录本身不足以判定范围。记录器须在该回调处理时取得当前轮次、交互入口、原会话归属及有效工作目录的可信宿主元数据，先确认范围，再读取正文或写入。当前 Skill 在业务轮内取到的元数据还需证明在更早的回调时点也可用。可信 `exec`、`exec resume` 和归属不符的恢复须证明记录器零新增、零续写、零额外正文补读。 [0.172.0 提交事件参数](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/hooks/src/events/user_prompt_submit.rs#L82-L94) · [0.172.0 非交互提交](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/exec/src/lib.rs#L1359-L1375) · [现有轮次核验规则](../../../packages/skills/src/profile/conversation-recording/references/session-scope.md)
 
-### 最终回复发出前的保存与读回
+### 正常最终回复结束后的保存与读回
 
-**决策** `Stop` 可以作为捕获回复的对照。两轮均取得与实发一致的全文，写入均晚于宿主最终回复事件。0.172.0 的源码在采样期间转发文本增量，终端据此更新显示，`Stop` 在采样之后执行。`Stop` 的继续指令请求后续模型处理，无法收回已显示的文字。当前基线未找到项目 Hook 能暂停正常最终回复的首段显示，等全文保存和读回后再发送。 [隔离观测](analysis/acceptance/t035-isolated-recheck/hook-probe.json) · [0.172.0 输出增量](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/core/src/session/turn.rs#L3756-L3782) · [0.172.0 终端渲染](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/tui/src/chatwidget/streaming.rs#L854-L892) · [0.172.0 Stop 调用](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/core/src/session/turn.rs#L852-L909)
+用户确认回复结束后自动保存并读回。T035 优先验证 `Stop` 在正常回复发送结束后取得当轮实发全文，核对会话和轮次后自动保存，在同轮实际打开项目文件逐字读回。隔离探针中四轮零模型工具调用的 `Stop` 均取得与实发一致的全文，写入及读回晚于终端显示完整回复。该证据支持正式候选选型，安装来源、业务例外和故障处理仍各自复验。 [用户确认](spec.md#最终回复保存时机确认) · [隔离探针](analysis/recording-acceptance.md#t035-自动记录接入前置探针) · [0.172.0 Stop 调用](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/core/src/session/turn.rs#L852-L909)
 
-**理由与已核对方式** 0.172.0 的 `after_complete_response` 模式可以在同步 `PostModelRequest` 返回前保留缓冲输出。该回调入参提供请求元数据，完整回复尚未进入常规会话记录，上游测试也覆盖了这一顺序。工具回调只能覆盖使用该工具的轮次。要通过末轮验证，候选须同时提供将实际发出的全文和在首段可见前等待读回的能力。用分段的已知文本对照保存完成、实际读回及终端首段可见的顺序。只取得发送后保存或轮次结束时间时，该项判为失败或证据不足。若目标宿主仍无该能力，首条与安装的独立证据继续保留，完整交付与旧逻辑移除等待可行候选或用户另行确认范围。 [0.172.0 缓冲实现](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/core/src/client/response_delivery.rs#L53-L155) · [回调输入](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/hooks/src/events/model_request.rs#L22-L35) · [上游时序测试](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/core/tests/suite/hooks.rs#L6391-L6427) · [验收步骤](quickstart.md#记录验收)
+#### 最终回复发出前的保存与读回
+
+此前按发送前保存的判据验证过默认流式模式和缓冲模式。默认模式显示首段时后段还未到达。0.172.0 的 `after_complete_response` 模式可以在同步 `PostModelRequest` 返回前保留输出，但当时在回调入参和会话文件中均无法取得全文。`Stop` 在正常回复发送后提供全文。现行验收按上节的用户确认执行。 [旧判据对应的探针](analysis/recording-acceptance.md#t035-自动记录接入前置探针) · [0.172.0 缓冲实现](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/core/src/client/response_delivery.rs#L53-L155) · [回调输入](https://github.com/openai/codex/blob/rust-v0.172.0/codex-rs/hooks/src/events/model_request.rs#L22-L35)
 
 ## 交互会话的接入时点
 
@@ -78,7 +80,7 @@ T035 先核对新增的宿主前置。可独立取证的首次启用、首条时
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------ |
 | 项目安装与首次启用   | 干净隔离项目完成安装及所需原生信任，空白会话零建档，普通启动后的第一条「读一下 README」在业务动作前保存并读回 | 正式安装交付与自动建档 |
 | 回调时点的范围核对   | 首轮和续轮可核实当前真实交互归属，可信 `exec`、`exec resume` 及范围外对照零新增、零续写、零额外正文补读 | 自动保存的范围与恢复 |
-| 最终回复发出时序     | 零模型工具的交互轮次取得完整回复，在终端首段可见前保存并读回，逐字比对实发文本 | 完整记录交付、旧记录逻辑移除及 T033 |
+| 最终回复保存时序     | 零模型工具的交互轮次在正常最终回复发送结束后自动保存全文并读回，逐字比对实发文本，无需再发消息 | 完整记录交付、旧记录逻辑移除及 T033 |
 | 原始工具内容与附件   | 受控的普通、长输出和附件能按真实可得范围保留原值，原件哈希一致，已验证会话的工具切换目录后仍能回查                 | 工具详情与附件   |
 | 恢复、部分写入及提交 | 仓库外来源及非交互恢复零写入，跨日续写原文件且无重复，丢失原文保留缺档，写入失败提示后继续，真实提交步骤及结果回复零写入，Git 新增差异为零 | 原文件续写、失败处理与旧入口切换 |
 | 父代理入口和独立派发 | 普通任务下按三组材料核对实际派发数、证据范围及候选回传。首次提炼只采用合格的新流程记录                             | 特点确认、分析生成和版本核对   |

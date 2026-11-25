@@ -1,17 +1,11 @@
 ---
 name: conversation-recording
-description: 本项目所有 Codex CLI 交互轮次的首步。收到任何用户消息时先用此 Skill 保存到项目内，再回复或执行业务。适用于首条消息、hello 等问候、普通问答、要求「只回复指定文字」的短请求、业务请求和恢复后的消息。
-compatibility: 适用于 Linux 上启用会话分页的 Codex CLI 0.171.0 终端交互会话。
+description: 核对 Codex CLI 项目级对话记录、资料位置和保存缺口，适用于首条消息、普通问答、业务请求、提交停写及会话恢复。
+compatibility: 项目级自动入口适用于 Linux 上已启用分页会话的 Codex CLI 0.172.0，安装与回调需要 Python 3.10 或更高版本。
 ---
 
 # 保存 Codex 会话记录
 
-本项目安装本 Skill 后，每条交互消息进入记录流程。在实际保存时根据项目规则确定资料目录，将可取得的发言、工具活动和附件原件保存到项目内，通过主记录回查发言及当轮详情。
+项目级安装交付本 Skill 和 Codex Hook。已从正式入口安装并在 Codex 完成信任时，首条用户原话、已完成的工具活动和实际最终回复由 Hook 保存。查阅记录或处理缺口时按[触发和保存时机](references/recording-timing.md)定位。把修复、实际 Git 提交和后续普通动作拆成独立调用，使每次提交及其结果可按发生顺序跳过记录。
 
-**当前轮先保存用户原话并读回主记录，再执行用户的任务或直接回复。** 读完本页后先执行前两步。业务读取也在首条确认后开始。问候轮照常保存。用户限定「只回复」某段文字时，仍先用工具保存和读回，最终回复保持用户指定的文字。
-
-1. 先读取[触发和保存时机](references/recording-timing.md)与[会话归属与身份](references/session-scope.md)，用现有命令工具从 Codex 宿主状态中只读核对当前轮次和原会话，再取得实际工作目录。
-2. 核实归属后，按[资料根选择规则](references/storage-contract.md)判断本轮的实际写入位置。先利用已有会话记录，再按项目自定义规则、Agent 工具资料目录、项目内自选目录的顺序判断。核对真实路径和 Git 可见性，按[逐项保存规则](references/save-events.md)写入并读回本轮首条记录，然后执行用户任务。
-3. 按[内容采集与提交边界](references/event-capture.md)取得本轮已展示的进度原话、实际业务活动与附件，判断提交步骤及结果回复的保存边界。
-4. 按[会话写入协调和断点核对](references/resume-records.md)取得本次写入范围，用宿主已有文件工具按[逐项保存规则](references/save-events.md)写入并读回。首条用户消息和普通末轮按时机规则保存。
-5. 遇到路径冲突、写入失败或无法完成读回确认时，按[写入失败与重试](references/write-failures.md)先提示具体缺口、保留已确认内容，再继续本轮工作。
+项目安装位于 `.agents/skills/conversation-recording`，安装归属可从同目录的 `.foundry-recording-install.json` 核对。直接处理用户请求，由宿主 Hook 完成记录。用户要求查阅记录时，把查阅作为本轮业务。根据[资料契约](references/storage-contract.md)定位主记录和详情，根据[写入失败与重试](references/write-failures.md)说明仍缺失的范围。

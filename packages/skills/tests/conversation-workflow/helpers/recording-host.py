@@ -175,8 +175,8 @@ class Terminal:
         os.close(self.fd)
 
 
-async def list_hooks(codex, repo, scopes):
-    """使用与 /hooks 相同的宿主发现接口读取候选和实际信任状态。"""
+async def discover_project_items(codex, repo, method, params):
+    """从实际宿主取回项目级入口和状态。"""
     process = await asyncio.create_subprocess_exec(
         codex, "app-server", "--listen", "stdio://", cwd=repo,
         stdin=asyncio.subprocess.PIPE, stdout=asyncio.subprocess.PIPE,
@@ -194,7 +194,7 @@ async def list_hooks(codex, repo, scopes):
                 if "error" in packet:
                     raise RuntimeError(packet["error"])
                 return packet["result"]
-        raise RuntimeError("宿主未返回 hooks/list")
+        raise RuntimeError(f"宿主未返回 {method}")
 
     try:
         await send({"id": 1, "method": "initialize", "params": {
@@ -202,7 +202,7 @@ async def list_hooks(codex, repo, scopes):
         }})
         await asyncio.wait_for(receive(1), 10)
         await send({"method": "initialized"})
-        await send({"id": 2, "method": "hooks/list", "params": {"cwds": [str(scope) for scope in scopes]}})
+        await send({"id": 2, "method": method, "params": params})
         return (await asyncio.wait_for(receive(2), 10))["data"]
     finally:
         process.stdin.close()
@@ -211,6 +211,11 @@ async def list_hooks(codex, repo, scopes):
         except asyncio.TimeoutError:
             process.kill()
             await process.wait()
+
+
+async def list_hooks(codex, repo, scopes):
+    """使用与 /hooks 相同的宿主发现接口读取候选和实际信任状态。"""
+    return await discover_project_items(codex, repo, "hooks/list", {"cwds": [str(scope) for scope in scopes]})
 
 
 def timezone_boundary(seconds_until_boundary=8):
