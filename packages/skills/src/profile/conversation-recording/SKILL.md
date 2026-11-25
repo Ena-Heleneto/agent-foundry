@@ -11,7 +11,7 @@ compatibility: 适用于 Linux 上启用会话分页的 Codex CLI 0.171.0 终端
 **当前轮先保存用户原话并读回主记录，再执行用户的任务或直接回复。** 读完本页后先执行前两步。业务读取也在首条确认后开始。问候轮照常保存。用户限定「只回复」某段文字时，仍先用工具保存和读回，最终回复保持用户指定的文字。
 
 1. 先读取[触发和保存时机](references/recording-timing.md)与[会话归属与身份](references/session-scope.md)，用现有命令工具从 Codex 宿主状态中只读核对当前轮次和原会话，再取得实际工作目录。
-2. 核实归属后，按[资料根选择规则](references/storage-contract.md#选择资料根)判断本轮的实际写入位置。先利用已有会话记录，再按项目自定义规则、Agent 工具资料目录、项目内自选目录的顺序判断。核对真实路径和 Git 可见性，按[逐项保存规则](references/save-events.md)写入并读回本轮首条记录，然后执行用户任务。
+2. 核实归属后，按[资料根选择规则](references/storage-contract.md)判断本轮的实际写入位置。先利用已有会话记录，再按项目自定义规则、Agent 工具资料目录、项目内自选目录的顺序判断。核对真实路径和 Git 可见性，按[逐项保存规则](references/save-events.md)写入并读回本轮首条记录，然后执行用户任务。
 3. 按[内容采集与提交边界](references/event-capture.md)取得本轮已展示的进度原话、实际业务活动与附件，判断提交步骤及结果回复的保存边界。
 4. 按[会话写入协调和断点核对](references/resume-records.md)取得本次写入范围，用宿主已有文件工具按[逐项保存规则](references/save-events.md)写入并读回。首条用户消息和普通末轮按时机规则保存。
 5. 遇到路径冲突、写入失败或无法完成读回确认时，按[写入失败与重试](references/write-failures.md)先提示具体缺口、保留已确认内容，再继续本轮工作。

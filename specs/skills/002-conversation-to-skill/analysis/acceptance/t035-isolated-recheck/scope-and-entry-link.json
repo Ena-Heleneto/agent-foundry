@@ -1,0 +1,134 @@
+{
+  "runtime": "Codex CLI 0.172.0",
+  "model": "gpt-6.2-sol",
+  "openedLocalDate": "2026-11-24",
+  "firstPromptLocalDate": "2026-11-25",
+  "timeZone": "TST+7:34:34",
+  "artifactHashes": {
+    "SKILL.md": "1d37476c7176a5433cb443c7558d5002b092fbb22bf66f40fe024c68d946068d",
+    "references/event-capture.md": "47e8acff4900c0aaf5814c3ff0d7848185b93353eec1d93eb0b30cddb17a5f72",
+    "references/recording-timing.md": "15d9ff37694a562079a1535dadff20c05938e26487c48786b2c8f0514c860dce",
+    "references/resume-records.md": "2631b439281a4b9a6bdd690e89fb3851aba12810a8032928aed1a079b8e23949",
+    "references/save-events.md": "f1e25ebc9ed55908e6ed6bc88f49ca0b153a59cdaa8b5f23da103702826a8887",
+    "references/session-scope.md": "9cbd4c673d23566c3249bd029ae6f087aff2b18af181fc0c64f754454bdb0dae",
+    "references/storage-contract.md": "7553cc35854e348eb6eeb960af7dde1724061d8b6e63788db0c7eb60dbba3187",
+    "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+    "template/detail.md": "43b14c5bd86f03c14b8565bd341829b720d1495deaf37d8184fde8ccc1e47a81",
+    "template/record.md": "858e28dcc466b8e33ab67d28c136417d2007c1f3e7e963b5eada9d9ae2bc36bb"
+  },
+  "cases": [
+    {
+      "case": "midnight-alpha",
+      "thread": "01a211a0-72d2-7c52-9cd5-10f3532b7f1f",
+      "metadata": {
+        "id": "01a211a0-b5df-7f00-9ba3-8fd56233a968",
+        "byteOffset": 28890,
+        "ordinal": 1,
+        "type": "event_msg",
+        "payloadType": "task_started",
+        "turnMatches": true,
+        "trigger": "user",
+        "openedDate": "2026-11-24"
+      },
+      "readInstalledFiles": [
+        "SKILL.md",
+        "references/session-scope.md",
+        "references/storage-contract.md"
+      ],
+      "primaryFile": "alpha/conversation-records/records/2026-11-24/01a211a0-72d2-7c52-9cd5-10f3532b7f1f.md",
+      "userOriginalSaved": true,
+      "observedSavedAt": "2026-11-25T07:36:13.723+00:00",
+      "businessResultAt": "2026-11-25T07:36:17.045Z",
+      "savedBeforeBusinessResult": true,
+      "finalAt": "2026-11-25T07:37:05.368Z",
+      "savedFinalMatches": true,
+      "finalText": "T035 fixture alpha",
+      "elapsedSeconds": 151.01,
+      "businessStartedAt": "2026-11-25T07:36:16.917Z",
+      "savedBeforeBusinessStarted": true,
+      "finalResponseObserved": true,
+      "deadlineSeconds": 175
+    },
+    {
+      "case": "midnight-beta",
+      "thread": "01a211a0-7c48-7840-9f25-5f1ab97c7514",
+      "metadata": {
+        "id": "01a211a0-b5d7-74e3-81ac-9681095e4980",
+        "byteOffset": 28888,
+        "ordinal": 1,
+        "type": "event_msg",
+        "payloadType": "task_started",
+        "turnMatches": true,
+        "trigger": "user",
+        "openedDate": "2026-11-24"
+      },
+      "readInstalledFiles": [
+        "SKILL.md",
+        "references/session-scope.md",
+        "references/storage-contract.md"
+      ],
+      "primaryFile": "beta/conversation-records/records/2026-11-24/01a211a0-7c48-7840-9f25-5f1ab97c7514.md",
+      "userOriginalSaved": true,
+      "observedSavedAt": "2026-11-25T07:36:20.232+00:00",
+      "businessResultAt": "2026-11-25T07:36:25.182Z",
+      "savedBeforeBusinessResult": true,
+      "finalAt": null,
+      "savedFinalMatches": false,
+      "finalText": null,
+      "elapsedSeconds": 175.02,
+      "businessStartedAt": "2026-11-25T07:36:25.085Z",
+      "savedBeforeBusinessStarted": true,
+      "finalResponseObserved": false,
+      "deadlineSeconds": 175
+    },
+    {
+      "case": "scope-diagnostic",
+      "thread": "01a211a0-851e-7a63-aa6c-659bf1e63cb1",
+      "metadata": {
+        "id": "01a211a0-b5df-7f11-9bb2-ee240edb42c7",
+        "byteOffset": 28882,
+        "ordinal": 1,
+        "type": "event_msg",
+        "payloadType": "task_started",
+        "turnMatches": true,
+        "trigger": "user",
+        "openedDate": "2026-11-25"
+      },
+      "readInstalledFiles": [
+        "SKILL.md",
+        "references/session-scope.md",
+        "references/storage-contract.md"
+      ],
+      "primaryFile": "conversation/records/2026-11-25/01a211a0-851e-7a63-aa6c-659bf1e63cb1.md",
+      "userOriginalSaved": true,
+      "observedSavedAt": "2026-11-25T07:37:04.541+00:00",
+      "businessResultAt": "2026-11-25T07:37:09.192Z",
+      "savedBeforeBusinessResult": true,
+      "finalAt": null,
+      "savedFinalMatches": false,
+      "finalText": null,
+      "elapsedSeconds": 175.03,
+      "businessStartedAt": "2026-11-25T07:37:09.039Z",
+      "savedBeforeBusinessStarted": true,
+      "finalResponseObserved": false,
+      "deadlineSeconds": 175
+    }
+  ],
+  "execControl": {
+    "exit": 0,
+    "trigger": "exec",
+    "thread": "01a211a1-009a-77c3-9938-389c55fa3750",
+    "readUpdatedScope": true,
+    "businessCompleted": true,
+    "gitVisibleRecordFilesUnchanged": true
+  },
+  "entryLinkCheck": {
+    "originalDirectFileFailure": "references/storage-contract.md#选择资料根",
+    "fixedRelativePath": "references/storage-contract.md",
+    "allEntryLinksOpenAsFiles": true,
+    "linkCount": 8,
+    "installAndSourceMatchFiles": 10
+  },
+  "initialEmptyParallelRepository": true,
+  "explicitDiagnosticFirstScopeCheckRetried": true
+}

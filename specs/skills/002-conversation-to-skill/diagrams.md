@@ -1,12 +1,28 @@
 # 关键流程图 · 从 Codex 对话生成协作 Skill
 
-## 会话先保存，再继续任务
+## 项目安装与首次启用
 
-规则位置为规划中的 `packages/skills/src/profile/conversation-recording/SKILL.md`。AI 用现有工具核对工作目录和原会话来源，在首条消息出现时为范围内的会话建档。首条原话先写入主记录，详情可打开后补上链接。若同名附件内容不同，分别保存原件，各详情事件指向自己的文件。仅为记录维护产生的内部工具活动不进入待记录集合；同轮提交失败后、重试前的修复按普通业务内容处理，每次提交及其结果回复分别跳过。
+首次启用的位置是主线 `profile` 集合的项目级安装入口。现有 Spec Kit 开发挂载脚本提供集中声明、核对来源和登记到项目的参考。图中的信任及自动启用路径由 T035 在 Codex CLI 上复验。 [记录集合](../../../packages/skills/src/profile/collection.config.ts) · [挂载参考](../../../scripts/dev/mount-speckit.sh)
 
 ```mermaid
 flowchart TD
-    A["收到新内容或恢复已有会话"] --> R{"是否仅为记录维护的内部工具活动？"}
+    A["同次项目安装交付记录 Skill 和必要组件"] --> B{"候选需要 Codex 信任确认？"}
+    B -->|需要| C["在空白引导会话中完成原生确认"]
+    B -->|已满足启用条件| D["核对项目来源及当前启用状态"]
+    C --> D
+    D --> E{"已读回安装完成所需条件？"}
+    E -->|已满足| F["安装完成，空白会话零记录"]
+    E -->|待满足| G["安装尚未启用，保留待处理原因"]
+    F --> H["正常打开 Codex 并发第一条消息"]
+```
+
+## 会话先保存，再继续任务
+
+现有范围规则位于记录 Skill 的 `references/session-scope.md`，保存规则位于 `references/save-events.md`。候选须用回调时点可取得的宿主证据确认范围，再沿这些规则保存。首条原话先写入并读回，详情可打开后补上链接。同轮提交失败后、重试前的修复按普通业务内容处理。 [范围规则](../../../packages/skills/src/profile/conversation-recording/references/session-scope.md) · [保存规则](../../../packages/skills/src/profile/conversation-recording/references/save-events.md)
+
+```mermaid
+flowchart TD
+    A["收到用户消息或已纳入会话的活动"] --> R{"是否仅为记录维护的内部工具活动？"}
     R -->|是，不产生待记录事件| G
     R -->|否| I{"能核实交互入口、当前有效目录与原会话均符合仓库范围？"}
     I -->|是| B["确认会话身份和原归档日期"]
@@ -14,13 +30,30 @@ flowchart TD
     B --> K{"当前内容属于提交步骤或结果回复？"}
     K -->|是，仅跳过该次步骤及结果回复| G
     K -->|否| C["首条消息时建档，后续内容续写原文件"]
-    C --> D{"写入成功？"}
+    C --> D{"写入并读回成功？"}
     D -->|是| E["核对详情与附件，更新主记录链接"]
     D -->|否| F["标记实际缺口"]
     E --> G["继续会话任务"]
     F --> G
     G --> H["后续事件或再次恢复"]
     H --> A
+```
+
+## 正常最终回复的发送顺序
+
+现有记录时序规则位于 `references/recording-timing.md`。图中顺序表达 FR-002 的验收条件。T035 用分段回包核对终端看到首段前，真实文件已经保存并读回完整原文。 [记录时序规则](../../../packages/skills/src/profile/conversation-recording/references/recording-timing.md) · [现有宿主证据](research.md#最终回复发出前的保存与读回)
+
+```mermaid
+sequenceDiagram
+    participant Host as Codex 宿主
+    participant Recorder as 项目记录流程
+    participant File as 项目主记录
+    participant Terminal as 用户终端
+    Host->>Recorder: 交付本轮将发送的最终回复全文
+    Recorder->>File: 保存回复原文
+    File-->>Recorder: 读回全文并逐字核对
+    Recorder-->>Host: 回复已保存并读回
+    Host->>Terminal: 发送最终回复的首段与后续内容
 ```
 
 ## 父代理分别判断两个阶段

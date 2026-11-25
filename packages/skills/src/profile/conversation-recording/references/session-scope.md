@@ -9,7 +9,7 @@
 1. 用未指定工作目录的宿主命令运行 `pwd -P` 和 `git rev-parse --show-toplevel`，取得当前有效目录和真实 Git 工作树根。使用 Codex 本轮实际加载的 Skill 入口核实项目级安装归属。可读取宿主确认的项目级来源，也可解析实际入口的路径，并从其所在目录运行 `git rev-parse --show-toplevel` 核对归属同一工作树。目录归属按解析后的目录层级判定。实际项目级来源无法核实时，按归属证据不足处理。
 2. 在宿主现有命令工具中取得 `CODEX_THREAD_ID`，保留规范的 UUID。使用该 CLI 的 `CODEX_HOME`，未设置时使用当前本地用户的 `~/.codex`。只定位 `sessions/` 下唯一匹配此 UUID 的 `rollout-*-<UUID>.jsonl`，定位阶段只使用匹配文件名。状态目录、标识或文件归属无法核实时结束自动记录核验。
 3. 在 Linux 的 Codex CLI 0.171.0 分页布局中，以只读方式打开 `thread_history_1.sqlite`。数据库位于宿主实际使用的 `CODEX_SQLITE_HOME`，未设置时位于上述 CLI 状态目录。按该线程查询 `thread_turns` 的 `turn_id`、`status` 和 `rollout_byte_offset`。要求恰有一条 `status=inProgress` 的轮次且有有效字节偏移。同时取得该线程已索引的轮次计数。
-4. 用宿主命令工具在匹配文件中按字节偏移定位。无缓冲核对事件类型为 `event_msg`、载荷类型为 `task_started` 后，只读取该行的元数据，核对事件的 `turn_id` 与活跃轮次一致，再取 `turn_attribution.turn_trigger`。头部类型不符时立即停止读取。遇到 `exec`、缺失或不支持的触发类型时结束自动记录核验。后续分支只处理已验证的 `user` 活跃轮次。
+4. 用宿主命令工具在匹配文件中按索引的字节偏移无缓冲定位。按 JSON 字段的层级和值逐步识别同一行的事件头，兼容 `ordinal` 等额外头部元数据及其字段换序。先确认顶层 `type` 为 `event_msg`，再进入 `payload` 确认其中的 `type` 为 `task_started`。判断类型前只推进到所需的头部字段。类型不符或无法在正文载荷前确认时立即停止读取。确认类型后才读取该行的轮次元数据，要求 `payload.turn_id` 与活跃轮次一致，且 `payload.turn_attribution.turn_trigger` 为 `user`。遇到 `exec`、字段缺失或值不符时结束自动记录核验。
 5. 用现有命令工具从匹配线程文件首行读取 `session_meta`，核对当前线程 ID、`originator=codex-tui`、`source` 和首次目录。已验证的 Linux CLI 0.171.0 在前台可报告 `source=cli`，默认后台服务可报告 `source=vscode`。两种来源均须有 `originator=codex-tui` 和本轮已验证的 `user` 触发。解析首次目录和第 1 步取得的当前有效目录，两处均属于目标工作树时进入保存流程。恢复前的启动路径可缺省。
 
 ## 首次建档与按轮续写
