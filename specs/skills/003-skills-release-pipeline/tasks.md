@@ -26,7 +26,7 @@ T007 保留实施当时的任务与证据；当前构建入口和集合矩阵按
 
 - [x] T006 [US1] 在 T001 和 T002 后，用隔离 Vite 构建验证配置回调和插件上下文能取得实际 `mode`：默认 build 为 `production`，显式 development、release、production 分别保持原值；在同一进程连续构建时不得串用上次 mode。记录命令、观察值和失败边界，形成 T007 的 mode 传递验证依据；不改工作流或直接调用 Vite 的脚本。 [实施方案与实测](implementation/T006.md)
 - [x] T007 [US1] 在 T006 验证通过后，为集合配置增加布尔值或按 Vite mode 求值的 `enabled`，由共享扫描函数接收并校验当次 mode，先过滤集合再扫描技能；显式 `enabled` 优先，缺省时兼容旧 `publish`。移除扫描调用方各自传入的 `publishOnly` 环境判断，避免与统一 mode 来源冲突。在 packages/skills/package.json 增加 `build:development`、`build:release`、`build:prod`，令既有 `build` 保持 Vite 默认 production。更新集合配置与分发回归，确认环境选择及 `build`/`build:prod` 一致；暂不改工作流、scripts/dev/mount-speckit.sh 和其他直接调用 Vite 的脚本。 [实施方案与实测](implementation/T007.md)
-- [ ] T008 [US1] 在 T007 后复验技能复制、集合插件、隐匿及包内挂载产物均采用同次选择。通过同一 `build` 覆盖默认 `production` 和显式 `--mode production`、`development`、`release`，按当前配置保留 `profile`，用隔离夹具验证禁用集合及技能级禁用项，并确认 `release` 保留测试发布材料。用隔离 Vite 构建验证 `outDir`、`write: false`，并验证默认容器导出及归档。不修改或执行临时脚本 `scripts/dev/mount-speckit.sh`，不改工作流；生产发布要求仍由 T019 验收。 [验收方案与实测](implementation/T008.md) · [续接复核与待确认修复](implementation/T008.md#续接复核与待确认的修复方案) · [范围确认](requirements/raw/2026-11-26-temporary-mount-script-scope.md)
+- [ ] T008 [US1] 在 T007 后复验技能复制、集合插件、隐匿及包内挂载产物均采用同次选择。通过同一 `build` 覆盖默认 `production` 和显式 `--mode production`、`development`、`release`，按当前配置保留 `profile`，用隔离夹具验证禁用集合及技能级禁用项，并确认 `release` 保留测试发布材料。用隔离 Vite 构建验证 `outDir`、`write: false`，并验证默认容器导出及归档。不修改或执行临时脚本 `scripts/dev/mount-speckit.sh`，不改工作流；生产发布要求仍由 T019 验收。 [验收方案与实测](implementation/T008.md) · [分项修复与剩余验收](implementation/T008.md#分项修复与剩余验收) · [范围确认](requirements/raw/2026-11-26-temporary-mount-script-scope.md)
 
 ## 临时版本管理
 

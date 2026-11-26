@@ -28,7 +28,7 @@
 
 ## 环境机制
 
-**状态** 进行中。**依据** T006 已验证连续构建的 mode 传递，T007 已接通集合筛选。T008 已验证单一 `build` 入口下的四类消费者选择一致，以及 `write: false` 的内存构建行为。自定义 `outDir`、挂载插件类型检查和命令挂载夹具的修复方案待确认，容器验收待包含被验改动的实际 Git 提交。 [T006 实测](implementation/T006.md#实际验证结果) · [T007 历史实测](implementation/T007.md#实际验证结果) · [T008 验收](implementation/T008.md#实际结果) · [续接复核与修复提议](implementation/T008.md#续接复核与待确认的修复方案) · [范围确认](requirements/raw/2026-11-26-temporary-mount-script-scope.md)
+**状态** 进行中。**依据** T006 已验证连续构建的 mode 传递，T007 已接通集合筛选。T008 已验证四类消费者选择一致和 `write: false` 内存构建。自定义 `outDir` 和挂载插件类型检查已修复并分项复验，命令挂载测试夹具待修。容器验收待包含被验输入的实际 Git 提交。 [T006 实测](implementation/T006.md#实际验证结果) · [T007 历史实测](implementation/T007.md#实际验证结果) · [T008 初次验收](implementation/T008.md#实际结果) · [分项修复与剩余验收](implementation/T008.md#分项修复与剩余验收) · [范围确认](requirements/raw/2026-11-26-temporary-mount-script-scope.md)
 
 **闭环结果** 集合作者能按环境控制实际交付。同次构建的技能复制、插件发现、隐匿候选、Spec Kit 挂载共用同一选择。覆盖 FR-001、FR-002、SC-001。
 

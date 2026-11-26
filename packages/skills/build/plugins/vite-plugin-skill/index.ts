@@ -62,7 +62,7 @@ async function createSkillMap(skills: SelectedSkills): Promise<string> {
   /**
    * 每行来自扫描结果和对应正文，集合名称取自配置的 packageName。
    */
-  const rows = await Promise.all(skills.map(async ({ source, name: directory, collection, config }) => {
+  const rows = await Promise.all(skills.map(async ({ source, name: directory, collection, relativeTarget, config }) => {
     if (!identifier.test(collection) || !identifier.test(directory))
       throw new Error(`正式技能目录名无效：${collection}/${directory}`)
     /**
@@ -75,7 +75,7 @@ async function createSkillMap(skills: SelectedSkills): Promise<string> {
     const requiresSkills = config.requiresSkills === undefined ? [] : config.requiresSkills
     if (!Array.isArray(requiresSkills) || requiresSkills.some(dep => typeof dep !== 'string' || !identifier.test(dep)))
       throw new Error(`正式技能依赖须为合法声明名数组：${name}`)
-    return { name, collection, directory, requiresSkills: [...new Set<string>(requiresSkills)].sort() }
+    return { name, collection, directory, relativeTarget, requiresSkills: [...new Set<string>(requiresSkills)].sort() }
   }))
   /**
    * 每个公开声明名在所有参与发布的集合中唯一。
@@ -116,16 +116,16 @@ async function createSkillMap(skills: SelectedSkills): Promise<string> {
    * 保持映射顺序固定，无依赖以短横线表示。
    */
   const lines = ['# foundry-skills 1']
-  for (const { name, collection, directory, requiresSkills } of rows.toSorted((a, b) => a.name.localeCompare(b.name, 'en'))) {
+  for (const { name, collection, directory, relativeTarget, requiresSkills } of rows.toSorted((a, b) => a.name.localeCompare(b.name, 'en'))) {
     visit(name)
-    lines.push([name, collection, posix.join('skill', collection, directory), directory, requiresSkills.join(',') || '-'].join('\t'))
+    lines.push([name, collection, relativeTarget, directory, requiresSkills.join(',') || '-'].join('\t'))
   }
   return `${lines.join('\n')}\n`
 }
 
 /**
  * 在构建开始时按小写比较技能安装目录名，输出阶段复制已校验的技能内容。
- * 发布模式将参与发布的集合与安装材料写入 dist。
+ * 发布模式将参与发布的集合与安装材料写入当次输出目录。
  *
  * @returns 技能构建插件。
  */
@@ -221,9 +221,18 @@ export default function vitePluginSkill(): Plugin {
 
     /**
      * 将已选中的技能正文及附件复制到当次构建输出。
+     *
+     * @param outputOptions 打包器为当前产物使用的输出选项。
      */
-    async writeBundle() {
-      await Promise.all(selectedSkills.map(({ source, target }) => cp(source, target, { recursive: true })))
+    async writeBundle(outputOptions) {
+      /**
+       * 使用与生成资产相同的输出根目录。
+       */
+      const { dir } = outputOptions
+      if (!dir)
+        this.error('技能构建需要输出目录')
+
+      await Promise.all(selectedSkills.map(({ source, relativeTarget }) => cp(source, join(dir, relativeTarget), { recursive: true })))
     },
     closeBundle() {},
   }

@@ -12,7 +12,7 @@
 
 **备选** 各插件独立按照 mode 重扫会引入上下文漂移。由每个插件保留 `publishOnly` 布尔值会丢失实际环境信息，并与集合配置的 enabled 规则分离；改为各扫描调用传入 Vite 当前 mode，由扫描器统一过滤。
 
-**前置验证** 用相同进程顺序构建三种模式，再运行一次 write:false 挂载构建和一次隔离 outDir 构建。读取实际技能、派生数据和输出路径，核对同次选择及文件系统副作用。现行目录覆盖实测显示正文写到固定 dist/skill，应把这个边界纳入评审和回归。测试缺配置、非普通配置、导入失败和安装名冲突的既有行为，再确定需要保留的分支。 [集合扫描](../../../packages/skills/build/utils/scan-skills.ts) · [技能插件](../../../packages/skills/build/plugins/vite-plugin-skill/index.ts) · [现行构建测试](../../../packages/skills/tests/distribution/vite-plugin-skill.test.mjs)
+**前置验证** 用相同进程顺序构建三种模式，再运行一次 write:false 挂载构建和一次隔离 outDir 构建。读取实际技能、派生数据和输出路径，核对同次选择及文件系统副作用。早期目录覆盖实测发现正文写到固定 `dist/skill`，T008 已修复并对相对和绝对输出路径复跑。测试缺配置、非普通配置、导入失败和安装名冲突的既有行为，再确定需要保留的分支。 [集合扫描](../../../packages/skills/build/utils/scan-skills.ts) · [现行构建测试](../../../packages/skills/tests/distribution/vite-plugin-skill.test.mjs) · [T008 分项验证](implementation/T008.md#分项修复与剩余验收)
 
 ## 评审范围与手写源码依据
 
@@ -64,6 +64,6 @@
 
 **决定** 现行 skills-test 使用触发提交和只读 checkout 权限，调用三组测试。复用隔离的 Vite、引擎、Spec Kit 挂载和真实安装夹具。连续发布用实际准备及发布逻辑与可控的隔离对象存储边界，不在每次 CI 门禁连真实 R2。缺工具、断言失败或必需用例被跳过均不放行。以同次运行中的三个结果和被测 SHA 驱动后续部署。 [验收指南](quickstart.md) · [现行门禁](../../../.github/workflows/skills-test.yml) · [HTTPS 测试源](../../../packages/skills/tests/distribution/helpers/https-source.mjs)
 
-**理由** 本地现有基线为四组 Node 64 项和 Python 39 项通过，Node 运行前隔离补齐 jq。旧 runner-archive 与 pipeline-workflow 因引用已删除工作流失败，实际断言需按当前入口复用。技能包 check-types 在已有预设 dist 的工作区通过，干净安装需先构建预设依赖。listFilesOnly 显示动态导入的挂载插件未进入检查，临时纳入同一严格配置时在 mount-script.ts:51 复现可选捕获组的 TS2345。改动挂载消费者时补入检查并保持现有缺 description 的行为。 [当前基线](spec.md#当前分支依据) · [技能包类型配置](../../../packages/skills/tsconfig.json) · [预设导出](../../../packages/preset-config/package.json)
+**理由** 本地历史基线为四组 Node 64 项和 Python 39 项通过，Node 运行前隔离补齐 jq。旧 runner-archive 与 pipeline-workflow 因引用已删除工作流失败，实际断言需按当前入口复用。技能包 check-types 在已有预设 dist 的工作区通过，干净安装需先构建预设依赖。历史基线的类型检查遗漏动态挂载插件，纳入后复现捕获组引发的 `TS2345`。T008 已将插件纳入常规类型检查并修复解析输入，缺少 `description` 的回归通过。 [历史基线与当前验收](spec.md#当前分支依据) · [T008 分项验证](implementation/T008.md#分项修复与剩余验收) · [预设导出](../../../packages/preset-config/package.json)
 
 **备选** 继续使用占位通过或只断言 YAML 文本无法证明本次产物和安装结果。复用全部旧测试入口会夹带已退役的工作流和缺失场景。首次外部失败验证与跨 job 契约分别留证，真实 release 桶部署和公网实际消费各按相应条件运行。

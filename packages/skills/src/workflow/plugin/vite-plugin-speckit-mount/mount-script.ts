@@ -42,13 +42,15 @@ async function createCommand(skill: MountSkill) {
    */
   const body = await readFile(join(skill.source, 'SKILL.md'), 'utf8')
   /**
-   * 支持 LF 和 CRLF frontmatter，不将技能业务复制到命令正文。
+   * 从支持 LF 和 CRLF 的元数据区块提取 YAML 正文。
    */
-  const frontmatter = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/u.exec(body)
+  const frontmatter = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/u.exec(body)?.[1]
   /**
-   * 官方命令描述必须来自源元数据，缺失或空值直接拒绝。
+   * 有捕获值时才解析 YAML，官方命令描述必须来自源元数据。
    */
-  const metadata = frontmatter ? parse(frontmatter[1]) as { description?: unknown } | null : null
+  const metadata = frontmatter === undefined
+    ? null
+    : parse(frontmatter) as { description?: unknown } | null
   if (typeof metadata?.description !== 'string' || !metadata.description.trim())
     throw new Error(`技能 ${skill.name} 缺少有效 description`)
   /**

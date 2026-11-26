@@ -245,6 +245,16 @@ class ConversationRecordingTest(unittest.TestCase):
         return {"ordinal": ordinal, "type": "response_item", "payload": {"type": "function_call_output",
                 "call_id": call, "output": output}}
 
+    def native_command(self, call, script, output, exit_code=0):
+        return {"type": "event_msg", "payload": {"type": "item_completed", "turn_id": self.turn,
+                "item": {"type": "CommandExecution", "id": call, "command": ["/bin/bash", "-lc", script],
+                         "cwd": self.repo.as_uri(), "aggregated_output": output, "exit_code": exit_code}}}
+
+    @staticmethod
+    def code_call(call, code):
+        return {"type": "response_item", "payload": {"type": "custom_tool_call", "name": "exec",
+                "call_id": call, "input": code}}
+
     def test_commit_and_result_are_omitted_without_losing_repair(self):
         self.install()
         events = [
@@ -312,6 +322,139 @@ class ConversationRecordingTest(unittest.TestCase):
         previous = self.record.read_bytes()
         self.callback("Stop", last_assistant_message="提交完成")
         self.assertEqual(self.record.read_bytes(), previous)
+
+    def test_multiline_native_verification_keeps_commit_reply_suppressed(self):
+        self.install()
+        commit = "set -e\ngit add README.md\ngit -c user.name=Fixture commit -qm retry"
+        verify = "git status --short\ngit log -1 --format=%s"
+        self.seed_turn(events=[self.tool_call(2, "commit", {"cmd": commit}),
+                               self.native_command("exec-commit", commit, "成功重试"),
+                               self.tool_output(4, "commit", "成功重试"),
+                               self.tool_call(5, "verify", {"cmd": verify}),
+                               self.native_command("exec-verify", verify, "只读核对"),
+                               self.tool_output(7, "verify", "只读核对")])
+        self.callback("UserPromptSubmit", prompt="提交")
+        previous = self.record.read_bytes(), self.record.stat().st_mtime_ns
+        self.callback("PostToolUse", tool_name="Bash", tool_use_id="verify",
+                      tool_input={"command": verify}, tool_response="只读核对")
+        self.callback("Stop", last_assistant_message="提交完成")
+        self.assertEqual((self.record.read_bytes(), self.record.stat().st_mtime_ns), previous)
+        self.assertFalse((self.record.parent / "details").exists())
+
+    def test_code_mode_callback_waits_for_host_command_and_output(self):
+        self.install()
+        code = "text(await tools.exec_command({cmd: buildCommand()}))"
+        call = self.code_call("pending", code)
+        self.seed_turn(events=[call])
+        self.callback("UserPromptSubmit", prompt="执行操作")
+        previous = self.record.read_bytes(), self.record.stat().st_mtime_ns
+        self.callback("PostToolUse", tool_name="exec", tool_use_id="pending",
+                      tool_input=code, tool_response="回调抢先到达")
+        self.assertEqual((self.record.read_bytes(), self.record.stat().st_mtime_ns), previous)
+        self.assertFalse((self.record.parent / "details").exists())
+        self.seed_turn(events=[call, self.native_command("exec-read", "cat README.md", "宿主文件正文"),
+                               self.tool_output(4, "pending", "确认的普通工具回包")])
+        self.callback("Stop", last_assistant_message="已读取")
+        detail = self.record.parent / f"details/{self.session}/{self.turn}.md"
+        self.assertIn("确认的普通工具回包", detail.read_text())
+        self.assertNotIn("回调抢先到达", detail.read_text())
+
+    def test_failed_code_mode_commit_is_omitted_when_saving_later_repair(self):
+        self.install()
+        commit = "set -e\ngit add README.md\ngit commit -qm first"
+        repair = "printf repaired > README.md"
+        self.seed_turn(events=[self.code_call("failed", "text(await tools.exec_command({cmd: buildCommit()}))"),
+                               self.native_command("exec-failed", commit, "作者名缺失", exit_code=128),
+                               self.tool_output(4, "failed", "失败提交回包"),
+                               self.code_call("repair", f"text(await tools.exec_command({{cmd: {json.dumps(repair)}}}))"),
+                               self.native_command("exec-repair", repair, "修复已执行"),
+                               self.tool_output(7, "repair", "修复工具回包")])
+        self.callback("UserPromptSubmit", prompt="失败后修复")
+        self.callback("PostToolUse", tool_name="exec", tool_use_id="repair", tool_input={},
+                      tool_response="修复工具回包")
+        detail = self.record.parent / f"details/{self.session}/{self.turn}.md"
+        repaired = detail.read_text()
+        self.assertIn("修复已执行", repaired)
+        self.assertIn("修复工具回包", repaired)
+        self.assertNotIn("buildCommit()", repaired)
+        self.assertNotIn("作者名缺失", repaired)
+        self.assertNotIn("失败提交回包", repaired)
+
+    def test_multiline_quoted_and_continued_commit_shell_arguments_are_omitted(self):
+        self.install()
+        for script in ("git commit -m '标题\n\n正文'", "git \\\n commit -m continued"):
+            with self.subTest(script=script):
+                self.turn = str(uuid4())
+                self.seed_turn(events=[self.code_call("dynamic", "text(await tools.exec_command({cmd: buildCommit()}))"),
+                                       self.native_command("exec-commit", script, "成功提交"),
+                                       self.tool_output(4, "dynamic", "提交回包")])
+                self.callback("UserPromptSubmit", prompt="提交")
+                previous = self.record.read_bytes(), self.record.stat().st_mtime_ns
+                self.callback("Stop", last_assistant_message="提交结果")
+                self.assertEqual((self.record.read_bytes(), self.record.stat().st_mtime_ns), previous)
+
+    def test_shell_data_with_git_commit_text_remains_recordable(self):
+        self.install()
+        for script in ("cat <<'EOF' > README.md\ngit commit -m example\nEOF",
+                       "printf '%s' '&&' git commit -m example"):
+            with self.subTest(script=script):
+                self.turn = str(uuid4())
+                self.seed_turn(events=[self.tool_call(2, "write", {"cmd": script}),
+                                       self.native_command("exec-write", script, "文档数据"),
+                                       self.tool_output(4, "write", "文档工具回包")])
+                self.callback("UserPromptSubmit", prompt="写文档")
+                self.callback("Stop", last_assistant_message="文档已处理")
+                detail = self.record.parent / f"details/{self.session}/{self.turn}.md"
+                self.assertTrue(detail.is_file())
+                self.assertIn("文档工具回包", detail.read_text())
+
+    def test_repairs_after_failed_commit_are_recorded_even_with_readonly_checks(self):
+        self.install()
+        for repair_events, label in (
+            ([self.code_call("patch", "text(await tools.apply_patch(patch))"),
+              {"type": "event_msg", "payload": {"type": "item_completed", "item": {"type": "FileChange",
+               "id": "edit", "status": "completed", "changes": {"README.md": {}}, "stdout": "", "stderr": ""}}},
+              self.tool_output(6, "patch", "修复补丁回包")], "修复补丁回包"),
+            ([self.tool_call(4, "mixed", {"cmd": "printf repaired > README.md\ngit status --short"}),
+              self.native_command("exec-mixed", "printf repaired > README.md\ngit status --short", "修复核对"),
+              self.tool_output(6, "mixed", "修复核对回包")], "修复核对回包"),
+        ):
+            with self.subTest(label=label):
+                # 每个子例用独立轮次；宿主完成事件也使用相同轮次标识。
+                self.turn = str(uuid4())
+                repair_events[1]["payload"]["turn_id"] = self.turn
+                self.seed_turn(events=[self.tool_call(2, "failed", {"cmd": "git commit -qm first"}),
+                                       self.tool_output(3, "failed", "提交失败"), *repair_events])
+                self.callback("UserPromptSubmit", prompt="失败后修复")
+                self.callback("Stop", last_assistant_message="修复完成")
+                detail = self.record.parent / f"details/{self.session}/{self.turn}.md"
+                self.assertTrue(detail.is_file())
+                self.assertIn(label, detail.read_text())
+                self.assertNotIn("提交失败", detail.read_text())
+
+    def test_yielded_code_mode_commit_and_wait_are_excluded_from_details(self):
+        self.install()
+        code = self.code_call("yielded", "text(await tools.exec_command({cmd: buildCommit()}))")
+        pending = self.tool_output(3, "yielded", "Script running with cell ID g4:16\nWall time 1.0 seconds\nOutput:\n")
+        wait = {"type": "response_item", "payload": {"type": "function_call", "name": "wait",
+                "call_id": "poll", "arguments": json.dumps({"cell_id": "g4:16", "yield_time_ms": 1000})}}
+        self.seed_turn(events=[code, pending])
+        self.callback("UserPromptSubmit", prompt="提交")
+        previous = self.record.read_bytes(), self.record.stat().st_mtime_ns
+        self.callback("PostToolUse", tool_name="exec", tool_use_id="yielded", tool_response="尚在运行")
+        self.assertEqual((self.record.read_bytes(), self.record.stat().st_mtime_ns), previous)
+        repoll = {**wait, "payload": {**wait["payload"], "call_id": "poll-again"}}
+        # 相同的宿主进度有纯文本与结构化两种交付形式。
+        pending_text = pending["payload"]["output"]
+        self.seed_turn(events=[code, pending, wait,
+                               self.tool_output(5, "poll", [{"type": "input_text", "text": pending_text}]),
+                               self.native_command("exec-done", "git commit -qm done", "提交已执行"),
+                               repoll, self.tool_output(8, "poll-again", "提交回包")])
+        self.callback("PostToolUse", tool_name="wait", tool_use_id="poll-again",
+                      tool_input={"cell_id": "g4:16"}, tool_response="提交回包")
+        self.callback("Stop", last_assistant_message="提交完成")
+        self.assertEqual((self.record.read_bytes(), self.record.stat().st_mtime_ns), previous)
+        self.assertFalse((self.record.parent / "details").exists())
 
     def test_stop_keeps_detail_already_confirmed_by_tool_hook(self):
         self.install()

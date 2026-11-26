@@ -23,6 +23,14 @@ SENSITIVE_PATH = re.compile(r'''(?i)(?:^|[/\s'"])(?:\.env(?:\.[\w.-]+)?|\.netrc|
 JS_LITERAL = r'''"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`[^`]*`'''
 CODE_COMMAND = re.compile(rf'''\btools\.(?:exec_command|shell_command)\s*\(\s*\{{[^{{}}]*?\b(cmd|command)\s*(?::\s*({JS_LITERAL}|\w+)|(?=[,}}]))''')
 CODE_ASSIGNMENT = re.compile(rf"\bconst\s+(\w+)\s*=\s*({JS_LITERAL})\s*[;\n]")
+CODE_YIELD = re.compile(r"\AScript running with cell ID (\S+)\nWall time [^\n]+ seconds\nOutput:\n")
+SHELL_WORD_PART = r'''(?:'[^']*'|"(?:\\.|[^"\\])*"|\\.|[^\s'"\\;&|<>]+)'''
+SHELL_WORD_PARTS = re.compile(SHELL_WORD_PART, re.DOTALL)
+SHELL_TOKEN = re.compile(
+    rf"(?P<space>[ \t\r]+)|(?P<comment>\#[^\n]*)|(?P<breaks>[;&|]+|\n)|"
+    rf"(?P<heredoc><<-|<<(?!<))|(?P<redirection>[<>]+)|(?P<word>{SHELL_WORD_PART}+)",
+    re.DOTALL,
+)
 
 
 @dataclass(frozen=True)
@@ -50,6 +58,7 @@ class TurnContents:
     commit_result: bool
     tool_privacy: dict[str, bool]
     tool_outputs: frozenset[str]
+    withheld_calls: frozenset[str]
 
 
 def redacted(text):
@@ -104,63 +113,128 @@ def command_segments(command):
     """只解析命令字面量，不执行记录里的任何命令。"""
     if not isinstance(command, str):
         return
-    for line in command.splitlines():
-        lexer = shlex.shlex(line, posix=True, punctuation_chars=";&|")
-        lexer.whitespace_split = True
-        segment = []
-        try:
-            for token in lexer:
-                if token and not token.strip(";&|"):
-                    yield segment
-                    segment = []
+    segment, heredocs = [], []
+    position = 0
+    heredoc_operator = None
+    while position < len(command):
+        match = SHELL_TOKEN.match(command, position)
+        if match is None:
+            return
+        position = match.end()
+        if boundary := match["breaks"]:
+            if segment:
+                yield segment
+                segment = []
+            if boundary == "\n":
+                for delimiter, strip_tabs in heredocs:
+                    position = heredoc_end(command, position, delimiter, strip_tabs)
+                heredocs.clear()
+            heredoc_operator = None
+        elif operator := match["heredoc"]:
+            heredoc_operator = operator
+        elif raw := match["word"]:
+            # 匹配时保留引号；只有真实续行符会从命令词中移除。
+            word = "".join(part[0] for part in SHELL_WORD_PARTS.finditer(raw) if part[0] != "\\\n")
+            if word:
+                token = shlex.split(word)[0]
+                if heredoc_operator:
+                    heredocs.append((token, heredoc_operator == "<<-"))
+                    heredoc_operator = None
                 else:
                     segment.append(token)
-        except ValueError:
-            continue
+        elif redirection := match["redirection"]:
+            segment.append(redirection)
+    if segment:
         yield segment
+
+
+def heredoc_end(command, position, delimiter, strip_tabs):
+    """跨过 shell 重定向正文，其中的命令示例不会执行。"""
+    while position < len(command):
+        end = command.find("\n", position)
+        if end < 0:
+            return len(command)
+        line = command[position:end]
+        position = end + 1
+        terminator = line.lstrip("\t") if strip_tabs else line
+        if terminator == delimiter:
+            break
+    return position
 
 
 def git_actions(command, depth=0):
     for tokens in command_segments(command):
-        while tokens:
-            launcher = Path(tokens[0]).name
-            if launcher == "env":
-                tokens.pop(0)
-                while tokens and tokens[0].startswith("-"):
-                    flag = tokens.pop(0)
-                    if flag in ("-u", "--unset", "-C", "--chdir") and tokens:
-                        tokens.pop(0)
-            elif "=" in tokens[0] or launcher in ("command", "builtin"):
-                tokens.pop(0)
-            else:
+        yield from git_argv_actions(tokens, depth)
+
+
+def git_argv_actions(argv, depth=0):
+    """保留宿主参数边界，只在 shell 的命令参数内解析脚本。"""
+    tokens = list(argv)
+    while tokens:
+        launcher = Path(tokens[0]).name
+        if launcher == "env":
+            tokens.pop(0)
+            while tokens and tokens[0].startswith("-"):
+                flag = tokens.pop(0)
+                if flag in ("-u", "--unset", "-C", "--chdir") and tokens:
+                    tokens.pop(0)
+        elif "=" in tokens[0] or launcher in ("command", "builtin"):
+            tokens.pop(0)
+        else:
+            break
+    if not tokens:
+        return
+
+    executable = Path(tokens[0]).name
+    if executable in ("bash", "sh", "zsh") and depth < 2:
+        for flag, script in zip(tokens[1:], tokens[2:]):
+            if re.fullmatch(r"-[a-zA-Z]*c[a-zA-Z]*", flag):
+                yield from git_actions(script, depth + 1)
                 break
-        if not tokens:
-            continue
-        executable = Path(tokens[0]).name
-        if executable in ("bash", "sh", "zsh") and depth < 2:
-            for index, token in enumerate(tokens[1:-1], start=1):
-                if token.startswith("-") and "c" in token:
-                    yield from git_actions(tokens[index + 1], depth + 1)
-                    break
-        if executable != "git":
-            continue
+    elif executable == "git":
         arguments = iter(tokens[1:])
         for token in arguments:
             if token in ("-c", "-C", "--git-dir", "--work-tree", "--namespace", "--config-env"):
                 next(arguments, None)
             elif not token.startswith("-"):
-                yield token
+                yield token, tuple(arguments)
                 break
+    else:
+        # 保留普通命令的存在，避免把同一脚本中的修复误判为只读核对。
+        yield None, ()
+
+
+def readonly_git_actions(actions):
+    return bool(actions) and all(action in {"status", "log", "diff", "show", "rev-parse"}
+                                 or (action == "branch" and "--show-current" in arguments)
+                                 for action, arguments in actions)
 
 
 def is_commit(value):
-    return any("commit" in git_actions(command) for command in commands_from(value))
+    return any(action == "commit" for command in commands_from(value) for action, _ in git_actions(command))
 
 
 def commit_verification(value):
-    actions = [(action, command) for command in commands_from(value) for action in git_actions(command)]
-    return bool(actions and all(action in {"status", "log", "diff", "show", "rev-parse"}
-                                or (action == "branch" and "--show-current" in command) for action, command in actions))
+    return readonly_git_actions([action for command in commands_from(value) for action in git_actions(command)])
+
+
+def is_code_exec(name):
+    return name in ("exec", "functions.exec")
+
+
+def code_wait_cell(name, arguments):
+    if name in ("wait", "functions.wait"):
+        cell = as_mapping(arguments).get("cell_id")
+        if isinstance(cell, str):
+            return cell
+
+
+def running_code_cell(output):
+    """从宿主的文本或结构化首段识别仍在运行的 Code Mode 调用。"""
+    if isinstance(output, list) and output and isinstance(output[0], dict):
+        output = output[0].get("text")
+    if isinstance(output, str) and (running := CODE_YIELD.match(output)):
+        return running[1]
 
 
 def private_output(value):
@@ -242,7 +316,7 @@ def visible_message(row, location, events, inputs, during_commit):
                 events.append(captured_output(location, "用户附件", part, False))
 
 
-def completed_item(item, location, events, fallback_inputs, during_commit, code_calls):
+def completed_item(item, location, events, fallback_inputs, during_commit, code_calls, withheld):
     """使用宿主完成事件核对实际命令及带身份的可见消息。"""
     kind = item.get("type")
     if kind == "UserMessage":
@@ -253,13 +327,21 @@ def completed_item(item, location, events, fallback_inputs, during_commit, code_
         argv = item.get("command") or []
         if not isinstance(argv, list) or not all(isinstance(arg, str) for arg in argv):
             return during_commit
+        actions = list(git_argv_actions(argv))
+        during_commit = any(action == "commit" for action, _ in actions) or (
+            during_commit and readonly_git_actions(actions))
+        if during_commit:
+            # Code Mode 的原始调用与聚合回包也可能包含此次提交。
+            withheld.update(code_calls)
         arguments = {"command": shlex.join(argv), "workdir": item.get("cwd")}
-        during_commit = is_commit(arguments) or (during_commit and commit_verification(arguments))
         if code_calls and not during_commit:
             identifier = item.get("id") or location
             value = {**arguments, "exitCode": item.get("exit_code"), "status": item.get("status")}
             events.append(Event(location, "宿主命令执行", redacted(pretty(value)), identity=f"command:{identifier}"))
             events.append(captured_output(location, identifier, item.get("aggregated_output", ""), private_output(arguments)))
+    elif kind == "FileChange" and code_calls:
+        # apply_patch 的宿主完成事件确认这是一次普通文件操作。
+        during_commit = False
     elif not during_commit and kind == "Reasoning" and item.get("summary"):
         events.append(Event(location, "已展示推理摘要", redacted(pretty(item["summary"]))))
     elif not during_commit and kind in ("CollabAgentToolCall", "SubAgentActivity"):
@@ -269,7 +351,9 @@ def completed_item(item, location, events, fallback_inputs, during_commit, code_
 
 def collect(scope):
     """按当前轮的宿主事件重建详情，剔除实际提交及对应结果。"""
-    events, inputs, fallback_inputs, calls, outputs, code_calls = [], [], [], {}, set(), set()
+    events, inputs, fallback_inputs = [], [], []
+    calls, outputs, code_calls, withheld = {}, set(), set(), set()
+    code_cells, code_waits = {}, {}
     during_commit = False
     with scope.transcript.open("rb") as stream:
         stream.seek(scope.offset)
@@ -286,30 +370,48 @@ def collect(scope):
                 break
             if entry.get("type") == "event_msg" and kind == "item_completed" and row.get("turn_id") == scope.turn:
                 during_commit = completed_item(row.get("item") or {}, location, events, fallback_inputs,
-                                               during_commit, code_calls)
+                                               during_commit, code_calls, withheld)
             if entry.get("type") != "response_item":
                 continue
             call = row.get("call_id")
             if kind in CALLS and call:
                 arguments = row.get("arguments", row.get("input"))
-                is_code = kind == "custom_tool_call" and row.get("name") == "exec"
+                is_code = kind == "custom_tool_call" and is_code_exec(row.get("name"))
+                parent = code_cells.get(code_wait_cell(row.get("name"), arguments))
                 if is_code:
                     code_calls.add(call)
-                skipped = is_commit(arguments) or (during_commit and (is_code or commit_verification(arguments)))
-                if not is_code or skipped:
+                elif parent:
+                    code_waits[call] = parent
+                skipped = is_commit(arguments) or (during_commit and not is_code and commit_verification(arguments))
+                if (not is_code and not parent) or skipped:
                     during_commit = skipped
-                calls[call] = (skipped, private_output(arguments))
-                if not skipped:
+                calls[call] = private_output(arguments)
+                if skipped:
+                    withheld.add(call)
+                else:
                     name = redacted(str(row.get("name") or "工具"))
                     cwd = as_mapping(arguments).get("workdir", str(scope.cwd))
                     events.append(Event(location, f"工具调用 `{name}` · `{call}`",
                                         redacted(f"工作目录：{cwd}\n{pretty(arguments)}"), identity=f"call:{call}"))
             elif kind in OUTPUTS and call in calls:
-                if not calls[call][0] and not (call in code_calls and during_commit):
+                output = row.get("output")
+                code_call = code_waits.get(call, call)
+                if code_call in code_calls:
+                    if cell := running_code_cell(output):
+                        code_cells[cell] = code_call
+                    else:
+                        if during_commit:
+                            withheld.add(code_call)
+                        code_calls.discard(code_call)
+                if call not in withheld and code_call not in withheld:
                     outputs.add(call)
-                    events.append(captured_output(location, call, row.get("output"), calls[call][1]))
-                code_calls.discard(call)
+                    events.append(captured_output(location, call, output, calls[call]))
             elif kind == "message":
                 visible_message(row, location, events, inputs, during_commit)
-    tool_privacy = {call: omit for call, (_, omit) in calls.items()}
-    return TurnContents(tuple(events), tuple(inputs or fallback_inputs), during_commit, tool_privacy, frozenset(outputs))
+    # 在确认 Code Mode 回包边界前，调用仍可能执行提交，暂缓保存其原始输入。
+    withheld.update(code_calls)
+    withheld.update(wait for wait, parent in code_waits.items() if parent in withheld)
+    blocked_events = {f"{label}:{call}" for call in withheld for label in ("call", "result")}
+    return TurnContents(tuple(event for event in events if event.identity not in blocked_events),
+                        tuple(inputs or fallback_inputs), during_commit, calls, frozenset(outputs - withheld),
+                        frozenset(withheld))

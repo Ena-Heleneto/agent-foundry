@@ -1,0 +1,304 @@
+{
+  "task": "T037",
+  "baseline": "1233ff9",
+  "date": "2026-11-26",
+  "environment": "Linux，独立 Codex 状态，真实交互式终端与 Git，回环端点返回合成工具请求与回复",
+  "source": "使用当前工作区安装副本内的安装器重新本地安装，核对除安装归属清单外全量文件哈希一致",
+  "ordinaryReplyAfterCommitWasTested": true,
+  "resumeAfterCommitWasTested": false,
+  "variants": [
+    {
+      "version": "codex-cli 0.172.0",
+      "mode": "direct",
+      "trustedHooks": [
+        "postToolUse",
+        "stop",
+        "userPromptSubmit"
+      ],
+      "skillDiscovered": true,
+      "installedMatchesSource": true,
+      "eventModuleSha256": "4678104abab08eaa71ed1a87c55d1be7716ad348855c47637c459ab22d4f62c0",
+      "stopHookSha256": "be6c6ce155b234037cdc644ef13127c0a10a17c914c8d04bf011cc9101bfd84c",
+      "realAuthorIdentityFailure": true,
+      "realRetrySuccess": true,
+      "recordChangedAfterInitialRepair": true,
+      "recordChangedAfterFailedCommit": false,
+      "recordChangedAfterInterveningRepair": true,
+      "recordChangedAfterSuccessfulCommit": false,
+      "recordChangedAfterReadonlyCheck": true,
+      "recordChangedAfterFinalReply": true,
+      "commitReplySaved": true,
+      "originalRequestSaved": true,
+      "repairInDetail": true,
+      "authorFailureInDetail": false,
+      "successCommandInDetail": false,
+      "readonlyCheckInDetail": true,
+      "laterOrdinaryReplySaved": true,
+      "variant": "direct-staged",
+      "gitRecordedNoRecordChangesAtStartOfReadonlyCheck": true,
+      "workspaceChangedRecordFilesAfterReply": [
+        "main",
+        "detail"
+      ],
+      "indexChangedRecordCountAfterReply": 0,
+      "failureStagedIntoRetryCommit": false,
+      "commitResultFlagWhenReplayingStop": false,
+      "nativeToolSteps": [
+        {
+          "tool": "function_call",
+          "commandActionsFromToolInput": [],
+          "shellScript": "printf 'T037_INITIAL_REPAIR\\n' > README.md",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [],
+          "actionsFromNativeShellScriptArgument": []
+        },
+        {
+          "tool": "function_call",
+          "commandActionsFromToolInput": [
+            "add",
+            "commit"
+          ],
+          "shellScript": "set -euo pipefail\ngit add README.md records\ngit commit -qm t037-first",
+          "exitCode": 128,
+          "actionsFromNativeArgvRejoinedForParser": [
+            "add"
+          ],
+          "actionsFromNativeShellScriptArgument": [
+            "add",
+            "commit"
+          ]
+        },
+        {
+          "tool": "function_call",
+          "commandActionsFromToolInput": [],
+          "shellScript": "printf 'T037_RETRY_REPAIR\\n' > README.md",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [],
+          "actionsFromNativeShellScriptArgument": []
+        },
+        {
+          "tool": "function_call",
+          "commandActionsFromToolInput": [
+            "add",
+            "commit"
+          ],
+          "shellScript": "set -euo pipefail\ngit add README.md records\ngit -c user.name=T037 commit -m t037-retry",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [
+            "add"
+          ],
+          "actionsFromNativeShellScriptArgument": [
+            "add",
+            "commit"
+          ]
+        },
+        {
+          "tool": "function_call",
+          "commandActionsFromToolInput": [
+            "status",
+            "log"
+          ],
+          "shellScript": "git status --short --untracked-files=all\ngit log -1 --format=%s",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [],
+          "actionsFromNativeShellScriptArgument": [
+            "status",
+            "log"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "codex-cli 0.172.0",
+      "mode": "code",
+      "trustedHooks": [
+        "postToolUse",
+        "stop",
+        "userPromptSubmit"
+      ],
+      "skillDiscovered": true,
+      "installedMatchesSource": true,
+      "eventModuleSha256": "4678104abab08eaa71ed1a87c55d1be7716ad348855c47637c459ab22d4f62c0",
+      "stopHookSha256": "be6c6ce155b234037cdc644ef13127c0a10a17c914c8d04bf011cc9101bfd84c",
+      "realAuthorIdentityFailure": true,
+      "realRetrySuccess": true,
+      "recordChangedAfterInitialRepair": true,
+      "recordChangedAfterFailedCommit": false,
+      "recordChangedAfterInterveningRepair": true,
+      "recordChangedAfterSuccessfulCommit": false,
+      "recordChangedAfterReadonlyCheck": true,
+      "recordChangedAfterFinalReply": true,
+      "commitReplySaved": true,
+      "originalRequestSaved": true,
+      "repairInDetail": true,
+      "authorFailureInDetail": true,
+      "successCommandInDetail": true,
+      "readonlyCheckInDetail": true,
+      "laterOrdinaryReplySaved": true,
+      "variant": "code-staged",
+      "gitRecordedNoRecordChangesAtStartOfReadonlyCheck": true,
+      "workspaceChangedRecordFilesAfterReply": [
+        "main",
+        "detail"
+      ],
+      "indexChangedRecordCountAfterReply": 0,
+      "failureStagedIntoRetryCommit": true,
+      "commitResultFlagWhenReplayingStop": false,
+      "nativeToolSteps": [
+        {
+          "tool": "custom_tool_call",
+          "commandActionsFromToolInput": [],
+          "shellScript": "printf 'T037_INITIAL_REPAIR\\n' > README.md",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [],
+          "actionsFromNativeShellScriptArgument": []
+        },
+        {
+          "tool": "custom_tool_call",
+          "commandActionsFromToolInput": [],
+          "shellScript": "set -euo pipefail\ngit add README.md records\ngit commit -qm t037-first",
+          "exitCode": 128,
+          "actionsFromNativeArgvRejoinedForParser": [
+            "add"
+          ],
+          "actionsFromNativeShellScriptArgument": [
+            "add",
+            "commit"
+          ]
+        },
+        {
+          "tool": "custom_tool_call",
+          "commandActionsFromToolInput": [],
+          "shellScript": "printf 'T037_RETRY_REPAIR\\n' > README.md",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [],
+          "actionsFromNativeShellScriptArgument": []
+        },
+        {
+          "tool": "custom_tool_call",
+          "commandActionsFromToolInput": [],
+          "shellScript": "set -euo pipefail\ngit add README.md records\ngit -c user.name=T037 commit -m t037-retry",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [
+            "add"
+          ],
+          "actionsFromNativeShellScriptArgument": [
+            "add",
+            "commit"
+          ]
+        },
+        {
+          "tool": "custom_tool_call",
+          "commandActionsFromToolInput": [
+            "status",
+            "log"
+          ],
+          "shellScript": "git status --short --untracked-files=all\ngit log -1 --format=%s",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [],
+          "actionsFromNativeShellScriptArgument": [
+            "status",
+            "log"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "codex-cli 0.172.0",
+      "mode": "code",
+      "trustedHooks": [
+        "postToolUse",
+        "stop",
+        "userPromptSubmit"
+      ],
+      "skillDiscovered": true,
+      "installedMatchesSource": true,
+      "eventModuleSha256": "4678104abab08eaa71ed1a87c55d1be7716ad348855c47637c459ab22d4f62c0",
+      "stopHookSha256": "be6c6ce155b234037cdc644ef13127c0a10a17c914c8d04bf011cc9101bfd84c",
+      "realAuthorIdentityFailure": true,
+      "realRetrySuccess": true,
+      "recordChangedAfterInitialRepair": true,
+      "recordChangedAfterFailedCommit": false,
+      "recordChangedAfterInterveningRepair": true,
+      "recordChangedAfterSuccessfulCommit": false,
+      "recordChangedAfterReadonlyCheck": false,
+      "recordChangedAfterFinalReply": false,
+      "commitReplySaved": false,
+      "originalRequestSaved": true,
+      "repairInDetail": true,
+      "authorFailureInDetail": false,
+      "successCommandInDetail": false,
+      "readonlyCheckInDetail": false,
+      "laterOrdinaryReplySaved": true,
+      "variant": "code-single",
+      "gitRecordedNoRecordChangesAtStartOfReadonlyCheck": true,
+      "workspaceChangedRecordFilesAfterReply": [],
+      "indexChangedRecordCountAfterReply": 0,
+      "failureStagedIntoRetryCommit": false,
+      "commitResultFlagWhenReplayingStop": true,
+      "nativeToolSteps": [
+        {
+          "tool": "custom_tool_call",
+          "commandActionsFromToolInput": [],
+          "shellScript": "printf 'T037_INITIAL_REPAIR\\n' > README.md",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [],
+          "actionsFromNativeShellScriptArgument": []
+        },
+        {
+          "tool": "custom_tool_call",
+          "commandActionsFromToolInput": [],
+          "shellScript": "set -euo pipefail && git add README.md records && git commit -qm t037-first",
+          "exitCode": 128,
+          "actionsFromNativeArgvRejoinedForParser": [
+            "add",
+            "commit"
+          ],
+          "actionsFromNativeShellScriptArgument": [
+            "add",
+            "commit"
+          ]
+        },
+        {
+          "tool": "custom_tool_call",
+          "commandActionsFromToolInput": [],
+          "shellScript": "printf 'T037_RETRY_REPAIR\\n' > README.md",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [],
+          "actionsFromNativeShellScriptArgument": []
+        },
+        {
+          "tool": "custom_tool_call",
+          "commandActionsFromToolInput": [],
+          "shellScript": "set -euo pipefail && git add README.md records && git -c user.name=T037 commit -m t037-retry",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [
+            "add",
+            "commit"
+          ],
+          "actionsFromNativeShellScriptArgument": [
+            "add",
+            "commit"
+          ]
+        },
+        {
+          "tool": "custom_tool_call",
+          "commandActionsFromToolInput": [
+            "status",
+            "log"
+          ],
+          "shellScript": "git status --short --untracked-files=all && git log -1 --format=%s",
+          "exitCode": 0,
+          "actionsFromNativeArgvRejoinedForParser": [
+            "status",
+            "log"
+          ],
+          "actionsFromNativeShellScriptArgument": [
+            "status",
+            "log"
+          ]
+        }
+      ]
+    }
+  ]
+}

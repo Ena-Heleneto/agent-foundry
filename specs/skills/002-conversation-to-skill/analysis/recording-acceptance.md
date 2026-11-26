@@ -277,3 +277,29 @@ Codex CLI 0.172.0 使用回环合成回包重跑 `--extended`。空白引导保�
 - 复核时项目安装副本中 `recording/events.py` 与维护源字节一致，`scripts/stop.py` 和 `recording/record.py` 有差异。T035 和 T036 的通过证据对应各自的隔离验收来源。本次已确认实际落盘，触发原因和修复效果待在 T037 核实。
 
 现场结果违反 FR-008，SC-004 在该场景未通过。依原验收口径，每次提交开始到对应结果回复发出期间，主记录、详情和附件的写入次数为零，由记录引入的工作区和暂存区新增差异为零。用户原始请求、提交前和两次提交之间的修复及后续普通对话均可回查。T037 以实际安装副本和工具事件顺序复现，再用正式来源验证上述边界。 [需求与验收](../spec.md#当前实施状态) · [T037](../tasks.md#p0-提交停写回归)
+
+### T037 隔离复现
+
+从当前工作区的记录 Skill 安装副本复制安装，在独立的 Codex CLI `0.172.0` 终端信任三个项目 Hook。用回环端点发送合成工具请求，通过宿主执行真实 Git 命令。同轮先修改 README，再故意以缺少作者名的配置提交，修改 README 后补足作者名重试。成功后执行 `git status` 和 `git log`，等待宿主发出最终回复，再核对记录文件的哈希、修改时间和 Git 状态。提交请求和两次提交之间的修复可回查，下一普通轮次的回复也正常保存。 [逐步观测](acceptance/t037-commit-skip-reproduction.json)
+
+| 工具入口 | 详情误记 | 提交结果回复误入主记录 | 回复后由记录引入的 Git 差异 |
+| --- | --- | --- | --- |
+| Code Mode，多行命令 | 失败、成功的提交与只读核对。失败输出在后续修复时被补写并进入重试提交 | 有 | 工作区两个文件，暂存区零 |
+| 直接命令入口，多行命令 | 只读核对 | 有 | 工作区两个文件，暂存区零 |
+| Code Mode，同一组命令改用单行 `&&` | 无 | 无 | 工作区及暂存区均为零 |
+
+宿主完成事件的 `command` 参数数组保留了完整脚本。`completed_item()` 将数组拼成带引号的命令，再交给 `command_segments()` 按行切开，导致 shell 脚本的引号在解析前被截断。实际事件中，提交脚本只识别出 `add`，只读脚本也丢失了 `status` 和 `log`。Code Mode 通过 JavaScript 变量拼装的脚本还无法从工具输入识别提交。重放已捕获事件时，多行样例在 `Stop` 的停写判断为假，单行对照为真。 [事件解析](../../../../packages/skills/src/profile/conversation-recording/recording/events.py) · [逐步观测](acceptance/t037-commit-skip-reproduction.json)
+
+本次保存修复前基线。现有 Python 记录回归 17 项通过。修复后正式安装复验及恢复续写场景待执行。
+
+### T037 正式本地安装复验
+
+从维护源经 `install.py` 刷新三个隔离仓库的项目级安装，核对脚本哈希及 Codex CLI `0.172.0` 的原生发现、信任和实发回复。直接命令、Code Mode、Code Mode 分段返回并由 `wait` 取得成功结果，均真实执行首次提交失败、修复、成功重试、只读核对和最终回复。每次提交以及后续只读核对与对应回复期间，记录文件清单、哈希和修改时间一致，工作区及暂存区均无由记录引入的新增差异。提交前和两次提交间的修复可回查，下一普通回复照常保存。三组均从子目录跨日恢复，原主记录续写，旧详情完整保留，跳过的提交回复未被补写。 [正式来源观测](acceptance/t037-commit-skip-verification.json)
+
+会话记录 Python 测试 24 项通过，隔离样例 Node 测试 8 项通过，`@foundry/skills` 的 lint 和类型检查通过。技能包全量 Python 测试运行 63 项，其中 4 项 `test_register_commands` 在准备阶段缺少 `dist/skill/workflow/task-increment`。Code Mode `apply_patch` 在宿主 `FileChange` 事件的安装回调回放中通过。额外的原生探针所用工具集未提供 `tools.apply_patch`，该变体的端到端复验未完成。
+
+### 2026-11-26 T037 修复版工作区试用
+
+从维护源通过 `install.py` 重新安装到当前工作区。2026-11-27 同步时再次核对，当前安装的事件模块、工具回调入口和停止入口与 T037 隔离复验的哈希一致。Codex 原生 `hooks/list` 返回 `UserPromptSubmit`、`PostToolUse`、`Stop` 均为已信任、已启用。 [脚本哈希](acceptance/t037-commit-skip-verification.json)
+
+用户重开 Codex 后发出「读一下 README 的第一行」，并反馈「已收到回复」。主记录位于 Spec Kit 项目资料区，保存了原始请求。记录中的完整回复与宿主实发文本逐字一致，仓库根目录的 `README.md` 确为 0 字节。「查看经过」链接打开同一会话、同一轮的详情，详情含本轮 README 查询。主记录和详情均可从 Git 工作区看到。本轮验证普通对话自动记录，提交停写及跨日恢复沿用 T037 的隔离复验。 [主记录](../../../../.specify/memory/conversation-recording/records/2026-11-26/01a21816-1e19-7e32-b5ca-e511bf016a8a.md#L7) · [当轮详情](../../../../.specify/memory/conversation-recording/records/2026-11-26/details/01a21816-1e19-7e32-b5ca-e511bf016a8a/01a21816-207c-7101-8fdb-a32620f9a750.md) · [提交停写复验](#t037-正式本地安装复验)

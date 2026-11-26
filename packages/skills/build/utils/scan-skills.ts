@@ -1,6 +1,6 @@
 import type { CollectionMode, CollectionOption } from '#utils/define-collection-handle'
 import { lstatSync, readdirSync } from 'node:fs'
-import { join } from 'node:path'
+import { join, posix } from 'node:path'
 import process from 'node:process'
 import { pathToFileURL } from 'node:url'
 
@@ -143,7 +143,7 @@ export async function scanCollections(
  * @param mode Vite 当次实际构建模式。
  * @param sourceDir 集合来源目录，默认使用当前包的 src。
  * @param options 缺配置回调。
- * @returns 包含集合、名称、源目录、目标目录及原技能配置的清单。
+ * @returns 包含集合、名称、源目录、包内相对路径及原技能配置的清单。
  * @throws 配置导入失败、启用项名称非法或实际交付内容含软链接时报错。
  */
 export async function scanSkills(
@@ -179,7 +179,7 @@ export async function scanSkills(
           collection: packageName,
           name,
           source,
-          target: join('dist', 'skill', packageName, name),
+          relativeTarget: posix.join('skill', packageName, name),
           config,
         }]
       }))

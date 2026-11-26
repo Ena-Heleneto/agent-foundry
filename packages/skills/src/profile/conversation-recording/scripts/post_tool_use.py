@@ -6,7 +6,8 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from recording.events import (
-    Event, captured_output, collect, commit_verification, is_commit, pretty, private_output, redacted,
+    Event, captured_output, code_wait_cell, collect, commit_verification, is_code_exec, is_commit, pretty,
+    private_output, redacted,
 )
 from recording.record import link_details, load_turn, run_hook, session_lock
 
@@ -20,6 +21,10 @@ def record_tool(scope, data):
     with session_lock(scope):
         contents = collect(scope)
         call = data.get("tool_use_id")
+        name = data.get("tool_name")
+        is_code = is_code_exec(name) or code_wait_cell(name, arguments) is not None
+        if call in contents.withheld_calls or (is_code and call not in contents.tool_outputs):
+            return
         if contents.commit_result and (not call or commit_verification(arguments)):
             return
         turn = load_turn(scope, contents.inputs)

@@ -33,7 +33,7 @@
 
 ### P0 提交停写回归
 
-- [ ] T037 [P0] [US1] 修复真实 Git 提交及其结果回复误入会话记录的回归。对照现场安装来源和宿主事件，在隔离项目真实复现同轮提交失败、修正、重试成功、只读 Git 核对和最终结果回复。从正式安装来源验证每次提交及其对应结果回复期间记录文件零写入、由记录引入的 Git 新增差异为零，提交前及两次提交间的修复、后续普通轮次和恢复续写符合 FR-008、SC-004。 [现场失败证据](analysis/recording-acceptance.md#2026-11-26-当前工作区提交停写回归) · [复验入口](quickstart.md#记录验收)
+- [x] T037 [P0] [US1] 修复真实 Git 提交及其结果回复误入会话记录的回归。对照现场安装来源和宿主事件，在隔离项目真实复现同轮提交失败、修正、重试成功、只读 Git 核对和最终结果回复。从正式安装来源验证每次提交及其对应结果回复期间记录文件零写入、由记录引入的 Git 新增差异为零，提交前及两次提交间的修复、后续普通轮次和恢复续写符合 FR-008、SC-004。 [实施方案](implementation/T037.md) · [现场失败证据](analysis/recording-acceptance.md#2026-11-26-当前工作区提交停写回归) · [正式来源复验](analysis/recording-acceptance.md#t037-正式本地安装复验)
 
 ### 技术前置与测试
 
@@ -117,7 +117,7 @@
 
 ## 依赖与实际执行顺序
 
-当前首项为 T037（P0）。提交停写回归在真实工作区已出现，优先恢复 FR-008 和 SC-004 的现场验收。 [用户优先级确认](requirements/raw/2026-11-26-recording-commit-skip-regression.md) · [现场证据](analysis/recording-acceptance.md#2026-11-26-当前工作区提交停写回归)
+T037 按用户确认的 P0 优先级完成修复，FR-008 和 SC-004 经正式本地安装来源在隔离仓库复验。 [用户优先级确认](requirements/raw/2026-11-26-recording-commit-skip-regression.md) · [复验](analysis/recording-acceptance.md#t037-正式本地安装复验)
 
 ```text
 T001 → T002 → T003 → T027 → T028 → T029 旧入口检查

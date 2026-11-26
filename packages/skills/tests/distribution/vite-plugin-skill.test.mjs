@@ -3,7 +3,7 @@ import { Buffer } from 'node:buffer'
 import { spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import process from 'node:process'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
@@ -53,14 +53,16 @@ function writeSkillConfig(collection, packageName = 'workflow', skill = { sample
 /**
  * 从隔离项目调用当前包的真实 Vite 配置。
  * @param {string} root 测试项目根。
+ * @param {string[]} args 额外的 Vite 构建参数。
  * @returns {import('node:child_process').SpawnSyncReturns<string>} 实际进程结果。
  */
-function buildSkills(root) {
+function buildSkills(root, args = []) {
   return spawnSync(process.execPath, [
     fileURLToPath(new URL('bin/vite.js', import.meta.resolve('vite/package.json'))),
     'build',
     '--config',
     fileURLToPath(new URL('../../vite.config.ts', import.meta.url)),
+    ...args,
   ], { cwd: root, encoding: 'utf8', timeout: 15_000 })
 }
 
@@ -160,6 +162,33 @@ test('普通附件保持字节且禁用技能的链接不阻止构建', (t) => {
   assert.equal(readFileSync(join(fixture.output, 'skill/workflow/sample/SKILL.md'), 'utf8'), '# 示例技能\n')
   assert.deepEqual(readFileSync(join(fixture.output, 'skill/workflow/sample/references/中文 附件.bin')), Buffer.from([0, 255, 128, 10]))
   assert.equal(existsSync(join(fixture.output, 'skill/workflow/disabled')), false)
+})
+
+test('自定义输出目录同时接收入口、技能正文和附件', (t) => {
+  /**
+   * 用隔离项目保留上一轮默认输出，核对自定义构建没有写入该目录。
+   */
+  const fixture = skillFixture(t)
+  mkdirSync(join(fixture.source, 'references'))
+  writeFileSync(join(fixture.source, 'references/示例 附件.txt'), '附件内容\n')
+
+  for (const outDir of ['相对 输出', join(fixture.root, '绝对 输出')]) {
+    /**
+     * 通过真实 CLI 分别传递含空格的相对和绝对路径。
+     */
+    const result = buildSkills(fixture.root, ['--outDir', outDir])
+    assert.ifError(result.error)
+    assert.equal(result.status, 0, result.stderr)
+    /**
+     * 相对目标以测试项目根为基准，绝对目标直接使用。
+     */
+    const output = resolve(fixture.root, outDir)
+    assert.ok(existsSync(join(output, 'curl/install.sh')))
+    assert.equal(readFileSync(join(output, 'skill/workflow/sample/SKILL.md'), 'utf8'), '# 示例技能\n')
+    assert.equal(readFileSync(join(output, 'skill/workflow/sample/references/示例 附件.txt'), 'utf8'), '附件内容\n')
+    assert.deepEqual(readdirSync(fixture.output), ['previous.txt'])
+    assert.equal(readFileSync(join(fixture.output, 'previous.txt'), 'utf8'), '上一轮产物\n')
+  }
 })
 
 test('真实构建交付压缩的 curl 入口及可选隐匿脚本', (t) => {
