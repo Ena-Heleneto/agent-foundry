@@ -7,6 +7,7 @@ import { defineCollectionHandle } from '#utils/define-collection-handle'
  */
 export default defineCollectionHandle({
   packageName: 'workflow',
+  enabled: true,
   publish: true,
   mcp: false,
   plugin: true,

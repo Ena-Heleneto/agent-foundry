@@ -23,3 +23,4 @@ args = ["dlx", "@playwright/mcp@latest"]
 
 [mcp_servers.figma]
 url = "https://mcp.figma.com/mcp"
+startup_timeout_sec = 90

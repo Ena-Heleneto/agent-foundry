@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite'
 import { fileURLToPath } from 'node:url'
-import { scanSkills } from '#utils/scan-skills'
+import { scanSkills } from '#build/utils/scan-skills'
 import { createSpeckitMountScript } from './mount-script.ts'
 
 /**
@@ -18,9 +18,9 @@ export default function vitePluginSpeckitMount(sourceDir = fileURLToPath(import.
      */
     async generateBundle() {
       /**
-       * 发布模式仅为参与发布的工作流技能生成挂载。
+       * 仅为当次模式启用的工作流技能生成挂载。
        */
-      const skills = (await scanSkills(sourceDir, { publishOnly: this.environment.config.mode === 'release' }))
+      const skills = (await scanSkills(this.environment.config.mode, sourceDir))
         .filter(skill => skill.collection === 'workflow')
       /**
        * 挂载生成同时消费 hook 和 command，空声明不创建脚本资产。

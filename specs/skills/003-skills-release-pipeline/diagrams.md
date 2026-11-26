@@ -4,18 +4,19 @@
 
 构建选择是本轮允许交付的集合和技能名单。副作用由各自插件负责。
 
-**代码位置** [Vite 配置](../../../packages/skills/vite.config.ts) · [扫描](../../../packages/skills/utils/scan-skills.ts) · [技能插件](../../../packages/skills/build/plugins/vite-plugin-skill/index.ts) · [引擎插件](../../../packages/skills/build/plugins/vite-plugin-engine/index.ts) · [隐匿插件](../../../packages/skills/build/plugins/vite-plugin-engine/sub-plugins/vite-plugin-hidden-install/index.ts) · [挂载插件](../../../packages/skills/src/workflow/plugin/vite-plugin-speckit-mount/index.ts)
+**代码位置** [Vite 配置](../../../packages/skills/vite.config.ts) · [扫描](../../../packages/skills/build/utils/scan-skills.ts) · [技能插件](../../../packages/skills/build/plugins/vite-plugin-skill/index.ts) · [引擎插件](../../../packages/skills/build/plugins/vite-plugin-engine/index.ts) · [隐匿插件](../../../packages/skills/build/plugins/vite-plugin-engine/sub-plugins/vite-plugin-hidden-install/index.ts) · [挂载插件](../../../packages/skills/src/workflow/plugin/vite-plugin-speckit-mount/index.ts)
 
 ```mermaid
 flowchart TD
-    entry["构建入口给出当次 mode"]
+    entry["Vite 提供当次 mode；默认 production"]
+    environment["Node 扫描函数接收 mode"]
     collection["先判断集合是否启用"]
     selection["筛选已启用技能并形成构建选择"]
     skills["复制技能与生成发布清单"]
     plugins["发现启用集合的插件"]
     hidden["派生隐匿候选"]
     mount["派生 Spec Kit 挂载材料"]
-    entry --> collection --> selection
+    entry --> environment --> collection --> selection
     selection --> skills
     selection --> plugins
     selection --> hidden

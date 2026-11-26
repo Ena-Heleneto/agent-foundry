@@ -4,7 +4,7 @@
 
 ## 1. 本地工具和基线
 
-以待验证的明确提交建立干净工作区。安装仓库锁定依赖及 mise 工具链。安装验收需要 Linux、Bash、curl、Node、npm、tar、jq、uv，真实挂载另需已初始化的隔离 Spec Kit 项目与 Specify。验证覆盖普通构建、直接 Vite、容器及内存挂载，容器步骤需可用 Docker。
+以待验证的明确提交建立干净工作区。安装仓库锁定依赖及 mise 工具链。安装验收需要 Linux、Bash、curl、Node、npm、tar、jq、uv，真实挂载另需已初始化的隔离 Spec Kit 项目与 Specify。T008 用隔离 Vite 构建检查正式挂载产物及内存构建行为，不调用临时手动挂载脚本。容器验收需可用 Docker。
 
 ```bash
 git rev-parse HEAD
@@ -31,7 +31,7 @@ pnpm --filter @foundry/skills run test:release
 
 | 用例         | 输入和操作                                                                                                                                   | 预期观察                                                                                                                                               |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 按环境选择   | 真实构建 development、release、prod，增加可观察插件和派生内容的隔离集合夹具。另核对无显式 mode、同进程多次构建、覆盖 outDir 和 write:false。 | 前两种及普通构建包含 profile，prod 不包含 profile 或适用派生内容。两种发布模式都有发布材料。四类消费者一致，写出产物在指定目录，内存构建无磁盘副作用。 |
+| 按环境选择   | 运行无参数的 `build` 以及显式 `--mode development`、`--mode release`、`--mode production`，加入集合与技能级开关夹具。 | 默认与显式 `production` 选择一致；各 mode 按配置过滤集合，`release` 生成测试发布材料。未知 mode 失败。 |
 | 安装器选包   | 生成两份标记不同的真实归档，用隔离 HTTPS 夹具提供倒序版本与根入口。分别默认选首条、显式选另一条，再分别让 SHA-256、长度和包内时间戳不一致。  | 请求的下载地址与实际安装文件都对应选中记录。三类失败各返回失败且无项目写入。默认挂载、--no-mount、--hidden 沿原接口复核。                              |
 | 持久化与顺序 | 在独立对象存储边界执行实际版本准备及发布逻辑，首发后补发旧提交，并模拟同目标连续请求、读表错误、条件冲突和中途写入失败。                     | 第一轮从确认缺失开始，第二轮置顶并保留首发。归档目录和 VERSION 同值。失败运行零重试、零未完整条目登记。                                                |
 
@@ -56,13 +56,14 @@ pnpm --filter @foundry/skills run test:release
   test -f "$docker_check_dir/artifacts/curl/install.sh"
   test -f "$docker_check_dir/artifacts/engine/install.sh"
   test -f "$docker_check_dir/artifacts/skill/profile/conversation-recording/SKILL.md"
+  test ! -d "$docker_check_dir/artifacts/skill/eval"
   tar -tzf "$docker_check_dir/artifacts/skills.tar.gz" |
-    grep -Fx -- 'skill/profile/conversation-recording/SKILL.md'
+    grep -Fx -- 'skill/coding/document-changed-symbols/SKILL.md'
   printf '容器构建提交与导出目录：%s %s\n' "$SOURCE_REVISION" "$docker_check_dir/artifacts"
 )
 ```
 
-记录待验 SHA、Docker 构建结果及 artifacts 的实际文件。预期未指定发布 mode 的容器构建保有 profile、VERSION、安装入口与引擎入口。容器附带归档应包含对应技能成员。Docker 不可用时，记录该验证缺前置。
+记录待验 SHA、Docker 构建结果及 artifacts 的实际文件。按 [T008 确认的验收口径](implementation/T008.md)，未指定 Vite `--mode` 的容器构建按默认 `production` 选择，包含当前启用的 `profile`，不含仅开发模式启用的 `eval`，且保有 VERSION、安装入口与引擎入口。容器附带归档应包含已启用集合的技能成员。若缺可用 Docker 或含待验输入的真实提交，记录缺前置；本项不代替 T019 的生产发布验收。
 
 ## 3. 比较同源构建与交接候选
 
@@ -72,8 +73,8 @@ pnpm --filter @foundry/skills run test:release
 export FOUNDRY_SKILLS_RELEASE_TIMESTAMP=20261125T120905123Z
 export FOUNDRY_SKILLS_DOWNLOAD_BASE_URL=https://downloads.fixture.invalid
 comparison_dir="$(mktemp -d)"
-pnpm --filter @foundry/skills exec vite build --mode release --outDir "$comparison_dir/first"
-pnpm --filter @foundry/skills exec vite build --mode release --outDir "$comparison_dir/second"
+pnpm --filter @foundry/skills run build --mode release --outDir "$comparison_dir/first"
+pnpm --filter @foundry/skills run build --mode release --outDir "$comparison_dir/second"
 diff -qr "$comparison_dir/first" "$comparison_dir/second"
 ```
 
@@ -117,7 +118,7 @@ diff -qr "$comparison_dir/first" "$comparison_dir/second"
 
 ## 5. 公网验证与生产接入
 
-完成三组门禁和测试桶回读后，可依授权接入手动生产入口。每次手动运行对该次所选提交实际执行三组门禁。核对测试、prod 构建和交接候选的 SHA 一致以及生产桶身份。分别以门禁失败、跳过、缺结果和候选 SHA 不符进行受控验收，预期均无部署。
+完成三组门禁和测试桶回读后，可依授权接入手动生产入口。每次手动运行对该次所选提交实际执行三组门禁。核对测试、`production` 模式的发布构建和交接候选的 SHA 一致以及生产桶身份。检查候选归档不含 `profile` 技能、插件及适用派生内容，并具备构建契约要求的完整发布材料。分别以门禁失败、跳过、缺结果和候选 SHA 不符进行受控验收，预期均无部署。
 
 测试桶公网下载安装在实际 HTTPS 根和授权具备后独立执行。先核对该次候选入口绑定的真实下载根和实际版本表。历史条目若存认证 S3 地址，备份版本表并按对象键逐项核对归档长度和摘要。取得维护者授权后迁移必要 URL，确认回读只改变下载地址，版本、顺序和固定归档保持一致。记录迁移及缓存核对结果。 [下载根与切换](contracts/build-and-publish.md#下载根与切换)
 

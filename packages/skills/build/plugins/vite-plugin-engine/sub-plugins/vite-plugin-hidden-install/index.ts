@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
 import { readFileSync } from 'node:fs'
-import { minifyShellScript } from '#utils/minify-shell-script'
-import { scanSkills } from '#utils/scan-skills'
+import { minifyShellScript } from '#build/utils/minify-shell-script'
+import { scanSkills } from '#build/utils/scan-skills'
 import { createCandidatePathsAssignment } from './hidden-install.template.ts'
 
 /**
@@ -44,9 +44,9 @@ export default function vitePluginHiddenInstall(): Plugin {
      */
     async buildStart() {
       /**
-       * 发布构建仅将选择发布的集合加入隐匿候选。
+       * 仅将当次模式启用的集合及技能加入隐匿候选。
        */
-      const enabledSkills = await scanSkills(undefined, { publishOnly: this.environment.config.mode === 'release' })
+      const enabledSkills = await scanSkills(this.environment.config.mode)
       this.emitFile({ type: 'asset', fileName: 'script/hidden-install.sh', source: createHiddenInstallScript(enabledSkills) })
     },
   }

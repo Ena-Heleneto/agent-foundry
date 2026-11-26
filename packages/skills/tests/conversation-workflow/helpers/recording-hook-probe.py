@@ -173,6 +173,12 @@ COMMIT_STEPS = (
 )
 
 
+def formal_message(label, text):
+    """构造正式主记录的预期完整消息，保留原话与外层排版的区别。"""
+    title = {"发起": "用户 · 发起", "补充": "用户 · 补充", "回复": "主代理 · 回复"}[label]
+    return f"<!-- foundry-message {label} {len(text)} -->\n\n### {title}\n\n{text}\n"
+
+
 def records_snapshot(repo):
     """检查合成项目的记录写入和字节变化。"""
     roots = (repo / "records", repo / "conversation-recording/records")
@@ -387,7 +393,7 @@ def run_probe(binary, work, skill_source, link_source, formal=False, extended=Fa
     maintained = skill_source / "conversation-recording"
     hook_file = repo / ".codex/hooks.json"
     if formal:
-        subprocess.run([sys.executable, "-B", str(maintained / "scripts/install.py"), "--project", str(repo)],
+        subprocess.run([sys.executable, "-B", str(maintained / "install.py"), "--project", str(repo)],
                        capture_output=True, check=True)
         candidate = target / "conversation-recording/scripts/stop.py"
         prompt_candidate = candidate.with_name("user_prompt_submit.py")
@@ -497,7 +503,7 @@ stream_max_retries = 0
         return [event for event in trace(events) if event.get("status") == "read-back"]
 
     def saved_reply(answer):
-        expected = ("> - **回复** " + "\n>   ".join(answer.split("\n"))).encode()
+        expected = formal_message("回复", answer).encode()
         locations = [*repo.glob("records/*/*.md"), *repo.glob("conversation-recording/records/*/*.md")]
         return next((path for path in locations if expected in path.read_bytes()), None)
 
@@ -671,7 +677,7 @@ stream_max_retries = 0
         assert EARLY_INPUT not in rollout.read_text()
         resume(repo, record.stem)
         enter("T035_AFTER_EARLY_CLOSE")
-        wait(lambda: "> - **回复** T035_OTHER_FINAL" in record.read_text(), "关闭后从原记录续写")
+        wait(lambda: formal_message("回复", "T035_OTHER_FINAL") in record.read_text(), "关闭后从原记录续写")
         end()
         with sqlite3.connect(f"{(state / 'thread_history_1.sqlite').as_uri()}?mode=ro", uri=True) as index:
             turns = index.execute("SELECT status FROM thread_turns WHERE thread_id = ? ORDER BY rollout_byte_offset",
@@ -735,8 +741,8 @@ stream_max_retries = 0
              "并行会话各自建档及保存实发回复")
         records = [record for record in repo.glob("records/*/*.md") if PARALLEL_PROMPT in record.read_text()]
         assert len(records) == 2 and all(record.parent.name == first_date for record in records)
-        assert all(f"> **{first_prompt_date}**" in record.read_text() for record in records)
-        assert all(record.read_text().count(f"**发起** {PARALLEL_PROMPT}") == 1 for record in records)
+        assert all(f"## {first_prompt_date} <!-- turn-" in record.read_text() for record in records)
+        assert all(record.read_text().count(formal_message("发起", PARALLEL_PROMPT)) == 1 for record in records)
         for name in ("parallel-alpha", "parallel-beta"):
             session = name
             enter("/exit")
@@ -757,8 +763,9 @@ stream_max_retries = 0
         end()
         content = record.read_text()
         assert content.count("<!-- turn-") == 1, content
-        assert content.index("**发起** " + STEER_INPUT) < content.index("**补充** " + STEER_ADDITION)
-        assert content.index("**补充** " + STEER_ADDITION) < content.index("**回复** " + STEER_REPLY)
+        assert content.index(formal_message("发起", STEER_INPUT)) < content.index(formal_message("补充", STEER_ADDITION))
+        assert content.index(formal_message("补充", STEER_ADDITION)) < content.index(formal_message("回复", STEER_REPLY))
+        assert content.count("\n---\n\n") == 2
         return {"sentDuringActualTool": True, "oneNativeTurn": True, "supplementBeforeFinalInRecord": True}
 
     try:
@@ -900,7 +907,7 @@ stream_max_retries = 0
                 end()
                 if answer != RESUMES[-1]:
                     assert len(list(repo.glob("records/*/*.md"))) == 1
-                    assert answer in records[0].read_text() and f"> **{day}**" in records[0].read_text()
+                    assert answer in records[0].read_text() and f"## {day} <!-- turn-" in records[0].read_text()
             relocated = repo / "conversation-recording" / records[0].relative_to(repo)
             assert records[0].read_bytes() == preserved
             assert RESUMES[-1] in relocated.read_text() and "previousRecords" in relocated.read_text()

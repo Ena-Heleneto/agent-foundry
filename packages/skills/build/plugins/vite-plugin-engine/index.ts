@@ -3,23 +3,46 @@ import { createHash } from 'node:crypto'
 import { lstatSync, readdirSync } from 'node:fs'
 import { join, posix } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import { scanCollections } from '#utils/scan-skills'
+import { scanCollections } from '#build/utils/scan-skills'
 import { createEngineInstallScript } from './install-script.ts'
+
+/**
+ * 在 Vite 解析当次构建环境后加载引擎子插件，不要求入口传入 mode。
+ *
+ * @returns 仅用于构建的引擎插件。
+ */
+export default function vitePluginEngine(): Plugin {
+  return {
+    name: 'vite-plugin-engine',
+    apply: 'build',
+    applyToEnvironment: loadEnvironmentPlugins,
+  }
+}
+
+/**
+ * 从 Vite 提供的环境取得 mode，在构建钩子运行前加载子插件。
+ *
+ * @param environment Vite 已解析的构建环境。
+ * @returns 该环境启用的引擎子插件及统一入口插件。
+ */
+function loadEnvironmentPlugins(environment: Parameters<NonNullable<Plugin['applyToEnvironment']>>[0]): Promise<PluginOption[]> {
+  return loadEnginePlugins(environment.config.mode)
+}
 
 /**
  * 按顺序加载全局与集合子插件，限定子插件输出路径并交付引擎入口。
  *
- * @param publishOnly 是否只从选择发布的集合发现子插件。
+ * @param mode Vite 当次构建模式，供集合扫描筛选启用的子插件。
  * @returns 子插件及后置入口生成插件，由 Vite 执行各自构建钩子。
  * @throws 子插件导入、解析或工厂调用失败时，附带实际入口路径。
  */
-export default async function vitePluginEngine(publishOnly = false): Promise<PluginOption[]> {
+export async function loadEnginePlugins(mode: string): Promise<PluginOption[]> {
   /**
    * 从包内定位全局和集合子插件目录，全局优先，集合沿用扫描顺序及 plugin 开关。
    */
   const directories = [
     { root: fileURLToPath(new URL('./sub-plugins', import.meta.url)), source: '全局' },
-    ...(await scanCollections(fileURLToPath(import.meta.resolve('#src')), { publishOnly }))
+    ...(await scanCollections(mode, fileURLToPath(import.meta.resolve('#src'))))
       .filter(({ config }) => config.plugin === true)
       .map(({ directory }) => ({ root: join(directory, 'plugin'), source: '集合' })),
   ]

@@ -28,7 +28,7 @@ function fixture(t) {
    */
   const copiedFiles = [
     'package.json',
-    'utils/scan-skills.ts',
+    'build/utils/scan-skills.ts',
     ...['index.ts', 'install-script.ts', 'install.source.sh'].map(file => join(engineDirectory, file)),
   ]
   for (const relative of copiedFiles)
@@ -55,14 +55,14 @@ function configure(root, name, options = {}) {
 }
 
 /**
- * 从独占包加载真实引擎，以无参工厂扫描包内目录。
+ * 从独占包加载真实引擎，以开发模式保留此组夹具的发现范围。
  */
 async function loadFixtureEngine(root) {
   /**
    * 模块从隔离包解析内部目录和导入别名。
    */
-  const { default: vitePluginEngine } = await import(pathToFileURL(join(root, engineDirectory, 'index.ts')).href)
-  return vitePluginEngine()
+  const { loadEnginePlugins } = await import(pathToFileURL(join(root, engineDirectory, 'index.ts')).href)
+  return loadEnginePlugins('development')
 }
 
 test('加载全局子插件时跳过备份与禁用集合的入口', async (t) => {
@@ -135,7 +135,7 @@ test('隐匿脚本模板缺失时保留旧构建产物', (t) => {
    */
   const hiddenPlugin = join(engineDirectory, 'sub-plugins/vite-plugin-hidden-install')
   for (const relative of [
-    'utils/minify-shell-script.ts',
+    'build/utils/minify-shell-script.ts',
     join(hiddenPlugin, 'index.ts'),
     join(hiddenPlugin, 'hidden-install.template.ts'),
   ])
@@ -286,15 +286,23 @@ test('已匹配的全局子插件失败时保留入口路径和原错', async (t
 })
 
 /**
- * 使用真实 Vite 内存构建验证统一入口，不运行任何生成脚本。
+ * 使用无参引擎入口进行真实 Vite 内存构建，不运行任何生成脚本。
+ *
+ * @param {string} root 隔离包根目录。
+ * @param {string} mode Vite 构建模式；原有夹具沿用开发模式。
  */
-async function buildEngine(root) {
+async function buildEngine(root, mode = 'development') {
+  /**
+   * 从隔离包加载正式引擎工厂，由 Vite 提供环境而非工厂参数。
+   */
+  const { default: engine } = await import(pathToFileURL(join(root, engineDirectory, 'index.ts')).href)
   return build({
     configFile: false,
+    mode,
     root,
     publicDir: false,
     logLevel: 'silent',
-    plugins: [await loadFixtureEngine(root), {
+    plugins: [engine(), {
       name: 'engine-test-entry',
       resolveId: id => id === 'virtual:test' ? '\0virtual:test' : undefined,
       load: id => id === '\0virtual:test' ? 'export {}' : undefined,
@@ -302,6 +310,40 @@ async function buildEngine(root) {
     build: { write: false, rolldownOptions: { input: 'virtual:test' } },
   })
 }
+
+/**
+ * 验证同一隔离包连续改变 Vite mode 时，引擎仅加载当次启用的集合插件。
+ *
+ * @param {import('node:test').TestContext} t 当前测试上下文。
+ */
+async function verifyEngineEnvironment(t) {
+  /**
+   * 在隔离包中声明一个仅参与测试发布的子插件。
+   */
+  const root = fixture(t)
+  write(root, 'src/probe/collection.config.ts', 'export default { packageName: "probe", skill: {}, plugin: true, enabled: mode => mode === "release" }')
+  write(root, 'src/probe/plugin/vite-plugin-probe/index.ts', `export default () => ({
+    name: 'mode-probe',
+    generateBundle() {
+      this.emitFile({ type: 'asset', fileName: 'probe.txt', source: this.environment.config.mode })
+    },
+  })`)
+
+  for (const mode of ['production', 'release', 'production']) {
+    /**
+     * 读取本次构建产物，检查引擎入口始终存在且探针只在 release 输出。
+     */
+    const result = await buildEngine(root, mode)
+    assert.ok(result.output.some(output => output.fileName === 'engine/install.sh'))
+    /**
+     * 被启用时，探针内容应等于当前插件环境的 mode。
+     */
+    const probe = result.output.find(output => output.fileName === 'engine/probe.txt')
+    assert.equal(probe?.source, mode === 'release' ? 'release' : undefined, mode)
+  }
+}
+
+test('无参引擎由 Vite 环境选择集合插件，连续构建不串用 mode', verifyEngineEnvironment)
 
 /**
  * 声明后置生成脚本的真实子插件，避免依赖插件工厂偶然加载顺序。

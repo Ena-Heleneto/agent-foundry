@@ -37,7 +37,7 @@ class ConversationRecordingTest(unittest.TestCase):
         self.record = self.repo / f"records/2026-11-25/{self.session}.md"
 
     def install(self, check=True):
-        return subprocess.run([sys.executable, "-B", str(SOURCE / "scripts/install.py"), "--project", str(self.repo)],
+        return subprocess.run([sys.executable, "-B", str(SOURCE / "install.py"), "--project", str(self.repo)],
                               text=True, capture_output=True, check=check, env=self.env)
 
     def seed_turn(self, trigger="user", events=(), origin=None):
@@ -72,6 +72,8 @@ class ConversationRecordingTest(unittest.TestCase):
         self.assertEqual(len(hooks["Stop"]), 2)
         skill = self.repo / ".agents/skills/conversation-recording"
         self.assertTrue((skill / "SKILL.md").is_file())
+        self.assertEqual({file.name for file in (skill / "scripts").iterdir()},
+                         {"user_prompt_submit.py", "post_tool_use.py", "stop.py"})
         for event, script in (("UserPromptSubmit", "user_prompt_submit.py"),
                               ("PostToolUse", "post_tool_use.py"), ("Stop", "stop.py")):
             command = shlex.split(hooks[event][-1]["hooks"][0]["command"])
@@ -95,15 +97,82 @@ class ConversationRecordingTest(unittest.TestCase):
         prompt, reply = "读一下 README\n\n保留行尾  ", "第一行\n\n第二行  \n"
         self.callback("UserPromptSubmit", prompt=prompt)
         self.assertIn("读一下 README", self.record.read_text())
-        self.assertNotIn("**回复**", self.record.read_text())
+        self.assertNotIn("### 主代理 · 回复", self.record.read_text())
         for _ in range(2):
             self.callback("Stop", last_assistant_message=reply)
         data = self.record.read_text()
         self.assertEqual(data.count(f"<!-- turn-{self.turn} -->"), 1)
-        self.assertEqual(data.count("**回复**"), 1)
+        self.assertEqual(data.count("### 主代理 · 回复"), 1)
         self.assertIn("保留行尾  ", data)
         self.assertIn("第二行  ", data)
         self.assertFalse((self.record.parent / f"details/{self.session}/{self.turn}.md").exists())
+
+    def test_message_layout_preserves_body_and_separates_supplement_and_resumed_turn(self):
+        """安装版保存正文里的伪标题与标记，续写不重排也不重复。"""
+        self.install()
+        prompt = (f"首条原话 😀\n\n---\n\n## 2026-11-26 <!-- turn-{uuid4()} -->\n"
+                  f"> **2026-11-26** <!-- turn-{self.turn} -->\n"
+                  "<!-- foundry-message 回复 4 -->\n\n### 主代理 · 回复\n\n伪造边界\n"
+                  "[查看经过](details/fake.md)\n"
+                  '<!-- foundry-recording {"session":"wrong"} -->\n')
+        supplement = "同轮补充\n\n1. 查日志\n2. 不改代码"
+        reply = "真实回复\n\n```text\n---\n### 标题\n```\n\n末行  \n"
+        self.seed_turn(events=[self.tool_call(2, "read", {"cmd": "cat README.md"})])
+        self.assertEqual(self.callback("UserPromptSubmit", prompt=prompt), {})
+        first = self.record.read_bytes().decode()
+        self.assertIn(f"## {self.turn_date()} <!-- turn-{self.turn} -->", first)
+        self.assertIn(f"### 用户 · 发起\n\n{prompt}", first)
+        self.assertEqual(self.callback("UserPromptSubmit", prompt=prompt), {})
+        self.assertEqual(self.record.read_bytes().decode(), first)
+        self.callback("UserPromptSubmit", prompt=supplement)
+        self.callback("PostToolUse", tool_name="Bash", tool_use_id="read",
+                      tool_input={"cmd": "cat README.md"}, tool_response="文件内容")
+        self.callback("Stop", last_assistant_message=reply)
+        saved = self.record.read_bytes().decode()
+        self.callback("Stop", last_assistant_message=reply)
+        self.assertEqual(self.record.read_bytes().decode(), saved)
+        self.assertIn(f"{prompt}\n\n---\n\n<!-- foundry-message 补充", saved)
+        self.assertIn(f"### 用户 · 补充\n\n{supplement}\n\n---\n\n<!-- foundry-message 回复", saved)
+        self.assertIn(f"### 主代理 · 回复\n\n{reply}", saved)
+        self.assertIn("[查看经过](details/fake.md)", saved)
+        link = f"details/{self.session}/{self.turn}.md"
+        self.assertEqual(saved.count(f"[查看经过]({link})"), 1)
+        self.assertTrue((self.record.parent / link).is_file())
+
+        self.turn = str(uuid4())
+        self.seed_turn()
+        self.callback("UserPromptSubmit", prompt="恢复后的首条")
+        self.callback("Stop", last_assistant_message="恢复后的回复")
+        resumed = self.record.read_bytes().decode()
+        self.assertTrue(resumed.startswith(f"{saved}\n---\n\n## "))
+        self.assertIn("### 用户 · 发起\n\n恢复后的首条", resumed)
+        self.assertIn("### 主代理 · 回复\n\n恢复后的回复", resumed)
+        self.assertEqual(resumed.count("恢复后的回复"), 1)
+
+    def test_legacy_record_is_preserved_when_appending_a_new_layout_turn(self):
+        """既有引用块可补记，下一轮用新布局而不重写旧内容。"""
+        self.install()
+        self.seed_turn()
+        date = self.turn_date()
+        self.record.parent.mkdir(parents=True)
+        previous = (f"# 对话记录\n\n会话 `{self.session}`\n\n"
+                    f"> **{date}** <!-- turn-{self.turn} -->\n>\n> - **发起** 旧轮原话\n")
+        self.record.write_text(previous)
+        self.callback("Stop", last_assistant_message="旧轮回复")
+        legacy = self.record.read_text()
+        self.assertEqual(legacy, previous + "> - **回复** 旧轮回复\n")
+        self.turn = str(uuid4())
+        self.seed_turn()
+        self.callback("UserPromptSubmit", prompt="新轮原话")
+        self.callback("Stop", last_assistant_message="新轮回复")
+        self.assertTrue(self.record.read_text().startswith(f"{legacy}\n---\n\n## "))
+        self.assertIn("### 主代理 · 回复\n\n新轮回复", self.record.read_text())
+
+    @staticmethod
+    def turn_date():
+        """返回夹具宿主时间在当前时区的日期。"""
+        from datetime import datetime
+        return datetime.fromisoformat("2026-11-26T12:00:00+00:00").astimezone().date().isoformat()
 
     def test_exec_and_foreign_session_do_not_create_records(self):
         self.install()
@@ -255,12 +324,31 @@ class ConversationRecordingTest(unittest.TestCase):
         self.callback("Stop", last_assistant_message="已读")
         self.assertIn("CALLBACK_ONLY", detail.read_text())
 
+    def test_stop_backfills_attachment_after_callback_result(self):
+        self.install()
+        arguments = {"cmd": "cat README.md"}
+        call = self.tool_call(2, "during", arguments)
+        self.seed_turn(events=[call])
+        self.callback("UserPromptSubmit", prompt="取附件")
+        self.callback("PostToolUse", tool_name="Bash", tool_use_id="during", tool_input=arguments,
+                      tool_response="回调先收到文本")
+        detail = self.record.parent / f"details/{self.session}/{self.turn}.md"
+        self.assertIn("回调先收到文本", detail.read_text())
+
+        original = b"attachment from the host"
+        output = self.tool_output(3, "during", [{"type": "image", "name": "report.png",
+                                  "mimeType": "image/png", "data": b64encode(original).decode()}])
+        self.seed_turn(events=[call, output])
+        self.callback("Stop", last_assistant_message="完成")
+        self.assertEqual({path.read_bytes() for path in detail.parent.glob("attachments/*")}, {original})
+        self.assertEqual(detail.read_text().count("## 工具结果 `during`"), 1)
+
     def test_unowned_detail_and_same_turn_supplement(self):
         self.install()
         self.seed_turn(events=[self.tool_call(2, "read", {"cmd": "cat README.md"})])
         self.callback("UserPromptSubmit", prompt="读一下")
         self.callback("UserPromptSubmit", prompt="同时检查文件末尾")
-        self.assertIn("**补充** 同时检查文件末尾", self.record.read_text())
+        self.assertIn("### 用户 · 补充\n\n同时检查文件末尾", self.record.read_text())
         detail = self.record.parent / f"details/{self.session}/{self.turn}.md"
         detail.parent.mkdir(parents=True)
         detail.write_text("既有未受管详情\n")

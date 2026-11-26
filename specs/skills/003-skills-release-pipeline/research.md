@@ -6,13 +6,13 @@
 
 ## 构建模式与集合选择
 
-**决定** 在现有 Vite 异步配置函数内读取当次 mode、加载配置，并在引擎子插件注册前生成一份构建内只读选择结果。集合可导出布尔 enabled 的静态配置，也可导出接收只读 env 的配置函数。显式 enabled 优先。迁移期未声明 enabled 的集合在 release/prod 依旧要求 publish 为 true，普通模式沿现有纳入规则。发布专属清单及说明许可同时覆盖 release 和 prod。 [构建与发布契约](contracts/build-and-publish.md)
+**当前决定（2026-11-26 更新）** 使用 Vite 当次 `mode` 作为唯一环境选择，不增加自定义环境变量。仅保留 `build`，未传 `--mode` 时沿用默认 `production`。集合配置可声明静态或按 mode 求值的 `enabled`；当前配置工厂默认启用，扫描器只在输入没有 `enabled` 时兼容旧 `publish`。插件从构建环境取得当次 mode 并交给 Node 扫描函数，不在 Node 动态导入模块中直接读取 `import.meta.env.MODE`。工作流与直接调用 Vite 的脚本在本阶段不改动。 [用户确认](spec.md#session-2026-11-26) · [构建与发布契约](contracts/build-and-publish.md) · [环境验收记录](implementation/T008.md#实际结果)
 
-**理由** Vite CLI 和 JS build 默认 mode 均是 production。根构建、Dockerfile 和开发挂载脚本都沿用此默认值，正式发布入口才显式传 release 或 prod。引擎决定是否加载集合插件早于 generateBundle，现行技能、引擎、隐匿和挂载路径各自扫描。预先选集可以让四者核对同一输入，并保持无共享可变环境的顺序构建。 [当前构建入口](../../../packages/skills/vite.config.ts) · [开发挂载](../../../scripts/dev/mount-speckit.sh) · [Vite 模式](https://vite.dev/guide/env-and-mode#-modes) · [Vite 8.3.8 JS 入口](https://github.com/vitejs/vite/blob/v8.3.8/packages/vite/src/node/build.ts#L558-L575) · [Vite 插件配置时序](https://vite.dev/guide/api-plugin#config)
+**理由** Vite 已提供唯一、与真实构建一致的 `mode`，避免自定义进程变量和 Vite mode 不一致。引擎在 `applyToEnvironment` 中从 Vite 构建环境读取 mode 并加载子插件；其他插件从各自构建钩子的环境读取 mode，再传给共享扫描函数。`vite.config.ts` 不代传 mode。普通 `vite build` 的默认 mode 就是 `production`。Node 动态导入的集合配置本身不是 Vite 转换的应用模块，因此扫描函数需要接收 mode 参数，而不是直接读 `import.meta.env.MODE`。 [当前构建入口](../../../packages/skills/vite.config.ts) · [开发挂载](../../../scripts/dev/mount-speckit.sh) · [Vite 模式](https://vite.dev/guide/env-and-mode#-modes) · [Vite 配置](https://vite.dev/config/) · [Vite 插件上下文](https://vite.dev/guide/api-plugin#config)
 
-**备选** 各插件独立按照 mode 重扫会引入上下文漂移。全局环境变量与模块顶层求值会使同进程多次构建依赖求值顺序。直接把 Vite 的 production 映射为 prod 会改变本地默认构建并影响挂载。
+**备选** 各插件独立按照 mode 重扫会引入上下文漂移。由每个插件保留 `publishOnly` 布尔值会丢失实际环境信息，并与集合配置的 enabled 规则分离；改为各扫描调用传入 Vite 当前 mode，由扫描器统一过滤。
 
-**前置验证** 用相同进程顺序构建三种模式，再运行一次 write:false 挂载构建和一次隔离 outDir 构建。读取实际技能、派生数据和输出路径，核对同次选择及文件系统副作用。现行目录覆盖实测显示正文写到固定 dist/skill，应把这个边界纳入评审和回归。测试缺配置、非普通配置、导入失败和安装名冲突的既有行为，再确定需要保留的分支。 [集合扫描](../../../packages/skills/utils/scan-skills.ts) · [技能插件](../../../packages/skills/build/plugins/vite-plugin-skill/index.ts) · [现行构建测试](../../../packages/skills/tests/distribution/vite-plugin-skill.test.mjs)
+**前置验证** 用相同进程顺序构建三种模式，再运行一次 write:false 挂载构建和一次隔离 outDir 构建。读取实际技能、派生数据和输出路径，核对同次选择及文件系统副作用。现行目录覆盖实测显示正文写到固定 dist/skill，应把这个边界纳入评审和回归。测试缺配置、非普通配置、导入失败和安装名冲突的既有行为，再确定需要保留的分支。 [集合扫描](../../../packages/skills/build/utils/scan-skills.ts) · [技能插件](../../../packages/skills/build/plugins/vite-plugin-skill/index.ts) · [现行构建测试](../../../packages/skills/tests/distribution/vite-plugin-skill.test.mjs)
 
 ## 评审范围与手写源码依据
 

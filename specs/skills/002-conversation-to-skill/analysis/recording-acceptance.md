@@ -253,3 +253,17 @@ python3 -B packages/skills/tests/conversation-workflow/helpers/recording-hook-pr
 三个事件改为独立的 Python 入口后，核对 16 个源码、主线构建和隔离安装文件的 SHA-256。隔离安装从旧的共用入口更新为三个入口，核对重复安装及已手动修改的旧配置保护。53 项 Python 测试、构建、lint 和类型检查通过。 [当前入口与交付](../implementation/T035.md#独立-hook-入口与交付)
 
 Codex CLI 0.172.0 使用回环合成回包重跑 `--extended`。空白引导保持零记录，首条保存先于业务，回复完成后保存全文，8 组扩展场景通过。其中强制结束正在等待会话锁的独立 `Stop` 入口后，原记录停在最后一次确认位置，恢复后的新轮仍能续写。真实模型验收见拆分前的最终来源证据。 [独立入口复验证据](acceptance/t035-isolated-recheck/separate-hook-entrypoints.json) · [此前真实模型验收](acceptance/t035-isolated-recheck/final-hook-runtime.json)
+
+### 2026-11-26 一次确认后的普通启动复验
+
+执行 `pnpm --filter @foundry/skills build` 和 `python3 -B packages/skills/tests/conversation-workflow/helpers/recording-hook-probe.py --formal`，均正常退出。Linux Codex CLI 0.172.0 从无预置信任的隔离状态启动。在原生界面确认项目目录后，一次确认三条记录 Hook，宿主读回三条定义均已启用且受信。空白引导会话零建档。保持同一安装及信任状态，重开 `codex` 后直接发送合成请求，首条原话在读取 README 前已保存，实发的正常最终回复在发送结束后落盘。本次复验使用本地回环合成回包，当前工作区的安装和人工试用证据由 T033 取得。 [试用步骤](../quickstart.md#当前工作区安装与手动试用)
+
+### 2026-11-26 三个 Hook 独立执行复验
+
+主线构建产物与维护源逐文件一致。从 Skill 根目录的 `install.py` 安装后，`scripts/` 只有三个 Hook 入口。分别在临时 Git 仓库移出另外两个入口，再运行剩余入口的已登记命令，确认用户原话、工具回包和实发回复各自可落盘。旧版独立入口升级到本版和重复安装均保留无关项目 Hook。Python 回归 54 项、隔离夹具测试 8 项通过。 [入口与交付](../implementation/T035.md#独立-hook-入口与交付)
+
+扩展探针首轮达到 230 秒的总时限，第二轮附件矩阵有两份 MCP 原件未落盘。独立矩阵对照中，旧版和重构版都曾保存 3 份实际原件。合成事件复现了工具回调先保存文本、宿主稍后提供同一结果的附件时出现的漏记。将仅有回调文本的结果标为可补齐后，新增回归验证晚到的原件可读回且详情只出现一次。
+
+最终构建产物用 Codex CLI 0.172.0、回环合成回包重跑 `--extended`，外层运行时限为 360 秒，实际用时 188.9 秒。从产物安装并核对了 17 个文件，三条 Hook 原生信任和随后启动通过。附件矩阵核对 3 个原件及恢复后链接，另外七组扩展场景、真实 Git 提交停写和跨日恢复均通过。当前工作区仍按 T033 办理安装和人工试用。 [试用步骤](../quickstart.md#当前工作区安装与手动试用)
+
+目标包 lint 和类型检查一度报告同期 `utils/scan-skills.ts` 的语法错误，两项复跑均通过。

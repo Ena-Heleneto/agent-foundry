@@ -2,24 +2,24 @@
 
 ## 构建入口
 
-普通根构建、直接 Vite 构建、容器及 Spec Kit 内存构建，使用各自既有默认配置。Vite 默认 mode 为 production。测试发布显式使用 release，生产发布显式使用 prod。集合配置支持静态对象与接收只读 env 的函数形式。传入当次 mode，在同次构建得到只读集合与技能清单。下表是对当前五个集合的迁移预期，后续以实测输出核对。
+集合选择直接使用 Vite 当次 `mode`。技能包仅保留 `build`：不传 `--mode` 时使用默认 `production`，也可传入 `--mode development`、`--mode release` 或 `--mode production`。默认与显式 `production` 选择一致。扫描函数接收插件从 Vite 构建环境取得的 mode，`vite.config.ts` 不代传，不在 Node 扫描模块读取 `import.meta.env.MODE`，也不增加自定义环境变量。集合配置支持静态布尔值与按 mode 计算的 `enabled`。下表是 T008 已验证的当前集合配置，不是正式生产发布的候选清单。 [验收结果](../implementation/T008.md#实际结果)
 
-| 集合     | development 与默认构建 | release | prod |
-| -------- | ---------------------- | ------- | ---- |
-| coding   | 启用                   | 启用    | 启用 |
-| frontend | 启用                   | 启用    | 启用 |
-| workflow | 启用                   | 启用    | 启用 |
-| eval     | 沿当前本地开关         | 排除    | 排除 |
-| profile  | 启用                   | 启用    | 排除 |
+| 集合     | development | release | production（含默认 build） |
+| -------- | ----------- | ------- | -------------------------- |
+| coding   | 启用        | 启用    | 启用                       |
+| frontend | 启用        | 启用    | 启用                       |
+| workflow | 启用        | 启用    | 启用                       |
+| eval     | 沿当前本地开关 | 排除  | 排除                       |
+| profile  | 启用        | 启用    | 启用                       |
 
-集合 enabled 存在时采用明确的布尔值。未声明时，release 与 prod 延续 publish 为 true 才纳入，其他构建延续本地规则。随后才选择技能级 enabled。集合插件发现额外尊重已有 plugin 开关，可以运行没有启用技能但声明了适用插件的启用集合。继续保留已有的缺配置、导入错误、链接和安装名冲突处理，并确认消费者间原有差异的实际影响。
+扫描优先使用集合配置的有效 `enabled`（布尔值或按当前 mode 求值）。当前 `defineCollectionHandle` 默认填入 `enabled: true`；只有扫描实际收到的配置没有 `enabled` 时，才走旧规则：`development` 纳入集合，`release` 和 `production` 仅纳入 `publish: true` 的集合。随后才选择技能级 `enabled`。集合插件发现额外尊重已有 plugin 开关，可以运行没有启用技能但声明了适用插件的启用集合。继续保留已有的缺配置、导入错误、链接和安装名冲突处理，并确认消费者间原有差异的实际影响。
 
-同次快照为技能复制、引擎插件发现、隐匿列表和 Spec Kit 挂载提供依据。真实写出使用当次解析的输出目录。内存构建只读取生成的挂载材料，保持磁盘输出不被改写。测试发布和生产归档都包含同次 VERSION、curl/install.sh、适用的 engine 与 skill 内容、安装映射、说明、许可和实际必要的通知文件。
+同次快照为技能复制、引擎插件发现、隐匿列表和 Spec Kit 挂载提供依据。真实写出必须使用当次解析的输出目录；该要求在 T008 的自定义 `outDir` 验收中尚未通过。内存构建返回生成的挂载材料，保持磁盘输出不被改写。测试发布和正式生产归档都应包含同次 VERSION、curl/install.sh、适用的 engine 与 skill 内容、安装映射、说明、许可和实际必要的通知文件；正式生产候选的交付范围和材料由 T019 验收，不改变默认 `build`。
 
 ## 入口、配置与制品交接
 
 - 测试入口沿用 feature/init 推送与复用调用，删除事件跳过。生产入口通过受信工作流的手动触发选择提交，于三组门禁及测试桶真实回读通过后接入。显式选中的提交在仅持内容读取权限的测试和构建作业检出，触发及制品证据一致。手动工作流可触发性按仓库默认分支的实际设置核验。 [GitHub 手动运行前置](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)
-- 公共流程只接受 release 或 prod，核对目标、mode、环境绑定与各自 R2 桶。沿用 SKILL_DEPLOY_RELEASE_R2 / SKILL_DEPLOY_R2 的账户和桶变量以及共用凭据。计划给相应前缀提供 DOWNLOAD_BASE_URL 非秘密配置。R2 作业只执行受信工作流版本的脚本，候选字节作为输入读取。选中源码的构建与测试无 R2 凭据。
+- 公共流程按阶段接入 `release` 和 `production`，核对目标、mode、环境绑定与各自 R2 桶。沿用 SKILL_DEPLOY_RELEASE_R2 / SKILL_DEPLOY_R2 的账户和桶变量以及共用凭据。计划给相应前缀提供 DOWNLOAD_BASE_URL 非秘密配置。R2 作业只执行受信工作流版本的脚本，候选字节作为输入读取。选中源码的构建与测试无 R2 凭据。
 - 每次测试或手动生产发布，三组门禁须有该次所选 SHA 的实际通过记录。门禁失败、跳过、结果缺失或候选 SHA 与被测 SHA 不符时停止部署。构建使用与门禁一致的锁定依赖和工具配置，直接构建该包生成目标模式的候选。补发旧提交也须通过现行门禁和候选核验。候选核对获准集合和必要附件，排除项目个人材料、工作区凭据与环境文件。用同一工作流运行的制品传递归档、根入口字节及候选元数据，下载后逐项验证身份、长度和摘要。版本表准备作业另交接新表及源状态。 [数据模型](../data-model.md)
 - 从调度进入到 S3 回读，整条公共发布流程按已验证目标分组，启用 queue: max 且不取消在途。多次触发以实际成功登记顺序置顶。队列满由平台取消，保留运行记录。旧工作流运行的重新尝试不进入部署，维护者另行触发时生成独立候选。 [GitHub 并发队列](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency)
 

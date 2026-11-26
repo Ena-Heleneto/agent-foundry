@@ -10,7 +10,7 @@ import { parse } from 'yaml'
 import vitePluginSpeckitMount from '../../src/workflow/plugin/vite-plugin-speckit-mount/index.ts'
 
 /**
- * 创建独占来源、运行项目和外部 CLI 记录器，不挂载当前仓库。
+ * 创建默认生产模式可见的独占来源和 CLI 记录器，不挂载当前仓库。
  */
 function fixture(t, skill) {
   /**
@@ -19,7 +19,7 @@ function fixture(t, skill) {
   const root = mkdtempSync(join(tmpdir(), 'foundry hook '))
   t.after(() => rmSync(root, { recursive: true, force: true }))
   mkdirSync(join(root, 'src/workflow'), { recursive: true })
-  writeFileSync(join(root, 'src/workflow/collection.config.ts'), `export default ${JSON.stringify({ packageName: 'workflow', mcp: false, skill })}`)
+  writeFileSync(join(root, 'src/workflow/collection.config.ts'), `export default ${JSON.stringify({ packageName: 'workflow', mcp: false, publish: true, skill })}`)
   for (const name of Object.keys(skill)) {
     mkdirSync(join(root, 'src/workflow', name))
     writeFileSync(join(root, 'src/workflow', name, 'SKILL.md'), `---\nname: ${name}\ndescription: 测试技能\n---\n正文\n`)

@@ -3,7 +3,7 @@ import { lstatSync } from 'node:fs'
 import { cp, readFile, stat } from 'node:fs/promises'
 import { join, posix } from 'node:path'
 import { parse } from 'yaml'
-import { scanSkills } from '#utils/scan-skills'
+import { scanSkills } from '#build/utils/scan-skills'
 
 /**
  * 映射使用小写字母、数字及内部连字符作为技能名和目录段。
@@ -148,8 +148,7 @@ export default function vitePluginSkill(): Plugin {
       /**
        * 本次启用且具备正文的技能，由复制插件统一报告缺配置的集合。
        */
-      const skills = await scanSkills(undefined, {
-        publishOnly: this.environment.config.mode === 'release',
+      const skills = await scanSkills(this.environment.config.mode, undefined, {
         onMissingConfig: configurationPath => this.warn(`缺少集合配置 ${configurationPath}，已跳过该集合`),
       })
       /**

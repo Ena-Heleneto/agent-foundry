@@ -20,7 +20,15 @@
 
 - Q: 构建和打包已完成，但上传中途失败时，重跑应继续发布原候选，还是发起一次新发布？ → A: 算部署失败，不重试。
 
-- Q: 本地直接执行 `pnpm build` 且未指定环境时，应该使用开发环境还是生产环境的集合配置？ → A: 使用默认配置。本地普通构建沿用入口现有默认值，生产发布显式使用 `prod`。
+- Q: 本地直接执行 `pnpm build` 且未指定环境时，应该使用开发环境还是生产环境的集合配置？ → A: 使用默认配置。本地普通构建沿用入口现有默认值，生产发布显式使用 `prod`。（2026-11-26 后续确认修正了默认环境解释，见下节。）
+
+### Session 2026-11-26
+
+- [环境标识使用全拼](requirements/raw/2026-11-26-environment-naming.md)、[默认环境确认](requirements/raw/2026-11-26-default-production-environment.md)与[Vite mode 决策](requirements/raw/2026-11-26-vite-built-in-mode.md)：使用 Vite 当次 `mode` 作为集合环境，不新增自定义环境变量。支持 `development`、`release`、`production`。插件从 Vite 构建环境取得 mode，交给扫描函数；`vite.config.ts` 不代传 mode。先实现包内环境区分，暂不改工作流和直接调用 Vite 的脚本。
+- [T008 验收口径确认](requirements/raw/2026-11-26-sync-build-acceptance.md)：技能包只保留 `build`，不传 `--mode` 即使用 Vite 默认 `production`，需要显式选择时传 `--mode <环境>`。当前 `profile` 在三个模式均启用，用独立夹具验收禁用集合。默认生产模式构建不等于正式生产发布；T019 的候选范围、完整发布材料及部署门禁不变。
+
+- [临时脚本范围确认](requirements/raw/2026-11-26-temporary-mount-script-scope.md)：`scripts/dev/mount-speckit.sh` 是临时手动入口，不纳入本期开发或验收。技能包自身生成的挂载材料及其集合选择仍须验证。
+- [构建评审输入确认](requirements/raw/2026-11-26-review-current-code.md)：评审以开始评审前的最新代码为准，纳入当时已有的相关手动修改；旧评审仅作为对应快照的历史证据。
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -30,12 +38,12 @@
 
 **优先理由** 发布产物与本地挂载都依赖正确的集合选择。
 
-**独立验证** 用带环境条件的 `profile` 和带技能级禁用项的集合，分别构建 `development`、`release` 和 `prod`，检查实际技能目录、启用的集合插件及其派生产物。
+**独立验证** 用同一个 `build` 构建默认 `production` 和显式 `development`、`release`、`production`，用集合级与技能级开关的正反夹具检查实际技能目录、启用的集合插件及其派生产物。默认构建与显式 `--mode production` 应采用相同的集合选择。
 
-1. 在 `profile` 按 `env.mode !== 'prod'` 启用且其技能已开启时，`development` 和 `release` 的产物应包含该技能。用 `prod` 构建时，该集合的技能、插件和适用派生交付内容均应缺席。
+1. 各模式按集合配置交付技能及适用派生内容。当前配置在三种模式均交付 `profile` 中启用的技能；仅 `development` 交付 `eval` 中启用的技能。
 2. 在集合按布尔值启用时，只交付其中启用且符合现有交付规则的技能。集合关闭时，组内技能即使开启也应全部跳过。
 3. 针对同次构建核对技能目录、集合插件、隐匿候选和 Spec Kit 挂载材料时，各处应使用一致的集合选择。
-4. 本地普通构建未指定环境时，使用现有入口的默认配置。以本期 `profile` 配置执行普通构建时，默认产物应包含 `profile`。
+4. 未传 `--mode` 的 `build` 使用 Vite 默认 `production`，与显式 `--mode production` 选择一致。生产模式构建不自动部署。
 
 ### User Story 2 - 连续发布并保留已交付版本 (P1)
 
@@ -86,7 +94,7 @@
 **独立验证** 核对测试环境的三组门禁和对象回读结果，验证测试桶公网地址尚未补齐时也能按条件接入生产。随后核对生产模式、专用目标及公网安装的独立验收记录。
 
 1. 三组测试门禁或测试桶对象回读任一未通过时，生产入口应保持待接入。
-2. 三组测试门禁与测试桶对象回读全部通过后，即可接入生产入口。每次手动生产发布须先通过本次所选提交的三组门禁，再用同一提交执行 `prod` 构建并写入生产桶。测试入口继续使用 `release` 与测试桶。
+2. 三组测试门禁与测试桶对象回读全部通过后，即可接入生产入口。每次手动生产发布须先通过本次所选提交的三组门禁，再用同一提交构建 `production` 候选并写入生产桶。测试入口继续使用 `release` 与测试桶。
 3. 测试桶公网下载根尚未补齐时，公网安装记为缺前置。地址补齐后须用实际公网入口完成独立验收。
 
 ### Edge Cases
@@ -101,9 +109,9 @@
 
 ### Functional Requirements
 
-- **FR-001** 集合配置 `defineCollectionHandle` 必须支持集合级布尔字段 `enabled`，可直接声明或根据当次构建的 `env.mode` 求值。支持 `development`、测试发布 `release` 和生产 `prod`，先判断集合，再按 `skill` 下各项的 `enabled` 选择技能。
-- **FR-002** 同次构建的集合选择必须共同约束技能复制、集合插件发现、隐匿候选和挂载脚本。未指定环境的本地普通构建沿用现有入口的默认配置。普通构建、直接构建、内存挂载构建、容器构建及发布构建均须核对适用的环境和交付结果。发布候选应保有供安装消费的技能目录、入口、适用的引擎和挂载材料、交付清单、说明和许可证。
-- **FR-003** 评审必须完整覆盖 `packages/skills/build/plugins`、`packages/skills/script` 及其构建、安装和测试调用链。对构建插件逐项记录问题和调用影响，实施评审确定的范围内优化，并附可复验的验收证据。
+- **FR-001** 集合配置 `defineCollectionHandle` 必须支持集合级布尔字段 `enabled`，可直接声明或根据当次 Vite `mode` 求值。环境值为 `development`、`release` 或 `production`。扫描先判断集合，再按 `skill` 下各项的 `enabled` 选择技能。
+- **FR-002** 同次构建的集合选择必须共同约束技能复制、集合插件发现、隐匿候选和挂载脚本。技能包只保留 `build`，未传 `--mode` 时沿用 Vite 默认 `production`；显式环境由 `--mode` 选择，默认与显式 `production` 的集合选择一致。发布材料及真实部署行为仍按发布入口处理。
+- **FR-003** 评审以该环节开始前的最新代码为准，必须记录实际评审输入并完整覆盖 `packages/skills/build/plugins`、`packages/skills/script` 及其构建、安装和测试调用链。对构建插件逐项记录问题和调用影响，实施评审确定的范围内优化，并附可复验的验收证据。历史结果只证明所评快照，不代替对后续改动的核对。
 - **FR-004** 清理旧脚本前必须核对直接引用、导出与配置、动态路径、工作流、安装入口、测试和历史使用依据。确认无引用后清理对应旧代码，并记录实删项。仍被引用的代码须记录调用方与用途，证据不足时须说明保留依据。
 - **FR-005** 本功能后续新增或修改代码前，须在本 Spec 目录保存从用户手写代码中提炼的规则与可定位源码示例，并依该记录编写和审查改动。
 - **FR-006** 测试和生产必须使用各自的 R2 桶，沿用共用访问凭据配置。各桶的发布对象为根 `install.sh`、根 `release.json` 和 `release/<时间戳>/skills.tar.gz`。旧 SHA 目录由维护者手动处理。
@@ -114,7 +122,7 @@
 - **FR-011** 桶根安装入口运行时须从对应环境的下载根读取 `release.json`。默认使用数组首条，显式版本按 `version` 精确匹配一条记录，按记录的 `url` 获取归档。安装新发布的时间戳版本时，入口必须核对归档的 SHA-256 和字节长度，并确认包内 `VERSION` 时间戳等于记录的 `version`。三项均通过后才可写入项目，字段缺失或核对失败时须报告原因。项目级技能安装及适用的挂载和隐匿接口纳入兼容核对。面向公网的版本表须使用实际 HTTPS 归档地址。
 - **FR-012** 测试和生产的每次发布均须由 `skills-test` 针对候选提交运行三组真实最小用例，验证三环境集合选择、默认安装首条以及连续两次发布。三组全部通过且被测提交与候选提交一致才允许发布，结果须可追溯到被测提交。
 - **FR-013** 测试环境应保有当前 `feature/init` 推送和可复用调用入口，分支删除事件跳过部署。测试阶段须从实际对象键经 S3 回读三份材料，核对同次运行的归档 SHA-256、入口原字节和索引首条与候选身份。公网根补齐后须用真实公开入口验下载安装。测试、对象回读和公网安装须各自记录通过、失败或缺前置未执行的证据。
-- **FR-014** 生产入口接入所需的测试环境验收证据为 FR-012 的三组门禁和 FR-013 的测试桶对象回读均通过。测试桶公网安装作为地址补齐后的独立验收。生产发布须显式使用 `prod`，按其配置选择集合并写入生产桶，使用相同的版本和发布契约。实际外部部署、发布和资源变更须有适用授权。
+- **FR-014** 生产入口接入所需的测试环境验收证据为 FR-012 的三组门禁和 FR-013 的测试桶对象回读均通过。测试桶公网安装作为地址补齐后的独立验收。正式生产候选沿用 Vite 的 `production` 模式，由生产发布入口选定交付范围并生成完整发布材料，使用相同的版本和发布契约写入生产桶。实际外部部署、发布和资源变更须有适用授权。
 
 ### Key Entities _(include if feature involves data)_
 
@@ -127,7 +135,7 @@
 
 ### Measurable Outcomes
 
-- **SC-001** 核验三种环境各一份实际构建产物。两份非生产示例产物都包含 `profile`，生产产物中该组技能及适用派生内容的残留数为 0。另核对一次未指定环境的普通构建，产物包含 `profile`。同次构建四类消费者的集合选择矛盾数为 0。
+- **SC-001** 分别核验 `development`、`release` 和 `production` 的实际构建产物。按集合配置启用的集合及适用派生内容与环境一致；默认 `build` 与 `build --mode production` 的选择结果相同。同次构建四类消费者的集合选择矛盾数为 0。
 - **SC-002** 同一提交三组门禁用例全部有真实执行结果。任一失败、跳过或未执行时的错误放行次数为 0。
 - **SC-003** 两份可区分的归档各完成一次实际安装验证，分别覆盖默认首条和显式历史版本。下载和安装内容与选中归档的匹配率为 100%。归档 SHA-256、字节长度及包内 `VERSION` 时间戳各验证一次独立不匹配情形，产生的项目写入次数均为 0。
 - **SC-004** 从无索引起连续成功发布两次时，两个版本的包内标识、归档目录及索引标识各自完全一致，第二次保留首发条目。并行触发和失败场景中，已登记的不同内容归档覆盖数、已交付记录丢失数和未完成版本入表数均为 0。至少验证一次部署写入中途失败，运行结果为失败，同次发布的后续部署尝试次数为 0。
@@ -143,11 +151,15 @@
 - 新版根布局、时间戳发布标识和首版三个测试场景采用本次确认。旧 `curl/` 桶路径、SemVer 发布键及早期门禁假设沿原记录追溯。已有有效安装行为纳入回归核对。 [旧安装交付契约](../001-skills-distribution/contracts/curl-delivery.md) · [已确认的 R2 发布布局](../002-conversation-to-skill/requirements/raw/2026-11-24-r2-release-layout.md)
 - 开发阶段将彼此独立的调研、核对和审查尽量交给子代理并行处理。子代理主动汇报结论，主代理继续推进手头开发。
 
-### 当前分支依据
+<a id="当前分支依据"></a>
 
-- 截至 `1bcc1bd`，`profile` 的 `enabled: true` 已提交，扫描仍在精确的 `release` 模式以 `publish: true` 过滤。当前 `coding`、`frontend`、`workflow` 声明参与发布，`eval` 和 `profile` 未声明。开发模式下 `eval` 的已有技能开关不构成正式发布授权。 [集合扫描](../../../packages/skills/utils/scan-skills.ts) · [技能插件](../../../packages/skills/build/plugins/vite-plugin-skill/index.ts) · [profile 配置](../../../packages/skills/src/profile/collection.config.ts) · [eval 迁移差异](../001-skills-distribution/implementation/repository-migration-files.md#六发现的差异不混入搬迁修改)
-- 根普通构建、包构建和现存 Dockerfile 可触发主线构建，开发挂载脚本用内存构建提取挂载产物。引擎、隐匿和工作流挂载插件分别参与集合选择或派生产物生成。 [根脚本](../../../package.json) · [技能包脚本](../../../packages/skills/package.json) · [容器构建](../../../packages/skills/deploy/Dockerfile) · [开发挂载](../../../scripts/dev/mount-speckit.sh) · [引擎](../../../packages/skills/build/plugins/vite-plugin-engine/index.ts) · [隐匿](../../../packages/skills/build/plugins/vite-plugin-engine/sub-plugins/vite-plugin-hidden-install/index.ts) · [Spec Kit 挂载插件](../../../packages/skills/src/workflow/plugin/vite-plugin-speckit-mount/index.ts)
-- 从 `1bcc1bd` 的隔离源码构建，默认模式 `production`、显式 `development` 和显式 `prod` 均交付 11 项技能，包含 `eval` 与 `profile`。`release` 交付 7 项，来自 `coding`、`frontend`、`workflow`，且只有该模式交付 `curl/skills.tsv`。覆盖 `outDir` 时，`VERSION` 等资产写入指定目录，技能仍写到固定 `dist/skill`。完整配置的 `write: false` 复跑返回 8 项资产，未创建输出目录。默认类型检查通过，但遗漏动态挂载源码，临时纳入后复现一处 TS2345。这些是当前实现的实测差异，供环境机制专项核对。 [T002 专项发现](analysis/build-plugin-review.md#已有专项任务接手的问题) · [实测记录](analysis/build-plugin-review.md#本轮验证记录)
+### 历史基线与当前验收
+
+- 在 `1bcc1bd` 快照中，`profile` 的 `enabled: true` 已提交，扫描仍在精确的 `release` 模式以 `publish: true` 过滤。当时 `coding`、`frontend`、`workflow` 声明参与发布，`eval` 和 `profile` 未声明。开发模式下 `eval` 的技能开关不构成正式发布授权。 [历史评审](analysis/build-plugin-review.md#已有专项任务接手的问题) · [eval 迁移差异](../001-skills-distribution/implementation/repository-migration-files.md#六发现的差异不混入搬迁修改)
+- 根 `build`、技能包 `build` 和现存 Dockerfile 可触发主线构建。引擎、隐匿和工作流挂载插件分别参与集合选择或派生产物生成；本期不使用临时开发挂载脚本验收。 [根脚本](../../../package.json) · [技能包脚本](../../../packages/skills/package.json) · [容器构建](../../../packages/skills/deploy/Dockerfile) · [引擎](../../../packages/skills/build/plugins/vite-plugin-engine/index.ts) · [隐匿](../../../packages/skills/build/plugins/vite-plugin-engine/sub-plugins/vite-plugin-hidden-install/index.ts) · [Spec Kit 挂载插件](../../../packages/skills/src/workflow/plugin/vite-plugin-speckit-mount/index.ts)
+- 从 `1bcc1bd` 的隔离源码构建，默认模式 `production`、显式 `development` 和显式 `prod` 均交付 11 项技能，包含 `eval` 与 `profile`。`release` 交付 7 项，来自 `coding`、`frontend`、`workflow`，且只有该模式交付 `curl/skills.tsv`。覆盖 `outDir` 时，`VERSION` 等资产写入指定目录，技能仍写到固定 `dist/skill`。完整配置的 `write: false` 复跑返回 8 项资产，未创建输出目录。默认类型检查通过，但遗漏动态挂载源码，临时纳入后复现一处 TS2345。这些是 T002 快照的历史结果。 [T002 专项发现](analysis/build-plugin-review.md#已有专项任务接手的问题) · [实测记录](analysis/build-plugin-review.md#本轮验证记录)
+- T008 以含未提交改动的工作区快照核对隔离构建。默认和显式 `production` 的产物逐字节一致，各有 8 项技能。`development` 有 11 项技能，`release` 有 8 项技能并生成测试发布材料。集合过滤、派生产物及 `write: false` 均通过。 [T008 验收记录](implementation/T008.md#实际结果)
+- T008 续接复核覆盖了含空格的相对和绝对 `outDir`，两种路径下的 8 份技能正文均写进了默认 `dist/skill`。把动态挂载插件纳入类型检查后复现了 TS2345。命令挂载的 4 项测试因夹具缺少集合开关报错，仅在隔离夹具中补上 `enabled: true` 后全部通过。三处修复的方案待确认，容器归档等待包含被验改动的实际 Git 提交，T008 整体验收仍未通过。 [复核证据与修复提议](implementation/T008.md#续接复核与待确认的修复方案)
 - 当前 `VERSION` 仅有包版本。部署流程固定使用 `release` 构建、会取消同目标在途运行，并按源码 SHA 和运行标识上传。测试放行是占位，生产文件是草稿。安装源使用示例下载根，已有首条与显式版本选择，以及下载校验后调用引擎的行为。 [通用部署](../../../.github/workflows/skills-deploy-common.yml) · [测试放行](../../../.github/workflows/skills-test.yml) · [测试环境入口](../../../.github/workflows/skills-deploy-release.yml) · [生产草稿](../../../.github/workflows/skills-deploy-prod.yml.example) · [版本文件](../../../packages/skills/build/plugins/vite-plugin-version/index.ts) · [安装入口](../../../packages/skills/build/plugins/vite-plugin-curl/install.source.sh)
 - T001 已保存代码风格及可定位的手写样本。2026-11-25 的隔离基线中，四组 Node 分发用例通过 64 项，技能包 Python 测试通过 39 项。T002 完成构建插件和调用链评审，复跑四组 Node 用例仍为 64 项通过。另有两项旧工作流测试因引用已移除的 YAML 失败。评审记录了四类可复现问题和各自的影响，具体优化范围仍待 T003 确认。 [代码风格](coding-style.md) · [T001 基线](implementation/T001.md#实际复跑结果) · [T002 评审](analysis/build-plugin-review.md)
 - T004 已核对 `packages/skills/script` 的 15 项文件。实际 release 构建和本地 `pnpm pack` 确认当前发布包不含旧脚本。旧默认路径已失效，显式指向 `script/old` 后，8 项定向 Node 调度测试通过。`script/old` 的 14 项有测试、内部依赖或历史用途未决等保留依据。空占位 `script/curl/.gitkeep` 是 T005 唯一清理候选，实际清理及回归待执行。归档内 `script/hidden-install.sh` 的回退由现行引擎及其回归覆盖。 [逐文件核查](analysis/legacy-script-review.md#逐文件处置依据) · [T004 实测](analysis/legacy-script-review.md#本轮验证)
@@ -155,8 +167,8 @@
 
 ### 规划时待确认与复核
 
-- 依据 T002 的评审证据确定 T003 的优化范围，并在处理后复验。依据 T004 的逐文件结论复核 T005 的清理候选，再核对有效入口和历史夹具。 [评审与清理任务](tasks.md#构建插件评审与优化)
-- 确认各入口如何传递各自的构建环境、缺少集合级 `enabled` 时如何承接旧 `publish` 行为，以及各集合在 `release` 和 `prod` 的条件。核对开发、直接构建、容器、内存挂载和发布入口。
+- T003 修改前，先以该轮评审开始前的最新代码复核构建插件及调用链。对比 T002 的历史证据，确认仍成立的问题、新发现和优化范围，再实施并复验。依据 T004 的逐文件结论复核 T005 的清理候选，再核对有效入口和历史夹具。 [评审与清理任务](tasks.md#构建插件评审与优化)
+- 环境选择使用 Vite 当前 `mode`；包内 mode 传递、扫描和实际构建产物按对应任务验收。工作流按发布阶段接入，临时手动挂载脚本不纳入本期。
 - 确认 `VERSION` 字段格式、时间戳粒度，以及同一发布输入的重复构建比较口径。 [旧规格的同源构建验收](../001-skills-distribution/spec.md)
 - 核对旧公开地址或 SemVer 条目的真实消费者，确定兼容范围。核对包内 `curl/install.sh` 和 `engine/install.sh` 的接口，以及旧安装器是否仍需读取 `md5` 字段。 [旧安装交付契约](../001-skills-distribution/contracts/curl-delivery.md#版本表与固定对象)
 - 确认真实 HTTPS 下载根及缓存对公网安装验收的影响。缺少公网地址时，测试桶仍可按实际对象键完成回读验收，公网验证结果记为缺前置。

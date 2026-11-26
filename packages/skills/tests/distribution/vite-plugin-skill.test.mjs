@@ -7,7 +7,7 @@ import { join } from 'node:path'
 import process from 'node:process'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
-import { minifyShellScript } from '../../utils/minify-shell-script.ts'
+import { minifyShellScript } from '../../build/utils/minify-shell-script.ts'
 
 /**
  * 为真实构建准备独占来源和旧产物，结束后清理整个测试项目。
@@ -41,13 +41,13 @@ function skillFixture(t) {
 }
 
 /**
- * 将场景数据写为真实集合模块，不执行字符串拼接生成的 Shell。
+ * 写入参与默认生产构建的集合夹具，使原有校验用例不被集合筛选跳过。
  * @param {string} collection 集合目录。
  * @param {unknown} packageName 集合目标名称。
  * @param {Record<string, { enabled: boolean }>} skill 启用选择。
  */
 function writeSkillConfig(collection, packageName = 'workflow', skill = { sample: { enabled: true } }) {
-  writeFileSync(join(collection, 'collection.config.ts'), `export default ${JSON.stringify({ packageName, skill })}\n`)
+  writeFileSync(join(collection, 'collection.config.ts'), `export default ${JSON.stringify({ packageName, publish: true, skill })}\n`)
 }
 
 /**
@@ -318,7 +318,7 @@ test('重名技能使真实 Vite 构建在清理旧产物前失败', (t) => {
     const directory = join(root, 'src', collection)
     mkdirSync(join(directory, 'same-name'), { recursive: true })
     writeFileSync(join(directory, 'same-name/SKILL.md'), `# ${collection}\n`)
-    writeFileSync(join(directory, 'collection.config.ts'), `export default { packageName: '${collection}', skill: { 'same-name': { enabled: true } } }\n`)
+    writeFileSync(join(directory, 'collection.config.ts'), `export default { packageName: '${collection}', publish: true, skill: { 'same-name': { enabled: true } } }\n`)
   }
 
   /**

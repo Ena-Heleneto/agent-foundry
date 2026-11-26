@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite'
 import { readFile } from 'node:fs/promises'
-import { minifyShellScript } from '#utils/minify-shell-script'
+import { minifyShellScript } from '#build/utils/minify-shell-script'
 
 export default function vitePluginCurl(): Plugin {
   return {

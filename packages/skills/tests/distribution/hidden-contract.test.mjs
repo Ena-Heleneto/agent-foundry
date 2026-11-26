@@ -7,7 +7,7 @@ import process from 'node:process'
 import test from 'node:test'
 import { createEngineInstallScript } from '../../build/plugins/vite-plugin-engine/install-script.ts'
 import { createHiddenInstallScript } from '../../build/plugins/vite-plugin-engine/sub-plugins/vite-plugin-hidden-install/index.ts'
-import { minifyShellScript } from '../../utils/minify-shell-script.ts'
+import { minifyShellScript } from '../../build/utils/minify-shell-script.ts'
 import { createSandbox } from './sandbox.mjs'
 
 /**

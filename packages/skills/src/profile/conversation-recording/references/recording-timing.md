@@ -2,7 +2,7 @@
 
 ## 项目级 Hook 安装
 
-从主线构建产物运行 `python3 -B scripts/install.py --project <Git 工作树根>`，由 Codex 原生界面确认项目及安装的 Hook。空白引导会话保持零记录，信任完成后普通启动。显式的项目相对资料根可在 `.codex/conversation-recording.json` 中用 `recordRoot` 配置，默认沿资料契约选址。
+从主线构建产物的记录 Skill 根目录运行 `python3 -B install.py --project <Git 工作树根>`，由 Codex 原生界面确认项目及安装的 Hook。空白引导会话保持零记录，信任完成后普通启动。显式的项目相对资料根可在 `.codex/conversation-recording.json` 中用 `recordRoot` 配置，默认沿资料契约选址。
 
 ## 首条消息与普通轮次
 
