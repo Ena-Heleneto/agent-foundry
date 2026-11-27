@@ -25,6 +25,7 @@ HOOK_SCRIPTS = {
     "UserPromptSubmit": "user_prompt_submit.py",
     "PostToolUse": "post_tool_use.py",
     "Stop": "stop.py",
+    "SubagentStop": "subagent_stop.py",
 }
 
 
@@ -103,7 +104,8 @@ def install(project, source):
         plain_path(path, is_directory=False)
     same_location = source == target
     files = inventory(source)
-    required = {"SKILL.md", "install.py", "recording/__init__.py", "recording/events.py", "recording/record.py"}
+    required = {"SKILL.md", "install.py", "recording/__init__.py", "recording/events.py", "recording/record.py",
+                "recording/subagents.py", "recording/timeline.py"}
     required.update(f"scripts/{script}" for script in HOOK_SCRIPTS.values())
     if not required <= files.keys():
         raise ValueError("主线 Skill 安装材料不完整")

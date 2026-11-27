@@ -22,6 +22,7 @@ import tempfile
 import threading
 import time
 import tomllib
+from urllib.parse import unquote
 from uuid import UUID
 import uuid
 import zlib
@@ -186,6 +187,22 @@ def records_snapshot(repo):
             for root in roots for path in root.rglob("*") if path.is_file()}
 
 
+def main_records(repo):
+    """找到独立正式安装和早期平铺探针各自的主记录。"""
+    return [*repo.glob("records/*/*/record.md"), *repo.glob("records/*/*.md")]
+
+
+def record_session(record):
+    """从实际文件前言取会话身份，标题目录仍按真实 ID 恢复。"""
+    if record.name == "record.md":
+        return re.search(r"^会话 `([a-f0-9-]{36})`", record.read_text(), re.M)[1]
+    return record.stem
+
+
+def record_date(record):
+    return record.parents[1 if record.name == "record.md" else 0].name
+
+
 def png_fixture(color):
     """生成一个合成原件，供两处同名附件的字节回查。"""
     def chunk(kind, payload):
@@ -283,7 +300,7 @@ class Provider(HostResponses):
                           if value.get("type") == "function_call_output" and str(value.get("call_id")).startswith("t035-")}
         wanted = {"readme": PROMPTS[0], "question": PROMPTS[1]}.get(correlation)
         prompt_saved = wanted is not None and any(
-            wanted.encode() in path.read_bytes() for path in self.server.repo.glob("records/*/*.md")
+            wanted.encode() in path.read_bytes() for path in main_records(self.server.repo)
         )
         log(self.server.events, event="ProviderRequest", correlation=correlation, auxiliary=is_aux,
             outputHasReadme=output is not None and README in json.dumps(output), promptAlreadySaved=prompt_saved,
@@ -504,7 +521,7 @@ stream_max_retries = 0
 
     def saved_reply(answer):
         expected = formal_message("回复", answer).encode()
-        locations = [*repo.glob("records/*/*.md"), *repo.glob("conversation-recording/records/*/*.md")]
+        locations = main_records(repo) + main_records(repo / "conversation-recording")
         return next((path for path in locations if expected in path.read_bytes()), None)
 
     def stop_isolated_daemon():
@@ -553,8 +570,8 @@ stream_max_retries = 0
         detail_ref = re.search(r"\[查看经过\]\(([^)]*)\)", record.read_text())[1]
         detail_path = record.parent / detail_ref
         detail = detail_path.read_text()
-        links = re.findall(r"\[附件\]\((attachments/[^)]+)\)", detail)
-        originals = {link: sha256((detail_path.parent / link).read_bytes()).hexdigest() for link in links}
+        links = re.findall(r"\[附件\]\(((?:\.\./)?attachments/[^)]+)\)", detail)
+        originals = {link: sha256((detail_path.parent / unquote(link)).read_bytes()).hexdigest() for link in links}
         user_checksum = sha256(user_image.read_bytes()).hexdigest()
         assert len(originals) == 3 and set(originals.values()) == {*expected_images.values(), user_checksum}, (originals, expected_images)
         assert "T035_TOOL_OUTSIDE_BYTES" in detail and str(work / "outside-tools") in detail
@@ -562,7 +579,7 @@ stream_max_retries = 0
         stream_first = re.search(r"## 工具结果 `matrix-stream`.*?T035_STREAM_FIRST", detail, re.S)
         stream_last = re.search(r"## 工具结果 `matrix-poll`.*?T035_STREAM_LAST", detail, re.S)
         assert stream_first and stream_last and stream_first.start() < stream_last.start(), detail[-6000:]
-        resume(repo, record.stem)
+        resume(repo, record_session(record))
         enter("T035_MATRIX_REOPEN")
         wait(lambda: saved_reply("T035_OTHER_FINAL"), "带附件会话实际续写")
         end()
@@ -607,8 +624,8 @@ stream_max_retries = 0
         enter(PAUSED_PROMPT)
         wait(lambda: any(row.get("correlation") == "interrupted" and not row.get("auxiliary")
                          for row in trace(events)), "用户原话保存后进入模型请求")
-        record = next(path for path in repo.glob("records/*/*.md") if PAUSED_PROMPT in path.read_text())
-        rollout, = (state / "sessions").rglob(f"*-{record.stem}.jsonl")
+        record = next(path for path in main_records(repo) if PAUSED_PROMPT in path.read_text())
+        rollout, = (state / "sessions").rglob(f"*-{record_session(record)}.jsonl")
         before = record.read_bytes()
         with rollout.open("rb") as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
@@ -620,7 +637,7 @@ stream_max_retries = 0
             shell("kill-pane", "-t", session)
         stop_isolated_daemon()
         assert record.read_bytes() == before and PAUSED_REPLY not in record.read_text()
-        resume(repo, record.stem)
+        resume(repo, record_session(record))
         enter(f"请只回复 {CONTINUED}")
         wait(lambda: saved_reply(CONTINUED), "强制中断后恢复并正常保存")
         end()
@@ -657,10 +674,10 @@ stream_max_retries = 0
         wait_ready()
         enter(CANCEL_INPUT)
         wait(lambda: CANCEL_CHUNK in screen(), "已显示未完成的流式回复")
-        record = next(path for path in repo.glob("records/*/*.md") if CANCEL_INPUT in path.read_text())
+        record = next(path for path in main_records(repo) if CANCEL_INPUT in path.read_text())
         before = record.read_bytes()
         shell("send-keys", "-t", session, "Escape")
-        rollout, = (state / "sessions").rglob(f"*-{record.stem}.jsonl")
+        rollout, = (state / "sessions").rglob(f"*-{record_session(record)}.jsonl")
         wait(lambda: '"type":"turn_aborted"' in rollout.read_text(), "宿主确认用户停止")
         server.cancel_gate.set()
         assert record.read_bytes() == before and CANCEL_CHUNK.encode() not in before
@@ -675,13 +692,13 @@ stream_max_retries = 0
             if process := matching_hook_process(prompt_candidate):
                 os.kill(process, signal.SIGKILL)
         assert EARLY_INPUT not in rollout.read_text()
-        resume(repo, record.stem)
+        resume(repo, record_session(record))
         enter("T035_AFTER_EARLY_CLOSE")
         wait(lambda: formal_message("回复", "T035_OTHER_FINAL") in record.read_text(), "关闭后从原记录续写")
         end()
         with sqlite3.connect(f"{(state / 'thread_history_1.sqlite').as_uri()}?mode=ro", uri=True) as index:
             turns = index.execute("SELECT status FROM thread_turns WHERE thread_id = ? ORDER BY rollout_byte_offset",
-                                  (record.stem,)).fetchall()
+                                  (record_session(record),)).fetchall()
         assert turns == [("interrupted",), ("inProgress",), ("completed",)], turns
         assert record.read_bytes().startswith(before)
         assert EARLY_INPUT not in record.read_text() and CANCEL_CHUNK not in record.read_text()
@@ -698,10 +715,12 @@ stream_max_retries = 0
         enter(PARTIAL_INPUT)
         wait(lambda: any(row["event"] == "PartialFailureStage" and not row["toolCompleted"] for row in trace(events)),
              "详情阻断前的首条原话已保存")
-        record = next(path for path in repo.glob("records/*/*.md") if PARTIAL_INPUT in path.read_text())
+        record = next(path for path in main_records(repo) if PARTIAL_INPUT in path.read_text())
         original = record.read_bytes()
-        obstacle = record.parent / "details" / record.stem
-        obstacle.parent.mkdir(exist_ok=True)
+        obstacle = record.parent / "details"
+        if record.name != "record.md":
+            obstacle /= record_session(record)
+            obstacle.parent.mkdir(exist_ok=True)
         obstacle.write_text("T035_PARTIAL_WRITE_OBSTRUCTION\n")
         server.partial_start.set()
         wait(lambda: any(row["event"] == "PartialFailureStage" and row["toolCompleted"] for row in trace(events)),
@@ -737,10 +756,10 @@ stream_max_retries = 0
         for name in ("parallel-alpha", "parallel-beta"):
             session = name
             enter(PARALLEL_PROMPT)
-        wait(lambda: sum(PARALLEL_REPLY in record.read_text() for record in repo.glob("records/*/*.md")) == 2,
+        wait(lambda: sum(PARALLEL_REPLY in record.read_text() for record in main_records(repo)) == 2,
              "并行会话各自建档及保存实发回复")
-        records = [record for record in repo.glob("records/*/*.md") if PARALLEL_PROMPT in record.read_text()]
-        assert len(records) == 2 and all(record.parent.name == first_date for record in records)
+        records = [record for record in main_records(repo) if PARALLEL_PROMPT in record.read_text()]
+        assert len(records) == 2 and all(record_date(record) == first_date for record in records)
         assert all(f"## {first_prompt_date} <!-- turn-" in record.read_text() for record in records)
         assert all(record.read_text().count(formal_message("发起", PARALLEL_PROMPT)) == 1 for record in records)
         for name in ("parallel-alpha", "parallel-beta"):
@@ -777,9 +796,11 @@ stream_max_retries = 0
         shell("send-keys", "-t", session, "Enter")
         wait(lambda: "Trust all and continue" in screen(), "Hook 信任提示")
         before_hooks = discovered()
-        expected_events = {"userPromptSubmit", "stop", "postToolUse", "preToolUse"} if formal else {"userPromptSubmit", "stop"}
+        expected_events = {"userPromptSubmit", "stop"}
+        if formal:
+            expected_events.update(("postToolUse", "subagentStop"))
         actual_events = {hook["eventName"] for hook in before_hooks}
-        assert {"userPromptSubmit", "stop"} <= actual_events <= expected_events
+        assert expected_events <= actual_events <= (expected_events | {"preToolUse"} if formal else expected_events)
         assert all(hook["trustStatus"] == "untrusted" for hook in before_hooks)
         shell("send-keys", "-t", session, "Down")
         wait(lambda: "› 2. Trust all" in screen(), "选中 Hook 信任")
@@ -821,7 +842,8 @@ stream_max_retries = 0
             assert "absent.txt" in str(outputs["t035-failure"]), outputs
             assert "repaired" in str(outputs["t035-retry"]), outputs
             assert not saved_reply(COMMIT_REPLY)
-            detail = "\n".join(path.read_text() for path in repo.glob("records/*/details/*/*.md"))
+            details = [*repo.glob("records/*/*/details/*.md"), *repo.glob("records/*/details/*/*.md")]
+            detail = "\n".join(path.read_text() for path in details)
             assert "T035_REPAIRED_README" in detail and "absent.txt" not in detail
             enter(AFTER_PROMPT)
             wait(lambda: saved_reply(AFTER_REPLY), "提交后的普通回复继续保存")
@@ -829,7 +851,7 @@ stream_max_retries = 0
                             "bothCommitWindowsUnchanged": True, "resultReplyOmitted": True, "laterReplyRecorded": True}
         end()
         observed = trace(events)
-        records = list(repo.glob("records/*/*.md"))
+        records = main_records(repo)
         assert len(records) == 1, records
         saved = records[0].read_bytes()
         actual_replies = [row for row in observed if row["event"] == "Stop" and row.get("status") == "received"]
@@ -851,7 +873,7 @@ stream_max_retries = 0
                 finished = next(row for row in observed if row["event"] == "ProviderFinished" and row["correlation"] == name and not row["auxiliary"] and row["isFinal"])
                 after = next(row for row in read_backs() if row["turn"] == original["turn"] and row["event"] == "Stop")
                 assert prompt_read_back["ns"] < requests[0]["ns"] < finished["ns"] < after["ns"], observed
-        session_id = records[0].stem
+        session_id = record_session(records[0])
         rollouts = list((state / "sessions").rglob(f"*{session_id}.jsonl"))
         assert len(rollouts) == 1, rollouts
         final_entries = []
@@ -888,7 +910,7 @@ stream_max_retries = 0
         recovery = None
         extended_proof = None
         if formal:
-            opening_date = records[0].parent.name
+            opening_date = record_date(records[0])
             now = datetime.now(timezone.utc)
             zone, day = next((zone, (now + timedelta(hours=offset)).date().isoformat())
                              for zone, offset in (("Pacific/Kiritimati", 14), ("Etc/GMT+12", -12))
@@ -906,7 +928,7 @@ stream_max_retries = 0
                 wait(lambda: saved_reply(answer), "恢复后的回复已保存")
                 end()
                 if answer != RESUMES[-1]:
-                    assert len(list(repo.glob("records/*/*.md"))) == 1
+                    assert len(main_records(repo)) == 1
                     assert answer in records[0].read_text() and f"## {day} <!-- turn-" in records[0].read_text()
             relocated = repo / "conversation-recording" / records[0].relative_to(repo)
             assert records[0].read_bytes() == preserved

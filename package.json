@@ -14,13 +14,13 @@
     }
   },
   "scripts": {
-    "dev": "pnpm --filter @foundry/docs run dev",
+    "dev": "pnpm --filter ./apps/docs run dev",
     "build": "turbo run build --filter=!@foundry/skills-distribution-urgent",
     "build:packages": "turbo run build --filter=@foundry/preset-config --filter=@foundry/skills",
     "build:candidate": "pnpm --filter @foundry/skills-distribution-urgent run build",
     "lint": "turbo run lint",
     "check-types": "turbo run check-types",
-    "prepare:workspace": "pnpm --filter @foundry/preset-config run build && pnpm --filter @foundry/docs run nuxt:prepare",
+    "prepare:workspace": "pnpm --filter @foundry/preset-config run build && pnpm --filter ./apps/docs run nuxt:prepare",
     "skills:link": "bash scripts/dev/actions/link-skills/link-skills.sh packages/skills-distribution-urgent/src .agents/skills",
     "mcp:test": "uv run --project apps/mcp --frozen --group dev pytest apps/mcp/tests",
     "postinstall": "pnpm prepare:workspace"

@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-27",
+  "cli": "codex-cli 0.172.0",
+  "model": "gpt-6.2-sol",
+  "reasoningEffort": "medium",
+  "modelBackend": "Codex 原生登录的真实模型",
+  "installedFiles": {
+    "SKILL.md": "a156bb6dafae543304d7b68fdbaceb1515199599357fbeac6921965302086d5e",
+    "install.py": "326b2ac01e5f1dc27b061cd38264a4d3d917fb6639a48d593c52a6c0c7b6bcda",
+    "recording/events.py": "7a860d022fce11ee03a381bfcf00b4da8f0f78163cd132bc06bc9301b78f2c49",
+    "recording/__init__.py": "f18e4fe9ac27d8eb4e4e5b791f7ceba82f78adb2e697c726f7e6676a6b608d57",
+    "recording/timeline.py": "e52fd6521ea12fa6924ce1621144dfa3567119a3acd29bb6bfdda9575310e30e",
+    "recording/record.py": "eb9ad8115a5267b41bc5290417b66f3416d8c712dae6adcb3456e9b4bfb11f88",
+    "recording/subagents.py": "2464d7f86e3cac439c8e2b266a9888690e51facd08022f54fbf99a0f3128015f",
+    "references/resume-records.md": "d6668ff8ad9c81ec139ed1c15aafd92f18e9f5de90c5a31b7aa16e7019562186",
+    "references/session-scope.md": "03deea62a561d6314bd3628814b47bff986689dcb0aa9b0096e15eaaa3775e42",
+    "references/storage-contract.md": "7553cc35854e348eb6eeb960af7dde1724061d8b6e63788db0c7eb60dbba3187",
+    "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+    "references/recording-timing.md": "283e086174f8322ccde8baff0935be06d000c09199a7bf12fa7c921d9e697274",
+    "references/event-capture.md": "9a8657e9883debc029b0344e9ab149db1843d20a8b15b93dda9e3513559272b5",
+    "references/save-events.md": "acdb4e17d52237e2c57bcf0410284c48e336080da767674ade9ab96349386f14",
+    "template/record.md": "e9f1e1770e047ffcd8c68d807f4031dfb8d2dc41d87b3dfcdb793187d8f5891d",
+    "template/detail.md": "43b14c5bd86f03c14b8565bd341829b720d1495deaf37d8184fde8ccc1e47a81",
+    "scripts/stop.py": "799c0913b49cc53b378820e44bf9f70e31babe9ce6ed72a437c5fc3e6591021b",
+    "scripts/subagent_stop.py": "8543b9126a390a64e340bc9993cecb04a30158b99eec996fc65bb18386491bd7",
+    "scripts/post_tool_use.py": "185aa0dad1fcd2abca427105922f2eab09f98b85c2637a6511984fd25f0b85d4",
+    "scripts/user_prompt_submit.py": "f378f5b5c31efb75aec6ebd10ff0e7389e80b6baad35a452aa32dc778e2bd62b"
+  },
+  "trustedProbeEvents": [
+    "postToolUse",
+    "stop",
+    "subagentStart",
+    "subagentStop",
+    "userPromptSubmit"
+  ],
+  "user": {
+    "prompt": "雨后为什么容易看到彩虹？请用一句话回答。",
+    "parentId": "01a21bbc-a333-7263-85c3-9d42488953b1",
+    "turnId": "01a21bbc-a3ec-7741-b877-3ae1969aed1e",
+    "record": "records/2026-11-27/01a21bbc-a333-7263-85c3-9d42488953b1.md",
+    "initialReadBackSha256": "cdd5a877127d47f940ab35564a4b352286c00da1319874a7b131f4767d2023bd",
+    "additionalContextSha256": "21ff56c2dc212c06b29fabf45a0cdd9803b98f0531923d7d30243386316f7f37",
+    "hintInDeveloperRolloutAt": "2026-11-27T06:41:20.956Z"
+  },
+  "dispatch": {
+    "at": "2026-11-27T06:41:32.923Z",
+    "tool": "collaboration.spawn_agent",
+    "callId": "call_5a38b893e5794a87bb8c5a1eec378932",
+    "taskName": "recording_title",
+    "agentPath": "/root/recording_title",
+    "childId": "01a21bbc-e105-7530-baf7-dea8d70909cd",
+    "childTurn": "01a21bbc-e124-7a63-be4f-4e0ec5d24b29",
+    "postToolUseMsFromReadBack": 12302.208,
+    "plainMarkerFoundInToolPayload": false
+  },
+  "parentReply": {
+    "at": "2026-11-27T06:41:36.035Z",
+    "text": "雨后空气中常残留许多小水滴，阳光在水滴中折射、反射并分散成不同颜色，就形成了彩虹。",
+    "readBackMsFromOriginal": 15441.914,
+    "visibleBeforeChildResult": true,
+    "finalAnswerCount": 1,
+    "waitAgentCalls": 0
+  },
+  "naming": {
+    "at": "2026-11-27T06:41:54.045Z",
+    "result": {
+      "title": "雨后为什么容易看到彩虹"
+    },
+    "hookMsFromOriginal": 33532.432,
+    "secondsAfterParentReply": 18.01,
+    "gateToolCalledAt": "2026-11-27T06:41:50.223Z",
+    "gateWasOpenOnToolInvocation": true,
+    "callbackAcceptedAfterGate": true
+  },
+  "probeChecks": {
+    "completedRealModelSamples": 1,
+    "sameParentChildVerified": true,
+    "initialProbeAssertion": "旧断言从派发输入匹配明文标记失败",
+    "finalVerification": "用宿主任务名、工具调用、子线程身份及原生回调重新核对通过",
+    "directoryRenameExercised": false
+  }
+}

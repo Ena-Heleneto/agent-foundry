@@ -10,6 +10,7 @@ from recording.events import (
     private_output, redacted,
 )
 from recording.record import link_details, load_turn, run_hook, session_lock
+from recording.subagents import agent_tool_message
 
 
 def record_tool(scope, data):
@@ -46,7 +47,7 @@ def record_tool(scope, data):
                 events.append(captured_output(location, call, data.get("tool_response"), omit, provisional=True))
 
         failure = link_details(scope, turn, events)
-        turn.save()
+        turn.save(scope, agent_tool_message(scope, data))
         if failure is not None:
             raise failure
 

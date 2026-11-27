@@ -59,6 +59,17 @@ class TurnContents:
     tool_privacy: dict[str, bool]
     tool_outputs: frozenset[str]
     withheld_calls: frozenset[str]
+    pending_code_calls: frozenset[str]
+
+
+def rollout_rows(path, offset=0):
+    """按宿主文件顺序读回完整事件，保留真实的字节位置。"""
+    with path.open("rb") as stream:
+        stream.seek(offset)
+        while line := stream.readline():
+            if not line.endswith(b"\n"):
+                break
+            yield stream.tell() - len(line), json.loads(line)
 
 
 def redacted(text):
@@ -414,4 +425,4 @@ def collect(scope):
     blocked_events = {f"{label}:{call}" for call in withheld for label in ("call", "result")}
     return TurnContents(tuple(event for event in events if event.identity not in blocked_events),
                         tuple(inputs or fallback_inputs), during_commit, calls, frozenset(outputs - withheld),
-                        frozenset(withheld))
+                        frozenset(withheld), frozenset(code_calls))

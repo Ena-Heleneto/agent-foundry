@@ -1,6 +1,6 @@
 # Implementation Plan: 主线技能按环境构建与发布
 
-**Branch** feature/init · **Spec Kit 功能标识** 003-skills-release-pipeline · **Updated** 2026-11-26
+**Branch** feature/init · **Spec Kit 功能标识** 003-skills-release-pipeline · **Updated** 2026-11-27
 **Input** [功能规格与四项澄清](spec.md) · [调研与决策](research.md)
 
 ## Summary
@@ -19,12 +19,12 @@
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | 语言与版本 | 严格 TypeScript 6、ESM、Bash 与 Node.js。使用仓库 mise 工具链、pnpm 12 和锁定的 Vite 8.3.8。                                                  |
 | 主要依赖   | 已有 Vite/Rolldown、Node 内建 crypto、Bash/curl/tar/jq/uv、GitHub Actions artifacts、AWS CLI v2 的 S3 API。干净工作区先构建技能包的预设依赖。 |
-| 存储       | release 与 production 各一 R2 桶，沿用共用凭据配置。桶根是安装入口和有序版本表，归档是独立的固定键。CI 制品传递同次候选和读表快照。           |
+| 存储       | release 与 production 各一 R2 桶，沿用共用凭据配置。桶根是安装入口和有序版本表，归档是独立的固定键。CI 制品传递同次候选和新表，作业输出传递源状态。 |
 | 测试       | 以真实 Vite 产物、实际安装器和隔离对象存储边界执行三组 Node 门禁。既有 Node、Python 回归与真实 S3、公网安装分别记录。                         |
 | 目标平台   | CI 沿用 Ubuntu 24.04，主线验收在 Linux 的隔离 Codex 项目；技能包脚本用 Vite `--mode` 选择集合，本地 `build` 缺省为 production。                    |
 | 项目类型   | 主线技能包构建、发布流水线和 Bash 安装入口。                                                                                                  |
 | 性能与规模 | 每个 R2 目标同时只处理一个发布，平台队列及单次对象上传上限按调研取证。归档用流式摘要，历史有序保留。规格以正确性和可核验性为度量。            |
-| 边界       | 临时版本逻辑放入独立目录，源码版本与发布时间戳各自保存。本期不含回退机制、紧急版及 MCP 清单改造。                                             |
+| 边界       | 公共发布工作流用独立作业准备版本表，源码版本与发布时间戳各自保存。本期不含回退机制、紧急版及 MCP 清单改造。                                    |
 
 ## Constitution Check
 
@@ -56,7 +56,7 @@ packages/skills/
 ├── src/*/collection.config.ts
 ├── src/workflow/plugin/vite-plugin-speckit-mount/
 ├── build/                        # 构建插件与构建专用工具
-├── script/                       # 含待核查旧脚本，计划新增 temporary-release/
+├── script/                       # 含待核查旧脚本
 ├── tests/distribution/
 ├── deploy/Dockerfile
 └── README.md
@@ -64,7 +64,9 @@ packages/skills/
 
 沿用现有入口及集合插件结构。扫描器接收同一 mode 并先解析集合启用状态，使用集合配置的有效 `enabled`，仅在扫描输入未提供该字段时兼容旧 `publish` 规则。工作流与直接调用 Vite 的脚本按发布阶段接入。生产入口在 release 门禁和测试桶实际回读通过后接入。
 
-四类消费者的包内环境选择已通过隔离验证。T008 的自定义输出目录和挂载插件类型检查已修复并分项复验。接下来补齐命令挂载测试夹具，复跑完整本地验收，再从包含被验输入的实际 Git 提交验收容器导出与归档。 [T008 当前进度](implementation/T008.md#分项修复与剩余验收)
+T008 已完成环境产物验收。命令挂载测试配置修复后，模式矩阵、四类消费者、自定义输出、内存构建及现有回归均通过。默认容器构建从实际提交 `8563253` 导出，归档与导出目录逐文件核验通过。 [T008 复验证据](implementation/T008.md#2026-11-27-续接验收)
+
+T009 已验收构建开始时生成的 `VERSION`、固定测试时钟复建和归档内标识。候选由归档中的 `releaseTimestamp` 取得标识，供固定对象键和版本表准备使用。 [T009 验收](implementation/T009.md#构建时钟复验)
 
 ## Complexity Tracking
 

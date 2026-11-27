@@ -1,3 +1,6 @@
+@import 'tailwindcss' prefix(tw);
+@import '@nuxt/ui';
+
 :root {
   color-scheme: light;
   font-family:

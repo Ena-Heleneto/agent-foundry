@@ -1,0 +1,214 @@
+{
+  "source": "cf8def3:packages/skills/src/profile/conversation-recording",
+  "scope": "Linux Codex CLI 原生隔离交互，Code Mode 和补充回传，所有文本合成，时间为 UTC",
+  "v1CodeMode": {
+    "execution": "nested",
+    "featureMode": "v1",
+    "version": "codex-cli 0.172.0",
+    "installedFileCount": 17,
+    "eventModuleSha256": "8054c9d6e619c3201f5944e51050381dc7ec2f90a7eeffc0c2e417f7411347a7",
+    "parentSessionId": "01a21aba-1844-7872-a211-5539427eaf9f",
+    "parentRollout": "sessions/2026/11/27/rollout-2026-11-27T01-58-53-01a21aba-1844-7872-a211-5539427eaf9f.jsonl",
+    "parentReplyReadBackTimes": {
+      "first": "2026-11-27T01:58:55.719Z",
+      "second": "2026-11-27T01:58:58.442Z",
+      "third": "2026-11-27T01:58:59.951Z"
+    },
+    "thirdTurnStartedAt": "2026-11-27T01:58:58.722Z",
+    "thirdPromptHookAt": "2026-11-27T01:58:58.996Z",
+    "recordStayedUnchangedBetweenParentActivityAtBothChildReplies": true,
+    "events": [
+      {
+        "stage": "initial",
+        "senderParentTurnId": "01a21aba-198f-74d1-b6c1-a6e94e988c00",
+        "childThreadId": "01a21aba-1d83-7c90-a7b0-6b1041c6c3ed",
+        "childTurnId": "01a21aba-1d94-7351-97c5-39c27e507a7b",
+        "toolName": "spawn_agent",
+        "toolUseId": "exec-b3edbc13-fd5c-4fff-9b19-ff9255051224",
+        "originalInputInBothToolHooks": "FOUNDRY_CODE_CHILD_INITIAL\n\n子代理初次派发的合成原文。",
+        "toolTarget": null,
+        "postToolResponse": "{\"agent_id\":\"01a21aba-1d83-7c90-a7b0-6b1041c6c3ed\",\"nickname\":\"Sagan\"}",
+        "parentActivity": {
+          "line": 16,
+          "type": "CollabAgentToolCall",
+          "time": "2026-11-27T01:58:54.622Z"
+        },
+        "replyFromSubagentStop": "FOUNDRY_CODE_CHILD_INITIAL_DONE\n\n初次回复原文。",
+        "subagentStopAt": "2026-11-27T01:58:55.973Z",
+        "replyAtCallback": {
+          "activeTurn": "01a21aba-1d94-7351-97c5-39c27e507a7b",
+          "matchingFinalAnswers": [
+            {
+              "time": "2026-11-27T01:58:55.793Z",
+              "line": 11,
+              "byteOffset": 34012,
+              "sha256": "2e3c5926f8c83a5eb18d896486f8b621bb451577febbad29d5b12484f81cd658"
+            }
+          ],
+          "taskCompleteAlreadyReadable": false,
+          "completeBytesRead": 36294
+        },
+        "childTaskCompleteAt": "2026-11-27T01:58:56.011Z",
+        "childRollout": "sessions/2026/11/27/rollout-2026-11-27T01-58-54-01a21aba-1d83-7c90-a7b0-6b1041c6c3ed.jsonl"
+      },
+      {
+        "stage": "supplement",
+        "senderParentTurnId": "01a21aba-2382-7b52-a711-d9c6e1240144",
+        "childThreadId": "01a21aba-1d83-7c90-a7b0-6b1041c6c3ed",
+        "childTurnId": "01a21aba-27a9-7143-a907-a742f46b85fd",
+        "toolName": "multi_agent_v1send_input",
+        "toolUseId": "exec-7957cd25-89a3-4f71-880a-d8d6ec4760cb",
+        "originalInputInBothToolHooks": "FOUNDRY_CODE_CHILD_SUPPLEMENT\n\n对同一子代理的合成补充。",
+        "toolTarget": "01a21aba-1d83-7c90-a7b0-6b1041c6c3ed",
+        "postToolResponse": "{\"submission_id\":\"01a21aba-27a9-7143-a907-a742f46b85fd\"}",
+        "parentActivity": {
+          "line": 33,
+          "type": "CollabAgentToolCall",
+          "time": "2026-11-27T01:58:57.198Z"
+        },
+        "replyFromSubagentStop": "FOUNDRY_CODE_CHILD_SUPPLEMENT_DONE\n\n补充回复原文。",
+        "subagentStopAt": "2026-11-27T01:58:59.608Z",
+        "replyAtCallback": {
+          "activeTurn": "01a21aba-27a9-7143-a907-a742f46b85fd",
+          "matchingFinalAnswers": [
+            {
+              "time": "2026-11-27T01:58:59.435Z",
+              "line": 20,
+              "byteOffset": 39671,
+              "sha256": "628afb6e7cb6ad796f00bf0a154774fede0d98ca8492c99d661ed9a430353f9a"
+            }
+          ],
+          "taskCompleteAlreadyReadable": false,
+          "completeBytesRead": 41956
+        },
+        "childTaskCompleteAt": "2026-11-27T01:58:59.630Z",
+        "childRollout": "sessions/2026/11/27/rollout-2026-11-27T01-58-54-01a21aba-1d83-7c90-a7b0-6b1041c6c3ed.jsonl"
+      }
+    ]
+  },
+  "v2CodeModeCatalogChecks": [
+    {
+      "dynamicToolsFlag": false,
+      "codeModeCatalogReply": [
+        {
+          "type": "input_text",
+          "text": "Script completed\nWall time 0.0 seconds\nOutput:\n"
+        },
+        {
+          "type": "input_text",
+          "text": "FOUNDRY_CATALOG []"
+        }
+      ],
+      "requestedNestedOperations": [
+        "spawn_agent",
+        "followup_task",
+        "send_input"
+      ],
+      "nestedAgentsMatched": []
+    },
+    {
+      "dynamicToolsFlag": true,
+      "codeModeCatalogReply": [
+        {
+          "type": "input_text",
+          "text": "Script completed\nWall time 0.0 seconds\nOutput:\n"
+        },
+        {
+          "type": "input_text",
+          "text": "FOUNDRY_CATALOG []"
+        }
+      ],
+      "requestedNestedOperations": [
+        "spawn_agent",
+        "followup_task",
+        "send_input"
+      ],
+      "nestedAgentsMatched": []
+    }
+  ],
+  "v2Control": {
+    "execution": "separate-direct-tools",
+    "featureMode": "v2-direct-control",
+    "version": "codex-cli 0.172.0",
+    "installedFileCount": 17,
+    "eventModuleSha256": "8054c9d6e619c3201f5944e51050381dc7ec2f90a7eeffc0c2e417f7411347a7",
+    "parentSessionId": "01a21abb-84f1-7611-a94e-3a5e9a100ac8",
+    "parentRollout": "sessions/2026/11/27/rollout-2026-11-27T02-00-26-01a21abb-84f1-7611-a94e-3a5e9a100ac8.jsonl",
+    "parentReplyReadBackTimes": {
+      "first": "2026-11-27T02:00:28.513Z",
+      "second": "2026-11-27T02:00:30.200Z",
+      "third": "2026-11-27T02:00:31.497Z"
+    },
+    "thirdTurnStartedAt": "2026-11-27T02:00:30.367Z",
+    "thirdPromptHookAt": "2026-11-27T02:00:30.636Z",
+    "recordStayedUnchangedBetweenParentActivityAtBothChildReplies": true,
+    "events": [
+      {
+        "stage": "initial",
+        "senderParentTurnId": "01a21abb-85da-7951-bcaf-b255060a62bc",
+        "childThreadId": "01a21abb-89d7-7f62-b351-2669a524b17d",
+        "childTurnId": "01a21abb-89e5-7ef3-8dee-b5678ab8e699",
+        "toolName": "collaborationspawn_agent",
+        "toolUseId": "v2-spawn",
+        "originalInputInBothToolHooks": "FOUNDRY_CODE_CHILD_INITIAL\n\n子代理初次派发的合成原文。",
+        "toolTarget": null,
+        "postToolResponse": "{\"task_name\":\"/root/timeline_code\"}",
+        "parentActivity": {
+          "line": 18,
+          "type": "SubAgentActivity",
+          "time": "2026-11-27T02:00:27.878Z"
+        },
+        "replyFromSubagentStop": "FOUNDRY_CODE_CHILD_INITIAL_DONE\n\n初次回复原文。",
+        "subagentStopAt": "2026-11-27T02:00:28.759Z",
+        "replyAtCallback": {
+          "activeTurn": "01a21abb-89e5-7ef3-8dee-b5678ab8e699",
+          "matchingFinalAnswers": [
+            {
+              "time": "2026-11-27T02:00:28.578Z",
+              "line": 13,
+              "byteOffset": 37548,
+              "sha256": "2e3c5926f8c83a5eb18d896486f8b621bb451577febbad29d5b12484f81cd658"
+            }
+          ],
+          "taskCompleteAlreadyReadable": false,
+          "completeBytesRead": 39830
+        },
+        "childTaskCompleteAt": "2026-11-27T02:00:28.791Z",
+        "childRollout": "sessions/2026/11/27/rollout-2026-11-27T02-00-27-01a21abb-89d7-7f62-b351-2669a524b17d.jsonl"
+      },
+      {
+        "stage": "supplement",
+        "senderParentTurnId": "01a21abb-8e01-7950-8c66-7dea6f777182",
+        "childThreadId": "01a21abb-89d7-7f62-b351-2669a524b17d",
+        "childTurnId": "01a21abb-905a-7340-84c1-58887291fb11",
+        "toolName": "collaborationfollowup_task",
+        "toolUseId": "v2-followup",
+        "originalInputInBothToolHooks": "FOUNDRY_CODE_CHILD_SUPPLEMENT\n\n对同一子代理的合成补充。",
+        "toolTarget": "/root/timeline_code",
+        "postToolResponse": "",
+        "parentActivity": {
+          "line": 35,
+          "type": "SubAgentActivity",
+          "time": "2026-11-27T02:00:29.531Z"
+        },
+        "replyFromSubagentStop": "FOUNDRY_CODE_CHILD_SUPPLEMENT_DONE\n\n补充回复原文。",
+        "subagentStopAt": "2026-11-27T02:00:31.072Z",
+        "replyAtCallback": {
+          "activeTurn": "01a21abb-905a-7340-84c1-58887291fb11",
+          "matchingFinalAnswers": [
+            {
+              "time": "2026-11-27T02:00:30.926Z",
+              "line": 22,
+              "byteOffset": 42810,
+              "sha256": "628afb6e7cb6ad796f00bf0a154774fede0d98ca8492c99d661ed9a430353f9a"
+            }
+          ],
+          "taskCompleteAlreadyReadable": false,
+          "completeBytesRead": 45095
+        },
+        "childTaskCompleteAt": "2026-11-27T02:00:31.094Z",
+        "childRollout": "sessions/2026/11/27/rollout-2026-11-27T02-00-27-01a21abb-89d7-7f62-b351-2669a524b17d.jsonl"
+      }
+    ]
+  }
+}

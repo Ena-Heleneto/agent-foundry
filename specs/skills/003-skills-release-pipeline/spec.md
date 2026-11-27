@@ -30,6 +30,11 @@
 - [临时脚本范围确认](requirements/raw/2026-11-26-temporary-mount-script-scope.md)：`scripts/dev/mount-speckit.sh` 是临时手动入口，不纳入本期开发或验收。技能包自身生成的挂载材料及其集合选择仍须验证。
 - [构建评审输入确认](requirements/raw/2026-11-26-review-current-code.md)：评审以开始评审前的最新代码为准，纳入当时已有的相关手动修改；旧评审仅作为对应快照的历史证据。
 
+### Session 2026-11-27
+
+- 版本插件在每次构建开始时读取一次当前 UTC 时间并写入 `VERSION`。候选发布标识取自归档中的该字段，同源字节比对使用隔离的固定测试时钟。 [时间戳来源确认](requirements/raw/2026-11-27-release-timestamp-source.md)
+- 版本表由发布流水线中的独立作业准备。下载步骤只交接下载结果和文件。后续步骤在下载成功时另存更新后的版本表，明确缺失时新建。 [流水线内准备版本表](requirements/raw/2026-11-27-release-table-workflow.md)
+
 ## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - 按环境确认交付内容 (P1)
@@ -115,10 +120,10 @@
 - **FR-004** 清理旧脚本前必须核对直接引用、导出与配置、动态路径、工作流、安装入口、测试和历史使用依据。确认无引用后清理对应旧代码，并记录实删项。仍被引用的代码须记录调用方与用途，证据不足时须说明保留依据。
 - **FR-005** 本功能后续新增或修改代码前，须在本 Spec 目录保存从用户手写代码中提炼的规则与可定位源码示例，并依该记录编写和审查改动。
 - **FR-006** 测试和生产必须使用各自的 R2 桶，沿用共用访问凭据配置。各桶的发布对象为根 `install.sh`、根 `release.json` 和 `release/<时间戳>/skills.tar.gz`。旧 SHA 目录由维护者手动处理。
-- **FR-007** 构建必须在 `VERSION` 保有源码包版本并新增本次发布的时间戳。归档目录、包内发布标识与版本表 `version` 取同一个值。源码包版本以 `package.json.version` 为准。本地构建可在无线上版本表和凭据的情况下完成。
-- **FR-008** 在候选构建和打包之后，版本表准备作业必须经目标桶的 S3 接口读取现有根版本表，在工作区生成更新版本表。只在确知对象缺失时初始化。新版本对象包含本次时间戳、固定归档下载信息、归档 SHA-256 摘要和实际字节长度，并置于有序数组首条，原记录与原顺序保留。补发旧提交遵循当次成功发布顺序。
+- **FR-007** 技能包每次构建开始时必须取一次当前 UTC 毫秒时间，在 `VERSION` 写入该时间戳和源码包版本。准备发布候选时，从归档的 `VERSION` 读取并校验时间戳，候选发布标识、固定归档目录和版本表 `version` 均取该值。源码包版本以 `package.json.version` 为准。本地构建可在无线上版本表和凭据的情况下完成。
+- **FR-008** 在候选构建和打包之后，独立的版本表准备作业必须经目标桶的 S3 接口下载现有根版本表，在工作区另存更新后的版本表。只在确知对象缺失时新建。新版本对象包含本次时间戳、固定归档下载信息、归档 SHA-256 摘要和实际字节长度，并置于有序数组首条，原记录与原顺序保留。补发旧提交遵循当次成功发布顺序。
 - **FR-009** 独立发布作业须在归档、安装脚本和更新后的版本表全部就绪后开始上传。先上传并校验归档，再写桶根入口，最后写桶根版本表。同目标串行边界覆盖读表至写回，后续请求排队，已开始的发布继续执行直至成功或失败。部署步骤失败时，本次运行标记失败并终止，不重试。若维护者另行发起发布，使用该次发布自己的时间戳，并读取当时的版本表。
-- **FR-010** 临时版本管理逻辑须在独立临时目录集中维护。本期默认版本由首条记录表达。正式版本工具接管和故障后的回退机制留待后续。
+- **FR-010** 临时版本表准备逻辑直接写在公共发布工作流的独立版本表准备作业内。本期默认版本由首条记录表达。正式版本工具接管和故障后的回退机制留待后续。
 - **FR-011** 桶根安装入口运行时须从对应环境的下载根读取 `release.json`。默认使用数组首条，显式版本按 `version` 精确匹配一条记录，按记录的 `url` 获取归档。安装新发布的时间戳版本时，入口必须核对归档的 SHA-256 和字节长度，并确认包内 `VERSION` 时间戳等于记录的 `version`。三项均通过后才可写入项目，字段缺失或核对失败时须报告原因。项目级技能安装及适用的挂载和隐匿接口纳入兼容核对。面向公网的版本表须使用实际 HTTPS 归档地址。
 - **FR-012** 测试和生产的每次发布均须由 `skills-test` 针对候选提交运行三组真实最小用例，验证三环境集合选择、默认安装首条以及连续两次发布。三组全部通过且被测提交与候选提交一致才允许发布，结果须可追溯到被测提交。
 - **FR-013** 测试环境应保有当前 `feature/init` 推送和可复用调用入口，分支删除事件跳过部署。测试阶段须从实际对象键经 S3 回读三份材料，核对同次运行的归档 SHA-256、入口原字节和索引首条与候选身份。公网根补齐后须用真实公开入口验下载安装。测试、对象回读和公网安装须各自记录通过、失败或缺前置未执行的证据。
@@ -159,17 +164,18 @@
 - 根 `build`、技能包 `build` 和现存 Dockerfile 可触发主线构建。引擎、隐匿和工作流挂载插件分别参与集合选择或派生产物生成；本期不使用临时开发挂载脚本验收。 [根脚本](../../../package.json) · [技能包脚本](../../../packages/skills/package.json) · [容器构建](../../../packages/skills/deploy/Dockerfile) · [引擎](../../../packages/skills/build/plugins/vite-plugin-engine/index.ts) · [隐匿](../../../packages/skills/build/plugins/vite-plugin-engine/sub-plugins/vite-plugin-hidden-install/index.ts) · [Spec Kit 挂载插件](../../../packages/skills/src/workflow/plugin/vite-plugin-speckit-mount/index.ts)
 - 从 `1bcc1bd` 的隔离源码构建，默认模式 `production`、显式 `development` 和显式 `prod` 均交付 11 项技能，包含 `eval` 与 `profile`。`release` 交付 7 项，来自 `coding`、`frontend`、`workflow`，且只有该模式交付 `curl/skills.tsv`。覆盖 `outDir` 时，`VERSION` 等资产写入指定目录，技能仍写到固定 `dist/skill`。完整配置的 `write: false` 复跑返回 8 项资产，未创建输出目录。默认类型检查通过，但遗漏动态挂载源码，临时纳入后复现一处 TS2345。这些是 T002 快照的历史结果。 [T002 专项发现](analysis/build-plugin-review.md#已有专项任务接手的问题) · [实测记录](analysis/build-plugin-review.md#本轮验证记录)
 - T008 以含未提交改动的工作区快照核对隔离构建。默认和显式 `production` 的产物逐字节一致，各有 8 项技能。`development` 有 11 项技能，`release` 有 8 项技能并生成测试发布材料。集合过滤、派生产物及 `write: false` 均通过。 [T008 验收记录](implementation/T008.md#实际结果)
-- T008 已修复自定义 `outDir` 的产物分离问题。含空格的相对和绝对目录各有 8 条有效安装映射，正文均在对应目录内。动态挂载插件已纳入常规类型检查，捕获组引发的 `TS2345` 已修复。T008 仍在进行中，待补齐命令挂载测试夹具并复跑完整本地验收，再用包含被验输入的实际 Git 提交验收容器导出与归档。 [分项修复与剩余验收](implementation/T008.md#分项修复与剩余验收)
-- 当前 `VERSION` 仅有包版本。部署流程固定使用 `release` 构建、会取消同目标在途运行，并按源码 SHA 和运行标识上传。测试放行是占位，生产文件是草稿。安装源使用示例下载根，已有首条与显式版本选择，以及下载校验后调用引擎的行为。 [通用部署](../../../.github/workflows/skills-deploy-common.yml) · [测试放行](../../../.github/workflows/skills-test.yml) · [测试环境入口](../../../.github/workflows/skills-deploy-release.yml) · [生产草稿](../../../.github/workflows/skills-deploy-prod.yml.example) · [版本文件](../../../packages/skills/build/plugins/vite-plugin-version/index.ts) · [安装入口](../../../packages/skills/build/plugins/vite-plugin-curl/install.source.sh)
+- T008 用实际提交 `8563253` 复验环境构建。含空格的相对和绝对 `outDir` 各有 8 条有效安装映射，正文均在对应目录内。`write: false` 返回挂载资产，动态挂载插件纳入常规类型检查，命令挂载夹具修复后通过原有回归。默认容器导出有 8 项技能，其 32 个构建文件与宿主默认构建逐字节一致，归档内 30 个文件均与容器导出匹配。 [T008 构建和容器验收](implementation/T008.md#2026-11-27-续接验收)
+- T009 在构建开始时取一次当前 UTC 时间，并在 `VERSION` 输出源码包版本与发布标识。固定测试时钟复建和归档读回均通过。现有部署直接运行 `release` 构建，读取 `packageVersion` 拼接当前归档名，按源码 SHA 和运行标识上传，并会取消同目标在途运行。测试放行是占位，生产文件是草稿。安装源使用示例下载根，已有首条与显式版本选择，以及下载校验后调用引擎的行为。 [T009 验收](implementation/T009.md#构建时钟复验) · [通用部署](../../../.github/workflows/skills-deploy-common.yml) · [测试放行](../../../.github/workflows/skills-test.yml) · [测试环境入口](../../../.github/workflows/skills-deploy-release.yml) · [生产草稿](../../../.github/workflows/skills-deploy-prod.yml.example) · [版本文件](../../../packages/skills/build/plugins/vite-plugin-version/index.ts) · [安装入口](../../../packages/skills/build/plugins/vite-plugin-curl/install.source.sh)
 - T001 已保存代码风格及可定位的手写样本。2026-11-25 的隔离基线中，四组 Node 分发用例通过 64 项，技能包 Python 测试通过 39 项。T002 完成构建插件和调用链评审，复跑四组 Node 用例仍为 64 项通过。另有两项旧工作流测试因引用已移除的 YAML 失败。评审记录了四类可复现问题和各自的影响，具体优化范围仍待 T003 确认。 [代码风格](coding-style.md) · [T001 基线](implementation/T001.md#实际复跑结果) · [T002 评审](analysis/build-plugin-review.md)
 - T004 已核对 `packages/skills/script` 的 15 项文件。实际 release 构建和本地 `pnpm pack` 确认当前发布包不含旧脚本。旧默认路径已失效，显式指向 `script/old` 后，8 项定向 Node 调度测试通过。`script/old` 的 14 项有测试、内部依赖或历史用途未决等保留依据。空占位 `script/curl/.gitkeep` 是 T005 唯一清理候选，实际清理及回归待执行。归档内 `script/hidden-install.sh` 的回退由现行引擎及其回归覆盖。 [逐文件核查](analysis/legacy-script-review.md#逐文件处置依据) · [T004 实测](analysis/legacy-script-review.md#本轮验证)
+- T010 已建立独立版本表准备作业。按用户要求，「下载旧版本表」步骤的 `run` 现为空，下载实现和隔离复验待完成。 [T010 当前状态](implementation/T010.md#当前状态)
 - 首版发布门禁、R2 新布局的实际部署和对象回读、公开安装仍待对应任务验收。 [验收入口](quickstart.md)
 
 ### 规划时待确认与复核
 
 - T003 修改前，先以该轮评审开始前的最新代码复核构建插件及调用链。对比 T002 的历史证据，确认仍成立的问题、新发现和优化范围，再实施并复验。依据 T004 的逐文件结论复核 T005 的清理候选，再核对有效入口和历史夹具。 [评审与清理任务](tasks.md#构建插件评审与优化)
 - 环境选择使用 Vite 当前 `mode`；包内 mode 传递、扫描和实际构建产物按对应任务验收。工作流按发布阶段接入，临时手动挂载脚本不纳入本期。
-- 确认 `VERSION` 字段格式、时间戳粒度，以及同一发布输入的重复构建比较口径。 [旧规格的同源构建验收](../001-skills-distribution/spec.md)
+- 用已确认的 `VERSION` 字段格式、UTC 毫秒粒度及固定测试时钟核对同源复建。 [数据模型](data-model.md#发布候选) · [字节比对](quickstart.md#3-比较同源构建与交接候选)
 - 核对旧公开地址或 SemVer 条目的真实消费者，确定兼容范围。核对包内 `curl/install.sh` 和 `engine/install.sh` 的接口，以及旧安装器是否仍需读取 `md5` 字段。 [旧安装交付契约](../001-skills-distribution/contracts/curl-delivery.md#版本表与固定对象)
 - 确认真实 HTTPS 下载根及缓存对公网安装验收的影响。缺少公网地址时，测试桶仍可按实际对象键完成回读验收，公网验证结果记为缺前置。
 - 后续调整任务清单时，依本规格、方案及调研记录复核当前分支、可复用入口和验证方式。若代码或证据范围发生变化，先补齐相关材料，保留测试环境验收先于生产接入的依赖关系。 [任务清单](tasks.md)

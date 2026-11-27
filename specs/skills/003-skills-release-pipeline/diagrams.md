@@ -27,21 +27,23 @@ flowchart TD
 
 版本表是安装器选包的依据。最后写表成功才登记新版本。ETag 是读取现有表时取得的对象标识，用它防止别人修改过的版本表被覆盖。
 
-**代码位置** [测试入口](../../../.github/workflows/skills-deploy-release.yml) · [现行门禁](../../../.github/workflows/skills-test.yml) · [公共工作流](../../../.github/workflows/skills-deploy-common.yml) · [脚本目录](../../../packages/skills/script)下计划新增 temporary-release。
+**代码位置** [测试入口](../../../.github/workflows/skills-deploy-release.yml) · [现行门禁](../../../.github/workflows/skills-test.yml) · [版本插件](../../../packages/skills/build/plugins/vite-plugin-version/index.ts) · [公共工作流](../../../.github/workflows/skills-deploy-common.yml)
 
 ```mermaid
 flowchart TD
     tests["同一提交三组门禁通过"]
     queue["等待同目标的发布槽位"]
-    build["构建并打包归档及入口"]
-    read["S3 读表并在本地准备新表"]
+    build["构建取时并打包归档及入口"]
+    version["从归档 VERSION 校验发布标识"]
+    read["独立作业从 S3 下载旧表并在本地准备新表"]
     archive["条件创建归档并回读核验"]
     entry["写根入口并核对原字节"]
     register["按缺失或源 ETag 条件写表"]
     proof["回读同次对象并记录证据"]
     fail["终止本次部署并记录失败步骤"]
-    tests --> queue --> build --> read
-    read --> archive --> entry --> register --> proof
+    tests --> queue --> build --> version --> read
+    read -->|新表制品与源状态| archive --> entry --> register --> proof
+    version -. 包内标识无效 .-> fail
     read -. 读取或验证失败 .-> fail
     archive -. 上传或校验失败 .-> fail
     entry -. 写入或校验失败 .-> fail

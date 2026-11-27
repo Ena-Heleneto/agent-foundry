@@ -27,6 +27,7 @@
     "@types/node": "catalog:types",
     "consola": "catalog:shared",
     "defu": "catalog:shared",
+    "moment": "catalog:build",
     "sh-syntax": "catalog:",
     "vite": "catalog:build",
     "yaml": "catalog:shared"

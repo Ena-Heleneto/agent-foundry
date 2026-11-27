@@ -12,7 +12,7 @@ description: "Agent Foundry 文档站框架的实现任务"
 
 **Purpose**: 验证 Nuxt UI 与现有应用基础的集成，为模块页面和导航提供共享组件能力。
 
-- [ ] T001 在 `apps/docs/package.json`、`apps/docs/nuxt.config.ts` 和根 `pnpm-lock.yaml` 接入 Nuxt UI；核对其 Nuxt 配置及与现有 UnoCSS `presetWind3`、属性化前缀 `un-` 的样式共存，运行 docs workspace lint、类型检查和构建。若发现冲突，记录可复现输入、影响与恢复方案，不静默替换 Nuxt UI。
+- [x] T001 在 `apps/docs/package.json`、`apps/docs/nuxt.config.ts` 和根 `pnpm-lock.yaml` 接入 Nuxt UI；核对其 Nuxt 配置及与现有 UnoCSS `presetWind3`、属性化前缀 `un-` 的样式共存，运行 docs workspace lint、类型检查和构建。若发现冲突，记录可复现输入、影响与恢复方案，不静默替换 Nuxt UI。 [实施及验收](implementation/T001.md)
 
 ## Phase 2: Foundational（共享路由、布局与技能样例数据）
 
@@ -87,11 +87,11 @@ description: "Agent Foundry 文档站框架的实现任务"
 
 ### Implementation
 
-- [ ] T017 [P] [US6] 在 `specs/docs/001-docs-site-framework/analysis/figma-conversion.md` 建立真实原型盘点和输入记录；取得可访问的 Figma Make 原型或可运行源码、以及可编辑目标 Design 文件/工作区权限后，逐项记录五模块可达页面/视图、适用桌面/手机视口、默认画面、改变可见导航布局的展开态和不同正文的 Spec Kit 栏目。缺任何前置时记录阻塞原因与恢复条件。
-- [ ] T018 [US6] 在 `specs/docs/001-docs-site-framework/analysis/figma-conversion.md` 对照真实清单比较批量 URL 导入、Figma MCP Code to canvas，以及至少一种 AI 或脚本驱动的清单采集方式对页面/交互状态的覆盖能力；记录各自限制、实际采用方式、运行输入及目标文件，不以公开文档能力替代本项目实测。
-- [ ] T019 [US6] 在 `specs/docs/001-docs-site-framework/analysis/figma-conversion.md` 执行一次代表性转换：覆盖首页和至少一个内页各自适用的桌面、手机视图，一次启动在同一 Design 文件生成至少四块具名画板；逐项检查文字/布局可编辑性、正文/导航状态、字体/图片差异及 3D/动画处理，保存画板链接、结果和设计协作者对替代项的确认。
-- [ ] T020 [US6] 仅在 T019 代表性批次验收通过后，于 `specs/docs/001-docs-site-framework/analysis/figma-conversion.md` 对真实全量清单执行一次转换；核对清单每项唯一对应同一 Design 文件内具名画板，满足 FR-012 条件的比例为 100%，保存全部链接、逐项结果、差异和失败/未执行恢复条件。
-- [ ] T021 [US6] 仅在 T020 全量验收通过后，将实际可复用输入、权限、页面清单维护方式、批量运行步骤、画板组织/链接、动态内容处理和失败重跑方法写入 `specs/docs/001-docs-site-framework/spec.md` 的「转换方法复用」章节；未通过或前置缺失时如实记录结果，不填写推测的方法。
+- [x] T017 [P] [US6] 在 `specs/docs/001-docs-site-framework/analysis/figma-conversion.md` 建立真实原型盘点和输入记录；取得可访问的 Figma Make 原型或可运行源码、以及可编辑目标 Design 文件/工作区权限后，逐项记录五模块可达页面/视图、适用桌面/手机视口、默认画面、改变可见导航布局的展开态和不同正文的 Spec Kit 栏目。缺任何前置时记录阻塞原因与恢复条件。 [实施方案](implementation/T017.md) · [盘点记录](analysis/figma-conversion.md)
+- [x] T018 [US6] 在 `specs/docs/001-docs-site-framework/analysis/figma-conversion.md` 对照真实清单比较批量 URL 导入、Figma MCP Code to canvas，以及至少一种 AI 或脚本驱动的清单采集方式对页面/交互状态的覆盖能力；记录各自限制、实际采用方式、运行输入及目标文件，不以公开文档能力替代本项目实测。 [实施方案](implementation/T018.md) · [转换方式实测](analysis/figma-conversion.md#t018-转换方式实测)
+- [x] T019 [US6] 在 `specs/docs/001-docs-site-framework/analysis/figma-conversion.md` 执行一次代表性转换：覆盖首页和至少一个内页各自适用的桌面、手机视图，一次启动在同一 Design 文件生成至少四块具名画板；逐项检查文字/布局可编辑性、正文/导航状态、字体/图片差异及 3D/动画处理，保存画板链接、结果和设计协作者对替代项的确认。 [实施方案](implementation/T019.md) · [代表性试转记录](analysis/figma-conversion.md#t019-代表性试转)
+- [x] T020 [US6] 仅在 T019 代表性批次验收通过后，于 `specs/docs/001-docs-site-framework/analysis/figma-conversion.md` 对真实全量清单执行一次转换；核对清单每项唯一对应同一 Design 文件内具名画板，满足 FR-012 条件的比例为 100%，保存全部链接、逐项结果、差异和失败/未执行恢复条件。 [实施方案](implementation/T020.md) · [验收记录](analysis/figma-conversion.md#t020-全量转换)
+- [x] T021 [US6] 仅在 T020 全量验收通过后，将实际可复用输入、权限、页面清单维护方式、批量运行步骤、画板组织/链接、动态内容处理和失败重跑方法写入 `specs/docs/001-docs-site-framework/spec.md` 的「转换方法复用」章节；未通过或前置缺失时如实记录结果，不填写推测的方法。 [实施方案](implementation/T021.md) · [复用方法](spec.md#转换方法复用)
 
 ## Phase 9: Polish & Cross-Cutting Concerns
 

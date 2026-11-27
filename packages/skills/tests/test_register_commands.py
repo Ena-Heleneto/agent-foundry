@@ -54,7 +54,7 @@ class RegisterCommandsTests(unittest.TestCase):
         for name in ('build', 'utils', 'src/workflow/plugin/vite-plugin-speckit-mount'):
             shutil.copytree(PACKAGE / name, root / name)
         (root / 'node_modules').mkdir()
-        for name in ('vite', 'sh-syntax', 'yaml'):
+        for name in ('vite', 'moment', 'sh-syntax', 'yaml'):
             (root / 'node_modules' / name).symlink_to(
                 PACKAGE / 'node_modules' / name, target_is_directory=True,
             )

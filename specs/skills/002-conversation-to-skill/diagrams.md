@@ -56,6 +56,19 @@ sequenceDiagram
     Recorder-->>Host: 回复已保存并读回
 ```
 
+## 业务子代理回复落入父会话的记录
+
+入口位于 `conversation-recording/scripts/subagent_stop.py` 和 `scripts/post_tool_use.py`。各入口复用 `recording/` 下的核对和保存模块。同一子线程可以接收后续补充。 [方案与证据](implementation/T038.md)
+
+```mermaid
+flowchart TD
+  A["PostToolUse 核对派发或补充"] -->|允许写入| H["在父会话锁内按宿主时间更新主记录"]
+  C["SubagentStop 核对回复原文、时间和子线程归属"] --> F{"父会话已空闲且允许写入"}
+  F -->|是| H
+  F -->|否| G["等待符合停写规则的父 Stop 或后续 UserPromptSubmit 补齐"]
+  G --> H
+```
+
 ## 父代理分别判断两个阶段
 
 规则位于规划中的提炼和分析 Skill 入口。父代理通过已有工具派发，能支持一条特点时启动提炼。此前确认的特点也可直接进入分析判断。

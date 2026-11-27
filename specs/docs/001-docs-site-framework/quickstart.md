@@ -13,9 +13,9 @@
 在仓库根目录执行：
 
 ```bash
-pnpm --filter @foundry/docs run lint
-pnpm --filter @foundry/docs run check-types
-pnpm --filter @foundry/docs run build
+pnpm --filter ./apps/docs run lint
+pnpm --filter ./apps/docs run check-types
+pnpm --filter ./apps/docs run build
 ```
 
 预期：命令成功；lint、类型检查及构建均无新增错误。失败项记录命令、输出、阻塞范围与恢复条件，不得通过删除验收断言或放宽规则消除。
@@ -25,7 +25,7 @@ pnpm --filter @foundry/docs run build
 在仓库根目录启动：
 
 ```bash
-pnpm --filter @foundry/docs run dev
+pnpm --filter ./apps/docs run dev
 ```
 
 预期：本地文档站启动。按实现输出的地址打开浏览器；当前应用默认配置端口为 7000，若配置调整则以实际运行输出为准。

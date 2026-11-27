@@ -1,0 +1,281 @@
+{
+  "task": "T038",
+  "date": "2026-11-27",
+  "source": "packages/skills/src/profile/conversation-recording",
+  "installationSha256": {
+    "SKILL.md": "a156bb6dafae543304d7b68fdbaceb1515199599357fbeac6921965302086d5e",
+    "install.py": "326b2ac01e5f1dc27b061cd38264a4d3d917fb6639a48d593c52a6c0c7b6bcda",
+    "recording/events.py": "7a860d022fce11ee03a381bfcf00b4da8f0f78163cd132bc06bc9301b78f2c49",
+    "recording/__init__.py": "f18e4fe9ac27d8eb4e4e5b791f7ceba82f78adb2e697c726f7e6676a6b608d57",
+    "recording/timeline.py": "e52fd6521ea12fa6924ce1621144dfa3567119a3acd29bb6bfdda9575310e30e",
+    "recording/record.py": "eb9ad8115a5267b41bc5290417b66f3416d8c712dae6adcb3456e9b4bfb11f88",
+    "recording/subagents.py": "30d4ec68c6b1a9a6d6ff183951731b8d5a86fe842bcdefcc56f709fe93fe4a96",
+    "references/resume-records.md": "d6668ff8ad9c81ec139ed1c15aafd92f18e9f5de90c5a31b7aa16e7019562186",
+    "references/session-scope.md": "03deea62a561d6314bd3628814b47bff986689dcb0aa9b0096e15eaaa3775e42",
+    "references/storage-contract.md": "7553cc35854e348eb6eeb960af7dde1724061d8b6e63788db0c7eb60dbba3187",
+    "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+    "references/recording-timing.md": "283e086174f8322ccde8baff0935be06d000c09199a7bf12fa7c921d9e697274",
+    "references/event-capture.md": "9a8657e9883debc029b0344e9ab149db1843d20a8b15b93dda9e3513559272b5",
+    "references/save-events.md": "acdb4e17d52237e2c57bcf0410284c48e336080da767674ade9ab96349386f14",
+    "template/record.md": "e9f1e1770e047ffcd8c68d807f4031dfb8d2dc41d87b3dfcdb793187d8f5891d",
+    "template/detail.md": "43b14c5bd86f03c14b8565bd341829b720d1495deaf37d8184fde8ccc1e47a81",
+    "scripts/stop.py": "799c0913b49cc53b378820e44bf9f70e31babe9ce6ed72a437c5fc3e6591021b",
+    "scripts/subagent_stop.py": "c77d68a77fe7a811d7e583842070eec2eb5bd3f5236c274e473af525339cd5a1",
+    "scripts/post_tool_use.py": "185aa0dad1fcd2abca427105922f2eab09f98b85c2637a6511984fd25f0b85d4",
+    "scripts/user_prompt_submit.py": "f378f5b5c31efb75aec6ebd10ff0e7389e80b6baad35a452aa32dc778e2bd62b"
+  },
+  "cases": [
+    {
+      "name": "V2 原生跨轮",
+      "cli": "codex-cli 0.172.0",
+      "installerOwns": [
+        "PostToolUse",
+        "Stop",
+        "SubagentStop",
+        "UserPromptSubmit"
+      ],
+      "record": "records/2026-11-27/01a21aee-0c61-7583-866a-35dd183cf29e.md",
+      "readBack": {
+        "parent": {
+          "first": "2026-11-27T02:55:40.778Z",
+          "second": "2026-11-27T02:55:44.186Z",
+          "resume": "2026-11-27T02:55:51.511Z",
+          "control": "2026-11-27T02:55:59.225Z"
+        },
+        "children": [
+          {
+            "label": "A",
+            "turn": "01a21aee-10e5-7381-a8dd-abb46cab6ef3",
+            "completedAt": "2026-11-27T02:55:41.228Z"
+          },
+          {
+            "label": "B",
+            "turn": "01a21aee-1407-7b31-984c-9989a5c84af9",
+            "completedAt": "2026-11-27T02:55:43.463Z"
+          }
+        ]
+      },
+      "verifiedDetailLinks": [
+        "details/01a21aee-0c61-7583-866a-35dd183cf29e/01a21aee-0ce0-7380-9f57-20e6b5912f52.md"
+      ],
+      "displayHeadings": [
+        "用户 · 发起",
+        "子代理 /root/timeline a `01a21aee-10cc-7a93-9456-b75caa1ab612` · 派发 · 2026-11-27 02:55:39.238+00:00",
+        "子代理 /root/timeline b `01a21aee-13ef-7ae0-8020-075e6998925b` · 派发 · 2026-11-27 02:55:40.039+00:00",
+        "主代理 · 回复",
+        "子代理 /root/timeline a `01a21aee-10cc-7a93-9456-b75caa1ab612` · 回复 · 2026-11-27 02:55:40.910+00:00 · 原派发轮次 `01a21aee-0ce0-7380-9f57-20e6b5912f52`",
+        "用户 · 发起",
+        "子代理 /root/timeline b `01a21aee-13ef-7ae0-8020-075e6998925b` · 回复 · 2026-11-27 02:55:43.215+00:00 · 原派发轮次 `01a21aee-0ce0-7380-9f57-20e6b5912f52`",
+        "主代理 · 回复"
+      ],
+      "childEventsByDisplayOrder": [
+        {
+          "kind": "派发",
+          "at": "2026-11-27T02:55:39.238Z",
+          "child": "01a21aee-10cc-7a93-9456-b75caa1ab612",
+          "name": "/root/timeline_a",
+          "dispatch_turn": "01a21aee-0ce0-7380-9f57-20e6b5912f52",
+          "identity": "tool:80585559915691548a6955803fce34309b072a4a2aaac824d4b800ee3b331f2b",
+          "visibleBodySha256": "b27708b45decbccea922e3aa42f9bf7c981ce5a7756d50529c18ed39bcd9a933"
+        },
+        {
+          "kind": "派发",
+          "at": "2026-11-27T02:55:40.039Z",
+          "child": "01a21aee-13ef-7ae0-8020-075e6998925b",
+          "name": "/root/timeline_b",
+          "dispatch_turn": "01a21aee-0ce0-7380-9f57-20e6b5912f52",
+          "identity": "tool:a7fe5eae8d395bcfcc4f233da570d5ec5cca05806056bc2b2bc1d834399df9f2",
+          "visibleBodySha256": "301e1ab3c806b14411db110b53c46e1e22eb945d6ab3b12cf6a9ab7bca5b8a18"
+        },
+        {
+          "kind": "回复",
+          "at": "2026-11-27T02:55:40.910Z",
+          "child": "01a21aee-10cc-7a93-9456-b75caa1ab612",
+          "name": "/root/timeline_a",
+          "dispatch_turn": "01a21aee-0ce0-7380-9f57-20e6b5912f52",
+          "identity": "reply:01a21aee-10cc-7a93-9456-b75caa1ab612:01a21aee-10e5-7381-a8dd-abb46cab6ef3",
+          "visibleBodySha256": "e4ee24137a80239109b6d5bbf8f8fb4e69f8ce5eb326e28ae7b2eab7e52353a0"
+        },
+        {
+          "kind": "回复",
+          "at": "2026-11-27T02:55:43.215Z",
+          "child": "01a21aee-13ef-7ae0-8020-075e6998925b",
+          "name": "/root/timeline_b",
+          "dispatch_turn": "01a21aee-0ce0-7380-9f57-20e6b5912f52",
+          "identity": "reply:01a21aee-13ef-7ae0-8020-075e6998925b:01a21aee-1407-7b31-984c-9989a5c84af9",
+          "visibleBodySha256": "a588a5d5fba8f97ceacae6a6d3f9c340bf5194d6d0dee689094114780fea79d1"
+        }
+      ],
+      "visibleSeparators": 7,
+      "replyTextAndTimeMatchHost": true,
+      "lateReplyWrittenAtSafeParentHook": true,
+      "resumeKeptPrefix": true,
+      "noAgentControl": true
+    },
+    {
+      "name": "V1 Code Mode 补充",
+      "cli": "codex-cli 0.172.0",
+      "installerOwns": [
+        "PostToolUse",
+        "Stop",
+        "SubagentStop",
+        "UserPromptSubmit"
+      ],
+      "record": "records/2026-11-27/01a21aee-0f11-7a93-99a7-3c65276c53f6.md",
+      "readBack": {
+        "parent": {
+          "first": "2026-11-27T02:55:40.712Z",
+          "second": "2026-11-27T02:55:42.282Z",
+          "third": "2026-11-27T02:55:43.187Z"
+        },
+        "children": [
+          {
+            "label": "initial",
+            "turn": "01a21aee-13a6-7cc0-bc07-4052d5dd5f7f",
+            "completedAt": "2026-11-27T02:55:41.122Z"
+          },
+          {
+            "label": "supplement",
+            "turn": "01a21aee-1a57-7c51-8885-0884b3f02c29",
+            "completedAt": "2026-11-27T02:55:42.893Z"
+          }
+        ]
+      },
+      "verifiedDetailLinks": [
+        "details/01a21aee-0f11-7a93-99a7-3c65276c53f6/01a21aee-0fec-7570-88a0-e4ac15133d5e.md",
+        "details/01a21aee-0f11-7a93-99a7-3c65276c53f6/01a21aee-18a2-7c00-86fb-5166bf5ce1a8.md"
+      ],
+      "displayHeadings": [
+        "用户 · 发起",
+        "子代理 Newton `01a21aee-1399-71a2-b9d5-968ac2553732` · 派发 · 2026-11-27 02:55:39.946+00:00",
+        "主代理 · 回复",
+        "子代理 Newton `01a21aee-1399-71a2-b9d5-968ac2553732` · 回复 · 2026-11-27 02:55:40.782+00:00 · 原派发轮次 `01a21aee-0fec-7570-88a0-e4ac15133d5e`",
+        "用户 · 发起",
+        "子代理 Newton `01a21aee-1399-71a2-b9d5-968ac2553732` · 补充 · 2026-11-27 02:55:41.659+00:00 · 原派发轮次 `01a21aee-0fec-7570-88a0-e4ac15133d5e`",
+        "主代理 · 回复",
+        "用户 · 发起",
+        "子代理 Newton `01a21aee-1399-71a2-b9d5-968ac2553732` · 回复 · 2026-11-27 02:55:42.670+00:00 · 原派发轮次 `01a21aee-0fec-7570-88a0-e4ac15133d5e`",
+        "主代理 · 回复"
+      ],
+      "childEventsByDisplayOrder": [
+        {
+          "kind": "派发",
+          "at": "2026-11-27T02:55:39.946Z",
+          "child": "01a21aee-1399-71a2-b9d5-968ac2553732",
+          "name": "Newton",
+          "dispatch_turn": "01a21aee-0fec-7570-88a0-e4ac15133d5e",
+          "identity": "tool:e49128633375027bed7ae1880da976690b73bd0f1a7ad320890173a8ddb61a60",
+          "visibleBodySha256": "7cd4a62293d32b6bc29fa3e2fd377cf06dd9a1e672f0bc43a71b8e5c5bc42397"
+        },
+        {
+          "kind": "回复",
+          "at": "2026-11-27T02:55:40.782Z",
+          "child": "01a21aee-1399-71a2-b9d5-968ac2553732",
+          "name": "Newton",
+          "dispatch_turn": "01a21aee-0fec-7570-88a0-e4ac15133d5e",
+          "identity": "reply:01a21aee-1399-71a2-b9d5-968ac2553732:01a21aee-13a6-7cc0-bc07-4052d5dd5f7f",
+          "visibleBodySha256": "2e3c5926f8c83a5eb18d896486f8b621bb451577febbad29d5b12484f81cd658"
+        },
+        {
+          "kind": "补充",
+          "at": "2026-11-27T02:55:41.659Z",
+          "child": "01a21aee-1399-71a2-b9d5-968ac2553732",
+          "name": "Newton",
+          "dispatch_turn": "01a21aee-0fec-7570-88a0-e4ac15133d5e",
+          "identity": "tool:e3402799bb0d56c9b5b849ee9ff7011ebee4e28b661b91f9967f336a22f66bc5",
+          "visibleBodySha256": "568b4e8c8cdc48017bb6cd8d0bc6bd0e53693aad830033d326740aa39b4ed8ae"
+        },
+        {
+          "kind": "回复",
+          "at": "2026-11-27T02:55:42.670Z",
+          "child": "01a21aee-1399-71a2-b9d5-968ac2553732",
+          "name": "Newton",
+          "dispatch_turn": "01a21aee-0fec-7570-88a0-e4ac15133d5e",
+          "identity": "reply:01a21aee-1399-71a2-b9d5-968ac2553732:01a21aee-1a57-7c51-8885-0884b3f02c29",
+          "visibleBodySha256": "628afb6e7cb6ad796f00bf0a154774fede0d98ca8492c99d661ed9a430353f9a"
+        }
+      ],
+      "visibleSeparators": 9,
+      "replyTextAndTimeMatchHost": true
+    },
+    {
+      "name": "提交停写",
+      "cli": "codex-cli 0.172.0",
+      "installerOwns": [
+        "PostToolUse",
+        "Stop",
+        "SubagentStop",
+        "UserPromptSubmit"
+      ],
+      "record": "records/2026-11-27/01a21aee-0d9a-7471-93de-c410ce637b2b.md",
+      "readBack": {
+        "parent": {
+          "first": "2026-11-27T02:55:41.179Z",
+          "resume": "2026-11-27T02:55:51.907Z",
+          "control": "2026-11-27T02:55:59.758Z"
+        },
+        "children": [
+          {
+            "label": "A",
+            "turn": "01a21aee-1342-72c2-a56e-80e05933f685",
+            "completedAt": "2026-11-27T02:55:41.562Z"
+          },
+          {
+            "label": "B",
+            "turn": "01a21aee-15f3-7c01-bc01-614be558a415",
+            "completedAt": "2026-11-27T02:55:44.016Z"
+          }
+        ]
+      },
+      "verifiedDetailLinks": [
+        "details/01a21aee-0d9a-7471-93de-c410ce637b2b/01a21aee-0ee7-72b2-b220-21660787da2b.md"
+      ],
+      "childEventsByDisplayOrder": [
+        {
+          "kind": "派发",
+          "at": "2026-11-27T02:55:39.843Z",
+          "child": "01a21aee-1336-7683-bb04-0c72934fbc28",
+          "name": "/root/timeline_a",
+          "dispatch_turn": "01a21aee-0ee7-72b2-b220-21660787da2b",
+          "identity": "tool:04e898501b14676131d2c2485f2f159b2ecc24539655e24039759377925d3d7a",
+          "visibleBodySha256": "b27708b45decbccea922e3aa42f9bf7c981ce5a7756d50529c18ed39bcd9a933"
+        },
+        {
+          "kind": "派发",
+          "at": "2026-11-27T02:55:40.531Z",
+          "child": "01a21aee-15e5-7692-b89f-ddefa4926938",
+          "name": "/root/timeline_b",
+          "dispatch_turn": "01a21aee-0ee7-72b2-b220-21660787da2b",
+          "identity": "tool:0f57f4a562c60eed79dc540b20b6e42c754497a77ead1b8612fc9684f40b0fda",
+          "visibleBodySha256": "301e1ab3c806b14411db110b53c46e1e22eb945d6ab3b12cf6a9ab7bca5b8a18"
+        },
+        {
+          "kind": "回复",
+          "at": "2026-11-27T02:55:41.252Z",
+          "child": "01a21aee-1336-7683-bb04-0c72934fbc28",
+          "name": "/root/timeline_a",
+          "dispatch_turn": "01a21aee-0ee7-72b2-b220-21660787da2b",
+          "identity": "reply:01a21aee-1336-7683-bb04-0c72934fbc28:01a21aee-1342-72c2-a56e-80e05933f685",
+          "visibleBodySha256": "e4ee24137a80239109b6d5bbf8f8fb4e69f8ce5eb326e28ae7b2eab7e52353a0"
+        },
+        {
+          "kind": "回复",
+          "at": "2026-11-27T02:55:43.748Z",
+          "child": "01a21aee-15e5-7692-b89f-ddefa4926938",
+          "name": "/root/timeline_b",
+          "dispatch_turn": "01a21aee-0ee7-72b2-b220-21660787da2b",
+          "identity": "reply:01a21aee-15e5-7692-b89f-ddefa4926938:01a21aee-15f3-7c01-bc01-614be558a415",
+          "visibleBodySha256": "a588a5d5fba8f97ceacae6a6d3f9c340bf5194d6d0dee689094114780fea79d1"
+        }
+      ],
+      "worktreeAndStagingUnchangedDuringCommit": true,
+      "actualCommit": "T038-held-commit",
+      "unchangedRecordFiles": [
+        "records/2026-11-27/01a21aee-0d9a-7471-93de-c410ce637b2b.md",
+        "records/2026-11-27/details/01a21aee-0d9a-7471-93de-c410ce637b2b/01a21aee-0ee7-72b2-b220-21660787da2b.md"
+      ],
+      "noRecordInStaging": true,
+      "resumedParentRecord": true
+    }
+  ]
+}

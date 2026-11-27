@@ -67,18 +67,25 @@ pnpm --filter @foundry/skills run test:release
 
 ## 3. 比较同源构建与交接候选
 
-用两个干净输出目录和同一已确认的源码 SHA、依赖、构建模式、下载根及固定时间戳。下例中的下载根是隔离测试夹具输入。实现后的构建以这两个变量接收冻结值和下载根。
+用两个干净输出目录，同一已确认的源码 SHA、依赖、构建模式及下载根。下例仅在隔离验收的 Node 进程中固定测试时钟，版本插件照常读取当次时间并写入 `VERSION`。
 
 ```bash
-export FOUNDRY_SKILLS_RELEASE_TIMESTAMP=20261125T120905123Z
-export FOUNDRY_SKILLS_DOWNLOAD_BASE_URL=https://downloads.fixture.invalid
-comparison_dir="$(mktemp -d)"
-pnpm --filter @foundry/skills run build --mode release --outDir "$comparison_dir/first"
-pnpm --filter @foundry/skills run build --mode release --outDir "$comparison_dir/second"
-diff -qr "$comparison_dir/first" "$comparison_dir/second"
+(
+  set -euo pipefail
+  comparison_dir="$(mktemp -d)"
+  cat > "$comparison_dir/clock.cjs" <<'JS'
+Date.now = () => Date.parse('2026-11-25T12:09:05.123Z')
+JS
+  export NODE_OPTIONS="--require=\"$comparison_dir/clock.cjs\""
+  export FOUNDRY_SKILLS_DOWNLOAD_BASE_URL=https://downloads.fixture.invalid
+  pnpm --filter @foundry/skills run build --mode release --outDir "$comparison_dir/first"
+  pnpm --filter @foundry/skills run build --mode release --outDir "$comparison_dir/second"
+  diff -qr "$comparison_dir/first" "$comparison_dir/second"
+  jq -e '.releaseTimestamp == "20261125T120905123Z"' "$comparison_dir/first/VERSION" >/dev/null
+)
 ```
 
-预期两份输出的文件相对路径和原字节一致。CI 实际发布另对冻结归档的 SHA-256 与字节长度核验，复核包内入口和从构建作业交接给发布作业的入口字节一致。归档可记录 tar/gzip 元数据差异，实际上传使用候选制品交接的原字节。
+预期两份输出的文件相对路径和原字节一致。准备发布时从归档内的 `VERSION` 核对 `releaseTimestamp` 与候选对象键及版本表条目同值，再核对冻结归档的 SHA-256、字节长度及入口字节。归档可记录 tar/gzip 元数据差异，实际上传使用候选制品交接的原字节。
 
 ## 4. 从测试桶回读同次对象
 

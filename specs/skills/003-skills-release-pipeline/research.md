@@ -24,9 +24,9 @@
 
 ## 候选身份、版本文件与安装校验
 
-**决定** 每次新发布生成一个 UTC 毫秒时间戳，格式为 YYYYMMDDTHHmmssSSSZ，冻结后贯穿候选、VERSION、固定对象键和索引。VERSION 使用一份 UTF-8 JSON 对象，分别保存 packageVersion 与 releaseTimestamp。索引条目用 version、url、bytes、sha256。安装器先核对下载字节长度和 SHA-256，再在独立目录读取唯一常规 VERSION 成员，核对时间戳才进入项目写入。 [数据模型](data-model.md) · [安装契约](contracts/install.md)
+**决定** 版本插件每次构建开始时读取一次当前 UTC 毫秒时间，格式为 YYYYMMDDTHHmmssSSSZ。VERSION 使用一份 UTF-8 JSON 对象，保存 packageVersion 与 releaseTimestamp。候选读取归档中的 VERSION，固定对象键和索引沿用其中的 releaseTimestamp。索引条目用 version、url、bytes、sha256。安装器先核对下载字节长度和 SHA-256，再在独立目录读取唯一常规 VERSION 成员，核对时间戳才进入项目写入。 [数据模型](data-model.md) · [安装契约](contracts/install.md) · [时间戳来源确认](requirements/raw/2026-11-27-release-timestamp-source.md)
 
-**理由** 活动 VERSION 消费者是公共部署工作流，当前把整文件拼进归档名，本次同时改为读取明确字段。README 中的 SemVer 是示例，当前安装源的公网地址是占位。仓库未发现仍消费旧公网入口或 SemVer 索引的证据。现有隐藏脚本旧包布局兼容有测试，需要保留。两次清洁构建使用等同输入和固定时间戳比较解包文件全集及原字节，验收实际交接则校验同一原始归档的字节及 SHA-256。 [现行工作流](../../../.github/workflows/skills-deploy-common.yml) · [安装源](../../../packages/skills/build/plugins/vite-plugin-curl/install.source.sh) · [隐匿契约测试](../../../packages/skills/tests/distribution/hidden-contract.test.mjs) · [Node Hash API](https://nodejs.org/api/crypto.html#cryptocreatehashalgorithm-options)
+**理由** 公共部署工作流原先把整份 VERSION 拼进归档名，T009 接通 `packageVersion` 字段读取。README 中的 SemVer 是示例，当前安装源的公网地址是占位。仓库未发现仍消费旧公网入口或 SemVer 索引的证据。现有隐藏脚本旧包布局兼容有测试，需要保留。两次清洁构建使用相同源码、依赖与固定测试时钟，比较解包文件全集及原字节。实际交接校验同一原始归档的字节及 SHA-256。 [现行工作流](../../../.github/workflows/skills-deploy-common.yml) · [安装源](../../../packages/skills/build/plugins/vite-plugin-curl/install.source.sh) · [隐匿契约测试](../../../packages/skills/tests/distribution/hidden-contract.test.mjs) · [Node Hash API](https://nodejs.org/api/crypto.html#cryptocreatehashalgorithm-options)
 
 **备选** 继续将源码版本当发布键会使同源码版本的不同构建覆盖。单用 MD5 排除了用户确认的三项检查。分行文本也可解析，但结构化 VERSION 可通过现有 Node 或 jq 明确区分两个字段并做严格解析。凭据或短期签名混入候选元数据会改变其交接范围。
 
