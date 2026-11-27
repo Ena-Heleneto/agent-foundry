@@ -1,0 +1,13 @@
+{
+  "before_implement": [
+    {
+      "command": "implementation-preparation",
+      "description": "实施前完整读取共同准备，核对当前 Task 的适用方案与继续范围",
+      "prompt": "以用户明确的目标项目和 Spec 为准，完整读取 implementation-preparation skill，依目标项目现行工作流治理核对拟实施的原 Task、相关材料、认可范围、保存结果、必要前置及授权；返回本次实际可继续范围、待讨论或恢复部分，不用一次准备放行其他 Task。",
+      "enabled": true,
+      "optional": false,
+      "priority": 20,
+      "condition": null
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "status": "copied_not_activated",
+  "files": {
+    "SKILL.md": "8d02d669ab1f5af5fb2268f9c809bb0a5ea933597fe92afc01ee14b10fa2349c",
+    "references/host-contract.md": "a77a8ea19fafc4608efe68e29d9b9aab0663e32d286f9561ad1b76f58c6af173",
+    "scripts/shadow_runtime.py": "3190b66cc2f40912ce0d1ec5aebd0e54f2a599c6fbf135850346ca4fce9374b4"
+  },
+  "complete_skill_copy_equal": true,
+  "source_path": "packages/skills/src/profile/shadow-profile/",
+  "installed_path": ".agents/skills/shadow-profile/",
+  "archive_path": "specs/skills/20261029-speckit-workflow-foundation/history/archive-shadow-profile-2026-11-18/",
+  "recording_started": false,
+  "active_shadow_root_exists": false,
+  "local_cli_version": "0.169.1",
+  "declared_source_version": "0.169.0",
+  "host_compatibility": "pending",
+  "user_acceptance": "pending",
+  "installed_regression_tests": {
+    "total": 27,
+    "passed": 27
+  },
+  "version_preflight_0_169_1": "unsupported_source"
+}

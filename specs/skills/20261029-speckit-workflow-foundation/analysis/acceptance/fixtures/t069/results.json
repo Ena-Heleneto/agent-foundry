@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-12",
+  "scope": "T069本地源码和复制调用清退，不代表真实工作区迁移",
+  "removed_source_files": 12,
+  "removed_source_directories": 11,
+  "already_absent": [
+    "task-explore"
+  ],
+  "remaining_workflow_skills": [
+    "artifact-project-description",
+    "artifact-spec-analysis",
+    "bug-report",
+    "implementation-preparation",
+    "task-increment"
+  ],
+  "registration": {
+    "pass": 52,
+    "fail": 0,
+    "skip": 1,
+    "exit_code": 0
+  },
+  "workspace_consumer": {
+    "pass": 14,
+    "fail": 0,
+    "skip": 1,
+    "exit_code": 0
+  },
+  "python": {
+    "pass": 12,
+    "exit_code": 0
+  },
+  "types_exit_code": 0,
+  "targeted_lint_exit_code": 0,
+  "bash_syntax_exit_code": 0,
+  "package_lint": {
+    "exit_code": 1,
+    "existing_errors": [
+      "packages/skills/build/plugins/collections.ts:11 unused-imports/no-unused-vars",
+      "packages/skills/build/plugins/collections.ts:11 sonarjs/no-dead-store"
+    ]
+  },
+  "not_run": [
+    "build/dist及构建消费：用户已要求暂跳过",
+    "真实工作区/全局副本及hooks迁移：T072后续范围",
+    "T070完整编排和T097来源分流：独立后续任务",
+    "PowerShell实现：T068/T098已废弃"
+  ],
+  "protected_file_count": 293,
+  "review": {
+    "important": 1,
+    "minor": 1,
+    "resolved": [
+      "注册契约旧维护来源要求",
+      "包说明旧五模式/七hooks当前陈述"
+    ]
+  },
+  "logs": {
+    "red.log": "c05f19b37ab435a5c0a2fcd26e3979cd46902f3daa5c2e55f2e4ef5cac037be2",
+    "initial-network-timeout.log": "1387018740bdc3a7881989faa049d5b6256562806393bae02f5a85fece0bf82d",
+    "historical-fixture-failure.log": "a8a36e8aecdce4562b402785d6907a84f3beb205afad8a41316979dd43fbe178",
+    "registration.log": "be300bfaff50ac6e5a165d12b9549d5b6dfe6ea96a87e61b9f2f06ae71a7af9a",
+    "workspace-consumer.log": "a607f0833e828bf952cee6de531137934412215320d4fd90e7eecf5e74e2a07f",
+    "python.log": "c9d33d5c8ebee6b75d7d12999a731128ecb00ee13e5d0403f6881717e33608af",
+    "types.log": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+    "package-lint.log": "b97083290caea697d671b460ee3c3b87534ce087f340675b0d913c166dce4b27",
+    "targeted-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

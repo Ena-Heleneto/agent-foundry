@@ -1,0 +1,42 @@
+{
+  "observed_at_ns": 1794969166345140597,
+  "host_profile": "codex-0.169.0-item-completed",
+  "controlled_test_only": true,
+  "control_display": {
+    "type": "AgentMessage",
+    "phase": "final_answer",
+    "delivery": "async",
+    "has_questions_metadata": true,
+    "questions_fields": [
+      "title",
+      "options"
+    ],
+    "visible_text_preserved_as_assistant": true
+  },
+  "observed_answers": {
+    "count": 2,
+    "text": "A",
+    "item_type": "UserMessage",
+    "part_type": "text",
+    "text_elements_empty": true,
+    "distinct_native_identities": 2,
+    "explicit_question_correlation_in_user_item": false
+  },
+  "diagnostic_current_session_replay": {
+    "exit_code": 0,
+    "selected_records_checked": 3,
+    "text_parts_role_phase_offset_identity_equal": true,
+    "question_metadata_not_promoted_to_user_text": true,
+    "same_text_different_identity_preserved": true
+  },
+  "automatic_control_capture_verified": false,
+  "button_click_or_submission_mapping_proven": false,
+  "user_profile_updated": false,
+  "limitations": [
+    "当前两次A在源中都是普通文本，不能仅凭此认定点击提交或建立题目/选项映射。",
+    "本次once为当前仍运行会话内的诊断重放，不是消息到达时的自动保存证明。",
+    "不扩大至所有控件、非文本、未知text_elements或其他宿主。"
+  ],
+  "runtime_sha256": "e8ba82a4a2c322de5469f1cc573682e7339a6004a81739bcfc361959217efc5e",
+  "copied_runtime_matches_source": true
+}

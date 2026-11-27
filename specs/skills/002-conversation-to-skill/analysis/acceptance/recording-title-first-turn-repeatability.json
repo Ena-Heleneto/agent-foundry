@@ -1,0 +1,301 @@
+{
+  "date": "2026-11-27",
+  "method": "隔离项目中的真实 Codex 普通交互，每轮创建新会话，观察正式记录及原生宿主日志",
+  "cli": "codex-cli 0.172.0",
+  "model": "gpt-6.2-sol",
+  "reasoningEffort": "medium",
+  "nativeToolMode": "multi_agent_v2",
+  "prompt": "雨后为什么容易看到彩虹？请用一句话回答。",
+  "installationSource": "packages/skills/src/profile/conversation-recording",
+  "installedFilesSha256": {
+    "SKILL.md": "a156bb6dafae543304d7b68fdbaceb1515199599357fbeac6921965302086d5e",
+    "install.py": "326b2ac01e5f1dc27b061cd38264a4d3d917fb6639a48d593c52a6c0c7b6bcda",
+    "recording/__init__.py": "f18e4fe9ac27d8eb4e4e5b791f7ceba82f78adb2e697c726f7e6676a6b608d57",
+    "recording/events.py": "7a860d022fce11ee03a381bfcf00b4da8f0f78163cd132bc06bc9301b78f2c49",
+    "recording/record.py": "036002e8a6834129e6b8c8731d8c8f7dc468a1940bd4926d427ddaa93edd2036",
+    "recording/subagents.py": "f20bebb21f3073938795e56bf7826e8056b4b0248e813ac032fd338df49e972d",
+    "recording/timeline.py": "e52fd6521ea12fa6924ce1621144dfa3567119a3acd29bb6bfdda9575310e30e",
+    "references/event-capture.md": "9a8657e9883debc029b0344e9ab149db1843d20a8b15b93dda9e3513559272b5",
+    "references/recording-timing.md": "283e086174f8322ccde8baff0935be06d000c09199a7bf12fa7c921d9e697274",
+    "references/resume-records.md": "d6668ff8ad9c81ec139ed1c15aafd92f18e9f5de90c5a31b7aa16e7019562186",
+    "references/save-events.md": "3a0bf2e2598b6be5cbcc31652b701a2ee230e0c80ea1db09276f4eb46c545b8b",
+    "references/session-scope.md": "04955984f2b0565ea59bffb946439adfc71b19f0174994e01a4ceb26cbe16b7c",
+    "references/storage-contract.md": "233c243e7386bd6aa6b55347bfe10f13c1b3018dc18707257228e7d60b937b2f",
+    "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+    "scripts/post_tool_use.py": "185aa0dad1fcd2abca427105922f2eab09f98b85c2637a6511984fd25f0b85d4",
+    "scripts/stop.py": "799c0913b49cc53b378820e44bf9f70e31babe9ce6ed72a437c5fc3e6591021b",
+    "scripts/subagent_stop.py": "8543b9126a390a64e340bc9993cecb04a30158b99eec996fc65bb18386491bd7",
+    "scripts/user_prompt_submit.py": "f378f5b5c31efb75aec6ebd10ff0e7389e80b6baad35a452aa32dc778e2bd62b",
+    "template/detail.md": "446325e89fca7b8e984fa6aad4cd2d56b1891775a3e00b4f2e0c5890cf769263",
+    "template/record.md": "ae38044b4abff4aab2382dabf5e05f7eeb7077343c44bbf7352cbb0446abba51"
+  },
+  "trustedHooks": [
+    "postToolUse",
+    "stop",
+    "subagentStop",
+    "userPromptSubmit"
+  ],
+  "control": {
+    "officialHookDefinitionUntouched": true,
+    "counts": {
+      "completed": 2,
+      "dispatched": 0,
+      "adoptedTitle": 0,
+      "emptyTitle": 0,
+      "missingDispatch": 2,
+      "mainReplySavedExactly": 2
+    },
+    "trials": [
+      {
+        "trial": 1,
+        "session": "01a21c86-f37e-7313-8285-2dbb45c537b6",
+        "parentTurn": "01a21c86-f489-7fc2-a25c-3ed18622dec3",
+        "hintInDeveloperMessage": false,
+        "originalReadBackBeforeHint": false,
+        "parentReplySavedExactly": true,
+        "parentReplyVisible": true,
+        "parentReplyAt": "2026-11-27T10:22:26.571Z",
+        "parentReplyCount": 1,
+        "launches": [],
+        "matchedNamingChildren": 0,
+        "children": [],
+        "childErrors": [],
+        "parentWaitTools": [],
+        "finalRecord": "records/2026-11-27/01a21c86-f37e-7313-8285-2dbb45c537b6/record.md",
+        "parentToolCount": 1,
+        "recordAtEndOfRepetition": "records/2026-11-27/01a21c86-f37e-7313-8285-2dbb45c537b6/record.md"
+      },
+      {
+        "trial": 2,
+        "session": "01a21c87-2a88-7673-a7ae-175396cb72a1",
+        "parentTurn": "01a21c87-2b89-75c0-94bf-08785a3b798b",
+        "hintInDeveloperMessage": false,
+        "originalReadBackBeforeHint": false,
+        "parentReplySavedExactly": true,
+        "parentReplyVisible": true,
+        "parentReplyAt": "2026-11-27T10:22:35.741Z",
+        "parentReplyCount": 1,
+        "launches": [],
+        "matchedNamingChildren": 0,
+        "children": [],
+        "childErrors": [],
+        "parentWaitTools": [],
+        "finalRecord": "records/2026-11-27/01a21c87-2a88-7673-a7ae-175396cb72a1/record.md",
+        "parentToolCount": 0,
+        "recordAtEndOfRepetition": "records/2026-11-27/01a21c87-2a88-7673-a7ae-175396cb72a1/record.md"
+      }
+    ],
+    "infrastructureFailures": []
+  },
+  "withPromptSubmitHint": {
+    "hint": "【项目的会话记录命名工作流】本轮用户原话已保存。请先调用 Codex 原生子代理工具，创建一个名为 recording_title 的命名子代理，把下面的完整任务文本作为 message 传给它。若工具支持 fork_context，请设为 false。创建后直接正常回答用户的问题。不等待、不查询命名子代理的结果，主回复只回答原问题。\n\nFOUNDRY_TITLE_DISPATCH_PROBE。你是本会话的命名子代理。以下是用户已落盘的原话：雨后为什么容易看到彩虹？请用一句话回答。\n按已保存的发言判断主题，输出 JSON 对象，只含 title 字段。主题明确就填一个简短中文标题，主题不明确就填 null。",
+    "hostField": "hookSpecificOutput.additionalContext",
+    "childWaitGate": false,
+    "counts": {
+      "completed": 5,
+      "dispatched": 4,
+      "adoptedTitle": 3,
+      "emptyTitle": 1,
+      "missingDispatch": 1,
+      "mainReplySavedExactly": 5
+    },
+    "trials": [
+      {
+        "trial": 1,
+        "session": "01a21c86-f665-7570-9b77-6e8bb9057aae",
+        "parentTurn": "01a21c86-f7bf-7383-97ae-51ed78669ceb",
+        "hintInDeveloperMessage": true,
+        "originalReadBackBeforeHint": true,
+        "parentReplySavedExactly": true,
+        "parentReplyVisible": true,
+        "parentReplyAt": "2026-11-27T10:22:29.644Z",
+        "parentReplyCount": 1,
+        "launches": [
+          {
+            "call": "call_96030114400e40a6916c7f07a8b704c2",
+            "at": "2026-11-27T10:22:26.871Z",
+            "namespace": "collaboration",
+            "taskName": "recording_title"
+          }
+        ],
+        "matchedNamingChildren": 1,
+        "children": [
+          {
+            "thread": "01a21c87-1e42-72a0-92f1-bf247cd02a25",
+            "turn": "01a21c87-1e4d-7a42-be00-f8f800ce5467",
+            "path": "/root/recording_title",
+            "replyAt": "2026-11-27T10:22:30.764Z",
+            "jsonReply": {
+              "title": "雨后彩虹的成因"
+            },
+            "identityVerified": true,
+            "titleCandidateReadBack": {
+              "title": "雨后彩虹的成因",
+              "parentTurn": "01a21c86-f7bf-7383-97ae-51ed78669ceb",
+              "dispatchCall": "call_96030114400e40a6916c7f07a8b704c2",
+              "childThread": "01a21c87-1e42-72a0-92f1-bf247cd02a25",
+              "childTurn": "01a21c87-1e4d-7a42-be00-f8f800ce5467",
+              "repliedAt": "2026-11-27T10:22:30.764Z"
+            },
+            "directoryAdopted": true
+          }
+        ],
+        "childErrors": [],
+        "parentWaitTools": [],
+        "finalRecord": "records/2026-11-27/雨后彩虹的成因/record.md",
+        "parentToolCount": 1,
+        "recordAtEndOfRepetition": "records/2026-11-27/雨后彩虹的成因--b9057aae/record.md"
+      },
+      {
+        "trial": 2,
+        "session": "01a21c87-3c1b-7f82-b599-d57373fb796f",
+        "parentTurn": "01a21c87-3d6f-71e3-b66f-af8236409ad2",
+        "hintInDeveloperMessage": true,
+        "originalReadBackBeforeHint": true,
+        "parentReplySavedExactly": true,
+        "parentReplyVisible": true,
+        "parentReplyAt": "2026-11-27T10:22:49.181Z",
+        "parentReplyCount": 1,
+        "launches": [
+          {
+            "call": "call_61329848ee03444691e41ca14d87f599",
+            "at": "2026-11-27T10:22:46.568Z",
+            "namespace": "collaboration",
+            "taskName": "recording_title"
+          }
+        ],
+        "matchedNamingChildren": 1,
+        "children": [
+          {
+            "thread": "01a21c87-6b3c-7973-9931-6837f4b5a354",
+            "turn": "01a21c87-6b5b-7c12-baa8-80b990f1ef8c",
+            "path": "/root/recording_title",
+            "replyAt": "2026-11-27T10:22:50.758Z",
+            "jsonReply": {
+              "title": "雨后彩虹的成因"
+            },
+            "identityVerified": true,
+            "titleCandidateReadBack": {
+              "title": "雨后彩虹的成因",
+              "parentTurn": "01a21c87-3d6f-71e3-b66f-af8236409ad2",
+              "dispatchCall": "call_61329848ee03444691e41ca14d87f599",
+              "childThread": "01a21c87-6b3c-7973-9931-6837f4b5a354",
+              "childTurn": "01a21c87-6b5b-7c12-baa8-80b990f1ef8c",
+              "repliedAt": "2026-11-27T10:22:50.758Z"
+            },
+            "directoryAdopted": true
+          }
+        ],
+        "childErrors": [],
+        "parentWaitTools": [],
+        "finalRecord": "records/2026-11-27/雨后彩虹的成因--73fb796f/record.md",
+        "parentToolCount": 1,
+        "recordAtEndOfRepetition": "records/2026-11-27/雨后彩虹的成因--73fb796f/record.md"
+      },
+      {
+        "trial": 3,
+        "session": "01a21c87-8b31-7961-94f9-6001d9f4cc1e",
+        "parentTurn": "01a21c87-8c65-7fb0-9724-1372c4dd7965",
+        "hintInDeveloperMessage": true,
+        "originalReadBackBeforeHint": true,
+        "parentReplySavedExactly": true,
+        "parentReplyVisible": true,
+        "parentReplyAt": "2026-11-27T10:23:09.791Z",
+        "parentReplyCount": 1,
+        "launches": [
+          {
+            "call": "call_f2f48e6b61c749f89453a1cea2248295",
+            "at": "2026-11-27T10:23:06.305Z",
+            "namespace": "collaboration",
+            "taskName": "recording_title"
+          }
+        ],
+        "matchedNamingChildren": 1,
+        "children": [
+          {
+            "thread": "01a21c87-b849-7fe1-82fe-4b74ecf4b9b2",
+            "turn": "01a21c87-b853-79c1-b550-568c0b82d8e5",
+            "path": "/root/recording_title",
+            "replyAt": "2026-11-27T10:23:14.296Z",
+            "jsonReply": {
+              "title": null
+            },
+            "identityVerified": true,
+            "titleCandidateReadBack": null
+          }
+        ],
+        "childErrors": [],
+        "parentWaitTools": [],
+        "finalRecord": "records/2026-11-27/01a21c87-8b31-7961-94f9-6001d9f4cc1e/record.md",
+        "parentToolCount": 1,
+        "recordAtEndOfRepetition": "records/2026-11-27/01a21c87-8b31-7961-94f9-6001d9f4cc1e/record.md"
+      },
+      {
+        "trial": 4,
+        "session": "01a21c87-eba3-7ef3-9d87-9f0643f09b67",
+        "parentTurn": "01a21c87-ecd8-7a11-a0b0-3843f32d9e69",
+        "hintInDeveloperMessage": true,
+        "originalReadBackBeforeHint": true,
+        "parentReplySavedExactly": true,
+        "parentReplyVisible": true,
+        "parentReplyAt": "2026-11-27T10:23:26.716Z",
+        "parentReplyCount": 1,
+        "launches": [],
+        "matchedNamingChildren": 0,
+        "children": [],
+        "childErrors": [],
+        "parentWaitTools": [],
+        "finalRecord": "records/2026-11-27/01a21c87-eba3-7ef3-9d87-9f0643f09b67/record.md",
+        "parentToolCount": 0,
+        "recordAtEndOfRepetition": "records/2026-11-27/01a21c87-eba3-7ef3-9d87-9f0643f09b67/record.md"
+      },
+      {
+        "trial": 5,
+        "session": "01a21c88-15ef-7623-bc3b-3d953bdf27e1",
+        "parentTurn": "01a21c88-16e0-7d10-9a03-299f5fd64f5d",
+        "hintInDeveloperMessage": true,
+        "originalReadBackBeforeHint": true,
+        "parentReplySavedExactly": true,
+        "parentReplyVisible": true,
+        "parentReplyAt": "2026-11-27T10:23:43.903Z",
+        "parentReplyCount": 1,
+        "launches": [
+          {
+            "call": "call_9ac0f18079ee4c76b9dd7bb8d74c12dc",
+            "at": "2026-11-27T10:23:41.469Z",
+            "namespace": "collaboration",
+            "taskName": "recording_title"
+          }
+        ],
+        "matchedNamingChildren": 1,
+        "children": [
+          {
+            "thread": "01a21c88-41a7-7881-a5cc-051bfdf961f1",
+            "turn": "01a21c88-41b6-7983-bd04-38ab37addfeb",
+            "path": "/root/recording_title",
+            "replyAt": "2026-11-27T10:23:45.938Z",
+            "jsonReply": {
+              "title": "雨后彩虹的成因"
+            },
+            "identityVerified": true,
+            "titleCandidateReadBack": {
+              "title": "雨后彩虹的成因",
+              "parentTurn": "01a21c88-16e0-7d10-9a03-299f5fd64f5d",
+              "dispatchCall": "call_9ac0f18079ee4c76b9dd7bb8d74c12dc",
+              "childThread": "01a21c88-41a7-7881-a5cc-051bfdf961f1",
+              "childTurn": "01a21c88-41b6-7983-bd04-38ab37addfeb",
+              "repliedAt": "2026-11-27T10:23:45.938Z"
+            },
+            "directoryAdopted": true
+          }
+        ],
+        "childErrors": [],
+        "parentWaitTools": [],
+        "finalRecord": "records/2026-11-27/雨后彩虹的成因--3bdf27e1/record.md",
+        "parentToolCount": 1,
+        "recordAtEndOfRepetition": "records/2026-11-27/雨后彩虹的成因--3bdf27e1/record.md"
+      }
+    ],
+    "infrastructureFailures": []
+  }
+}

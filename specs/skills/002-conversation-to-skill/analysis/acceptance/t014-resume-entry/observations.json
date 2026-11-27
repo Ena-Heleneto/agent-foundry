@@ -1,0 +1,465 @@
+{
+  "environment": {
+    "cli": "codex-cli 0.171.0",
+    "model": "gpt-6.2-sol",
+    "kernel": "Linux",
+    "interface": "foreground TUI --no-daemon",
+    "resumeCwdPolicy": "session",
+    "outerIsolation": {
+      "readOnlyRoot": true,
+      "syntheticHome": true,
+      "privatePidNamespace": true,
+      "syntheticRecordedFilesReadOnly": true
+    },
+    "nativeExecutableDeviceAndInode": [
+      2096,
+      1440984
+    ],
+    "snapshot": {
+      "relativeSource": "packages/skills/src/profile/conversation-recording",
+      "files": {
+        "SKILL.md": {
+          "bytes": 1438,
+          "sha256": "b8f2653ea7e3fd9a390e16097f4e136ea7b22c864a165e89b8b1a71751bde927"
+        },
+        "references/event-capture.md": {
+          "bytes": 4969,
+          "sha256": "69be17559e843bf87787af97028174bf8c496a7ad9d56a28456bc14f08072fb9"
+        },
+        "references/paired-save.md": {
+          "bytes": 3745,
+          "sha256": "317debf508fb6ff38bcd91b3f077378c5d89c3fc70b13bfd15b691ae90b1633f"
+        },
+        "references/recording-timing.md": {
+          "bytes": 2134,
+          "sha256": "6fd0430d177b51a588b6e4a33ac267f74fbb475596f853f7e6a0d9698ad312ca"
+        },
+        "references/resume-records.md": {
+          "bytes": 2978,
+          "sha256": "b33c16f3e88cdeccbcc7dfd5ab21e5d24a9dbeb8c462b6b2750ec9599c41a07d"
+        },
+        "references/session-scope.md": {
+          "bytes": 5107,
+          "sha256": "4e18293134d0400253d5d66184e98ad58df1a50ab65784d1d640d921b2cf7f3b"
+        },
+        "references/storage-contract.md": {
+          "bytes": 11555,
+          "sha256": "54a8fb8c6c4bcea12b9c7b67b4745a2235a07b38bb734c59da94b31138cfe3d7"
+        },
+        "references/write-failures.md": {
+          "bytes": 2673,
+          "sha256": "6b6be6059d3ef842f3045d26e5cea1ed2042c054c8a50df0e1a9ebff85deb374"
+        }
+      }
+    }
+  },
+  "syntheticSeed": {
+    "threadId": "01a207f1-8e5d-7631-a551-47d19bb1e987",
+    "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+    "sha256": "9d0bbde91b42b20379979b5f936e73778679b2e7a23b4d5fcced19dccd61fc93"
+  },
+  "recordsBeforeEachRun": {
+    "records/2026-11-23/details/01a207f1-8e5d-7631-a551-47d19bb1e987.md": {
+      "bytes": 1146,
+      "sha256": "24fcee8ab403e56e2740ea6f550eabde20afd1ed3034b09b03125c4892374dbb"
+    },
+    "records/2026-11-23/index/01a207f1-8e5d-7631-a551-47d19bb1e987.md": {
+      "bytes": 921,
+      "sha256": "4d7a7e323ca76be1effe647e24900c04845c47e509755340c620be367bb7b415"
+    }
+  },
+  "cases": {
+    "restricted-in": {
+      "sandboxMode": "workspace-write",
+      "launchCwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+      "hostActiveTurn": {
+        "line": 87,
+        "turnId": "01a20811-708b-7032-a973-2c3e7b49721a",
+        "trigger": "user"
+      },
+      "probeCall": {
+        "line": 101,
+        "name": "exec",
+        "id": "call_8b8200bed52a41a8842e61b6fa44990a",
+        "isProbe": true
+      },
+      "probeReadback": {
+        "line": 104,
+        "id": "call_8b8200bed52a41a8842e61b6fa44990a",
+        "value": {
+          "ancestry": [
+            {
+              "argv0": "python3",
+              "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+              "executable": "python3.14",
+              "executableIdentity": [
+                2096,
+                4622
+              ],
+              "isSandboxCommand": false,
+              "pid": 2,
+              "ppid": 1,
+              "resumeForCurrentThread": false,
+              "startTick": "3973741"
+            },
+            {
+              "argv0": "codex-linux-sandbox",
+              "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+              "executable": "codex",
+              "executableIdentity": [
+                2096,
+                1440984
+              ],
+              "isSandboxCommand": true,
+              "pid": 1,
+              "ppid": 0,
+              "resumeForCurrentThread": false,
+              "startTick": "3973740"
+            }
+          ],
+          "effectiveCwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+          "metadataOffset": 318378,
+          "stateRead": "current task_started header only",
+          "threadId": "01a207f1-8e5d-7631-a551-47d19bb1e987",
+          "tuiStartHeader": {
+            "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+            "kind": "session_start",
+            "threadId": null,
+            "thread_id": null,
+            "ts": "2026-11-23T11:01:27.278Z",
+            "turnId": null,
+            "turn_id": null
+          },
+          "turnId": "01a20811-708b-7032-a973-2c3e7b49721a",
+          "turnTrigger": "user"
+        }
+      },
+      "tuiStartHeaderFields": [
+        "cwd",
+        "dir",
+        "kind",
+        "model",
+        "model_provider_id",
+        "model_provider_name",
+        "ts"
+      ],
+      "nativeResumeAncestorPids": [],
+      "nativeAncestorCwdMatchesLaunch": false,
+      "recordsAfter": {
+        "records/2026-11-23/details/01a207f1-8e5d-7631-a551-47d19bb1e987.md": {
+          "bytes": 1146,
+          "sha256": "24fcee8ab403e56e2740ea6f550eabde20afd1ed3034b09b03125c4892374dbb"
+        },
+        "records/2026-11-23/index/01a207f1-8e5d-7631-a551-47d19bb1e987.md": {
+          "bytes": 921,
+          "sha256": "4d7a7e323ca76be1effe647e24900c04845c47e509755340c620be367bb7b415"
+        }
+      },
+      "exitCode": 0
+    },
+    "restricted-out": {
+      "sandboxMode": "workspace-write",
+      "launchCwd": "/tmp/foundry-conversation-5jmmxo/repository-outside",
+      "hostActiveTurn": {
+        "line": 87,
+        "turnId": "01a20811-6ed6-75b3-be16-b53fafa2182c",
+        "trigger": "user"
+      },
+      "probeCall": {
+        "line": 101,
+        "name": "exec",
+        "id": "call_fcc88eeda645469ab543e9847d458a51",
+        "isProbe": true
+      },
+      "probeReadback": {
+        "line": 104,
+        "id": "call_fcc88eeda645469ab543e9847d458a51",
+        "value": {
+          "ancestry": [
+            {
+              "argv0": "python3",
+              "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+              "executable": "python3.14",
+              "executableIdentity": [
+                2096,
+                4622
+              ],
+              "isSandboxCommand": false,
+              "pid": 2,
+              "ppid": 1,
+              "resumeForCurrentThread": false,
+              "startTick": "3973649"
+            },
+            {
+              "argv0": "codex-linux-sandbox",
+              "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+              "executable": "codex",
+              "executableIdentity": [
+                2096,
+                1440984
+              ],
+              "isSandboxCommand": true,
+              "pid": 1,
+              "ppid": 0,
+              "resumeForCurrentThread": false,
+              "startTick": "3973647"
+            }
+          ],
+          "effectiveCwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+          "metadataOffset": 318378,
+          "stateRead": "current task_started header only",
+          "threadId": "01a207f1-8e5d-7631-a551-47d19bb1e987",
+          "tuiStartHeader": {
+            "cwd": "/tmp/foundry-conversation-5jmmxo/repository-outside",
+            "kind": "session_start",
+            "threadId": null,
+            "thread_id": null,
+            "ts": "2026-11-23T11:01:27.209Z",
+            "turnId": null,
+            "turn_id": null
+          },
+          "turnId": "01a20811-6ed6-75b3-be16-b53fafa2182c",
+          "turnTrigger": "user"
+        }
+      },
+      "tuiStartHeaderFields": [
+        "cwd",
+        "dir",
+        "kind",
+        "model",
+        "model_provider_id",
+        "model_provider_name",
+        "ts"
+      ],
+      "nativeResumeAncestorPids": [],
+      "nativeAncestorCwdMatchesLaunch": false,
+      "recordsAfter": {
+        "records/2026-11-23/details/01a207f1-8e5d-7631-a551-47d19bb1e987.md": {
+          "bytes": 1146,
+          "sha256": "24fcee8ab403e56e2740ea6f550eabde20afd1ed3034b09b03125c4892374dbb"
+        },
+        "records/2026-11-23/index/01a207f1-8e5d-7631-a551-47d19bb1e987.md": {
+          "bytes": 921,
+          "sha256": "4d7a7e323ca76be1effe647e24900c04845c47e509755340c620be367bb7b415"
+        }
+      },
+      "exitCode": 0
+    },
+    "outer-in": {
+      "sandboxMode": "danger-full-access",
+      "launchCwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+      "hostActiveTurn": {
+        "line": 87,
+        "turnId": "01a20811-70fe-7d71-9caa-fae0fb045b5b",
+        "trigger": "user"
+      },
+      "probeCall": {
+        "line": 97,
+        "name": "exec",
+        "id": "call_e13fb6b08f8741c6bac93a6f2fb2da23",
+        "isProbe": true
+      },
+      "probeReadback": {
+        "line": 100,
+        "id": "call_e13fb6b08f8741c6bac93a6f2fb2da23",
+        "value": {
+          "ancestry": [
+            {
+              "argv0": "python3",
+              "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+              "executable": "python3.14",
+              "executableIdentity": [
+                2096,
+                4622
+              ],
+              "isSandboxCommand": false,
+              "pid": 119,
+              "ppid": 2,
+              "resumeForCurrentThread": false,
+              "startTick": "3973463"
+            },
+            {
+              "argv0": "codex",
+              "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+              "executable": "codex",
+              "executableIdentity": [
+                2096,
+                1440984
+              ],
+              "isSandboxCommand": false,
+              "pid": 2,
+              "ppid": 1,
+              "resumeForCurrentThread": true,
+              "startTick": "3972339"
+            },
+            {
+              "argv0": "bwrap",
+              "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+              "executable": "bwrap",
+              "executableIdentity": [
+                2096,
+                2560
+              ],
+              "isSandboxCommand": false,
+              "pid": 1,
+              "ppid": 0,
+              "resumeForCurrentThread": true,
+              "startTick": "3972338"
+            }
+          ],
+          "effectiveCwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+          "metadataOffset": 312702,
+          "stateRead": "current task_started header only",
+          "threadId": "01a207f1-8e5d-7631-a551-47d19bb1e987",
+          "tuiStartHeader": {
+            "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+            "kind": "session_start",
+            "threadId": null,
+            "thread_id": null,
+            "ts": "2026-11-23T11:01:27.317Z",
+            "turnId": null,
+            "turn_id": null
+          },
+          "turnId": "01a20811-70fe-7d71-9caa-fae0fb045b5b",
+          "turnTrigger": "user"
+        }
+      },
+      "tuiStartHeaderFields": [
+        "cwd",
+        "dir",
+        "kind",
+        "model",
+        "model_provider_id",
+        "model_provider_name",
+        "ts"
+      ],
+      "nativeResumeAncestorPids": [
+        2
+      ],
+      "nativeAncestorCwdMatchesLaunch": true,
+      "recordsAfter": {
+        "records/2026-11-23/details/01a207f1-8e5d-7631-a551-47d19bb1e987.md": {
+          "bytes": 1146,
+          "sha256": "24fcee8ab403e56e2740ea6f550eabde20afd1ed3034b09b03125c4892374dbb"
+        },
+        "records/2026-11-23/index/01a207f1-8e5d-7631-a551-47d19bb1e987.md": {
+          "bytes": 921,
+          "sha256": "4d7a7e323ca76be1effe647e24900c04845c47e509755340c620be367bb7b415"
+        }
+      },
+      "exitCode": 0
+    },
+    "outer-out": {
+      "sandboxMode": "danger-full-access",
+      "launchCwd": "/tmp/foundry-conversation-5jmmxo/repository-outside",
+      "hostActiveTurn": {
+        "line": 87,
+        "turnId": "01a20811-6f55-7fd0-a4bf-6b04e7a4491c",
+        "trigger": "user"
+      },
+      "probeCall": {
+        "line": 104,
+        "name": "exec",
+        "id": "call_1e0f0710fa9f4563806489550acd4dea",
+        "isProbe": true
+      },
+      "probeReadback": {
+        "line": 107,
+        "id": "call_1e0f0710fa9f4563806489550acd4dea",
+        "value": {
+          "ancestry": [
+            {
+              "argv0": "python3",
+              "cwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+              "executable": "python3.14",
+              "executableIdentity": [
+                2096,
+                4622
+              ],
+              "isSandboxCommand": false,
+              "pid": 127,
+              "ppid": 2,
+              "resumeForCurrentThread": false,
+              "startTick": "3973668"
+            },
+            {
+              "argv0": "codex",
+              "cwd": "/tmp/foundry-conversation-5jmmxo/repository-outside",
+              "executable": "codex",
+              "executableIdentity": [
+                2096,
+                1440984
+              ],
+              "isSandboxCommand": false,
+              "pid": 2,
+              "ppid": 1,
+              "resumeForCurrentThread": true,
+              "startTick": "3972330"
+            },
+            {
+              "argv0": "bwrap",
+              "cwd": "/tmp/foundry-conversation-5jmmxo/repository-outside",
+              "executable": "bwrap",
+              "executableIdentity": [
+                2096,
+                2560
+              ],
+              "isSandboxCommand": false,
+              "pid": 1,
+              "ppid": 0,
+              "resumeForCurrentThread": true,
+              "startTick": "3972329"
+            }
+          ],
+          "effectiveCwd": "/tmp/foundry-conversation-5jmmxo/repository/projects/alpha",
+          "metadataOffset": 312702,
+          "stateRead": "current task_started header only",
+          "threadId": "01a207f1-8e5d-7631-a551-47d19bb1e987",
+          "tuiStartHeader": {
+            "cwd": "/tmp/foundry-conversation-5jmmxo/repository-outside",
+            "kind": "session_start",
+            "threadId": null,
+            "thread_id": null,
+            "ts": "2026-11-23T11:01:27.209Z",
+            "turnId": null,
+            "turn_id": null
+          },
+          "turnId": "01a20811-6f55-7fd0-a4bf-6b04e7a4491c",
+          "turnTrigger": "user"
+        }
+      },
+      "tuiStartHeaderFields": [
+        "cwd",
+        "dir",
+        "kind",
+        "model",
+        "model_provider_id",
+        "model_provider_name",
+        "ts"
+      ],
+      "nativeResumeAncestorPids": [
+        2
+      ],
+      "nativeAncestorCwdMatchesLaunch": true,
+      "recordsAfter": {
+        "records/2026-11-23/details/01a207f1-8e5d-7631-a551-47d19bb1e987.md": {
+          "bytes": 1146,
+          "sha256": "24fcee8ab403e56e2740ea6f550eabde20afd1ed3034b09b03125c4892374dbb"
+        },
+        "records/2026-11-23/index/01a207f1-8e5d-7631-a551-47d19bb1e987.md": {
+          "bytes": 921,
+          "sha256": "4d7a7e323ca76be1effe647e24900c04845c47e509755340c620be367bb7b415"
+        }
+      },
+      "exitCode": 0
+    }
+  },
+  "setupRetry": {
+    "cases": [
+      "restricted-in",
+      "restricted-out"
+    ],
+    "toolFailure": "bwrap: Can't bind mount tmpfile on /tmp/foundry-conversation-5jmmxo/input: Unable to mount source on destination: No such file or directory",
+    "correction": "在新夹具中挂载合成会话保留的 input 目录后重新执行四组对照。"
+  }
+}

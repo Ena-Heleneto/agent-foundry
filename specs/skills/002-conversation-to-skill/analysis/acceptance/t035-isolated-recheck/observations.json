@@ -1,0 +1,303 @@
+{
+  "date": "2026-11-25",
+  "environment": {
+    "codexCli": "0.172.0",
+    "model": "gpt-6.2-sol",
+    "reasoningEffort": "high",
+    "sourceRevision": "d75e52b3c4c80329cb20c371885a9a3ecde874b0",
+    "artifact": "packages/skills/dist/skill/profile/conversation-recording/",
+    "installed": ".agents/skills/conversation-recording/",
+    "onlyProjectSkillInstalled": true,
+    "fixtureGitOutsideToolSandboxWithinIsolatedMount": true,
+    "fileSha256": {
+      "SKILL.md": "87dc5382fda8bc5b4cac6b10797ca1f4cf742d4535d0feb24ff63135e5f930a7",
+      "references/event-capture.md": "47e8acff4900c0aaf5814c3ff0d7848185b93353eec1d93eb0b30cddb17a5f72",
+      "references/recording-timing.md": "15d9ff37694a562079a1535dadff20c05938e26487c48786b2c8f0514c860dce",
+      "references/resume-records.md": "2631b439281a4b9a6bdd690e89fb3851aba12810a8032928aed1a079b8e23949",
+      "references/save-events.md": "f1e25ebc9ed55908e6ed6bc88f49ca0b153a59cdaa8b5f23da103702826a8887",
+      "references/session-scope.md": "a2d5d6f7a271c3846b6a517813d3edf77cf9cc04f063804a47436052125c2ad1",
+      "references/storage-contract.md": "7553cc35854e348eb6eeb960af7dde1724061d8b6e63788db0c7eb60dbba3187",
+      "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+      "template/detail.md": "43b14c5bd86f03c14b8565bd341829b720d1495deaf37d8184fde8ccc1e47a81",
+      "template/record.md": "858e28dcc466b8e33ab67d28c136417d2007c1f3e7e963b5eada9d9ae2bc36bb"
+    },
+    "hostInventory": [
+      {
+        "scope": "repository/",
+        "installMatches": [
+          true
+        ],
+        "recordingScope": [
+          "repo"
+        ],
+        "shadowProfileCount": 0
+      },
+      {
+        "scope": "repository/alpha",
+        "installMatches": [
+          true
+        ],
+        "recordingScope": [
+          "repo"
+        ],
+        "shadowProfileCount": 0
+      }
+    ],
+    "hostReadFullFiles": [
+      "SKILL.md",
+      "references/event-capture.md",
+      "references/recording-timing.md",
+      "references/resume-records.md",
+      "references/save-events.md",
+      "references/session-scope.md",
+      "references/storage-contract.md",
+      "references/write-failures.md",
+      "template/detail.md",
+      "template/record.md"
+    ],
+    "fullReadThread": "01a21160-c39c-7c23-b4e8-42b3afc41d15"
+  },
+  "shortReply": {
+    "input": "请只回复 T035-CONTROL-SAME",
+    "sameCatalog": true,
+    "trials": [
+      {
+        "thread": "01a21160-caf8-7b11-b3ac-cade82fb1590",
+        "turn": "01a21160-cbd3-7e21-8324-92bc18790d71",
+        "promptMatches": 1,
+        "catalogSha256": "f438937b68c21d6836e2a1ecbda7fabaafe87efaf8259d10392849a277b9957a",
+        "toolCalls": 7,
+        "final": [
+          "T035-CONTROL-SAME"
+        ],
+        "sentAt": "2026-11-25T06:26:04.728Z",
+        "savedReplyReadAt": "2026-11-25T06:26:02.661Z",
+        "main": "conversation-records/records/2026-11-25/01a21160-caf8-7b11-b3ac-cade82fb1590.md"
+      },
+      {
+        "thread": "01a21163-0c7e-7e52-85fb-b26f2ee8e349",
+        "turn": "01a21163-0d52-7090-ac16-a03de1c94f54",
+        "promptMatches": 1,
+        "catalogSha256": "f438937b68c21d6836e2a1ecbda7fabaafe87efaf8259d10392849a277b9957a",
+        "toolCalls": 0,
+        "final": [
+          "T035-CONTROL-SAME"
+        ],
+        "sentAt": "2026-11-25T06:27:21.031Z",
+        "savedReplyReadAt": null,
+        "main": null
+      }
+    ]
+  },
+  "commit": {
+    "thread": "01a21160-c39c-7c23-b4e8-42b3afc41d15",
+    "turn": "01a21162-49e3-7101-b440-1fa65f64ca21",
+    "attempts": [
+      {
+        "command": "git commit -m t035-first-attempt",
+        "start": "2026-11-25T06:27:45.410Z",
+        "toolCompleted": "2026-11-25T06:27:45.456Z",
+        "windowEnd": "2026-11-25T06:27:45.525Z",
+        "exit": 1,
+        "recordFileEvents": 0
+      },
+      {
+        "command": "git commit -m t035-retry-success",
+        "start": "2026-11-25T06:28:00.414Z",
+        "toolCompleted": "2026-11-25T06:28:00.466Z",
+        "windowEnd": "2026-11-25T06:28:13.665Z",
+        "exit": 0,
+        "recordFileEvents": 0
+      }
+    ],
+    "realCommitFiles": [
+      "alpha/answer.txt"
+    ],
+    "stagedAfter": [],
+    "stagedDuringCommit": [
+      [
+        "alpha/answer.txt"
+      ],
+      [
+        "alpha/answer.txt"
+      ]
+    ],
+    "detailsContainFirstRepair": true,
+    "detailsContainRetryRepair": true,
+    "detailsContainCommitCommand": false,
+    "confirmedPostCommitOrdinary": true,
+    "gitStatusDuringCommitEqual": true,
+    "resultReplySaved": false,
+    "interactiveResume": null
+  },
+  "crossDay": {
+    "open": {
+      "thread": "01a21160-c234-7853-83d4-9283095963a3",
+      "turn": "01a21160-c314-7bc1-993d-ebf6053ea479",
+      "trigger": "user",
+      "launchLocalDate": "2026-11-24",
+      "userMatches": 1,
+      "finished": false,
+      "finalSaved": false,
+      "mainPath": "conversation-recording/records/2026-11-24/01a21160-c234-7853-83d4-9283095963a3.md"
+    },
+    "fixtureTimeZone": "TST+6:25:34",
+    "resumes": [
+      {
+        "resumeLocalDate": "2026-11-25",
+        "originalRecordPath": "conversation-recording/records/2026-11-24/01a21160-c234-7853-83d4-9283095963a3.md",
+        "sameThread": true,
+        "sameFile": true,
+        "seedPromptExists": true,
+        "seedOriginalPrefixPreserved": true,
+        "totalCopiesOfRepeatedPrompt": 1,
+        "turn": "01a21162-a2e2-7981-a78a-ec12288c222a"
+      },
+      {
+        "resumeLocalDate": "2026-11-25",
+        "originalRecordPath": "conversation-recording/records/2026-11-24/01a21160-c234-7853-83d4-9283095963a3.md",
+        "sameThread": true,
+        "sameFile": true,
+        "seedPromptExists": true,
+        "seedOriginalPrefixPreserved": true,
+        "totalCopiesOfRepeatedPrompt": 2,
+        "turn": "01a21164-6a27-7261-bfa8-b8a9262d6459"
+      }
+    ],
+    "bothFinalRepliesSaved": true,
+    "ignoredOldLocation": {
+      "originalPath": "conversation-records/records/2026-11-25/01a21160-caf8-7b11-b3ac-cade82fb1590.md",
+      "oldUnchanged": true,
+      "newMainPaths": [
+        "conversation-data/records/2026-11-25/01a21160-caf8-7b11-b3ac-cade82fb1590.md"
+      ],
+      "newContainsOnlyNewTurn": true,
+      "citesOriginalPath": true,
+      "visible": true,
+      "finished": true
+    }
+  },
+  "writeFailure": {
+    "thread": "01a21160-cc0a-7363-883f-5f12c49ec6eb",
+    "turn": "01a21162-b024-7852-ae09-23e9638f9ee6",
+    "readOnlyErrorAt": "2026-11-25T06:27:25.575Z",
+    "warningAt": "2026-11-25T06:28:03.077Z",
+    "businessReadAt": "2026-11-25T06:28:03.447Z",
+    "mainUnchangedWhileBlocked": true,
+    "detailFilesWhileBlocked": [
+      "conversation-records/records/2026-11-25/details/01a21160-cc0a-7363-883f-5f12c49ec6eb/01a21162-b024-7852-ae09-23e9638f9ee6.md"
+    ],
+    "priorPromptRecovered": 1,
+    "nextPromptSaved": 1,
+    "newFinalSaved": false,
+    "entireDirectoryReadOnly": {
+      "existingUnchanged": true,
+      "readBusinessFile": true,
+      "newPromptRecorded": 0,
+      "faultGotFinal": true
+    }
+  },
+  "parallelMidnight": [
+    {
+      "idleFiles": 0,
+      "openLocalDate": "2026-11-24",
+      "promptLocalDate": "2026-11-25",
+      "differentThreads": true,
+      "projects": {
+        "alpha": {
+          "thread": "01a21160-c3f1-7e60-9341-4c9bbba48735",
+          "turn": "01a21161-0340-7921-949a-f23fe16f3ac3",
+          "trigger": "user",
+          "launchLocalDate": "2026-11-24",
+          "userMatches": 1,
+          "finished": true,
+          "finalSaved": true,
+          "mainPath": "alpha/records/2026-11-24/01a21160-c3f1-7e60-9341-4c9bbba48735.md"
+        },
+        "beta": {
+          "thread": "01a21160-d123-73e1-b191-9374dc4c8343",
+          "turn": "01a21161-0340-7501-911f-5ff3b7a6c1f3",
+          "trigger": "user",
+          "launchLocalDate": "2026-11-24",
+          "userMatches": 0,
+          "finished": false,
+          "finalSaved": false,
+          "mainPath": null
+        }
+      }
+    },
+    {
+      "idleFiles": 0,
+      "openLocalDate": "2026-11-24",
+      "promptLocalDate": "2026-11-25",
+      "differentThreads": true,
+      "projects": {
+        "alpha": {
+          "thread": "01a21165-3545-71a3-afd5-8f7273d86ef8",
+          "turn": "01a21165-7bbc-7b03-9bc5-37529d5fabe4",
+          "trigger": "user",
+          "launchLocalDate": "2026-11-24",
+          "userMatches": 0,
+          "finished": true,
+          "finalSaved": false,
+          "mainPath": null
+        },
+        "beta": {
+          "thread": "01a21165-3dc5-7cf1-9ebb-02dde32381ec",
+          "turn": "01a21165-7bbd-7860-a323-8313a3da1038",
+          "trigger": "user",
+          "launchLocalDate": "2026-11-24",
+          "userMatches": 1,
+          "finished": true,
+          "finalSaved": true,
+          "mainPath": "beta/conversation/records/2026-11-24/01a21165-3dc5-7cf1-9ebb-02dde32381ec.md"
+        }
+      }
+    }
+  ],
+  "scope": {
+    "outsideZeroRecords": true,
+    "outsideFinal": [
+      "T035 outside control"
+    ],
+    "exec": {
+      "thread": "01a21161-a80e-7a90-b7e4-2e5f9626c0bc",
+      "exit": 0,
+      "triggers": [
+        "exec"
+      ],
+      "completed": true,
+      "recordsBefore": 0,
+      "recordsUnchanged": true
+    },
+    "execResume": {
+      "thread": "01a21160-c3f1-7e60-9341-4c9bbba48735",
+      "exit": 0,
+      "triggers": [
+        "exec"
+      ],
+      "completed": true,
+      "recordsBefore": 2,
+      "recordsUnchanged": true
+    }
+  },
+  "supplementAndOutsideTool": {
+    "firstAndSupplement": {
+      "initial": "01a21167-20c9-7a32-b5f0-0c9772d853a9",
+      "supplement": "01a21167-20c9-7a32-b5f0-0c9772d853a9"
+    },
+    "sentDuringCommand": true,
+    "sameTurn": true,
+    "supplementInMain": true,
+    "externalTool": {
+      "workingDirectory": "repository-outside",
+      "exit": 0,
+      "output": "T035 outside tool application\n",
+      "seenInDetail": true,
+      "finishedAt": "2026-11-25T06:33:45.368Z"
+    },
+    "replyMatchesAfterRemovingMarkdownBlockPrefix": true,
+    "replyReadBackAt": "2026-11-25T06:34:20.785Z",
+    "finalSentAt": "2026-11-25T06:34:23.564Z"
+  }
+}

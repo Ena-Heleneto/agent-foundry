@@ -1,0 +1,9 @@
+{
+  "extends": "@foundry/preset-config/tsconfig-json/tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true
+  },
+  "include": ["*.ts", "build/**/*.ts", "utils/**/*.ts", "src/**/collection.config.ts", "src/**/plugin/**/*.ts", "types/**/*.d.ts", "tests/distribution/helpers/**/*.ts"]
+}

@@ -1,0 +1,73 @@
+{
+  "cli": "0.171.0",
+  "source": "e9aea96",
+  "scope": "repo",
+  "discovery": [
+    {
+      "cwd": "/tmp/foundry-conversation-gQlvgX/repository",
+      "runningScope": "repo",
+      "discoveredPath": "/tmp/foundry-conversation-gQlvgX/repository/.agents/skills/conversation-recording/SKILL.md",
+      "retiredCount": 0
+    },
+    {
+      "cwd": "/tmp/foundry-conversation-gQlvgX/repository/projects/alpha",
+      "runningScope": "repo",
+      "discoveredPath": "/tmp/foundry-conversation-gQlvgX/repository/.agents/skills/conversation-recording/SKILL.md",
+      "retiredCount": 0
+    }
+  ],
+  "entryReadbackLines": [
+    19
+  ],
+  "snapshot": {
+    "SKILL.md": {
+      "bytes": 1615,
+      "sha256": "66b2b44d5c2303dc33c0ee658df68462bb0b13cc23505435fa09d69e05ffbe2e"
+    },
+    "references/event-capture.md": {
+      "bytes": 4969,
+      "sha256": "69be17559e843bf87787af97028174bf8c496a7ad9d56a28456bc14f08072fb9"
+    },
+    "references/paired-save.md": {
+      "bytes": 3745,
+      "sha256": "317debf508fb6ff38bcd91b3f077378c5d89c3fc70b13bfd15b691ae90b1633f"
+    },
+    "references/recording-timing.md": {
+      "bytes": 2134,
+      "sha256": "6fd0430d177b51a588b6e4a33ac267f74fbb475596f853f7e6a0d9698ad312ca"
+    },
+    "references/resume-records.md": {
+      "bytes": 3020,
+      "sha256": "1ff3bf60f7c159cf5748545c9df25981cc6c3846c31b224e464247357ec8b813"
+    },
+    "references/session-scope.md": {
+      "bytes": 5292,
+      "sha256": "1c76731be180a9c6cedf2cdffb468ea27d0fae07a53c2a640a5763daf3a03f2e"
+    },
+    "references/storage-contract.md": {
+      "bytes": 11681,
+      "sha256": "f11bfb9e9fd558be655d6ce91f972b8f9618faeff9f0492ea8eae4b00bc86440"
+    },
+    "references/write-failures.md": {
+      "bytes": 2673,
+      "sha256": "6b6be6059d3ef842f3045d26e5cea1ed2042c054c8a50df0e1a9ebff85deb374"
+    }
+  },
+  "thread": "01a20b0d-1633-7442-84ed-29bac9a0d636",
+  "turn": "01a20b0d-1b29-7750-a5a3-cb762ee79bc8",
+  "prompt": "读一下 README 的第一行。",
+  "reply": "对话记录合成基线",
+  "indexPath": "records/2026-11-24/index/01a20b0d-1633-7442-84ed-29bac9a0d636.md",
+  "detailPath": "records/2026-11-24/details/01a20b0d-1633-7442-84ed-29bac9a0d636.md",
+  "index": {
+    "sha256": "12b4d4c96362def5fa490b9b0a4464e95aeb96de8f272f83aa0e4eb163961f1c",
+    "bytes": 663,
+    "text": "# 对话索引\n\n线程 UUID：01a20b0d-1633-7442-84ed-29bac9a0d636\n仓库根：/tmp/foundry-conversation-gQlvgX/repository\n首次工作目录：/tmp/foundry-conversation-gQlvgX/repository\n开启日：2026-11-24\n\n## turn-01a20b0d-1b29-7750-a5a3-cb762ee79bc8\n\n轮次 UUID：01a20b0d-1b29-7750-a5a3-cb762ee79bc8\n入口：Codex CLI 0.171.0，cli，codex-tui，user\n有效工作目录：/tmp/foundry-conversation-gQlvgX/repository\n轮次来源：rollout 字节 28910\n要点：读取 README 的第一行。\n结果：已读取。\n改动文件：无。\n详情：[本轮详情](../details/01a20b0d-1633-7442-84ed-29bac9a0d636.md#turn-01a20b0d-1b29-7750-a5a3-cb762ee79bc8)\n"
+  },
+  "detail": {
+    "sha256": "4dd38817f5a6767bba1745c2b8e00e9670d4df4455cbe589570d6bfe4cacf224",
+    "bytes": 1567,
+    "text": "# 对话详情\n\n线程 UUID：01a20b0d-1633-7442-84ed-29bac9a0d636\n仓库根：/tmp/foundry-conversation-gQlvgX/repository\n首次工作目录：/tmp/foundry-conversation-gQlvgX/repository\n开启日：2026-11-24\n\n## turn-01a20b0d-1b29-7750-a5a3-cb762ee79bc8\n\n轮次 UUID：01a20b0d-1b29-7750-a5a3-cb762ee79bc8\n入口：Codex CLI 0.171.0，cli，codex-tui，user\n有效工作目录：/tmp/foundry-conversation-gQlvgX/repository\n轮次来源：rollout 字节 28910\n\n### 用户发言\n\n来源：rollout 字节 130378\n\n用户原文（原文末尾换行：无）\n\n```text\n读一下 README 的第一行。\n```\n\n### 工具调用\n\n来源：rollout 字节 295118\n\n调用 ID：call_d3de1d8030e841a6b4b64e71f5c6b6d0\n工具：functions.exec → exec_command\n工作目录：/tmp/foundry-conversation-gQlvgX/repository\n\n调用参数（原文末尾换行：有）\n\n```text\nconst r=await tools.exec_command({cmd:\"head -n 1 -- README.md\",workdir:\"/tmp/foundry-conversation-gQlvgX/repository\"});text(r);store(\"readme-line\",r.output)\n```\n\n### 工具回包\n\n来源：rollout 字节 297420\n\n调用 ID：call_d3de1d8030e841a6b4b64e71f5c6b6d0\n\n回包原文（原文末尾换行：无）\n\n```text\n[{\"type\": \"input_text\", \"text\": \"Script completed\\nWall time 0.1 seconds\\nOutput:\\n\"}, {\"type\": \"input_text\", \"text\": \"{\\\"chunk_id\\\":\\\"fd08cf\\\",\\\"wall_time_seconds\\\":0.000014652,\\\"exit_code\\\":0,\\\"original_token_count\\\":7,\\\"output\\\":\\\"对话记录合成基线\\\\n\\\"}\"}]\n```\n\n### 助手末轮回复（待发送）\n\n待发送原文（原文末尾换行：无）\n\n```text\n对话记录合成基线\n```\n"
+  },
+  "gitUnchanged": true
+}

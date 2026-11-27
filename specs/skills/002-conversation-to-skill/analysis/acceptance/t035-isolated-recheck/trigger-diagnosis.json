@@ -1,0 +1,100 @@
+{
+  "runtime": "Codex CLI 0.172.0",
+  "model": "gpt-6.2-sol",
+  "reasoningEffort": "high",
+  "input": "请只回复 T035-CONTROL-SAME",
+  "existingDescription": "本项目所有 Codex CLI 交互轮次的首步。收到任何用户消息时先用此 Skill 保存到项目内，再回复或执行业务。适用于首条消息、hello 等问候、普通问答、要求「只回复指定文字」的短请求、业务请求和恢复后的消息。",
+  "exactRequestDescription": "当用户说「请只回复 T035-CONTROL-SAME」时，使用此 Skill。先保存这条用户原话并读回，然后只回复指定文本。此 Skill 也用于项目内每个普通交互轮次的记录。",
+  "existing": [
+    {
+      "thread": "01a2118d-6bd0-76a3-aef5-d2031fa94ad8",
+      "observed": "read_entry",
+      "descriptionVisible": true,
+      "catalogSha256": "974a7d55687fdd6bea5617d0821110968f2ac1dd036ea2e27a41a824acb015b9",
+      "developerTextSha256": "37121ef14187086f1328da40ce525708ac6e0be1da3eeb5a54475c286e674b6c",
+      "toolCalls": 1,
+      "entryReadCalls": 1,
+      "finalMatchesUserText": false
+    },
+    {
+      "thread": "01a2118d-775f-7303-a3e6-5348379941c0",
+      "observed": "direct_reply",
+      "descriptionVisible": true,
+      "catalogSha256": "974a7d55687fdd6bea5617d0821110968f2ac1dd036ea2e27a41a824acb015b9",
+      "developerTextSha256": "37121ef14187086f1328da40ce525708ac6e0be1da3eeb5a54475c286e674b6c",
+      "toolCalls": 0,
+      "entryReadCalls": 0,
+      "finalMatchesUserText": true
+    },
+    {
+      "thread": "01a2118d-8289-7f30-b137-d70244161b9b",
+      "observed": "direct_reply",
+      "descriptionVisible": true,
+      "catalogSha256": "974a7d55687fdd6bea5617d0821110968f2ac1dd036ea2e27a41a824acb015b9",
+      "developerTextSha256": "37121ef14187086f1328da40ce525708ac6e0be1da3eeb5a54475c286e674b6c",
+      "toolCalls": 0,
+      "entryReadCalls": 0,
+      "finalMatchesUserText": true
+    }
+  ],
+  "exactRequest": [
+    {
+      "thread": "01a2118d-d12a-7480-a4b9-cbdd716e1e48",
+      "observed": "read_entry",
+      "descriptionVisible": true,
+      "catalogSha256": "a01fa767d8f6e7b228b7b166af42e37d2746b08182d228999e72917bbf15dc6a",
+      "developerTextSha256": "99f6e612edd513483be644b927f56056e5936eaa3e2f06bbd55f6e0b39b41ab9",
+      "toolCalls": 1,
+      "entryReadCalls": 1,
+      "finalMatchesUserText": false
+    },
+    {
+      "thread": "01a2118d-dc63-7941-908f-7c650fa8c649",
+      "observed": "read_entry",
+      "descriptionVisible": true,
+      "catalogSha256": "a01fa767d8f6e7b228b7b166af42e37d2746b08182d228999e72917bbf15dc6a",
+      "developerTextSha256": "99f6e612edd513483be644b927f56056e5936eaa3e2f06bbd55f6e0b39b41ab9",
+      "toolCalls": 1,
+      "entryReadCalls": 1,
+      "finalMatchesUserText": false
+    },
+    {
+      "thread": "01a2118d-e614-7182-823e-eb525ad5d1a6",
+      "observed": "direct_reply",
+      "descriptionVisible": true,
+      "catalogSha256": "a01fa767d8f6e7b228b7b166af42e37d2746b08182d228999e72917bbf15dc6a",
+      "developerTextSha256": "99f6e612edd513483be644b927f56056e5936eaa3e2f06bbd55f6e0b39b41ab9",
+      "toolCalls": 0,
+      "entryReadCalls": 0,
+      "finalMatchesUserText": true
+    }
+  ],
+  "sameBodyAcrossVariants": true,
+  "developerAndHostUserTextIdenticalWithDescriptionNormalized": true,
+  "verificationStopsAfterReadingEntryOrReceivingDirectReply": true,
+  "parallelRoundMetadata": {
+    "thread": "01a21165-3545-71a3-afd5-8f7273d86ef8",
+    "turn": "01a21165-7bbc-7b03-9bc5-37529d5fabe4",
+    "byteOffset": 28902,
+    "observedTopLevelFields": [
+      "timestamp",
+      "ordinal",
+      "type",
+      "payload"
+    ],
+    "eventType": "event_msg",
+    "payloadType": "task_started",
+    "turnMatchesIndex": true,
+    "trigger": "user",
+    "actualPatternsMatchOriginalHeader": [
+      false,
+      false
+    ],
+    "actualPatternsMatchWithOnlyOrdinalOmitted": [
+      true,
+      true
+    ]
+  },
+  "developerInputItemsBeforePrompt": 5,
+  "toolDefinitionsAndMessagesIdenticalAfterNormalizingDescriptionAndHostIdsAndTimes": true
+}

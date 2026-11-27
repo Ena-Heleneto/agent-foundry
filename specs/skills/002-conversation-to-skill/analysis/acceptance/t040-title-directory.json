@@ -1,0 +1,174 @@
+{
+  "task": "T040",
+  "cli": "codex-cli 0.172.0",
+  "installationSource": "packages/skills/src/profile/conversation-recording",
+  "installationSha256": {
+    "SKILL.md": "a156bb6dafae543304d7b68fdbaceb1515199599357fbeac6921965302086d5e",
+    "install.py": "326b2ac01e5f1dc27b061cd38264a4d3d917fb6639a48d593c52a6c0c7b6bcda",
+    "recording/events.py": "7a860d022fce11ee03a381bfcf00b4da8f0f78163cd132bc06bc9301b78f2c49",
+    "recording/__init__.py": "f18e4fe9ac27d8eb4e4e5b791f7ceba82f78adb2e697c726f7e6676a6b608d57",
+    "recording/timeline.py": "e52fd6521ea12fa6924ce1621144dfa3567119a3acd29bb6bfdda9575310e30e",
+    "recording/record.py": "036002e8a6834129e6b8c8731d8c8f7dc468a1940bd4926d427ddaa93edd2036",
+    "recording/subagents.py": "f20bebb21f3073938795e56bf7826e8056b4b0248e813ac032fd338df49e972d",
+    "references/resume-records.md": "d6668ff8ad9c81ec139ed1c15aafd92f18e9f5de90c5a31b7aa16e7019562186",
+    "references/session-scope.md": "04955984f2b0565ea59bffb946439adfc71b19f0174994e01a4ceb26cbe16b7c",
+    "references/storage-contract.md": "233c243e7386bd6aa6b55347bfe10f13c1b3018dc18707257228e7d60b937b2f",
+    "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+    "references/recording-timing.md": "283e086174f8322ccde8baff0935be06d000c09199a7bf12fa7c921d9e697274",
+    "references/event-capture.md": "9a8657e9883debc029b0344e9ab149db1843d20a8b15b93dda9e3513559272b5",
+    "references/save-events.md": "3a0bf2e2598b6be5cbcc31652b701a2ee230e0c80ea1db09276f4eb46c545b8b",
+    "template/record.md": "ae38044b4abff4aab2382dabf5e05f7eeb7077343c44bbf7352cbb0446abba51",
+    "template/detail.md": "446325e89fca7b8e984fa6aad4cd2d56b1891775a3e00b4f2e0c5890cf769263",
+    "scripts/stop.py": "799c0913b49cc53b378820e44bf9f70e31babe9ce6ed72a437c5fc3e6591021b",
+    "scripts/subagent_stop.py": "8543b9126a390a64e340bc9993cecb04a30158b99eec996fc65bb18386491bd7",
+    "scripts/post_tool_use.py": "185aa0dad1fcd2abca427105922f2eab09f98b85c2637a6511984fd25f0b85d4",
+    "scripts/user_prompt_submit.py": "f378f5b5c31efb75aec6ebd10ff0e7389e80b6baad35a452aa32dc778e2bd62b"
+  },
+  "liveModel": {
+    "model": "gpt-6.2-sol",
+    "method": "原生交互显式派发命名任务，正向复验指定一个合格回包",
+    "sourceBeforeNaming": {
+      "session": "01a21c70-9db9-75d1-8603-44ef71579661",
+      "turn": "01a21c70-9e00-7b81-8978-0b0381680f2b",
+      "record": "records/2026-11-27/01a21c70-9db9-75d1-8603-44ef71579661/record.md",
+      "savedSha256": "910d48f3f66d2c9f7993a393abad237d6b193faeb64fd001e7c1eb1f62e83700"
+    },
+    "parentFinishedBeforeNaming": {
+      "hostAt": "2026-11-27T09:58:06.061Z",
+      "visible": true,
+      "resultStillPending": true
+    },
+    "adoptedDirectory": {
+      "candidate": {
+        "title": "雨后彩虹的成因",
+        "parentTurn": "01a21c70-9e00-7b81-8978-0b0381680f2b",
+        "dispatchCall": "call_c505c536d19443e286b79e7297ee2185",
+        "childThread": "01a21c70-c83e-7dc1-915b-f1b30edad1be",
+        "childTurn": "01a21c70-c846-78d2-b647-511cdc174a3f",
+        "repliedAt": "2026-11-27T09:58:33.056Z"
+      },
+      "record": "records/2026-11-27/雨后彩虹的成因/record.md",
+      "detail": "details/01a21c70-9e00-7b81-8978-0b0381680f2b.md",
+      "attachmentSha256": "8087dfe7033da8627aee434f01d4cdbbbcdd145452e58e0b27ba6503d5041115"
+    },
+    "resumed": {
+      "opening": "2026-11-27",
+      "day": "2026-11-26",
+      "nativeSession": "01a21c70-9db9-75d1-8603-44ef71579661",
+      "directoryUnchanged": true,
+      "attachmentStillReadable": true,
+      "mainRecordCount": 1
+    },
+    "resumedRecordSha256": "d96f67b4ecbdc8ba4dca0ca4d4b00f1f38d175a21d610611184a83eb00bfb281",
+    "earlierModelChosenTitle": {
+      "title": "雨后彩虹的成因",
+      "parentReplyAt": "2026-11-27T09:50:50.245Z",
+      "childReplyAt": "2026-11-27T09:51:03.900Z"
+    },
+    "earlierSourceDifferences": [
+      "recording/record.py",
+      "recording/subagents.py",
+      "references/storage-contract.md"
+    ],
+    "emptyCandidate": {
+      "reply": null,
+      "record": "records/2026-11-27/01a21c6f-a07e-7810-b730-051ebe0a1e22/record.md",
+      "usedInitialDirectory": true
+    }
+  },
+  "controlledNativeRegression": {
+    "recordVisible": true,
+    "trustedNativeHooks": [
+      "postToolUse",
+      "stop",
+      "subagentStop",
+      "userPromptSubmit"
+    ],
+    "commit": {
+      "realFailureThenSuccess": true,
+      "repairRecordedBeforeRetry": true,
+      "bothCommitWindowsUnchanged": true,
+      "resultReplyOmitted": true,
+      "laterReplyRecorded": true
+    },
+    "recovery": {
+      "openingDate": "2026-11-27",
+      "resumedLocalDate": "2026-11-26",
+      "sameRecordAfterTwoResumes": true,
+      "ignoredOriginalPreserved": true,
+      "relocatedStartsWithNewTurn": true
+    },
+    "extended": {
+      "toolMatrix": {
+        "attachments": {
+          "../attachments/attachment-a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57.png": "a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57",
+          "../attachments/attachment-78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340.png": "78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340",
+          "../attachments/attachment-66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b.png": "66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b"
+        },
+        "sourceHashes": {
+          "alpha": "78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340",
+          "beta": "66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b"
+        },
+        "userAttachmentSha256": "a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57",
+        "afterNativeResume": true,
+        "longOutputExact": true,
+        "streamedOutputInOrder": true,
+        "outsideToolOutputInOriginalSession": true
+      },
+      "foreignResume": {
+        "linkedWorktree": true,
+        "sameNativeSession": true,
+        "resumedBusinessCompleted": true,
+        "noNewRecordOrRewrite": true
+      },
+      "interruptedStop": {
+        "finalVisibleBeforeKill": true,
+        "lastConfirmedBytesPreserved": true,
+        "sameRecordResumed": true,
+        "interruptedFinalRemainedGap": true
+      },
+      "failedWrite": {
+        "firstWriteBlocked": true,
+        "nativeWarningBeforeReply": true,
+        "businessContinued": true,
+        "originalPromptRecovered": true
+      },
+      "cancelAndEarlyClose": {
+        "nativeUserStoppedStreaming": true,
+        "partialFinalNotRecorded": true,
+        "closedBeforeInputSave": true,
+        "nativeInputUnavailable": true,
+        "staleInProgressIndexObserved": true,
+        "sameRecordResumedWithGap": true
+      },
+      "partialWrite": {
+        "mainRecordPreserved": true,
+        "toolStillCompleted": true,
+        "nativeWarningBeforeReply": true,
+        "detailRecoveredInSameTurn": true
+      },
+      "parallelMidnight": {
+        "openedAtDate": "2026-11-26",
+        "promptSentAtDate": "2026-11-27",
+        "twoSeparateRecords": true,
+        "emptyBeforePrompt": true,
+        "sameTextKeptInEachSession": true
+      },
+      "sameTurnSupplement": {
+        "sentDuringActualTool": true,
+        "oneNativeTurn": true,
+        "supplementBeforeFinalInRecord": true
+      }
+    },
+    "nonInteractiveControls": [
+      {
+        "mode": "exec",
+        "recordsUnchanged": true
+      },
+      {
+        "mode": "exec-resume",
+        "recordsUnchanged": true
+      }
+    ]
+  }
+}

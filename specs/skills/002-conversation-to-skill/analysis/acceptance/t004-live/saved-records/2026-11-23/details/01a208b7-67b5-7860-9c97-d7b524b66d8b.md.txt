@@ -1,0 +1,13 @@
+# 会话 01a208b7-67b5-7860-9c97-d7b524b66d8b
+
+原来源：/tmp/foundry-conversation-lwxSrQ/repository/projects/beta
+此次入口目录：/tmp/foundry-conversation-lwxSrQ/repository/projects/beta
+核对依据：初始环境 cwd 与最近 codex 祖先 cwd 一致，交互入口含 --no-daemon。当前线程 rollout 文件名日期为 2026-11-23。
+
+## 用户
+
+请创建 business-cross-midnight.txt，内容为 T004_CASE_CROSS-MIDNIGHT，然后简短告诉我结果。
+
+## 助手
+
+已创建并校验 `business-cross-midnight.txt`，内容为 `T004_CASE_CROSS-MIDNIGHT`。

@@ -1,0 +1,24 @@
+{
+  "case": "recording",
+  "label": "recording-followup",
+  "command": [
+    "codex",
+    "exec",
+    "--json",
+    "-c",
+    "sandbox_mode=\"workspace-write\"",
+    "-c",
+    "approval_policy=\"never\"",
+    "resume",
+    "01a1ef5f-6eb8-77f0-a0a3-0e43305e55a6",
+    "-"
+  ],
+  "prompt": "闭包是什么，用一句话解释。",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 30.026,
+  "events": 13,
+  "session_id": "01a1ef5f-6eb8-77f0-a0a3-0e43305e55a6",
+  "stderr_line_count": 0,
+  "stderr_errors": []
+}

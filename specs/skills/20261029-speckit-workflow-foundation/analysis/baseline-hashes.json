@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-10-30T00:10:29.112923+00:00",
+  "repo_root": "<source-home>/workspce/ena/foundry/feature/speckit-workflow-extensions",
+  "feature_directory": "specs/skills/20261029-speckit-workflow-foundation",
+  "git_head": "dd3995482b544b30f607fd654047ac8af9b9c9b1",
+  "initial_git_status": [
+    " M specs/skills/20261029-speckit-workflow-foundation/spec.md"
+  ],
+  "files": {
+    ".agents/skills/explainer-doc-sync/SKILL.md": "af7292e6949f07bc9b3cf4a4cb67c8456f5f01cb83916d8834c1903839405327",
+    ".agents/skills/mvu-gate/SKILL.md": "47cb3dfa543612e4e95b5cc8aee2f33e7fe9d6f63366a44e0105406eb441e075",
+    ".agents/skills/speckit-implement/SKILL.md": "848a5c9eff7b99e348927cbde6c35378de9fea3fd317941f58fa0b0b79301eec",
+    ".specify/extensions.yml": "616626ba1908ccb94c675605f8ac8ccae7758a91d92413e2aac5f8d7ededa38a",
+    ".specify/init-options.json": "b2cd2f9e794572b4a84da9e2c25f164c51ce978eb321c03954902e92a79fac4a",
+    ".specify/integration.json": "d1fc0b70ebca13cac86fab0e92e4b6aa8bab18e508540e3925cd3eb415953d9d",
+    ".specify/integrations/codex.manifest.json": "a63503a1b02bbbe3abe47db374e0fdc4652a680ef17137022a755a7b2e1c6b07",
+    ".specify/memory/constitution.md": "37b0aaac5c1435cf221649af6fe8c30614efd53ebb31fb0bd781916331b5bac6",
+    "apps/personal-hub/app/composables/useBlogPosts.ts": "28a677b7b90128400874ec051bbf5ac7fbc6a89df6e0b40376ec1ef9e97f41ef",
+    "apps/personal-hub/app/pages/posts/[...slug].vue": "285406870259aad421384ede52648ad41e505965864b2d37a0ebe88e9b1e669d",
+    "apps/personal-hub/config/runtime.config.ts": "deac71b9f5795865838a1d4e8516edb6cfd8cffb4a9ebdd80112d801aad3f17a",
+    "apps/personal-hub/content.config.ts": "9c556278cf2c498ae56fa35c0c9b5cd81e36f5fd0aed89a67619f48750f94da8",
+    "apps/personal-hub/nuxt.config.ts": "86807dff4329b01bc98cfae90246ef6c79f8469f3607dd48f9584a5ce78225b9",
+    "packages/skills/src/speckit/explainer-doc-sync/SKILL.md": "af7292e6949f07bc9b3cf4a4cb67c8456f5f01cb83916d8834c1903839405327",
+    "packages/skills/src/speckit/mvu-gate/SKILL.md": "47cb3dfa543612e4e95b5cc8aee2f33e7fe9d6f63366a44e0105406eb441e075",
+    "scripts/dev/actions/link-skills/link-skills.ps1": "5a239bb3502bb5c4e5593aa2c627a9b8b5370a89e690d4cd2eb07a975dfe262d",
+    "scripts/dev/actions/link-skills/link-skills.sh": "f84c7904221da955b3b840c54b334d9f3d7633366cac6a44b2186d06cafa0740",
+    "scripts/dev/actions/register-hooks/register-hooks.ps1": "c305e39665daa4bde34b64227c28da18766cc08cd590e1b49c97f53af9077612",
+    "scripts/dev/actions/register-hooks/register-hooks.sh": "b4af25d5ff27134912860d5d195e32905a65e107b93cfbe401a8c0ea3a6688f0",
+    "scripts/dev/nuxt-prepare/nuxt-prepare.ps1": "bf6f9358b9a240b3dc6bf2c8d4031a70cba31907e99b5c1dee304e99a14117bf",
+    "scripts/dev/nuxt-prepare/nuxt-prepare.sh": "46b3f536fcfee4dd5ead3700e3f4220793b873c1d6859c944e9fc3f1ff9ff608",
+    "specs/speckit/001-atomic-skills/business-flow.md": "14925d2dd9a7b3807c5c3428bc1f7b26c24bc22f03c38d87754c3d9869787891",
+    "specs/speckit/001-atomic-skills/checklists/requirements.md": "ca413ce8e7b7387919e1d72acf3f468863093f0bc0725229ee69d44fc2eab2a9",
+    "specs/speckit/001-atomic-skills/contracts/artifacts.md": "78a0bc49ba5f6b1fc583503a94d4d57450da392471b28f240b8ad162eba27b55",
+    "specs/speckit/001-atomic-skills/contracts/eval-report.md": "961149ce2189079a1c0571de990f84bc72ac3889eaf5efafdbbc76b551761928",
+    "specs/speckit/001-atomic-skills/contracts/hooks-extensions.md": "e79f4fdcf75fc574393bf9c9952d30db0bcc144ef7ad425ddaea51d9726e19b0",
+    "specs/speckit/001-atomic-skills/contracts/mcp-server.md": "e34d79451a34b937c5e5ba106d59c739fa40decfe574d22d5427b2f6a079faaf",
+    "specs/speckit/001-atomic-skills/contracts/pipeline-base.md": "6430786583f3ccd368ed657d4df451585b3696d32621af72b44fba3e04d074c2",
+    "specs/speckit/001-atomic-skills/contracts/skills-packaging.md": "5b3f0b9b4836e15c8be65372c1484e44f0b8923b536c288be1e3de2d2ddf313c",
+    "specs/speckit/001-atomic-skills/data-model.md": "b490448a46a7d60301f64bde9ba6663de168ccc523ff8fa95fdc6fde409d7581",
+    "specs/speckit/001-atomic-skills/diagrams.md": "8a44ead15f8728fff71c552378c3dcadc16e93ca84851631a2666f318cfc4df9",
+    "specs/speckit/001-atomic-skills/issue-description.md": "a4d2cdff79e10eec09d4ceebbde3133e57b683826c57da6b39f4f7f5f50d3b68",
+    "specs/speckit/001-atomic-skills/logic-flow.md": "fcd214bd55071b1cfdd7cfa649535a54209c74aad9a2cd290e704b294d5ffcb4",
+    "specs/speckit/001-atomic-skills/mcp-eval-report.md": "3f851e96110690960faffa2bfc82b27ca0838a6bcb9bdf8dd1581d8eafe50241",
+    "specs/speckit/001-atomic-skills/merge-request.md": "b71284b68939f3a0ddccd46de46d7cde3c88c10c8547cc8734ccc32d678559e4",
+    "specs/speckit/001-atomic-skills/plan.md": "520d58faa82cb09f5625caba1b6baefa431c7332882efb3a59983526fbf78b9d",
+    "specs/speckit/001-atomic-skills/pr-description.md": "385f4d7b965015f2d97a88cf49c80a04680a45e18d8c59fae1dfddea059a2367",
+    "specs/speckit/001-atomic-skills/quickstart.md": "73c8b71b79f4fddac15b978e736a1d2918a6409bec804ca733a793df0c16e55c",
+    "specs/speckit/001-atomic-skills/requirements.md": "3760913037376689cb8e64338c20db22f81bc8ca6da001cab71f3d5eb8d4925d",
+    "specs/speckit/001-atomic-skills/research.md": "5cc7ba1743bc54e73445d2446071909632da2ca590c1c77e7d527773ccfab01e",
+    "specs/speckit/001-atomic-skills/spec.md": "a3ab0d2518cd60272e51a7435a237475c059e96d64ae01ac3a7338a9758598fe",
+    "specs/speckit/001-atomic-skills/tasks.md": "bbe17d2580391dd77fee1a3216a467f1a124be9a03eb4dd662e06b6e4c4b4216",
+    "specs/stacks/001-chimera-cloud-deploy/fastmcp.md": "ad5005ade1a3715b62ffc3d9976409f869b648a921a8b77fa49d5d8ec3de2829"
+  },
+  "missing_files": [],
+  "mvu_hooks": {
+    "before_plan": [
+      {
+        "extension": "mvu-gate",
+        "command": "mvu-gate",
+        "description": "计划阶段开始前注入 MVU 判定条件清单（FR-016）",
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 向 plan 阶段注入 FR-015 判定条件清单（C1-C4 命中即需 MVU、三豁免全满足可跳过）与「待验证假设 + 验收信号」书写格式，要求 plan.md 产出「MVU 判定」表。",
+        "optional": false
+      }
+    ],
+    "after_plan": [
+      {
+        "extension": "mvu-gate",
+        "command": "mvu-gate",
+        "description": "计划阶段完成后校验 plan 含 MVU 标记（FR-016）",
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 校验 <FD>/plan.md 含「MVU 判定」表且命中项具备命中条件、待验证假设、验收信号三要素（无命中项须写明扫描结论与豁免理由），校验失败输出缺失项清单并提示修正，不静默通过、不阻断原命令完成。",
+        "optional": false
+      }
+    ],
+    "before_tasks": [
+      {
+        "extension": "mvu-gate",
+        "command": "mvu-gate",
+        "description": "任务解析阶段开始前注入 plan 的 MVU 标记（FR-016）",
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 读取 <FD>/plan.md 的「MVU 判定」表，要求将每个 MVU 标记生成为前置任务（含验收信号）并为下游业务任务建立显式依赖/阻塞标注。",
+        "optional": false
+      }
+    ],
+    "after_tasks": [
+      {
+        "extension": "mvu-gate",
+        "command": "mvu-gate",
+        "description": "任务解析阶段完成后校验 MVU 前置任务与依赖（FR-016）",
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 校验 <FD>/tasks.md 中每个 MVU 标记有对应前置任务、含验收信号、业务任务有显式依赖/阻塞标注，校验失败输出缺失项清单并提示修正，不静默通过、不阻断原命令完成。",
+        "optional": false
+      }
+    ],
+    "before_implement": [
+      {
+        "extension": "mvu-gate",
+        "command": "mvu-gate",
+        "description": "实施阶段开始前注入 MVU 阻塞/补充规则（FR-016）",
+        "prompt": "当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 注入实施规则\u2014\u2014MVU 未验收不得开始下游业务任务、新发现风险补充 MVU 任务、验收后骨架保留增量填充、验收失败回计划阶段，并按 FR-017 逐步参与模式推进（逐任务/任务组、每步汇报待确认、中断后以勾选状态断点续跑）。",
+        "optional": false
+      }
+    ]
+  },
+  "registrar_mvu_lines": {
+    "scripts/dev/actions/register-hooks/register-hooks.sh": [
+      "  $'before_plan\\x1fmvu-gate\\x1fmvu-gate\\x1f计划阶段开始前注入 MVU 判定条件清单（FR-016）\\x1f当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 向 plan 阶段注入 FR-015 判定条件清单（C1-C4 命中即需 MVU、三豁免全满足可跳过）与「待验证假设 + 验收信号」书写格式，要求 plan.md 产出「MVU 判定」表。\\x1ffalse'",
+      "  $'after_plan\\x1fmvu-gate\\x1fmvu-gate\\x1f计划阶段完成后校验 plan 含 MVU 标记（FR-016）\\x1f当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 校验 <FD>/plan.md 含「MVU 判定」表且命中项具备命中条件、待验证假设、验收信号三要素（无命中项须写明扫描结论与豁免理由），校验失败输出缺失项清单并提示修正，不静默通过、不阻断原命令完成。\\x1ffalse'",
+      "  $'before_tasks\\x1fmvu-gate\\x1fmvu-gate\\x1f任务解析阶段开始前注入 plan 的 MVU 标记（FR-016）\\x1f当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 读取 <FD>/plan.md 的「MVU 判定」表，要求将每个 MVU 标记生成为前置任务（含验收信号）并为下游业务任务建立显式依赖/阻塞标注。\\x1ffalse'",
+      "  $'after_tasks\\x1fmvu-gate\\x1fmvu-gate\\x1f任务解析阶段完成后校验 MVU 前置任务与依赖（FR-016）\\x1f当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 校验 <FD>/tasks.md 中每个 MVU 标记有对应前置任务、含验收信号、业务任务有显式依赖/阻塞标注，校验失败输出缺失项清单并提示修正，不静默通过、不阻断原命令完成。\\x1ffalse'",
+      "  $'before_implement\\x1fmvu-gate\\x1fmvu-gate\\x1f实施阶段开始前注入 MVU 阻塞/补充规则（FR-016）\\x1f当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 注入实施规则\u2014\u2014MVU 未验收不得开始下游业务任务、新发现风险补充 MVU 任务、验收后骨架保留增量填充、验收失败回计划阶段，并按 FR-017 逐步参与模式推进（逐任务/任务组、每步汇报待确认、中断后以勾选状态断点续跑）。\\x1ffalse'"
+    ],
+    "scripts/dev/actions/register-hooks/register-hooks.ps1": [
+      "  @{ Hook = 'before_plan'; Extension = 'mvu-gate'; Command = 'mvu-gate'; Description = '计划阶段开始前注入 MVU 判定条件清单（FR-016）'; Prompt = '当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 向 plan 阶段注入 FR-015 判定条件清单（C1-C4 命中即需 MVU、三豁免全满足可跳过）与「待验证假设 + 验收信号」书写格式，要求 plan.md 产出「MVU 判定」表。'; Optional = 'false' }",
+      "  @{ Hook = 'after_plan'; Extension = 'mvu-gate'; Command = 'mvu-gate'; Description = '计划阶段完成后校验 plan 含 MVU 标记（FR-016）'; Prompt = '当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 校验 <FD>/plan.md 含「MVU 判定」表且命中项具备命中条件、待验证假设、验收信号三要素（无命中项须写明扫描结论与豁免理由），校验失败输出缺失项清单并提示修正，不静默通过、不阻断原命令完成。'; Optional = 'false' }",
+      "  @{ Hook = 'before_tasks'; Extension = 'mvu-gate'; Command = 'mvu-gate'; Description = '任务解析阶段开始前注入 plan 的 MVU 标记（FR-016）'; Prompt = '当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 读取 <FD>/plan.md 的「MVU 判定」表，要求将每个 MVU 标记生成为前置任务（含验收信号）并为下游业务任务建立显式依赖/阻塞标注。'; Optional = 'false' }",
+      "  @{ Hook = 'after_tasks'; Extension = 'mvu-gate'; Command = 'mvu-gate'; Description = '任务解析阶段完成后校验 MVU 前置任务与依赖（FR-016）'; Prompt = '当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 校验 <FD>/tasks.md 中每个 MVU 标记有对应前置任务、含验收信号、业务任务有显式依赖/阻塞标注，校验失败输出缺失项清单并提示修正，不静默通过、不阻断原命令完成。'; Optional = 'false' }",
+      "  @{ Hook = 'before_implement'; Extension = 'mvu-gate'; Command = 'mvu-gate'; Description = '实施阶段开始前注入 MVU 阻塞/补充规则（FR-016）'; Prompt = '当前功能目录经 .specify/feature.json 的 feature_directory 解析；按 mvu-gate SKILL.md 注入实施规则\u2014\u2014MVU 未验收不得开始下游业务任务、新发现风险补充 MVU 任务、验收后骨架保留增量填充、验收失败回计划阶段，并按 FR-017 逐步参与模式推进（逐任务/任务组、每步汇报待确认、中断后以勾选状态断点续跑）。'; Optional = 'false' }"
+    ]
+  },
+  "retired_skill_inventory": {
+    "packages/skills/src/speckit/explainer-doc-sync": {
+      "SKILL.md": "af7292e6949f07bc9b3cf4a4cb67c8456f5f01cb83916d8834c1903839405327"
+    },
+    ".agents/skills/explainer-doc-sync": {
+      "SKILL.md": "af7292e6949f07bc9b3cf4a4cb67c8456f5f01cb83916d8834c1903839405327"
+    }
+  },
+  "fixture": {
+    "root": "/tmp/speckit-foundation-t001-z2xleuxz",
+    "definition": {
+      "schema_version": 1,
+      "kind": "fixture-definition-only",
+      "spec_id": "baseline-fixture",
+      "parents": [
+        {
+          "task_id": "T001",
+          "subtask": {
+            "id": "T001-S001",
+            "goal_kind": "code",
+            "status": "pending",
+            "acceptance": [
+              "实际调用返回 1，测试退出 0"
+            ]
+          },
+          "learning": {
+            "unit_id": "T001-U001",
+            "status": "pending",
+            "evidence": []
+          },
+          "knowledge_ref": "knowledge.md"
+        },
+        {
+          "task_id": "T002",
+          "subtask": {
+            "id": "T002-S001",
+            "goal_kind": "code",
+            "status": "pending",
+            "acceptance": [
+              "实际调用返回 2，测试退出 0；T001 状态不变"
+            ]
+          },
+          "knowledge_ref": "knowledge.md"
+        }
+      ],
+      "notes": [
+        "仅定义样例，不是权威 state.json；真实状态须由后续 helper 初始化。",
+        "代码通过而学习未通过是后续演练目标，目前均未执行。"
+      ]
+    },
+    "files": {
+      ".agents/skills/explainer-doc-sync/SKILL.md": "af7292e6949f07bc9b3cf4a4cb67c8456f5f01cb83916d8834c1903839405327",
+      ".agents/skills/fixture-unknown/sentinel.txt": "83fa40987ce4e423b8e5208fb55899bad4be3d480e0aa620dd83ab861b06e1cd",
+      ".agents/skills/mvu-gate/SKILL.md": "47cb3dfa543612e4e95b5cc8aee2f33e7fe9d6f63366a44e0105406eb441e075",
+      ".specify/extensions.yml": "ce340c18c280ec83582bf4824907fa32e9b3e3578ed71f9dd7c27f7f164c5a0f",
+      ".specify/feature.json": "55edf34342fb89d82e91480677846d9c91f3cc197c2a1e6ec6b87a66b11a84cc",
+      ".specify-extensions-snapshot.yml": "616626ba1908ccb94c675605f8ac8ccae7758a91d92413e2aac5f8d7ededa38a",
+      "apps/personal-hub/content/blog/fixture-draft.md": "c4c67566a297e2892d8cf51b86fc184183b02b78f9ead94f0e0324c6a23e9abd",
+      "apps/personal-hub/content/blog/fixture-published.md": "400a1fb2dc5bffdbea91ba2e63bc7af112b613dc3c747a214a59c55e963f1519",
+      "custom-hook.json": "9df22ae3c18c144776c65e7f52dbd20a33e6eedd9ef54c2484382be63349ac7f",
+      "fixture-definition.json": "90d50b2a714556c957b9e5e4fbaa0ca20429aea6ab25b9ac1fddda18a3c3f4df",
+      "packages/skills/src/speckit/explainer-doc-sync/SKILL.md": "af7292e6949f07bc9b3cf4a4cb67c8456f5f01cb83916d8834c1903839405327",
+      "packages/skills/src/speckit/mvu-gate/SKILL.md": "47cb3dfa543612e4e95b5cc8aee2f33e7fe9d6f63366a44e0105406eb441e075",
+      "specs/skills/baseline-fixture/knowledge.md": "f7809d086b2828b534128357f9aa68e7f347df2bc4066f4f1ec6e87e7606b7ae",
+      "specs/skills/baseline-fixture/plan.md": "30f223ddbc6e3516b06116df01fc83d1b69347e9ddb743a675fa4aac7b098042",
+      "specs/skills/baseline-fixture/spec.md": "30dd6bf064a9b3a9d0ac6d5d4ce7d3a51cfb7cd8e6cad46f2af986f4129d2c7c",
+      "specs/skills/baseline-fixture/tasks.md": "a48a00ec2b8c17a2a8fea438c8ee278e8b50016783a933b6cdf0d27ff9d5f241"
+    }
+  },
+  "historical_reference": {
+    "current": "specs/stacks/001-chimera-cloud-deploy/fastmcp.md",
+    "current_exists": true,
+    "old": "docs/tools/fastmcp.md",
+    "old_exists": false
+  },
+  "notes": [
+    "files 为采集时快照；注册器及配置后续有计划内改动时仅比较受保护条目，不要求整文件 hash 永久不变。",
+    "fixture 路径是本机临时证据；可按 implementation-baseline.md 的定义重建。",
+    "不含 .env、密钥或数据库数据；不表示 MVU 或模式行为通过。"
+  ]
+}

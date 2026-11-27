@@ -1,0 +1,424 @@
+{
+  "date": "2026-11-10",
+  "scope": "T103最小候选TV-10；不含T104最终来源",
+  "versions": {
+    "specify": "1.2.6",
+    "skills": "1.7.4",
+    "codex": "0.167.0"
+  },
+  "model_override": false,
+  "max_seconds_per_turn": 240,
+  "results": [
+    {
+      "case": "continuous-parallel-recovery",
+      "project": "/tmp/foundry-tv10-20261110/cases/positive-a",
+      "started": "2026-11-10T12:36:16.104427+00:00",
+      "ended": "2026-11-10T12:38:56.575357+00:00",
+      "elapsed_seconds": 160.471,
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "events": 22,
+      "thread_id": "01a1c538-2440-7892-b774-4eda05b77853",
+      "changed": [
+        "specs/demo/001-order/analysis/T002-parallel-review.md",
+        "specs/demo/001-order/implementation/T002.md",
+        "specs/demo/001-order/tasks.md"
+      ],
+      "markers": {
+        "T001": "x",
+        "T002": " "
+      }
+    },
+    {
+      "case": "parallel-boundary",
+      "project": "/tmp/foundry-tv10-20261110/cases/positive-a",
+      "started": "2026-11-10T12:31:36.290163+00:00",
+      "ended": "2026-11-10T12:35:36.390375+00:00",
+      "elapsed_seconds": 240.1,
+      "exit": -15,
+      "timeout": true,
+      "turn_completed": false,
+      "events": 50,
+      "thread_id": "01a1c571-4259-7753-865c-c89cb520bfd0",
+      "changed": [
+        "specs/demo/001-order/analysis/T001-parallel-review.md",
+        "specs/demo/001-order/analysis/T002-parallel-review.md",
+        "specs/demo/001-order/implementation/T002.md"
+      ],
+      "markers": {
+        "T001": "x",
+        "T002": " "
+      }
+    },
+    {
+      "case": "shared-finish",
+      "project": "/tmp/foundry-tv10-20261110/round3/cases/shared-contract",
+      "started": "2026-11-10T12:44:14.836482+00:00",
+      "ended": "2026-11-10T12:47:36.824600+00:00",
+      "elapsed_seconds": 201.988,
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "events": 52,
+      "thread_id": "01a1c56f-a390-7172-931f-e701b5b77383",
+      "changed": [
+        "shipping.py",
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/implementation/T002.md",
+        "specs/demo/001-order/mvu.md",
+        "specs/demo/001-order/plan.md",
+        "specs/demo/001-order/requirements/discussions/amount-unit-change.md",
+        "specs/demo/001-order/tasks.md",
+        "test_shipping.py"
+      ],
+      "markers": {
+        "T001": "x",
+        "T002": "x"
+      }
+    },
+    {
+      "case": "shared-recovery",
+      "project": "/tmp/foundry-tv10-20261110/round3/cases/shared-contract",
+      "started": "2026-11-10T12:33:03.985798+00:00",
+      "ended": "2026-11-10T12:36:39.140111+00:00",
+      "elapsed_seconds": 215.154,
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "events": 55,
+      "thread_id": "01a1c56f-a390-7172-931f-e701b5b77383",
+      "changed": [
+        ".gitignore",
+        "order.py",
+        "specs/demo/001-order/analysis/T001.md",
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/implementation/T002.md",
+        "specs/demo/001-order/tasks.md",
+        "test_order.py"
+      ],
+      "markers": {
+        "T001": "x",
+        "T002": " "
+      }
+    },
+    {
+      "case": "shared-save",
+      "project": "/tmp/foundry-tv10-20261110/round3/cases/shared-contract",
+      "started": "2026-11-10T12:29:49.996862+00:00",
+      "ended": "2026-11-10T12:32:07.170530+00:00",
+      "elapsed_seconds": 137.174,
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "events": 44,
+      "thread_id": "01a1c56f-a390-7172-931f-e701b5b77383",
+      "changed": [],
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      }
+    },
+    {
+      "case": "shared-substantive",
+      "project": "/tmp/foundry-tv10-20261110/round3/cases/shared-contract",
+      "started": "2026-11-10T12:37:32.235419+00:00",
+      "ended": "2026-11-10T12:41:32.356069+00:00",
+      "elapsed_seconds": 240.121,
+      "exit": -15,
+      "timeout": true,
+      "turn_completed": false,
+      "events": 27,
+      "thread_id": "01a1c56f-a390-7172-931f-e701b5b77383",
+      "changed": [
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/implementation/T002.md",
+        "specs/demo/001-order/mvu.md",
+        "specs/demo/001-order/plan.md",
+        "specs/demo/001-order/requirements/discussions/amount-unit-change.md",
+        "specs/demo/001-order/requirements/raw/2026-11-10-amount-unit-change.md",
+        "specs/demo/001-order/spec.md"
+      ],
+      "markers": {
+        "T001": "x",
+        "T002": " "
+      }
+    },
+    {
+      "case": "shared-substantive-close",
+      "project": "/tmp/foundry-tv10-20261110/round3/cases/shared-contract",
+      "started": "2026-11-10T12:42:41.366960+00:00",
+      "ended": "2026-11-10T12:43:38.276672+00:00",
+      "elapsed_seconds": 56.91,
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "events": 11,
+      "thread_id": "01a1c56f-a390-7172-931f-e701b5b77383",
+      "changed": [],
+      "markers": {
+        "T001": "x",
+        "T002": " "
+      }
+    },
+    {
+      "case": "skill-missing",
+      "project": "/tmp/foundry-tv10-20261110/round3/cases/skill-missing",
+      "started": "2026-11-10T12:29:48.158940+00:00",
+      "ended": "2026-11-10T12:30:56.834453+00:00",
+      "elapsed_seconds": 68.676,
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "events": 22,
+      "thread_id": "01a1c56f-9d0a-7802-8320-e583d077748e",
+      "changed": [],
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      }
+    },
+    {
+      "case": "skill-outdated",
+      "project": "/tmp/foundry-tv10-20261110/round3/cases/skill-outdated",
+      "started": "2026-11-10T12:29:48.171564+00:00",
+      "ended": "2026-11-10T12:31:23.477866+00:00",
+      "elapsed_seconds": 95.306,
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "events": 27,
+      "thread_id": "01a1c56f-9d0b-7c72-9bea-b499822b584c",
+      "changed": [],
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      }
+    },
+    {
+      "case": "skill-unreadable-actual",
+      "project": "/tmp/foundry-tv10-20261110/round3/cases/skill-unreadable",
+      "started": "2026-11-10T12:30:45.047687+00:00",
+      "ended": "2026-11-10T12:31:46.507755+00:00",
+      "elapsed_seconds": 61.46,
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "events": 22,
+      "thread_id": "01a1c570-7a8e-7451-8fa7-9d7a354902cb",
+      "changed": [],
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      }
+    },
+    {
+      "case": "yaml-broken",
+      "project": "/tmp/foundry-tv10-20261110/round3/cases/yaml-broken",
+      "started": "2026-11-10T12:29:48.164019+00:00",
+      "ended": "2026-11-10T12:31:23.599580+00:00",
+      "elapsed_seconds": 95.436,
+      "exit": 0,
+      "timeout": false,
+      "turn_completed": true,
+      "events": 33,
+      "thread_id": "01a1c56f-9d0a-78b3-9ec7-2a0fb2c021a5",
+      "changed": [
+        "specs/demo/001-order/implementation/T001.md",
+        "specs/demo/001-order/tasks.md"
+      ],
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      }
+    }
+  ],
+  "checks": {
+    "yaml-broken": {
+      "complete": true,
+      "no_business_change": true,
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      },
+      "elapsed_seconds": 95.436
+    },
+    "skill-missing": {
+      "complete": true,
+      "no_business_change": true,
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      },
+      "elapsed_seconds": 68.676
+    },
+    "skill-unreadable-actual": {
+      "complete": true,
+      "no_business_change": true,
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      },
+      "elapsed_seconds": 61.46
+    },
+    "skill-outdated": {
+      "complete": true,
+      "no_business_change": true,
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      },
+      "elapsed_seconds": 95.306
+    },
+    "shared-save": {
+      "complete": true,
+      "no_business_change": true,
+      "markers": {
+        "T001": " ",
+        "T002": " "
+      },
+      "elapsed_seconds": 137.174,
+      "actual_failed_write_events": [
+        31
+      ]
+    },
+    "continuous-parallel-recovery": {
+      "complete": true,
+      "no_business_change": true,
+      "markers": {
+        "T001": "x",
+        "T002": " "
+      },
+      "elapsed_seconds": 160.471
+    },
+    "shared-recovery": {
+      "complete": true,
+      "plan_read_before_business_event": 23,
+      "first_business_write_event": 33,
+      "markers": {
+        "T001": "x",
+        "T002": " "
+      },
+      "elapsed_seconds": 215.154
+    },
+    "parallel": {
+      "same_parent": true,
+      "branches_overlap": true,
+      "each_full_candidate_and_governance": true,
+      "branch_ids": [
+        "01a1c576-16e8-7113-abe7-f8e4d3ce7df0",
+        "01a1c575-e972-7311-871b-2b59f03d4503"
+      ]
+    },
+    "substantive": {
+      "complete": true,
+      "first_turn_timed_out_not_passed": true,
+      "closure_turn_completed": true,
+      "no_business_change_across_both": true,
+      "completed_A_preserved": true,
+      "B_pending": true,
+      "closure_elapsed_seconds": 56.91
+    },
+    "shared-finish": {
+      "complete": true,
+      "completed_A_unchanged": true,
+      "B_implemented": true,
+      "elapsed_seconds": 201.988
+    },
+    "candidate_source_sha256": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+    "ready_to_complete_T103": true
+  },
+  "native": [
+    {
+      "thread_id": "01a1c576-16e8-7113-abe7-f8e4d3ce7df0",
+      "source_file": "rollout-2026-11-10T20-36-53-01a1c576-16e8-7113-abe7-f8e4d3ce7df0.jsonl",
+      "retained": "native/01a1c576-16e8-7113-abe7-f8e4d3ce7df0.jsonl",
+      "parent_thread_id": "01a1c538-2440-7892-b774-4eda05b77853",
+      "agent_path": "/root/prepare_t002",
+      "events": 10,
+      "candidate_full_text_read": true,
+      "governance_full_text_read": true,
+      "task_started": [
+        "2026-11-10T12:36:53.160Z"
+      ],
+      "task_complete": [
+        "2026-11-10T12:37:46.939Z"
+      ]
+    },
+    {
+      "thread_id": "01a1c538-2440-7892-b774-4eda05b77853",
+      "source_file": "rollout-2026-11-10T19-29-13-01a1c538-2440-7892-b774-4eda05b77853.jsonl",
+      "retained": "native/01a1c538-2440-7892-b774-4eda05b77853.jsonl",
+      "parent_thread_id": null,
+      "agent_path": null,
+      "events": 18,
+      "candidate_full_text_read": false,
+      "governance_full_text_read": false,
+      "task_started": [
+        "2026-11-10T12:36:17.147Z"
+      ],
+      "task_complete": [
+        "2026-11-10T12:38:54.307Z"
+      ]
+    },
+    {
+      "thread_id": "01a1c575-e972-7311-871b-2b59f03d4503",
+      "source_file": "rollout-2026-11-10T20-36-41-01a1c575-e972-7311-871b-2b59f03d4503.jsonl",
+      "retained": "native/01a1c575-e972-7311-871b-2b59f03d4503.jsonl",
+      "parent_thread_id": "01a1c538-2440-7892-b774-4eda05b77853",
+      "agent_path": "/root/resume_t001",
+      "events": 6,
+      "candidate_full_text_read": true,
+      "governance_full_text_read": true,
+      "task_started": [
+        "2026-11-10T12:36:41.523Z"
+      ],
+      "task_complete": [
+        "2026-11-10T12:37:24.659Z"
+      ]
+    },
+    {
+      "thread_id": "01a1c56f-a390-7172-931f-e701b5b77383",
+      "source_file": "rollout-2026-11-10T20-29-50-01a1c56f-a390-7172-931f-e701b5b77383.jsonl",
+      "retained": "native/01a1c56f-a390-7172-931f-e701b5b77383.jsonl",
+      "parent_thread_id": null,
+      "agent_path": null,
+      "events": 73,
+      "candidate_full_text_read": true,
+      "governance_full_text_read": true,
+      "task_started": [
+        "2026-11-10T12:29:51.260Z",
+        "2026-11-10T12:33:05.138Z",
+        "2026-11-10T12:37:33.345Z",
+        "2026-11-10T12:42:42.365Z",
+        "2026-11-10T12:44:16.875Z"
+      ],
+      "task_complete": [
+        "2026-11-10T12:32:05.933Z",
+        "2026-11-10T12:36:38.041Z",
+        "2026-11-10T12:43:35.913Z",
+        "2026-11-10T12:47:35.459Z"
+      ]
+    }
+  ],
+  "independent_unittest": {
+    "exit": 0,
+    "output": "test_invalid_inputs (test_order.SubtotalTests.test_invalid_inputs) ... ok\ntest_subtotal (test_order.SubtotalTests.test_subtotal) ... ok\ntest_invalid_inputs (test_shipping.ShippingTests.test_invalid_inputs) ... ok\ntest_subtotal_integration (test_shipping.ShippingTests.test_subtotal_integration) ... ok\ntest_total (test_shipping.ShippingTests.test_total) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.001s\n\nOK\n"
+  },
+  "independent_boundaries": {
+    "exit": 0,
+    "output": "主agent独立普通值、零值、两参数非法类型及大整数断言全部通过。\n"
+  },
+  "limitations": [
+    "本机Linux真实宿主的工作流约定验证，不是程序锁或全平台保证",
+    "全局辅助技能仍可被宿主加载，不声称候选是唯一因果来源",
+    "两个超时回合保持未通过；采用持久会话完整分支及同场景收尾结果补齐",
+    "初次不可读样本的快照采集在启动模型前失败，修复快照后单独实际运行，不将准备错误计行为通过"
+  ],
+  "archive": {
+    "file": "retained-round3.tar.gz",
+    "sha256": "c6235f37e2a7606938f1dbb34c2eb458446bf2105cd1bff3015ccf5f49077ec5",
+    "bytes": 1077751,
+    "members": 403
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "observed_unix_ms": 1795056236281,
+  "independent_analysis_while_summary_pending": true,
+  "raw_range": "M01–M06",
+  "conclusions": "E01–E03",
+  "summary_still_pending": true,
+  "normal_answer_waited_for_analysis": true,
+  "root_cause": "“派发后继续”未明确区分当前问答无需分析结果时应先完成答复，主 AI 实际调用 wait_agent 后才回答。",
+  "disposition": "保留独立分析成功及主 AI 等待缺陷；沿同一候选补充条件并重复制验证"
+}

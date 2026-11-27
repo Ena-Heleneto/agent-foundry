@@ -1,0 +1,379 @@
+{
+  "task": "T066",
+  "date": "2026-11-12",
+  "scope": "固定版 Linux 官方迁移隔离候选，非生产注册器",
+  "approval": "方案展示后用户实际回复「可以」",
+  "specify": {
+    "path": "<source-home>/.cache/uv/archive-v0/om6AD6JxRTroJuBL/bin/specify",
+    "version": "1.2.6"
+  },
+  "new_scenarios": 25,
+  "zero_call_protections": 16,
+  "commands": {
+    "exit": 0,
+    "tests": 23,
+    "pass": 22,
+    "fail": 0,
+    "skip": 1
+  },
+  "hooks": {
+    "exit": 1,
+    "tests": 7,
+    "new_pass": 4,
+    "legacy_fail": 3,
+    "reason": "原 fixture 仍读取不存在的 src/skills/workflow/*/speckit-hooks.json"
+  },
+  "checks": {
+    "targeted_lint": 0,
+    "package_lint": {
+      "exit": 1,
+      "reason": "collections.ts:11 entries 未使用，既有两项错误"
+    },
+    "check_types": 0,
+    "python_tests": {
+      "exit": 0,
+      "pass": 12
+    },
+    "build": "用户明确暂跳过"
+  },
+  "audit": {
+    "commands-attachment": {
+      "calls": 10,
+      "statuses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_registry_and_files_unchanged": true,
+      "history_unchanged": true
+    },
+    "commands-five": {
+      "calls": 14,
+      "statuses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_registry_and_files_unchanged": true,
+      "history_unchanged": true
+    },
+    "commands-four": {
+      "calls": 14,
+      "statuses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_registry_and_files_unchanged": true,
+      "history_unchanged": true
+    },
+    "commands-source-reduction": {
+      "calls": 14,
+      "statuses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_registry_and_files_unchanged": true,
+      "history_unchanged": true
+    },
+    "commands-three": {
+      "calls": 14,
+      "statuses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_registry_and_files_unchanged": true,
+      "history_unchanged": true
+    },
+    "failure-official-retry": {
+      "calls": 11,
+      "statuses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_registry_and_files_unchanged": true,
+      "history_unchanged": true
+    },
+    "failure-remove-retry": {
+      "calls": 11,
+      "statuses": [
+        0,
+        23,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_registry_and_files_unchanged": true,
+      "history_unchanged": true
+    },
+    "failure-spawn-retry": {
+      "calls": 11,
+      "statuses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0
+      ],
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_registry_and_files_unchanged": true,
+      "history_unchanged": true
+    },
+    "hooks-current": {
+      "calls": 10,
+      "statuses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "increment_only": true,
+      "retired_six_absent": true,
+      "unrelated_registry_and_files_unchanged": true,
+      "history_unchanged": true
+    },
+    "protect-attachment-conflict": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-edited-generated": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-extra-extension": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-extra-generated": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-invalid-hook-command": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-linked-source": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-missing-attachment": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-missing-config": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-missing-increment": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-missing-preparation": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-orphan-extension": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-orphan-generated": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-orphan-hook": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-raw-source": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-registry-mismatch": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    },
+    "protect-uninitialized": {
+      "calls": 0,
+      "statuses": [],
+      "zero_calls": true,
+      "project_unchanged": true
+    }
+  },
+  "review": {
+    "reviewer": "review_t066",
+    "initial": {
+      "critical": 0,
+      "important": [
+        "临时输入覆盖残留已删除附件",
+        "实际进程异常绕过失败阶段报告"
+      ]
+    },
+    "fixes": "两项先复现再修正并回归",
+    "followup": "两项 Important 均已充分修正，可关闭；本次定向复审无新增发现。",
+    "scope": "只读核验代码及实际日志，未运行迁移或改文件；证据组织后续由主 agent 另核对"
+  },
+  "limitations": [
+    "一次性官方生成内存基线，不是持久安装状态或生产未知环境归属服务",
+    "恢复只验证当前上下文实际磁盘续接，未声称崩溃恢复",
+    "Windows/macOS、真实挂载、宿主行为、构建/dist 未验",
+    "既有完整 hooks 文件及整包 lint 非全绿",
+    "真实 ENOENT 已测；超时/信号经同一处理但未独立实测，不以此冒称全部进程故障已验"
+  ],
+  "archive": {
+    "name": "retained.tar.gz",
+    "bytes": 4748765,
+    "sha256": "ee1a3710f3ca8c46f6f44866353887d2941c12ef882387c9124bd490df3acece",
+    "verified_file_count": 2947,
+    "link_records": 1,
+    "verification": "安全成员路径及普通文件检查；每文件摘要匹配；链接仅留元数据，不跟随目标",
+    "selected_credential_patterns": {
+      "matches": 0,
+      "not_exhaustive": true
+    }
+  },
+  "code_sha256": {
+    "packages/skills/tests/test-register-commands.mjs": "524a4fb88df548d2f718bc827e31b4d30c03673bde52cc4e1354d73ea2e926c8",
+    "packages/skills/tests/test-register-hooks.mjs": "506278bc6da8cbfc18b48d16e2cb9d9ec96cbffbb20472bda54e99a66f0b9379",
+    "packages/skills/tests/distribution/helpers/registration-fixture.mjs": "71ec4607ccce15347d1c02e1aea1ed6e4b1128378c0c9dc5331e95b3de7c038d",
+    "packages/skills/tests/distribution/helpers/registration-migration.mjs": "23ed5aef31f589971e679e0303d6abf063771e03945e1fde0a439882170623d7"
+  },
+  "parent_verification": {
+    "task_identity_order_preserved": 107,
+    "checkbox_changes": [
+      "T066"
+    ],
+    "active": {
+      "total": 50,
+      "complete": 28,
+      "remaining": 22
+    },
+    "new_link_targets_checked": 21,
+    "final_code_matches_archive": true,
+    "archive_files_reverified": 2947
+  }
+}

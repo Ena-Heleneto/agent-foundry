@@ -1,0 +1,542 @@
+{
+  "scope": "T096维护源官方安装下的真实文件应用；非正式modes生成/构建产物/用户业务验收",
+  "results": [
+    {
+      "stage": "existing",
+      "case": "existing",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 179.698,
+      "session_id": "01a1c845-c1a1-7d50-a0b1-4e535b3b9b61",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/cases/existing",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/host/existing/final.txt",
+        "-"
+      ],
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "raw_directory": "/tmp/foundry-t096-20261111-e9mb3gpt/host/existing",
+      "changed": [
+        "specs/demo/001-labels/mvu.md",
+        "specs/demo/001-labels/plan.md",
+        "specs/demo/001-labels/tasks.md"
+      ],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          6
+        ],
+        "constitution": [
+          8
+        ],
+        "profile": [
+          8
+        ]
+      },
+      "failed_commands": [
+        {
+          "event": 34,
+          "exit": 1,
+          "command": "/bin/bash -lc \"rg --files --hidden . <source-home>/.codex/skills -g 'SKILL.md' -g '\"'!.git/**'\"'; rg --files --hidden specs/demo/001-labels -g '*analysis*' -g '*index*'\"",
+          "output": "./.agents/skills/task-increment/SKILL.md\n<source-home>/.codex/skills/.system/skill-installer/SKILL.md\n<source-home>/.codex/skills/.system/imagegen/SKILL.md\n<source-home>/.codex/skills/.system/skill-creator/SKILL.md\n<source-home>/.codex/skills/.system/openai-docs/SKILL.md\n<source-home>/.codex/skills/.system/review-agent/SKILL.md\n"
+        }
+      ],
+      "business_unchanged": true,
+      "governance_unchanged": true
+    },
+    {
+      "stage": "legacy-task",
+      "case": "existing",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 31.361,
+      "session_id": "01a1c845-4a8b-76b3-a718-8147f110f394",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/cases/existing",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/host/legacy-task/final.txt",
+        "-"
+      ],
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "raw_directory": "/tmp/foundry-t096-20261111-e9mb3gpt/host/legacy-task",
+      "changed": [],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          7
+        ],
+        "constitution": [],
+        "profile": []
+      },
+      "failed_commands": [],
+      "business_unchanged": true,
+      "governance_unchanged": true
+    },
+    {
+      "stage": "no-plan",
+      "case": "no-plan",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 47.863,
+      "session_id": "01a1c844-d366-7760-9509-abd6ffd14d24",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/cases/no-plan",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/host/no-plan/final.txt",
+        "-"
+      ],
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "raw_directory": "/tmp/foundry-t096-20261111-e9mb3gpt/host/no-plan",
+      "changed": [],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          6
+        ],
+        "constitution": [
+          13
+        ]
+      },
+      "failed_commands": [
+        {
+          "event": 8,
+          "exit": 2,
+          "command": "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*SKILL.md' -g 'constitution.md' -g 'current.md' -g '*.md' specs/demo/001-labels .specify .collaboration .agents 2>/dev/null\"",
+          "output": "/tmp/foundry-t096-20261111-e9mb3gpt/cases/no-plan\n.agents/skills/task-increment/SKILL.md\nspecs/demo/001-labels/mvu.md\n.specify/memory/constitution.md\nspecs/demo/001-labels/spec.md\nspecs/demo/001-labels/tasks.md\nspecs/demo/001-labels/evidence.md\nspecs/demo/001-labels/implementation/T004.md\n"
+        }
+      ],
+      "business_unchanged": true,
+      "governance_unchanged": true
+    },
+    {
+      "stage": "plan-only",
+      "case": "plan-only",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 215.754,
+      "session_id": "01a1c845-8bc1-7a83-a10c-62804e715670",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/cases/plan-only",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/host/plan-only/final.txt",
+        "-"
+      ],
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "raw_directory": "/tmp/foundry-t096-20261111-e9mb3gpt/host/plan-only",
+      "changed": [
+        "specs/demo/001-labels/mvu.md",
+        "specs/demo/001-labels/plan.md",
+        "specs/demo/001-labels/tasks.md"
+      ],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          6
+        ],
+        "constitution": [
+          10
+        ]
+      },
+      "failed_commands": [
+        {
+          "event": 8,
+          "exit": 2,
+          "command": "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g 'SKILL.md' -g '*.md' -g '\"'!node_modules'\"' -g '\"'!vendor'\"' . .specify .collaboration .agents .codex\"",
+          "output": "/tmp/foundry-t096-20261111-e9mb3gpt/cases/plan-only\nrg: .collaboration: No such file or directory (os error 2)\n.specify/memory/constitution.md\n.agents/skills/task-increment/SKILL.md\n./AGENTS.md\n./specs/demo/001-labels/spec.md\n./specs/demo/001-labels/plan.md\n"
+        },
+        {
+          "event": 17,
+          "exit": 1,
+          "command": "/bin/bash -lc \"cat <source-home>/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/skills/verification-before-completion/SKILL.md\nrg --files --hidden <source-home>/.codex/skills <source-home>/.codex/plugins/cache .agents .codex -g 'SKILL.md' -g '\"'!.git/**'\"' | rg 'artifact-spec-analysis'\nrg -n --hidden -g '\"'!.git/**'\"' -g '\"'!.agents/**'\"' -g '\"'!.specify/**'\"' 'T[0-9]{3}|MVU[0-9-]|plan\\\\.md#' .\"",
+          "output": "ixed | Test original symptom: passes | Code changed, assumed fixed |\n| Regression test works | Red-green cycle verified | Test passes once |\n| Agent completed | VCS diff shows changes | Agent reports \"success\" |\n| Requirements met | Line-by-line checklist | Tests passing |\n\n## Red Flags - STOP\n\n- Using \"should\", \"probably\", \"seems to\"\n- Expressing satisfaction before verification (\"Great!\", \"Perfect!\", \"Done!\", etc.)\n- About to commit/push/PR without verification\n- Trusting agent success reports\n- Relying on partial verification\n- Thinking \"just this once\"\n- Tired and wanting work over\n- **ANY wording implying success without having run verification**\n\n## Rationalization Prevention\n\n| Excuse | Reality |\n|--------|---------|\n| \"Should work now\" | RUN the verification |\n| \"I'm confident\" | Confidence ≠ evidence |\n| \"Just this once\" | No exceptions |\n| \"Linter passed\" | Linter ≠ compiler |\n| \"Agent said success\" | Verify independently |\n| \"I'm tired\" | Exhaustion ≠ excuse |\n| \"Partial check is enough\" | Partial proves nothing |\n| \"Different words so rule doesn't apply\" | Spirit over letter |\n\n## Key Patterns\n\n**Tests:**\n```\n✅ [Run test command] [See: 34/34 pass] \"All tests pass\"\n❌ \"Should pass now\" / \"Looks correct\"\n```\n\n**Regression tests (TDD Red-Green):**\n```\n✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)\n❌ \"I've written a regression test\" (without red-green verification)\n```\n\n**Build:**\n```\n✅ [Run build] [See: exit 0] \"Build passes\"\n❌ \"Linter passed\" (linter doesn't check compilation)\n```\n\n**Requirements:**\n```\n✅ Re-read plan → Create checklist → Verify each → Report gaps or completion\n❌ \"Tests pass, phase complete\"\n```\n\n**Agent delegation:**\n```\n✅ Agent reports success → Check VCS diff → Verify changes → Report actual state\n❌ Trust agent report\n```\n\n## When To Apply\n\n**ALWAYS before:**\n- ANY variation of success/completion claims\n- ANY expression of satisfaction\n- ANY positive statement about work state\n- Committing, PR creation, task completion\n- Moving to next task\n- Delegating to agents\n\n**Rule applies to:**\n- Exact phrases\n- Paraphrases and synonyms\n- Implications of success\n- ANY communication suggesting completion/correctness\n"
+        }
+      ],
+      "business_unchanged": true,
+      "governance_unchanged": true
+    },
+    {
+      "stage": "repeat-blank",
+      "case": "existing",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 88.959,
+      "session_id": "01a1c845-c1a1-7d50-a0b1-4e535b3b9b61",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/cases/existing",
+        "--sandbox",
+        "workspace-write",
+        "resume",
+        "--json",
+        "--output-last-message",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/host/repeat-blank/final.txt",
+        "01a1c845-c1a1-7d50-a0b1-4e535b3b9b61",
+        "-"
+      ],
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "raw_directory": "/tmp/foundry-t096-20261111-e9mb3gpt/host/repeat-blank",
+      "changed": [],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          6
+        ],
+        "constitution": [
+          6,
+          14
+        ],
+        "profile": [
+          6,
+          14
+        ]
+      },
+      "failed_commands": [
+        {
+          "event": 18,
+          "exit": 1,
+          "command": "/bin/bash -lc \"rg --files --hidden .agents <source-home>/.codex/skills <source-home>/.codex/plugins/cache -g 'SKILL.md' -g '*artifact-spec-analysis*' -g '\"'!.git/**'\"' | rg '(\"'^|/)artifact-spec-analysis(/|'\"\\\\.)'\"",
+          "output": ""
+        }
+      ],
+      "business_unchanged": true,
+      "governance_unchanged": true
+    },
+    {
+      "stage": "save-failure",
+      "case": "save-failure",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 151.563,
+      "session_id": "01a1c845-4b62-7242-85d4-fe6a5e7460b8",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/cases/save-failure",
+        "--sandbox",
+        "workspace-write",
+        "--json",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/host/save-failure/final.txt",
+        "-"
+      ],
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "raw_directory": "/tmp/foundry-t096-20261111-e9mb3gpt/host/save-failure",
+      "changed": [
+        "specs/demo/001-labels/mvu.md",
+        "specs/demo/001-labels/plan.md"
+      ],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [
+          6
+        ],
+        "constitution": [
+          6
+        ]
+      },
+      "failed_commands": [
+        {
+          "event": 4,
+          "exit": 2,
+          "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*.md' -g '\"'!node_modules'\"' -g '\"'!vendor'\"' .specify .collaboration specs .agents/skills 2>/dev/null\"",
+          "output": "/tmp/foundry-t096-20261111-e9mb3gpt/cases/save-failure\n.specify/memory/constitution.md\n.agents/skills/task-increment/SKILL.md\nspecs/demo/001-labels/spec.md\nspecs/demo/001-labels/plan.md\nspecs/demo/001-labels/mvu.md\nspecs/demo/001-labels/tasks.md\nspecs/demo/001-labels/evidence.md\nspecs/demo/001-labels/implementation/T004.md\n"
+        },
+        {
+          "event": 21,
+          "exit": 1,
+          "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nimport re\np = Path('specs/demo/001-labels/tasks.md')\noriginal = p.read_bytes()\ntext = original.decode('utf-8')\ntext = text.replace('# 原任务\\\\n', '# 原任务\\\\n\\\\n有效执行顺序沿原正文保留：复用查看 → 新增前置验证及业务验收 → 筛选验收 → 末尾清理。筛选只依赖查看，可在新增局部受阻时独立推进；历史记录不进入待办序列。闭环职责见 [mvu.md](mvu.md)，本轮仅规划，不进入实施。\\\\n')\ntext = text.replace('- [ ] T008 管理员新增标签后再次查看；仅管理员可写，失败保持旧数据；依赖T004；验收新增gamma和写失败分支。', '- [ ] T008 管理员新增标签后再次查看；仅管理员可写，失败保持旧数据；依赖T004；验收新增gamma和写失败分支。前置验证：在隔离alpha/beta数据副本上，非管理员新增gamma须被拒绝且无写入；管理员新增时注入OSError等写失败，须显示错误、旧数据不变且gamma未出现，并核对正常写入可行。当前缺通过证据，假设被推翻时只阻止依赖它的新增；通过后保留最小骨架、填充时复验，再独立验收管理员新增gamma后查看alpha/beta/gamma。记录输入、操作、可核验信号及实际证据；技术通过不代替业务验收，详细方案开工前讨论认可并保存。')\ntext = text.replace('- [ ] T009 使用者按标签名筛选和清除；离线不得联网；依赖T004；验收匹配、无匹配空列表及清除恢复全部。', '- [ ] T009 使用者按标签名筛选和清除；离线不得联网；依赖T004；验收匹配、无匹配空列表及清除恢复全部。适用于任何使用者，仅按完整名称匹配；以alpha/beta为输入，筛选alpha仅返回alpha、不存在的名称返回空列表，清除恢复alpha/beta；离线执行同一流程，并保留零网络调用的观测或拦截证据。不依赖T008，不新增模糊搜索、网页或数据库。')\ntext = text.replace('- [ ] T012 在有效执行序列末尾清理开发产物并核对引用；保护正式来源和证据；依赖本期业务实现与必要验收。', '- [ ] T012 在有效执行序列末尾清理开发产物并核对引用；保护正式来源和证据；依赖本期业务实现与必要验收。核查本Spec文档及局部临时段落、labels.py开发试验片段和临时验证产物，按实际用途、调用及引用依据处置，保护有效治理、历史任务事实、原方案、验收证据和复用骨架；用途待核实项保留，记录路径及符号/标题/片段、原因和后续条件。清理证据归本任务，说明对象、依据及处置/保留结果；无需清理也记录范围及结果。无未处理应清理项、必要验证及引用和保存检查通过后才满足清理验收，其他结案条件仍须满足，本轮不执行清理。')\nassert text \"'!= original.decode('\"'utf-8')\nassert text.endswith('\\\\n') and not any(line.rstrip() \"'!= line for line in text.splitlines())\nassert re.findall(r'\"'\"'^- '\"\\\\[([ x])\\\\] (T\\\\d+)', text, re.M) == re.findall(r'\"'^- '\"\\\\[([ x])\\\\] (T\\\\d+)', original.decode('utf-8'), re.M)\ntry:\n    with p.open('w', encoding='utf-8', newline='\\\\n') as f:\n        f.write(text)\nexcept OSError as exc:\n    print(f'保存失败：{p}：{type(exc).__name__}: {exc}')\n    current = p.read_bytes()\n    print(f'原tasks字节保持不变：{current == original}')\n    print('当前tasks完整读回：')\n    print(current.decode('utf-8'), end='')\n    raise SystemExit(1)\nassert p.read_text(encoding='utf-8') == text\nprint(text, end='')\nPY\"",
+          "output": "保存失败：specs/demo/001-labels/tasks.md：PermissionError: [Errno 13] Permission denied: 'specs/demo/001-labels/tasks.md'\n原tasks字节保持不变：True\n当前tasks完整读回：\n# 原任务\n\n- [x] T004 查看标签；范围为已有list_labels；验收alpha/beta；证据见[evidence.md](evidence.md)，原方案见[implementation/T004.md](implementation/T004.md)。\n- [ ] T008 管理员新增标签后再次查看；仅管理员可写，失败保持旧数据；依赖T004；验收新增gamma和写失败分支。\n- [ ] T009 使用者按标签名筛选和清除；离线不得联网；依赖T004；验收匹配、无匹配空列表及清除恢复全部。\n- [ ] T012 在有效执行序列末尾清理开发产物并核对引用；保护正式来源和证据；依赖本期业务实现与必要验收。\n\n## 历史\n\n- [x] T020 旧记录身份；已完成事实保留，不因规划重开。\n"
+        }
+      ],
+      "business_unchanged": true,
+      "governance_unchanged": true
+    },
+    {
+      "stage": "save-recovery",
+      "case": "save-failure",
+      "exit": 0,
+      "timeout": false,
+      "elapsed_seconds": 160.543,
+      "session_id": "01a1c845-4b62-7242-85d4-fe6a5e7460b8",
+      "args": [
+        "codex",
+        "exec",
+        "--cd",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/cases/save-failure",
+        "--sandbox",
+        "workspace-write",
+        "resume",
+        "--json",
+        "--output-last-message",
+        "/tmp/foundry-t096-20261111-e9mb3gpt/host/save-recovery/final.txt",
+        "01a1c845-4b62-7242-85d4-fe6a5e7460b8",
+        "-"
+      ],
+      "sandbox": "workspace-write",
+      "model_override": false,
+      "raw_directory": "/tmp/foundry-t096-20261111-e9mb3gpt/host/save-recovery",
+      "changed": [
+        "specs/demo/001-labels/mvu.md",
+        "specs/demo/001-labels/tasks.md"
+      ],
+      "turn_completed": true,
+      "full_text_reads": {
+        "skill": [],
+        "constitution": [
+          6
+        ]
+      },
+      "failed_commands": [],
+      "business_unchanged": true,
+      "governance_unchanged": true,
+      "skill_context_reused_from": "save-failure（同一真实会话已全文加载；本回合组合输出截断，不冒称新的全文读取）"
+    }
+  ],
+  "projects": {
+    "existing": {
+      "markers": {
+        "T004": "x",
+        "T009": " ",
+        "T008": " ",
+        "T012": " ",
+        "T020": "x"
+      },
+      "completed_lines_preserved": true,
+      "protected_files": {
+        "labels.py": true,
+        "AGENTS.md": true,
+        ".specify/memory/constitution.md": true,
+        "specs/demo/001-labels/evidence.md": true,
+        "specs/demo/001-labels/implementation/T004.md": true,
+        ".collaboration/current.md": true
+      },
+      "implementation_files": [
+        "implementation/T004.md"
+      ],
+      "profile_created": false,
+      "analysis_created": false
+    },
+    "no-plan": {
+      "markers": {
+        "T004": "x",
+        "T008": " ",
+        "T009": " ",
+        "T012": " ",
+        "T020": "x"
+      },
+      "completed_lines_preserved": true,
+      "protected_files": {
+        "labels.py": true,
+        "AGENTS.md": true,
+        ".specify/memory/constitution.md": true,
+        "specs/demo/001-labels/evidence.md": true,
+        "specs/demo/001-labels/implementation/T004.md": true
+      },
+      "implementation_files": [
+        "implementation/T004.md"
+      ],
+      "profile_created": false,
+      "analysis_created": false
+    },
+    "plan-only": {
+      "markers": {
+        "T001": " ",
+        "T002": " ",
+        "T003": " ",
+        "T004": " "
+      },
+      "completed_lines_preserved": true,
+      "protected_files": {
+        "labels.py": true,
+        "AGENTS.md": true,
+        ".specify/memory/constitution.md": true
+      },
+      "implementation_files": [],
+      "profile_created": false,
+      "analysis_created": false
+    },
+    "save-failure": {
+      "markers": {
+        "T004": "x",
+        "T008": " ",
+        "T009": " ",
+        "T012": " ",
+        "T020": "x"
+      },
+      "completed_lines_preserved": true,
+      "protected_files": {
+        "labels.py": true,
+        "AGENTS.md": true,
+        ".specify/memory/constitution.md": true,
+        "specs/demo/001-labels/evidence.md": true,
+        "specs/demo/001-labels/implementation/T004.md": true
+      },
+      "implementation_files": [
+        "implementation/T004.md"
+      ],
+      "profile_created": false,
+      "analysis_created": false
+    }
+  },
+  "archive": {
+    "file": "retained.tar.gz",
+    "bytes": 559711,
+    "sha256": "d724fd64ca89a847b9f7da127da2e1f3d22da57a316080c6b3434701cf4569a4",
+    "members": 273,
+    "selected_credential_patterns": 3,
+    "files_scanned": 164,
+    "matches": 0,
+    "scan_complete": false
+  },
+  "checks": {
+    "runtime_turns": 7,
+    "runtime_timeouts": 0,
+    "micro_control": 5,
+    "micro_guided": 5,
+    "source_installed_sets_match": true,
+    "technical_mvu_state_core_unchanged": true,
+    "protected_fixture_files_preserved": true,
+    "profile_conflict_resolved_by_spec": true,
+    "profile_missing_does_not_create": true,
+    "existing_proposal_preserved": true,
+    "implementation_proposals_not_generated": true,
+    "recovery_same_session": true,
+    "analysis": "能力不存在，全部明确未完成，未造替代输出",
+    "generic_validator": "默认缺PyYAML；缓存解释器拒绝旧有destructive字段，写前与写后错误相同",
+    "package_checks": {
+      "lint": 0,
+      "check_types": 0,
+      "test": {
+        "exit": 0,
+        "tests": 12
+      }
+    },
+    "build": "用户明确暂跳过，未执行"
+  },
+  "micro": {
+    "method": "每项为一次新上下文场景题；微评估不执行文件操作，不代表真实规划行为或稳定性估计",
+    "control_instruction": "不加载技能，按通常理解判断",
+    "guided_instruction": "完整读取本轮修改后task-increment再判断",
+    "scenario": "有效Spec及原材料；调用 $speckit-modes-increment Spec:specs/demo/001-notes Task:T005；无其他描述",
+    "controls": [
+      {
+        "agent": "t096_control_1",
+        "answer": "以指定 Spec 下的 T005 为增量规划锚点。当前缺少规划意图，先请补充新增或调整需求；明确后按影响更新 spec、plan、mvu、tasks，保留 T001 及无关旧任务。",
+        "manual_result": "接受旧Task定位，不符合本轮目标输入契约"
+      },
+      {
+        "agent": "t096_control_2",
+        "answer": "以指定 Spec 的未完成 T005 为规划锚点，先读取现有材料，补齐其验证单元、依赖和实施任务；按需同步相关 spec/plan/mvu/tasks，不改已完成 T001 或无关旧任务。",
+        "manual_result": "接受旧Task定位，不符合本轮目标输入契约"
+      },
+      {
+        "agent": "t096_control_3",
+        "answer": "以指定 Spec 的 T005 为本次规划范围，先读取其目标和依赖，再补齐验证单元与实施步骤；按需调整 plan、mvu、tasks，保留既定需求、已完成的 T001 和无关旧任务。",
+        "manual_result": "接受旧Task定位，不符合本轮目标输入契约"
+      },
+      {
+        "agent": "t096_control_4",
+        "answer": "以指定 Spec 的 T005 为规划锚点，先查看任务及依赖，补齐相关 MVU 和任务，必要时同步 spec/plan，保留已完成及无关任务。若现有内容不足以确定增量目标，再询问具体调整诉求。",
+        "manual_result": "接受旧Task定位，不符合本轮目标输入契约"
+      },
+      {
+        "agent": "t096_control_5",
+        "answer": "以指定 Spec 为上下文、T005 为规划锚点，先核对目标与依赖；可按需同步 spec、plan、mvu、tasks，不重做 T001 或扩展无关旧任务。若仍无法确定增量意图，再询问具体目标。",
+        "manual_result": "接受旧Task定位，不符合本轮目标输入契约"
+      }
+    ],
+    "guided": [
+      {
+        "agent": "t096_guided_1",
+        "answer": "Spec 定位为 specs/demo/001-notes；Task:T005 参数已不受支持。当前不调整任何材料、不重排任务。请改用 Spec 加业务规划描述，明确意图后再确定局部调整范围。",
+        "manual_result": "拒绝旧Task定位，保留材料，给出Spec+描述继续方式"
+      },
+      {
+        "agent": "t096_guided_2",
+        "answer": "以 Spec 路径定位；Task:T005 已不受支持，不能据此限定规划。当前不改任何材料，也不全量重排。请改用 Spec 加业务规划描述；明确意图后仅调整相关 plan、mvu、tasks 及必要引用，保留无关任务和已完成事实。",
+        "manual_result": "拒绝旧Task定位，保留材料，给出Spec+描述继续方式"
+      },
+      {
+        "agent": "t096_guided_3",
+        "answer": "以 Spec 路径定位；`Task:T005` 已不受支持，不能静默忽略后重排。当前不修改材料；请改用 Spec 加业务规划描述，明确意图后仅调整相关 plan/mvu/tasks，保留已完成事实及无关任务。",
+        "manual_result": "拒绝旧Task定位，保留材料，给出Spec+描述继续方式"
+      },
+      {
+        "agent": "t096_guided_4",
+        "answer": "以 Spec 路径定位；Task:T005 已不受支持，不能据此限定规划或删参后全量重排。当前不修改任何材料，保留 T001 完成事实及无关任务。请改用 Spec 加业务规划描述，明确意图后再确定局部可写范围。",
+        "manual_result": "拒绝旧Task定位，保留材料，给出Spec+描述继续方式"
+      },
+      {
+        "agent": "t096_guided_5",
+        "answer": "以 specs/demo/001-notes 定位；Task:T005 已不受支持，不能据此限定规划。当前不调整材料，保留完成事实及无关任务。请改用 Spec 加业务规划描述，明确意图后再确定 plan、mvu、tasks 的调整范围。",
+        "manual_result": "拒绝旧Task定位，保留材料，给出Spec+描述继续方式"
+      }
+    ]
+  },
+  "frontmatter": {
+    "parsed": true,
+    "preserved_fields": [
+      "name",
+      "destructive"
+    ],
+    "description": "用户在已有 Spec Kit 方案上要求增量规划业务闭环和实施任务，或提供新的规划描述时使用。",
+    "source_sha256": "512d1838056a4228a96e0e4c5fa1a521f80f9bd6794c0fd717cb7b0dbac61b86",
+    "versions": {
+      "skills": "1.7.4",
+      "codex": "codex-cli 0.167.0"
+    },
+    "generic_validator_limit": "默认Python缺yaml；既有含yaml解释器仍会拒绝仓库原有destructive字段，不修改验证器或移除原元数据"
+  },
+  "limits": [
+    "构建、dist同版及构建来源消费暂跳过，未计通过",
+    "官方skills维护源本地安装，不冒充正式modes生成入口或真实工作区迁移",
+    "仅本机Linux宿主；仍可能加载全局辅助技能，不声明唯一因果或全平台保证",
+    "画像为明确标注的人工测试输入，不是父会话用户真实画像或新结论",
+    "分析能力未交付，现场正确报告分析未完成，完整双触发消费仍由后续原Task验证",
+    "恢复回合工具输出截断，复用同一会话上轮已完整读取且摘要未变的skill，不冒称新全文证据",
+    "通用校验器在写前/写后均拒绝原destructive字段；解析、安装及运行证据不等同该校验通过"
+  ]
+}

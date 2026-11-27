@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "phase": "local-workspace",
+  "localConclusion": "success-then-paused",
+  "pausedAt": "T089",
+  "sourcePackagePath": "packages/skills-distribution-urgent",
+  "sourceRevision": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f",
+  "version": "0.1.0",
+  "inputDigest": "19a0feb4e629325bf03826cd956f40b6dc3dbd87978aff722648e608c0219edd",
+  "dependencySnapshotDigest": "0fc4b941a94f9d80f37b7d3650780cf56ca988d1a0cc737bbcf59ed2d8a1d2cc",
+  "catalogDigest": "5305dfcc5d799f52b920829d71498cb8c27329ba35cd1bfcbc5dab7ac4a8c70c",
+  "candidateDigest": "498f5e8984061c21344ed3c4566ceb5dea1ce0e1301f0fb01342e396b8bdc8e6",
+  "payloadFiles": 36,
+  "sourceInputFiles": 59,
+  "dependencyRecords": 413,
+  "support": {
+    "platform": "linux",
+    "architecture": "x86_64",
+    "agent": "codex",
+    "scope": "project"
+  },
+  "checks": {
+    "lint": {
+      "status": "success",
+      "exitCode": 0
+    },
+    "checkTypes": {
+      "status": "success",
+      "exitCode": 0
+    },
+    "build": {
+      "status": "success",
+      "exitCode": 0
+    },
+    "sameSourceDoubleBuild": {
+      "status": "success",
+      "identicalFiles": 36
+    },
+    "test": {
+      "status": "success",
+      "exitCode": 0,
+      "tests": 133,
+      "pass": 133,
+      "fail": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 426396.791543
+    }
+  },
+  "installedContent": {
+    "skills": 9,
+    "files": 12,
+    "bytes": 54315,
+    "exactBytes": true,
+    "evalSkills": 0
+  },
+  "normalMount": {
+    "runs": 2,
+    "installation": "success",
+    "integrity": "success",
+    "hooks": "success",
+    "commands": "success",
+    "legacy": "success",
+    "runtimeLoadingReport": "not-run-requires-host-session"
+  },
+  "actualHost": {
+    "after_tasks": {
+      "validation": "success",
+      "exitCode": 0,
+      "outcome": "completed",
+      "eventsBytes": 111171
+    },
+    "before_implement": {
+      "validation": "success",
+      "exitCode": 0,
+      "outcome": "stopped",
+      "eventsBytes": 26802
+    },
+    "after_converge": {
+      "validation": "success",
+      "exitCode": 0,
+      "outcome": "stopped",
+      "eventsBytes": 17151
+    },
+    "increment": {
+      "validation": "success",
+      "exitCode": 0,
+      "outcome": "completed",
+      "eventsBytes": 94780
+    }
+  },
+  "evidence": {
+    "fullTestLog": "/tmp/foundry-urgent-final-all-tests.log",
+    "sourceProof": "/tmp/foundry-urgent-revised-source-proof.json",
+    "hostContext": "/tmp/urgent-host-consumption-rogydhlh/probe-context.json",
+    "hostResults": "/tmp/urgent-host-consumption-rogydhlh/project/probe/results",
+    "contentReport": "urgent-content.md",
+    "mountReport": "urgent-mount.md",
+    "hostReport": "urgent-host.md",
+    "handoffReport": "urgent-handoff.md"
+  },
+  "migrationSources": [
+    "packages/skills-distribution-urgent",
+    "packages/skills",
+    "specs/skills",
+    "apps/mcp"
+  ],
+  "license": {
+    "declared": "ISC",
+    "actualLicenseFile": true,
+    "copyright": "2026 Ena-Heleneto",
+    "otherSourcesRequirePrepublicationReview": true
+  },
+  "postMigration": {
+    "candidate": "not-run",
+    "publish": "not-run",
+    "remoteVerify": "not-run",
+    "publicConsumption": "not-run",
+    "reason": "等待用户实际迁仓及明确继续，不以本地结果当公开交付。"
+  },
+  "coverageLimits": [
+    "主线用户手写及原Task状态保持，本报告不代表主线Actions/全矩阵完成。",
+    "两个宿主保护分支正确停止，不代表取得业务认可或完成结案。",
+    "迁后依赖、四处源码公开前处理、第三方许可及MCP旧manifest缺口均须另行核对。",
+    "强制发现要求本轮已按真实双线材料与分工执行；133项工程测试不代表穷举所有未来会话/单线指定/缺材料变体或程序级保证，整体SC-019仍按原条件另验。"
+  ]
+}

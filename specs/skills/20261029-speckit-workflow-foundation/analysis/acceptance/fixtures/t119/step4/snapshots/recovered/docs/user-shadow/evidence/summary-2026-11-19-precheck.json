@@ -1,0 +1,23 @@
+{
+  "target": "docs/user-shadow/conversations/2026-11-19.md",
+  "source": {
+    "session": "S01",
+    "turn": "T01",
+    "date": "2026-11-19",
+    "timezone": "Asia/Shanghai",
+    "host_ids_available": false,
+    "confirmed_raw_anchors": [
+      "M01",
+      "M02"
+    ]
+  },
+  "target_type": "directory",
+  "existing_summary_read": {
+    "success": false,
+    "exception_type": "IsADirectoryError",
+    "exception": "[Errno 21] Is a directory: '/tmp/foundry-t119-step4-6yig4ais/failure/docs/user-shadow/conversations/2026-11-19.md'",
+    "errno": 21
+  },
+  "original_directory_snapshot": [],
+  "save_attempted_at_precheck": false
+}

@@ -1,0 +1,151 @@
+{
+  "cli": "0.172.0",
+  "date": "2026-11-25",
+  "prompt": "请只回复 T035-CONTROL-SAME",
+  "skillEntrySha256": "1d37476c7176a5433cb443c7558d5002b092fbb22bf66f40fe024c68d946068d",
+  "controlledBackend": "Loopback endpoint returning fixed final text without tool calls",
+  "fixedReminder": {
+    "trust": {
+      "initial": [
+        "untrusted",
+        "untrusted"
+      ],
+      "tested": [
+        "trusted",
+        "trusted"
+      ]
+    },
+    "hookEvents": [
+      "UserPromptSubmit",
+      "Stop"
+    ],
+    "modelRequestSawReminder": true,
+    "modelToolCalls": 0,
+    "recordFileCount": 0
+  },
+  "fixedDirect": {
+    "trust": {
+      "initial": [
+        "untrusted",
+        "untrusted"
+      ],
+      "tested": [
+        "trusted",
+        "trusted"
+      ]
+    },
+    "thread": "01a211c4-3ce2-78b3-adc9-4e488b156daf",
+    "turns": [
+      {
+        "turn": "01a211c4-3dba-7df2-aebe-02051aa4114f",
+        "promptSavedAt": "2026-11-25T08:13:25.110537+00:00",
+        "requestReceivedAt": "2026-11-25T08:13:25.150490+00:00",
+        "savedPromptReadAtRequest": "请只回复 T035-CONTROL-SAME",
+        "modelToolCalls": 0,
+        "hostFinalEventAt": "2026-11-25T08:13:25.157Z",
+        "replySavedByStopAt": "2026-11-25T08:13:25.204426+00:00",
+        "equalReply": "T035-CONTROL-SAME"
+      },
+      {
+        "turn": "01a211c4-46d9-7602-a74d-26a7dce6cc86",
+        "promptSavedAt": "2026-11-25T08:13:25.906823+00:00",
+        "requestReceivedAt": "2026-11-25T08:13:25.938998+00:00",
+        "savedPromptReadAtRequest": "请只回复 T035-CONTROL-SAME",
+        "modelToolCalls": 0,
+        "hostFinalEventAt": "2026-11-25T08:13:25.944Z",
+        "replySavedByStopAt": "2026-11-25T08:13:25.990568+00:00",
+        "equalReply": "T035-CONTROL-SAME"
+      }
+    ],
+    "totalModelRequests": 3,
+    "savedRepliesAfterHostFinalEvents": true
+  },
+  "liveReminder": {
+    "model": "gpt-6.2-sol",
+    "reasoningEffort": "high",
+    "trials": [
+      {
+        "thread": "01a211c1-f933-7490-9843-671812e319fb",
+        "hookSeen": true,
+        "bodyRead": true,
+        "additionalContextSeen": true,
+        "toolCalls": 1,
+        "final": [],
+        "finishedObservationAtSkillRead": true
+      },
+      {
+        "thread": "01a211c2-012f-79b0-944f-46d6293f9bd8",
+        "hookSeen": true,
+        "bodyRead": true,
+        "additionalContextSeen": true,
+        "toolCalls": 1,
+        "final": [],
+        "finishedObservationAtSkillRead": true
+      },
+      {
+        "thread": "01a211c2-083e-7d62-b8c8-ccef33ca13fc",
+        "hookSeen": true,
+        "bodyRead": true,
+        "additionalContextSeen": true,
+        "toolCalls": 1,
+        "final": [],
+        "finishedObservationAtSkillRead": true
+      }
+    ]
+  },
+  "execTrustControl": [
+    {
+      "trusted": false,
+      "hookTrust": {
+        "initial": [
+          "untrusted",
+          "untrusted"
+        ],
+        "tested": [
+          "untrusted",
+          "untrusted"
+        ]
+      },
+      "exit": 0,
+      "completed": true,
+      "requests": [
+        {
+          "at": "2026-11-25T08:12:13.930621+00:00",
+          "includedPrompt": true,
+          "includedReminder": false,
+          "savedPromptsWhenReceived": []
+        }
+      ],
+      "observedHooks": []
+    },
+    {
+      "trusted": true,
+      "hookTrust": {
+        "initial": [
+          "untrusted",
+          "untrusted"
+        ],
+        "tested": [
+          "trusted",
+          "trusted"
+        ]
+      },
+      "exit": 0,
+      "completed": true,
+      "requests": [
+        {
+          "at": "2026-11-25T08:12:17.479279+00:00",
+          "includedPrompt": true,
+          "includedReminder": false,
+          "savedPromptsWhenReceived": [
+            "请只回复 T035-CONTROL-SAME"
+          ]
+        }
+      ],
+      "observedHooks": [
+        "UserPromptSubmit",
+        "Stop"
+      ]
+    }
+  ]
+}

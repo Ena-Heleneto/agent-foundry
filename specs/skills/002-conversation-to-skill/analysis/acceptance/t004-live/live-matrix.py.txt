@@ -1,0 +1,86 @@
+"""在已安装候选的合成目录运行根目录、范围、停止与恢复对照。"""
+import hashlib,importlib.util,json,os,re,subprocess,sys,time
+from pathlib import Path
+work=Path('/tmp/foundry-t004-t005-lJoI3d');fixture=json.loads((work/'sandbox.json').read_text())
+spec=importlib.util.spec_from_file_location('host',Path.cwd()/'packages/skills/tests/conversation-workflow/helpers/recording-host.py')
+host=importlib.util.module_from_spec(spec);spec.loader.exec_module(host)
+codex='/home/by152/.codex/packages/standalone/releases/0.170.0-x86_64-unknown-linux-musl/bin/codex'
+records=Path(fixture['records']);repo=Path(fixture['repository']);outside=Path(fixture['outside']);child=Path(fixture['projects'][1])
+
+
+def snapshot():
+    """按字节核对写入前后的资料，而非只数文件。"""
+    return {str(p.relative_to(records)):hashlib.sha256(p.read_bytes()).hexdigest() for p in records.rglob('*') if p.is_file()}
+
+
+def case(tag,launch_cwd,effective_cwd=None,resume=None,midnight=False,stop=False,exec_mode=False):
+    """入口目录、历史工作目录和实际业务目录分别保留。"""
+    before=snapshot();effective_cwd=effective_cwd or launch_cwd
+    prompt=f'请创建 business-{tag}.txt，内容为 T004_CASE_{tag.upper()}，然后简短告诉我结果。'
+    args=[codex,'--no-daemon','-c','check_for_update_on_startup=false','-a','never','-s','danger-full-access','-C',str(effective_cwd)]
+    if exec_mode:
+        args+=['exec','--json']
+        if resume:args+=['resume',resume]
+        args+=[prompt]
+        result=subprocess.run(args,cwd=launch_cwd,text=True,capture_output=True,timeout=120)
+        (work/(tag+'-exec.jsonl')).write_text(result.stdout)
+        (work/(tag+'-stderr.txt')).write_text(result.stderr)
+        events=[json.loads(line) for line in result.stdout.splitlines() if line.startswith('{')]
+        ids=[e['thread_id'] for e in events if e.get('type')=='thread.started']
+        row={'case':tag,'interactive':False,'startedFrom':str(launch_cwd),'effectiveCwd':str(effective_cwd),'resumedId':resume,'threadIds':ids,'status':result.returncode,'recordsBefore':before,'recordsAfter':snapshot(),'businessExists':(effective_cwd/f'business-{tag}.txt').exists()}
+    else:
+        args+=['--no-alt-screen']
+        if resume:args+=['resume',resume]
+        env=None;boundary=None;opened=None;first_date=None
+        if midnight:
+            boundary,offset,tz=host.timezone_boundary(10);env={'TZ':tz}
+        terminal=host.Terminal(args,launch_cwd,env)
+        try:
+            terminal.settle(4)
+            if 'Update available' in terminal.text():raise RuntimeError('意外更新菜单，拒绝提交业务输入')
+            if 'Trust this folder?' in terminal.text():terminal.submit('1');terminal.settle(2)
+            if 'session directory' in terminal.text().lower():
+                (work/(tag+'-directory-choice.txt')).write_text(terminal.text())
+                raise RuntimeError('需核对恢复目录菜单，尚未输入业务请求')
+            idle=snapshot();initial_worked=terminal.text().count('Worked for')
+            if midnight:
+                opened=time.time()
+                if opened>=boundary:raise RuntimeError('界面启动已错过本次时区边界，未输入首条')
+                terminal.wait(lambda:time.time()>boundary+0.15,'等待本次进程本地跨日',15)
+                first_date=time.strftime('%Y-%m-%d',time.gmtime(time.time()+offset))
+            terminal.submit(prompt)
+            started=time.monotonic();observations=[];last=None;stopped=False
+            while time.monotonic()-started<110 and not terminal.exited():
+                terminal.read(0.1)
+                current=(snapshot(),(effective_cwd/f'business-{tag}.txt').exists())
+                if current!=last:
+                    observations.append({'elapsed':round(time.monotonic()-started,3),'records':current[0],'businessExists':current[1]});last=current
+                if stop and not stopped and time.monotonic()-started>3:
+                    terminal.interrupt();terminal.settle(1);stopped=True;break
+                if not stop and current[1] and terminal.text().count('Worked for')>initial_worked:break
+            terminal.settle(1)
+            (work/(tag+'-screen.txt')).write_text(terminal.text())
+            terminal.submit('/exit');terminal.settle(4)
+            ids=re.findall(r'codex resume ([0-9a-f-]{36})',terminal.text())
+            row={'case':tag,'interactive':True,'startedFrom':str(launch_cwd),'effectiveCwd':str(effective_cwd),'resumedId':resume,'threadIds':ids,'idleBeforePrompt':idle,'recordsBefore':before,'recordsAfter':snapshot(),'observations':observations,'status':terminal.status,'businessExists':(effective_cwd/f'business-{tag}.txt').exists(),'userStopped':stopped,'elapsed':round(time.monotonic()-started,2)}
+            if midnight:row.update(openDate=time.strftime('%Y-%m-%d',time.gmtime(opened+offset)),firstPromptDate=first_date,processTimezone=tz)
+            print(json.dumps({'case':tag,'ids':ids,'business':row['businessExists'],'recordChanges':before!=row['recordsAfter'],'tail':terminal.text()[-1100:]},ensure_ascii=False),flush=True)
+        finally:terminal.close()
+    row['recordsUnchanged']=row['recordsBefore']==row['recordsAfter']
+    (work/(tag+'-observation.json')).write_text(json.dumps(row,ensure_ascii=False,indent=2))
+    return row
+
+
+if __name__=='__main__':
+    tags=sys.argv[1:]
+    for tag in tags:
+        if tag=='root':case(tag,repo)
+        elif tag=='outside':case(tag,outside)
+        elif tag=='exec':case(tag,repo,exec_mode=True)
+        elif tag=='exec-resume':case(tag,repo,resume='01a208b2-2044-7283-8dd1-07c30ca3ef6f',exec_mode=True)
+        elif tag=='stop':case(tag,repo,stop=True)
+        elif tag=='cross-midnight':case(tag,child,midnight=True)
+        elif tag=='inside-resume':case(tag,child,resume='01a208b2-2044-7283-8dd1-07c30ca3ef6f')
+        elif tag=='inside-resume-outside':
+            previous=json.loads((work/'outside-observation.json').read_text());case(tag,child,resume=previous['threadIds'][-1])
+        elif tag=='outside-resume-inside':case(tag,outside,effective_cwd=child,resume='01a208b2-2044-7283-8dd1-07c30ca3ef6f')

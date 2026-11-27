@@ -1,0 +1,130 @@
+{
+  "source": "维护源本地复制安装，网络隔离，回环合成应答，T035 extended 探针",
+  "version": "codex-cli 0.172.0",
+  "ordinaryLaunch": true,
+  "emptyRecordCount": 0,
+  "nativeTrustPrompts": [
+    "project",
+    "hooks"
+  ],
+  "skillDiscovery": {
+    "installedProjectSkillDiscovered": true,
+    "retiredEntryCount": 0
+  },
+  "installedSkillHashes": {
+    "SKILL.md": "6eac4cd542961a358428efdcf0b274321752fa0b678e5f9df590ed1a30f67393",
+    "install.py": "46245b3640f865e098469883923ec6aad515c30fa17e808690ce250c73f146d7",
+    "recording/events.py": "4678104abab08eaa71ed1a87c55d1be7716ad348855c47637c459ab22d4f62c0",
+    "recording/__init__.py": "40f438354e1e73c23b06d10a3f9efde8e2b0568cbf18472b5a62329c98c0dbcb",
+    "recording/record.py": "9405ff6df2ccdfe60adfa631c2dbfed03ec572eb96674c4c343c371e354ea0c8",
+    "references/resume-records.md": "d6668ff8ad9c81ec139ed1c15aafd92f18e9f5de90c5a31b7aa16e7019562186",
+    "references/session-scope.md": "7cebbc12310f06f4202bf6caa94923cf2df5c48b0ee2f1c7df62c986fb1a8780",
+    "references/storage-contract.md": "7553cc35854e348eb6eeb960af7dde1724061d8b6e63788db0c7eb60dbba3187",
+    "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+    "references/recording-timing.md": "decf3ed1ee206d8fea1e1eee8cc267551a55e9a61e8af51fe2ad90f1e9268ace",
+    "references/event-capture.md": "9a8657e9883debc029b0344e9ab149db1843d20a8b15b93dda9e3513559272b5",
+    "references/save-events.md": "acdb4e17d52237e2c57bcf0410284c48e336080da767674ade9ab96349386f14",
+    "template/record.md": "a51d92e05612dfb641e6a48bec082b7582c07bf608c6de24eb36c99a856867b3",
+    "template/detail.md": "43b14c5bd86f03c14b8565bd341829b720d1495deaf37d8184fde8ccc1e47a81",
+    "scripts/stop.py": "be6c6ce155b234037cdc644ef13127c0a10a17c914c8d04bf011cc9101bfd84c",
+    "scripts/post_tool_use.py": "c951094110fe35a8de56820c0390c2daea0ad7b2be0d5d569d9a0a18b35de031",
+    "scripts/user_prompt_submit.py": "90a368346bc6e50fbecb2e980befa50f127a60f43747df97a3778092f3f4255c"
+  },
+  "recordSha256": "97c040fce73cc45aa54e815a41bb5b16d40a8d5f388f9b85b5dcb7961674b088",
+  "commit": {
+    "realFailureThenSuccess": true,
+    "repairRecordedBeforeRetry": true,
+    "bothCommitWindowsUnchanged": true,
+    "resultReplyOmitted": true,
+    "laterReplyRecorded": true
+  },
+  "recovery": {
+    "openingDate": "2026-11-26",
+    "resumedLocalDate": "2026-11-25",
+    "sameRecordAfterTwoResumes": true,
+    "ignoredOriginalPreserved": true,
+    "relocatedStartsWithNewTurn": true
+  },
+  "extended": {
+    "toolMatrix": {
+      "attachments": {
+        "attachments/attachment-a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57.png": "a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57",
+        "attachments/attachment-78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340.png": "78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340",
+        "attachments/attachment-66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b.png": "66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b"
+      },
+      "sourceHashes": {
+        "alpha": "78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340",
+        "beta": "66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b"
+      },
+      "userAttachmentSha256": "a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57",
+      "afterNativeResume": true,
+      "longOutputExact": true,
+      "streamedOutputInOrder": true,
+      "outsideToolOutputInOriginalSession": true
+    },
+    "foreignResume": {
+      "linkedWorktree": true,
+      "sameNativeSession": true,
+      "resumedBusinessCompleted": true,
+      "noNewRecordOrRewrite": true
+    },
+    "interruptedStop": {
+      "finalVisibleBeforeKill": true,
+      "lastConfirmedBytesPreserved": true,
+      "sameRecordResumed": true,
+      "interruptedFinalRemainedGap": true
+    },
+    "failedWrite": {
+      "firstWriteBlocked": true,
+      "nativeWarningBeforeReply": true,
+      "businessContinued": true,
+      "originalPromptRecovered": true
+    },
+    "cancelAndEarlyClose": {
+      "nativeUserStoppedStreaming": true,
+      "partialFinalNotRecorded": true,
+      "closedBeforeInputSave": true,
+      "nativeInputUnavailable": true,
+      "staleInProgressIndexObserved": true,
+      "sameRecordResumedWithGap": true
+    },
+    "partialWrite": {
+      "mainRecordPreserved": true,
+      "toolStillCompleted": true,
+      "nativeWarningBeforeReply": true,
+      "detailRecoveredInSameTurn": true
+    },
+    "parallelMidnight": {
+      "openedAtDate": "2026-11-25",
+      "promptSentAtDate": "2026-11-26",
+      "twoSeparateRecords": true,
+      "emptyBeforePrompt": true,
+      "sameTextKeptInEachSession": true
+    },
+    "sameTurnSupplement": {
+      "sentDuringActualTool": true,
+      "oneNativeTurn": true,
+      "supplementBeforeFinalInRecord": true
+    }
+  },
+  "replySavedAfterHostFinal": true,
+  "recordVisible": true,
+  "controls": [
+    {
+      "mode": "exec",
+      "recordsUnchanged": true
+    },
+    {
+      "mode": "exec-resume",
+      "recordsUnchanged": true
+    }
+  ],
+  "messageLayout": {
+    "originalRecordGroupsAfterTwoResumes": 6,
+    "sameTurnSupplementSeparators": 2,
+    "detailLinksResolved": true,
+    "focusedTestsPassed": 17,
+    "subagentTimelineVerified": false,
+    "releaseBuildVerified": false
+  }
+}

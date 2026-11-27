@@ -1,0 +1,11 @@
+{
+  "command": [
+    "bash",
+    "/home/by152/workspace/ena/agent-foundry/feature/init/scripts/dev/actions/link-skills/link-skills.sh",
+    "/tmp/foundry-t119-step2-ytn2iqb6/recording-final-input",
+    "/tmp/foundry-t119-step2-ytn2iqb6/recording-only/.agents/skills"
+  ],
+  "stdout": "copy: conversation-recording\n完成: 新建 1，更新 0，跳过 0，冲突 0\n",
+  "sha256": "b32c3a88498551c4259a205d7698503decab165f31caf6642e392abe56913741",
+  "copy_equal": true
+}

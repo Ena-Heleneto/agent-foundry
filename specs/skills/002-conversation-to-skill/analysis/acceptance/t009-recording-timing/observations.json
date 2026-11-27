@@ -1,0 +1,175 @@
+{
+  "date": "2026-11-23",
+  "environment": "Linux Codex CLI 0.171.0 前台分页交互，workspace-write，隔离项目入口和 CLI 状态",
+  "cases": {
+    "alpha": {
+      "case": "alpha",
+      "cli": "codex-cli 0.171.0",
+      "model": "gpt-6.2-sol",
+      "entry": {
+        "cwd": "/tmp/foundry-conversation-k1nrpq/repository/projects/alpha",
+        "threadId": "01a2073a-212d-7560-8a66-bab41319faa8",
+        "turnId": "01a2073a-23d6-7240-a2ef-73cf6cbdec06",
+        "trigger": "user",
+        "openingDate": "2026-11-23",
+        "rollout": "rollout-2026-11-23T15-06-19-01a2073a-212d-7560-8a66-bab41319faa8.jsonl",
+        "blankRollouts": 0,
+        "candidateSha256": "667884c530f3745720eb7926779ee91b97f457c0a0af604ff4c275424531bb2d",
+        "projectEntrySha256": "dfdafd1a93da4d8dec20ed6bf86df73a34385bf4c6394bfc0b1de4c055517515",
+        "referenceSha256": {
+          "storage-contract.md": "54a8fb8c6c4bcea12b9c7b67b4745a2235a07b38bb734c59da94b31138cfe3d7",
+          "paired-save.md": "07e8385e48db3b7fc8aec143a1b9bb0fc6f5fb95418a9b1bf8100328cc8011da",
+          "session-scope.md": "4e18293134d0400253d5d66184e98ad58df1a50ab65784d1d640d921b2cf7f3b",
+          "recording-timing.md": "6fd0430d177b51a588b6e4a33ac267f74fbb475596f853f7e6a0d9698ad312ca"
+        }
+      },
+      "timeline": {
+        "candidateRead": 19,
+        "timingRead": 27,
+        "scopeRead": 32,
+        "firstPairReadback": 62,
+        "firstBusinessCall": 64,
+        "finalPairReadback": 79,
+        "actualFinalEvent": 85,
+        "firstDetailReadbackFs": 338,
+        "firstIndexReadbackFs": 341,
+        "businessMarkerFs": 376,
+        "businessReadFs": [
+          379
+        ]
+      },
+      "prompt": "在当前目录创建文件 t009-business-start，写入 T009 已开始。然后读取 ../../README.md 的第一行。请把 T009- 加在实际第一行前，原样只回复这一行。",
+      "actualFinalReply": "T009-对话记录合成基线",
+      "interrupted": false,
+      "blankFiles": {},
+      "afterExit": {
+        "records/2026-11-23/details/01a2073a-212d-7560-8a66-bab41319faa8.md": {
+          "bytes": 2113,
+          "sha256": "4bbd435888e8ef40bfe2f536d0d5c8014dbdd94c51129931e8505280d5d88cc2",
+          "text": "# 会话详情\n\n线程 UUID：01a2073a-212d-7560-8a66-bab41319faa8\n仓库根：/tmp/foundry-conversation-k1nrpq/repository\n首次工作目录：/tmp/foundry-conversation-k1nrpq/repository/projects/alpha\n开启日：2026-11-23\n入口证据：Codex CLI 0.171.0，cli / codex-tui，轮次 01a2073a-23d6-7240-a2ef-73cf6cbdec06，触发类型 user，task_started 紧接 session_meta（字节偏移 28940）。\n\n## turn-01a2073a-23d6-7240-a2ef-73cf6cbdec06\n\n宿主轮次：01a2073a-23d6-7240-a2ef-73cf6cbdec06\n\n### 用户（01a2073a-2b51-77d0-9764-90e4e35079ed，字节偏移 120686）\n\n原文以换行结束：否\n\n```\n在当前目录创建文件 t009-business-start，写入 T009 已开始。然后读取 ../../README.md 的第一行。请把 T009- 加在实际第一行前，原样只回复这一行。\n```\n\n### 工具 functions.exec 参数（call_1ea16942b8fd4cb3af6ea1e6ed9e0860，字节偏移 254465，工作目录 /tmp/foundry-conversation-k1nrpq/repository/projects/alpha）\n\n原文以换行结束：是\n\n```\nconst result=await tools.exec_command({cmd:\"/usr/bin/python3 - <<'PY'\\n# t009-business-execution\\nfrom pathlib import Path\\nimport json\\nout = Path('t009-business-start')\\ncontent = 'T009 已开始'.encode('utf-8')\\nout.write_bytes(content)\\nassert out.read_bytes() == content\\nwith Path('../../README.md').open('rb') as source:\\n    first_line = source.readline()\\nassert first_line, 'README is empty'\\nprint(json.dumps('T009-' + first_line.removesuffix(b'\\\\n').removesuffix(b'\\\\r').decode('utf-8'), ensure_ascii=False))\\nPY\"});store(\"t009-business-result\",result);text(result)\n```\n\n### 工具 functions.exec 输出（call_1ea16942b8fd4cb3af6ea1e6ed9e0860，字节偏移 258112）\n\n原文以换行结束：否\n\n```\n[{\"type\": \"input_text\", \"text\": \"Script completed\\nWall time 0.1 seconds\\nOutput:\\n\"}, {\"type\": \"input_text\", \"text\": \"{\\\"chunk_id\\\":\\\"916696\\\",\\\"wall_time_seconds\\\":0.000024643,\\\"exit_code\\\":0,\\\"original_token_count\\\":8,\\\"output\\\":\\\"\\\\\\\"T009-对话记录合成基线\\\\\\\"\\\\n\\\"}\"}]\n```\n\n### 助手回复（待发送）\n\n原文以换行结束：否\n\n```\nT009-对话记录合成基线\n```\n"
+        },
+        "records/2026-11-23/index/01a2073a-212d-7560-8a66-bab41319faa8.md": {
+          "bytes": 869,
+          "sha256": "98141ac6371b5a0326df609971a604d53ba539eba64c2932958136c4b81d315b",
+          "text": "# 会话索引\n\n线程 UUID：01a2073a-212d-7560-8a66-bab41319faa8\n仓库根：/tmp/foundry-conversation-k1nrpq/repository\n首次工作目录：/tmp/foundry-conversation-k1nrpq/repository/projects/alpha\n开启日：2026-11-23\n入口证据：Codex CLI 0.171.0，cli / codex-tui，轮次 01a2073a-23d6-7240-a2ef-73cf6cbdec06，触发类型 user，task_started 紧接 session_meta（字节偏移 28940）。\n\n## turn-01a2073a-23d6-7240-a2ef-73cf6cbdec06\n\n宿主轮次：01a2073a-23d6-7240-a2ef-73cf6cbdec06\n\n- 要点：创建业务文件，读取 README 首行并加前缀。\n- 结果：已创建并核对业务文件，已读取 README 首行，答复待发送。\n- 改动文件：/tmp/foundry-conversation-k1nrpq/repository/projects/alpha/t009-business-start\n- [本轮详情](../details/01a2073a-212d-7560-8a66-bab41319faa8.md#turn-01a2073a-23d6-7240-a2ef-73cf6cbdec06)\n"
+        }
+      },
+      "exit": 0
+    },
+    "beta": {
+      "case": "beta",
+      "cli": "codex-cli 0.171.0",
+      "model": "gpt-6.2-sol",
+      "entry": {
+        "cwd": "/tmp/foundry-conversation-ATA8e7/repository/projects/beta",
+        "threadId": "01a2073a-23c8-7b23-9106-3d8bb70d5c6b",
+        "turnId": "01a2073a-2669-7631-b45c-2e448518056b",
+        "trigger": "user",
+        "openingDate": "2026-11-23",
+        "rollout": "rollout-2026-11-23T15-06-20-01a2073a-23c8-7b23-9106-3d8bb70d5c6b.jsonl",
+        "blankRollouts": 0,
+        "candidateSha256": "7a76856cc2278dca1f167dbb7708714ee761f57a7548da4c9146d00e547f7bec",
+        "projectEntrySha256": "457c7516ae8cfbfe2a5667e50aa363bf1c64bfec663db847400b7ffc281e3dfb",
+        "referenceSha256": {
+          "storage-contract.md": "54a8fb8c6c4bcea12b9c7b67b4745a2235a07b38bb734c59da94b31138cfe3d7",
+          "paired-save.md": "07e8385e48db3b7fc8aec143a1b9bb0fc6f5fb95418a9b1bf8100328cc8011da",
+          "session-scope.md": "4e18293134d0400253d5d66184e98ad58df1a50ab65784d1d640d921b2cf7f3b",
+          "recording-timing.md": "6fd0430d177b51a588b6e4a33ac267f74fbb475596f853f7e6a0d9698ad312ca"
+        }
+      },
+      "timeline": {
+        "candidateRead": 19,
+        "timingRead": 24,
+        "scopeRead": 29,
+        "firstPairReadback": 53,
+        "firstBusinessCall": 55,
+        "finalPairReadback": null,
+        "actualFinalEvent": null,
+        "firstDetailReadbackFs": 270,
+        "firstIndexReadbackFs": 273,
+        "businessMarkerFs": 308,
+        "businessReadFs": []
+      },
+      "prompt": "在当前目录运行一个命令。先将 T009 已开始写入 t009-business-start，再等待 45 秒，最后读取 ../../README.md 的第一行并告诉我。",
+      "actualFinalReply": "",
+      "interrupted": true,
+      "blankFiles": {},
+      "afterExit": {
+        "records/2026-11-23/details/01a2073a-23c8-7b23-9106-3d8bb70d5c6b.md": {
+          "bytes": 1155,
+          "sha256": "325563235c46f543f8be184d54574d9361f4b9220cd23f4e6b69a6d9946f3a27",
+          "text": "# 会话详情\n\n线程 UUID：01a2073a-23c8-7b23-9106-3d8bb70d5c6b\n\n仓库根：/tmp/foundry-conversation-ATA8e7/repository\n\n首次有效工作目录：/tmp/foundry-conversation-ATA8e7/repository/projects/beta\n\n开启日：2026-11-23\n\n入口证据：Codex CLI 0.171.0，source=cli，originator=codex-tui。活跃轮次 01a2073a-2669-7631-b45c-2e448518056b，触发类型 user，首次且唯一索引轮次，文件 rollout-2026-11-23T15-06-20-01a2073a-23c8-7b23-9106-3d8bb70d5c6b.jsonl 字节 0 为 session_meta，字节 28938 为紧接其后的 task_started。\n\n## turn-01a2073a-2669-7631-b45c-2e448518056b\n\n宿主轮次：01a2073a-2669-7631-b45c-2e448518056b\n\n### user · msg_01a2073a-2e2f-7730-8c71-e006be0e0aeb · 字节 119636\n\n原文以换行结束：否\n\n~~~\n在当前目录运行一个命令。先将 T009 已开始写入 t009-business-start，再等待 45 秒，最后读取 ../../README.md 的第一行并告诉我。\n~~~\n\n### assistant · msg_0024aa6cc54edc01016b03e5f0cff087d0b3401902b5dff91b · 字节 121779\n\n原文以换行结束：否\n\n~~~\n我会先用 `t009-recording-probe` 技能核验当前会话，再运行你指定的命令。\n~~~\n\n"
+        },
+        "records/2026-11-23/index/01a2073a-23c8-7b23-9106-3d8bb70d5c6b.md": {
+          "bytes": 912,
+          "sha256": "9d7dfd8baff4932f735f334361b8e276bf5a361db89d83048bd1cadf6da71e47",
+          "text": "# 会话索引\n\n线程 UUID：01a2073a-23c8-7b23-9106-3d8bb70d5c6b\n\n仓库根：/tmp/foundry-conversation-ATA8e7/repository\n\n首次有效工作目录：/tmp/foundry-conversation-ATA8e7/repository/projects/beta\n\n开启日：2026-11-23\n\n入口证据：Codex CLI 0.171.0，source=cli，originator=codex-tui。活跃轮次 01a2073a-2669-7631-b45c-2e448518056b，触发类型 user，首次且唯一索引轮次，文件 rollout-2026-11-23T15-06-20-01a2073a-23c8-7b23-9106-3d8bb70d5c6b.jsonl 字节 0 为 session_meta，字节 28938 为紧接其后的 task_started。\n\n## turn-01a2073a-2669-7631-b45c-2e448518056b\n\n宿主轮次：01a2073a-2669-7631-b45c-2e448518056b\n\n本轮要点：写入启动文件，等待 45 秒并读取 README 第一行。\n\n执行结果：业务命令尚未运行。\n\n改动文件：无。\n\n[详情](../details/01a2073a-23c8-7b23-9106-3d8bb70d5c6b.md#turn-01a2073a-2669-7631-b45c-2e448518056b)\n"
+        }
+      },
+      "exit": 0
+    }
+  },
+  "ordinary": {
+    "emptyBeforePrompt": {},
+    "sessions": {
+      "alpha": {
+        "sessionId": "01a2073a-212d-7560-8a66-bab41319faa8",
+        "openedDate": "2026-11-23",
+        "originalCwd": "/tmp/foundry-conversation-k1nrpq/repository/projects/alpha",
+        "turns": [
+          {
+            "turnId": "01a2073a-23d6-7240-a2ef-73cf6cbdec06",
+            "prompt": "在当前目录创建文件 t009-business-start，写入 T009 已开始。然后读取 ../../README.md 的第一行。请把 T009- 加在实际第一行前，原样只回复这一行。",
+            "finalReply": "T009-对话记录合成基线"
+          }
+        ]
+      },
+      "beta": {
+        "sessionId": "01a2073a-23c8-7b23-9106-3d8bb70d5c6b",
+        "openedDate": "2026-11-23",
+        "originalCwd": "/tmp/foundry-conversation-ATA8e7/repository/projects/beta",
+        "turns": [
+          {
+            "turnId": "01a2073a-2669-7631-b45c-2e448518056b",
+            "prompt": "在当前目录运行一个命令。先将 T009 已开始写入 t009-business-start，再等待 45 秒，最后读取 ../../README.md 的第一行并告诉我。",
+            "finalReply": ""
+          }
+        ]
+      }
+    },
+    "atFirstBusiness": {
+      "alpha": {
+        "records/2026-11-23/details/01a2073a-212d-7560-8a66-bab41319faa8.md": {
+          "bytes": 804,
+          "sha256": "5b89ab2386789dff1c09891bfe4f680bd6ac6675757af926c22b9635a6bf4af4",
+          "text": "# 会话详情\n\n线程 UUID：01a2073a-212d-7560-8a66-bab41319faa8\n仓库根：/tmp/foundry-conversation-k1nrpq/repository\n首次工作目录：/tmp/foundry-conversation-k1nrpq/repository/projects/alpha\n开启日：2026-11-23\n入口证据：Codex CLI 0.171.0，cli / codex-tui，轮次 01a2073a-23d6-7240-a2ef-73cf6cbdec06，触发类型 user，task_started 紧接 session_meta（字节偏移 28940）。\n\n## turn-01a2073a-23d6-7240-a2ef-73cf6cbdec06\n\n宿主轮次：01a2073a-23d6-7240-a2ef-73cf6cbdec06\n\n### 用户（01a2073a-2b51-77d0-9764-90e4e35079ed，字节偏移 120686）\n\n原文以换行结束：否\n\n```\n在当前目录创建文件 t009-business-start，写入 T009 已开始。然后读取 ../../README.md 的第一行。请把 T009- 加在实际第一行前，原样只回复这一行。\n```\n"
+        },
+        "records/2026-11-23/index/01a2073a-212d-7560-8a66-bab41319faa8.md": {
+          "bytes": 771,
+          "sha256": "659cdf182dab36acb2579860cf40d7f9dd6bb842908fa3cec8d02da7e631113f",
+          "text": "# 会话索引\n\n线程 UUID：01a2073a-212d-7560-8a66-bab41319faa8\n仓库根：/tmp/foundry-conversation-k1nrpq/repository\n首次工作目录：/tmp/foundry-conversation-k1nrpq/repository/projects/alpha\n开启日：2026-11-23\n入口证据：Codex CLI 0.171.0，cli / codex-tui，轮次 01a2073a-23d6-7240-a2ef-73cf6cbdec06，触发类型 user，task_started 紧接 session_meta（字节偏移 28940）。\n\n## turn-01a2073a-23d6-7240-a2ef-73cf6cbdec06\n\n宿主轮次：01a2073a-23d6-7240-a2ef-73cf6cbdec06\n\n- 要点：创建业务文件，读取 README 首行并加前缀。\n- 结果：已完成会话归属核验，业务操作待执行。\n- 改动文件：无\n- [本轮详情](../details/01a2073a-212d-7560-8a66-bab41319faa8.md#turn-01a2073a-23d6-7240-a2ef-73cf6cbdec06)\n"
+        }
+      },
+      "beta": {
+        "records/2026-11-23/details/01a2073a-23c8-7b23-9106-3d8bb70d5c6b.md": {
+          "bytes": 1155,
+          "sha256": "325563235c46f543f8be184d54574d9361f4b9220cd23f4e6b69a6d9946f3a27",
+          "text": "# 会话详情\n\n线程 UUID：01a2073a-23c8-7b23-9106-3d8bb70d5c6b\n\n仓库根：/tmp/foundry-conversation-ATA8e7/repository\n\n首次有效工作目录：/tmp/foundry-conversation-ATA8e7/repository/projects/beta\n\n开启日：2026-11-23\n\n入口证据：Codex CLI 0.171.0，source=cli，originator=codex-tui。活跃轮次 01a2073a-2669-7631-b45c-2e448518056b，触发类型 user，首次且唯一索引轮次，文件 rollout-2026-11-23T15-06-20-01a2073a-23c8-7b23-9106-3d8bb70d5c6b.jsonl 字节 0 为 session_meta，字节 28938 为紧接其后的 task_started。\n\n## turn-01a2073a-2669-7631-b45c-2e448518056b\n\n宿主轮次：01a2073a-2669-7631-b45c-2e448518056b\n\n### user · msg_01a2073a-2e2f-7730-8c71-e006be0e0aeb · 字节 119636\n\n原文以换行结束：否\n\n~~~\n在当前目录运行一个命令。先将 T009 已开始写入 t009-business-start，再等待 45 秒，最后读取 ../../README.md 的第一行并告诉我。\n~~~\n\n### assistant · msg_0024aa6cc54edc01016b03e5f0cff087d0b3401902b5dff91b · 字节 121779\n\n原文以换行结束：否\n\n~~~\n我会先用 `t009-recording-probe` 技能核验当前会话，再运行你指定的命令。\n~~~\n\n"
+        },
+        "records/2026-11-23/index/01a2073a-23c8-7b23-9106-3d8bb70d5c6b.md": {
+          "bytes": 912,
+          "sha256": "9d7dfd8baff4932f735f334361b8e276bf5a361db89d83048bd1cadf6da71e47",
+          "text": "# 会话索引\n\n线程 UUID：01a2073a-23c8-7b23-9106-3d8bb70d5c6b\n\n仓库根：/tmp/foundry-conversation-ATA8e7/repository\n\n首次有效工作目录：/tmp/foundry-conversation-ATA8e7/repository/projects/beta\n\n开启日：2026-11-23\n\n入口证据：Codex CLI 0.171.0，source=cli，originator=codex-tui。活跃轮次 01a2073a-2669-7631-b45c-2e448518056b，触发类型 user，首次且唯一索引轮次，文件 rollout-2026-11-23T15-06-20-01a2073a-23c8-7b23-9106-3d8bb70d5c6b.jsonl 字节 0 为 session_meta，字节 28938 为紧接其后的 task_started。\n\n## turn-01a2073a-2669-7631-b45c-2e448518056b\n\n宿主轮次：01a2073a-2669-7631-b45c-2e448518056b\n\n本轮要点：写入启动文件，等待 45 秒并读取 README 第一行。\n\n执行结果：业务命令尚未运行。\n\n改动文件：无。\n\n[详情](../details/01a2073a-23c8-7b23-9106-3d8bb70d5c6b.md#turn-01a2073a-2669-7631-b45c-2e448518056b)\n"
+        }
+      }
+    },
+    "firstPairReadbackLines": {
+      "alpha": 62,
+      "beta": 53
+    },
+    "firstBusinessLines": {
+      "alpha": 64,
+      "beta": 55
+    }
+  }
+}

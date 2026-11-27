@@ -1,0 +1,9 @@
+{
+  "child_thread_id": "01a1f1a9-ff8d-7701-b41d-1c699670e51f",
+  "observed_tool_names": [
+    "send_message",
+    "wait_agent"
+  ],
+  "summary_file_absent": true,
+  "parent_turn_completed": true
+}

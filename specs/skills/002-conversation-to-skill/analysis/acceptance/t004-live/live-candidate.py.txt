@@ -1,0 +1,34 @@
+"""使用原生认证和已有伪终端骨架检验候选；测试请求不点名技能。"""
+import importlib.util,json,re,time
+from pathlib import Path
+spec=importlib.util.spec_from_file_location('host',Path.cwd()/'packages/skills/tests/conversation-workflow/helpers/recording-host.py')
+host=importlib.util.module_from_spec(spec);spec.loader.exec_module(host)
+root=Path('/tmp/foundry-t004-t005-lJoI3d');f=json.loads((root/'sandbox.json').read_text())
+mode=__import__('sys').argv[1];cli_path='/home/by152/.codex/packages/standalone/releases/0.170.0-x86_64-unknown-linux-musl/bin/codex'
+args=[cli_path,'-c','check_for_update_on_startup=false','--no-alt-screen','-C',f['projects'][1],'-a','never','-s','danger-full-access','--add-dir',f['records']]
+if mode.startswith('foreground'):args.insert(1,'--no-daemon')
+terminal=host.Terminal(args,f['projects'][1]);observations=[]
+try:
+    terminal.settle(4)
+    if 'Update available' in terminal.text():raise RuntimeError('出现更新菜单，未发送业务输入')
+    if 'Trust this folder?' in terminal.text():terminal.submit('1');terminal.settle(2)
+    idle=list(Path(f['records']).rglob('*.md'))
+    prompt=f'请创建 business-{mode}.txt，内容为 T004_LIVE_{mode.upper()}，然后简短告诉我结果。'
+    terminal.submit(prompt)
+    deadline=time.monotonic()+110
+    last_snapshot=None
+    while time.monotonic()<deadline and not terminal.exited():
+        terminal.read(0.1)
+        snapshot=([str(p.relative_to(Path(f['records']))) for p in Path(f['records']).rglob('*.md')],(Path(f['projects'][1])/f'business-{mode}.txt').exists())
+        if snapshot!=last_snapshot:
+            observations.append({'elapsed':round(110-(deadline-time.monotonic()),3),'recordFiles':snapshot[0],'businessExists':snapshot[1]})
+            last_snapshot=snapshot
+        if snapshot[1] and 'Worked for' in terminal.text():break
+    terminal.settle(2)
+    (root/f'{mode}-screen.txt').write_text(terminal.text())
+    terminal.submit('/exit');terminal.settle(4)
+    ids=re.findall(r'codex resume ([0-9a-f-]{36})',terminal.text())
+    report={'mode':mode,'prompt':prompt,'idleRecordCount':len(idle),'observations':observations,'threadIds':ids,'terminalExit':terminal.exited(),'terminalStatus':terminal.status,'tail':terminal.text()[-2200:]}
+    (root/f'{mode}-observation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+    print(json.dumps(report,ensure_ascii=False),flush=True)
+finally:terminal.close()

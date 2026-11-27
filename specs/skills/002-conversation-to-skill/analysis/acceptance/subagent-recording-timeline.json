@@ -1,0 +1,466 @@
+{
+  "scenario": "两名业务子代理直接派发及跨轮回传的隔离宿主取证",
+  "timeStandard": "UTC",
+  "source": "cf8def3:packages/skills/src/profile/conversation-recording",
+  "runSource": "真实 Linux Codex CLI 原生交互、隔离回环合成回复",
+  "runs": [
+    {
+      "mode": "v2",
+      "parentSessionId": "01a21a8c-75d6-71f2-9200-1a827a23bbcd",
+      "parentRollout": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d6-71f2-9200-1a827a23bbcd.jsonl",
+      "record": "records/2026-11-27/01a21a8c-75d6-71f2-9200-1a827a23bbcd.md",
+      "currentMainRecordMessageLabels": [
+        "### 用户 · 发起",
+        "### 主代理 · 回复",
+        "### 用户 · 发起",
+        "### 主代理 · 回复"
+      ],
+      "parentTurns": [
+        {
+          "turnId": "01a21a8c-76b9-73a0-8aa2-55df3c842ef9",
+          "started": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d6-71f2-9200-1a827a23bbcd.jsonl",
+            "line": 2,
+            "time": "2026-11-27T01:09:02.835Z"
+          },
+          "promptHookAt": "2026-11-27T01:09:03.388Z",
+          "stopHookAt": "2026-11-27T01:09:05.483Z",
+          "recordReadBackAt": "2026-11-27T01:09:05.575Z",
+          "recordSha256": "930fed238bb2106a7701a01a3030b2362c62f0836f4f03857c94065843cc74be"
+        },
+        {
+          "turnId": "01a21a8c-8921-7db2-b56f-e31f856d5e56",
+          "started": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d6-71f2-9200-1a827a23bbcd.jsonl",
+            "line": 31,
+            "time": "2026-11-27T01:09:07.500Z"
+          },
+          "promptHookAt": "2026-11-27T01:09:07.710Z",
+          "stopHookAt": "2026-11-27T01:09:08.664Z",
+          "recordReadBackAt": "2026-11-27T01:09:08.718Z",
+          "recordSha256": "bba4db01d996c0249a362363e05f5f49aa32027c90517b190ad21c02b3402d61"
+        }
+      ],
+      "children": [
+        {
+          "agent": "A",
+          "childThreadId": "01a21a8c-7adf-7d10-82cc-f73608ff00fc",
+          "childTurnId": "01a21a8c-7af4-71f3-8c7d-153d13284e78",
+          "originalInput": "TIMELINE_INPUT_A\n\n业务子代理 A 的合成输入。",
+          "reply": "TIMELINE_REPLY_A\n\n业务子代理 A 的实际合成回复。",
+          "parentTurnId": "01a21a8c-76b9-73a0-8aa2-55df3c842ef9",
+          "callId": "input-A",
+          "toolHooks": {
+            "name": "collaborationspawn_agent",
+            "pre": "2026-11-27T01:09:03.807Z",
+            "post": "2026-11-27T01:09:04.165Z",
+            "postToolResponse": {
+              "task_name": "/root/timeline_a"
+            }
+          },
+          "dispatchRecord": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d6-71f2-9200-1a827a23bbcd.jsonl",
+            "line": 14,
+            "kind": "SubAgentActivity",
+            "time": "2026-11-27T01:09:03.861Z",
+            "agentPath": "/root/timeline_a"
+          },
+          "subagentStart": {
+            "time": "2026-11-27T01:09:04.216Z",
+            "keys": [
+              "agent_id",
+              "agent_type",
+              "cwd",
+              "hook_event_name",
+              "model",
+              "permission_mode",
+              "session_id",
+              "transcript_path",
+              "turn_id"
+            ],
+            "transcriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-03-01a21a8c-7adf-7d10-82cc-f73608ff00fc.jsonl"
+          },
+          "subagentStop": {
+            "time": "2026-11-27T01:09:05.837Z",
+            "keys": [
+              "agent_id",
+              "agent_transcript_path",
+              "agent_type",
+              "cwd",
+              "hook_event_name",
+              "last_assistant_message",
+              "model",
+              "permission_mode",
+              "session_id",
+              "stop_hook_active",
+              "transcript_path",
+              "turn_id"
+            ],
+            "transcriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d6-71f2-9200-1a827a23bbcd.jsonl",
+            "agentTranscriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-03-01a21a8c-7adf-7d10-82cc-f73608ff00fc.jsonl"
+          },
+          "childTaskComplete": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-03-01a21a8c-7adf-7d10-82cc-f73608ff00fc.jsonl",
+            "line": 16,
+            "time": "2026-11-27T01:09:05.862Z"
+          },
+          "copyOfReplyInParentRollout": [
+            {
+              "line": 41,
+              "type": "agent_message",
+              "timestamp": "2026-11-27T01:09:08.716Z"
+            }
+          ],
+          "completionEventInParentRollout": [
+            {
+              "line": 29,
+              "parentTurnId": "01a21a8c-76b9-73a0-8aa2-55df3c842ef9",
+              "timestamp": "2026-11-27T01:09:05.866Z"
+            }
+          ],
+          "childPromptHookCount": 0
+        },
+        {
+          "agent": "B",
+          "childThreadId": "01a21a8c-7e21-7ae3-a0d3-b67fb24e4752",
+          "childTurnId": "01a21a8c-7e36-7553-824e-3df3df3b917b",
+          "originalInput": "TIMELINE_INPUT_B\n\n业务子代理 B 的合成输入。",
+          "reply": "TIMELINE_REPLY_B\n\n业务子代理 B 的实际合成回复。",
+          "parentTurnId": "01a21a8c-76b9-73a0-8aa2-55df3c842ef9",
+          "callId": "input-B",
+          "toolHooks": {
+            "name": "collaborationspawn_agent",
+            "pre": "2026-11-27T01:09:04.632Z",
+            "post": "2026-11-27T01:09:05.002Z",
+            "postToolResponse": {
+              "task_name": "/root/timeline_b"
+            }
+          },
+          "dispatchRecord": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d6-71f2-9200-1a827a23bbcd.jsonl",
+            "line": 20,
+            "kind": "SubAgentActivity",
+            "time": "2026-11-27T01:09:04.695Z",
+            "agentPath": "/root/timeline_b"
+          },
+          "subagentStart": {
+            "time": "2026-11-27T01:09:05.031Z",
+            "keys": [
+              "agent_id",
+              "agent_type",
+              "cwd",
+              "hook_event_name",
+              "model",
+              "permission_mode",
+              "session_id",
+              "transcript_path",
+              "turn_id"
+            ],
+            "transcriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-04-01a21a8c-7e21-7ae3-a0d3-b67fb24e4752.jsonl"
+          },
+          "subagentStop": {
+            "time": "2026-11-27T01:09:08.030Z",
+            "keys": [
+              "agent_id",
+              "agent_transcript_path",
+              "agent_type",
+              "cwd",
+              "hook_event_name",
+              "last_assistant_message",
+              "model",
+              "permission_mode",
+              "session_id",
+              "stop_hook_active",
+              "transcript_path",
+              "turn_id"
+            ],
+            "transcriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d6-71f2-9200-1a827a23bbcd.jsonl",
+            "agentTranscriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-04-01a21a8c-7e21-7ae3-a0d3-b67fb24e4752.jsonl"
+          },
+          "childTaskComplete": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-04-01a21a8c-7e21-7ae3-a0d3-b67fb24e4752.jsonl",
+            "line": 16,
+            "time": "2026-11-27T01:09:08.057Z"
+          },
+          "copyOfReplyInParentRollout": [],
+          "completionEventInParentRollout": [
+            {
+              "line": 35,
+              "parentTurnId": "01a21a8c-76b9-73a0-8aa2-55df3c842ef9",
+              "timestamp": "2026-11-27T01:09:08.061Z"
+            }
+          ],
+          "childPromptHookCount": 0
+        }
+      ],
+      "idleObservationSeconds": 1.577,
+      "ordinaryControl": {
+        "sessionId": "01a21a8c-a859-7fc3-bd66-062eb6b1fdfa",
+        "record": "records/2026-11-27/01a21a8c-a859-7fc3-bd66-062eb6b1fdfa.md",
+        "recordReadBackAt": "2026-11-27T01:09:16.867Z",
+        "recordSha256": "611dede5d1f1d96c39bc1ed7b373236dfdbdcfbdcc48c1b1eb059f9a0558dcad"
+      },
+      "trustedHooks": [
+        "postToolUse",
+        "postToolUse",
+        "preToolUse",
+        "stop",
+        "stop",
+        "subagentStart",
+        "subagentStop",
+        "userPromptSubmit",
+        "userPromptSubmit"
+      ],
+      "recordSnapshotComparison": [
+        {
+          "before": "parent-first-done",
+          "after": "child-a-parent-idle",
+          "fileCount": 2,
+          "mainSha256Before": "930fed238bb2106a7701a01a3030b2362c62f0836f4f03857c94065843cc74be",
+          "mainSha256After": "930fed238bb2106a7701a01a3030b2362c62f0836f4f03857c94065843cc74be",
+          "fileListHashAndMtimeEqual": true
+        },
+        {
+          "before": "parent-second-started",
+          "after": "child-b-parent-second-active",
+          "fileCount": 2,
+          "mainSha256Before": "633a9774926d09c1929179265b6ecf15499163e570ee9616925e62e339241307",
+          "mainSha256After": "633a9774926d09c1929179265b6ecf15499163e570ee9616925e62e339241307",
+          "fileListHashAndMtimeEqual": true
+        }
+      ]
+    },
+    {
+      "mode": "v1",
+      "parentSessionId": "01a21a8c-75d9-7a83-a2a4-d70b9fe97664",
+      "parentRollout": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d9-7a83-a2a4-d70b9fe97664.jsonl",
+      "record": "records/2026-11-27/01a21a8c-75d9-7a83-a2a4-d70b9fe97664.md",
+      "currentMainRecordMessageLabels": [
+        "### 用户 · 发起",
+        "### 主代理 · 回复",
+        "### 用户 · 发起",
+        "### 主代理 · 回复"
+      ],
+      "parentTurns": [
+        {
+          "turnId": "01a21a8c-76db-7331-ac41-0de5142dc35d",
+          "started": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d9-7a83-a2a4-d70b9fe97664.jsonl",
+            "line": 2,
+            "time": "2026-11-27T01:09:02.863Z"
+          },
+          "promptHookAt": "2026-11-27T01:09:03.412Z",
+          "stopHookAt": "2026-11-27T01:09:05.452Z",
+          "recordReadBackAt": "2026-11-27T01:09:05.545Z",
+          "recordSha256": "6a501feea0bbeb8efcce0bc4b93d903adaca8cd8aac44b328279efa375dce192"
+        },
+        {
+          "turnId": "01a21a8c-88cf-7290-8ac9-a2da7831d34b",
+          "started": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d9-7a83-a2a4-d70b9fe97664.jsonl",
+            "line": 29,
+            "time": "2026-11-27T01:09:07.416Z"
+          },
+          "promptHookAt": "2026-11-27T01:09:07.608Z",
+          "stopHookAt": "2026-11-27T01:09:08.683Z",
+          "recordReadBackAt": "2026-11-27T01:09:08.742Z",
+          "recordSha256": "13e93a4d41292ff9565fc08c234130bef1c8d2981c4669674d84dda4242c8816"
+        }
+      ],
+      "children": [
+        {
+          "agent": "A",
+          "childThreadId": "01a21a8c-7ae5-7eb3-a2de-7971c06db4fa",
+          "childTurnId": "01a21a8c-7af9-70c2-b287-e4dfcc26d3bf",
+          "originalInput": "TIMELINE_INPUT_A\n\n业务子代理 A 的合成输入。",
+          "reply": "TIMELINE_REPLY_A\n\n业务子代理 A 的实际合成回复。",
+          "parentTurnId": "01a21a8c-76db-7331-ac41-0de5142dc35d",
+          "callId": "input-A",
+          "toolHooks": {
+            "name": "spawn_agent",
+            "pre": "2026-11-27T01:09:03.806Z",
+            "post": "2026-11-27T01:09:04.184Z",
+            "postToolResponse": {
+              "agent_id": "01a21a8c-7ae5-7eb3-a2de-7971c06db4fa",
+              "nickname": "Hilbert"
+            }
+          },
+          "dispatchRecord": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d9-7a83-a2a4-d70b9fe97664.jsonl",
+            "line": 12,
+            "kind": "CollabAgentToolCall",
+            "time": "2026-11-27T01:09:03.872Z",
+            "agentPath": null
+          },
+          "subagentStart": {
+            "time": "2026-11-27T01:09:04.254Z",
+            "keys": [
+              "agent_id",
+              "agent_type",
+              "cwd",
+              "hook_event_name",
+              "model",
+              "permission_mode",
+              "session_id",
+              "transcript_path",
+              "turn_id"
+            ],
+            "transcriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-03-01a21a8c-7ae5-7eb3-a2de-7971c06db4fa.jsonl"
+          },
+          "subagentStop": {
+            "time": "2026-11-27T01:09:05.768Z",
+            "keys": [
+              "agent_id",
+              "agent_transcript_path",
+              "agent_type",
+              "cwd",
+              "hook_event_name",
+              "last_assistant_message",
+              "model",
+              "permission_mode",
+              "session_id",
+              "stop_hook_active",
+              "transcript_path",
+              "turn_id"
+            ],
+            "transcriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d9-7a83-a2a4-d70b9fe97664.jsonl",
+            "agentTranscriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-03-01a21a8c-7ae5-7eb3-a2de-7971c06db4fa.jsonl"
+          },
+          "childTaskComplete": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-03-01a21a8c-7ae5-7eb3-a2de-7971c06db4fa.jsonl",
+            "line": 14,
+            "time": "2026-11-27T01:09:05.799Z"
+          },
+          "copyOfReplyInParentRollout": [
+            {
+              "line": 27,
+              "type": "message",
+              "timestamp": "2026-11-27T01:09:05.806Z"
+            }
+          ],
+          "completionEventInParentRollout": [],
+          "childPromptHookCount": 1
+        },
+        {
+          "agent": "B",
+          "childThreadId": "01a21a8c-7e14-71d3-a4d3-61aba5601fa9",
+          "childTurnId": "01a21a8c-7e25-7233-a9bd-256780b17257",
+          "originalInput": "TIMELINE_INPUT_B\n\n业务子代理 B 的合成输入。",
+          "reply": "TIMELINE_REPLY_B\n\n业务子代理 B 的实际合成回复。",
+          "parentTurnId": "01a21a8c-76db-7331-ac41-0de5142dc35d",
+          "callId": "input-B",
+          "toolHooks": {
+            "name": "spawn_agent",
+            "pre": "2026-11-27T01:09:04.622Z",
+            "post": "2026-11-27T01:09:04.975Z",
+            "postToolResponse": {
+              "agent_id": "01a21a8c-7e14-71d3-a4d3-61aba5601fa9",
+              "nickname": "Franklin"
+            }
+          },
+          "dispatchRecord": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d9-7a83-a2a4-d70b9fe97664.jsonl",
+            "line": 18,
+            "kind": "CollabAgentToolCall",
+            "time": "2026-11-27T01:09:04.683Z",
+            "agentPath": null
+          },
+          "subagentStart": {
+            "time": "2026-11-27T01:09:05.035Z",
+            "keys": [
+              "agent_id",
+              "agent_type",
+              "cwd",
+              "hook_event_name",
+              "model",
+              "permission_mode",
+              "session_id",
+              "transcript_path",
+              "turn_id"
+            ],
+            "transcriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-04-01a21a8c-7e14-71d3-a4d3-61aba5601fa9.jsonl"
+          },
+          "subagentStop": {
+            "time": "2026-11-27T01:09:07.958Z",
+            "keys": [
+              "agent_id",
+              "agent_transcript_path",
+              "agent_type",
+              "cwd",
+              "hook_event_name",
+              "last_assistant_message",
+              "model",
+              "permission_mode",
+              "session_id",
+              "stop_hook_active",
+              "transcript_path",
+              "turn_id"
+            ],
+            "transcriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-02-01a21a8c-75d9-7a83-a2a4-d70b9fe97664.jsonl",
+            "agentTranscriptPath": "sessions/2026/11/27/rollout-2026-11-27T01-09-04-01a21a8c-7e14-71d3-a4d3-61aba5601fa9.jsonl"
+          },
+          "childTaskComplete": {
+            "file": "sessions/2026/11/27/rollout-2026-11-27T01-09-04-01a21a8c-7e14-71d3-a4d3-61aba5601fa9.jsonl",
+            "line": 14,
+            "time": "2026-11-27T01:09:07.989Z"
+          },
+          "copyOfReplyInParentRollout": [
+            {
+              "line": 37,
+              "type": "message",
+              "timestamp": "2026-11-27T01:09:08.453Z"
+            }
+          ],
+          "completionEventInParentRollout": [],
+          "childPromptHookCount": 1
+        }
+      ],
+      "idleObservationSeconds": 1.563,
+      "ordinaryControl": {
+        "sessionId": "01a21a8c-a7f4-7830-a757-8a92145e7242",
+        "record": "records/2026-11-27/01a21a8c-a7f4-7830-a757-8a92145e7242.md",
+        "recordReadBackAt": "2026-11-27T01:09:16.763Z",
+        "recordSha256": "861e1585ab4e826346021eddf8a3b67b31a6292d81964e6bb2bbd58ab6edc387"
+      },
+      "trustedHooks": [
+        "postToolUse",
+        "postToolUse",
+        "preToolUse",
+        "stop",
+        "stop",
+        "subagentStart",
+        "subagentStop",
+        "userPromptSubmit",
+        "userPromptSubmit"
+      ],
+      "recordSnapshotComparison": [
+        {
+          "before": "parent-first-done",
+          "after": "child-a-parent-idle",
+          "fileCount": 2,
+          "mainSha256Before": "6a501feea0bbeb8efcce0bc4b93d903adaca8cd8aac44b328279efa375dce192",
+          "mainSha256After": "6a501feea0bbeb8efcce0bc4b93d903adaca8cd8aac44b328279efa375dce192",
+          "fileListHashAndMtimeEqual": true
+        },
+        {
+          "before": "parent-second-started",
+          "after": "child-b-parent-second-active",
+          "fileCount": 2,
+          "mainSha256Before": "52dd2dcbf4027d8c1801536e336d875c8d3936fdd9d04124f82402ba476a92c0",
+          "mainSha256After": "52dd2dcbf4027d8c1801536e336d875c8d3936fdd9d04124f82402ba476a92c0",
+          "fileListHashAndMtimeEqual": true
+        }
+      ]
+    }
+  ],
+  "installation": {
+    "version": "codex-cli 0.172.0",
+    "verifiedFileCount": 17,
+    "eventModuleSha256": "8054c9d6e619c3201f5944e51050381dc7ec2f90a7eeffc0c2e417f7411347a7",
+    "entrySha256": {
+      "scripts/stop.py": "be6c6ce155b234037cdc644ef13127c0a10a17c914c8d04bf011cc9101bfd84c",
+      "scripts/post_tool_use.py": "12430ac29dcbfeb450956b4be7eca3e2054dfde0fb0d7813ec2a89fdfed716af",
+      "scripts/user_prompt_submit.py": "90a368346bc6e50fbecb2e980befa50f127a60f43747df97a3778092f3f4255c"
+    }
+  }
+}

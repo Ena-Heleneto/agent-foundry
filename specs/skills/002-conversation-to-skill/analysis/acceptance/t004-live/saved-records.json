@@ -1,0 +1,42 @@
+[
+  {
+    "record": "2026-11-23/index/01a208bb-efef-7c32-b80b-7b2d8d852857.md",
+    "snapshot": "saved-records/2026-11-23/index/01a208bb-efef-7c32-b80b-7b2d8d852857.md.txt",
+    "sha256": "2c5a19f8a5172253f987e8e50a34e7d65d0acb9a0a29a62bca1a01c83d436ab8"
+  },
+  {
+    "record": "2026-11-23/index/01a208b7-67b5-7860-9c97-d7b524b66d8b.md",
+    "snapshot": "saved-records/2026-11-23/index/01a208b7-67b5-7860-9c97-d7b524b66d8b.md.txt",
+    "sha256": "dac5fea03da09d69c4139d978498e7c322c52f2c13a8fa760d1a1c58ea8aefeb"
+  },
+  {
+    "record": "2026-11-23/index/01a208b4-8f0e-76b2-82f4-7394e959b86a.md",
+    "snapshot": "saved-records/2026-11-23/index/01a208b4-8f0e-76b2-82f4-7394e959b86a.md.txt",
+    "sha256": "a12be72f1f9eee2c12efe044eaa9890d03cbec622d5d1980e99b839f8d7edb0a"
+  },
+  {
+    "record": "2026-11-23/index/01a208b2-2044-7283-8dd1-07c30ca3ef6f.md",
+    "snapshot": "saved-records/2026-11-23/index/01a208b2-2044-7283-8dd1-07c30ca3ef6f.md.txt",
+    "sha256": "cf664d7008074d17ecadd5819bcdc7b41bdfd0c3afdfda1c8a21ea84cbf84d2e"
+  },
+  {
+    "record": "2026-11-23/details/01a208bb-efef-7c32-b80b-7b2d8d852857.md",
+    "snapshot": "saved-records/2026-11-23/details/01a208bb-efef-7c32-b80b-7b2d8d852857.md.txt",
+    "sha256": "a3d8be0c9896cf2f155b996d808ff0611ff337e4c17206be2ccf21085ae78285"
+  },
+  {
+    "record": "2026-11-23/details/01a208b7-67b5-7860-9c97-d7b524b66d8b.md",
+    "snapshot": "saved-records/2026-11-23/details/01a208b7-67b5-7860-9c97-d7b524b66d8b.md.txt",
+    "sha256": "21e8ae59a25b1327986a28154211ecb65bb5b6da1244af1e8d5feede455f7db6"
+  },
+  {
+    "record": "2026-11-23/details/01a208b4-8f0e-76b2-82f4-7394e959b86a.md",
+    "snapshot": "saved-records/2026-11-23/details/01a208b4-8f0e-76b2-82f4-7394e959b86a.md.txt",
+    "sha256": "70b46444638efd3a70cf370d8469ed49084ef11ab919f7d43666ed0c3f9eefc6"
+  },
+  {
+    "record": "2026-11-23/details/01a208b2-2044-7283-8dd1-07c30ca3ef6f.md",
+    "snapshot": "saved-records/2026-11-23/details/01a208b2-2044-7283-8dd1-07c30ca3ef6f.md.txt",
+    "sha256": "7c78c88fd2e68c1078d62383a61f3124126641857d1db6576b259260223dbbd8"
+  }
+]

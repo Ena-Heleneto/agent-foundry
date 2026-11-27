@@ -1,0 +1,3767 @@
+{
+  "sourceRevision": "c598a40771c0f86e7f7c1bf7d99fca215148f872",
+  "sourceContainsUncommittedDesign": true,
+  "publicationVerified": false,
+  "files": [
+    {
+      "path": "apps/mcp/README.md",
+      "action": "identical",
+      "originalSha256": "28a3547768a846c4a15f3ee49250612913ace67cc38b9979a986b1feae9eeab5",
+      "targetSha256": "28a3547768a846c4a15f3ee49250612913ace67cc38b9979a986b1feae9eeab5",
+      "originalBytes": 3245,
+      "targetBytes": 3245
+    },
+    {
+      "path": "apps/mcp/pyproject.toml",
+      "action": "identical",
+      "originalSha256": "d1129a47a0782ce4f8d8ac62a24451b116666da5b437268ceb305f164750a560",
+      "targetSha256": "d1129a47a0782ce4f8d8ac62a24451b116666da5b437268ceb305f164750a560",
+      "originalBytes": 521,
+      "targetBytes": 521
+    },
+    {
+      "path": "apps/mcp/src/foundry_skills_mcp/__init__.py",
+      "action": "identical",
+      "originalSha256": "119a7970203a529bd20df6ec18bae2e91b2a0a3459ae241be7064ed21d0bd6a8",
+      "targetSha256": "119a7970203a529bd20df6ec18bae2e91b2a0a3459ae241be7064ed21d0bd6a8",
+      "originalBytes": 282,
+      "targetBytes": 282
+    },
+    {
+      "path": "apps/mcp/src/foundry_skills_mcp/registry.py",
+      "action": "identical",
+      "originalSha256": "6670026d74c66ae5f383494bba60fa3d767bc6d4f5a06f6464dc143a59a8515f",
+      "targetSha256": "6670026d74c66ae5f383494bba60fa3d767bc6d4f5a06f6464dc143a59a8515f",
+      "originalBytes": 6472,
+      "targetBytes": 6472
+    },
+    {
+      "path": "apps/mcp/src/foundry_skills_mcp/server.py",
+      "action": "identical",
+      "originalSha256": "d3389ba436f8c01aa14766e560fc449bb390f0aad273fc7c1fdf595ed65a09da",
+      "targetSha256": "d3389ba436f8c01aa14766e560fc449bb390f0aad273fc7c1fdf595ed65a09da",
+      "originalBytes": 4263,
+      "targetBytes": 4263
+    },
+    {
+      "path": "apps/mcp/tests/__init__.py",
+      "action": "identical",
+      "originalSha256": "75950886c06d7ce551d84f80eae6b7a152b0874f9c59104896909ccd25af5a12",
+      "targetSha256": "75950886c06d7ce551d84f80eae6b7a152b0874f9c59104896909ccd25af5a12",
+      "originalBytes": 75,
+      "targetBytes": 75
+    },
+    {
+      "path": "apps/mcp/tests/test_registry.py",
+      "action": "identical",
+      "originalSha256": "9b554c3eb2e4644aa49e426847d22451255710fce22ecb66ad396c67a6034ec2",
+      "targetSha256": "9b554c3eb2e4644aa49e426847d22451255710fce22ecb66ad396c67a6034ec2",
+      "originalBytes": 3740,
+      "targetBytes": 3740
+    },
+    {
+      "path": "apps/mcp/tests/test_server.py",
+      "action": "identical",
+      "originalSha256": "d58d35c8efda7bcde813065e437ee9b4a3aa83f13ef4aebafa995cbd713ac182",
+      "targetSha256": "d58d35c8efda7bcde813065e437ee9b4a3aa83f13ef4aebafa995cbd713ac182",
+      "originalBytes": 2645,
+      "targetBytes": 2645
+    },
+    {
+      "path": "apps/mcp/uv.lock",
+      "action": "identical",
+      "originalSha256": "2ae769a91d3fd70ad7cfee300368689a6a4c27c1c2ac7e9bcd6f0fdceb428bcf",
+      "targetSha256": "2ae769a91d3fd70ad7cfee300368689a6a4c27c1c2ac7e9bcd6f0fdceb428bcf",
+      "originalBytes": 235626,
+      "targetBytes": 235626
+    },
+    {
+      "path": "packages/skills-distribution-urgent/LICENSE",
+      "action": "identical",
+      "originalSha256": "a2f402e931906baada87fa68625cec647d73e538fdd2d115f74d436674fb6dcb",
+      "targetSha256": "a2f402e931906baada87fa68625cec647d73e538fdd2d115f74d436674fb6dcb",
+      "originalBytes": 743,
+      "targetBytes": 743
+    },
+    {
+      "path": "packages/skills-distribution-urgent/README.md",
+      "action": "identical",
+      "originalSha256": "068aaf92b4a8011fdc5c7414ef2b60dc26dfaf16d7f8f2cccab4899b387fea12",
+      "targetSha256": "068aaf92b4a8011fdc5c7414ef2b60dc26dfaf16d7f8f2cccab4899b387fea12",
+      "originalBytes": 7059,
+      "targetBytes": 7059
+    },
+    {
+      "path": "packages/skills-distribution-urgent/build/distribution/export.ts",
+      "action": "identical",
+      "originalSha256": "d207927af04ab7cb0c88eda2bb739756fdc4f123b442eac7ac7bdb724a069003",
+      "targetSha256": "d207927af04ab7cb0c88eda2bb739756fdc4f123b442eac7ac7bdb724a069003",
+      "originalBytes": 16516,
+      "targetBytes": 16516
+    },
+    {
+      "path": "packages/skills-distribution-urgent/build/distribution/models.ts",
+      "action": "identical",
+      "originalSha256": "669ab6ccd0be099b0d122a9dee38f8608af7396b017e7206229f6509b5ee51b6",
+      "targetSha256": "669ab6ccd0be099b0d122a9dee38f8608af7396b017e7206229f6509b5ee51b6",
+      "originalBytes": 2319,
+      "targetBytes": 2319
+    },
+    {
+      "path": "packages/skills-distribution-urgent/build/distribution/references.ts",
+      "action": "identical",
+      "originalSha256": "62218af45bed52cdd03fdbb9c8ff6a0bcdda09bf7bd974a95e4db91c19bc67f0",
+      "targetSha256": "62218af45bed52cdd03fdbb9c8ff6a0bcdda09bf7bd974a95e4db91c19bc67f0",
+      "originalBytes": 5783,
+      "targetBytes": 5783
+    },
+    {
+      "path": "packages/skills-distribution-urgent/build/distribution/source.ts",
+      "action": "identical",
+      "originalSha256": "39eb04b8bc797dcae6b8af49d5da88e6ded32d6afd50840ab618306c06b97de9",
+      "targetSha256": "39eb04b8bc797dcae6b8af49d5da88e6ded32d6afd50840ab618306c06b97de9",
+      "originalBytes": 18509,
+      "targetBytes": 18509
+    },
+    {
+      "path": "packages/skills-distribution-urgent/build/distribution/validate.ts",
+      "action": "identical",
+      "originalSha256": "d4e32c378047daa335cb354a6c3853bef155aeb1cd3efda469d93306d87a561d",
+      "targetSha256": "d4e32c378047daa335cb354a6c3853bef155aeb1cd3efda469d93306d87a561d",
+      "originalBytes": 15788,
+      "targetBytes": 15788
+    },
+    {
+      "path": "packages/skills-distribution-urgent/build/distribution/verify.ts",
+      "action": "identical",
+      "originalSha256": "d134e832f5b9ce5437b507b2f5af65499d75762a100f32987e301baa465e65c3",
+      "targetSha256": "d134e832f5b9ce5437b507b2f5af65499d75762a100f32987e301baa465e65c3",
+      "originalBytes": 10976,
+      "targetBytes": 10976
+    },
+    {
+      "path": "packages/skills-distribution-urgent/build/plugins/content.ts",
+      "action": "identical",
+      "originalSha256": "00679d30fdd401442fd08afe229cebd5b53b95692cdb6f8b662a98d272d9be0a",
+      "targetSha256": "00679d30fdd401442fd08afe229cebd5b53b95692cdb6f8b662a98d272d9be0a",
+      "originalBytes": 3726,
+      "targetBytes": 3726
+    },
+    {
+      "path": "packages/skills-distribution-urgent/build/publish.mjs",
+      "action": "identical",
+      "originalSha256": "90ed14d8d9ebbe4d47abd8473cffb1ed4fc45ddf23f2aca5907f485458e490bc",
+      "targetSha256": "90ed14d8d9ebbe4d47abd8473cffb1ed4fc45ddf23f2aca5907f485458e490bc",
+      "originalBytes": 25911,
+      "targetBytes": 25911
+    },
+    {
+      "path": "packages/skills-distribution-urgent/eslint.config.mjs",
+      "action": "identical",
+      "originalSha256": "e8567284307df74ff8d85ade15e44a215d5be5b148af3a761d11ecd41ea5a96d",
+      "targetSha256": "e8567284307df74ff8d85ade15e44a215d5be5b148af3a761d11ecd41ea5a96d",
+      "originalBytes": 449,
+      "targetBytes": 449
+    },
+    {
+      "path": "packages/skills-distribution-urgent/package.json",
+      "action": "identical",
+      "originalSha256": "8993076175936fb5116f20e3aecc5668de047dbf8c2b11b38ed27a182d68ce2b",
+      "targetSha256": "8993076175936fb5116f20e3aecc5668de047dbf8c2b11b38ed27a182d68ce2b",
+      "originalBytes": 719,
+      "targetBytes": 719
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/index.mjs",
+      "action": "identical",
+      "originalSha256": "59a62e35956c7b475c6e9dfacde1ff3ee9f8161644dd6f1cf97f8cb9b3d482e3",
+      "targetSha256": "59a62e35956c7b475c6e9dfacde1ff3ee9f8161644dd6f1cf97f8cb9b3d482e3",
+      "originalBytes": 6411,
+      "targetBytes": 6411
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/install-skills/README.md",
+      "action": "identical",
+      "originalSha256": "3911908a0d639a1bf8645d8b50624791a6b9f98ad7945422237c38359be39abc",
+      "targetSha256": "3911908a0d639a1bf8645d8b50624791a6b9f98ad7945422237c38359be39abc",
+      "originalBytes": 2371,
+      "targetBytes": 2371
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/install-skills/install-skills.ps1",
+      "action": "identical",
+      "originalSha256": "7c16ffdf8b8f6f3e13f6b303ed3bb61c40c6c54492b3b27d2f7bdec848b0da29",
+      "targetSha256": "7c16ffdf8b8f6f3e13f6b303ed3bb61c40c6c54492b3b27d2f7bdec848b0da29",
+      "originalBytes": 23736,
+      "targetBytes": 23736
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/install-skills/install-skills.sh",
+      "action": "identical",
+      "originalSha256": "4d77192c4e950c60e1fd524260ce75bae29be2b9ec8a540549978b795a5ac964",
+      "targetSha256": "4d77192c4e950c60e1fd524260ce75bae29be2b9ec8a540549978b795a5ac964",
+      "originalBytes": 22350,
+      "targetBytes": 22350
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/install-skills/read-agents.mjs",
+      "action": "identical",
+      "originalSha256": "f8da363188b6cdc794a7e4fa407bd8005fac90727c1e4534b8b28976f5f750b9",
+      "targetSha256": "f8da363188b6cdc794a7e4fa407bd8005fac90727c1e4534b8b28976f5f750b9",
+      "originalBytes": 9761,
+      "targetBytes": 9761
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/lib/managed-state.mjs",
+      "action": "identical",
+      "originalSha256": "8a571c056e6ffd743f781134ec78f04abd40723a528dbdb3e2e46ee196ea01fa",
+      "targetSha256": "8a571c056e6ffd743f781134ec78f04abd40723a528dbdb3e2e46ee196ea01fa",
+      "originalBytes": 10994,
+      "targetBytes": 10994
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/mount-entry/README.md",
+      "action": "identical",
+      "originalSha256": "0e65e79702198e0f0a2d40412e9c3fa5076f665b2ce0b93b62bb98a2bf21b042",
+      "targetSha256": "0e65e79702198e0f0a2d40412e9c3fa5076f665b2ce0b93b62bb98a2bf21b042",
+      "originalBytes": 2108,
+      "targetBytes": 2108
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/mount-entry/mount-entry.ps1",
+      "action": "identical",
+      "originalSha256": "ae493d20109770f2282bfbc7ccd1f6010e0cc2fe37ff155d3c75591636fb7073",
+      "targetSha256": "ae493d20109770f2282bfbc7ccd1f6010e0cc2fe37ff155d3c75591636fb7073",
+      "originalBytes": 15228,
+      "targetBytes": 15228
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/mount-entry/mount-entry.sh",
+      "action": "identical",
+      "originalSha256": "f62864c38b1c035ef51156356eb9110913d6841a841d85bb329a6b331a724904",
+      "targetSha256": "f62864c38b1c035ef51156356eb9110913d6841a841d85bb329a6b331a724904",
+      "originalBytes": 22206,
+      "targetBytes": 22206
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/register-commands/README.md",
+      "action": "identical",
+      "originalSha256": "bd637c329c05f4fe3c7b70c3c13cd13437b55943a5aa0b9d6eb6376341cef82c",
+      "targetSha256": "bd637c329c05f4fe3c7b70c3c13cd13437b55943a5aa0b9d6eb6376341cef82c",
+      "originalBytes": 3472,
+      "targetBytes": 3472
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/register-commands/legacy-source-hashes.json",
+      "action": "identical",
+      "originalSha256": "2e743edd9323f81f05f59e3596835624a49a45f104bd55985e13b9a316bf2d29",
+      "targetSha256": "2e743edd9323f81f05f59e3596835624a49a45f104bd55985e13b9a316bf2d29",
+      "originalBytes": 3749,
+      "targetBytes": 3749
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/register-commands/prepare-command.mjs",
+      "action": "identical",
+      "originalSha256": "3aef93e3d2462032b4c307be8eb9489b7f984c5548b07e9c5ad73e04a5e8f3b3",
+      "targetSha256": "3aef93e3d2462032b4c307be8eb9489b7f984c5548b07e9c5ad73e04a5e8f3b3",
+      "originalBytes": 2267,
+      "targetBytes": 2267
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/register-commands/register-commands.ps1",
+      "action": "identical",
+      "originalSha256": "860282e8c9969e2721f6879812176a473688d9b6f32239cb94fc54cb1f832868",
+      "targetSha256": "860282e8c9969e2721f6879812176a473688d9b6f32239cb94fc54cb1f832868",
+      "originalBytes": 4316,
+      "targetBytes": 4316
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/register-commands/register-commands.sh",
+      "action": "identical",
+      "originalSha256": "8e99034e10faf856c41702b09990d81720ce36216615cd1be1474c733acb8cc5",
+      "targetSha256": "8e99034e10faf856c41702b09990d81720ce36216615cd1be1474c733acb8cc5",
+      "originalBytes": 2530,
+      "targetBytes": 2530
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/register-hooks/README.md",
+      "action": "identical",
+      "originalSha256": "c97697777439b8394e058e6327c7a353e14f80fa40ad93c99709a5a7dcde8a8e",
+      "targetSha256": "c97697777439b8394e058e6327c7a353e14f80fa40ad93c99709a5a7dcde8a8e",
+      "originalBytes": 2089,
+      "targetBytes": 2089
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/register-hooks/prepare-hooks.mjs",
+      "action": "identical",
+      "originalSha256": "5d51b34416f9ccb6e41dda5a4f7777dbaace8cb98cd6943f01e4040c326ef2b1",
+      "targetSha256": "5d51b34416f9ccb6e41dda5a4f7777dbaace8cb98cd6943f01e4040c326ef2b1",
+      "originalBytes": 4235,
+      "targetBytes": 4235
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/register-hooks/register-hooks.ps1",
+      "action": "identical",
+      "originalSha256": "4208e31e52e8b70a362674fd19e5314f0831387e3e8127e2949e40798003725b",
+      "targetSha256": "4208e31e52e8b70a362674fd19e5314f0831387e3e8127e2949e40798003725b",
+      "originalBytes": 4475,
+      "targetBytes": 4475
+    },
+    {
+      "path": "packages/skills-distribution-urgent/script/register-hooks/register-hooks.sh",
+      "action": "identical",
+      "originalSha256": "4cdf99303d3c46d4968a9d34709b87095596f73613180709a8d3cf71efa09806",
+      "targetSha256": "4cdf99303d3c46d4968a9d34709b87095596f73613180709a8d3cf71efa09806",
+      "originalBytes": 7361,
+      "targetBytes": 7361
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/coding/business-node-delivery/SKILL.md",
+      "action": "identical",
+      "originalSha256": "2e0b8d03e3a7e8c3cf33adf92232d44ecd1b1b461775efbe7bdbdd3492a27cd1",
+      "targetSha256": "2e0b8d03e3a7e8c3cf33adf92232d44ecd1b1b461775efbe7bdbdd3492a27cd1",
+      "originalBytes": 3404,
+      "targetBytes": 3404
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/coding/collection.config.json",
+      "action": "identical",
+      "originalSha256": "e6a95dcda76c83c555239487d3d823825b801a51bef4f3ffa0793ec55d1edbe3",
+      "targetSha256": "e6a95dcda76c83c555239487d3d823825b801a51bef4f3ffa0793ec55d1edbe3",
+      "originalBytes": 129,
+      "targetBytes": 129
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/coding/document-changed-symbols/SKILL.md",
+      "action": "identical",
+      "originalSha256": "049b5d4f7e8b68f759d14f5ca98d13e94984731efef276f5c21b6c6258e1dacc",
+      "targetSha256": "049b5d4f7e8b68f759d14f5ca98d13e94984731efef276f5c21b6c6258e1dacc",
+      "originalBytes": 4691,
+      "targetBytes": 4691
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/coding/document-changed-symbols/references/test-prompts.md",
+      "action": "identical",
+      "originalSha256": "817c590ca9b7324eaf37c8aa4560b301f32d8395b052c5f844c62deff79e3038",
+      "targetSha256": "817c590ca9b7324eaf37c8aa4560b301f32d8395b052c5f844c62deff79e3038",
+      "originalBytes": 1591,
+      "targetBytes": 1591
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/frontend/collection.config.json",
+      "action": "identical",
+      "originalSha256": "c80dc3d331351e28d72e67ed7fea433f35f8e79d83e4007c9ac1452507b75003",
+      "targetSha256": "c80dc3d331351e28d72e67ed7fea433f35f8e79d83e4007c9ac1452507b75003",
+      "originalBytes": 112,
+      "targetBytes": 112
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/frontend/nuxt-ui-styling/SKILL.md",
+      "action": "identical",
+      "originalSha256": "0fb02df099d6751f65e83f3d8a3945340114eefc8b6718e220af118ce3a99735",
+      "targetSha256": "0fb02df099d6751f65e83f3d8a3945340114eefc8b6718e220af118ce3a99735",
+      "originalBytes": 5227,
+      "targetBytes": 5227
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/frontend/nuxt-ui-styling/references/attribute-conflicts.md",
+      "action": "identical",
+      "originalSha256": "417c746d59a4a9f7f68976a884ab6d196266304118c102c959e10b752c5fede2",
+      "targetSha256": "417c746d59a4a9f7f68976a884ab6d196266304118c102c959e10b752c5fede2",
+      "originalBytes": 1891,
+      "targetBytes": 1891
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/frontend/nuxt-ui-styling/references/rule-verification.md",
+      "action": "identical",
+      "originalSha256": "6f47315857912ea6a1c5989b022e0eb45535e2a860748df29eb9370ca2957dac",
+      "targetSha256": "6f47315857912ea6a1c5989b022e0eb45535e2a860748df29eb9370ca2957dac",
+      "originalBytes": 1162,
+      "targetBytes": 1162
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/frontend/vue-reactivity/SKILL.md",
+      "action": "identical",
+      "originalSha256": "fb6aacad0eec0034e8e89fa40d483137b895633a46505258ac4363bb1bf0fc15",
+      "targetSha256": "fb6aacad0eec0034e8e89fa40d483137b895633a46505258ac4363bb1bf0fc15",
+      "originalBytes": 1786,
+      "targetBytes": 1786
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/workflow/artifact-project-description/SKILL.md",
+      "action": "identical",
+      "originalSha256": "68aa274a0649da3a16eca2df56403564ac6f948f9bff5368c5c58825e02053ac",
+      "targetSha256": "68aa274a0649da3a16eca2df56403564ac6f948f9bff5368c5c58825e02053ac",
+      "originalBytes": 1675,
+      "targetBytes": 1675
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/workflow/artifact-spec-analysis/SKILL.md",
+      "action": "identical",
+      "originalSha256": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323",
+      "targetSha256": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323",
+      "originalBytes": 3484,
+      "targetBytes": 3484
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/workflow/bug-report/SKILL.md",
+      "action": "identical",
+      "originalSha256": "ad19b3aff08b3d448e43feb46fbcf56d009eec57105935436557434603adebc6",
+      "targetSha256": "ad19b3aff08b3d448e43feb46fbcf56d009eec57105935436557434603adebc6",
+      "originalBytes": 1421,
+      "targetBytes": 1421
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/workflow/collection.config.json",
+      "action": "identical",
+      "originalSha256": "e62f27cd7c23702030183e378fa6a5c4da18c7f34cf28e49a969a4a9879ae5f3",
+      "targetSha256": "e62f27cd7c23702030183e378fa6a5c4da18c7f34cf28e49a969a4a9879ae5f3",
+      "originalBytes": 1989,
+      "targetBytes": 1989
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/workflow/implementation-preparation/SKILL.md",
+      "action": "identical",
+      "originalSha256": "50510c75e684f753c972c61c3a523a1a59a9022b3ddfb78d73f60af024da46ea",
+      "targetSha256": "50510c75e684f753c972c61c3a523a1a59a9022b3ddfb78d73f60af024da46ea",
+      "originalBytes": 4811,
+      "targetBytes": 4811
+    },
+    {
+      "path": "packages/skills-distribution-urgent/src/workflow/task-increment/SKILL.md",
+      "action": "identical",
+      "originalSha256": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a",
+      "targetSha256": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a",
+      "originalBytes": 23172,
+      "targetBytes": 23172
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/build.test.mjs",
+      "action": "identical",
+      "originalSha256": "d347dd9840aea12e161c4dd579ee261aa8b60feecb7f0c323a0abb33e339b7e0",
+      "targetSha256": "d347dd9840aea12e161c4dd579ee261aa8b60feecb7f0c323a0abb33e339b7e0",
+      "originalBytes": 10298,
+      "targetBytes": 10298
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/commands.test.mjs",
+      "action": "identical",
+      "originalSha256": "c91b3ff0f4a9d842d26adba07301fe49566fa391cbb274bbfc583032fcb3c8c2",
+      "targetSha256": "c91b3ff0f4a9d842d26adba07301fe49566fa391cbb274bbfc583032fcb3c8c2",
+      "originalBytes": 10275,
+      "targetBytes": 10275
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/helpers/host-probe.mjs",
+      "action": "identical",
+      "originalSha256": "c36bcb297ec47ca1944362a8c4d1238554c0d96128bbc2f323c8b6a01ee8497c",
+      "targetSha256": "c36bcb297ec47ca1944362a8c4d1238554c0d96128bbc2f323c8b6a01ee8497c",
+      "originalBytes": 19030,
+      "targetBytes": 19030
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/helpers/prepare-host-context.py",
+      "action": "identical",
+      "originalSha256": "2a71bf0bb9d8e6833d5e0cfd849b46cad30d36c216900519a891651bf9954a2b",
+      "targetSha256": "2a71bf0bb9d8e6833d5e0cfd849b46cad30d36c216900519a891651bf9954a2b",
+      "originalBytes": 17641,
+      "targetBytes": 17641
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/helpers/urgent-sandbox.mjs",
+      "action": "identical",
+      "originalSha256": "60ee3b0c0b73d9fbbde26730a5530067ffac26385fc8f21a3f7dd85d2e03baf9",
+      "targetSha256": "60ee3b0c0b73d9fbbde26730a5530067ffac26385fc8f21a3f7dd85d2e03baf9",
+      "originalBytes": 16674,
+      "targetBytes": 16674
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/hooks.test.mjs",
+      "action": "identical",
+      "originalSha256": "de87eac1985c678d0ebb1f00b7c82300eaf5935f3638115a21bcb7528b2085e5",
+      "targetSha256": "de87eac1985c678d0ebb1f00b7c82300eaf5935f3638115a21bcb7528b2085e5",
+      "originalBytes": 18388,
+      "targetBytes": 18388
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/mount-contract.test.mjs",
+      "action": "identical",
+      "originalSha256": "f4468dd8200986ba6128c803deb8a5457eb1a36b97cc6711e2e7845f9e01718f",
+      "targetSha256": "f4468dd8200986ba6128c803deb8a5457eb1a36b97cc6711e2e7845f9e01718f",
+      "originalBytes": 17867,
+      "targetBytes": 17867
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/official-install.test.mjs",
+      "action": "identical",
+      "originalSha256": "1b8b651ae9827d3b860b212f9981b37451c6683163bfb523eddb3e238da6ea06",
+      "targetSha256": "1b8b651ae9827d3b860b212f9981b37451c6683163bfb523eddb3e238da6ea06",
+      "originalBytes": 12694,
+      "targetBytes": 12694
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/publish.test.mjs",
+      "action": "identical",
+      "originalSha256": "bb7a6e0a5d71386cae17f9c42c3174500868a89e0ceb8ca4cd6db3961fc6821c",
+      "targetSha256": "bb7a6e0a5d71386cae17f9c42c3174500868a89e0ceb8ca4cd6db3961fc6821c",
+      "originalBytes": 15409,
+      "targetBytes": 15409
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/remote-consumption.test.mjs",
+      "action": "identical",
+      "originalSha256": "72a6bdd48ed2092ea2b6d36f70b9d4eb05211502d9f011e3c10a7ca51524d586",
+      "targetSha256": "72a6bdd48ed2092ea2b6d36f70b9d4eb05211502d9f011e3c10a7ca51524d586",
+      "originalBytes": 20045,
+      "targetBytes": 20045
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/runtime.test.mjs",
+      "action": "identical",
+      "originalSha256": "37dc318e1657b72648e67d5f9e4d37659f2f457d73bd130b8e7789b39aa1da17",
+      "targetSha256": "37dc318e1657b72648e67d5f9e4d37659f2f457d73bd130b8e7789b39aa1da17",
+      "originalBytes": 23961,
+      "targetBytes": 23961
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/urgent-contract.test.mjs",
+      "action": "identical",
+      "originalSha256": "b6d406980361687bde314016157a8f608c3850190a74b2fa8cd8fa1297144cfc",
+      "targetSha256": "b6d406980361687bde314016157a8f608c3850190a74b2fa8cd8fa1297144cfc",
+      "originalBytes": 14864,
+      "targetBytes": 14864
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tests/workspace-source.test.mjs",
+      "action": "identical",
+      "originalSha256": "40547f9400bc7aae12d0e7b5670ad7f218b3ff7ea36cd296bbcc71ab7c153855",
+      "targetSha256": "40547f9400bc7aae12d0e7b5670ad7f218b3ff7ea36cd296bbcc71ab7c153855",
+      "originalBytes": 15044,
+      "targetBytes": 15044
+    },
+    {
+      "path": "packages/skills-distribution-urgent/tsconfig.json",
+      "action": "identical",
+      "originalSha256": "4ce1db33420fa78b24107b7d9ac0bd8a9e4ce52e06d5cf4510571c0b2ac4ca04",
+      "targetSha256": "4ce1db33420fa78b24107b7d9ac0bd8a9e4ce52e06d5cf4510571c0b2ac4ca04",
+      "originalBytes": 675,
+      "targetBytes": 675
+    },
+    {
+      "path": "packages/skills-distribution-urgent/vite.config.ts",
+      "action": "identical",
+      "originalSha256": "3793f1dc51c4288b9c5483b6bb9613380bf787b3b3e39ef65e910500d6fbb531",
+      "targetSha256": "3793f1dc51c4288b9c5483b6bb9613380bf787b3b3e39ef65e910500d6fbb531",
+      "originalBytes": 481,
+      "targetBytes": 481
+    },
+    {
+      "path": "packages/skills/README.md",
+      "action": "identical",
+      "originalSha256": "8dbecac135b67bac8762f4084642b407168f615eb66dcb56694389f1a383c328",
+      "targetSha256": "8dbecac135b67bac8762f4084642b407168f615eb66dcb56694389f1a383c328",
+      "originalBytes": 17388,
+      "targetBytes": 17388
+    },
+    {
+      "path": "packages/skills/build/plugins/old/collections.ts",
+      "action": "identical",
+      "originalSha256": "8d30381299a46aa9508c677f1db99426dfd448f00fe174b885bcb3e626f0764c",
+      "targetSha256": "8d30381299a46aa9508c677f1db99426dfd448f00fe174b885bcb3e626f0764c",
+      "originalBytes": 1659,
+      "targetBytes": 1659
+    },
+    {
+      "path": "packages/skills/build/plugins/old/copy-skills.ts",
+      "action": "identical",
+      "originalSha256": "179f70efcbecf723ff0bab87b7727b74ec0f93ee043309d0b06aadc0419e506d",
+      "targetSha256": "179f70efcbecf723ff0bab87b7727b74ec0f93ee043309d0b06aadc0419e506d",
+      "originalBytes": 127,
+      "targetBytes": 127
+    },
+    {
+      "path": "packages/skills/build/plugins/old/create-directories.ts",
+      "action": "identical",
+      "originalSha256": "ae54a4f98839cb3f49237876e0b1830f4c7119e5515b1c6eb5813ef3c127df8b",
+      "targetSha256": "ae54a4f98839cb3f49237876e0b1830f4c7119e5515b1c6eb5813ef3c127df8b",
+      "originalBytes": 5867,
+      "targetBytes": 5867
+    },
+    {
+      "path": "packages/skills/build/plugins/old/generate-scripts.ts",
+      "action": "identical",
+      "originalSha256": "fda8fac33b6ffc7a44ac6eb1a03ca910a49a5b2f3a49c1c9892de67b8952ae9a",
+      "targetSha256": "fda8fac33b6ffc7a44ac6eb1a03ca910a49a5b2f3a49c1c9892de67b8952ae9a",
+      "originalBytes": 132,
+      "targetBytes": 132
+    },
+    {
+      "path": "packages/skills/build/plugins/vite-plugin-skill.plugin.ts",
+      "action": "identical",
+      "originalSha256": "efbd682de44baa156341023cb8c62ef337aee25c957b90e42cb53a50a9642c90",
+      "targetSha256": "efbd682de44baa156341023cb8c62ef337aee25c957b90e42cb53a50a9642c90",
+      "originalBytes": 2721,
+      "targetBytes": 2721
+    },
+    {
+      "path": "packages/skills/eslint.config.ts",
+      "action": "identical",
+      "originalSha256": "f4bbec475b85fccfa83e11866d56e85991a8c239ebfa36e8319aa3e5557bad4a",
+      "targetSha256": "640099cf8609d1d893cdb4bb2f97470908808b8925d47fb866ee1f6c4c00a906",
+      "originalBytes": 518,
+      "targetBytes": 587,
+      "preparedTargetSha256": "f4bbec475b85fccfa83e11866d56e85991a8c239ebfa36e8319aa3e5557bad4a",
+      "migrationAdaptation": true
+    },
+    {
+      "path": "packages/skills/package.json",
+      "action": "identical",
+      "originalSha256": "8b40108b04f5245e352e4813df5bfc3db6e17c76c05c2b8b9c1ec90a388b6def",
+      "targetSha256": "8b40108b04f5245e352e4813df5bfc3db6e17c76c05c2b8b9c1ec90a388b6def",
+      "originalBytes": 908,
+      "targetBytes": 908
+    },
+    {
+      "path": "packages/skills/script/index.mjs",
+      "action": "identical",
+      "originalSha256": "6eacc71bcdfd46aa8a044f1636d7ec4003f4f8e3a697d4b059cfc727dd26d81f",
+      "targetSha256": "6eacc71bcdfd46aa8a044f1636d7ec4003f4f8e3a697d4b059cfc727dd26d81f",
+      "originalBytes": 6524,
+      "targetBytes": 6524
+    },
+    {
+      "path": "packages/skills/script/install-skills/README.md",
+      "action": "identical",
+      "originalSha256": "3288863e221cf9bc4cb56d7f3a68dd1491a79e472a317da47c4050a404cee32f",
+      "targetSha256": "3288863e221cf9bc4cb56d7f3a68dd1491a79e472a317da47c4050a404cee32f",
+      "originalBytes": 6265,
+      "targetBytes": 6265
+    },
+    {
+      "path": "packages/skills/script/install-skills/install-skills.ps1",
+      "action": "identical",
+      "originalSha256": "7c16ffdf8b8f6f3e13f6b303ed3bb61c40c6c54492b3b27d2f7bdec848b0da29",
+      "targetSha256": "7c16ffdf8b8f6f3e13f6b303ed3bb61c40c6c54492b3b27d2f7bdec848b0da29",
+      "originalBytes": 23736,
+      "targetBytes": 23736
+    },
+    {
+      "path": "packages/skills/script/install-skills/install-skills.sh",
+      "action": "identical",
+      "originalSha256": "15e39d5325cd3abe8f99ec7ef4c9ca1805185a34243683703f6a364bef73de99",
+      "targetSha256": "15e39d5325cd3abe8f99ec7ef4c9ca1805185a34243683703f6a364bef73de99",
+      "originalBytes": 36669,
+      "targetBytes": 36669
+    },
+    {
+      "path": "packages/skills/script/install-skills/read-agents.mjs",
+      "action": "identical",
+      "originalSha256": "54303341a8d8999d36c6fde482244363475f8c6ab203ec7eeb34d6ba277ea191",
+      "targetSha256": "54303341a8d8999d36c6fde482244363475f8c6ab203ec7eeb34d6ba277ea191",
+      "originalBytes": 7478,
+      "targetBytes": 7478
+    },
+    {
+      "path": "packages/skills/script/mount-entry/README.md",
+      "action": "identical",
+      "originalSha256": "5d7563dc3f5146d13048673eb9d3586692043ac5536108a46175b05103610e32",
+      "targetSha256": "5d7563dc3f5146d13048673eb9d3586692043ac5536108a46175b05103610e32",
+      "originalBytes": 4278,
+      "targetBytes": 4278
+    },
+    {
+      "path": "packages/skills/script/mount-entry/mount-entry.ps1",
+      "action": "identical",
+      "originalSha256": "ae493d20109770f2282bfbc7ccd1f6010e0cc2fe37ff155d3c75591636fb7073",
+      "targetSha256": "ae493d20109770f2282bfbc7ccd1f6010e0cc2fe37ff155d3c75591636fb7073",
+      "originalBytes": 15228,
+      "targetBytes": 15228
+    },
+    {
+      "path": "packages/skills/script/mount-entry/mount-entry.sh",
+      "action": "identical",
+      "originalSha256": "a1cdd723c4a34890be11459b32c3fafcf5f82980c071edb0dc570e3be5e1eb0c",
+      "targetSha256": "a1cdd723c4a34890be11459b32c3fafcf5f82980c071edb0dc570e3be5e1eb0c",
+      "originalBytes": 14278,
+      "targetBytes": 14278
+    },
+    {
+      "path": "packages/skills/script/register-commands/README.md",
+      "action": "identical",
+      "originalSha256": "bd637c329c05f4fe3c7b70c3c13cd13437b55943a5aa0b9d6eb6376341cef82c",
+      "targetSha256": "bd637c329c05f4fe3c7b70c3c13cd13437b55943a5aa0b9d6eb6376341cef82c",
+      "originalBytes": 3472,
+      "targetBytes": 3472
+    },
+    {
+      "path": "packages/skills/script/register-commands/register-commands.ps1",
+      "action": "identical",
+      "originalSha256": "860282e8c9969e2721f6879812176a473688d9b6f32239cb94fc54cb1f832868",
+      "targetSha256": "860282e8c9969e2721f6879812176a473688d9b6f32239cb94fc54cb1f832868",
+      "originalBytes": 4316,
+      "targetBytes": 4316
+    },
+    {
+      "path": "packages/skills/script/register-commands/register-commands.sh",
+      "action": "identical",
+      "originalSha256": "6eeb93ff0e923077996d0300f0c3253a1c1128eeadfd41476d33406e9c44d7ae",
+      "targetSha256": "6eeb93ff0e923077996d0300f0c3253a1c1128eeadfd41476d33406e9c44d7ae",
+      "originalBytes": 20342,
+      "targetBytes": 20342
+    },
+    {
+      "path": "packages/skills/script/register-hooks/README.md",
+      "action": "identical",
+      "originalSha256": "c97697777439b8394e058e6327c7a353e14f80fa40ad93c99709a5a7dcde8a8e",
+      "targetSha256": "c97697777439b8394e058e6327c7a353e14f80fa40ad93c99709a5a7dcde8a8e",
+      "originalBytes": 2089,
+      "targetBytes": 2089
+    },
+    {
+      "path": "packages/skills/script/register-hooks/register-hooks.ps1",
+      "action": "identical",
+      "originalSha256": "4208e31e52e8b70a362674fd19e5314f0831387e3e8127e2949e40798003725b",
+      "targetSha256": "4208e31e52e8b70a362674fd19e5314f0831387e3e8127e2949e40798003725b",
+      "originalBytes": 4475,
+      "targetBytes": 4475
+    },
+    {
+      "path": "packages/skills/script/register-hooks/register-hooks.sh",
+      "action": "identical",
+      "originalSha256": "01d920512219079b75e4d4c04a2210d07157081d76aef935ff9cd6bc4a144aad",
+      "targetSha256": "01d920512219079b75e4d4c04a2210d07157081d76aef935ff9cd6bc4a144aad",
+      "originalBytes": 236,
+      "targetBytes": 236
+    },
+    {
+      "path": "packages/skills/src/coding/business-node-delivery/SKILL.md",
+      "action": "identical",
+      "originalSha256": "2e0b8d03e3a7e8c3cf33adf92232d44ecd1b1b461775efbe7bdbdd3492a27cd1",
+      "targetSha256": "2e0b8d03e3a7e8c3cf33adf92232d44ecd1b1b461775efbe7bdbdd3492a27cd1",
+      "originalBytes": 3404,
+      "targetBytes": 3404
+    },
+    {
+      "path": "packages/skills/src/coding/collection.config.ts",
+      "action": "identical",
+      "originalSha256": "c00755f0e349d6ff46bcf574a8933552101aae81367df2db00efe817caab2b9f",
+      "targetSha256": "c00755f0e349d6ff46bcf574a8933552101aae81367df2db00efe817caab2b9f",
+      "originalBytes": 295,
+      "targetBytes": 295
+    },
+    {
+      "path": "packages/skills/src/coding/document-changed-symbols/SKILL.md",
+      "action": "identical",
+      "originalSha256": "049b5d4f7e8b68f759d14f5ca98d13e94984731efef276f5c21b6c6258e1dacc",
+      "targetSha256": "049b5d4f7e8b68f759d14f5ca98d13e94984731efef276f5c21b6c6258e1dacc",
+      "originalBytes": 4691,
+      "targetBytes": 4691
+    },
+    {
+      "path": "packages/skills/src/coding/document-changed-symbols/references/test-prompts.md",
+      "action": "identical",
+      "originalSha256": "817c590ca9b7324eaf37c8aa4560b301f32d8395b052c5f844c62deff79e3038",
+      "targetSha256": "817c590ca9b7324eaf37c8aa4560b301f32d8395b052c5f844c62deff79e3038",
+      "originalBytes": 1591,
+      "targetBytes": 1591
+    },
+    {
+      "path": "packages/skills/src/eval/collection.config.ts",
+      "action": "identical",
+      "originalSha256": "113c86c6b478a298c64c4bdec153a3a620f40b4fbeb2b794b2d5aa7fe3d6bb53",
+      "targetSha256": "113c86c6b478a298c64c4bdec153a3a620f40b4fbeb2b794b2d5aa7fe3d6bb53",
+      "originalBytes": 391,
+      "targetBytes": 391
+    },
+    {
+      "path": "packages/skills/src/eval/eval-short-rule/SKILL.md",
+      "action": "identical",
+      "originalSha256": "fc4b394ad3cbdb20ed414c4174df47f5abf9bb007d50c82bb180fbbc8cea5772",
+      "targetSha256": "fc4b394ad3cbdb20ed414c4174df47f5abf9bb007d50c82bb180fbbc8cea5772",
+      "originalBytes": 1263,
+      "targetBytes": 1263
+    },
+    {
+      "path": "packages/skills/src/eval/eval-with-reference/SKILL.md",
+      "action": "identical",
+      "originalSha256": "efb66c7dc0a9316ef8463c47f74117c85f0b1fc27ca2e95c95b45f809b2f6ff3",
+      "targetSha256": "efb66c7dc0a9316ef8463c47f74117c85f0b1fc27ca2e95c95b45f809b2f6ff3",
+      "originalBytes": 1494,
+      "targetBytes": 1494
+    },
+    {
+      "path": "packages/skills/src/eval/eval-with-reference/references/contracts.md",
+      "action": "identical",
+      "originalSha256": "7e11c215de84328cef54f777ea20d1375d0c9b6ab37e3efe136ba470d6560a32",
+      "targetSha256": "7e11c215de84328cef54f777ea20d1375d0c9b6ab37e3efe136ba470d6560a32",
+      "originalBytes": 1299,
+      "targetBytes": 1299
+    },
+    {
+      "path": "packages/skills/src/eval/eval-workflow-guide/SKILL.md",
+      "action": "identical",
+      "originalSha256": "a7497c13c5be0fd68a088b71a7a7a6aca235a4e03cb71d5354771a75d6798fd5",
+      "targetSha256": "a7497c13c5be0fd68a088b71a7a7a6aca235a4e03cb71d5354771a75d6798fd5",
+      "originalBytes": 4550,
+      "targetBytes": 4550
+    },
+    {
+      "path": "packages/skills/src/eval/mcp-build-smoke/SKILL.md",
+      "action": "identical",
+      "originalSha256": "0b067cb8f05223559fa0813d966aa9ecafd874eb471c6e2152239e0caa9f34df",
+      "targetSha256": "0b067cb8f05223559fa0813d966aa9ecafd874eb471c6e2152239e0caa9f34df",
+      "originalBytes": 464,
+      "targetBytes": 464
+    },
+    {
+      "path": "packages/skills/src/eval/mcp-build-smoke/references/verification.md",
+      "action": "identical",
+      "originalSha256": "495c31a77b4ab6a6c347275d0ad586f74ba330d588a8b97326b20d5d0802739b",
+      "targetSha256": "495c31a77b4ab6a6c347275d0ad586f74ba330d588a8b97326b20d5d0802739b",
+      "originalBytes": 272,
+      "targetBytes": 272
+    },
+    {
+      "path": "packages/skills/temp/frontend/collection.config.json",
+      "action": "identical",
+      "originalSha256": "c80dc3d331351e28d72e67ed7fea433f35f8e79d83e4007c9ac1452507b75003",
+      "targetSha256": "c80dc3d331351e28d72e67ed7fea433f35f8e79d83e4007c9ac1452507b75003",
+      "originalBytes": 112,
+      "targetBytes": 112
+    },
+    {
+      "path": "packages/skills/temp/frontend/nuxt-ui-styling/SKILL.md",
+      "action": "identical",
+      "originalSha256": "0fb02df099d6751f65e83f3d8a3945340114eefc8b6718e220af118ce3a99735",
+      "targetSha256": "0fb02df099d6751f65e83f3d8a3945340114eefc8b6718e220af118ce3a99735",
+      "originalBytes": 5227,
+      "targetBytes": 5227
+    },
+    {
+      "path": "packages/skills/temp/frontend/nuxt-ui-styling/references/attribute-conflicts.md",
+      "action": "identical",
+      "originalSha256": "417c746d59a4a9f7f68976a884ab6d196266304118c102c959e10b752c5fede2",
+      "targetSha256": "417c746d59a4a9f7f68976a884ab6d196266304118c102c959e10b752c5fede2",
+      "originalBytes": 1891,
+      "targetBytes": 1891
+    },
+    {
+      "path": "packages/skills/temp/frontend/nuxt-ui-styling/references/rule-verification.md",
+      "action": "identical",
+      "originalSha256": "6f47315857912ea6a1c5989b022e0eb45535e2a860748df29eb9370ca2957dac",
+      "targetSha256": "6f47315857912ea6a1c5989b022e0eb45535e2a860748df29eb9370ca2957dac",
+      "originalBytes": 1162,
+      "targetBytes": 1162
+    },
+    {
+      "path": "packages/skills/temp/frontend/vue-reactivity/SKILL.md",
+      "action": "identical",
+      "originalSha256": "fb6aacad0eec0034e8e89fa40d483137b895633a46505258ac4363bb1bf0fc15",
+      "targetSha256": "fb6aacad0eec0034e8e89fa40d483137b895633a46505258ac4363bb1bf0fc15",
+      "originalBytes": 1786,
+      "targetBytes": 1786
+    },
+    {
+      "path": "packages/skills/temp/workflow/artifact-project-description/SKILL.md",
+      "action": "identical",
+      "originalSha256": "68aa274a0649da3a16eca2df56403564ac6f948f9bff5368c5c58825e02053ac",
+      "targetSha256": "68aa274a0649da3a16eca2df56403564ac6f948f9bff5368c5c58825e02053ac",
+      "originalBytes": 1675,
+      "targetBytes": 1675
+    },
+    {
+      "path": "packages/skills/temp/workflow/artifact-spec-analysis/SKILL.md",
+      "action": "identical",
+      "originalSha256": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323",
+      "targetSha256": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323",
+      "originalBytes": 3484,
+      "targetBytes": 3484
+    },
+    {
+      "path": "packages/skills/temp/workflow/bug-report/SKILL.md",
+      "action": "identical",
+      "originalSha256": "ad19b3aff08b3d448e43feb46fbcf56d009eec57105935436557434603adebc6",
+      "targetSha256": "ad19b3aff08b3d448e43feb46fbcf56d009eec57105935436557434603adebc6",
+      "originalBytes": 1421,
+      "targetBytes": 1421
+    },
+    {
+      "path": "packages/skills/temp/workflow/collection.config.json",
+      "action": "identical",
+      "originalSha256": "7435c3d45a73afe17ad3e448030f11117714110b11c15c48449de04de851fef8",
+      "targetSha256": "7435c3d45a73afe17ad3e448030f11117714110b11c15c48449de04de851fef8",
+      "originalBytes": 1989,
+      "targetBytes": 1989
+    },
+    {
+      "path": "packages/skills/temp/workflow/implementation-preparation/SKILL.md",
+      "action": "identical",
+      "originalSha256": "420ccff95c4826f0625188a3d58332031d4e65d0f8e1cdf34972758461ddc5ee",
+      "targetSha256": "420ccff95c4826f0625188a3d58332031d4e65d0f8e1cdf34972758461ddc5ee",
+      "originalBytes": 5658,
+      "targetBytes": 5658
+    },
+    {
+      "path": "packages/skills/temp/workflow/task-increment/SKILL.md",
+      "action": "identical",
+      "originalSha256": "397cd96cab639d2ff22268402e2a457efb5f16bbec1bbce1c520fad4b9b6696b",
+      "targetSha256": "397cd96cab639d2ff22268402e2a457efb5f16bbec1bbce1c520fad4b9b6696b",
+      "originalBytes": 24527,
+      "targetBytes": 24527
+    },
+    {
+      "path": "packages/skills/tests/distribution/agent-paths.test.mjs",
+      "action": "identical",
+      "originalSha256": "dc0a8264fb8b416deb0d505b1b32eedc60030ab0787512ac5908ee376388bb23",
+      "targetSha256": "dc0a8264fb8b416deb0d505b1b32eedc60030ab0787512ac5908ee376388bb23",
+      "originalBytes": 157,
+      "targetBytes": 157
+    },
+    {
+      "path": "packages/skills/tests/distribution/build-pipeline.test.mjs",
+      "action": "identical",
+      "originalSha256": "393f9d0aea3ba778019c77a9f5f65c694e5518e6f3d388eeaefd3c331462286f",
+      "targetSha256": "393f9d0aea3ba778019c77a9f5f65c694e5518e6f3d388eeaefd3c331462286f",
+      "originalBytes": 27328,
+      "targetBytes": 27328
+    },
+    {
+      "path": "packages/skills/tests/distribution/collections.test.mjs",
+      "action": "identical",
+      "originalSha256": "2cd610c9d1e060f8fccb3a3ce574d47490dae4ecfddf7f5de058b214626ac86c",
+      "targetSha256": "2cd610c9d1e060f8fccb3a3ce574d47490dae4ecfddf7f5de058b214626ac86c",
+      "originalBytes": 11840,
+      "targetBytes": 11840
+    },
+    {
+      "path": "packages/skills/tests/distribution/create-directories.test.mjs",
+      "action": "identical",
+      "originalSha256": "5dd0a613b052e6e311dc1686809e68c78e2219189da5d8c1f5875acbea75f352",
+      "targetSha256": "5dd0a613b052e6e311dc1686809e68c78e2219189da5d8c1f5875acbea75f352",
+      "originalBytes": 6483,
+      "targetBytes": 6483
+    },
+    {
+      "path": "packages/skills/tests/distribution/entry-discovery.test.mjs",
+      "action": "identical",
+      "originalSha256": "ab827cad4fbd4c2306b0d4e22daf59160a09d93cf20fcd41dbdd9b80567058f9",
+      "targetSha256": "ab827cad4fbd4c2306b0d4e22daf59160a09d93cf20fcd41dbdd9b80567058f9",
+      "originalBytes": 12515,
+      "targetBytes": 12515
+    },
+    {
+      "path": "packages/skills/tests/distribution/fixtures/agents-1.7.4.json",
+      "action": "identical",
+      "originalSha256": "5b5b207443e5e727aff95a85d439f8573484e8648f973aed2d879a08811147b7",
+      "targetSha256": "5b5b207443e5e727aff95a85d439f8573484e8648f973aed2d879a08811147b7",
+      "originalBytes": 16723,
+      "targetBytes": 16723
+    },
+    {
+      "path": "packages/skills/tests/distribution/fixtures/legacy-registration-hooks.json",
+      "action": "identical",
+      "originalSha256": "51cb8d9d2d3c6b5ab310ae1b797fd986fffe5287ee287b8c61c289064c70ce06",
+      "targetSha256": "51cb8d9d2d3c6b5ab310ae1b797fd986fffe5287ee287b8c61c289064c70ce06",
+      "originalBytes": 7037,
+      "targetBytes": 7037
+    },
+    {
+      "path": "packages/skills/tests/distribution/helpers/build-fixture.mjs",
+      "action": "identical",
+      "originalSha256": "e3df43b359d77cea3fde5175bdf4f4e89ee7e06b88a244a542ac76101cb68461",
+      "targetSha256": "e3df43b359d77cea3fde5175bdf4f4e89ee7e06b88a244a542ac76101cb68461",
+      "originalBytes": 11251,
+      "targetBytes": 11251
+    },
+    {
+      "path": "packages/skills/tests/distribution/helpers/entry-discovery.mjs",
+      "action": "identical",
+      "originalSha256": "0bd8aeb7d04acaf08712a90a8c901a11aca77cf86d05608e4602860124cd26f4",
+      "targetSha256": "0bd8aeb7d04acaf08712a90a8c901a11aca77cf86d05608e4602860124cd26f4",
+      "originalBytes": 10962,
+      "targetBytes": 10962
+    },
+    {
+      "path": "packages/skills/tests/distribution/helpers/https-source.mjs",
+      "action": "identical",
+      "originalSha256": "e48a75535476db8d171db6a56adf1aafd97490f9f3d017adaa49a633f79b6122",
+      "targetSha256": "e48a75535476db8d171db6a56adf1aafd97490f9f3d017adaa49a633f79b6122",
+      "originalBytes": 4178,
+      "targetBytes": 4178
+    },
+    {
+      "path": "packages/skills/tests/distribution/helpers/online-provider.mjs",
+      "action": "identical",
+      "originalSha256": "442ba4ec391d0b1236b189cfebb4a51d90659daf8e166ce913e0882db5b85fcf",
+      "targetSha256": "442ba4ec391d0b1236b189cfebb4a51d90659daf8e166ce913e0882db5b85fcf",
+      "originalBytes": 2223,
+      "targetBytes": 2223
+    },
+    {
+      "path": "packages/skills/tests/distribution/helpers/registration-bash-fixture.mjs",
+      "action": "identical",
+      "originalSha256": "d760434dccc173de135f0171078d70c528ce0ebec2276e6e7f432800546240b7",
+      "targetSha256": "d760434dccc173de135f0171078d70c528ce0ebec2276e6e7f432800546240b7",
+      "originalBytes": 6495,
+      "targetBytes": 6495
+    },
+    {
+      "path": "packages/skills/tests/distribution/helpers/registration-fixture.mjs",
+      "action": "identical",
+      "originalSha256": "6529520ace36caf5dbe902c12c4e0e827e0062f18d6a8ba2fc4038ed42d3630b",
+      "targetSha256": "6529520ace36caf5dbe902c12c4e0e827e0062f18d6a8ba2fc4038ed42d3630b",
+      "originalBytes": 11484,
+      "targetBytes": 11484
+    },
+    {
+      "path": "packages/skills/tests/distribution/helpers/registration-migration.mjs",
+      "action": "identical",
+      "originalSha256": "23ed5aef31f589971e679e0303d6abf063771e03945e1fde0a439882170623d7",
+      "targetSha256": "23ed5aef31f589971e679e0303d6abf063771e03945e1fde0a439882170623d7",
+      "originalBytes": 18096,
+      "targetBytes": 18096
+    },
+    {
+      "path": "packages/skills/tests/distribution/mvu-b.mjs",
+      "action": "identical",
+      "originalSha256": "b8b4893cd85ea42636b0809b2bd8037444462baf6c74aab776eab75343a9fb82",
+      "targetSha256": "b8b4893cd85ea42636b0809b2bd8037444462baf6c74aab776eab75343a9fb82",
+      "originalBytes": 29227,
+      "targetBytes": 29227
+    },
+    {
+      "path": "packages/skills/tests/distribution/mvu-c.mjs",
+      "action": "identical",
+      "originalSha256": "69d5c57c9811046740fee0433eba1c8655bb6632f09700913f0e405a2bad7990",
+      "targetSha256": "69d5c57c9811046740fee0433eba1c8655bb6632f09700913f0e405a2bad7990",
+      "originalBytes": 25510,
+      "targetBytes": 25510
+    },
+    {
+      "path": "packages/skills/tests/distribution/mvu-e.mjs",
+      "action": "identical",
+      "originalSha256": "dc02cd4983f8096aa245835a0de35c7ac7ea6135ab01f64f921188d4d5fd24cd",
+      "targetSha256": "dc02cd4983f8096aa245835a0de35c7ac7ea6135ab01f64f921188d4d5fd24cd",
+      "originalBytes": 19307,
+      "targetBytes": 19307
+    },
+    {
+      "path": "packages/skills/tests/distribution/online-agents.test.mjs",
+      "action": "identical",
+      "originalSha256": "18fcb80a1963c1bf02cdc1335f31f69ee81b4c0c2b298610111a0ed36bf215a0",
+      "targetSha256": "18fcb80a1963c1bf02cdc1335f31f69ee81b4c0c2b298610111a0ed36bf215a0",
+      "originalBytes": 3501,
+      "targetBytes": 3501
+    },
+    {
+      "path": "packages/skills/tests/distribution/sandbox.mjs",
+      "action": "identical",
+      "originalSha256": "c65e210975a242d53f04d88250e3e4b0e843f841bc412514b6e79ee6e9c1d1e3",
+      "targetSha256": "c65e210975a242d53f04d88250e3e4b0e843f841bc412514b6e79ee6e9c1d1e3",
+      "originalBytes": 14901,
+      "targetBytes": 14901
+    },
+    {
+      "path": "packages/skills/tests/distribution/test-distribution.mjs",
+      "action": "identical",
+      "originalSha256": "006bdaf24ed87c35362dcb6dbd89c5b083411189735ccf5f746fa18d264c87e2",
+      "targetSha256": "006bdaf24ed87c35362dcb6dbd89c5b083411189735ccf5f746fa18d264c87e2",
+      "originalBytes": 7367,
+      "targetBytes": 7367
+    },
+    {
+      "path": "packages/skills/tests/distribution/test-entry.mjs",
+      "action": "identical",
+      "originalSha256": "8cadfb6ee543746cdc1d4685f2eb35c633ee820960b9f90d68e8bbf34a4d3472",
+      "targetSha256": "8cadfb6ee543746cdc1d4685f2eb35c633ee820960b9f90d68e8bbf34a4d3472",
+      "originalBytes": 12272,
+      "targetBytes": 12272
+    },
+    {
+      "path": "packages/skills/tests/test-register-commands.mjs",
+      "action": "identical",
+      "originalSha256": "347c67fe30dd5a7cd479e667eaaa472acb099553fc22204b277842017938aae1",
+      "targetSha256": "347c67fe30dd5a7cd479e667eaaa472acb099553fc22204b277842017938aae1",
+      "originalBytes": 30255,
+      "targetBytes": 30255
+    },
+    {
+      "path": "packages/skills/tests/test-register-hooks.mjs",
+      "action": "identical",
+      "originalSha256": "cbd0ed43f5276ed161d25f8a28f42bfb3949b456ef8cb18ced91f0596c4546c2",
+      "targetSha256": "cbd0ed43f5276ed161d25f8a28f42bfb3949b456ef8cb18ced91f0596c4546c2",
+      "originalBytes": 23556,
+      "targetBytes": 23556
+    },
+    {
+      "path": "packages/skills/tests/test_full_remount.py",
+      "action": "identical",
+      "originalSha256": "158e05035c9e8f7dc625052f3bb092e38d1f6cc255b2f7ba72d2f855d3d44456",
+      "targetSha256": "461ab42f4f1436ee98cab5ef684edd583f20b58ba8983c1db69126d93d04d8b6",
+      "originalBytes": 3394,
+      "targetBytes": 3415,
+      "preparedTargetSha256": "158e05035c9e8f7dc625052f3bb092e38d1f6cc255b2f7ba72d2f855d3d44456",
+      "migrationAdaptation": true
+    },
+    {
+      "path": "packages/skills/tests/test_mvu_documents.py",
+      "action": "identical",
+      "originalSha256": "15f036e6fc2599079d4f7653a86737efca405035ccbbbf74b0da2ef7f23064b4",
+      "targetSha256": "3f7cbbc3e4da646527061e9c0e5d27173bad0da88b14267595455b62020ca6f6",
+      "originalBytes": 8910,
+      "targetBytes": 8949,
+      "preparedTargetSha256": "15f036e6fc2599079d4f7653a86737efca405035ccbbbf74b0da2ef7f23064b4",
+      "migrationAdaptation": true
+    },
+    {
+      "path": "packages/skills/tests/test_register_commands.py",
+      "action": "identical",
+      "originalSha256": "a39d40ff9e2714903a40a403c9cd76bb4e138648cdf1b448437e1b6792ba3df7",
+      "targetSha256": "a39d40ff9e2714903a40a403c9cd76bb4e138648cdf1b448437e1b6792ba3df7",
+      "originalBytes": 4933,
+      "targetBytes": 4933
+    },
+    {
+      "path": "packages/skills/tsconfig.json",
+      "action": "identical",
+      "originalSha256": "98daae5d4286c7c07b41f88d4fd9e80914e0c33355b9b26a9fc329b3a3134e42",
+      "targetSha256": "98daae5d4286c7c07b41f88d4fd9e80914e0c33355b9b26a9fc329b3a3134e42",
+      "originalBytes": 337,
+      "targetBytes": 337
+    },
+    {
+      "path": "packages/skills/types/preset-config.d.ts",
+      "action": "identical",
+      "originalSha256": "f6a13049623a2feb72ae466d9b9eab0f00bd3f45b3c9efe2a6d6a472b6bc473e",
+      "targetSha256": "f6a13049623a2feb72ae466d9b9eab0f00bd3f45b3c9efe2a6d6a472b6bc473e",
+      "originalBytes": 618,
+      "targetBytes": 618
+    },
+    {
+      "path": "packages/skills/utils/define-collection-handle.ts",
+      "action": "identical",
+      "originalSha256": "e3fc876b68d831761f46f9de9b18b403a8a39fe84697f9fe54faa690366b94cd",
+      "targetSha256": "e3fc876b68d831761f46f9de9b18b403a8a39fe84697f9fe54faa690366b94cd",
+      "originalBytes": 227,
+      "targetBytes": 227
+    },
+    {
+      "path": "packages/skills/vite.config.ts",
+      "action": "identical",
+      "originalSha256": "e9dc974a7239a50c6e56d545344c530136bcd4918a113873d9c16a22c2971213",
+      "targetSha256": "e9dc974a7239a50c6e56d545344c530136bcd4918a113873d9c16a22c2971213",
+      "originalBytes": 670,
+      "targetBytes": 670
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/baseline.md",
+      "action": "identical",
+      "originalSha256": "6472693674c90af5c2bc97bc33728e7a23919e5d267d54579190aeaaa93bc7af",
+      "targetSha256": "6472693674c90af5c2bc97bc33728e7a23919e5d267d54579190aeaaa93bc7af",
+      "originalBytes": 9814,
+      "targetBytes": 9814
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/build-and-preflight.md",
+      "action": "identical",
+      "originalSha256": "c8a5f614de113296cbce11d6308c23cac765ecc8fe8461758ee66406025cf053",
+      "targetSha256": "c8a5f614de113296cbce11d6308c23cac765ecc8fe8461758ee66406025cf053",
+      "originalBytes": 9991,
+      "targetBytes": 9991
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/build-pipeline-red.md",
+      "action": "identical",
+      "originalSha256": "c9e2d65307b9dc754469d249c6e85d19391be17f3eed4b48c33d502436f2bb73",
+      "targetSha256": "c9e2d65307b9dc754469d249c6e85d19391be17f3eed4b48c33d502436f2bb73",
+      "originalBytes": 9286,
+      "targetBytes": 9286
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/build-rewrite.md",
+      "action": "derived",
+      "originalSha256": "b5775c0d44d492674386282272ac7807db74e0fa9f6b1a20dee3b4f3548ba5ff",
+      "targetSha256": "a773d5e498256ed5544cbeb03e0cfbd5402349a00def5461815d23831fcb642d",
+      "originalBytes": 9727,
+      "targetBytes": 9906
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/collections.md",
+      "action": "identical",
+      "originalSha256": "144a74cc907ef3d2fea9575e07803d2f65d91a7727c02b66cd731cabe4406275",
+      "targetSha256": "144a74cc907ef3d2fea9575e07803d2f65d91a7727c02b66cd731cabe4406275",
+      "originalBytes": 7399,
+      "targetBytes": 7399
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/content-export.md",
+      "action": "derived",
+      "originalSha256": "aedcaabefe4f7674298f9592e2a5de6889ee697f5070c47d3d22a50ebe560fce",
+      "targetSha256": "8e1f37320fca94242896e12ccc1da98c907fc0cb219e4ad5a7be3ac7695ec042",
+      "originalBytes": 10059,
+      "targetBytes": 9675,
+      "preparedTargetSha256": "caa918ef7dc80c08481fc44afd930fcfbb3e49a17e509244ff7040d81931ba1a"
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/mcp-manifest.md",
+      "action": "identical",
+      "originalSha256": "1723c279ffca9090205b090d8b9ea5588bd083b9f4fd38cb75153a9c7ea533c8",
+      "targetSha256": "1723c279ffca9090205b090d8b9ea5588bd083b9f4fd38cb75153a9c7ea533c8",
+      "originalBytes": 4202,
+      "targetBytes": 4202
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/models-and-agent-paths.md",
+      "action": "identical",
+      "originalSha256": "29bb96257c2616b7a4c3d9680157534bf4cdab45fa7002717084597b5966ca82",
+      "targetSha256": "29bb96257c2616b7a4c3d9680157534bf4cdab45fa7002717084597b5966ca82",
+      "originalBytes": 8240,
+      "targetBytes": 8240
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/mvu-a.md",
+      "action": "derived",
+      "originalSha256": "e4156550b12887951977158a70f290b3ef6ef045919a1376f82f2e9c23868ef4",
+      "targetSha256": "1722ee1a41b43da1d5f68377cca9653ce30d1333be610bfe114437e5ec62e03f",
+      "originalBytes": 44427,
+      "targetBytes": 44250,
+      "preparedTargetSha256": "3f63ceaca07a533f59c62dfa4301be78b6e0c587e376778885b23718e7a7c738"
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/mvu-b.md",
+      "action": "derived",
+      "originalSha256": "25cdf717ae85bbdc3795d8c70a619dae0741c23126a8f7a68945be5d05e0296a",
+      "targetSha256": "513a039f92a4087b1baadfac2cfcda0589f5c15f316a8ef541d25900ae59b5bc",
+      "originalBytes": 16617,
+      "targetBytes": 16743,
+      "preparedTargetSha256": "ffe9aecb3cbef0ac73687fba674309dc5f8c77783eea2165d6f4e5cee9bc026f"
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/mvu-c.md",
+      "action": "derived",
+      "originalSha256": "0b84ebe4e1dbdb06670f3ef6244fb9ce45ddd1c1dd1ab9e20f7339f6b15dbe36",
+      "targetSha256": "649d7b244f0599e5d9e859025dd356f3eb073f740cb50d20d15afd80b756acde",
+      "originalBytes": 14223,
+      "targetBytes": 13761,
+      "preparedTargetSha256": "00d02a85febdc0ee9b58c5cd6cb8867dca5d56f197b04d7025852767e9abd81a"
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/mvu-e.md",
+      "action": "identical",
+      "originalSha256": "12c96ecdb35ef3f297568c5008f126ccf104c160cfd63a97bd3ba60c2257e379",
+      "targetSha256": "12c96ecdb35ef3f297568c5008f126ccf104c160cfd63a97bd3ba60c2257e379",
+      "originalBytes": 9102,
+      "targetBytes": 9102
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/node-entry.md",
+      "action": "derived",
+      "originalSha256": "a627abc63153e351a068bba6e6ff16f7bb7f4930077464d0d5ff4fc16efa8737",
+      "targetSha256": "d4884bcd66ddccdd38235f17d72133e382b591a670ea890c3a7455e8cd3ef99a",
+      "originalBytes": 11788,
+      "targetBytes": 11375,
+      "preparedTargetSha256": "201cb2cd8e9a8f4207d9b66f4e8d8762e1043a8dea35dae7ced2016a8e8639d9"
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/official-contract.md",
+      "action": "identical",
+      "originalSha256": "e622711064b1522d0f831c78d72fc713a4c95da8a0d5f04b835bd74127f0285b",
+      "targetSha256": "e622711064b1522d0f831c78d72fc713a4c95da8a0d5f04b835bd74127f0285b",
+      "originalBytes": 8721,
+      "targetBytes": 8721
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/online-agent-source.md",
+      "action": "identical",
+      "originalSha256": "f018393879e2ffea29d6f0bd1db5cdba246b606c5fd15e4a424447c27d5bedbf",
+      "targetSha256": "f018393879e2ffea29d6f0bd1db5cdba246b606c5fd15e4a424447c27d5bedbf",
+      "originalBytes": 10084,
+      "targetBytes": 10084
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/pipeline-local.md",
+      "action": "identical",
+      "originalSha256": "64f8542602e51f8d9e887552fb6a98a9d8ada86d8225c177299d047fd9ea0d86",
+      "targetSha256": "64f8542602e51f8d9e887552fb6a98a9d8ada86d8225c177299d047fd9ea0d86",
+      "originalBytes": 11202,
+      "targetBytes": 11202
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/plugin-skill-config.md",
+      "action": "identical",
+      "originalSha256": "bbf87e39dd5b8370346c57dd868d8cc56c5d578855cabeaa8a754ab8a25104ff",
+      "targetSha256": "bbf87e39dd5b8370346c57dd868d8cc56c5d578855cabeaa8a754ab8a25104ff",
+      "originalBytes": 4844,
+      "targetBytes": 4844
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/source-plan.md",
+      "action": "identical",
+      "originalSha256": "9d1b9250499b4091a06fe41933141cecc14d9d76437e20d3a1890c602dc8f458",
+      "targetSha256": "9d1b9250499b4091a06fe41933141cecc14d9d76437e20d3a1890c602dc8f458",
+      "originalBytes": 8947,
+      "targetBytes": 8947
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-build.md",
+      "action": "derived",
+      "originalSha256": "c800bb3a5ca4135a57184957a9302dbee9d44fec4c0abfa693c57a0e06597833",
+      "targetSha256": "4c4c30e873cf4f806ebff6497084502b1cdb65a5ea3044624cfb3a714bfa51a6",
+      "originalBytes": 15062,
+      "targetBytes": 15241
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-commands.md",
+      "action": "derived",
+      "originalSha256": "4278d06e99ea83d096a6e0e038ed3c5d3c229c1adb745abb0ad2f5fc81bf342e",
+      "targetSha256": "d462eeccffe32f4d06da19e1b8039394cae2b557828091e0488dd56d1ac241d6",
+      "originalBytes": 3417,
+      "targetBytes": 3596
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-content.md",
+      "action": "identical",
+      "originalSha256": "7e4cda290eff9f8cce383bce9f0cca4ba4a89a03ca2b2e1b7eabde8b1176e131",
+      "targetSha256": "7e4cda290eff9f8cce383bce9f0cca4ba4a89a03ca2b2e1b7eabde8b1176e131",
+      "originalBytes": 10115,
+      "targetBytes": 10115
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-contract-red.md",
+      "action": "derived",
+      "originalSha256": "370b1254b2a8662cc223dce069181a046b56831af1f015d41b67b3e7b5a77425",
+      "targetSha256": "f799fde3127756aaaa5c16ffb05329456f9f6cdf35404fb5217e3a1b90c1a74d",
+      "originalBytes": 9713,
+      "targetBytes": 9920,
+      "preparedTargetSha256": "bc3c7bb9aa3558a208d8acc80dd2efee5db05a6c15d952e1c7e0cbf900955bac"
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-handoff.md",
+      "action": "identical",
+      "originalSha256": "516c39a997c507768bbe102f35d66bb024b61838330fe809122e0842eef617f6",
+      "targetSha256": "516c39a997c507768bbe102f35d66bb024b61838330fe809122e0842eef617f6",
+      "originalBytes": 62692,
+      "targetBytes": 62692
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-hooks.md",
+      "action": "derived",
+      "originalSha256": "24066cd46592e67fdc9387f08d49fa708c83eda35f084d3f85c66cdc4c2bd020",
+      "targetSha256": "2f4fd249a6e891ef1dfb64bb0c498051401efcea8f8d609443fea35a90d5cd4b",
+      "originalBytes": 5693,
+      "targetBytes": 5872
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-host-coverage.json",
+      "action": "identical",
+      "originalSha256": "3488b92742a5fde5a8ce9bca4458a8b297bdb9c17acf111b6333303d5338d471",
+      "targetSha256": "3488b92742a5fde5a8ce9bca4458a8b297bdb9c17acf111b6333303d5338d471",
+      "originalBytes": 8177,
+      "targetBytes": 8177
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-host.md",
+      "action": "identical",
+      "originalSha256": "9ad93f188977cf6502a0479a5eca70c11811efe2ca8a9d0aee2b2c24b25cf402",
+      "targetSha256": "9ad93f188977cf6502a0479a5eca70c11811efe2ca8a9d0aee2b2c24b25cf402",
+      "originalBytes": 8738,
+      "targetBytes": 8738
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-local.json",
+      "action": "identical",
+      "originalSha256": "68442706781b690d7a73f43d7cbc8742bc087654507f0c2265ce7b90e33be52b",
+      "targetSha256": "68442706781b690d7a73f43d7cbc8742bc087654507f0c2265ce7b90e33be52b",
+      "originalBytes": 3822,
+      "targetBytes": 3822
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-migration-runtime.md",
+      "action": "identical",
+      "originalSha256": "6948458bdff6f1affdecca1e7af8afbf9c0335c2cdb1acc7585f02727dc8cd7b",
+      "targetSha256": "6948458bdff6f1affdecca1e7af8afbf9c0335c2cdb1acc7585f02727dc8cd7b",
+      "originalBytes": 13555,
+      "targetBytes": 13555
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-mount.md",
+      "action": "derived",
+      "originalSha256": "d2f8406828277dce628ef11eb4a18832805609266d55cb03c021de18968b5c84",
+      "targetSha256": "46aa0c11b8985f1e35846cc2e23f52e6a2d2f3276ad682ee91bf82b408234de1",
+      "originalBytes": 14371,
+      "targetBytes": 14570,
+      "preparedTargetSha256": "a83a45400d803e2c072e9952910e3981241a548909b7dca21582e5c6907bb90d"
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-public-content.md",
+      "action": "identical",
+      "originalSha256": "269c24ffeb6c98aeaa01a10900a67e891fee99ba725d2912b1d1861931df0c05",
+      "targetSha256": "269c24ffeb6c98aeaa01a10900a67e891fee99ba725d2912b1d1861931df0c05",
+      "originalBytes": 14131,
+      "targetBytes": 14131
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-public-license.md",
+      "action": "identical",
+      "originalSha256": "ce2bb9b14aca0ebb359144a2641711f0dc5463979c419f5edc3491c7af2b7f8a",
+      "targetSha256": "ce2bb9b14aca0ebb359144a2641711f0dc5463979c419f5edc3491c7af2b7f8a",
+      "originalBytes": 26517,
+      "targetBytes": 26517
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-publish.md",
+      "action": "identical",
+      "originalSha256": "a779c70f58ff6e06927e7a89bb5cfb6595d350df3eb43ff843d7d400f73c259d",
+      "targetSha256": "a779c70f58ff6e06927e7a89bb5cfb6595d350df3eb43ff843d7d400f73c259d",
+      "originalBytes": 7040,
+      "targetBytes": 7040
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-runtime.md",
+      "action": "identical",
+      "originalSha256": "b4c03c15acfb2f0b970e5108ad8d33446c68dff2f65322eb67cfdeb11a2e5d70",
+      "targetSha256": "b4c03c15acfb2f0b970e5108ad8d33446c68dff2f65322eb67cfdeb11a2e5d70",
+      "originalBytes": 5451,
+      "targetBytes": 5451
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/acceptance/urgent-source.md",
+      "action": "derived",
+      "originalSha256": "667745e4ff519df51e368128eb66efa4bcb84f1c57f1a2a97a74f46740b790c1",
+      "targetSha256": "bf7a3d238aaded3325fb6de1304bd634d52a1236b96c45e7f17eda616d3d7fe9",
+      "originalBytes": 30207,
+      "targetBytes": 30386
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/analysis/history/task-details-before-constitution-7.md",
+      "action": "identical",
+      "originalSha256": "194d9f02972a8dc64ec751a207deca5114005ffb11b2b008bf409f90ab55e1ff",
+      "targetSha256": "194d9f02972a8dc64ec751a207deca5114005ffb11b2b008bf409f90ab55e1ff",
+      "originalBytes": 104618,
+      "targetBytes": 104618
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/README.md",
+      "action": "identical",
+      "originalSha256": "2a6bd3673075fa5f7d98abd028b19ca2fba6d0a51e0f981ddf98a5da2b50966c",
+      "targetSha256": "2a6bd3673075fa5f7d98abd028b19ca2fba6d0a51e0f981ddf98a5da2b50966c",
+      "originalBytes": 4217,
+      "targetBytes": 4217
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/files.sha256",
+      "action": "identical",
+      "originalSha256": "18e0a77141b72cae8ae93f14f22f3defffc3e075f9aa0edda8edaa82f9b7ba28",
+      "targetSha256": "18e0a77141b72cae8ae93f14f22f3defffc3e075f9aa0edda8edaa82f9b7ba28",
+      "originalBytes": 7478,
+      "targetBytes": 7478
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source.sha256",
+      "action": "identical",
+      "originalSha256": "ff48f1612de6c79220a9da959326fe01f7a251fc08c3f226fd99d87fff54cae0",
+      "targetSha256": "ff48f1612de6c79220a9da959326fe01f7a251fc08c3f226fd99d87fff54cae0",
+      "originalBytes": 2733,
+      "targetBytes": 2733
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/build/distribution/export.ts",
+      "action": "identical",
+      "originalSha256": "e638a820979ebf09db0d2bd9932b2dafd4eeb614ae915561202c997878229551",
+      "targetSha256": "e638a820979ebf09db0d2bd9932b2dafd4eeb614ae915561202c997878229551",
+      "originalBytes": 12794,
+      "targetBytes": 12794
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/build/distribution/models.ts",
+      "action": "identical",
+      "originalSha256": "07dd015d48e8ba21569fc5486d46d02861aeaad95abd75a6b5ecd72af213ed76",
+      "targetSha256": "07dd015d48e8ba21569fc5486d46d02861aeaad95abd75a6b5ecd72af213ed76",
+      "originalBytes": 1983,
+      "targetBytes": 1983
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/build/distribution/projection.ts",
+      "action": "identical",
+      "originalSha256": "b4412e2c13987f57c59432c34df838b3795fdc572fd5e0d31aeac71fbf64afd3",
+      "targetSha256": "b4412e2c13987f57c59432c34df838b3795fdc572fd5e0d31aeac71fbf64afd3",
+      "originalBytes": 2539,
+      "targetBytes": 2539
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/build/distribution/references.ts",
+      "action": "identical",
+      "originalSha256": "62218af45bed52cdd03fdbb9c8ff6a0bcdda09bf7bd974a95e4db91c19bc67f0",
+      "targetSha256": "62218af45bed52cdd03fdbb9c8ff6a0bcdda09bf7bd974a95e4db91c19bc67f0",
+      "originalBytes": 5783,
+      "targetBytes": 5783
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/build/distribution/validate.ts",
+      "action": "identical",
+      "originalSha256": "bdb74452d461de46473d00f44e327775b287dcf78ddd2f8af53d29fb8d73e44e",
+      "targetSha256": "bdb74452d461de46473d00f44e327775b287dcf78ddd2f8af53d29fb8d73e44e",
+      "originalBytes": 15352,
+      "targetBytes": 15352
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/build/distribution/verify.ts",
+      "action": "identical",
+      "originalSha256": "2b67c0eb5bc3445d6cfa26cd92db16041990bfaaf260acb41dbd3dd0b9a410c7",
+      "targetSha256": "2b67c0eb5bc3445d6cfa26cd92db16041990bfaaf260acb41dbd3dd0b9a410c7",
+      "originalBytes": 6907,
+      "targetBytes": 6907
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/build/plugins/content.ts",
+      "action": "identical",
+      "originalSha256": "78888fd876889149c6744d13dcf30ecaecc252db2737f9a35db025d4edc73778",
+      "targetSha256": "78888fd876889149c6744d13dcf30ecaecc252db2737f9a35db025d4edc73778",
+      "originalBytes": 2814,
+      "targetBytes": 2814
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/build/plugins/distribution.ts",
+      "action": "identical",
+      "originalSha256": "f1dabd44a98d24185a592769ff1efb5be34c9d77aa45e1312d501ef83d5f8b89",
+      "targetSha256": "f1dabd44a98d24185a592769ff1efb5be34c9d77aa45e1312d501ef83d5f8b89",
+      "originalBytes": 3215,
+      "targetBytes": 3215
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/build/plugins/mcp-manifest.ts",
+      "action": "identical",
+      "originalSha256": "d515b0acf0004b428fd373fd534409be6f79ef64d451aadf92630ba41adc55d1",
+      "targetSha256": "d515b0acf0004b428fd373fd534409be6f79ef64d451aadf92630ba41adc55d1",
+      "originalBytes": 6195,
+      "targetBytes": 6195
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/build/plugins/scripts.ts",
+      "action": "identical",
+      "originalSha256": "70d7ec3701b8b2562214ab1d43f66ce84192f4243778b750af7d0c1551c99132",
+      "targetSha256": "70d7ec3701b8b2562214ab1d43f66ce84192f4243778b750af7d0c1551c99132",
+      "originalBytes": 1684,
+      "targetBytes": 1684
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/tests/distribution/content-export.mjs",
+      "action": "identical",
+      "originalSha256": "2bd2dd1fc57526dbb2dd6faab2f8789554cb36b49c7b50f4a74e58515f7b625f",
+      "targetSha256": "2bd2dd1fc57526dbb2dd6faab2f8789554cb36b49c7b50f4a74e58515f7b625f",
+      "originalBytes": 13676,
+      "targetBytes": 13676
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/tests/distribution/helpers/catalog.ts",
+      "action": "identical",
+      "originalSha256": "bc148f96bfa010e19fc1048330a5817d8abaa64ce70e14de41bcdd3f3a1816ea",
+      "targetSha256": "bc148f96bfa010e19fc1048330a5817d8abaa64ce70e14de41bcdd3f3a1816ea",
+      "originalBytes": 349,
+      "targetBytes": 349
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/tests/distribution/helpers/projection.ts",
+      "action": "identical",
+      "originalSha256": "9528d3840a2ca23d9157b49653c6838b9b4249567cf8af00a2fef502afb1f179",
+      "targetSha256": "9528d3840a2ca23d9157b49653c6838b9b4249567cf8af00a2fef502afb1f179",
+      "originalBytes": 172,
+      "targetBytes": 172
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/tests/distribution/helpers/selection.ts",
+      "action": "identical",
+      "originalSha256": "147c8040835fb862ccbc9b310f9a9d2fd0c63b8f8d541ad7a9e85b375bb83ca2",
+      "targetSha256": "147c8040835fb862ccbc9b310f9a9d2fd0c63b8f8d541ad7a9e85b375bb83ca2",
+      "originalBytes": 5496,
+      "targetBytes": 5496
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/tests/distribution/mvu-a.mjs",
+      "action": "identical",
+      "originalSha256": "09290a3938a5a7aed4a635d8dd213c51ba0e2ef390e6869ac15481544595c54a",
+      "targetSha256": "09290a3938a5a7aed4a635d8dd213c51ba0e2ef390e6869ac15481544595c54a",
+      "originalBytes": 23148,
+      "targetBytes": 23148
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/tests/distribution/official-contract.test.mjs",
+      "action": "identical",
+      "originalSha256": "cbc3a15a6d2f80a1e24948b926640069623bab74b3e6e4aa4b571373fe6033ad",
+      "targetSha256": "cbc3a15a6d2f80a1e24948b926640069623bab74b3e6e4aa4b571373fe6033ad",
+      "originalBytes": 19062,
+      "targetBytes": 19062
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/tests/distribution/official-preflight.test.mjs",
+      "action": "identical",
+      "originalSha256": "7f5d29e1d4e59c7b10e543ea047d20fc90b15ac7d7bb9fba0211b96f01901578",
+      "targetSha256": "7f5d29e1d4e59c7b10e543ea047d20fc90b15ac7d7bb9fba0211b96f01901578",
+      "originalBytes": 27148,
+      "targetBytes": 27148
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/tests/distribution/release-models.test.mjs",
+      "action": "identical",
+      "originalSha256": "aebe155d925ed8ec9f713198510708c2b0002031b27c6102bae13401da70c1a0",
+      "targetSha256": "aebe155d925ed8ec9f713198510708c2b0002031b27c6102bae13401da70c1a0",
+      "originalBytes": 10772,
+      "targetBytes": 10772
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/tests/distribution/test-build-config.mjs",
+      "action": "identical",
+      "originalSha256": "29de14454fcf8a7f28264388bb86218ae29650d442077ee0673cba4743cf1c31",
+      "targetSha256": "29de14454fcf8a7f28264388bb86218ae29650d442077ee0673cba4743cf1c31",
+      "originalBytes": 15094,
+      "targetBytes": 15094
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/tests/test_artifacts.py",
+      "action": "identical",
+      "originalSha256": "1a6c163ea06d29e9e0895ccebc1750aabafd5691aa18aa0b20d22b12d169490b",
+      "targetSha256": "1a6c163ea06d29e9e0895ccebc1750aabafd5691aa18aa0b20d22b12d169490b",
+      "originalBytes": 11442,
+      "targetBytes": 11442
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/retired-source/packages/skills/vite.config.ts",
+      "action": "identical",
+      "originalSha256": "a96339684db89a24b96f6ca67a8b906c683c564388516146201d813021d79169",
+      "targetSha256": "a96339684db89a24b96f6ca67a8b906c683c564388516146201d813021d79169",
+      "originalBytes": 1106,
+      "targetBytes": 1106
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/snapshot.sha256",
+      "action": "identical",
+      "originalSha256": "52dbf24aad0ec2c9d8287f9c984df4ff7d59fb34ac4fc2f0e005a26bf2e89775",
+      "targetSha256": "52dbf24aad0ec2c9d8287f9c984df4ff7d59fb34ac4fc2f0e005a26bf2e89775",
+      "originalBytes": 82,
+      "targetBytes": 82
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/snapshot.tar.gz",
+      "action": "derived",
+      "originalSha256": "ee33cfd770ea4a38f73892d1809a9f413ccc3a7c1d1dc606169de1a5fb833a1f",
+      "targetSha256": "ef1dcc37b8d1d1ba72da4bf793156b75fc5a3c70480307e636096b0f11c24376",
+      "originalBytes": 287758,
+      "targetBytes": 289345
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/README.md",
+      "action": "identical",
+      "originalSha256": "05d0727027487490ed172b76b8881f974496dc1a9704faeb959b00f9459d5480",
+      "targetSha256": "05d0727027487490ed172b76b8881f974496dc1a9704faeb959b00f9459d5480",
+      "originalBytes": 2016,
+      "targetBytes": 2016
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/files.json",
+      "action": "identical",
+      "originalSha256": "f8c025deee20c0562764f8243e7ceaa2405c4af8716baf4525f0934c8bf71736",
+      "targetSha256": "f8c025deee20c0562764f8243e7ceaa2405c4af8716baf4525f0934c8bf71736",
+      "originalBytes": 1805,
+      "targetBytes": 1805
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/files.sha256",
+      "action": "identical",
+      "originalSha256": "5f5fe7a86bcdbfa04149e69345cf3501f2cdaf6dd84a544adf17870108fe31a6",
+      "targetSha256": "5f5fe7a86bcdbfa04149e69345cf3501f2cdaf6dd84a544adf17870108fe31a6",
+      "originalBytes": 907,
+      "targetBytes": 907
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/retired-source/packages/skills/build/distribution/dependencies.ts",
+      "action": "identical",
+      "originalSha256": "eb9d675c334948e425a3544ab475cce6a33d3e6337d4fc24ce1ac7b7b45baa8e",
+      "targetSha256": "eb9d675c334948e425a3544ab475cce6a33d3e6337d4fc24ce1ac7b7b45baa8e",
+      "originalBytes": 7232,
+      "targetBytes": 7232
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/retired-source/packages/skills/build/distribution/export.ts",
+      "action": "identical",
+      "originalSha256": "0abd93200068b328986f91e0f557921c6489441b6d7b854dd85fd8b2bd4955cc",
+      "targetSha256": "0abd93200068b328986f91e0f557921c6489441b6d7b854dd85fd8b2bd4955cc",
+      "originalBytes": 4764,
+      "targetBytes": 4764
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/retired-source/packages/skills/build/distribution/models.ts",
+      "action": "identical",
+      "originalSha256": "8aee59c376f4aa4ae33b25b70e4625819f5f1981e1d27a63bde97b259a255554",
+      "targetSha256": "8aee59c376f4aa4ae33b25b70e4625819f5f1981e1d27a63bde97b259a255554",
+      "originalBytes": 3200,
+      "targetBytes": 3200
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/retired-source/packages/skills/build/distribution/source-files.ts",
+      "action": "identical",
+      "originalSha256": "3d8fd2b2978e00beace791e1aef5b09d2282a27f57bd23e8eac913c551273733",
+      "targetSha256": "3d8fd2b2978e00beace791e1aef5b09d2282a27f57bd23e8eac913c551273733",
+      "originalBytes": 4964,
+      "targetBytes": 4964
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/retired-source/packages/skills/build/distribution/source.ts",
+      "action": "identical",
+      "originalSha256": "b27d7a56f681bf8c243a94d24987d638c084a521900885169c05aee34f9df0ed",
+      "targetSha256": "b27d7a56f681bf8c243a94d24987d638c084a521900885169c05aee34f9df0ed",
+      "originalBytes": 9345,
+      "targetBytes": 9345
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/retired-source/packages/skills/build/distribution/validate.ts",
+      "action": "identical",
+      "originalSha256": "ff43f292d44e3ebe8587eec2bd3ef3e32e15c7b3857076836e261bbecd776942",
+      "targetSha256": "ff43f292d44e3ebe8587eec2bd3ef3e32e15c7b3857076836e261bbecd776942",
+      "originalBytes": 10835,
+      "targetBytes": 10835
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-11-build-script-restart/retired-source/packages/skills/tests/distribution/source-plan.test.mjs",
+      "action": "identical",
+      "originalSha256": "5a34d1034486c9b5bf420c2aafe6e1529e280b097b916e06a300c29d35ad7381",
+      "targetSha256": "5a34d1034486c9b5bf420c2aafe6e1529e280b097b916e06a300c29d35ad7381",
+      "originalBytes": 25553,
+      "targetBytes": 25553
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/checklists/requirements.md",
+      "action": "identical",
+      "originalSha256": "2c301d829e720894648a835d793af9e53a9f4b7dfbdb57ea9d16a658c29a5f5b",
+      "targetSha256": "2c301d829e720894648a835d793af9e53a9f4b7dfbdb57ea9d16a658c29a5f5b",
+      "originalBytes": 28194,
+      "targetBytes": 28194
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/contracts/build-pipeline.md",
+      "action": "identical",
+      "originalSha256": "ac9a8e05c91e589bab5fde35af903b0240a94eb1e9e525e90d5bfa9e9706f941",
+      "targetSha256": "ac9a8e05c91e589bab5fde35af903b0240a94eb1e9e525e90d5bfa9e9706f941",
+      "originalBytes": 10494,
+      "targetBytes": 10494
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/contracts/compatibility.md",
+      "action": "identical",
+      "originalSha256": "646d6f4a872b9b42603b483d00baa57b974cec383421971875d0af944205cf94",
+      "targetSha256": "646d6f4a872b9b42603b483d00baa57b974cec383421971875d0af944205cf94",
+      "originalBytes": 12303,
+      "targetBytes": 12303
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/contracts/distribution.md",
+      "action": "identical",
+      "originalSha256": "34a51e900d0776c29ea80085886a586bca90bf4daf85b0fcd9457af43878bb44",
+      "targetSha256": "34a51e900d0776c29ea80085886a586bca90bf4daf85b0fcd9457af43878bb44",
+      "originalBytes": 15619,
+      "targetBytes": 15619
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/contracts/install.md",
+      "action": "identical",
+      "originalSha256": "9d8b9eb5830c8932b5750c4177ba416402171b5355b636e9895f0814a4f350fb",
+      "targetSha256": "9d8b9eb5830c8932b5750c4177ba416402171b5355b636e9895f0814a4f350fb",
+      "originalBytes": 12903,
+      "targetBytes": 12903
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/contracts/mount.md",
+      "action": "identical",
+      "originalSha256": "9acae8dd9cf4b89ab74bb063b5f22cfca8d601da9da44b45cf6858d02b84a812",
+      "targetSha256": "9acae8dd9cf4b89ab74bb063b5f22cfca8d601da9da44b45cf6858d02b84a812",
+      "originalBytes": 12360,
+      "targetBytes": 12360
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/contracts/pipeline.md",
+      "action": "identical",
+      "originalSha256": "0a899e08851286a04a94c73bfd02d3f88afecdd3d5e7756054903594d7ee0520",
+      "targetSha256": "0a899e08851286a04a94c73bfd02d3f88afecdd3d5e7756054903594d7ee0520",
+      "originalBytes": 19337,
+      "targetBytes": 19337
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/contracts/urgent-release.md",
+      "action": "identical",
+      "originalSha256": "c6c3ef1256964a0930f0cc75541760742d9182880c346c52279e73355e23f46a",
+      "targetSha256": "c6c3ef1256964a0930f0cc75541760742d9182880c346c52279e73355e23f46a",
+      "originalBytes": 11078,
+      "targetBytes": 11078
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/data-model.md",
+      "action": "identical",
+      "originalSha256": "0edbbd3ee771791fd54a6e8dd920506ec738b8bd856bb61e3f2f0678441bc683",
+      "targetSha256": "0edbbd3ee771791fd54a6e8dd920506ec738b8bd856bb61e3f2f0678441bc683",
+      "originalBytes": 35125,
+      "targetBytes": 35125
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/descriptions/issue-description.md",
+      "action": "identical",
+      "originalSha256": "f9db35e104899537f31c43c63857ab4189f9834285f01278c174584b0068440d",
+      "targetSha256": "f9db35e104899537f31c43c63857ab4189f9834285f01278c174584b0068440d",
+      "originalBytes": 2997,
+      "targetBytes": 2997
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/descriptions/pr-description.md",
+      "action": "identical",
+      "originalSha256": "5715d461d5435696f66724e898e289241e78d0d1b49c74ad6cd7e57609413c28",
+      "targetSha256": "5715d461d5435696f66724e898e289241e78d0d1b49c74ad6cd7e57609413c28",
+      "originalBytes": 5352,
+      "targetBytes": 5352
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/diagrams.md",
+      "action": "identical",
+      "originalSha256": "fbbe22bca7e74944902d1eccfcbadf2354ee004a3762337e703d90085b6876d2",
+      "targetSha256": "fbbe22bca7e74944902d1eccfcbadf2354ee004a3762337e703d90085b6876d2",
+      "originalBytes": 15037,
+      "targetBytes": 15037
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/diagrams/business-flow.md",
+      "action": "identical",
+      "originalSha256": "3d5ec2f94d17b5d1841718dfc453926d95be24b9224d4a1c5ec4fa624adb84c9",
+      "targetSha256": "3d5ec2f94d17b5d1841718dfc453926d95be24b9224d4a1c5ec4fa624adb84c9",
+      "originalBytes": 16913,
+      "targetBytes": 16913
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/diagrams/logic-flow.md",
+      "action": "identical",
+      "originalSha256": "ffb2ce77084e7a2d25acad0ead39c9beee95702764ac679795776b54f36ebb09",
+      "targetSha256": "ffb2ce77084e7a2d25acad0ead39c9beee95702764ac679795776b54f36ebb09",
+      "originalBytes": 24897,
+      "targetBytes": 24897
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T064.md",
+      "action": "derived",
+      "originalSha256": "97420e9e94a7aa18432deb5af4b64e968f33f43815d38f5fe7fde19bea047138",
+      "targetSha256": "cf16471c9e7bb372e2c1cf424cde23aaf7536b908528e1b0105015f57472e561",
+      "originalBytes": 3459,
+      "targetBytes": 3555
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T065.md",
+      "action": "identical",
+      "originalSha256": "10369ecce8cc8aa4004f18e38a8abea72c608573efbeb53189f3536d5795a061",
+      "targetSha256": "10369ecce8cc8aa4004f18e38a8abea72c608573efbeb53189f3536d5795a061",
+      "originalBytes": 4933,
+      "targetBytes": 4933
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T067.md",
+      "action": "identical",
+      "originalSha256": "1121fcf7b9fa15eb0dd5322d98b293a1b24e002e57278f4f4c9ea2a478a9fe85",
+      "targetSha256": "1121fcf7b9fa15eb0dd5322d98b293a1b24e002e57278f4f4c9ea2a478a9fe85",
+      "originalBytes": 7085,
+      "targetBytes": 7085
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T072.md",
+      "action": "identical",
+      "originalSha256": "4932255d10d589943fe61be12a04bac92c6733047e2290d14fd057a72066e31b",
+      "targetSha256": "4932255d10d589943fe61be12a04bac92c6733047e2290d14fd057a72066e31b",
+      "originalBytes": 6028,
+      "targetBytes": 6028
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T073.md",
+      "action": "identical",
+      "originalSha256": "0ac5f37b5c965f6f14597ddb1314e6e7dd468a9571b3d237ac1abaffebd5a18b",
+      "targetSha256": "0ac5f37b5c965f6f14597ddb1314e6e7dd468a9571b3d237ac1abaffebd5a18b",
+      "originalBytes": 4270,
+      "targetBytes": 4270
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T074.md",
+      "action": "identical",
+      "originalSha256": "220283d4a3d9f8bf51932643d084563b7461bc20030d8026c99bc669f950c46b",
+      "targetSha256": "220283d4a3d9f8bf51932643d084563b7461bc20030d8026c99bc669f950c46b",
+      "originalBytes": 4774,
+      "targetBytes": 4774
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T075.md",
+      "action": "identical",
+      "originalSha256": "f2233daa0f2efeeafc43d4c4616d7ce7f4a9e3009a304b9607fddb429f2c5446",
+      "targetSha256": "f2233daa0f2efeeafc43d4c4616d7ce7f4a9e3009a304b9607fddb429f2c5446",
+      "originalBytes": 7296,
+      "targetBytes": 7296
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T078.md",
+      "action": "identical",
+      "originalSha256": "81500d9e2be049e15766e1778779b9632b0b9e39259ef7db44f67f2075c59684",
+      "targetSha256": "81500d9e2be049e15766e1778779b9632b0b9e39259ef7db44f67f2075c59684",
+      "originalBytes": 4898,
+      "targetBytes": 4898
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T079.md",
+      "action": "identical",
+      "originalSha256": "d3a45298cf330bbf7a7d0b8134b450420fc65c86d559c5836e1babb2d860db78",
+      "targetSha256": "d3a45298cf330bbf7a7d0b8134b450420fc65c86d559c5836e1babb2d860db78",
+      "originalBytes": 4818,
+      "targetBytes": 4818
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T080.md",
+      "action": "identical",
+      "originalSha256": "5db3ce74c94da2dba574e3325ac5b651f20df71fe5167fad4720face97cb80b7",
+      "targetSha256": "5db3ce74c94da2dba574e3325ac5b651f20df71fe5167fad4720face97cb80b7",
+      "originalBytes": 7488,
+      "targetBytes": 7488
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T081.md",
+      "action": "identical",
+      "originalSha256": "c943aa0e3193c5b617ac9963ce8e2f335bf6022ff833068439d57b6f40172f7b",
+      "targetSha256": "c943aa0e3193c5b617ac9963ce8e2f335bf6022ff833068439d57b6f40172f7b",
+      "originalBytes": 2633,
+      "targetBytes": 2633
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T082.md",
+      "action": "identical",
+      "originalSha256": "5722408c1a26d5d458b99c79b6e31bd73efb94f0855c07faf1610b1e68378578",
+      "targetSha256": "5722408c1a26d5d458b99c79b6e31bd73efb94f0855c07faf1610b1e68378578",
+      "originalBytes": 6422,
+      "targetBytes": 6422
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T083.md",
+      "action": "identical",
+      "originalSha256": "86fdca2e90c3e69a632c7428a091e6e23e062709630b11daeebaff0b05e0de1b",
+      "targetSha256": "86fdca2e90c3e69a632c7428a091e6e23e062709630b11daeebaff0b05e0de1b",
+      "originalBytes": 2616,
+      "targetBytes": 2616
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T084.md",
+      "action": "identical",
+      "originalSha256": "01024401a35f8a4086f0a8527d00824c844d6509ae8cf0fa8cec54bf3ac87d5c",
+      "targetSha256": "01024401a35f8a4086f0a8527d00824c844d6509ae8cf0fa8cec54bf3ac87d5c",
+      "originalBytes": 4127,
+      "targetBytes": 4127
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T085.md",
+      "action": "identical",
+      "originalSha256": "3c0a8317a091c07c8e78ef696aac8e4c9fefba81e52d26e2044163c51110d2c8",
+      "targetSha256": "3c0a8317a091c07c8e78ef696aac8e4c9fefba81e52d26e2044163c51110d2c8",
+      "originalBytes": 4229,
+      "targetBytes": 4229
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T086.md",
+      "action": "identical",
+      "originalSha256": "78a98f2e1b98d5808361e774f049516cd598553883a5113644ddf835cd2fbb6a",
+      "targetSha256": "78a98f2e1b98d5808361e774f049516cd598553883a5113644ddf835cd2fbb6a",
+      "originalBytes": 5663,
+      "targetBytes": 5663
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T087.md",
+      "action": "derived",
+      "originalSha256": "ce9dd3622d7bbd5f68359daeabafa39e97f084a5332b43b0624b7c33a4fab826",
+      "targetSha256": "23ae1e8bc5ea6d6bd863cf6d106c8cfc1224a1febfda86d28e6b2224dc9cff29",
+      "originalBytes": 20547,
+      "targetBytes": 20726
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T088.md",
+      "action": "identical",
+      "originalSha256": "11ae8acff79f1c383c0bf6db9cc2b454f2f67cca8779b66eb1fdcab0928de11e",
+      "targetSha256": "11ae8acff79f1c383c0bf6db9cc2b454f2f67cca8779b66eb1fdcab0928de11e",
+      "originalBytes": 5163,
+      "targetBytes": 5163
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/T089.md",
+      "action": "identical",
+      "originalSha256": "e6eb28fb1a4001e2ac62e1fbe7ae8d7e4087e32231b3e8d3562e73c85799a9d3",
+      "targetSha256": "e6eb28fb1a4001e2ac62e1fbe7ae8d7e4087e32231b3e8d3562e73c85799a9d3",
+      "originalBytes": 4859,
+      "targetBytes": 4859
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/mvu.md",
+      "action": "identical",
+      "originalSha256": "fd60937ea8ccd832eca3da03c93f9116c5409e9ac46f2dea5d16a0929dddd1c2",
+      "targetSha256": "fd60937ea8ccd832eca3da03c93f9116c5409e9ac46f2dea5d16a0929dddd1c2",
+      "originalBytes": 35189,
+      "targetBytes": 35189
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/plan.md",
+      "action": "identical",
+      "originalSha256": "6ea1ee3f8afff0b487aef59748a208a213ee6ec4255edad64f0ea2815084aa9f",
+      "targetSha256": "6ea1ee3f8afff0b487aef59748a208a213ee6ec4255edad64f0ea2815084aa9f",
+      "originalBytes": 33363,
+      "targetBytes": 33363
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/quickstart.md",
+      "action": "identical",
+      "originalSha256": "3647076bd5dc5ee66d46ae303b56031a10b330a8444dd012e84e4edd92e44172",
+      "targetSha256": "3647076bd5dc5ee66d46ae303b56031a10b330a8444dd012e84e4edd92e44172",
+      "originalBytes": 49399,
+      "targetBytes": 49399
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/discussions/2026-11-10-build-actions-mount-order.md",
+      "action": "identical",
+      "originalSha256": "6310e34a98d2cb5e7fff9140c477ee52155a6173a6ef47479778e5b2324bcf15",
+      "targetSha256": "6310e34a98d2cb5e7fff9140c477ee52155a6173a6ef47479778e5b2324bcf15",
+      "originalBytes": 3340,
+      "targetBytes": 3340
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/discussions/2026-11-10-context-alignment.md",
+      "action": "identical",
+      "originalSha256": "64f47bd75e889b0e8f5a07b5d8d84e526eb3621af9a572b82b92e36bb7be11c8",
+      "targetSha256": "64f47bd75e889b0e8f5a07b5d8d84e526eb3621af9a572b82b92e36bb7be11c8",
+      "originalBytes": 1761,
+      "targetBytes": 1761
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/discussions/2026-11-11-collection-build.md",
+      "action": "identical",
+      "originalSha256": "af15235b63d20a5d6f50f9172df17102ea9145d2c8836167c705d7febd2541b3",
+      "targetSha256": "af15235b63d20a5d6f50f9172df17102ea9145d2c8836167c705d7febd2541b3",
+      "originalBytes": 3243,
+      "targetBytes": 3243
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/discussions/2026-11-11-independent-plugins.md",
+      "action": "identical",
+      "originalSha256": "8e9d5e2852ab354ac29c7bd73aeeecaeea2c1b3fe8f646e1e024b83e6daaf6e8",
+      "targetSha256": "8e9d5e2852ab354ac29c7bd73aeeecaeea2c1b3fe8f646e1e024b83e6daaf6e8",
+      "originalBytes": 5358,
+      "targetBytes": 5358
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/discussions/2026-11-11-plugin-order.md",
+      "action": "identical",
+      "originalSha256": "816ffb832234ea4e9926198bac466d2a3b54f3259f1a426976c4a4b42a19dda9",
+      "targetSha256": "816ffb832234ea4e9926198bac466d2a3b54f3259f1a426976c4a4b42a19dda9",
+      "originalBytes": 2875,
+      "targetBytes": 2875
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/discussions/2026-11-11-plugin-skill-config.md",
+      "action": "identical",
+      "originalSha256": "8adeabfbcb58e85508ba8c6c7a31a29a421590618b579e05be4546174b7c8ede",
+      "targetSha256": "8adeabfbcb58e85508ba8c6c7a31a29a421590618b579e05be4546174b7c8ede",
+      "originalBytes": 2114,
+      "targetBytes": 2114
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/prompts/2026-11-05-distribution-revision.md",
+      "action": "identical",
+      "originalSha256": "0c0f4d28b693249a28ab0a4ada8776b23876eb11332841729d280ebefb225e91",
+      "targetSha256": "0c0f4d28b693249a28ab0a4ada8776b23876eb11332841729d280ebefb225e91",
+      "originalBytes": 10217,
+      "targetBytes": 10217
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/prompts/2026-11-10-implement-only-mount-revision.md",
+      "action": "derived",
+      "originalSha256": "5968e4d36c1c58386c083753c5bab184533d6eaee57118037672f2a01707c7fa",
+      "targetSha256": "a9b6fa7750c2b1d22b7665a4fd218136ed49486b3993617f4c9f8866ff42da9a",
+      "originalBytes": 5779,
+      "targetBytes": 5898
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/raw/2026-11-05-workflow-adjustments.md",
+      "action": "identical",
+      "originalSha256": "d2ed50b2a8aea44c66bf52775a9ec4dfbf1e637a43c6cecd2184b8192f2dde3e",
+      "targetSha256": "d2ed50b2a8aea44c66bf52775a9ec4dfbf1e637a43c6cecd2184b8192f2dde3e",
+      "originalBytes": 4645,
+      "targetBytes": 4645
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/raw/2026-11-11-collection-build.md",
+      "action": "identical",
+      "originalSha256": "7e12e4d6a23da0e99478bc011c2814a28e525440eb8a8a05e612ca56bb63a5e0",
+      "targetSha256": "7e12e4d6a23da0e99478bc011c2814a28e525440eb8a8a05e612ca56bb63a5e0",
+      "originalBytes": 1617,
+      "targetBytes": 1617
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/raw/2026-11-11-independent-plugins.md",
+      "action": "identical",
+      "originalSha256": "5f2e7ddaa186a4b32480bb3bba979fac8afcc29ab6c6ff2b4c6f8deca852b395",
+      "targetSha256": "5f2e7ddaa186a4b32480bb3bba979fac8afcc29ab6c6ff2b4c6f8deca852b395",
+      "originalBytes": 1871,
+      "targetBytes": 1871
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/raw/2026-11-11-plugin-skill-config.md",
+      "action": "identical",
+      "originalSha256": "6c559e658177bd0b37a1e39308e801145e97fa0c9847f63a62a017fe94c6b8a5",
+      "targetSha256": "6c559e658177bd0b37a1e39308e801145e97fa0c9847f63a62a017fe94c6b8a5",
+      "originalBytes": 1274,
+      "targetBytes": 1274
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/raw/2026-11-11-urgent-release.md",
+      "action": "derived",
+      "originalSha256": "ca6e3ff53389e9433ee1006b6c39f3c4f2db605362eaaaf1bf4eb7f51d89c5dd",
+      "targetSha256": "c42bd50d7cc2483455293388e96cffe718439d20d319019ced05e0544af7e95c",
+      "originalBytes": 2650,
+      "targetBytes": 2768
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/raw/2026-11-12-main-curl-only.md",
+      "action": "identical",
+      "originalSha256": "ccd6a570ae4db941b686e0cd11d7ef70d5ba15a3ce9d838874af11aa13f0260e",
+      "targetSha256": "ccd6a570ae4db941b686e0cd11d7ef70d5ba15a3ce9d838874af11aa13f0260e",
+      "originalBytes": 2185,
+      "targetBytes": 2185
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/raw/2026-11-12-mandatory-track-discovery.md",
+      "action": "identical",
+      "originalSha256": "4736af28768272cce8e5fbc86ea393cc88482e46b92421c76d952fc830e10f32",
+      "targetSha256": "4736af28768272cce8e5fbc86ea393cc88482e46b92421c76d952fc830e10f32",
+      "originalBytes": 1358,
+      "targetBytes": 1358
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/raw/2026-11-12-track-ownership-and-repository.md",
+      "action": "identical",
+      "originalSha256": "67d09f873757b191ec89c7ac61a250c272c6914fca838ec020c2a51fe4371114",
+      "targetSha256": "67d09f873757b191ec89c7ac61a250c272c6914fca838ec020c2a51fe4371114",
+      "originalBytes": 1722,
+      "targetBytes": 1722
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/raw/2026-11-12-urgent-continuous-exemption.md",
+      "action": "identical",
+      "originalSha256": "5ac1ea03cf04af822485e1147ef88b0546bb03c4343444df3afefa8dd824ed34",
+      "targetSha256": "5ac1ea03cf04af822485e1147ef88b0546bb03c4343444df3afefa8dd824ed34",
+      "originalBytes": 1671,
+      "targetBytes": 1671
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/requirements/raw/2026-11-12-workspace-local-handoff.md",
+      "action": "identical",
+      "originalSha256": "40794decccc69ab23a00ca5aeb3fd0669c86170624f1b81b292b26a67bb20049",
+      "targetSha256": "40794decccc69ab23a00ca5aeb3fd0669c86170624f1b81b292b26a67bb20049",
+      "originalBytes": 2057,
+      "targetBytes": 2057
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/research.md",
+      "action": "identical",
+      "originalSha256": "7b630fb7e38fc596434efcec3092606cf07273f73f4338056cd849e4c8760bec",
+      "targetSha256": "7b630fb7e38fc596434efcec3092606cf07273f73f4338056cd849e4c8760bec",
+      "originalBytes": 37279,
+      "targetBytes": 37279
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/spec.md",
+      "action": "derived",
+      "originalSha256": "16726aacd0398023eb70c27532ba2b1f72d5a88d524c332da5f98d60c49d0a1e",
+      "targetSha256": "379c2d6d09bf5563783c7b6d13a0da66ff8e28dec19377d8795e90e57009ca7d",
+      "originalBytes": 135079,
+      "targetBytes": 134994
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/tasks.md",
+      "action": "identical",
+      "originalSha256": "174db351936a8c71bf9867547667db7acf007b42cdfa8bc7a4fea5f5cb68260f",
+      "targetSha256": "174db351936a8c71bf9867547667db7acf007b42cdfa8bc7a4fea5f5cb68260f",
+      "originalBytes": 206318,
+      "targetBytes": 206318
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/bash-registration.md",
+      "action": "identical",
+      "originalSha256": "dce9d5df663102a06b8ee117eca598ee0bc2ece1a9f37e2b9e5270be83c2e454",
+      "targetSha256": "dce9d5df663102a06b8ee117eca598ee0bc2ece1a9f37e2b9e5270be83c2e454",
+      "originalBytes": 7895,
+      "targetBytes": 7895
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/cleanup-governance.md",
+      "action": "identical",
+      "originalSha256": "32917b5db7ecc807c4c669642baf792a66f8c911d226d5fcfef9a1d164df05d2",
+      "targetSha256": "32917b5db7ecc807c4c669642baf792a66f8c911d226d5fcfef9a1d164df05d2",
+      "originalBytes": 6057,
+      "targetBytes": 6057
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/cleanup-validation.md",
+      "action": "identical",
+      "originalSha256": "adfc228212067227f992eb344c3aaeb8c7c9969ea26a1c336f28dd3951427c4d",
+      "targetSha256": "adfc228212067227f992eb344c3aaeb8c7c9969ea26a1c336f28dd3951427c4d",
+      "originalBytes": 15923,
+      "targetBytes": 15923
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/collaboration-modes-delivery.md",
+      "action": "derived",
+      "originalSha256": "e06b8a830b953359af23ae58727a4ded5068ad5762f3c63b2ee790b187f61d74",
+      "targetSha256": "3a9e8403341ee6f09f241876ff8f4eb488cc503dee4a50057eb3a4555c998c2b",
+      "originalBytes": 19281,
+      "targetBytes": 19500,
+      "preparedTargetSha256": "a7874a9009914c7493e2dd0a5c2d9f20c7fc77adb97aad9f39439e9738c44de1"
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/collaboration-modes.md",
+      "action": "identical",
+      "originalSha256": "c3120ed61ef8dd098f5841cb0bc8eac390361f831a3cbfac5058f3ce6f2d63b3",
+      "targetSha256": "c3120ed61ef8dd098f5841cb0bc8eac390361f831a3cbfac5058f3ce6f2d63b3",
+      "originalBytes": 8303,
+      "targetBytes": 8303
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/direct-engineering.md",
+      "action": "identical",
+      "originalSha256": "899a56865d51a36adaba108ffb19b7a54c783eff823d4cd6aebfd4fb819f2ff8",
+      "targetSha256": "899a56865d51a36adaba108ffb19b7a54c783eff823d4cd6aebfd4fb819f2ff8",
+      "originalBytes": 15054,
+      "targetBytes": 15054
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/direct-skills.md",
+      "action": "identical",
+      "originalSha256": "39cfc63df74a05228ec79ede0026969ff5795b835135f039b8bebc7cf4ca0b69",
+      "targetSha256": "39cfc63df74a05228ec79ede0026969ff5795b835135f039b8bebc7cf4ca0b69",
+      "originalBytes": 3119,
+      "targetBytes": 3119
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/entry-discovery-mechanism.md",
+      "action": "identical",
+      "originalSha256": "40862ba875a9697887a95c1a2e6d352fc3ea2c1b7e837c696ce4c9fdccac2805",
+      "targetSha256": "40862ba875a9697887a95c1a2e6d352fc3ea2c1b7e837c696ce4c9fdccac2805",
+      "originalBytes": 7305,
+      "targetBytes": 7305
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/implementation-preparation-baseline.json",
+      "action": "identical",
+      "originalSha256": "cd03c1ff630251323b925cd68b570bd92dd1f59b26d595ebc9618de0952b2aff",
+      "targetSha256": "cd03c1ff630251323b925cd68b570bd92dd1f59b26d595ebc9618de0952b2aff",
+      "originalBytes": 52099,
+      "targetBytes": 52099
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/request-boundary-source/baseline-implementation-preparation.txt",
+      "action": "identical",
+      "originalSha256": "50510c75e684f753c972c61c3a523a1a59a9022b3ddfb78d73f60af024da46ea",
+      "targetSha256": "50510c75e684f753c972c61c3a523a1a59a9022b3ddfb78d73f60af024da46ea",
+      "originalBytes": 4811,
+      "targetBytes": 4811
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/request-boundary-source/baseline-task-increment.txt",
+      "action": "identical",
+      "originalSha256": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a",
+      "targetSha256": "466fc0d9d5ba48a883c5346c310c5aac8b804f73a6e7e15a2552ff6a1077dc0a",
+      "originalBytes": 23172,
+      "targetBytes": 23172
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/request-boundary-source/candidate-implementation-preparation.txt",
+      "action": "identical",
+      "originalSha256": "420ccff95c4826f0625188a3d58332031d4e65d0f8e1cdf34972758461ddc5ee",
+      "targetSha256": "420ccff95c4826f0625188a3d58332031d4e65d0f8e1cdf34972758461ddc5ee",
+      "originalBytes": 5658,
+      "targetBytes": 5658
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/request-boundary-source/candidate-task-increment.txt",
+      "action": "identical",
+      "originalSha256": "397cd96cab639d2ff22268402e2a457efb5f16bbec1bbce1c520fad4b9b6696b",
+      "targetSha256": "397cd96cab639d2ff22268402e2a457efb5f16bbec1bbce1c520fad4b9b6696b",
+      "originalBytes": 24527,
+      "targetBytes": 24527
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/request-boundary-source/results.json",
+      "action": "derived",
+      "originalSha256": "89a27788e2a088bbf59d1d84e8a57ed730c95f2c7f60c2946554d35bf17d323b",
+      "targetSha256": "e0c3ae11d8b1a89a84169d46a0befa788c14712dfb19320aa924e0c171fade48",
+      "originalBytes": 4060,
+      "targetBytes": 4064
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/request-boundary-source/scenario-inputs.json",
+      "action": "identical",
+      "originalSha256": "0b2e77764e47ef977e07dc722dec8b462275e39b28dc986146452f858a00217e",
+      "targetSha256": "0b2e77764e47ef977e07dc722dec8b462275e39b28dc986146452f858a00217e",
+      "originalBytes": 913,
+      "targetBytes": 913
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/request-boundary-source/scenario-results.json",
+      "action": "identical",
+      "originalSha256": "85d1a4d1d0660bd9bf4aa546dd3a855bd6ba2b67a7814cb0a906ac9313d7b0d8",
+      "targetSha256": "85d1a4d1d0660bd9bf4aa546dd3a855bd6ba2b67a7814cb0a906ac9313d7b0d8",
+      "originalBytes": 2422,
+      "targetBytes": 2422
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/request-boundary-source/validator-results.json",
+      "action": "derived",
+      "originalSha256": "f34907a0de39f9fab8167af69cc2a844a9a74da8bf4a1be59b2d00af4b5d25af",
+      "targetSha256": "1ccf90115579d65545ee4c35196765924bd1567dde1ebc3d29f6cfdf4d3637ee",
+      "originalBytes": 1465,
+      "targetBytes": 1481
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t062/README.md",
+      "action": "identical",
+      "originalSha256": "5edfaf5880913a1c7b9e09711624f3948082aa56f43ece97475a37b0c01e4e2a",
+      "targetSha256": "5edfaf5880913a1c7b9e09711624f3948082aa56f43ece97475a37b0c01e4e2a",
+      "originalBytes": 4556,
+      "targetBytes": 4556
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t062/candidate/artifact-spec-analysis/SKILL.md",
+      "action": "identical",
+      "originalSha256": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323",
+      "targetSha256": "3f8e9c2dcf8db1204518c4253df5318049eb43fb594a351a7b1a07ab35df6323",
+      "originalBytes": 3484,
+      "targetBytes": 3484
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t062/results.json",
+      "action": "derived",
+      "originalSha256": "77f32a6fcb2e3e14e56a9593ea60edf8e4b44d34157cf69a8fef6a483e996797",
+      "targetSha256": "d0da78d0f811fe3bc020c8b6cc38f5dc7424c15e63cbb1ed8926f2550109cdd7",
+      "originalBytes": 19124,
+      "targetBytes": 19038
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t062/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "6c634769d3793f0f9ed00642b40ebefed4feee3a6c71c324d87a50de49103514",
+      "targetSha256": "3f5d2282f156a6ee6749be8ef48e8a14a7bfdd13eb67e1497e7c9adf37f9ee89",
+      "originalBytes": 779227,
+      "targetBytes": 782516
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t063/README.md",
+      "action": "identical",
+      "originalSha256": "4c75ca864b208d69275651c17ff5280a99346aafad54a44fa7641fe0493c2854",
+      "targetSha256": "4c75ca864b208d69275651c17ff5280a99346aafad54a44fa7641fe0493c2854",
+      "originalBytes": 3588,
+      "targetBytes": 3588
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t063/results.json",
+      "action": "derived",
+      "originalSha256": "1858bec43065f6b975a00194a63af2d0290670c9808593cf8f8a236dab1a2b9d",
+      "targetSha256": "7e3f979f80abc26f2863791681a3218062858e8c721f2839309720a2fed4a44f",
+      "originalBytes": 14243,
+      "targetBytes": 14059
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t063/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "44ad70c74749d3f392eddd0fd799c8ddd372f27f3f0d05ab9789dd6ddf506c24",
+      "targetSha256": "c729cdc90c7d9204dd4a94e81d1fca561e1b41d4f8433f28c82532f7c2f4de16",
+      "originalBytes": 642932,
+      "targetBytes": 646180
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t064/README.md",
+      "action": "identical",
+      "originalSha256": "eddc3fb1066cee1430580bf9097b078e70a17bdc9c9e942cfa08ef24bca0c513",
+      "targetSha256": "eddc3fb1066cee1430580bf9097b078e70a17bdc9c9e942cfa08ef24bca0c513",
+      "originalBytes": 4149,
+      "targetBytes": 4149
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t064/results.json",
+      "action": "derived",
+      "originalSha256": "f304e033c28a827e8c88a5d39005fbf30b9a8c8b019688e4b7308380a399e8a7",
+      "targetSha256": "f6c79898748bc9245a0d62c16cd58bb96fd263ec0867a3fecfe8e82666b5aaf2",
+      "originalBytes": 10549,
+      "targetBytes": 10308
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t064/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "4edf967145e788328e1ccf8f61ace433ba12f764fe9fedf3a37a8afb33944456",
+      "targetSha256": "2bce19ff9c5a6a5d8da3f5781810d2d216f47c3fded0820ea816c3070d9df061",
+      "originalBytes": 1576354,
+      "targetBytes": 1580532
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t066/results.json",
+      "action": "derived",
+      "originalSha256": "3bdaa81c795e3d12747737a2fb1439bc572343d32d255f798bb2219d0993f8bd",
+      "targetSha256": "f4a16be545b71e2242a04643693a4ed8f767975cf4e934203fba8197f50f1d5b",
+      "originalBytes": 8708,
+      "targetBytes": 8712
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t066/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "ee1a3710f3ca8c46f6f44866353887d2941c12ef882387c9124bd490df3acece",
+      "targetSha256": "28d917c76d15a00d741155afe08d6e408b0ed8ace8b0aac2bf2ad8808110fa16",
+      "originalBytes": 4748765,
+      "targetBytes": 4750763
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t067/results.json",
+      "action": "identical",
+      "originalSha256": "6757192542cb800cb04686b9643eacd74938f5aa10e17f6b69ef938f24896f9f",
+      "targetSha256": "6757192542cb800cb04686b9643eacd74938f5aa10e17f6b69ef938f24896f9f",
+      "originalBytes": 7709,
+      "targetBytes": 7709
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t067/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "34a8811fcbfce3166b3e6bb9633f9e671fe3864c4c2657579dfdd10397bbc2e6",
+      "targetSha256": "ce4400006b38cadc8c757acbad5f275d1d0754a494c42d272190c820626ae34d",
+      "originalBytes": 9165401,
+      "targetBytes": 9167658
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t069/results.json",
+      "action": "identical",
+      "originalSha256": "8272badbcb5a1e05fd4722ce8150fdd97e38395787d51a50a6d08915a2a891ab",
+      "targetSha256": "8272badbcb5a1e05fd4722ce8150fdd97e38395787d51a50a6d08915a2a891ab",
+      "originalBytes": 2283,
+      "targetBytes": 2283
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t069/source-manifest.json",
+      "action": "identical",
+      "originalSha256": "cf28a4a25f6dcfa67b2dd48dd6ad1181d11b8eb037a2c54ea1c018d277afd91e",
+      "targetSha256": "cf28a4a25f6dcfa67b2dd48dd6ad1181d11b8eb037a2c54ea1c018d277afd91e",
+      "originalBytes": 3465,
+      "targetBytes": 3465
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t095/README.md",
+      "action": "identical",
+      "originalSha256": "4f2dcbfea0503fbe6b28630df4a1437635963b95cf885b438c8c62109dfebef0",
+      "targetSha256": "4f2dcbfea0503fbe6b28630df4a1437635963b95cf885b438c8c62109dfebef0",
+      "originalBytes": 2757,
+      "targetBytes": 2757
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t095/results.json",
+      "action": "derived",
+      "originalSha256": "2b2b6745307b10394d3d09548d1938fa01f5cae1b331376c05bf2ecc9bf72f9e",
+      "targetSha256": "10b43accf25f18bb22f4647c30fd96a6d7235dae1d8665bc8fbbad730c50d850",
+      "originalBytes": 9361,
+      "targetBytes": 9316
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t095/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "5aadecfe661d7cea00b3f475963727b202c4e0553367ea78fa81f042a7ecb1e2",
+      "targetSha256": "c69859ccbc9fa80416f53d823fa3639b9e9cb4fd2fcaf1e1d9f0f2370a7f0753",
+      "originalBytes": 2929395,
+      "targetBytes": 2933896
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t096/results.json",
+      "action": "derived",
+      "originalSha256": "1307e1d2b04857cb246b5f9cf38e01ab741e919d59ff7b98d068ad0ae6eadfd7",
+      "targetSha256": "e53b418ff355ba987c2ba2cf0e198af02d4b6185842ad1fdac06e73279f5f578",
+      "originalBytes": 27190,
+      "targetBytes": 27234
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t096/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "d724fd64ca89a847b9f7da127da2e1f3d22da57a316080c6b3434701cf4569a4",
+      "targetSha256": "cd3af0ead7538bc62c165bcc1adb1f36edde67bc4edd48d2048af19f8c5fc09a",
+      "originalBytes": 559711,
+      "targetBytes": 562605
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t104/results.json",
+      "action": "derived",
+      "originalSha256": "e61fe04217f67690d3160e53757fbe2a4c7cbf33ac740014f870ab2ede3a2b5d",
+      "targetSha256": "5bd12a9937a5befbe973d60c6d1f477b741b16097acd874e56e73fd7732e3b61",
+      "originalBytes": 9923,
+      "targetBytes": 9735
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t104/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "6487dc47f3a7b250059bc061ab4b5a2f717f2d2b47e9f641ccd97391f54922c1",
+      "targetSha256": "e0687fa8fc48e75442263bdf25292bb242f3fb34ffe35ca3c8644d17c65fdaad",
+      "originalBytes": 118183,
+      "targetBytes": 119972
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t105/results.json",
+      "action": "identical",
+      "originalSha256": "5e32c8d8b96eb3eb8df8dc07d36331440b7bb3b95fd53cfb143ed209a72c740e",
+      "targetSha256": "5e32c8d8b96eb3eb8df8dc07d36331440b7bb3b95fd53cfb143ed209a72c740e",
+      "originalBytes": 13743,
+      "targetBytes": 13743
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t105/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "b7e5d829916ef6f5a8a90c99858044556743b369d8e913295d7cfef4409323d3",
+      "targetSha256": "0fd270e89198ec1b257c409bd6ad156b6f0a5dd9f079ac295fe27b3c6dbe9541",
+      "originalBytes": 528847,
+      "targetBytes": 531594
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t106/results.json",
+      "action": "derived",
+      "originalSha256": "1f1ce0ce45185df6b16acf93a010295a01e41dfd8256aec9405a3b60a1e0ef3a",
+      "targetSha256": "5f57df459f14dc32e05553c9938e4c2ea6a1ca92b6ce9d8853c4f4b209727445",
+      "originalBytes": 23754,
+      "targetBytes": 23778
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t106/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "0fba713e4e938886ad38bbf67dd25c8b8f89b4815c415cb19118872f80cbef95",
+      "targetSha256": "f24b419b22d47dd9ead88481c85f82f5ab3cabeffe6c34c5f673bcc463659835",
+      "originalBytes": 728730,
+      "targetBytes": 732047
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/trigger-discovery.json",
+      "action": "derived",
+      "originalSha256": "ab6be48bea650a335b44be7b47f8ff105774c7d9a034031b1ca62bd52b8cba5b",
+      "targetSha256": "7f934e18fd1574231e5820bf05d5467795be05e9003006e53c677165e887c4ed",
+      "originalBytes": 37901,
+      "targetBytes": 36484
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-02/README.md",
+      "action": "identical",
+      "originalSha256": "2166ef409ed2a2f2e8a39f99f5f3c60d7a7ab111642f1de22b06f5af6ca3f61b",
+      "targetSha256": "2166ef409ed2a2f2e8a39f99f5f3c60d7a7ab111642f1de22b06f5af6ca3f61b",
+      "originalBytes": 6567,
+      "targetBytes": 6567
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-04/README.md",
+      "action": "identical",
+      "originalSha256": "36ea0d12812edc0b9f49da31bded34524b365698e93298d1a7c5d521747b3f79",
+      "targetSha256": "36ea0d12812edc0b9f49da31bded34524b365698e93298d1a7c5d521747b3f79",
+      "originalBytes": 14219,
+      "targetBytes": 14219
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-05/README.md",
+      "action": "identical",
+      "originalSha256": "83fa538d41369b4cec490019e8fc3e02b3f86067bfa57d57a203a1aa97b10138",
+      "targetSha256": "83fa538d41369b4cec490019e8fc3e02b3f86067bfa57d57a203a1aa97b10138",
+      "originalBytes": 5054,
+      "targetBytes": 5054
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-06/README.md",
+      "action": "identical",
+      "originalSha256": "d6d7d4d1b454eca95cb8263ad063c3e26de11976cbfe655d4b419b3bbc90c6ef",
+      "targetSha256": "d6d7d4d1b454eca95cb8263ad063c3e26de11976cbfe655d4b419b3bbc90c6ef",
+      "originalBytes": 2526,
+      "targetBytes": 2526
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-07/README.md",
+      "action": "identical",
+      "originalSha256": "11f5f8e0f8ed291811b7aedc9cbdd023a6a4f36c184a8338397467871153996c",
+      "targetSha256": "11f5f8e0f8ed291811b7aedc9cbdd023a6a4f36c184a8338397467871153996c",
+      "originalBytes": 7420,
+      "targetBytes": 7420
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/README.md",
+      "action": "identical",
+      "originalSha256": "cade2a6efd3fec397a3b1db52a981986c5f29f261cb5e83ddc358f3069c7bddb",
+      "targetSha256": "cade2a6efd3fec397a3b1db52a981986c5f29f261cb5e83ddc358f3069c7bddb",
+      "originalBytes": 3719,
+      "targetBytes": 3719
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/candidate/implementation-preparation/SKILL.md",
+      "action": "identical",
+      "originalSha256": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+      "targetSha256": "ff0ec4893d2bc280c181ea0f0f8b8c925f6a04fd3dbaae791b55eb9713da4521",
+      "originalBytes": 3382,
+      "targetBytes": 3382
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/candidate/implementation-preparation/speckit-hooks.json",
+      "action": "identical",
+      "originalSha256": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013",
+      "targetSha256": "5f7cee9509d4ddb20107e2ca19c534526e2abadfe05527f96fc850c7b4949013",
+      "originalBytes": 645,
+      "targetBytes": 645
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/evidence-index.json",
+      "action": "identical",
+      "originalSha256": "7ccafb9ac2b4f145b7065913ab3ba6f1cc32c607e643dede0360a9b95ed04a2e",
+      "targetSha256": "7ccafb9ac2b4f145b7065913ab3ba6f1cc32c607e643dede0360a9b95ed04a2e",
+      "originalBytes": 8420,
+      "targetBytes": 8420
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/proposals/T001-approval.json",
+      "action": "identical",
+      "originalSha256": "7d5407995b9961e2697a72dc18e183659ca4f98d71d2cb6f0065e4ea3221e71a",
+      "targetSha256": "7d5407995b9961e2697a72dc18e183659ca4f98d71d2cb6f0065e4ea3221e71a",
+      "originalBytes": 668,
+      "targetBytes": 668
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/proposals/T001.md",
+      "action": "identical",
+      "originalSha256": "f39fead13e7588bcb8eda55dc38550c9651f53fc09f594ceb56fdabce981447a",
+      "targetSha256": "f39fead13e7588bcb8eda55dc38550c9651f53fc09f594ceb56fdabce981447a",
+      "originalBytes": 1563,
+      "targetBytes": 1563
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/proposals/shared-contract-approval.json",
+      "action": "identical",
+      "originalSha256": "71766ac9b7a3e514668238b82aecf932fe693ef916708fa161e3efe419b88039",
+      "targetSha256": "71766ac9b7a3e514668238b82aecf932fe693ef916708fa161e3efe419b88039",
+      "originalBytes": 815,
+      "targetBytes": 815
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/retained-round2.tar.gz",
+      "action": "derived",
+      "originalSha256": "5def17a748a7ec566a7d8f5ee02012379e6be7f1d018ec7f1d63a3accfb3bbee",
+      "targetSha256": "24be09f7e56d5acb1526b5f2fbd0688d659902cdeb714a4ca5a47fd3dda5cb89",
+      "originalBytes": 138067,
+      "targetBytes": 139992
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/retained-round3.tar.gz",
+      "action": "derived",
+      "originalSha256": "c6235f37e2a7606938f1dbb34c2eb458446bf2105cd1bff3015ccf5f49077ec5",
+      "targetSha256": "cfd2e6804c66397c12af2a0551b6c30c0e58fe3d52936d750bc359550f5613b9",
+      "originalBytes": 1077751,
+      "targetBytes": 1086427
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/retained.tar.gz",
+      "action": "derived",
+      "originalSha256": "de45d2e106b67d9aa2e1564f6380867c46b551fe92a36dd1e9fcf46daadcfdb7",
+      "targetSha256": "a008492f7e3460eb00ea3f7723700fbf6398f70cae6aa53383d0cb3262cb6e58",
+      "originalBytes": 1377977,
+      "targetBytes": 1381311
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/round2-results.json",
+      "action": "identical",
+      "originalSha256": "82fa426c7df69f291f920d9a15ef67b765841dc96d9c80a08936120f3c50356b",
+      "targetSha256": "82fa426c7df69f291f920d9a15ef67b765841dc96d9c80a08936120f3c50356b",
+      "originalBytes": 1177,
+      "targetBytes": 1177
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/round3-results.json",
+      "action": "identical",
+      "originalSha256": "187e93d52b0d0fa9149f9ee63b6199fd69002ded6e866b4e808b4e92d3b510e4",
+      "targetSha256": "187e93d52b0d0fa9149f9ee63b6199fd69002ded6e866b4e808b4e92d3b510e4",
+      "originalBytes": 13353,
+      "targetBytes": 13353
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/implementation-preparation-baseline.md",
+      "action": "derived",
+      "originalSha256": "4109ed6a0e0fc15a045172382c99242d3f0f9dd8e3cabcfa4470268a3d2aca58",
+      "targetSha256": "e501029731806e4cb79c40e766c2694e4388ffea0cdd5189004f677d6a6c24fb",
+      "originalBytes": 13111,
+      "targetBytes": 13269,
+      "preparedTargetSha256": "0ef86d1f21d967f52041a79bd5cffbc52ab95fc7f5eca707cc0d72271a91129d"
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/increment-description-engineering.md",
+      "action": "identical",
+      "originalSha256": "f43246a05fa1bc18ab12e65f90921e2b8de8766ef2a4028b35f4303eb7fdf8d2",
+      "targetSha256": "f43246a05fa1bc18ab12e65f90921e2b8de8766ef2a4028b35f4303eb7fdf8d2",
+      "originalBytes": 5666,
+      "targetBytes": 5666
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/increment-engineering.md",
+      "action": "identical",
+      "originalSha256": "4337fac013d59df71e401a4c17196fa90b9bc0176bd40f189be0bcc9c26e5e72",
+      "targetSha256": "4337fac013d59df71e401a4c17196fa90b9bc0176bd40f189be0bcc9c26e5e72",
+      "originalBytes": 26092,
+      "targetBytes": 26092
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/increment-task-order.md",
+      "action": "derived",
+      "originalSha256": "c8f8641fdc0c031e16c30ee66359509d6bd570ee13860fbca59c4c3a3eb412f8",
+      "targetSha256": "dfb2aecf071053bf2618625e2493daece7daf0df0911cb3606cc0e8f69803b2a",
+      "originalBytes": 12251,
+      "targetBytes": 12430
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/managed-migration.md",
+      "action": "identical",
+      "originalSha256": "937a7948c449cad9f98ab66e0583a4afe97e9a6b9e497df339a3b4849082da61",
+      "targetSha256": "937a7948c449cad9f98ab66e0583a4afe97e9a6b9e497df339a3b4849082da61",
+      "originalBytes": 9156,
+      "targetBytes": 9156
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/mvu-a.md",
+      "action": "identical",
+      "originalSha256": "6d9d8f457f68e22d6b287aae9c01ef16036e8c914297936112da9e13e903dcf4",
+      "targetSha256": "6d9d8f457f68e22d6b287aae9c01ef16036e8c914297936112da9e13e903dcf4",
+      "originalBytes": 4225,
+      "targetBytes": 4225
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/mvu-b.md",
+      "action": "derived",
+      "originalSha256": "076d570432329ccc21402778da431538a51c628fad624f00157a38b57824334d",
+      "targetSha256": "f29475fccc9e57e77327e9bf0756c6aff64ed66c587641a3f6a69f42e140c1c6",
+      "originalBytes": 10316,
+      "targetBytes": 10503
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/mvu-governance.md",
+      "action": "identical",
+      "originalSha256": "0489654dbe0c4dd5b52e17e458adf3e768384b4764614e4650f94c41b88bc815",
+      "targetSha256": "0489654dbe0c4dd5b52e17e458adf3e768384b4764614e4650f94c41b88bc815",
+      "originalBytes": 12024,
+      "targetBytes": 12024
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/mvu-increment.md",
+      "action": "identical",
+      "originalSha256": "dff70b6ed16e7d06384f9a8c864a71c25e90d8e2109467e2062fffed8bf70543",
+      "targetSha256": "dff70b6ed16e7d06384f9a8c864a71c25e90d8e2109467e2062fffed8bf70543",
+      "originalBytes": 5966,
+      "targetBytes": 5966
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/native-extension.md",
+      "action": "identical",
+      "originalSha256": "c74a0a7e24405931e3045a49f6083ad4cddcb347a2df525eef5338edde371d66",
+      "targetSha256": "c74a0a7e24405931e3045a49f6083ad4cddcb347a2df525eef5338edde371d66",
+      "originalBytes": 3224,
+      "targetBytes": 3224
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/phase-1.md",
+      "action": "identical",
+      "originalSha256": "2f03ae71f8e9fdb3ced83b09c9995197aa05afd95a33cb4e3567aefd9a2996b9",
+      "targetSha256": "2f03ae71f8e9fdb3ced83b09c9995197aa05afd95a33cb4e3567aefd9a2996b9",
+      "originalBytes": 4839,
+      "targetBytes": 4839
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/python-migration.md",
+      "action": "identical",
+      "originalSha256": "11887d13f35f791f288af7aff7ac87dd295fefab278275c67b267f07558d15d9",
+      "targetSha256": "11887d13f35f791f288af7aff7ac87dd295fefab278275c67b267f07558d15d9",
+      "originalBytes": 8526,
+      "targetBytes": 8526
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/registration-validation.md",
+      "action": "derived",
+      "originalSha256": "92d407f7731717145cfec5c2bc2f9ed87371dbd0a9f1f066000ce3f6ff58a880",
+      "targetSha256": "e102502a980457e6eeba667ba9151fcc31aaa8b7770ec8db4fa696bff751408c",
+      "originalBytes": 9552,
+      "targetBytes": 9731
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/request-boundary-source.md",
+      "action": "derived",
+      "originalSha256": "278680a9beab97f894c841fa855c391eeac17d6f07958613b4f1a751d3052231",
+      "targetSha256": "4b565401933dcb93ce3e979817da75ee53df9e45486a53a3e3eb798774f79bb7",
+      "originalBytes": 5181,
+      "targetBytes": 5360
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/requirements-trace.md",
+      "action": "identical",
+      "originalSha256": "2478d9d10651988d55b7bc1de8e662fbb8f0ae297750be145ce42b9ee7f1338a",
+      "targetSha256": "2478d9d10651988d55b7bc1de8e662fbb8f0ae297750be145ce42b9ee7f1338a",
+      "originalBytes": 10776,
+      "targetBytes": 10776
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/retired-sources.md",
+      "action": "identical",
+      "originalSha256": "907690c6014d8c7e7af9e83ff99ff7aa7e40859fd0b458f7e4f9ea181bc3fb0e",
+      "targetSha256": "907690c6014d8c7e7af9e83ff99ff7aa7e40859fd0b458f7e4f9ea181bc3fb0e",
+      "originalBytes": 4477,
+      "targetBytes": 4477
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/revision-baseline.md",
+      "action": "derived",
+      "originalSha256": "287ee4db0de0996db89c5ea8ea83c5ed2e75613825a447e756b14de17a485ab7",
+      "targetSha256": "5e2406fd8a89f9a61cdef14edbc0ed3a58d2bec9b0fb96bcb0aa82eee7fae16a",
+      "originalBytes": 91151,
+      "targetBytes": 91207
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/script-mount-mvu.md",
+      "action": "derived",
+      "originalSha256": "c799afe65d74d0c9642f5896db5b4cfbbe5169fe851ea8e51d86788431153749",
+      "targetSha256": "b169c83e3c49b42d44c27fe823bf1028fcf402a405199436a5ad1a6e16b71894",
+      "originalBytes": 44089,
+      "targetBytes": 43704,
+      "preparedTargetSha256": "663456f65afe36040fb6b51477d8a221a5362c8b648e38147cb44ce9f8c8e257"
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/skill-portability.md",
+      "action": "derived",
+      "originalSha256": "fb4ad05525e6b60e527ce3237d9cca1502e3f458abf32a9ea2d2966f62ceb20e",
+      "targetSha256": "9625282ba5b66d284201de90a1e45716c4edb9e7ec5915b025a336fcfdcced72",
+      "originalBytes": 12427,
+      "targetBytes": 12606
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/spec-analysis.md",
+      "action": "identical",
+      "originalSha256": "7865a38cb8877e52b57059e32d66f36ce61f66a177ac81769e8428922da02e6b",
+      "targetSha256": "7865a38cb8877e52b57059e32d66f36ce61f66a177ac81769e8428922da02e6b",
+      "originalBytes": 8684,
+      "targetBytes": 8684
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/t063-analysis-delivery.md",
+      "action": "identical",
+      "originalSha256": "7d0ada62144d0698fc22149a60bc110179ad590b9ca081c9108c2e9538d5404f",
+      "targetSha256": "7d0ada62144d0698fc22149a60bc110179ad590b9ca081c9108c2e9538d5404f",
+      "originalBytes": 7591,
+      "targetBytes": 7591
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/t064-analysis-lifecycle.md",
+      "action": "identical",
+      "originalSha256": "221c1455489374f23cf32dff280eae341b82a928f8dbf73484345d7af90de5bd",
+      "targetSha256": "221c1455489374f23cf32dff280eae341b82a928f8dbf73484345d7af90de5bd",
+      "originalBytes": 6785,
+      "targetBytes": 6785
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/t104-preparation-delivery.md",
+      "action": "identical",
+      "originalSha256": "95a0ace8b26bfb280fd1cf7ec720621843c096954a7e96288891d8c91c8c6fb3",
+      "targetSha256": "95a0ace8b26bfb280fd1cf7ec720621843c096954a7e96288891d8c91c8c6fb3",
+      "originalBytes": 8376,
+      "targetBytes": 8376
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/task-decomposition.md",
+      "action": "identical",
+      "originalSha256": "5923e5cd1301e2c6e26b457703f817eeb4545730ef712ea6d34aad031f6c9f8a",
+      "targetSha256": "5923e5cd1301e2c6e26b457703f817eeb4545730ef712ea6d34aad031f6c9f8a",
+      "originalBytes": 3910,
+      "targetBytes": 3910
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/task-inline.md",
+      "action": "identical",
+      "originalSha256": "0e12df5546d36026493275d15f7b841a0c3e8047e8c1f9cca18d93b3a6dd9bdc",
+      "targetSha256": "0e12df5546d36026493275d15f7b841a0c3e8047e8c1f9cca18d93b3a6dd9bdc",
+      "originalBytes": 24936,
+      "targetBytes": 24936
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/trigger-discovery.md",
+      "action": "derived",
+      "originalSha256": "0def555efdc7c1d091d04900e948631698985c16a568ae7ba496a2851ca6905a",
+      "targetSha256": "944ef396141412c9ca543abc0e23b268e12a47867cae1fc875d822f08767110f",
+      "originalBytes": 12078,
+      "targetBytes": 12297,
+      "preparedTargetSha256": "7d80cabe92640d1d1e01edd98e81e312aa36afbd30587ff85df1ca561150f88d"
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/tutor-engineering.md",
+      "action": "identical",
+      "originalSha256": "fb8116d6c72b81bf403680965f9d63be3b2967095ed424f0c549805962e210e7",
+      "targetSha256": "fb8116d6c72b81bf403680965f9d63be3b2967095ed424f0c549805962e210e7",
+      "originalBytes": 14723,
+      "targetBytes": 14723
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/tv-02-planning.md",
+      "action": "derived",
+      "originalSha256": "7b64c6738224ab4659e622ba169a20d440d993b3d8a0aa9b5387f0066b92dc3b",
+      "targetSha256": "fd576d2c3488dee64886a4703e9ce9a5b5d7f1f873f453d8d958a50f8bf60018",
+      "originalBytes": 15421,
+      "targetBytes": 15600
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/tv-05-mvu-documents.md",
+      "action": "identical",
+      "originalSha256": "b2944a5fa182e6f7904485b3e2300f82d7ebd15645592ac16a76b0adb169078c",
+      "targetSha256": "b2944a5fa182e6f7904485b3e2300f82d7ebd15645592ac16a76b0adb169078c",
+      "originalBytes": 4759,
+      "targetBytes": 4759
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/tv-06-description.md",
+      "action": "derived",
+      "originalSha256": "1c31d89297b6ea2bf66e11f06a1f3812a47829c3a80ada16bf0f7a39cca7762c",
+      "targetSha256": "62ce08ae3439c0382a4cb3f01678673fb5f01af9945704e961ce8cc9e18ff187",
+      "originalBytes": 15189,
+      "targetBytes": 15372
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/tv-07-business-delivery.md",
+      "action": "identical",
+      "originalSha256": "266405fa7f1abe536477501b2c6c6379baa7f3769a3dffcf2a7cbbfba8e46eb9",
+      "targetSha256": "266405fa7f1abe536477501b2c6c6379baa7f3769a3dffcf2a7cbbfba8e46eb9",
+      "originalBytes": 33528,
+      "targetBytes": 33528
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/tv-10-preparation.md",
+      "action": "identical",
+      "originalSha256": "d99dae495f89b33d0c13c49f644b89b2b0103585825001598d6437f949b1f8b4",
+      "targetSha256": "d99dae495f89b33d0c13c49f644b89b2b0103585825001598d6437f949b1f8b4",
+      "originalBytes": 13583,
+      "targetBytes": 13583
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/us1-shared-foundation.md",
+      "action": "derived",
+      "originalSha256": "4a389db52f31a13e5c6d189322bd78eece15edf14d49d9cceeb4da2055196c29",
+      "targetSha256": "fc4abb0b912548ca34a671210b5b9cf72db6796f195e8743de5e5d91c7d9d37c",
+      "originalBytes": 14450,
+      "targetBytes": 14629
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/user-shadow.md",
+      "action": "private-summary",
+      "originalSha256": "124e5aeae761a40d1a0f40bcafd7c7ece47db088a33c83196380407b3eb10884",
+      "targetSha256": "3f46ac9cdee580c701f57c366e0791d2e495fbe583b21a834f6b0ee9f67a3b95",
+      "originalBytes": 18985,
+      "targetBytes": 326
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/baseline-hashes.json",
+      "action": "derived",
+      "originalSha256": "9b1ec10d400ff261d048e839f36924c075ffe0e5c630a7fcfeba75908170db83",
+      "targetSha256": "27fa17dbf56516a78503df03fc7a55f72111d0e5e20efea4dd8384a6ecc05c31",
+      "originalBytes": 17645,
+      "targetBytes": 17649
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/full-remount-design.md",
+      "action": "identical",
+      "originalSha256": "88151babcd8a271ec5842ddc3871e08a741c74e3febcab3c4ed31038602f846b",
+      "targetSha256": "88151babcd8a271ec5842ddc3871e08a741c74e3febcab3c4ed31038602f846b",
+      "originalBytes": 6919,
+      "targetBytes": 6919
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/implementation-baseline.md",
+      "action": "identical",
+      "originalSha256": "a7e4ea1be66286cfc6096de4ac751b6dc696fedbd3b11297a0dacdb9c22e97a4",
+      "targetSha256": "a7e4ea1be66286cfc6096de4ac751b6dc696fedbd3b11297a0dacdb9c22e97a4",
+      "originalBytes": 9521,
+      "targetBytes": 9521
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/issues/2026-11-11-collaboration-conversation.md",
+      "action": "private-summary",
+      "originalSha256": "37f37eba8e6f031ad0f5a91d7f3d7107385dcd08d64f57234f6e297f21ac50ee",
+      "targetSha256": "e27e495ee6866c1317113d5655f5163c35da1f1524b720d24d57d67aa57ac92f",
+      "originalBytes": 1877,
+      "targetBytes": 311
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/issues/2026-11-11-implementation-discussion-scope-drift.md",
+      "action": "identical",
+      "originalSha256": "7afd0591581782c42fe1660c72492c280e5f9de009cba8e0356946360e733503",
+      "targetSha256": "7afd0591581782c42fe1660c72492c280e5f9de009cba8e0356946360e733503",
+      "originalBytes": 2040,
+      "targetBytes": 2040
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/issues/2026-11-12-collection-defaults-and-merge.md",
+      "action": "identical",
+      "originalSha256": "4b5fc3836a840ef7cdb544f6a4926a18f1c94d8b51200cc50152c793df232d82",
+      "targetSha256": "4b5fc3836a840ef7cdb544f6a4926a18f1c94d8b51200cc50152c793df232d82",
+      "originalBytes": 1728,
+      "targetBytes": 1728
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/issues/2026-11-12-spec-follow-up-issue-convention.md",
+      "action": "identical",
+      "originalSha256": "0d4ee4c51173d46bb63a8f3a850d99dbde1f7d5ea90048a9ea50796b31274c1a",
+      "targetSha256": "0d4ee4c51173d46bb63a8f3a850d99dbde1f7d5ea90048a9ea50796b31274c1a",
+      "originalBytes": 1561,
+      "targetBytes": 1561
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/natural-language-entry-design.md",
+      "action": "identical",
+      "originalSha256": "d3d2d0a8b7f986cafb996f6a2454125e68a7a49e3c0ee87c0ab50402da846522",
+      "targetSha256": "d3d2d0a8b7f986cafb996f6a2454125e68a7a49e3c0ee87c0ab50402da846522",
+      "originalBytes": 4458,
+      "targetBytes": 4458
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/spec-analysis/README.md",
+      "action": "identical",
+      "originalSha256": "354b3dc0a693a8353855343da5540bfb3b3218a1ab3a614025caf8512fc9e369",
+      "targetSha256": "354b3dc0a693a8353855343da5540bfb3b3218a1ab3a614025caf8512fc9e369",
+      "originalBytes": 15330,
+      "targetBytes": 15330
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/spec-analysis/flows.md",
+      "action": "identical",
+      "originalSha256": "81bb673970ba0c475680152f59e1c1a04859400fcac007d58e2eb2a98041ccae",
+      "targetSha256": "81bb673970ba0c475680152f59e1c1a04859400fcac007d58e2eb2a98041ccae",
+      "originalBytes": 3127,
+      "targetBytes": 3127
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/checklists/requirements.md",
+      "action": "derived",
+      "originalSha256": "5b0adb3f91032f36534011deb55dcb9ca31ba4dfa21adcc3b19251b381296100",
+      "targetSha256": "afe02c57c7bb377cc614c226ed1bb666ee41437588fd6f23a0552926e3fa016f",
+      "originalBytes": 36159,
+      "targetBytes": 36171
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/collaboration-modes-spec-prompt.md",
+      "action": "identical",
+      "originalSha256": "c7548c48f1c36a8e4123493a24a1f28a688d355265172351a57f610c3d8e8292",
+      "targetSha256": "c7548c48f1c36a8e4123493a24a1f28a688d355265172351a57f610c3d8e8292",
+      "originalBytes": 12758,
+      "targetBytes": 12758
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/contracts/artifacts.md",
+      "action": "identical",
+      "originalSha256": "f0f5f1a7063d45ff84eab9d1369dc4e5585609bdf835fdf0e33538fbbcfb50dc",
+      "targetSha256": "f0f5f1a7063d45ff84eab9d1369dc4e5585609bdf835fdf0e33538fbbcfb50dc",
+      "originalBytes": 10052,
+      "targetBytes": 10052
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/contracts/business-node-delivery.md",
+      "action": "identical",
+      "originalSha256": "00f73ef5e9936098b85a6c7c4ad0c810d584532fcd7625540193069568a8d806",
+      "targetSha256": "00f73ef5e9936098b85a6c7c4ad0c810d584532fcd7625540193069568a8d806",
+      "originalBytes": 8034,
+      "targetBytes": 8034
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/contracts/collaboration-modes.md",
+      "action": "identical",
+      "originalSha256": "b5c769be64e058f4e0d2922c107f33eb3b4ef3e585b329822f2a88f401fb39ae",
+      "targetSha256": "b5c769be64e058f4e0d2922c107f33eb3b4ef3e585b329822f2a88f401fb39ae",
+      "originalBytes": 5943,
+      "targetBytes": 5943
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/contracts/implementation-preparation.md",
+      "action": "identical",
+      "originalSha256": "e9ef3d5b455e0ab3946f295740b90d989bbf7db428a9da5bfbf9b8654db56318",
+      "targetSha256": "e9ef3d5b455e0ab3946f295740b90d989bbf7db428a9da5bfbf9b8654db56318",
+      "originalBytes": 5679,
+      "targetBytes": 5679
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/contracts/increment-description.md",
+      "action": "identical",
+      "originalSha256": "c499840506b55a03eed3117645a142bdc64688718e7949f0afa5fd71b08a3c70",
+      "targetSha256": "c499840506b55a03eed3117645a142bdc64688718e7949f0afa5fd71b08a3c70",
+      "originalBytes": 5073,
+      "targetBytes": 5073
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/contracts/mvu.md",
+      "action": "derived",
+      "originalSha256": "aac79f5bbb2c409089f163690dbaffc02dcd6d70906300ad53795211ed5fbe31",
+      "targetSha256": "8adef23e8964c0cdcfd2d07c0259f219c0fe519cc0f62b6e43a592fc93ed3629",
+      "originalBytes": 8738,
+      "targetBytes": 8870
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/contracts/registration.md",
+      "action": "identical",
+      "originalSha256": "59f7a7dde79e77cfacc83d58ebbfa9e9c6ce8e958e394935429d6294d5d1f90b",
+      "targetSha256": "59f7a7dde79e77cfacc83d58ebbfa9e9c6ce8e958e394935429d6294d5d1f90b",
+      "originalBytes": 10881,
+      "targetBytes": 10881
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/contracts/review.md",
+      "action": "identical",
+      "originalSha256": "73308808184c1407f33fe71c327e484ad012970c6d26faf6b455acec20971eb2",
+      "targetSha256": "73308808184c1407f33fe71c327e484ad012970c6d26faf6b455acec20971eb2",
+      "originalBytes": 7850,
+      "targetBytes": 7850
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/contracts/workflow.md",
+      "action": "identical",
+      "originalSha256": "a9df45625a83f8e110a41642e05fd798f781549c89bb84820512187feaa79098",
+      "targetSha256": "a9df45625a83f8e110a41642e05fd798f781549c89bb84820512187feaa79098",
+      "originalBytes": 9368,
+      "targetBytes": 9368
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/data-model.md",
+      "action": "identical",
+      "originalSha256": "75593a9286630606c0d71c2a24b2cd99ab98233d757a16c01aaf76202871af7a",
+      "targetSha256": "75593a9286630606c0d71c2a24b2cd99ab98233d757a16c01aaf76202871af7a",
+      "originalBytes": 19481,
+      "targetBytes": 19481
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/diagrams.md",
+      "action": "identical",
+      "originalSha256": "1117d6e625fd0a5841fce7c77e6f3c656c21bb2cb46a0e69c178bc769e5b3d8f",
+      "targetSha256": "1117d6e625fd0a5841fce7c77e6f3c656c21bb2cb46a0e69c178bc769e5b3d8f",
+      "originalBytes": 16631,
+      "targetBytes": 16631
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/diagrams/business-flow.md",
+      "action": "identical",
+      "originalSha256": "b78a2c6c2415524629af9e6f9130ed38d226102fb79c7ad178b0730a8b569384",
+      "targetSha256": "b78a2c6c2415524629af9e6f9130ed38d226102fb79c7ad178b0730a8b569384",
+      "originalBytes": 12391,
+      "targetBytes": 12391
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/diagrams/logic-flow.md",
+      "action": "identical",
+      "originalSha256": "c54f11b4c8f193f78bb2637a1141e958bc1bc60e463ad0c13abbb2d32625248f",
+      "targetSha256": "c54f11b4c8f193f78bb2637a1141e958bc1bc60e463ad0c13abbb2d32625248f",
+      "originalBytes": 11444,
+      "targetBytes": 11444
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/diagrams/state-transitions.md",
+      "action": "identical",
+      "originalSha256": "21426752a54fccbbe5e745eadfdd953fa95fb0109d1b671f5356c6af63d685ff",
+      "targetSha256": "21426752a54fccbbe5e745eadfdd953fa95fb0109d1b671f5356c6af63d685ff",
+      "originalBytes": 2559,
+      "targetBytes": 2559
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T060.md",
+      "action": "identical",
+      "originalSha256": "249c1903c49a2976252c96391b41d184b80a8dfff28de18447a3f4dbbfaa6f8e",
+      "targetSha256": "249c1903c49a2976252c96391b41d184b80a8dfff28de18447a3f4dbbfaa6f8e",
+      "originalBytes": 4084,
+      "targetBytes": 4084
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T061.md",
+      "action": "identical",
+      "originalSha256": "bed4288a124809fb3277472255acc14e5a46513e163b3122cd04ede4a45c5cb0",
+      "targetSha256": "bed4288a124809fb3277472255acc14e5a46513e163b3122cd04ede4a45c5cb0",
+      "originalBytes": 3216,
+      "targetBytes": 3216
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T062.md",
+      "action": "identical",
+      "originalSha256": "0d77836651a960fc7431a3298fca3a882ca4fd48a13a0fb0edfeb2bb28be7043",
+      "targetSha256": "0d77836651a960fc7431a3298fca3a882ca4fd48a13a0fb0edfeb2bb28be7043",
+      "originalBytes": 5984,
+      "targetBytes": 5984
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T063.md",
+      "action": "identical",
+      "originalSha256": "34853ae1ee1f561e5c21191fbfa37540a21f43ead3697744ad2874f9ae13611b",
+      "targetSha256": "34853ae1ee1f561e5c21191fbfa37540a21f43ead3697744ad2874f9ae13611b",
+      "originalBytes": 5410,
+      "targetBytes": 5410
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T064.md",
+      "action": "identical",
+      "originalSha256": "cb18232cb5b4a11901ea0b7fe9df52d82164abdc0fac1dd32fb9809adb45d4e8",
+      "targetSha256": "cb18232cb5b4a11901ea0b7fe9df52d82164abdc0fac1dd32fb9809adb45d4e8",
+      "originalBytes": 5675,
+      "targetBytes": 5675
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T066.md",
+      "action": "identical",
+      "originalSha256": "ed679dbf3bba946bee7360f7cf07bbb0f4087ffe97f985897b1a87c3b063967a",
+      "targetSha256": "ed679dbf3bba946bee7360f7cf07bbb0f4087ffe97f985897b1a87c3b063967a",
+      "originalBytes": 13148,
+      "targetBytes": 13148
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T067.md",
+      "action": "identical",
+      "originalSha256": "7d6bec3d4e6b29a3a37fc7d43f3379fe5daecbb8b6bccbf62c56b9a76f83ccd3",
+      "targetSha256": "7d6bec3d4e6b29a3a37fc7d43f3379fe5daecbb8b6bccbf62c56b9a76f83ccd3",
+      "originalBytes": 11740,
+      "targetBytes": 11740
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T069.md",
+      "action": "identical",
+      "originalSha256": "ebc541962c75e3adcd38dfe87504c11ce53ecd4e9d4581c8d1b4b877b6b23c9e",
+      "targetSha256": "ebc541962c75e3adcd38dfe87504c11ce53ecd4e9d4581c8d1b4b877b6b23c9e",
+      "originalBytes": 6693,
+      "targetBytes": 6693
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T095.md",
+      "action": "identical",
+      "originalSha256": "f3a8f6d434da0b7aa6bb7779c0bdf80c523c0eb9f3f2290ec2644de503fd8216",
+      "targetSha256": "f3a8f6d434da0b7aa6bb7779c0bdf80c523c0eb9f3f2290ec2644de503fd8216",
+      "originalBytes": 6456,
+      "targetBytes": 6456
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T096.md",
+      "action": "identical",
+      "originalSha256": "64ac947246d5ab5db8f851943444966f4382f31d6774df5768c38dab41e7ad8d",
+      "targetSha256": "64ac947246d5ab5db8f851943444966f4382f31d6774df5768c38dab41e7ad8d",
+      "originalBytes": 9626,
+      "targetBytes": 9626
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T099.md",
+      "action": "identical",
+      "originalSha256": "ec27fb97ba19e8ce7baa71f89400882f0b22a641ffd0dff40e4339fea1b0f0ca",
+      "targetSha256": "ec27fb97ba19e8ce7baa71f89400882f0b22a641ffd0dff40e4339fea1b0f0ca",
+      "originalBytes": 6045,
+      "targetBytes": 6045
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T101.md",
+      "action": "identical",
+      "originalSha256": "aaf46aca108e1cfc87a62d71baa17a8e740938f3e6b73657a54ec0cde1ae6dc6",
+      "targetSha256": "aaf46aca108e1cfc87a62d71baa17a8e740938f3e6b73657a54ec0cde1ae6dc6",
+      "originalBytes": 2474,
+      "targetBytes": 2474
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T102.md",
+      "action": "identical",
+      "originalSha256": "805a7c5ffe2def4bc6545b5e548fabd1a44a540d9849fbd9b22a36e4dc85b5ec",
+      "targetSha256": "805a7c5ffe2def4bc6545b5e548fabd1a44a540d9849fbd9b22a36e4dc85b5ec",
+      "originalBytes": 2132,
+      "targetBytes": 2132
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T103.md",
+      "action": "identical",
+      "originalSha256": "5ce5d6c2c3ed71ede645ea9a5f8a9bdcb4b9881085b5033c2e2ae5745af0d5c3",
+      "targetSha256": "5ce5d6c2c3ed71ede645ea9a5f8a9bdcb4b9881085b5033c2e2ae5745af0d5c3",
+      "originalBytes": 6752,
+      "targetBytes": 6752
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T104.md",
+      "action": "identical",
+      "originalSha256": "6e32f846181775ff8133bd283fee7cca80f9696f95a9108c859330412bd3bb98",
+      "targetSha256": "6e32f846181775ff8133bd283fee7cca80f9696f95a9108c859330412bd3bb98",
+      "originalBytes": 8630,
+      "targetBytes": 8630
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T105.md",
+      "action": "identical",
+      "originalSha256": "0f4edbb6c0d7d707021cab542f66a28a30ffbcef90a0741c835751a4ce73d671",
+      "targetSha256": "0f4edbb6c0d7d707021cab542f66a28a30ffbcef90a0741c835751a4ce73d671",
+      "originalBytes": 9801,
+      "targetBytes": 9801
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/implementation/T106.md",
+      "action": "identical",
+      "originalSha256": "e38577fb0215e10327766c6779a25576044f074769853a3081c5a4358e5dd884",
+      "targetSha256": "e38577fb0215e10327766c6779a25576044f074769853a3081c5a4358e5dd884",
+      "originalBytes": 4113,
+      "targetBytes": 4113
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/issue-description.md",
+      "action": "identical",
+      "originalSha256": "b930283ca6a0b63d4f6fa676992bda1bfb94e21dd9241eda2fcd86458075bf73",
+      "targetSha256": "b930283ca6a0b63d4f6fa676992bda1bfb94e21dd9241eda2fcd86458075bf73",
+      "originalBytes": 4782,
+      "targetBytes": 4782
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/mvu.md",
+      "action": "derived",
+      "originalSha256": "fd33be7a63f43be920f9ab68875a4d956735038f9ebabbba3c97bd326b22b464",
+      "targetSha256": "fec3f8715d015072b171511a1c0bb7df938e8089ceb4af54cf3c56441c7cf0d6",
+      "originalBytes": 30614,
+      "targetBytes": 30698
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/plan.history.md",
+      "action": "identical",
+      "originalSha256": "1d7bbc01a4a96a425b534c6d3f6d9fe9f4bdd5e3da58e7e5b9f33b12d3da0567",
+      "targetSha256": "1d7bbc01a4a96a425b534c6d3f6d9fe9f4bdd5e3da58e7e5b9f33b12d3da0567",
+      "originalBytes": 35846,
+      "targetBytes": 35846
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/plan.md",
+      "action": "identical",
+      "originalSha256": "dfa9d08c02c4394b387b4cf1eb2cdd95a10ef028680287aed4f71f157c7b6e67",
+      "targetSha256": "dfa9d08c02c4394b387b4cf1eb2cdd95a10ef028680287aed4f71f157c7b6e67",
+      "originalBytes": 26212,
+      "targetBytes": 26212
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/pr-description.md",
+      "action": "identical",
+      "originalSha256": "8979f0e64d5d589a15ac14e8e3917810a8fc424e77f40669df6558e6710001f5",
+      "targetSha256": "8979f0e64d5d589a15ac14e8e3917810a8fc424e77f40669df6558e6710001f5",
+      "originalBytes": 5530,
+      "targetBytes": 5530
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/quickstart.md",
+      "action": "identical",
+      "originalSha256": "fbc071d7547f71dffd9770e140f0f3871b4faeb8456a2cfb13df379e155646fb",
+      "targetSha256": "fbc071d7547f71dffd9770e140f0f3871b4faeb8456a2cfb13df379e155646fb",
+      "originalBytes": 55486,
+      "targetBytes": 55486
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/README.md",
+      "action": "identical",
+      "originalSha256": "099c7709a55c3d1b5bbee611f8c174224be35aec7133db6d403d3143d4810c98",
+      "targetSha256": "099c7709a55c3d1b5bbee611f8c174224be35aec7133db6d403d3143d4810c98",
+      "originalBytes": 11182,
+      "targetBytes": 11182
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/discussions/2026-11-05-collaboration-modes.md",
+      "action": "derived",
+      "originalSha256": "c598fc0b54b06c73749e521b982bc3f5115820e54da34856fda8e11f0732e4e6",
+      "targetSha256": "25d3a4d2e0c87783a5f0af10f217797e938890b696a82b3e77df875358335002",
+      "originalBytes": 15059,
+      "targetBytes": 15148
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/discussions/2026-11-10-a-md-coverage.md",
+      "action": "derived",
+      "originalSha256": "9a01e4010d781d247163737f0a041fbcb43aca1515ff5991ea1d4507b20540ff",
+      "targetSha256": "294ea5a1f8d3daa55503a7345ffd7087b9a20f603f5f1bd9f1362d79d17b84b9",
+      "originalBytes": 8160,
+      "targetBytes": 8279
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/discussions/2026-11-10-artifact-organization.md",
+      "action": "identical",
+      "originalSha256": "9fa26868acba3e5dc3a9d7c15a14602112562e04af8ad8df2336c916570ac05c",
+      "targetSha256": "9fa26868acba3e5dc3a9d7c15a14602112562e04af8ad8df2336c916570ac05c",
+      "originalBytes": 5729,
+      "targetBytes": 5729
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/discussions/2026-11-10-existing-requirements-review.md",
+      "action": "identical",
+      "originalSha256": "52448bbeddfffa05f6e8da4dcce748e084d2980ff02ba9e02896300288af13d4",
+      "targetSha256": "52448bbeddfffa05f6e8da4dcce748e084d2980ff02ba9e02896300288af13d4",
+      "originalBytes": 6240,
+      "targetBytes": 6240
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/discussions/2026-11-10-logic-navigation.md",
+      "action": "derived",
+      "originalSha256": "e4732e67cdcdb1242b377c8ef7787d0f0024a454f21688d5b3c03009ea566b11",
+      "targetSha256": "eabab7f4787277064fa7303e8478e04a65af9483361e5f937300b06251decd4e",
+      "originalBytes": 5800,
+      "targetBytes": 5919
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/discussions/2026-11-10-t103-validation-design.md",
+      "action": "identical",
+      "originalSha256": "7746ae5bf29ba0fc5464375d32f33c1ac5331914570d2be09aac2a5e2a5976e1",
+      "targetSha256": "7746ae5bf29ba0fc5464375d32f33c1ac5331914570d2be09aac2a5e2a5976e1",
+      "originalBytes": 9131,
+      "targetBytes": 9131
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/discussions/2026-11-10-user-shadow-scope.md",
+      "action": "derived",
+      "originalSha256": "bbd22ba63d82548255511944fde4878cf6db84d1bf913045d9fd59e53f0bee23",
+      "targetSha256": "186e954f2c8389609ca2150a9e4566037f4c379c0feb56840f05eb0f7a9f7e1b",
+      "originalBytes": 7579,
+      "targetBytes": 7661
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/prompts/2026-11-05-workflow-revision.md",
+      "action": "derived",
+      "originalSha256": "d4b469bb17296e78ed847760c89839ea505f02ed4809f209abdff604b4bbf51d",
+      "targetSha256": "d24a0f7811db347d59e93cefa7cd905eef6b80e1a2e2b971adb4c5cfc4a25994",
+      "originalBytes": 17583,
+      "targetBytes": 17725
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/prompts/2026-11-08-increment-planning-description.md",
+      "action": "derived",
+      "originalSha256": "6623f7d122c455e976adb492fdb850981eae59c3d891ce2e2075da7e0f595a05",
+      "targetSha256": "718484138cfaab279287e6bd80cfec578a2743847f29a054972433112428c93e",
+      "originalBytes": 7440,
+      "targetBytes": 7534
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/prompts/2026-11-10-implement-first-revision.md",
+      "action": "derived",
+      "originalSha256": "fde1122c3c6a2b2fcdbf05932c9f8d9fdb12673a7377eb95ed0c91ec4fa252a6",
+      "targetSha256": "607cbc6d884a38e6fc7d9292a7e2b37a8a0f132906eaf8d03567bccd9c290795",
+      "originalBytes": 15206,
+      "targetBytes": 15266
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/raw/2026-11-05-workflow-adjustments.md",
+      "action": "identical",
+      "originalSha256": "d2ed50b2a8aea44c66bf52775a9ec4dfbf1e637a43c6cecd2184b8192f2dde3e",
+      "targetSha256": "d2ed50b2a8aea44c66bf52775a9ec4dfbf1e637a43c6cecd2184b8192f2dde3e",
+      "originalBytes": 4645,
+      "targetBytes": 4645
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/raw/2026-11-09-generic-business-delivery-rule.md",
+      "action": "identical",
+      "originalSha256": "554b8d31965e40347af459288e733dfe2bea97a32ef4f0c16bb72587c7b238ac",
+      "targetSha256": "554b8d31965e40347af459288e733dfe2bea97a32ef4f0c16bb72587c7b238ac",
+      "originalBytes": 2330,
+      "targetBytes": 2330
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/raw/2026-11-10-implement-first-scope.md",
+      "action": "identical",
+      "originalSha256": "255abf0706e76e855d9abf15621667c223dfd15a0cb444651c7057456255d35f",
+      "targetSha256": "255abf0706e76e855d9abf15621667c223dfd15a0cb444651c7057456255d35f",
+      "originalBytes": 769,
+      "targetBytes": 769
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/raw/2026-11-10-implementation-discussion-revision.md",
+      "action": "identical",
+      "originalSha256": "67a0601ab835329755de9685b53ed995d42192f1e248aefb4da0eb82538e2473",
+      "targetSha256": "67a0601ab835329755de9685b53ed995d42192f1e248aefb4da0eb82538e2473",
+      "originalBytes": 2709,
+      "targetBytes": 2709
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/raw/2026-11-11-defer-build-validation.md",
+      "action": "identical",
+      "originalSha256": "b4047f2da9c2a09afb2e66f6c5fbd90cf4f6c4539c1e49529c35febd31fface1",
+      "targetSha256": "b4047f2da9c2a09afb2e66f6c5fbd90cf4f6c4539c1e49529c35febd31fface1",
+      "originalBytes": 462,
+      "targetBytes": 462
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/raw/2026-11-12-delete-paused-sources.md",
+      "action": "identical",
+      "originalSha256": "84aae8b77721077d41e66bdd41f305a32e7d22a4c2b3a32449a263366c121fbe",
+      "targetSha256": "84aae8b77721077d41e66bdd41f305a32e7d22a4c2b3a32449a263366c121fbe",
+      "originalBytes": 786,
+      "targetBytes": 786
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/raw/2026-11-12-publishing-mounting-other-session.md",
+      "action": "identical",
+      "originalSha256": "d18e68054a88402c64b6c1e2c27f7207883a6d81841ba33cb8c375db37477abf",
+      "targetSha256": "d18e68054a88402c64b6c1e2c27f7207883a6d81841ba33cb8c375db37477abf",
+      "originalBytes": 1128,
+      "targetBytes": 1128
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/raw/2026-11-12-remove-powershell.md",
+      "action": "identical",
+      "originalSha256": "1a10b9345774c86b4357e67f0a77c3b9ef56f3d2740d4707af254ed2f225fa1e",
+      "targetSha256": "1a10b9345774c86b4357e67f0a77c3b9ef56f3d2740d4707af254ed2f225fa1e",
+      "originalBytes": 887,
+      "targetBytes": 887
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/requirements/raw/2026-11-12-spec-revision-planning-boundary.md",
+      "action": "identical",
+      "originalSha256": "6f0198411c7404c078958900cdd30cdc75113560aa1390f96974c894fbd396be",
+      "targetSha256": "6f0198411c7404c078958900cdd30cdc75113560aa1390f96974c894fbd396be",
+      "originalBytes": 971,
+      "targetBytes": 971
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/research.md",
+      "action": "derived",
+      "originalSha256": "39c1a0e8df0b31adef4d3213e589a567c1e8658558c57f77b3ee15c9a3c72b5e",
+      "targetSha256": "6462556797dbbaef62f2a2fcd8ba776e3eaa051b9b0c45decf175d9a79176e3b",
+      "originalBytes": 70500,
+      "targetBytes": 70683
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/spec.md",
+      "action": "derived",
+      "originalSha256": "7fca8501a5ac1c7f987f317165e461ff177d8fa56d36931faf108cb1674f2764",
+      "targetSha256": "e329f9d39686a3eef7b0dbcce42e8608548a20e4a77fcde3ded301268f0cbf76",
+      "originalBytes": 155310,
+      "targetBytes": 155017
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/tasks.md",
+      "action": "derived",
+      "originalSha256": "1efbce7a6b572d9e20d7bcd0e6900a523cf3d9cbd939ec4fb5bd3fbbbaac94c1",
+      "targetSha256": "0d3a317b326d86f8ff77da3b0df7096be7dfa30ed8ef941a750b729d4fc22471",
+      "originalBytes": 377988,
+      "targetBytes": 378298,
+      "preparedTargetSha256": "82cc1006c286eddbb3b6cb545802e6ee6455333b2b4296c9143cdb772fa65ab2"
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/repository-migration.md",
+      "action": "derived",
+      "originalSha256": "b6489f9b20e2b8f81715d3137b3cd023d750798ccc131ff7896d44cde013bcb2",
+      "targetSha256": "2528cff35c26aa784bc8a5b25084862aa0a15c807e099588c649fda101eebe3c",
+      "originalBytes": 5774,
+      "targetBytes": 6100,
+      "preparedTargetSha256": "b64d368891532e2a0642215a55d1ea7f668e677a77eddad0f2c662a3dae74bb0"
+    },
+    {
+      "path": "specs/skills/001-skills-distribution/implementation/repository-migration-files.md",
+      "action": "identical",
+      "originalSha256": "9219861b370625366732bd11211cf6fbc894fef7ce25f6f144a36cc11957d776",
+      "targetSha256": "fa65ff0f2d7d6bb6a58d3bc0ff7e04c77cec32097fab4173aeda2f90190c8238",
+      "originalBytes": 68930,
+      "targetBytes": 69113,
+      "preparedTargetSha256": "9219861b370625366732bd11211cf6fbc894fef7ce25f6f144a36cc11957d776"
+    },
+    {
+      "path": "scripts/dev/actions/link-skills/link-skills.sh",
+      "originalSha256": "96d970a4e0a6379a050a06bb44569af3d895a032c00493c5cb193009bbb7abdd",
+      "targetSha256": "96d970a4e0a6379a050a06bb44569af3d895a032c00493c5cb193009bbb7abdd",
+      "targetBytes": 3488,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "scripts/dev/actions/link-skills/test-link-skills.mjs",
+      "originalSha256": "081650fbf3a0a219aaa0c9512d4f526938d1557f1b4bb4b329e930d7b53847ef",
+      "targetSha256": "9d31bf3e32c77d51fb17509cf3108c5203a74f40928c8105a00e5dc5fc468f22",
+      "targetBytes": 11826,
+      "action": "companion",
+      "migrationAdaptation": true
+    },
+    {
+      "path": "scripts/dev/actions/link-skills/README.md",
+      "originalSha256": "c30864ead7e3711fc5731a9c9c185d674a96ca416e3d5fce47588f96d7c31141",
+      "targetSha256": "c30864ead7e3711fc5731a9c9c185d674a96ca416e3d5fce47588f96d7c31141",
+      "targetBytes": 2055,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "scripts/dev/actions/link-skills/link-skills.ps1",
+      "originalSha256": "63ae434991feb6a5af8cea6d032a082cf7385be2905b34039dd2ffb35b20b9d3",
+      "targetSha256": "63ae434991feb6a5af8cea6d032a082cf7385be2905b34039dd2ffb35b20b9d3",
+      "targetBytes": 4390,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "scripts/dev/actions/register-hooks/register-hooks.sh",
+      "originalSha256": "5506449c156ebc1cf179d4f693484934054a2a10b440d97480793f8f7963182a",
+      "targetSha256": "5506449c156ebc1cf179d4f693484934054a2a10b440d97480793f8f7963182a",
+      "targetBytes": 401,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "scripts/dev/actions/register-hooks/README.md",
+      "originalSha256": "57e1c2047d89eedf429f660cc5c256067006e8c47af4f33cb48c65a3b9ab071c",
+      "targetSha256": "57e1c2047d89eedf429f660cc5c256067006e8c47af4f33cb48c65a3b9ab071c",
+      "targetBytes": 868,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "scripts/dev/actions/register-hooks/test-register-hooks.mjs",
+      "originalSha256": "eaf22de705c7943a42e75ddbc6ebe2f81b8788777812b443c447fc7bb08b154d",
+      "targetSha256": "eaf22de705c7943a42e75ddbc6ebe2f81b8788777812b443c447fc7bb08b154d",
+      "targetBytes": 67,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "scripts/dev/actions/register-hooks/register-hooks.ps1",
+      "originalSha256": "2848ccff29561d07fedc8cbb8a0ba9ae2428942ac16b7d68b6831a367359f8bd",
+      "targetSha256": "2848ccff29561d07fedc8cbb8a0ba9ae2428942ac16b7d68b6831a367359f8bd",
+      "targetBytes": 374,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "scripts/dev/actions/estimate-context/test-estimate-context.mjs",
+      "originalSha256": "bfbf30984717d2e0bfe64df81dc488d2a52e0b82a4c97e50c5c01577180ac4f7",
+      "targetSha256": "bfbf30984717d2e0bfe64df81dc488d2a52e0b82a4c97e50c5c01577180ac4f7",
+      "targetBytes": 5029,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "scripts/dev/actions/estimate-context/estimate-context.mjs",
+      "originalSha256": "8ce72e0f73138f55c7309b18f2230fbe1e6c117dbc69c14becc386bffece7aa1",
+      "targetSha256": "8ce72e0f73138f55c7309b18f2230fbe1e6c117dbc69c14becc386bffece7aa1",
+      "targetBytes": 7481,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "stacks/mcp-inspector/docker-compose.yml",
+      "originalSha256": "d24d88e5467da13c9347309436314c32face367cf6976d48a183fd2b9cf20c0e",
+      "targetSha256": "d24d88e5467da13c9347309436314c32face367cf6976d48a183fd2b9cf20c0e",
+      "targetBytes": 1148,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "stacks/mcp-inspector/docker-compose.dev.yml",
+      "originalSha256": "23eb775d204432145cb7f971201f2e6efe345c2173f7c73aeaaef956755be4cd",
+      "targetSha256": "23eb775d204432145cb7f971201f2e6efe345c2173f7c73aeaaef956755be4cd",
+      "targetBytes": 1567,
+      "action": "companion",
+      "migrationAdaptation": false
+    },
+    {
+      "path": "stacks/mcp-inspector/README.md",
+      "originalSha256": "742c61f9d7dace19d35e73738952e99bba0a27b1defdbdeec58add4fcae23ab6",
+      "targetSha256": "742c61f9d7dace19d35e73738952e99bba0a27b1defdbdeec58add4fcae23ab6",
+      "targetBytes": 2102,
+      "action": "companion",
+      "migrationAdaptation": false
+    }
+  ],
+  "archives": [
+    {
+      "path": "specs/skills/001-skills-distribution/archive/2026-11-10-build-pipeline-replan/snapshot.tar.gz",
+      "originalSha256": "ee33cfd770ea4a38f73892d1809a9f413ccc3a7c1d1dc606169de1a5fb833a1f",
+      "derivedSha256": "ef1dcc37b8d1d1ba72da4bf793156b75fc5a3c70480307e636096b0f11c24376",
+      "changedMembers": 2
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t062/retained.tar.gz",
+      "originalSha256": "6c634769d3793f0f9ed00642b40ebefed4feee3a6c71c324d87a50de49103514",
+      "derivedSha256": "3f5d2282f156a6ee6749be8ef48e8a14a7bfdd13eb67e1497e7c9adf37f9ee89",
+      "changedMembers": 21
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t063/retained.tar.gz",
+      "originalSha256": "44ad70c74749d3f392eddd0fd799c8ddd372f27f3f0d05ab9789dd6ddf506c24",
+      "derivedSha256": "c729cdc90c7d9204dd4a94e81d1fca561e1b41d4f8433f28c82532f7c2f4de16",
+      "changedMembers": 19
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t064/retained.tar.gz",
+      "originalSha256": "4edf967145e788328e1ccf8f61ace433ba12f764fe9fedf3a37a8afb33944456",
+      "derivedSha256": "2bce19ff9c5a6a5d8da3f5781810d2d216f47c3fded0820ea816c3070d9df061",
+      "changedMembers": 31
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t066/retained.tar.gz",
+      "originalSha256": "ee1a3710f3ca8c46f6f44866353887d2941c12ef882387c9124bd490df3acece",
+      "derivedSha256": "28d917c76d15a00d741155afe08d6e408b0ed8ace8b0aac2bf2ad8808110fa16",
+      "changedMembers": 16
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t067/retained.tar.gz",
+      "originalSha256": "34a8811fcbfce3166b3e6bb9633f9e671fe3864c4c2657579dfdd10397bbc2e6",
+      "derivedSha256": "ce4400006b38cadc8c757acbad5f275d1d0754a494c42d272190c820626ae34d",
+      "changedMembers": 11
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t095/retained.tar.gz",
+      "originalSha256": "5aadecfe661d7cea00b3f475963727b202c4e0553367ea78fa81f042a7ecb1e2",
+      "derivedSha256": "c69859ccbc9fa80416f53d823fa3639b9e9cb4fd2fcaf1e1d9f0f2370a7f0753",
+      "changedMembers": 31
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t096/retained.tar.gz",
+      "originalSha256": "d724fd64ca89a847b9f7da127da2e1f3d22da57a316080c6b3434701cf4569a4",
+      "derivedSha256": "cd3af0ead7538bc62c165bcc1adb1f36edde67bc4edd48d2048af19f8c5fc09a",
+      "changedMembers": 30
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t104/retained.tar.gz",
+      "originalSha256": "6487dc47f3a7b250059bc061ab4b5a2f717f2d2b47e9f641ccd97391f54922c1",
+      "derivedSha256": "e0687fa8fc48e75442263bdf25292bb242f3fb34ffe35ca3c8644d17c65fdaad",
+      "changedMembers": 9
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t105/retained.tar.gz",
+      "originalSha256": "b7e5d829916ef6f5a8a90c99858044556743b369d8e913295d7cfef4409323d3",
+      "derivedSha256": "0fd270e89198ec1b257c409bd6ad156b6f0a5dd9f079ac295fe27b3c6dbe9541",
+      "changedMembers": 11
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/t106/retained.tar.gz",
+      "originalSha256": "0fba713e4e938886ad38bbf67dd25c8b8f89b4815c415cb19118872f80cbef95",
+      "derivedSha256": "f24b419b22d47dd9ead88481c85f82f5ab3cabeffe6c34c5f673bcc463659835",
+      "changedMembers": 25
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/retained-round2.tar.gz",
+      "originalSha256": "5def17a748a7ec566a7d8f5ee02012379e6be7f1d018ec7f1d63a3accfb3bbee",
+      "derivedSha256": "24be09f7e56d5acb1526b5f2fbd0688d659902cdeb714a4ca5a47fd3dda5cb89",
+      "changedMembers": 7
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/retained-round3.tar.gz!round3/substantive-complete-state.tar.gz",
+      "originalSha256": "32b9dbfa348d85b29f7f543ae992638ddfa99a2cb2f493850c5266dda5a6d3ec",
+      "derivedSha256": "10a6ac0ea3a7e0d05a5a0c963c4dc647c36b3cd65e11d244e95d1154a1bedfac",
+      "changedMembers": 2
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/retained-round3.tar.gz",
+      "originalSha256": "c6235f37e2a7606938f1dbb34c2eb458446bf2105cd1bff3015ccf5f49077ec5",
+      "derivedSha256": "cfd2e6804c66397c12af2a0551b6c30c0e58fe3d52936d750bc359550f5613b9",
+      "changedMembers": 45
+    },
+    {
+      "path": "specs/skills/20261029-speckit-workflow-foundation/analysis/acceptance/fixtures/tv-10/retained.tar.gz",
+      "originalSha256": "de45d2e106b67d9aa2e1564f6380867c46b551fe92a36dd1e9fcf46daadcfdb7",
+      "derivedSha256": "a008492f7e3460eb00ea3f7723700fbf6398f70cae6aa53383d0cb3262cb6e58",
+      "changedMembers": 39
+    }
+  ],
+  "localMigrationVerified": true,
+  "sourceDeletionVerified": true,
+  "targetCommitted": false,
+  "deletedRoots": [
+    "packages/skills",
+    "packages/skills-distribution-urgent",
+    "apps/mcp",
+    "specs/skills/001-skills-distribution",
+    "specs/skills/20261029-speckit-workflow-foundation",
+    "scripts/dev/actions/link-skills",
+    "scripts/dev/actions/register-hooks",
+    "scripts/dev/actions/estimate-context",
+    "stacks/mcp-inspector"
+  ],
+  "transferReceipt": "migration-transfer.json",
+  "report": "specs/skills/001-skills-distribution/implementation/repository-migration-execution.md"
+}

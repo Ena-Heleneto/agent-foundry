@@ -1,0 +1,94 @@
+{
+  "source_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f",
+  "targets": [
+    "artifact-issue-description",
+    "artifact-pr-description",
+    "mvu-gate",
+    "artifact-business-flow",
+    "artifact-logic-flow",
+    "explainer-doc-sync",
+    "task-review",
+    "task-guide",
+    "task-explore",
+    "task-pair",
+    "task-tutor",
+    "task-direct"
+  ],
+  "files": [
+    {
+      "path": "packages/skills/src/workflow/artifact-issue-description/SKILL.md",
+      "bytes": 1701,
+      "sha256": "172fb59dfbff15f7830da37a5fe742b13eb45bb30a4493a836e33dfebfb656bb",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/artifact-pr-description/SKILL.md",
+      "bytes": 1716,
+      "sha256": "bfe7883a7c4c8faa27c12da84fbccae67a1e4c347f9bf00d2480cebd217c1b2c",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/mvu-gate/SKILL.md",
+      "bytes": 2412,
+      "sha256": "ea3cff0ae2bd7acf9e7ae757354c52e3b371d293ba7f8d95d09f3656dff19fbc",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/artifact-business-flow/SKILL.md",
+      "bytes": 1842,
+      "sha256": "11519bdc1a29937bf455692795c4650b5b54160829b4d7f1d046ab1e607c5d8b",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/artifact-logic-flow/SKILL.md",
+      "bytes": 1899,
+      "sha256": "3fb17a5f80136b18e8054053b5a171b7503e0653f368df7434ddc696f4406323",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/explainer-doc-sync/SKILL.md",
+      "bytes": 1401,
+      "sha256": "d8709298aa0ef9ead88147bd880588093d8c8fd3cfb639beabfb766acffba780",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/task-review/SKILL.md",
+      "bytes": 6679,
+      "sha256": "fdbd6f58abc075a159bff0aefafa208bc3fb2bb8ce6a30019bfaf2bf0d225825",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/task-guide/SKILL.md",
+      "bytes": 7474,
+      "sha256": "71b4718cd03489e09690d43f92537d8758a39f54a6d34730e984ede519c59fcb",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/task-pair/SKILL.md",
+      "bytes": 4823,
+      "sha256": "5d462b4c5764d52e77fd517088efda8d76be17aa8ce3eade4706bacbd0fdcc97",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/task-tutor/SKILL.md",
+      "bytes": 7682,
+      "sha256": "660f8a01742a66f1f598a0702123a89e915808df07a7134191d98b32cca5273b",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/task-tutor/references/learning-report.md",
+      "bytes": 4226,
+      "sha256": "d99da0a31efdc59e8ccbf245abc28e8d88ff5dfeb488c29522dd91a3afa0d2ce",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    },
+    {
+      "path": "packages/skills/src/workflow/task-direct/SKILL.md",
+      "bytes": 5846,
+      "sha256": "74b28bca63bb0a73e82c6cc3463c8a068ef06a4a5c4452164e711fdef33f84e4",
+      "git_commit": "7e79b524b85fdfb5678acbe54ebfb41ec94bec1f"
+    }
+  ],
+  "already_absent": [
+    "task-explore"
+  ]
+}

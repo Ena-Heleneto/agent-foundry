@@ -1,0 +1,98 @@
+{
+  "version": "codex-cli 0.172.0",
+  "preseededTrust": false,
+  "ordinaryLaunch": true,
+  "emptyRecordCount": 0,
+  "nativeTrustPrompts": [
+    "project",
+    "hooks"
+  ],
+  "installedSkillHashes": {
+    "SKILL.md": "1d37476c7176a5433cb443c7558d5002b092fbb22bf66f40fe024c68d946068d",
+    "references/resume-records.md": "2631b439281a4b9a6bdd690e89fb3851aba12810a8032928aed1a079b8e23949",
+    "references/storage-contract.md": "7553cc35854e348eb6eeb960af7dde1724061d8b6e63788db0c7eb60dbba3187",
+    "references/save-events.md": "f1e25ebc9ed55908e6ed6bc88f49ca0b153a59cdaa8b5f23da103702826a8887",
+    "references/session-scope.md": "9cbd4c673d23566c3249bd029ae6f087aff2b18af181fc0c64f754454bdb0dae",
+    "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+    "references/recording-timing.md": "15d9ff37694a562079a1535dadff20c05938e26487c48786b2c8f0514c860dce",
+    "references/event-capture.md": "47e8acff4900c0aaf5814c3ff0d7848185b93353eec1d93eb0b30cddb17a5f72",
+    "template/detail.md": "43b14c5bd86f03c14b8565bd341829b720d1495deaf37d8184fde8ccc1e47a81",
+    "template/record.md": "858e28dcc466b8e33ab67d28c136417d2007c1f3e7e963b5eada9d9ae2bc36bb"
+  },
+  "candidateSha256": "aaf8a2e4464536e0307a88855f657d6f9998e01051371095733bdeb49006115b",
+  "hooks": [
+    {
+      "name": "userPromptSubmit",
+      "trusted": true,
+      "enabled": true,
+      "currentHash": "sha256:2c25b3406b803be749a756235c335427c8ced3b85af0450e395ac2da98d043b3",
+      "source": ".codex/hooks.json"
+    },
+    {
+      "name": "stop",
+      "trusted": true,
+      "enabled": true,
+      "currentHash": "sha256:9cb95cbd26f8ebd34d651db2fde3f41aa148dd4b81518d9b8963ef47f1a76191",
+      "source": ".codex/hooks.json"
+    }
+  ],
+  "recordSha256": "daea6473fef478f89db759e624c1b462335ae0c44679e69db25489f7f134a736",
+  "recordVisible": true,
+  "controls": [
+    {
+      "mode": "exec",
+      "callbacks": [
+        "UserPromptSubmit",
+        "Stop"
+      ],
+      "recordsUnchanged": true,
+      "additionalBodyReads": 0
+    },
+    {
+      "mode": "exec-resume",
+      "callbacks": [
+        "UserPromptSubmit",
+        "Stop"
+      ],
+      "recordsUnchanged": true,
+      "additionalBodyReads": 0
+    }
+  ],
+  "sessionId": "01a212a3-597c-7af1-a910-fcbe6ef0e08f",
+  "turns": [
+    {
+      "turnId": "01a212a3-5a1f-76b3-9fe4-9c39f518b5ed",
+      "prompt": "读一下 README",
+      "businessToolCommands": [
+        "/usr/bin/cat README.md"
+      ],
+      "promptReadBackBeforeModelRequestMs": 24.15,
+      "hostFinalEmittedAt": "2026-11-25T12:17:05.717Z",
+      "replyReadBackAfterHostFinalMs": 73.43,
+      "reply": "T035_README_FINAL\n\nT035_README_END",
+      "promptReadBackExact": true,
+      "replyReadBackExact": true
+    },
+    {
+      "turnId": "01a212a3-5d96-7762-b62c-8748031cce0f",
+      "prompt": "请只回复 T035_NO_TOOLS",
+      "businessToolCommands": [],
+      "promptReadBackBeforeModelRequestMs": 23.03,
+      "hostFinalEmittedAt": "2026-11-25T12:17:06.484Z",
+      "replyReadBackAfterHostFinalMs": 58.6,
+      "reply": "T035_NO_TOOLS\n\nT035_NO_TOOLS_END",
+      "promptReadBackExact": true,
+      "replyReadBackExact": true
+    }
+  ],
+  "normalExitThenReadBack": true,
+  "recordCountAfterExit": 1,
+  "fixture": {
+    "driver": "packages/skills/tests/conversation-workflow/helpers/recording-hook-probe.py",
+    "installSkillFrom": "packages/skills/dist/skill/profile via link-skills.sh",
+    "hookOrigin": "Temporary project-level candidate installed only by the probe",
+    "trustOperator": "Automated keystrokes through the native Codex UI",
+    "provider": "Synthetic loopback only, including a real Codex tool call to read the test README",
+    "sessionCleanup": "Stopped the isolated app-server daemon before exec resume to release the interactive thread writer"
+  }
+}
