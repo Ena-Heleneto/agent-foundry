@@ -1,0 +1,64 @@
+{
+  "syntheticThreads": [
+    {
+      "threadId": "01a208ac-28e7-75d1-91ff-777c29860be8",
+      "exitCode": 0,
+      "output": "Archived session 01a208ac-28e7-75d1-91ff-777c29860be8."
+    },
+    {
+      "threadId": "01a208af-a937-7c51-9ad8-5e077977c0df",
+      "exitCode": 0,
+      "output": "Archived session 01a208af-a937-7c51-9ad8-5e077977c0df."
+    },
+    {
+      "threadId": "01a208b0-fb34-7f32-8f50-86baf4c3ab65",
+      "exitCode": 0,
+      "output": "Archived session 01a208b0-fb34-7f32-8f50-86baf4c3ab65."
+    },
+    {
+      "threadId": "01a208b2-2044-7283-8dd1-07c30ca3ef6f",
+      "exitCode": 0,
+      "output": "Archived session 01a208b2-2044-7283-8dd1-07c30ca3ef6f."
+    },
+    {
+      "threadId": "01a208bb-efef-7c32-b80b-7b2d8d852857",
+      "exitCode": 0,
+      "output": "Archived session 01a208bb-efef-7c32-b80b-7b2d8d852857."
+    },
+    {
+      "threadId": "01a208b5-b126-7d12-af11-1dd5f8705e33",
+      "exitCode": 0,
+      "output": "Archived session 01a208b5-b126-7d12-af11-1dd5f8705e33."
+    },
+    {
+      "threadId": "01a208b7-67b5-7860-9c97-d7b524b66d8b",
+      "exitCode": 0,
+      "output": "Archived session 01a208b7-67b5-7860-9c97-d7b524b66d8b."
+    },
+    {
+      "threadId": "01a208b7-33c9-7610-8f53-a4b1ce059414",
+      "exitCode": 0,
+      "output": "Archived session 01a208b7-33c9-7610-8f53-a4b1ce059414."
+    },
+    {
+      "threadId": "01a208b6-28f5-7a50-94b4-34ef9b64b969",
+      "exitCode": 0,
+      "output": "Archived session 01a208b6-28f5-7a50-94b4-34ef9b64b969."
+    },
+    {
+      "threadId": "01a208b4-8f0e-76b2-82f4-7394e959b86a",
+      "exitCode": 0,
+      "output": "Archived session 01a208b4-8f0e-76b2-82f4-7394e959b86a."
+    },
+    {
+      "threadId": "01a208aa-b3b5-7843-b3c7-a2beb5eb6988",
+      "exitCode": 0,
+      "output": "Archived session 01a208aa-b3b5-7843-b3c7-a2beb5eb6988."
+    }
+  ],
+  "fixtureRoot": "/tmp/foundry-conversation-lwxSrQ",
+  "fixtureRemoved": true,
+  "nativeTrustNote": "CLI 对合成路径保存的信任记录未直接编辑；没有删除用户配置或认证。",
+  "standaloneCliRestored": "0.170.0",
+  "downloadedStandaloneCacheRetained": "0.171.0"
+}

@@ -1,0 +1,28 @@
+{
+  "project": "/tmp/foundry-t119-step2-ytn2iqb6/candidate",
+  "copy_command": [
+    "bash",
+    "/home/by152/workspace/ena/agent-foundry/feature/init/scripts/dev/actions/link-skills/link-skills.sh",
+    "/tmp/foundry-t119-step2-ytn2iqb6/pair-input",
+    "/tmp/foundry-t119-step2-ytn2iqb6/candidate/.agents/skills"
+  ],
+  "stdout": "copy: conversation-recording\ncopy: conversation-summary\n完成: 新建 2，更新 0，跳过 0，冲突 0\n",
+  "checks": [
+    {
+      "skill": "conversation-recording",
+      "files": [
+        "SKILL.md"
+      ],
+      "sha256": "b32c3a88498551c4259a205d7698503decab165f31caf6642e392abe56913741",
+      "diff_exit_code": 0
+    },
+    {
+      "skill": "conversation-summary",
+      "files": [
+        "SKILL.md"
+      ],
+      "sha256": "a76a2a38cab9e0d977d7419d5366863b64d36882fbd759775a0d82fbd56921e1",
+      "diff_exit_code": 0
+    }
+  ]
+}

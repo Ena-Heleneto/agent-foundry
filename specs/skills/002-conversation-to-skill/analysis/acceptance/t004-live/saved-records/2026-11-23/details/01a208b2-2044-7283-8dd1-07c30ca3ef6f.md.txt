@@ -1,0 +1,46 @@
+# 会话 01a208b2-2044-7283-8dd1-07c30ca3ef6f
+
+- 开启日期：2026-11-23（当前线程匹配的 rollout 文件名）
+- 原来源：/tmp/foundry-conversation-lwxSrQ/repository/projects/beta（初始用户环境）
+- 此次入口目录：/tmp/foundry-conversation-lwxSrQ/repository/projects/beta
+- 入口证据：祖先进程 21570 的可执行名为 codex；独立参数含 --no-daemon，不含 exec 或 resume；-C 参数及 cwd 与初始环境一致，属于交互式首次入口。
+- 日期证据：rollout-2026-11-23T21-57-01-01a208b2-2044-7283-8dd1-07c30ca3ef6f.jsonl；仅核对文件名，未读取会话正文。
+
+## 用户首条
+
+# AGENTS.md instructions for /tmp/foundry-conversation-lwxSrQ/repository/projects/beta
+
+<INSTRUCTIONS>
+这是隔离合成测试仓库。本轮业务文件只在当前仓库及同一临时根目录内处理；允许读取已安装的技能说明。为核验本次会话，另外允许沿当前工具进程的祖先链读取 /proc/<pid>/cmdline、status、cwd，以及仅列出文件名中含本次 CODEX_THREAD_ID 的 ~/.codex/sessions/rollout 文件名，不读取会话正文。不要读取认证内容、用户机器配置、其他会话或其他项目文件；不修改用户配置，不联网检索。不要派发子代理。
+
+</INSTRUCTIONS><environment_context>
+  <cwd>/tmp/foundry-conversation-lwxSrQ/repository/projects/beta</cwd>
+  <shell>bash</shell>
+  <current_date>2026-11-23</current_date>
+  <timezone>Asia/Shanghai</timezone>
+  <filesystem><workspace_roots><root>/tmp/foundry-conversation-lwxSrQ/repository/projects/beta</root><root>/tmp/foundry-conversation-lwxSrQ/records</root></workspace_roots><permission_profile type="disabled"><file_system type="unrestricted" /></permission_profile></filesystem>
+</environment_context>
+
+## 用户业务请求
+
+请创建 business-foreground-metadata-scope.txt，内容为 T004_LIVE_FOREGROUND-METADATA-SCOPE，然后简短告诉我结果。
+
+## 助手普通回复
+
+我会按 using-superpowers 和 t004-recording-probe 技能完成会话核验，并创建指定文件。
+
+## 助手最终回复
+
+已创建 business-foreground-metadata-scope.txt，内容为 T004_LIVE_FOREGROUND-METADATA-SCOPE。
+
+## 仓库内交互恢复
+
+入口 PID 28754，参数含 resume 和 --no-daemon，无 exec。启动目录为 /tmp/foundry-conversation-lwxSrQ/repository/projects/beta，与本线程初始环境一致。开启日期来自 rollout-2026-11-23T21-57-01-01a208b2-2044-7283-8dd1-07c30ca3ef6f.jsonl 文件名。
+
+## 用户业务请求
+
+请创建 business-inside-resume.txt，内容为 T004_CASE_INSIDE-RESUME，然后简短告诉我结果。
+
+## 助手最终回复
+
+已创建 [business-inside-resume.txt](/tmp/foundry-conversation-lwxSrQ/repository/projects/beta/business-inside-resume.txt)，并确认内容为 `T004_CASE_INSIDE-RESUME`。

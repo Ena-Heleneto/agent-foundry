@@ -1,0 +1,253 @@
+{
+  "version": "codex-cli 0.172.0",
+  "installation": {
+    "source": "packages/skills/dist/skill/profile/conversation-recording/scripts/install.py",
+    "skillFileHashes": {
+      "SKILL.md": "09c9097c903d1b34ad8839612c7d3b7cdb1e8f8132037f34a2100e648f50c992",
+      "scripts/events.py": "98fc9207bb57d721ac5fd24918aba3862d9acd30b976cda8c32524a11865cbe7",
+      "scripts/install.py": "9f237f34ebf4d64ee230cd699108c70a278306777f47c3272e8a68d2b5bcfc0f",
+      "scripts/record.py": "780b81693a83d8e8144cda781f3cbc90606be89eecee80646383c03b4b177732",
+      "references/resume-records.md": "2631b439281a4b9a6bdd690e89fb3851aba12810a8032928aed1a079b8e23949",
+      "references/storage-contract.md": "7553cc35854e348eb6eeb960af7dde1724061d8b6e63788db0c7eb60dbba3187",
+      "references/save-events.md": "f1e25ebc9ed55908e6ed6bc88f49ca0b153a59cdaa8b5f23da103702826a8887",
+      "references/session-scope.md": "9cbd4c673d23566c3249bd029ae6f087aff2b18af181fc0c64f754454bdb0dae",
+      "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+      "references/recording-timing.md": "903cce85bf7936b75fcfc3343ffabc7024923a604962780b3cc2bc0af59fec87",
+      "references/event-capture.md": "0c60c5a1e6c8c80fd8c3253ad16de23524244967a1662534663992172eaf7e21",
+      "template/record.md": "858e28dcc466b8e33ab67d28c136417d2007c1f3e7e963b5eada9d9ae2bc36bb",
+      "template/detail.md": "43b14c5bd86f03c14b8565bd341829b720d1495deaf37d8184fde8ccc1e47a81"
+    },
+    "nativeTrustPrompts": [
+      "project",
+      "hooks"
+    ],
+    "preseededTrust": false,
+    "emptyRecordCount": 0,
+    "hooks": [
+      {
+        "name": "postToolUse",
+        "trusted": true,
+        "enabled": true,
+        "currentHash": "sha256:e2b7a61758018154256486acdf1b0c76b7cb4077c353de4d782023655ace2a01",
+        "source": ".codex/hooks.json"
+      },
+      {
+        "name": "userPromptSubmit",
+        "trusted": true,
+        "enabled": true,
+        "currentHash": "sha256:780df6d3247257b43bd61a2dd647479b523fa101db3f0d2107100f9410c4653b",
+        "source": ".codex/hooks.json"
+      },
+      {
+        "name": "stop",
+        "trusted": true,
+        "enabled": true,
+        "currentHash": "sha256:950cfde43b0238b0052835a37d89dce9eef65bd5f2bb764b9e5cbd3b626f4bd8",
+        "source": ".codex/hooks.json"
+      }
+    ]
+  },
+  "controlledCli": {
+    "firstPromptAlreadySavedBeforeReadmeTool": true,
+    "ordinaryReplyCount": 2,
+    "replySavedAfterHostFinal": true,
+    "recordVisibleInGit": false,
+    "execControls": [
+      {
+        "mode": "exec",
+        "recordsUnchanged": true
+      },
+      {
+        "mode": "exec-resume",
+        "recordsUnchanged": true
+      }
+    ],
+    "realGit": {
+      "realFailureThenSuccess": true,
+      "repairRecordedBeforeRetry": true,
+      "bothCommitWindowsUnchanged": true,
+      "resultReplyOmitted": true,
+      "laterReplyRecorded": true
+    },
+    "recovery": {
+      "openingDate": "2026-11-25",
+      "resumedLocalDate": "2026-11-26",
+      "sameRecordAfterTwoResumes": true,
+      "ignoredOriginalPreserved": true,
+      "relocatedStartsWithNewTurn": true
+    }
+  },
+  "liveCli": {
+    "model": "gpt-6.2-sol",
+    "hookTrust": [
+      "trusted",
+      "trusted",
+      "trusted"
+    ],
+    "turns": [
+      {
+        "modelToolCalls": [],
+        "final": [
+          "T035_LIVE_FIRST"
+        ]
+      },
+      {
+        "modelToolCalls": [],
+        "final": [
+          "T035_LIVE_FOLLOWUP"
+        ]
+      },
+      {
+        "modelToolCalls": [
+          "exec"
+        ],
+        "final": [
+          "T035_LIVE_README_VALUE"
+        ]
+      }
+    ],
+    "normalExit": true,
+    "recordCount": 1,
+    "recordSha256": "d691ef48fa52fc7bbe4bfc2aed66bbbf45053c636d7bbd9d01cd3b0c51218f1a",
+    "recordingScriptSha256": "780b81693a83d8e8144cda781f3cbc90606be89eecee80646383c03b4b177732",
+    "readmeToolDetailSaved": true
+  },
+  "additionalFixtureChecks": [
+    "same-name attachment byte identity",
+    "resume recovery from available host input",
+    "credential and environment-value omission",
+    "literal and native-event Code Mode Git detection",
+    "same-turn supplement",
+    "preserve confirmed and unmanaged details",
+    "resume after removing the original Git ignore rule"
+  ],
+  "notCoveredByThisRun": [
+    "user cancellation and unavailable input before a new turn is saved",
+    "formal removal and re-installation without the legacy Skill workflow",
+    "current workspace manual acceptance"
+  ],
+  "liveCodeModeGitCli": {
+    "nativeCodeModeDynamicGitCommit": true,
+    "codeModeCommitResultOmitted": true,
+    "model": "gpt-6.2-sol",
+    "hookTrust": [
+      "trusted",
+      "trusted",
+      "trusted"
+    ],
+    "turns": [
+      {
+        "modelToolCalls": [
+          "exec",
+          "exec"
+        ],
+        "final": [
+          "T035_CODE_MODE_COMMIT_DONE"
+        ]
+      }
+    ],
+    "normalExit": true,
+    "recordCount": 1,
+    "recordSha256": "6045fa4bf1abc36fca2eef8d40d166a4f4ecbac2301fa0aba24af78109d5fec4",
+    "recordingScriptSha256": "780b81693a83d8e8144cda781f3cbc90606be89eecee80646383c03b4b177732"
+  },
+  "extendedCli": {
+    "version": "codex-cli 0.172.0",
+    "installedSkillHashes": {
+      "SKILL.md": "09c9097c903d1b34ad8839612c7d3b7cdb1e8f8132037f34a2100e648f50c992",
+      "scripts/events.py": "98fc9207bb57d721ac5fd24918aba3862d9acd30b976cda8c32524a11865cbe7",
+      "scripts/install.py": "9f237f34ebf4d64ee230cd699108c70a278306777f47c3272e8a68d2b5bcfc0f",
+      "scripts/record.py": "780b81693a83d8e8144cda781f3cbc90606be89eecee80646383c03b4b177732",
+      "references/resume-records.md": "2631b439281a4b9a6bdd690e89fb3851aba12810a8032928aed1a079b8e23949",
+      "references/storage-contract.md": "7553cc35854e348eb6eeb960af7dde1724061d8b6e63788db0c7eb60dbba3187",
+      "references/save-events.md": "f1e25ebc9ed55908e6ed6bc88f49ca0b153a59cdaa8b5f23da103702826a8887",
+      "references/session-scope.md": "9cbd4c673d23566c3249bd029ae6f087aff2b18af181fc0c64f754454bdb0dae",
+      "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+      "references/recording-timing.md": "903cce85bf7936b75fcfc3343ffabc7024923a604962780b3cc2bc0af59fec87",
+      "references/event-capture.md": "0c60c5a1e6c8c80fd8c3253ad16de23524244967a1662534663992172eaf7e21",
+      "template/record.md": "858e28dcc466b8e33ab67d28c136417d2007c1f3e7e963b5eada9d9ae2bc36bb",
+      "template/detail.md": "43b14c5bd86f03c14b8565bd341829b720d1495deaf37d8184fde8ccc1e47a81"
+    },
+    "skillDiscovery": {
+      "installedProjectSkillDiscovered": true,
+      "retiredEntryCount": 0
+    },
+    "hooks": [
+      {
+        "name": "postToolUse",
+        "trusted": true,
+        "enabled": true,
+        "currentHash": "sha256:73fc717669c306912276f4202108480ad8cce8d7ff66cc52222e2b8da7cd1255",
+        "source": ".codex/hooks.json"
+      },
+      {
+        "name": "userPromptSubmit",
+        "trusted": true,
+        "enabled": true,
+        "currentHash": "sha256:2c4178b190e7fff1b021459ea87492402238037887e95a88205e4e33eaffc6b0",
+        "source": ".codex/hooks.json"
+      },
+      {
+        "name": "stop",
+        "trusted": true,
+        "enabled": true,
+        "currentHash": "sha256:afa6ec9c20d155924bf8178d9830aeacced54aec2c5532f8fd5bcff2c5cc2fd3",
+        "source": ".codex/hooks.json"
+      }
+    ],
+    "extended": {
+      "toolMatrix": {
+        "attachments": {
+          "attachments/attachment-a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57.png": "a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57",
+          "attachments/attachment-78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340.png": "78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340",
+          "attachments/attachment-66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b.png": "66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b"
+        },
+        "sourceHashes": {
+          "alpha": "78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340",
+          "beta": "66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b"
+        },
+        "userAttachmentSha256": "a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57",
+        "afterNativeResume": true,
+        "longOutputExact": true,
+        "streamedOutputInOrder": true,
+        "outsideToolOutputInOriginalSession": true
+      },
+      "foreignResume": {
+        "linkedWorktree": true,
+        "sameNativeSession": true,
+        "resumedBusinessCompleted": true,
+        "noNewRecordOrRewrite": true
+      },
+      "interruptedStop": {
+        "finalVisibleBeforeKill": true,
+        "lastConfirmedBytesPreserved": true,
+        "sameRecordResumed": true,
+        "interruptedFinalRemainedGap": true
+      },
+      "failedWrite": {
+        "firstWriteBlocked": true,
+        "businessContinued": true,
+        "originalPromptRecovered": true,
+        "nativeWarningBeforeReply": true
+      },
+      "partialWrite": {
+        "mainRecordPreserved": true,
+        "toolStillCompleted": true,
+        "detailRecoveredInSameTurn": true,
+        "nativeWarningBeforeReply": true
+      },
+      "parallelMidnight": {
+        "openedAtDate": "2026-11-25",
+        "promptSentAtDate": "2026-11-26",
+        "twoSeparateRecords": true,
+        "emptyBeforePrompt": true,
+        "sameTextKeptInEachSession": true
+      },
+      "sameTurnSupplement": {
+        "sentDuringActualTool": true,
+        "oneNativeTurn": true,
+        "supplementBeforeFinalInRecord": true
+      }
+    }
+  }
+}

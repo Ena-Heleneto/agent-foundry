@@ -1,0 +1,54 @@
+{
+  "name": "@foundry/preset-config",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ENA Foundry 工作区共享预设配置库（ESLint / TSConfig / UnoCSS / Nuxt）",
+  "author": "ENA Foundry",
+  "license": "ISC",
+  "keywords": [
+    "eslint-config",
+    "tsconfig",
+    "unocss",
+    "nuxt",
+    "preset",
+    "shared-config"
+  ],
+  "sideEffects": false,
+  "exports": {
+    "./*.json": "./dist/*.json",
+    "./*": {
+      "import": "./dist/*/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint .",
+    "check-types": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "nuxt": "catalog:nuxt"
+  },
+  "dependencies": {
+    "@antfu/eslint-config": "catalog:dev",
+    "@unocss/eslint-config": "catalog:dev",
+    "@unocss/eslint-plugin": "catalog:dev",
+    "@unocss/preset-web-fonts": "catalog:dev",
+    "defu": "catalog:shared",
+    "eslint-plugin-cypress": "catalog:dev",
+    "eslint-plugin-format": "catalog:dev",
+    "eslint-plugin-slop": "catalog:",
+    "eslint-plugin-sonarjs": "catalog:dev",
+    "unocss": "catalog:dev"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:types",
+    "eslint": "catalog:dev",
+    "nuxt": "catalog:nuxt",
+    "typescript": "catalog:dev",
+    "vite": "catalog:build"
+  }
+}

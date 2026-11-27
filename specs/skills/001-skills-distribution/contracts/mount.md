@@ -1,5 +1,20 @@
 # 公共挂载与隐匿契约
 
+## 主线现行挂载入口
+
+主线 curl 从已核验同版归档直接调用 `engine/install.sh`。本次成功集合含适用 workflow 技能且挂载开启时，由引擎调用 `engine/script/speckit-mount.sh`，核验实际项目和选中材料，按所选 hooks、Increment 的依赖顺序执行。`--no-mount` 只关闭挂载，`--hidden` 仍可处理本次成功项。T027 核对入口调用、参数和阶段结果，T028 按原支持矩阵实证同包调用、官方注册和宿主加载。下方 Node 入口、旧脚本目录及官方第二步是此前方案的记录。[现行调用契约](curl-delivery.md#2026-11-20-隐匿脚本调用) · [T027](../tasks.md#t027) · [T028](../tasks.md#t028)
+
+## 2026-11-16 当前隐匿接口与挂载边界
+
+近期只推进技能安装和可选hidden，Spec Kit/hooks/Increment继续后置；原正式同版核验、先hooks后commands、旧入口保护及实际宿主完整加载验收保持，不以新包下载完成抵扣。字段及hidden协议集中在[curl契约](curl-delivery.md)，统一包不强制随包逐文件JSON，后置挂载仍须实际正文/附件/声明同版核验。
+
+hidden从已核验同版统一包取得，未知接口不执行；处理模板候选、本次选择和完整成功集合的交集。统一包整体失败不安装；技能完整且已实际安装后，只有hidden模块/执行失败可保留安装并报告部分失败。生成脚本路径必须过滤正式白名单，不能按历史目录存在性认定成功。
+
+本地.git/父仓库/.git文件、tracked、共享路径及global项目外限制保持，不忽略整个agent目录、不取消跟踪；当前只先验.agents/skills前缀。旧script路径仅作适配参考，不自动恢复script/old。紧急版自身候选和两步消费不受主线布局影响。
+
+<details>
+<summary>此前契约与历史接口（未被替代的保护和最终验收继续适用）</summary>
+
 **本次共同交付的前置边界（2026-11-10）**：打包构建全部重做，挂载运行源码保留原状态；新产物仍须通过本契约的同版文件、官方迁移和实际加载验证。所选正式workflow来源缺失只阻断对应完整候选及消费，不阻断纯MCP或稳定内容的构建实验。候选与CI统一见 [build-pipeline.md](build-pipeline.md)，不能把保留核验骨架描述为完整挂载已实现。
 
 日期：2026-11-10。来源：[当前规格](../spec.md) FR-020～030、FR-045～047、SC-005～010/018。此为待实现接口，当前注册器/公共核验仍有旧集合，不能按本文推定已交付；实际源码事实见 [research](../research.md)。历史段落只保留原时点。
@@ -78,3 +93,5 @@ hooks、commands 独立报告 success/skipped/failed/not-run；重试重新核�
 ## 历史：2026-11-04 hook 配置归属修正（已由集合集中配置替代）
 
 每个声明 hooks 的技能在 SKILL.md 同目录维护 speckit-hooks.json，内容是以事件为键的 hooks 映射。该配置随技能及附件原样构建、安装；register-hooks 从 --skills-dir/<技能>/speckit-hooks.json 读取并直接组装临时 extension.yml。脚本目录不维护或构建 definitions 副本，缺少任一必需配置时在首次官方安装前失败。
+
+</details>

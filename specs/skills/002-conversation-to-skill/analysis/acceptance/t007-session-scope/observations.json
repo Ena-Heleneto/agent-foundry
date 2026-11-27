@@ -1,0 +1,729 @@
+{
+  "date": "2026-11-23",
+  "environment": {
+    "cliVersion": "0.171.0",
+    "model": "gpt-6.2-sol",
+    "historyMode": "paginated",
+    "flags": [
+      "--no-daemon",
+      "-s workspace-write",
+      "-a never"
+    ],
+    "fixture": "T002 temporary Git repository and independent Codex state",
+    "verification": "The temporary project rule asks to load the candidate, run the read-only metadata bridge, and return a scope decision before a separate business call."
+  },
+  "source": {
+    "reference": "packages/skills/src/profile/conversation-recording/references/session-scope.md",
+    "referenceSha256": "4e18293134d0400253d5d66184e98ad58df1a50ab65784d1d640d921b2cf7f3b",
+    "wrapperSha256": "cbd8735b05d0b742ef366abcd455666a52c0826a6914781adbd523468c37630d",
+    "projectRuleSha256": "264cb87847ab121a8657da146a93baa77d50d4a310b56b7d72df3e1823f8c20c",
+    "readOnlyBridgeSha256": "08c73e5f0451ab93dc5cd3c8bad2cee172e53c1470574ca66d7bff0f3865390c"
+  },
+  "diagnosticRuns": {
+    "ordinaryOutside": {
+      "launchCwd": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+      "threadId": "01a2067f-b539-75d0-a0a6-e0fa13ad3383",
+      "tools": [
+        "text(await tools.exec_command({cmd:\"head -n 1 README.md\",workdir:\"/tmp/foundry-conversation-NwVmRL/repository-outside\"}))\n"
+      ],
+      "recordWrites": []
+    },
+    "initialOutsideGateUsedOnlyCwd": {
+      "launchCwd": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+      "threadId": "01a20680-fbcf-7c40-9f59-b6f22ba04a59",
+      "tools": [
+        {
+          "purpose": "observed",
+          "callLine": 16,
+          "resultLine": 19,
+          "input": "const p=\"/tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe\"; text(await tools.exec_command({cmd:`cat '${p}/SKILL.md' '${p}/references/session-scope.md'`}))\n"
+        },
+        {
+          "purpose": "observed",
+          "callLine": 21,
+          "resultLine": 25,
+          "input": "const results=await Promise.allSettled([tools.exec_command({cmd:\"pwd -P\"}),tools.exec_command({cmd:\"git -C /tmp/foundry-conversation-NwVmRL/repository rev-parse --show-toplevel\"})]);text(results);\n"
+        },
+        {
+          "purpose": "observed",
+          "callLine": 27,
+          "resultLine": 29,
+          "input": "text({t007Decision:{admitted:false,branch:\"skip\",repoRoot:\"/tmp/foundry-conversation-NwVmRL/repository\",currentCwd:\"/tmp/foundry-conversation-NwVmRL/repository-outside\",reason:\"当前真实工作目录位于目标仓库之外\"}})\n"
+        },
+        {
+          "purpose": "observed",
+          "callLine": 31,
+          "resultLine": 34,
+          "input": "text(await tools.exec_command({cmd:\"head -n 1 README.md\"}))\n"
+        }
+      ],
+      "actualDecision": {
+        "admitted": false,
+        "branch": "skip",
+        "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository",
+        "currentCwd": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+        "reason": "当前真实工作目录位于目标仓库之外"
+      }
+    },
+    "secondCandidateComparedFieldsAbsentFromSubsequentTurn": {
+      "threadId": "01a20683-0aee-7a21-9236-53240cda1113",
+      "returnedDecisionsAndMetadata": [
+        {
+          "line": 55,
+          "t007Metadata": {
+            "threadId": "01a20683-0aee-7a21-9236-53240cda1113",
+            "turnId": "01a20683-7528-7561-8b4e-747c96582ca9",
+            "turnTrigger": "user",
+            "indexedTurnCount": 2,
+            "activeOrdinal": 38
+          },
+          "launchProof": {
+            "threadId": "01a20683-0aee-7a21-9236-53240cda1113",
+            "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository",
+            "originalCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+            "openingDate": "2026-11-23",
+            "entryEvidence": {
+              "cliVersion": "0.171.0",
+              "historyMode": "paginated",
+              "source": "cli",
+              "originator": "codex-tui",
+              "eventType": "task_started",
+              "turnId": "01a20683-0bda-7350-8eff-b85947ef8c3f",
+              "turnTrigger": "user",
+              "branch": "fresh",
+              "activeFollowsSessionMeta": true
+            }
+          },
+          "gitRoot": "/tmp/foundry-conversation-NwVmRL/repository"
+        },
+        {
+          "line": 55,
+          "t007Decision": {
+            "admitted": false,
+            "branch": "skip",
+            "threadId": "01a20683-0aee-7a21-9236-53240cda1113",
+            "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository",
+            "reason": "Verified launch proof unavailable or inconsistent"
+          }
+        },
+        {
+          "line": 63,
+          "t007Decision": {
+            "admitted": true,
+            "branch": "same-launch",
+            "threadId": "01a20683-0aee-7a21-9236-53240cda1113",
+            "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository",
+            "originalCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+            "openingDate": "2026-11-23"
+          }
+        }
+      ],
+      "tools": [
+        {
+          "purpose": "observed",
+          "callLine": 45,
+          "resultLine": 49,
+          "input": "const base=\"/tmp/foundry-conversation-NwVmRL\";const p=base+\"/repository/.agents/skills/t007-scope-probe/\";const results=await Promise.allSettled([tools.exec_command({cmd:\"cat \"+p+\"SKILL.md\"}),tools.exec_command({cmd:\"cat \"+p+\"references/session-scope.md\"})]);for(const r of results)text(r);\n"
+        },
+        {
+          "purpose": "observed",
+          "callLine": 51,
+          "resultLine": 55,
+          "input": "const results=await Promise.allSettled([tools.exec_command({cmd:\"python3 -B /tmp/foundry-conversation-NwVmRL/native_scope.py\"}),tools.exec_command({cmd:\"git -C /tmp/foundry-conversation-NwVmRL/repository rev-parse --show-toplevel\"})]);const v=JSON.parse(results[0].value.output);const root=results[1].value.output.trim();const proof=v.threadId&&v.turnTrigger===\"user\"?(load(\"conversation-recording:launch:\"+v.threadId)??null):null;text({t007Metadata:v,launchProof:proof,gitRoot:root});const match=results[1].value.exit_code===0&&root===\"/tmp/foundry-conversation-NwVmRL/repository\"&&proof?.repoRoot===root&&proof.threadId===v.threadId&&proof.originalCwd===v.originalCwdReal&&proof.openingDate===v.openingDate&&proof.entryEvidence?.branch===\"fresh\"&&(v.defaultToolCwd===root||v.defaultToolCwd?.startsWith(root+\"/\"));text({t007Decision:match?{admitted:true,branch:\"same-launch\",threadId:v.threadId,repoRoot:root,originalCwd:proof.originalCwd,openingDate:proof.openingDate}:{admitted:false,branch:\"skip\",threadId:v.threadId,repoRoot:root,reason:\"Verified launch proof unavailable or inconsistent\"}});\n"
+        },
+        {
+          "purpose": "observed",
+          "callLine": 59,
+          "resultLine": 63,
+          "input": "const r=await tools.exec_command({cmd:\"python3 -B /tmp/foundry-conversation-NwVmRL/native_scope.py\"});const v=JSON.parse(r.output);const repoRoot=\"/tmp/foundry-conversation-NwVmRL/repository\";const p=load(\"conversation-recording:launch:\"+v.threadId);const e=p?.entryEvidence;const admitted=v.turnTrigger===\"user\"&&v.indexedTurnCount>1&&p?.threadId===v.threadId&&p.repoRoot===repoRoot&&p.originalCwd.startsWith(repoRoot+\"/\")&&/^\\d{4}-\\d{2}-\\d{2}$/.test(p.openingDate)&&e?.source===\"cli\"&&e.originator===\"codex-tui\"&&e.eventType===\"task_started\"&&e.turnTrigger===\"user\"&&e.branch===\"fresh\"&&e.activeFollowsSessionMeta;text({t007Decision:admitted?{admitted,branch:\"same-launch\",threadId:v.threadId,repoRoot,originalCwd:p.originalCwd,openingDate:p.openingDate}:{admitted:false,branch:\"skip\",threadId:v.threadId,repoRoot,reason:\"Launch evidence incomplete\"}});\nconst out=await tools.exec_command({cmd:\"head -n 1 README.md\",workdir:\"/tmp/foundry-conversation-NwVmRL/repository-outside\"});text(out);\n"
+        }
+      ]
+    }
+  },
+  "liveCases": {
+    "first-checked": {
+      "launchCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+      "threadId": "01a20685-5267-7772-b575-b07e3047ebed",
+      "openingDate": "2026-11-23",
+      "nativeOriginalCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+      "nativeOriginalSource": "cli",
+      "nativeOriginator": "codex-tui",
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "rollout": ".codex/sessions/2026/11/23/rollout-2026-11-23T11-48-50-01a20685-5267-7772-b575-b07e3047ebed.jsonl",
+      "filesBefore": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "filesAfter": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "writeEvents": [],
+      "turns": [
+        {
+          "actualTurnId": "01a20685-52c8-7593-80e6-ed0b67bfdaa9",
+          "effectiveCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+          "referenceReadBackLine": 19,
+          "metadataReadbacks": [
+            {
+              "line": 24,
+              "metadata": {
+                "threadId": "01a20685-5267-7772-b575-b07e3047ebed",
+                "turnId": "01a20685-52c8-7593-80e6-ed0b67bfdaa9",
+                "turnTrigger": "user",
+                "indexedTurnCount": 1,
+                "activeOrdinal": 1,
+                "activeFollowsSessionMeta": true,
+                "sessionMetaId": "01a20685-5267-7772-b575-b07e3047ebed",
+                "source": "cli",
+                "originator": "codex-tui",
+                "originalCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+                "originalCwdReal": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+                "defaultToolCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+                "openingDate": "2026-11-23",
+                "cliVersion": "0.171.0",
+                "historyMode": "paginated",
+                "forkedFromId": null
+              },
+              "launchProof": null
+            }
+          ],
+          "actualDecision": {
+            "line": 33,
+            "decision": {
+              "admitted": true,
+              "branch": "fresh",
+              "threadId": "01a20685-5267-7772-b575-b07e3047ebed",
+              "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository",
+              "originalCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+              "openingDate": "2026-11-23"
+            }
+          },
+          "toolTrace": [
+            {
+              "purpose": "read-candidate",
+              "callLine": 16,
+              "resultLine": 19,
+              "input": "text(await tools.exec_command({cmd:\"cat /tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe/SKILL.md /tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe/references/session-scope.md\"}))\n"
+            },
+            {
+              "purpose": "actual-metadata",
+              "callLine": 21,
+              "resultLine": 24,
+              "input": "text(await tools.exec_command({cmd:\"python3 -B /tmp/foundry-conversation-NwVmRL/native_scope.py\"}))\n"
+            },
+            {
+              "purpose": "directory-metadata",
+              "callLine": 26,
+              "resultLine": 29,
+              "input": "text(await tools.exec_command({cmd:\"git -C /tmp/foundry-conversation-NwVmRL/repository rev-parse --show-toplevel && pwd -P\"}))\n"
+            },
+            {
+              "purpose": "admission-decision",
+              "callLine": 31,
+              "resultLine": 33,
+              "input": "const threadId=\"01a20685-5267-7772-b575-b07e3047ebed\", repoRoot=\"/tmp/foundry-conversation-NwVmRL/repository\", originalCwd=repoRoot+\"/projects/alpha\", openingDate=\"2026-11-23\";\nstore(\"conversation-recording:launch:\"+threadId,{threadId,repoRoot,originalCwd,openingDate,entryEvidence:{cliVersion:\"0.171.0\",source:\"cli\",originator:\"codex-tui\",turnId:\"01a20685-52c8-7593-80e6-ed0b67bfdaa9\",turnTrigger:\"user\",activeFollowsSessionMeta:true}});\ntext({t007Decision:{admitted:true,branch:\"fresh\",threadId,repoRoot,originalCwd,openingDate}});\n"
+            },
+            {
+              "purpose": "business",
+              "callLine": 35,
+              "resultLine": 38,
+              "input": "text((await tools.exec_command({cmd:\"head -n 1 README.md\"})).output)\n"
+            }
+          ],
+          "bodyReadsForRecording": [],
+          "actualBusinessFinal": "T007-仓库内合成原文",
+          "businessCallLine": 35
+        },
+        {
+          "actualTurnId": "01a20685-c28b-7650-9656-b64c5842a147",
+          "effectiveCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+          "referenceReadBackLine": 60,
+          "metadataReadbacks": [
+            {
+              "line": 55,
+              "metadata": {
+                "threadId": "01a20685-5267-7772-b575-b07e3047ebed",
+                "turnId": "01a20685-c28b-7650-9656-b64c5842a147",
+                "turnTrigger": "user",
+                "indexedTurnCount": 2,
+                "activeOrdinal": 45
+              },
+              "launchProof": {
+                "threadId": "01a20685-5267-7772-b575-b07e3047ebed",
+                "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository",
+                "originalCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+                "openingDate": "2026-11-23",
+                "entryEvidence": {
+                  "cliVersion": "0.171.0",
+                  "source": "cli",
+                  "originator": "codex-tui",
+                  "turnId": "01a20685-52c8-7593-80e6-ed0b67bfdaa9",
+                  "turnTrigger": "user",
+                  "activeFollowsSessionMeta": true
+                }
+              }
+            }
+          ],
+          "actualDecision": {
+            "line": 64,
+            "decision": {
+              "admitted": true,
+              "branch": "same-launch",
+              "threadId": "01a20685-5267-7772-b575-b07e3047ebed",
+              "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository",
+              "originalCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+              "openingDate": "2026-11-23"
+            }
+          },
+          "toolTrace": [
+            {
+              "purpose": "actual-metadata",
+              "callLine": 52,
+              "resultLine": 55,
+              "input": "const r=await tools.exec_command({cmd:\"python3 -B /tmp/foundry-conversation-NwVmRL/native_scope.py\"}); const v=JSON.parse(r.output);text({t007Metadata:v,launchProof:v.threadId&&v.turnTrigger===\"user\"?(load(\"conversation-recording:launch:\"+v.threadId)??null):null});\n"
+            },
+            {
+              "purpose": "read-candidate",
+              "callLine": 57,
+              "resultLine": 60,
+              "input": "text(await tools.exec_command({cmd:\"cat /tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe/SKILL.md /tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe/references/session-scope.md && git -C /tmp/foundry-conversation-NwVmRL/repository rev-parse --show-toplevel && pwd -P\"}))\n"
+            },
+            {
+              "purpose": "admission-decision",
+              "callLine": 62,
+              "resultLine": 64,
+              "input": "const threadId=\"01a20685-5267-7772-b575-b07e3047ebed\";const {repoRoot,originalCwd,openingDate}=load(\"conversation-recording:launch:\"+threadId);text({t007Decision:{admitted:true,branch:\"same-launch\",threadId,repoRoot,originalCwd,openingDate}});\n"
+            },
+            {
+              "purpose": "business",
+              "callLine": 66,
+              "resultLine": 69,
+              "input": "text((await tools.exec_command({cmd:\"head -n 1 README.md\",workdir:\"/tmp/foundry-conversation-NwVmRL/repository-outside\"})).output)\n"
+            }
+          ],
+          "bodyReadsForRecording": [],
+          "actualBusinessFinal": "T007-仓库外合成原文",
+          "businessCallLine": 66
+        }
+      ]
+    },
+    "outside-explicit-checked": {
+      "launchCwd": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+      "threadId": "01a20685-50a8-73a2-9892-9f402c016a95",
+      "openingDate": "2026-11-23",
+      "nativeOriginalCwd": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+      "nativeOriginalSource": "cli",
+      "nativeOriginator": "codex-tui",
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "rollout": ".codex/sessions/2026/11/23/rollout-2026-11-23T11-48-49-01a20685-50a8-73a2-9892-9f402c016a95.jsonl",
+      "filesBefore": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "filesAfter": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "writeEvents": [],
+      "turns": [
+        {
+          "actualTurnId": "01a20685-50e0-78a2-a9af-ed062dd95797",
+          "effectiveCwd": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+          "referenceReadBackLine": 20,
+          "metadataReadbacks": [
+            {
+              "line": 25,
+              "metadata": {
+                "threadId": "01a20685-50a8-73a2-9892-9f402c016a95",
+                "turnId": "01a20685-50e0-78a2-a9af-ed062dd95797",
+                "turnTrigger": "user",
+                "indexedTurnCount": 1,
+                "activeOrdinal": 1,
+                "activeFollowsSessionMeta": true,
+                "sessionMetaId": "01a20685-50a8-73a2-9892-9f402c016a95",
+                "source": "cli",
+                "originator": "codex-tui",
+                "originalCwd": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+                "originalCwdReal": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+                "defaultToolCwd": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+                "openingDate": "2026-11-23",
+                "cliVersion": "0.171.0",
+                "historyMode": "paginated",
+                "forkedFromId": null
+              },
+              "launchProof": null
+            }
+          ],
+          "actualDecision": {
+            "line": 34,
+            "decision": {
+              "admitted": false,
+              "branch": "skip",
+              "reason": "Original and default tool cwd (/tmp/foundry-conversation-NwVmRL/repository-outside) are outside the verified target repository (/tmp/foundry-conversation-NwVmRL/repository)."
+            }
+          },
+          "toolTrace": [
+            {
+              "purpose": "read-candidate",
+              "callLine": 16,
+              "resultLine": 20,
+              "input": "const p=\"/tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe\"; for(const r of await Promise.allSettled([tools.exec_command({cmd:`cat ${p}/SKILL.md`}),tools.exec_command({cmd:`cat ${p}/references/session-scope.md`})])) text(r)\n"
+            },
+            {
+              "purpose": "actual-metadata",
+              "callLine": 22,
+              "resultLine": 25,
+              "input": "const r=await tools.exec_command({cmd:\"python3 -B /tmp/foundry-conversation-NwVmRL/native_scope.py\"}); const v=JSON.parse(r.output); store(\"t007-current-probe\",v); text({t007Metadata:v,launchProof:v.threadId&&v.turnTrigger===\"user\"?(load(\"conversation-recording:launch:\"+v.threadId)??null):null});\n"
+            },
+            {
+              "purpose": "directory-metadata",
+              "callLine": 27,
+              "resultLine": 30,
+              "input": "const p=\"/tmp/foundry-conversation-NwVmRL/repository\"; text(await tools.exec_command({cmd:`realpath -- '${p}' '${p}-outside' && git -C '${p}' rev-parse --show-toplevel`}));\n"
+            },
+            {
+              "purpose": "admission-decision",
+              "callLine": 32,
+              "resultLine": 34,
+              "input": "const v=load(\"t007-current-probe\"); text({t007Decision:{admitted:false,branch:\"skip\",reason:`Original and default tool cwd (${v.defaultToolCwd}) are outside the verified target repository (/tmp/foundry-conversation-NwVmRL/repository).`}});\n"
+            },
+            {
+              "purpose": "business",
+              "callLine": 36,
+              "resultLine": 39,
+              "input": "text(await tools.exec_command({cmd:\"head -n 1 README.md\"}))\n"
+            }
+          ],
+          "bodyReadsForRecording": [],
+          "actualBusinessFinal": "```text\nT007-仓库外合成原文\n```",
+          "businessCallLine": 36
+        }
+      ]
+    },
+    "exec-resume-checked": {
+      "launchCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+      "threadId": "01a2067f-b03b-7293-8db6-e4580beaa9c3",
+      "openingDate": "2026-11-23",
+      "nativeOriginalCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+      "nativeOriginalSource": "cli",
+      "nativeOriginator": "codex-tui",
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "rollout": ".codex/sessions/2026/11/23/rollout-2026-11-23T11-42-41-01a2067f-b03b-7293-8db6-e4580beaa9c3.jsonl",
+      "filesBefore": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "filesAfter": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "writeEvents": [],
+      "seedSha256": "adaa9ebed4ea94356f2227a04983e601e5bc5a778296cffa10fc2f56fa444574",
+      "turns": [
+        {
+          "actualTurnId": "01a20685-5099-7ac0-a51c-11a767792ad9",
+          "effectiveCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+          "referenceReadBackLine": 92,
+          "metadataReadbacks": [
+            {
+              "line": 98,
+              "metadata": {
+                "threadId": "01a2067f-b03b-7293-8db6-e4580beaa9c3",
+                "turnId": "01a20685-5099-7ac0-a51c-11a767792ad9",
+                "turnTrigger": "exec",
+                "indexedTurnCount": 3,
+                "activeOrdinal": 77
+              },
+              "launchProof": null
+            }
+          ],
+          "actualDecision": {
+            "line": 102,
+            "decision": {
+              "admitted": false,
+              "branch": "skip",
+              "threadId": "01a2067f-b03b-7293-8db6-e4580beaa9c3",
+              "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository",
+              "reason": "turnTrigger=exec"
+            }
+          },
+          "toolTrace": [
+            {
+              "purpose": "read-candidate",
+              "callLine": 89,
+              "resultLine": 92,
+              "input": "text(await tools.exec_command({cmd:\"cat /tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe/SKILL.md /tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe/references/session-scope.md\"}))\n"
+            },
+            {
+              "purpose": "actual-metadata",
+              "callLine": 94,
+              "resultLine": 98,
+              "input": "const a=await Promise.allSettled([tools.exec_command({cmd:\"python3 -B /tmp/foundry-conversation-NwVmRL/native_scope.py\"}),tools.exec_command({cmd:\"git -C /tmp/foundry-conversation-NwVmRL/repository rev-parse --show-toplevel && realpath /tmp/foundry-conversation-NwVmRL/repository && pwd -P\"})]);const v=JSON.parse(a[0].value.output);const p=v.threadId&&v.turnTrigger===\"user\"?(load(\"conversation-recording:launch:\"+v.threadId)??null):null;store(\"t007-third-check\",{v,p,paths:a[1].value.output});text({t007Metadata:v,launchProof:p});text(a[1].value);\n"
+            },
+            {
+              "purpose": "admission-decision",
+              "callLine": 100,
+              "resultLine": 102,
+              "input": "const {v,paths}=load(\"t007-third-check\");text({t007Decision:{admitted:false,branch:\"skip\",threadId:v.threadId,repoRoot:paths.trim().split(\"\\n\")[1],reason:`turnTrigger=${v.turnTrigger}`}});\n"
+            },
+            {
+              "purpose": "business",
+              "callLine": 104,
+              "resultLine": 107,
+              "input": "text(await tools.exec_command({cmd:\"head -n 1 README.md\"}))\n"
+            }
+          ],
+          "bodyReadsForRecording": [],
+          "actualBusinessFinal": "```text\nT007-仓库内合成原文\n```",
+          "businessCallLine": 104
+        }
+      ]
+    },
+    "inside-resume-checked": {
+      "launchCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+      "threadId": "01a2067f-b03b-7293-8db6-e4580beaa9c3",
+      "openingDate": "2026-11-23",
+      "nativeOriginalCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+      "nativeOriginalSource": "cli",
+      "nativeOriginator": "codex-tui",
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "rollout": ".codex/sessions/2026/11/23/rollout-2026-11-23T11-42-41-01a2067f-b03b-7293-8db6-e4580beaa9c3.jsonl",
+      "filesBefore": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "filesAfter": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "writeEvents": [],
+      "seedSha256": "adaa9ebed4ea94356f2227a04983e601e5bc5a778296cffa10fc2f56fa444574",
+      "turns": [
+        {
+          "actualTurnId": "01a20685-5bd0-77a3-97ac-4a212aac63ce",
+          "effectiveCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+          "referenceReadBackLine": 89,
+          "metadataReadbacks": [
+            {
+              "line": 95,
+              "metadata": {
+                "threadId": "01a2067f-b03b-7293-8db6-e4580beaa9c3",
+                "turnId": "01a20685-5bd0-77a3-97ac-4a212aac63ce",
+                "turnTrigger": "user",
+                "indexedTurnCount": 3,
+                "activeOrdinal": 77
+              },
+              "launchProof": null
+            }
+          ],
+          "actualDecision": {
+            "line": 99,
+            "decision": {
+              "admitted": false,
+              "branch": "skip",
+              "threadId": "01a2067f-b03b-7293-8db6-e4580beaa9c3",
+              "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository",
+              "reason": "缺少本次启动凭据及与线程绑定的恢复前目录证据"
+            }
+          },
+          "toolTrace": [
+            {
+              "purpose": "read-candidate",
+              "callLine": 86,
+              "resultLine": 89,
+              "input": "text((await tools.exec_command({cmd:\"cat /tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe/{SKILL.md,references/session-scope.md}\"})).output)\n"
+            },
+            {
+              "purpose": "actual-metadata",
+              "callLine": 91,
+              "resultLine": 95,
+              "input": "const root=\"/tmp/foundry-conversation-NwVmRL/repository\";const a=await Promise.allSettled([tools.exec_command({cmd:\"python3 -B /tmp/foundry-conversation-NwVmRL/native_scope.py\"}),tools.exec_command({cmd:`git -C ${root} rev-parse --show-toplevel && realpath ${root} && pwd -P`})]);const v=JSON.parse(a[0].value.output);const p=v.threadId&&v.turnTrigger===\"user\"?load(\"conversation-recording:launch:\"+v.threadId)??null:null;const paths=a[1].value.output;store(\"t007-check-latest\",{v,p,paths});text({t007Metadata:v,launchProof:p});text(a[1]);\n"
+            },
+            {
+              "purpose": "admission-decision",
+              "callLine": 97,
+              "resultLine": 99,
+              "input": "const {v,paths}=load(\"t007-check-latest\");text({t007Decision:{admitted:false,branch:\"skip\",threadId:v.threadId,repoRoot:paths.trim().split(\"\\n\")[1],reason:\"缺少本次启动凭据及与线程绑定的恢复前目录证据\"}});\n"
+            },
+            {
+              "purpose": "business",
+              "callLine": 101,
+              "resultLine": 104,
+              "input": "text(await tools.exec_command({cmd:\"head -n 1 README.md\"}))\n"
+            }
+          ],
+          "bodyReadsForRecording": [],
+          "actualBusinessFinal": "```text\nT007-仓库内合成原文\n```",
+          "businessCallLine": 101
+        }
+      ]
+    },
+    "outside-resume-inside-checked": {
+      "launchCwd": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+      "threadId": "01a2067f-b03b-7293-8db6-e4580beaa9c3",
+      "openingDate": "2026-11-23",
+      "nativeOriginalCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+      "nativeOriginalSource": "cli",
+      "nativeOriginator": "codex-tui",
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "rollout": ".codex/sessions/2026/11/23/rollout-2026-11-23T11-42-41-01a2067f-b03b-7293-8db6-e4580beaa9c3.jsonl",
+      "filesBefore": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "filesAfter": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "writeEvents": [],
+      "seedSha256": "adaa9ebed4ea94356f2227a04983e601e5bc5a778296cffa10fc2f56fa444574",
+      "turns": [
+        {
+          "actualTurnId": "01a20685-522c-77a1-ad3c-835d318f3896",
+          "effectiveCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+          "referenceReadBackLine": 89,
+          "metadataReadbacks": [
+            {
+              "line": 95,
+              "metadata": {
+                "threadId": "01a2067f-b03b-7293-8db6-e4580beaa9c3",
+                "turnId": "01a20685-522c-77a1-ad3c-835d318f3896",
+                "turnTrigger": "user",
+                "indexedTurnCount": 3,
+                "activeOrdinal": 77
+              },
+              "launchProof": null
+            }
+          ],
+          "actualDecision": {
+            "line": 99,
+            "decision": {
+              "admitted": false,
+              "branch": "skip",
+              "threadId": "01a2067f-b03b-7293-8db6-e4580beaa9c3",
+              "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository",
+              "reason": "缺少本次启动凭据及绑定当前线程的恢复前目录证据"
+            }
+          },
+          "toolTrace": [
+            {
+              "purpose": "read-candidate",
+              "callLine": 86,
+              "resultLine": 89,
+              "input": "const d=\"/tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe\";text((await tools.exec_command({cmd:`cat ${d}/SKILL.md ${d}/references/session-scope.md`})).output)\n"
+            },
+            {
+              "purpose": "actual-metadata",
+              "callLine": 91,
+              "resultLine": 95,
+              "input": "const b=\"/tmp/foundry-conversation-NwVmRL\";const a=await Promise.allSettled([tools.exec_command({cmd:`python3 -B ${b}/native_scope.py`}),tools.exec_command({cmd:`git -C ${b}/repository rev-parse --show-toplevel && realpath ${b}/repository && pwd -P`})]);const v=JSON.parse(a[0].value.output);const p=v.threadId&&v.turnTrigger===\"user\"?(load(\"conversation-recording:launch:\"+v.threadId)??null):null;store(\"t007-current-check\",{v,p,paths:a[1].value.output});text({t007Metadata:v,launchProof:p});text(a[1]);\n"
+            },
+            {
+              "purpose": "admission-decision",
+              "callLine": 97,
+              "resultLine": 99,
+              "input": "const {v,paths}=load(\"t007-current-check\");text({t007Decision:{admitted:false,branch:\"skip\",threadId:v.threadId,repoRoot:paths.split(\"\\n\")[0],reason:\"缺少本次启动凭据及绑定当前线程的恢复前目录证据\"}});\n"
+            },
+            {
+              "purpose": "business",
+              "callLine": 101,
+              "resultLine": 104,
+              "input": "text(await tools.exec_command({cmd:\"head -n 1 README.md\"}))\n"
+            }
+          ],
+          "bodyReadsForRecording": [],
+          "actualBusinessFinal": "```text\nT007-仓库内合成原文\n```",
+          "businessCallLine": 101
+        }
+      ]
+    },
+    "inside-resume-outside-checked": {
+      "launchCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+      "threadId": "01a2067f-b539-75d0-a0a6-e0fa13ad3383",
+      "openingDate": "2026-11-23",
+      "nativeOriginalCwd": "/tmp/foundry-conversation-NwVmRL/repository-outside",
+      "nativeOriginalSource": "cli",
+      "nativeOriginator": "codex-tui",
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "rollout": ".codex/sessions/2026/11/23/rollout-2026-11-23T11-42-42-01a2067f-b539-75d0-a0a6-e0fa13ad3383.jsonl",
+      "filesBefore": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "filesAfter": {
+        "already-saved/detail.md": "42d08c99d168ed29cbe3f9084772dd4673beda2ebd29df80e38a1a0b08a3a69c",
+        "already-saved/index.md": "1387888b0bbf18b656474ea0fcb4e65e31456709394d9c125fd6e09498606ded"
+      },
+      "writeEvents": [],
+      "seedSha256": "0d1f6af35445eb5f7e29b8c8a6c164fb37787dacb25b22b7d1b0888e4befdc2d",
+      "turns": [
+        {
+          "actualTurnId": "01a20685-5cda-7b20-820f-8339d0b3036c",
+          "effectiveCwd": "/tmp/foundry-conversation-NwVmRL/repository/projects/alpha",
+          "referenceReadBackLine": 41,
+          "metadataReadbacks": [
+            {
+              "line": 46,
+              "metadata": {
+                "threadId": "01a2067f-b539-75d0-a0a6-e0fa13ad3383",
+                "turnId": "01a20685-5cda-7b20-820f-8339d0b3036c",
+                "turnTrigger": "user",
+                "indexedTurnCount": 2,
+                "activeOrdinal": 27
+              },
+              "launchProof": null
+            }
+          ],
+          "actualDecision": {
+            "line": 51,
+            "decision": {
+              "admitted": false,
+              "branch": "skip",
+              "threadId": "01a2067f-b539-75d0-a0a6-e0fa13ad3383",
+              "turnTrigger": "user",
+              "indexedTurnCount": 2,
+              "reason": "No launch proof or thread-bound pre-resume directory evidence",
+              "repoRoot": "/tmp/foundry-conversation-NwVmRL/repository"
+            }
+          },
+          "toolTrace": [
+            {
+              "purpose": "read-candidate",
+              "callLine": 38,
+              "resultLine": 41,
+              "input": "text(await tools.exec_command({cmd:\"cat /tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe/SKILL.md /tmp/foundry-conversation-NwVmRL/repository/.agents/skills/t007-scope-probe/references/session-scope.md\"}))\n"
+            },
+            {
+              "purpose": "actual-metadata",
+              "callLine": 43,
+              "resultLine": 46,
+              "input": "const r=await tools.exec_command({cmd:\"python3 -B /tmp/foundry-conversation-NwVmRL/native_scope.py\"});if(r.exit_code===0){const v=JSON.parse(r.output);store(\"t007-current-metadata\",v);text({t007Metadata:v,launchProof:v.threadId&&v.turnTrigger===\"user\"?(load(\"conversation-recording:launch:\"+v.threadId)??null):null});}else{text(r);}\n"
+            },
+            {
+              "purpose": "admission-decision",
+              "callLine": 48,
+              "resultLine": 51,
+              "input": "const r=await tools.exec_command({cmd:\"git -C /tmp/foundry-conversation-NwVmRL/repository rev-parse --show-toplevel\"});const v=load(\"t007-current-metadata\");text({t007Decision:{admitted:false,branch:\"skip\",threadId:v.threadId,turnTrigger:v.turnTrigger,indexedTurnCount:v.indexedTurnCount,reason:\"No launch proof or thread-bound pre-resume directory evidence\",...(r.exit_code===0?{repoRoot:r.output.trim()}:{})}})\n"
+            },
+            {
+              "purpose": "business",
+              "callLine": 53,
+              "resultLine": 56,
+              "input": "text(await tools.exec_command({cmd:\"head -n 1 README.md\",workdir:\"/tmp/foundry-conversation-NwVmRL/repository/projects/alpha\"}))\n"
+            }
+          ],
+          "bodyReadsForRecording": [],
+          "actualBusinessFinal": "```text\nT007-仓库内合成原文\n```",
+          "businessCallLine": 53
+        }
+      ]
+    }
+  }
+}

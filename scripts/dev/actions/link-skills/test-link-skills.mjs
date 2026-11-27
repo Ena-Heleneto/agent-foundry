@@ -145,7 +145,7 @@ function testRetiredSources() {
     /**
      * 用户已明确清退的技能，Explore 兼容不存在源码但有旧输入的情况。
      */
-    const retired = ['artifact-issue-description', 'artifact-pr-description', 'mvu-gate', 'artifact-business-flow', 'artifact-logic-flow', 'explainer-doc-sync', 'task-review', 'task-guide', 'task-explore', 'task-pair', 'task-tutor', 'task-direct']
+    const retired = ['artifact-issue-description', 'artifact-pr-description', 'mvu-gate', 'artifact-business-flow', 'artifact-logic-flow', 'explainer-doc-sync', 'task-review', 'task-guide', 'task-explore', 'task-pair', 'task-tutor', 'task-direct', 'shadow-profile']
     /**
      * 旧生成名称也不能通过将来源换成旧安装根而重新复制。
      */
@@ -228,6 +228,76 @@ function testRetiredSources() {
 }
 
 test('Bash：退役来源不复活且用户副本保持', testRetiredSources)
+
+/**
+ * 同步移除本项目的旧影子画像副本，保护其他目标和目录内的用户资料。
+ */
+function testProjectShadowRetirement() {
+  /**
+   * 自有临时项目根，包含真实同步脚本的默认安装布局。
+   */
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'test-shadow-retirement-'))
+  try {
+    /**
+     * 从沙箱里的脚本位置解析项目根。
+     */
+    const script = path.join(root, 'scripts/dev/actions/link-skills/link-skills.sh')
+    fs.mkdirSync(path.dirname(script), { recursive: true })
+    fs.copyFileSync(path.join(SCRIPT_DIR, 'link-skills.sh'), script)
+    /**
+     * 合成源目录，模拟旧源码已经归档。
+     */
+    const source = path.join(root, 'packages/skills/src')
+    fs.mkdirSync(source, { recursive: true })
+    /**
+     * 与现有项目生成副本结构相同的合成正文。
+     */
+    const body = '---\nname: shadow-profile\n---\n# 旧项目技能'
+    /**
+     * 本项目应清理的已安装副本。
+     */
+    const installed = path.join(root, '.agents/skills/shadow-profile')
+    fs.mkdirSync(installed, { recursive: true })
+    fs.writeFileSync(path.join(installed, 'SKILL.md'), body)
+    /**
+     * 指定其他安装根时，同名目录仍归其他来源所有。
+     */
+    const otherTarget = path.join(root, 'other-skills')
+    fs.mkdirSync(path.join(otherTarget, 'shadow-profile'), { recursive: true })
+    fs.writeFileSync(path.join(otherTarget, 'shadow-profile/SKILL.md'), body)
+    /**
+     * 实际运行同步，校验退出码后由调用方检查文件系统。
+     *
+     * @param {string[]} args 可选的来源和目标路径。
+     */
+    function sync(args = []) {
+      /**
+       * 同步退出码和诊断保留供测试失败时定位。
+       */
+      const result = spawnSync('bash', [script, ...args], { encoding: 'utf8' })
+      assert.equal(result.status, 0, result.stdout + result.stderr)
+    }
+    sync([source, otherTarget])
+    assert.equal(fs.readFileSync(path.join(otherTarget, 'shadow-profile/SKILL.md'), 'utf8'), body)
+    assert.equal(fs.existsSync(installed), true)
+    sync()
+    assert.equal(fs.existsSync(installed), false, '项目旧安装副本仍可被发现')
+    sync()
+    assert.equal(fs.existsSync(installed), false)
+
+    fs.mkdirSync(installed)
+    fs.writeFileSync(path.join(installed, 'SKILL.md'), body)
+    fs.writeFileSync(path.join(installed, '.user-note'), '用户资料')
+    sync()
+    assert.equal(fs.readFileSync(path.join(installed, 'SKILL.md'), 'utf8'), body)
+    assert.equal(fs.readFileSync(path.join(installed, '.user-note'), 'utf8'), '用户资料')
+  }
+  finally {
+    fs.rmSync(root, { recursive: true, force: true })
+  }
+}
+
+test('Bash：清除项目影子画像副本并保护其他安装', testProjectShadowRetirement)
 
 /**
  * 正式来源与集合均清退旧能力，同时继续交付 Increment 与三个当前 hooks。

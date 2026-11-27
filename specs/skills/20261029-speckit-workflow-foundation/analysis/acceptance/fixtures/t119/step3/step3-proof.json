@@ -1,0 +1,114 @@
+{
+  "scope": "T119 第三步三源独立分支；不等同四入口整体交付",
+  "parent_thread_id": "01a1f1aa-f18f-79e3-a385-a16924cbf21e",
+  "summary_thread_id": "01a1f1ab-f626-73a0-b06b-befb71da603c",
+  "analysis_thread_id": "01a1f1ac-1f77-7a80-80b6-535b8ad30d03",
+  "raw_comparisons": [
+    {
+      "phase": "candidate-held",
+      "turn_id": "01a1f1ab-178a-7573-b97e-8e8588257db9",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03"
+      ],
+      "body_role_order_match": true,
+      "old_raw_prefix_unchanged": true,
+      "current_final_not_presaved": true
+    },
+    {
+      "phase": "candidate-v1-before-release",
+      "turn_id": "01a1f1ad-d2ac-7b71-8d56-77ac573664d3",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06"
+      ],
+      "body_role_order_match": true,
+      "old_raw_prefix_unchanged": true,
+      "current_final_not_presaved": true
+    },
+    {
+      "phase": "candidate-v2-before-release",
+      "turn_id": "01a1f1b0-cb68-7bd3-b302-7ccc57aeed3b",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09"
+      ],
+      "body_role_order_match": true,
+      "old_raw_prefix_unchanged": true,
+      "current_final_not_presaved": true
+    },
+    {
+      "phase": "candidate-released",
+      "turn_id": "01a1f1b2-88f2-7300-8075-7ccf05677638",
+      "raw_anchors": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12"
+      ],
+      "body_role_order_match": true,
+      "old_raw_prefix_unchanged": true,
+      "current_final_not_presaved": true
+    }
+  ],
+  "summary_wait_observed": true,
+  "summary_all_writes_after_explicit_release": true,
+  "analysis_three_writes_before_summary_commit": true,
+  "v1_main_wait_agent_calls": 1,
+  "v1_async_answer_defect_retained": true,
+  "v2_main_wait_agent_calls": 0,
+  "v2_answer_completed_at_ms": 1795056325091,
+  "v2_analysis_completed_at_ms": 1795056337099,
+  "v2_answer_preceded_analysis_finish_by_ms": 12008,
+  "v2_source_loaded_and_raw_read_by_child": true,
+  "parent_raw_read_before_analysis_dispatch": true,
+  "conclusions": [
+    "E01",
+    "E02",
+    "E03",
+    "E04"
+  ],
+  "summary_anchors": [
+    "R01",
+    "R02",
+    "R03",
+    "R04"
+  ],
+  "branch_file_writers_distinct": true,
+  "parent_did_not_write_conclusions_or_summary": true,
+  "final_source_copy_bytes_equal": true,
+  "protected_hashes": {
+    "packages/skills/src/profile/shadow-profile/SKILL.md": "d9fe13c9d53f23230ac1063f513d38cab67e7109cd7e042d5e1b44cfb40c3cc4",
+    "packages/skills/src/profile/collection.config.ts": "bc57a788afa9556424548fabc412ee12ad8323d42005566dbe642507dd3f18ec",
+    ".agents/skills/shadow-profile/SKILL.md": "3c35847b795e1cc90fe3d503168cbd31849d607fe0a90abf4d2ab963ebc1049e",
+    "packages/skills/src/profile/conversation-summary/SKILL.md": "a76a2a38cab9e0d977d7419d5366863b64d36882fbd759775a0d82fbd56921e1"
+  },
+  "comparison_note": "正文仅去除宿主文本事件末尾单个结构换行，不归一化内部内容；消息来自本次真实宿主的合成演练，非真实本人画像。",
+  "unverified": [
+    "T119 第四步摘要真实失败分支",
+    "T119 第五步画像交接及反例",
+    "四个独立来源整体复制",
+    "完整有限重试和根替换/遗忘",
+    "真实本人应用"
+  ]
+}

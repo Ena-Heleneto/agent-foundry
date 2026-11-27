@@ -10,7 +10,9 @@ function docsPageKey(route: { path: string }): string {
 </script>
 
 <template>
-  <NuxtLayout>
-    <NuxtPage :page-key="docsPageKey" />
-  </NuxtLayout>
+  <UApp>
+    <NuxtLayout>
+      <NuxtPage :page-key="docsPageKey" />
+    </NuxtLayout>
+  </UApp>
 </template>

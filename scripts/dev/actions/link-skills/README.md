@@ -18,6 +18,7 @@ bash scripts/dev/actions/link-skills/link-skills.sh <源目录> <目标目录>
 
 - 自动扫描源目录下的集合，收集一级或集合目录下含 `SKILL.md` 的 skill，按名称铺平复制。
 - Bash对已退役的六技能和Review/Guide/Explore/Pair/Tutor/Direct精确名称及旧speckit-modes别名停止复制；不匹配相近名称，不删除已有同名目标或链接目标，实际旧挂载留给迁移任务核对。
+- Bash 跳过退役的 `shadow-profile` 来源，并清理本仓库 `.agents/skills` 内仅包含旧正文的项目级生成副本。外部安装根、链接及附带用户资料的目录继续保留。
 - 目标内容相同则跳过，内容变化则替换整个 skill 目录，清除该目录中的旧文件。
 - 同名软链接（含断链）替换为实体副本，不修改软链接原先指向的目录。
 - 同名普通文件视为冲突，保留原文件并继续处理其他 skill，最终退出码为 `1`。

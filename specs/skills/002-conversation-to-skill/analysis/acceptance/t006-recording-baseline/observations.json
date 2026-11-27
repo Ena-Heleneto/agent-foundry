@@ -1,0 +1,690 @@
+{
+  "environment": {
+    "date": "2026-11-23",
+    "model": "gpt-6.2-sol",
+    "version": "codex-cli 0.171.0",
+    "history": "paginated",
+    "host": "Linux, frontend --no-daemon, synthetic T002 Git fixtures",
+    "workspaceSource": {
+      "path": "packages/skills/src/profile/conversation-recording/SKILL.md",
+      "present": false
+    },
+    "fixtureInstalledEntryPresent": false,
+    "ordinarySandbox": "workspace-write",
+    "commitSandbox": "danger-full-access inside Bubblewrap with only synthetic fixture and CLI state writable",
+    "notes": [
+      "All session and file data are synthetic.",
+      "The ordinary phase file snapshots precede file-system fault injection.",
+      "Each negative recovery ran only the requested README command. Native history restoration was outside the supplemental-body-read count.",
+      "The first PTY recovery injected text before the restored composer was ready; the prompt entered the composer but only submitted after a second Enter in teardown. The fresh retry passed the original prompt in the startup arguments."
+    ]
+  },
+  "ordinary": {
+    "emptyBeforePrompt": {},
+    "atFirstBusiness": {
+      "alpha": {},
+      "beta": {}
+    },
+    "after": {},
+    "firstPromptLocalDate": "2026-11-23",
+    "sessions": {
+      "alpha": {
+        "sessionId": "01a2066c-482b-7b32-9ac8-d14afca8eb3f",
+        "originalCwd": "/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha",
+        "openedDate": "2026-11-22",
+        "source": "cli",
+        "cliVersion": "0.171.0",
+        "historyMode": "paginated",
+        "turns": [
+          {
+            "turnId": "01a2066c-6afa-7b11-a23b-78956ee337ba",
+            "trigger": "user",
+            "startLine": 2,
+            "calls": [
+              {
+                "id": "call_15380a76dbea4985b6c6b8792438b6b2",
+                "tool": "exec",
+                "input": "text(await tools.exec_command({cmd:`printf '开始\\\\n' > '/tmp/foundry-conversation-bFbK4Z/trace/witness'/\"$(basename \"$PWD\")\" && head -n 1 ../../README.md`,workdir:\"/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha\"}))\n",
+                "callLine": 16,
+                "timestamp": "2026-11-23T03:21:43.612Z",
+                "output": [
+                  {
+                    "type": "input_text",
+                    "text": "Script completed\nWall time 0.2 seconds\nOutput:\n"
+                  },
+                  {
+                    "type": "input_text",
+                    "text": "{\"chunk_id\":\"012471\",\"wall_time_seconds\":0.000038186,\"exit_code\":0,\"original_token_count\":7,\"output\":\"对话记录合成基线\\n\"}"
+                  }
+                ],
+                "resultLine": 19
+              }
+            ],
+            "cwd": "/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha",
+            "model": "gpt-6.2-sol",
+            "prompt": "请用终端实际执行下列命令并给出 README 的第一行，命令要运行一次：\nprintf '开始\\n' > '/tmp/foundry-conversation-bFbK4Z/trace/witness'/\"$(basename \"$PWD\")\" && head -n 1 ../../README.md",
+            "promptTimestamp": "2026-11-23T03:21:39.988Z",
+            "commentary": [
+              {
+                "line": 15,
+                "text": "我会在当前目录运行一次这条命令，并报告 README 的第一行。"
+              }
+            ],
+            "finalReply": "命令已成功执行一次。README 的第一行是 `对话记录合成基线`。",
+            "finalLine": 25
+          },
+          {
+            "turnId": "01a2066c-8d67-72a1-bfa2-886af726a3ae",
+            "trigger": "user",
+            "startLine": 27,
+            "calls": [
+              {
+                "id": "call_5619af67821a486e9c572f9f37917ed3",
+                "tool": "exec",
+                "input": "text(await tools.exec_command({cmd:\"printf '开始\\\\n' > '/tmp/foundry-conversation-bFbK4Z/trace/witness'/\\\"$(basename \\\"$PWD\\\")\\\" && head -n 1 ../../README.md\",workdir:\"/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha\"}))\n",
+                "callLine": 33,
+                "timestamp": "2026-11-23T03:21:51.103Z",
+                "output": [
+                  {
+                    "type": "input_text",
+                    "text": "Script completed\nWall time 0.1 seconds\nOutput:\n"
+                  },
+                  {
+                    "type": "input_text",
+                    "text": "{\"chunk_id\":\"1ada85\",\"wall_time_seconds\":0.000021915,\"exit_code\":0,\"original_token_count\":7,\"output\":\"对话记录合成基线\\n\"}"
+                  }
+                ],
+                "resultLine": 36
+              }
+            ],
+            "cwd": "/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha",
+            "model": "gpt-6.2-sol",
+            "prompt": "请用终端实际执行下列命令并给出 README 的第一行，命令要运行一次：\nprintf '开始\\n' > '/tmp/foundry-conversation-bFbK4Z/trace/witness'/\"$(basename \"$PWD\")\" && head -n 1 ../../README.md",
+            "promptTimestamp": "2026-11-23T03:21:47.435Z",
+            "commentary": [
+              {
+                "line": 32,
+                "text": "我会在当前目录执行一次这条命令，并报告输出。"
+              }
+            ],
+            "finalReply": "命令已在终端成功执行一次。README 的第一行是 `对话记录合成基线`。",
+            "finalLine": 42
+          },
+          {
+            "turnId": "01a2066c-a9cd-7e11-8b9e-94935ae12b0a",
+            "trigger": "user",
+            "startLine": 44,
+            "calls": [
+              {
+                "id": "call_a8a4f7b2662d4a658b72ed71ad9ceafb",
+                "tool": "exec",
+                "input": "text(await Promise.allSettled([tools.exec_command({cmd:\"head -n 1 README.md\",workdir:\"/tmp/foundry-conversation-bFbK4Z/repository-outside\"}),tools.exec_command({cmd:\"sha256sum -- '/tmp/foundry-conversation-bFbK4Z/input/附件 原件.bin'\"})]))\n",
+                "callLine": 50,
+                "timestamp": "2026-11-23T03:21:58.846Z",
+                "output": [
+                  {
+                    "type": "input_text",
+                    "text": "Script completed\nWall time 0.2 seconds\nOutput:\n"
+                  },
+                  {
+                    "type": "input_text",
+                    "text": "[{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"91a664\",\"wall_time_seconds\":0.032838605,\"exit_code\":0,\"original_token_count\":5,\"output\":\"T006-OUTSIDE-TOOL\\n\"}},{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"d5a1ad\",\"wall_time_seconds\":0.000032639,\"exit_code\":0,\"original_token_count\":31,\"output\":\"a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d  /tmp/foundry-conversation-bFbK4Z/input/附件 原件.bin\\n\"}}]"
+                  }
+                ],
+                "resultLine": 54
+              }
+            ],
+            "cwd": "/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha",
+            "model": "gpt-6.2-sol",
+            "prompt": "请使用终端工具，明确把工作目录设为 /tmp/foundry-conversation-bFbK4Z/repository-outside，跑 head -n 1 README.md。再使用终端运行 sha256sum -- '/tmp/foundry-conversation-bFbK4Z/input/附件 原件.bin'。给出第一行及摘要。",
+            "promptTimestamp": "2026-11-23T03:21:54.712Z",
+            "commentary": [
+              {
+                "line": 49,
+                "text": "我会在指定目录读取 README 的首行，并用终端计算附件的 SHA-256 摘要。"
+              }
+            ],
+            "finalReply": "README 第一行：`T006-OUTSIDE-TOOL`\n\n附件 `附件 原件.bin` 的 SHA-256 摘要：`a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d`",
+            "finalLine": 60
+          }
+        ]
+      },
+      "beta": {
+        "sessionId": "01a2066c-485e-70f0-b508-b556ebfda87b",
+        "originalCwd": "/tmp/foundry-conversation-bFbK4Z/repository/projects/beta",
+        "openedDate": "2026-11-22",
+        "source": "cli",
+        "cliVersion": "0.171.0",
+        "historyMode": "paginated",
+        "turns": [
+          {
+            "turnId": "01a2066c-6bc4-7f72-81c3-8ca58f582ac0",
+            "trigger": "user",
+            "startLine": 2,
+            "calls": [
+              {
+                "id": "call_30dd4a97f8574e01bf1ea480ff8c6556",
+                "tool": "exec",
+                "input": "text(await tools.exec_command({cmd:\"printf '开始\\\\n' > '/tmp/foundry-conversation-bFbK4Z/trace/witness'/\\\"$(basename \\\"$PWD\\\")\\\" && head -n 1 ../../README.md\",workdir:\"/tmp/foundry-conversation-bFbK4Z/repository/projects/beta\"}))\n",
+                "callLine": 16,
+                "timestamp": "2026-11-23T03:21:43.388Z",
+                "output": [
+                  {
+                    "type": "input_text",
+                    "text": "Script completed\nWall time 0.1 seconds\nOutput:\n"
+                  },
+                  {
+                    "type": "input_text",
+                    "text": "{\"chunk_id\":\"04fa23\",\"wall_time_seconds\":0.000045314,\"exit_code\":0,\"original_token_count\":7,\"output\":\"对话记录合成基线\\n\"}"
+                  }
+                ],
+                "resultLine": 19
+              }
+            ],
+            "cwd": "/tmp/foundry-conversation-bFbK4Z/repository/projects/beta",
+            "model": "gpt-6.2-sol",
+            "prompt": "请用终端实际执行下列命令并给出 README 的第一行，命令要运行一次：\nprintf '开始\\n' > '/tmp/foundry-conversation-bFbK4Z/trace/witness'/\"$(basename \"$PWD\")\" && head -n 1 ../../README.md",
+            "promptTimestamp": "2026-11-23T03:21:39.566Z",
+            "commentary": [
+              {
+                "line": 15,
+                "text": "我会在当前目录执行这条命令一次，并返回 README 的第一行。"
+              }
+            ],
+            "finalReply": "命令已成功执行一次。README 的第一行是 `对话记录合成基线`。",
+            "finalLine": 25
+          }
+        ]
+      }
+    },
+    "attachmentInput": {
+      "path": "/tmp/foundry-conversation-bFbK4Z/input/附件 原件.bin",
+      "bytes": 6,
+      "sha256": "a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d"
+    },
+    "repository": "/tmp/foundry-conversation-bFbK4Z/repository",
+    "recordsRoot": "/tmp/foundry-conversation-bFbK4Z/records/writable",
+    "outsideDirectory": "/tmp/foundry-conversation-bFbK4Z/repository-outside",
+    "firstBusinessLines": {
+      "alpha": 16,
+      "beta": 16
+    },
+    "firstPairReadbackLines": {
+      "alpha": null,
+      "beta": null
+    },
+    "outsideTool": {
+      "callId": "call_a8a4f7b2662d4a658b72ed71ad9ceafb",
+      "tool": "exec_command",
+      "command": "head -n 1 README.md",
+      "cwd": "/tmp/foundry-conversation-bFbK4Z/repository-outside",
+      "output": "T006-OUTSIDE-TOOL\n"
+    },
+    "retainedUserTurnIds": {
+      "alpha": [],
+      "beta": []
+    },
+    "internalCalls": [],
+    "retainedCallIds": [],
+    "unexpectedRecordMaintenanceAfterReadback": []
+  },
+  "resumes": {
+    "outside-resume": {
+      "actualLaunchCwd": "/tmp/foundry-conversation-bFbK4Z/repository-outside",
+      "sessionId": "01a2066c-482b-7b32-9ac8-d14afca8eb3f",
+      "seedSha256": "469069330d94ce703631861127a6330898e2e9a1b4c3bc8d36ab59ef7299f9e9",
+      "before": {
+        "records/2026-11-22/details/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md": {
+          "sha256": "f80afb7991cd17e4e24d21640fb16f504af5687b2465d0627b58a204f36099ca",
+          "bytes": 27,
+          "text": "T006-恢复前合成原文\n"
+        },
+        "records/2026-11-22/details/01a2066c-485e-70f0-b508-b556ebfda87b.md": {
+          "sha256": "b69a2c512c51f86a034833a5db6614f02f4dc5027f872ec1f13ab014e70bba09",
+          "bytes": 30,
+          "text": "T006-已确认的合成详情\n"
+        },
+        "records/2026-11-22/index/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md": {
+          "sha256": "d05d46173748d9c67022967c0397baa91b56a08386f61d2fb9db30e3be2e761e",
+          "bytes": 67,
+          "text": "[合成详情](../details/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md)\n"
+        }
+      },
+      "after": {
+        "records/2026-11-22/details/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md": {
+          "sha256": "f80afb7991cd17e4e24d21640fb16f504af5687b2465d0627b58a204f36099ca",
+          "bytes": 27,
+          "text": "T006-恢复前合成原文\n"
+        },
+        "records/2026-11-22/details/01a2066c-485e-70f0-b508-b556ebfda87b.md": {
+          "sha256": "b69a2c512c51f86a034833a5db6614f02f4dc5027f872ec1f13ab014e70bba09",
+          "bytes": 30,
+          "text": "T006-已确认的合成详情\n"
+        },
+        "records/2026-11-22/index/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md": {
+          "sha256": "d05d46173748d9c67022967c0397baa91b56a08386f61d2fb9db30e3be2e761e",
+          "bytes": 67,
+          "text": "[合成详情](../details/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md)\n"
+        }
+      },
+      "writeEvents": [],
+      "additionalBodyReads": [],
+      "turn": {
+        "turnId": "01a20670-7877-7181-987d-7738545c27f0",
+        "trigger": "user",
+        "startLine": 62,
+        "calls": [
+          {
+            "id": "call_6d52e7b434444fe6803ee232965b505c",
+            "tool": "exec",
+            "input": "text(await tools.exec_command({cmd:\"head -n 1 ../../README.md\",workdir:\"/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha\"}))\n",
+            "callLine": 68,
+            "timestamp": "2026-11-23T03:26:10.154Z",
+            "output": [
+              {
+                "type": "input_text",
+                "text": "Script completed\nWall time 0.2 seconds\nOutput:\n"
+              },
+              {
+                "type": "input_text",
+                "text": "{\"chunk_id\":\"ce1156\",\"wall_time_seconds\":0.000068487,\"exit_code\":0,\"original_token_count\":7,\"output\":\"对话记录合成基线\\n\"}"
+              }
+            ],
+            "resultLine": 71
+          }
+        ],
+        "cwd": "/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha",
+        "model": "gpt-6.2-sol",
+        "prompt": "请在终端重新运行 head -n 1 ../../README.md，并给出第一行。",
+        "promptTimestamp": "2026-11-23T03:26:06.863Z",
+        "commentary": [
+          {
+            "line": 67,
+            "text": "我会在项目目录重新运行这条命令。"
+          }
+        ],
+        "finalReply": "README 的第一行是 `对话记录合成基线`。",
+        "finalLine": 77
+      }
+    },
+    "exec-resume": {
+      "actualLaunchCwd": "/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha",
+      "sessionId": "01a2066c-482b-7b32-9ac8-d14afca8eb3f",
+      "seedSha256": "469069330d94ce703631861127a6330898e2e9a1b4c3bc8d36ab59ef7299f9e9",
+      "before": {
+        "records/2026-11-22/details/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md": {
+          "sha256": "f80afb7991cd17e4e24d21640fb16f504af5687b2465d0627b58a204f36099ca",
+          "bytes": 27,
+          "text": "T006-恢复前合成原文\n"
+        },
+        "records/2026-11-22/details/01a2066c-485e-70f0-b508-b556ebfda87b.md": {
+          "sha256": "b69a2c512c51f86a034833a5db6614f02f4dc5027f872ec1f13ab014e70bba09",
+          "bytes": 30,
+          "text": "T006-已确认的合成详情\n"
+        },
+        "records/2026-11-22/index/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md": {
+          "sha256": "d05d46173748d9c67022967c0397baa91b56a08386f61d2fb9db30e3be2e761e",
+          "bytes": 67,
+          "text": "[合成详情](../details/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md)\n"
+        }
+      },
+      "after": {
+        "records/2026-11-22/details/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md": {
+          "sha256": "f80afb7991cd17e4e24d21640fb16f504af5687b2465d0627b58a204f36099ca",
+          "bytes": 27,
+          "text": "T006-恢复前合成原文\n"
+        },
+        "records/2026-11-22/details/01a2066c-485e-70f0-b508-b556ebfda87b.md": {
+          "sha256": "b69a2c512c51f86a034833a5db6614f02f4dc5027f872ec1f13ab014e70bba09",
+          "bytes": 30,
+          "text": "T006-已确认的合成详情\n"
+        },
+        "records/2026-11-22/index/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md": {
+          "sha256": "d05d46173748d9c67022967c0397baa91b56a08386f61d2fb9db30e3be2e761e",
+          "bytes": 67,
+          "text": "[合成详情](../details/01a2066c-482b-7b32-9ac8-d14afca8eb3f.md)\n"
+        }
+      },
+      "writeEvents": [],
+      "additionalBodyReads": [],
+      "turn": {
+        "turnId": "01a20670-a42d-78c2-97f9-b5ac7b9b83f6",
+        "trigger": "exec",
+        "startLine": 62,
+        "calls": [
+          {
+            "id": "call_4f0c2cdeb78d42df9569964c27e07c90",
+            "tool": "exec",
+            "input": "text(await tools.exec_command({cmd:\"head -n 1 ../../README.md\",workdir:\"/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha\"}))\n",
+            "callLine": 72,
+            "timestamp": "2026-11-23T03:26:20.001Z",
+            "output": [
+              {
+                "type": "input_text",
+                "text": "Script completed\nWall time 0.5 seconds\nOutput:\n"
+              },
+              {
+                "type": "input_text",
+                "text": "{\"chunk_id\":\"8ff7dc\",\"wall_time_seconds\":0.071095598,\"exit_code\":0,\"original_token_count\":7,\"output\":\"对话记录合成基线\\n\"}"
+              }
+            ],
+            "resultLine": 75
+          }
+        ],
+        "cwd": "/tmp/foundry-conversation-bFbK4Z/repository/projects/alpha",
+        "model": "gpt-6.2-sol",
+        "prompt": "请在终端重新运行 head -n 1 ../../README.md，并给出第一行。",
+        "promptTimestamp": "2026-11-23T03:26:17.505Z",
+        "commentary": [
+          {
+            "line": 71,
+            "text": "我会在当前工作目录重新运行这条命令。"
+          }
+        ],
+        "finalReply": "README 的第一行是 `对话记录合成基线`。",
+        "finalLine": 81
+      }
+    }
+  },
+  "eligibleResume": {
+    "unavailable": "受测入口缺少可独立核实的恢复前目录信号"
+  },
+  "partial": {
+    "filesystemRejection": {
+      "code": 21,
+      "path": "records/2026-11-22/index/01a2066c-485e-70f0-b508-b556ebfda87b.md"
+    },
+    "before": {
+      "records/2026-11-22/details/01a2066c-485e-70f0-b508-b556ebfda87b.md": {
+        "sha256": "b69a2c512c51f86a034833a5db6614f02f4dc5027f872ec1f13ab014e70bba09",
+        "bytes": 30,
+        "text": "T006-已确认的合成详情\n"
+      }
+    },
+    "after": {
+      "records/2026-11-22/details/01a2066c-485e-70f0-b508-b556ebfda87b.md": {
+        "sha256": "b69a2c512c51f86a034833a5db6614f02f4dc5027f872ec1f13ab014e70bba09",
+        "bytes": 30,
+        "text": "T006-已确认的合成详情\n"
+      }
+    },
+    "writeEvents": [],
+    "turn": {
+      "turnId": "01a2066c-ca7b-77c0-aeb3-1484b1ad400f",
+      "trigger": "user",
+      "startLine": 27,
+      "calls": [
+        {
+          "id": "call_f3330661a94a4b2eb16c0ae1cac86976",
+          "tool": "exec",
+          "input": "text(await tools.exec_command({cmd:\"head -n 1 ../../README.md\"}))\n",
+          "callLine": 33,
+          "timestamp": "2026-11-23T03:22:05.726Z",
+          "output": [
+            {
+              "type": "input_text",
+              "text": "Script completed\nWall time 0.2 seconds\nOutput:\n"
+            },
+            {
+              "type": "input_text",
+              "text": "{\"chunk_id\":\"39e53e\",\"wall_time_seconds\":0.000058613,\"exit_code\":0,\"original_token_count\":7,\"output\":\"对话记录合成基线\\n\"}"
+            }
+          ],
+          "resultLine": 36
+        }
+      ],
+      "cwd": "/tmp/foundry-conversation-bFbK4Z/repository/projects/beta",
+      "model": "gpt-6.2-sol",
+      "prompt": "请通过终端运行 head -n 1 ../../README.md，并告诉我读到的第一行。",
+      "promptTimestamp": "2026-11-23T03:22:03.054Z",
+      "commentary": [
+        {
+          "line": 32,
+          "text": "我会在当前目录运行 `head`，读取 README 的第一行。"
+        }
+      ],
+      "finalReply": "README 的第一行是 `对话记录合成基线`。",
+      "finalLine": 42
+    },
+    "seededDetail": "records/2026-11-22/details/01a2066c-485e-70f0-b508-b556ebfda87b.md"
+  },
+  "commit": {
+    "beforeGit": {
+      "head": "7ba8ab47fa0ee49120786005260b1686373cd26a",
+      "status": "",
+      "worktree": "",
+      "index": ""
+    },
+    "afterGit": {
+      "head": "779689ab6616bb45ac00013c82bbce41f8441dd9",
+      "status": "",
+      "worktree": "",
+      "index": ""
+    },
+    "subject": "T006 隔离回归提交",
+    "committedReadme": "T006-首次修复\nT006-重试前修复",
+    "recordsBefore": {},
+    "recordsAfterSubmission": {},
+    "recordsAfterFollowup": {},
+    "writeEvents": [],
+    "observed": {
+      "sessionId": "01a2066e-4a71-73b3-985c-269189889dd1",
+      "originalCwd": "/tmp/foundry-conversation-Pb8E0c/repository",
+      "openedDate": "2026-11-23",
+      "source": "cli",
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "turns": [
+        {
+          "turnId": "01a2066e-4ac1-7e92-9023-fa90d8b4dcf4",
+          "trigger": "user",
+          "startLine": 2,
+          "calls": [
+            {
+              "id": "call_40b1d28013fd48dd9f67712313ef039a",
+              "tool": "exec",
+              "input": "text(await tools.exec_command({cmd:`sed -i '1c\\\\T006-首次修复' README.md && git add README.md && git diff --cached -- README.md`}));\n",
+              "callLine": 16,
+              "timestamp": "2026-11-23T03:23:50.497Z",
+              "output": [
+                {
+                  "type": "input_text",
+                  "text": "Script completed\nWall time 0.1 seconds\nOutput:\n"
+                },
+                {
+                  "type": "input_text",
+                  "text": "{\"chunk_id\":\"1bea18\",\"wall_time_seconds\":0.000034133,\"exit_code\":0,\"original_token_count\":39,\"output\":\"diff --git a/README.md b/README.md\\nindex 17fa505..022681f 100644\\n--- a/README.md\\n+++ b/README.md\\n@@ -1 +1 @@\\n-对话记录合成基线\\n+T006-首次修复\\n\"}"
+                }
+              ],
+              "resultLine": 19
+            },
+            {
+              "id": "call_3d600b56af8a41099f70798bd314eaf2",
+              "tool": "exec",
+              "input": "text(await tools.exec_command({cmd:\"git commit -F '/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt'\"}));\n",
+              "callLine": 21,
+              "timestamp": "2026-11-23T03:23:53.562Z",
+              "output": [
+                {
+                  "type": "input_text",
+                  "text": "Script completed\nWall time 0.1 seconds\nOutput:\n"
+                },
+                {
+                  "type": "input_text",
+                  "text": "{\"chunk_id\":\"e5fe79\",\"wall_time_seconds\":0.000138036,\"exit_code\":128,\"original_token_count\":31,\"output\":\"fatal: could not read log file '/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt': No such file or directory\\n\"}"
+                }
+              ],
+              "resultLine": 24
+            },
+            {
+              "id": "call_eb2dbf913b054dc9863b6736658f076e",
+              "tool": "exec",
+              "input": "text(await tools.exec_command({cmd:`printf '%s\\\\n' 'T006-重试前修复' >> README.md && git add README.md && printf '%s\\\\n' 'T006 隔离回归提交' > '/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt' && git diff --cached -- README.md && cat '/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt'`}));\n",
+              "callLine": 26,
+              "timestamp": "2026-11-23T03:23:57.951Z",
+              "output": [
+                {
+                  "type": "input_text",
+                  "text": "Script completed\nWall time 0.1 seconds\nOutput:\n"
+                },
+                {
+                  "type": "input_text",
+                  "text": "{\"chunk_id\":\"db5c8f\",\"wall_time_seconds\":0.000038312,\"exit_code\":0,\"original_token_count\":51,\"output\":\"diff --git a/README.md b/README.md\\nindex 17fa505..c1ad42a 100644\\n--- a/README.md\\n+++ b/README.md\\n@@ -1 +1,2 @@\\n-对话记录合成基线\\n+T006-首次修复\\n+T006-重试前修复\\nT006 隔离回归提交\\n\"}"
+                }
+              ],
+              "resultLine": 29
+            },
+            {
+              "id": "call_51aab01e99464e199205c93ac01471fb",
+              "tool": "exec",
+              "input": "text(await tools.exec_command({cmd:\"git commit -F '/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt' && git log -1 --format='%h %s' && git status --short && git show HEAD:README.md\"}));\n",
+              "callLine": 31,
+              "timestamp": "2026-11-23T03:24:01.261Z",
+              "output": [
+                {
+                  "type": "input_text",
+                  "text": "Script completed\nWall time 0.1 seconds\nOutput:\n"
+                },
+                {
+                  "type": "input_text",
+                  "text": "{\"chunk_id\":\"c5e72e\",\"wall_time_seconds\":0.000025492,\"exit_code\":0,\"original_token_count\":40,\"output\":\"[main 779689a] T006 隔离回归提交\\n 1 file changed, 2 insertions(+), 1 deletion(-)\\n779689a T006 隔离回归提交\\nT006-首次修复\\nT006-重试前修复\\n\"}"
+                }
+              ],
+              "resultLine": 34
+            }
+          ],
+          "cwd": "/tmp/foundry-conversation-Pb8E0c/repository",
+          "model": "gpt-6.2-sol",
+          "prompt": "请在这个合成样例仓库修复 README.md 并提交。请分四次工具调用按顺序操作，保留每个实际结果。\n1. 将 README.md 第一行改成 T006-首次修复，然后 git add README.md。\n2. 运行 git commit -F '/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt'，该文件此刻不存在，保留实际失败结果。\n3. 在 README.md 追加一行 T006-重试前修复，再次 git add README.md，并在 '/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt' 写上提交信息 T006 隔离回归提交。\n4. 再运行 git commit -F '/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt'，确认提交结果后汇报。",
+          "promptTimestamp": "2026-11-23T03:23:45.924Z",
+          "commentary": [
+            {
+              "line": 15,
+              "text": "我会按指定顺序执行四次工具调用，保留每次的实际结果。"
+            }
+          ],
+          "finalReply": "已按顺序执行四次工具调用，README.md 已提交到 `main`，提交哈希为 `779689a`。四次实际结果如下。\n\n1. 退出码 `0`。README.md 第一行改为 `T006-首次修复`，并已暂存。\n2. 退出码 `128`。首次提交失败，Git 返回 `fatal: could not read log file '/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt': No such file or directory`。\n3. 退出码 `0`。追加 `T006-重试前修复` 并重新暂存 README.md，提交信息文件已写入 `T006 隔离回归提交`。\n4. 退出码 `0`。重试成功，Git 返回 `[main 779689a] T006 隔离回归提交`。已确认提交包含上述两行，工作区干净。",
+          "finalLine": 40
+        },
+        {
+          "turnId": "01a2066e-b383-7c70-9bdc-7e119ea0e6e9",
+          "trigger": "user",
+          "startLine": 42,
+          "calls": [
+            {
+              "id": "call_258b86eb146143f19d2337656786ac73",
+              "tool": "exec",
+              "input": "text(await tools.exec_command({cmd:\"head -n 2 README.md\"}))\n",
+              "callLine": 48,
+              "timestamp": "2026-11-23T03:24:11.543Z",
+              "output": [
+                {
+                  "type": "input_text",
+                  "text": "Script completed\nWall time 0.1 seconds\nOutput:\n"
+                },
+                {
+                  "type": "input_text",
+                  "text": "{\"chunk_id\":\"90685d\",\"wall_time_seconds\":0.000019905,\"exit_code\":0,\"original_token_count\":10,\"output\":\"T006-首次修复\\nT006-重试前修复\\n\"}"
+                }
+              ],
+              "resultLine": 51
+            }
+          ],
+          "cwd": "/tmp/foundry-conversation-Pb8E0c/repository",
+          "model": "gpt-6.2-sol",
+          "prompt": "请实际用终端运行 head -n 2 README.md，把读到的两行逐字告诉我。",
+          "promptTimestamp": "2026-11-23T03:24:08.248Z",
+          "commentary": [
+            {
+              "line": 47,
+              "text": "我会在仓库目录运行这条命令。"
+            }
+          ],
+          "finalReply": "```text\nT006-首次修复\nT006-重试前修复\n```",
+          "finalLine": 57
+        }
+      ]
+    },
+    "commitMessagePath": "/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt",
+    "unverifiedResume": {
+      "actualLaunchCwd": "/tmp/foundry-conversation-Pb8E0c/repository",
+      "sessionId": "01a2066e-4a71-73b3-985c-269189889dd1",
+      "turn": {
+        "turnId": "01a20671-2230-7303-a32e-71638707fedc",
+        "trigger": "user",
+        "startLine": 60,
+        "calls": [
+          {
+            "id": "call_19946a8852e8406495cc86fea752978c",
+            "tool": "exec",
+            "input": "text(await tools.exec_command({cmd:\"head -n 2 README.md\",workdir:\"/tmp/foundry-conversation-Pb8E0c/repository\"}))\n",
+            "callLine": 69,
+            "timestamp": "2026-11-23T03:26:53.078Z",
+            "output": [
+              {
+                "type": "input_text",
+                "text": "Script completed\nWall time 0.1 seconds\nOutput:\n"
+              },
+              {
+                "type": "input_text",
+                "text": "{\"chunk_id\":\"ab44c6\",\"wall_time_seconds\":0.000025223,\"exit_code\":0,\"original_token_count\":10,\"output\":\"T006-首次修复\\nT006-重试前修复\\n\"}"
+              }
+            ],
+            "resultLine": 72
+          }
+        ],
+        "cwd": "/tmp/foundry-conversation-Pb8E0c/repository",
+        "model": "gpt-6.2-sol",
+        "prompt": "请重新用终端执行 head -n 2 README.md，读给我听。",
+        "promptTimestamp": "2026-11-23T03:26:50.241Z",
+        "commentary": [
+          {
+            "line": 68,
+            "text": "我现在重新运行这条命令。"
+          }
+        ],
+        "finalReply": "```text\nT006-首次修复\nT006-重试前修复\n```",
+        "finalLine": 78
+      },
+      "before": {},
+      "after": {},
+      "writeEvents": [],
+      "additionalBodyReads": []
+    },
+    "firstFix": {
+      "callId": "call_40b1d28013fd48dd9f67712313ef039a",
+      "callLine": 16,
+      "resultLine": 19,
+      "exitCode": 0,
+      "output": "diff --git a/README.md b/README.md\nindex 17fa505..022681f 100644\n--- a/README.md\n+++ b/README.md\n@@ -1 +1 @@\n-对话记录合成基线\n+T006-首次修复\n"
+    },
+    "firstCommit": {
+      "callId": "call_3d600b56af8a41099f70798bd314eaf2",
+      "callLine": 21,
+      "resultLine": 24,
+      "exitCode": 128,
+      "output": "fatal: could not read log file '/tmp/foundry-conversation-Pb8E0c/trace/witness/git-message.txt': No such file or directory\n"
+    },
+    "betweenFix": {
+      "callId": "call_eb2dbf913b054dc9863b6736658f076e",
+      "callLine": 26,
+      "resultLine": 29,
+      "exitCode": 0,
+      "output": "diff --git a/README.md b/README.md\nindex 17fa505..c1ad42a 100644\n--- a/README.md\n+++ b/README.md\n@@ -1 +1,2 @@\n-对话记录合成基线\n+T006-首次修复\n+T006-重试前修复\nT006 隔离回归提交\n"
+    },
+    "secondCommit": {
+      "callId": "call_51aab01e99464e199205c93ac01471fb",
+      "callLine": 31,
+      "resultLine": 34,
+      "exitCode": 0,
+      "output": "[main 779689a] T006 隔离回归提交\n 1 file changed, 2 insertions(+), 1 deletion(-)\n779689a T006 隔离回归提交\nT006-首次修复\nT006-重试前修复\n"
+    },
+    "changedPaths": [
+      "README.md"
+    ],
+    "retainedCallIds": [],
+    "writeEventsDuringFirstCommit": [],
+    "writeEventsDuringSecondCommit": [],
+    "recordedCommitResultLocations": []
+  }
+}

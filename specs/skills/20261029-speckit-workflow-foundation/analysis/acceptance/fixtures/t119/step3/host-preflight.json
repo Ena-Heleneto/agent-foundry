@@ -1,0 +1,11 @@
+{
+  "returned": true,
+  "response_id": 1,
+  "error": null,
+  "result_keys": [
+    "userAgent",
+    "codexHome",
+    "platformFamily",
+    "platformOs"
+  ]
+}

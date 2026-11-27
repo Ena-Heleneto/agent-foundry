@@ -1,4 +1,151 @@
-# 技术流程图：分发核验与阶段状态
+# 技术流程图：统一包核验与独立结果
+
+## 主线 R2 部署与产物交接
+
+```mermaid
+flowchart TD
+    E["feature/init push 或 workflow_call"] --> R["skills-deploy-release"]
+    R --> T["skills-test 固定返回 passed=true"]
+    T -->|"通过，target=release"| C["skills-deploy-common 按环境分组"]
+    P["skills-deploy-prod.yml.example"] -.->|"生产待接入，target=prod"| C
+    C --> I
+    subgraph J["同一个 runner job"]
+        I["绑定目标环境，检出 github.sha"] --> A["安装依赖"]
+        A --> D["构建技能包的工作区依赖"]
+        D --> B["构建技能包"]
+        B --> Z["将 dist 打成压缩包"]
+        Z --> H["记录归档 SHA-256"]
+        H --> U["上传压缩包和安装脚本到对应 R2"]
+    end
+    U -->|"两份文件上传成功"| S["记录本次运行的 R2 目录"]
+    U -->|"失败"| F["记录失败及本次尝试"]
+```
+
+公共工作流为同一目标开启 `cancel-in-progress`。测试部署的 `push` 入口限定 `feature/init`，分支删除事件跳过部署。真实推送与测试桶回读待验收。[部署分析](analysis/spec-analysis/README.md#维护者流水线r2发布与独立迁移) · [流水线契约](contracts/pipeline.md#2026-11-23-按环境上传构建产物)
+
+## 主线同包引擎调度
+
+```mermaid
+flowchart TD
+    A[核验同版归档并记录技能复制结果] --> B{有适用挂载或显式隐匿吗}
+    B -->|是| C[调用同包 engine/install.sh 一次]
+    B -->|无| D[保留安装结果]
+    C --> E[按本次成功集合执行适用脚本]
+    E --> F[记录后置结果及退出码]
+```
+
+`--no-mount` 和部分复制失败都关闭挂载。显式隐匿仍可处理已成功项，复制失败保留原复制退出码。入口源码位于 `packages/skills/build/plugins/vite-plugin-curl/install.source.sh` 和 `packages/skills/build/plugins/vite-plugin-engine/install.source.sh`。[当前调用契约](contracts/mount.md#主线现行挂载入口)
+
+## 2026-11-19 安装后经引擎调用子脚本
+
+```mermaid
+flowchart LR
+  A[安装源复制技能成功] --> B{是否跳过挂载}
+  B -->|否| C[engine/install.sh]
+  C --> D[预检查本次子脚本]
+  D --> E[按路径顺序 Bash 调用]
+  E --> F[首次失败停止并返回原码]
+  B -->|是| G[保留纯安装结果]
+```
+
+代码位置：`build/plugins/vite-plugin-curl/install.source.sh` 调用入口，引擎 `build/plugins/vite-plugin-engine/index.ts` 收集本次输出，`install-script.ts` 生成入口正文。全部位置以 `packages/skills/` 为根；路径解析以同包入口位置为准，业务脚本仍在目标项目目录运行。实际证据见 [T077](implementation/T077.md)。
+
+## 2026-11-18 配置加载时发现集合子插件
+
+```mermaid
+flowchart LR
+    A[Vite加载配置] --> H{集合 plugin 为 true}
+    H -->|是| B[扫描单数 plugin 目录固定入口]
+    H -->|否| I[跳过集合子插件]
+    B --> C[按集合名和插件名排序]
+    C --> D[依次导入并调用默认工厂]
+    D --> E[返回插件数组]
+    E --> F[Vite解析异步和嵌套结果]
+    F --> G[Vite执行实际构建钩子]
+```
+
+大白话：引擎只把集合里的插件找出来并创建，什么时候运行构建逻辑由 Vite 负责。目标代码位置：`packages/skills/build/plugins/vite-plugin-engine/index.ts` 及 `packages/skills/vite.config.ts` 接线；扫描模式为 `src/*/plugin/vite-plugin-*/index.ts`，坏入口使配置加载失败，无入口正常返回空数组。本轮新增默认关闭的配置开关并补齐引擎接线，验证以实际执行为准，不据此认定挂载脚本生成或 curl 回迁已完成。
+
+## 2026-11-16 最新入口与固定统一包
+
+当前设计替代旧双包、manifest及helper下载前提。图示不是已通过证据，代码和字段见[curl契约](contracts/curl-delivery.md)。
+
+```mermaid
+flowchart LR
+    A[最新已发布install入口] --> B[一次固定release记录]
+    B --> C[所选版本唯一统一包]
+    C --> D[长度与SHA核验]
+    D --> E[成员安全预检后私有解包]
+    E --> F[根VERSION与技能映射核对]
+    F --> G[本次选择与依赖核验]
+    G --> H[目标同文件系统逐技能提交]
+    H --> I[完整installed与reused集合]
+```
+
+大白话：入口可更新，历史技能和运行脚本始终来自所选历史统一包；包失败时不能安装或执行hidden，不再下载第二包。位置：现有install.source.sh及计划的发布记录/工程驱动；源码仍是基础MD5复制，新链待实施。
+
+## 2026-11-16 隐匿失败不抹去安装成功
+
+```mermaid
+flowchart TD
+    A{统一包与所选技能通过核验吗} -->|否| B[停止技能提交与辅助执行]
+    A -->|是| C[安装并记录完整成功集合]
+    C --> D{本次开启hidden吗}
+    D -->|否| E[hidden跳过且零排除写入]
+    D -->|是| F{同包hidden模块及协议有效吗}
+    F -->|否| G[不执行未知模块]
+    G --> H[保留安装 hidden失败 总体部分失败]
+    F -->|是| I[模板候选与选择及成功集合取交集]
+    I --> J[核对本地Git和未跟踪精确路径]
+    J --> K[保留去重追加并验证实际效果]
+    K --> L{实际隐匿成功吗}
+    L -->|否| H
+    L -->|是或明确不适用| M[分别报告真实结果及限制]
+```
+
+大白话：容错只针对包已可信之后的隐匿步骤；发布前缺必需hidden仍应拒绝正式候选。位置：install.source.sh和hidden-install.template.ts，模板已有Git/排除基础，成功集合/接口标记/完整报告待原任务实施。共享配置、tracked内容及项目外路径不误报隐藏。
+
+## 2026-11-18 内容生成与流水线统一归档
+
+```mermaid
+flowchart LR
+    A[TS集合与正文附件] --> B[技能插件独立扫描复制]
+    A --> C[脚本插件扫描并派生hidden]
+    S[安装源install.source.sh] --> K[curl插件原字节交付install.sh]
+    K --> E
+    V[package.json.version] --> D[版本插件输出根VERSION]
+    B --> E[可检查开发dist]
+    C --> E
+    D --> E
+    E --> F[流水线检查获准三分类及模板路径]
+    F --> G[核对身份依赖附件说明和许可证]
+    G --> H[正式暂存及非执行技能映射]
+    H --> I[目录外生成一个统一tar.gz]
+    I --> J[解包全集字节对照并冻结该次归档]
+```
+
+大白话：插件只生成内容，正式归档由后续流水线完成；开发dist不直接全量发布。位置：vite-plugin-skill、vite-plugin-script、vite-plugin-version与负责安装入口原字节交付的vite-plugin-curl，复用scan-skills.ts及计划的build/ci。图示为迁移目标，Tasks后协调者按局部授权迁移hidden模板到script插件目录，并核对唯一输出；当前未由本图证明构建成功。逐文件证据留包外，不新增随包JSON；双构建比较内容，不要求两个压缩包哈希相同。
+
+## 后置阶段的 R2 固定发布与版本表
+
+```mermaid
+flowchart TD
+    A[冻结候选及完整门禁] --> B{迁后真实目标及具体授权满足吗}
+    B -->|否| C[保留本地结果 不发布]
+    B -->|是| D[条件创建固定包与固定入口]
+    D --> E[读回源站及匿名公开字节]
+    E --> F{全部固定对象核验成功吗}
+    F -->|否| G[保留已发生事实和旧版本 不登记成功]
+    F -->|是| H[读取 R2 当前版本表]
+    H --> I[条件更新兼容入口并核验]
+    I --> J[维护 R2 的唯一版本表]
+    J --> K[分别核对发现结果 冲突停止并读回]
+```
+
+上传、远端核验、入口更新和版本表更新各自留证。固定对象核验通过后才更新 R2 版本表。更新方式及断连、竞争、缓存的验证留后续流水线。当前构建阶段只核对本地产物。
+
+<details>
+<summary>历史技术图（旧入口与旧推进顺序，当前依赖以logic-flow为准）</summary>
 
 2026-11-10 按当前 spec、plan 与数据模型同步 Increment、实施准备、旧入口迁移及 Agent 在线来源；唯一公开入口仍为 node script/index.mjs。下图区分已具备的只读数据查询与后续安装、挂载流程，图示不代表完整平台或业务验收。来源：[plan.md](plan.md)、[data-model.md](data-model.md)。
 
@@ -247,3 +394,5 @@ flowchart TD
 大白话：四处源码指紧急目录、packages/skills、specs/skills、apps/mcp；公开源码可以保留eval，但技能发布和安装仍排除它。tag指向承载精确公开文件的无父提交，sourceRevision则追溯对应的新仓库源码，两者不能混写。网络断连先回读，不从退出码推断没有发布；源码迁移、发布与匿名消费分别需要真实证据。
 
 计划位置：迁后新仓库根配置、紧急包内部发布工具、skills-v<version>和自有Linux/Codex消费项目；许可/依赖/私有依据与MCP旧manifest缺口进入迁移说明。原PlatformReceipt与full/ready资格不参与，不伪造Actions收据。本图只作文本结构核验，未声明渲染通过。
+
+</details>

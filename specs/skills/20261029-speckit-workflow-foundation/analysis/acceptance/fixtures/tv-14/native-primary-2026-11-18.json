@@ -1,0 +1,10 @@
+{
+  "status": "probe_failed",
+  "host_profile": "codex-0.169.0-item-completed",
+  "scope": "primary",
+  "started_at_ns": 1794966228393087309,
+  "runtime_sha256": "e8ba82a4a2c322de5469f1cc573682e7339a6004a81739bcfc361959217efc5e",
+  "real_memory_enabled": false,
+  "model_message_saves": 0,
+  "checked_at_ns": 1794966516082301128
+}

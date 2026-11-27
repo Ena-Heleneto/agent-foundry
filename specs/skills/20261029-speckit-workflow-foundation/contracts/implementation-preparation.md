@@ -4,7 +4,7 @@
 
 ## 调用与前置
 
-来源为 packages/skills/src/skills/workflow/implementation-preparation/，SKILL.md 与 speckit-hooks.json 同目录交付。自然语言明确要求实施/继续原 Task 可发现此能力，显式 Implement 的 before_implement 也完整消费同一正文；普通讨论、规划请求不自动启动实施。工作流暂限已初始化 Spec Kit 项目，不自动创建 .specify 或回退其他任务工具。
+2026-11-14 当前来源校正：正文为 `packages/skills/src/workflow/implementation-preparation/SKILL.md`，before_implement 声明位于 `packages/skills/src/workflow/collection.config.json` 的 `skill.implementation-preparation.hook.before_implement`，不再交付当前逐技能 speckit-hooks.json。旧候选、方案和历史验收中的 src/skills/workflow 路径及同目录配置保留原语境，不重建旧文件，也不据源码声明存在推断安装/注册已完成。自然语言明确要求实施/继续原 Task 可发现此能力，显式 Implement 的 before_implement 也完整消费同一正文；普通讨论、规划请求不自动启动实施。工作流暂限已初始化 Spec Kit 项目，不自动创建 .specify 或回退其他任务工具。
 
 输入是明确项目、Spec、原 Task 或当前拟实施任务范围，以及有效需求、plan、同级 mvu、轻量 tasks、相关代码/规范、已有方案和证据。用户定位优先，唯一上下文可复用，多候选先只澄清定位；原 ID 必须连同所属 Spec 校验。外部技能只读目标项目既有治理与记录约定，不导入本仓库个人资料。
 

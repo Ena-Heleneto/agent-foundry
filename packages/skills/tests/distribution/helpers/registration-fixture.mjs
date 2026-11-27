@@ -6,6 +6,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { after } from 'node:test'
 import { fileURLToPath } from 'node:url'
+import workflowCollection from '../../../src/workflow/collection.config.ts'
 import { createSandbox } from '../sandbox.mjs'
 
 /**
@@ -153,6 +154,7 @@ export function ownedBaseline(project) {
 
 /**
  * 创建真实官方旧环境的隔离副本，来源复制和官方安装分别报告。
+ * 将正式 TS 集合序列化为 JSON，供现有注册器消费。
  * @param {string} name 本次证据名称。
  * @param {'three'|'four'|'five'} variant 旧集合类型。
  * @returns {object} 测试拥有的夹具和候选参数。
@@ -199,7 +201,7 @@ export function migrationFixture(name, variant = 'four') {
     const target = path.join(item.project, id === 'task-increment' ? '.agents/skills-speckit-sources' : '.agents/skills', id)
     fs.cpSync(path.join(workflowRoot, id), target, { recursive: true })
   }
-  fs.copyFileSync(path.join(workflowRoot, 'collection.config.json'), path.join(item.root, 'collection.config.json'))
+  fs.writeFileSync(path.join(item.root, 'collection.config.json'), JSON.stringify(workflowCollection))
   /**
    * 官方基线在任何故障注入之前取得，不由候选自行认可修改。
    */

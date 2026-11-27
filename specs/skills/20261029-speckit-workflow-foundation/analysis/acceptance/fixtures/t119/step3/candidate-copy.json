@@ -1,0 +1,20 @@
+{
+  "command": [
+    "bash",
+    "/home/by152/workspace/ena/agent-foundry/feature/init/scripts/dev/actions/link-skills/link-skills.sh",
+    "/tmp/foundry-t119-step3-qcbpc735/candidate-input",
+    "/tmp/foundry-t119-step3-qcbpc735/candidate/.agents/skills"
+  ],
+  "stdout": "copy: conversation-analysis\ncopy: conversation-recording\ncopy: conversation-summary\n完成: 新建 3，更新 0，跳过 0，冲突 0\n",
+  "hashes": {
+    "conversation-analysis": "49ff0441d87fd8486af76a10d6c9354de9111caf61438ef089122247d1993e70",
+    "conversation-recording": "7e8785fd873a56a8f73d91b57af7503a38c28af1c76318ad10919725cb764df1",
+    "conversation-summary": "a76a2a38cab9e0d977d7419d5366863b64d36882fbd759775a0d82fbd56921e1"
+  },
+  "copied_directory_set": [
+    "conversation-analysis",
+    "conversation-recording",
+    "conversation-summary"
+  ],
+  "bytes_equal": true
+}

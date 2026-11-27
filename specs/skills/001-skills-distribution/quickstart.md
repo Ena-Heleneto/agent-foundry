@@ -1,6 +1,236 @@
-# 验证指南：构建、流水线与技能发布共同交付
+# 验证指南：统一发布包、安装与可选隐匿
+
+## 2026-11-23 R2 流水线验证
+
+`skills-deploy-release` 接收 `feature/init` 分支的 `push` 和 `workflow_call` 调用。本地核对了分支过滤、调用路径、打包、归档摘要和模拟 R2 上传。维护者确认线上 `release` 环境已配置，首次实际运行和 R2 回读待验收。[流水线契约](contracts/pipeline.md#2026-11-23-按环境上传构建产物)
+
+1. 在 `release` Environment 配置 `SKILL_DEPLOY_RELEASE_R2_ACCOUNT_ID` 和 `SKILL_DEPLOY_RELEASE_R2_BUCKET_NAME`，并填写共用的 `SKILL_DEPLOY_R2_ACCESS_KEY_ID` 和 `SKILL_DEPLOY_R2_SECRET_ACCESS_KEY`。创建 R2 凭据时选择 `Object Read & Write`，授权测试桶和生产桶。获准后向 `feature/init` 推送待验收提交，核对 `github.sha`、`target: release` 和测试摘要里的「占位放行，真实测试未执行」。 [R2 凭据配置](https://developers.cloudflare.com/r2/get-started/s3/#2-generate-api-credentials)
+2. 从运行摘要取得上传前 `packages/skills/skills.tar.gz` 的 SHA-256，关联该次运行的提交、运行 ID、重跑次数及实际归档对象键。用上传摘要中的 `s3://<桶>/<提交 SHA>/<运行 ID>-<重跑次数>/` 核对归档和 `curl/install.sh` 两份对象。
+3. 将实际归档的 S3 路径填入 `R2_ARCHIVE_URI`，将实际 S3 端点填入 `R2_ENDPOINT`，将上传前的摘要填入 `BUILT_ARCHIVE_SHA256`。用测试桶只读凭据回读。
+
+   ```bash
+   download_dir="$(mktemp -d)"
+   aws s3 cp "$R2_ARCHIVE_URI" "$download_dir/archive.tar.gz" \
+     --endpoint-url "$R2_ENDPOINT" --region auto --only-show-errors &&
+     printf '%s  %s\n' "$BUILT_ARCHIVE_SHA256" "$download_dir/archive.tar.gz" |
+     sha256sum --check
+   ```
+
+   下载及 SHA-256 比对均成功后保存归档对象键、运行标识和比对结果。
+
+4. 生产入口从 `skills-deploy-prod.yml.example` 接入，再按授权验证手动触发、所选 ref 的提交和生产桶路径。首次正式发布继续核对安装地址及公开消费。[GitHub 手动触发条件](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_dispatch)
+
+真实推送测试解冻后，以同次推送的 Python 和 Node 测试结果替换固定通过条件。两项均通过时才交接部署，任一失败时本次部署跳过。
+
+<details>
+<summary>本次拉取的远端差异（待核对，不覆盖上方本地进度和冻结决定）</summary>
+
+## 2026-11-23 推送测试与发布验证
+
+以下命令和场景用于对应步骤实现后的核验。就绪条件为干净的触发提交、其中的工作区依赖声明及 mise 配置。平台验证使用获授权的 GitHub 和 R2 目标。本地、隔离运行和真实环境结果分别留证。旧容器示例对应当时的实现。[流水线契约](contracts/pipeline.md#2026-11-23-统一发布与-r2-交接)
+
+### 干净 runner 的构建和检查
+
+从仓库根按以下方式核对一次实际构建及流水线打包。在另一份干净检出上用同一源码和实际工具版本复验，保留两次归档的文件路径、长度和 SHA-256。
+
+```bash
+set -euo pipefail
+export SOURCE_REVISION="$(git rev-parse HEAD)"
+export RELEASE_DIRECTORY="$(mktemp -d)/release"
+mise install
+export pnpm_config_lockfile=false
+export pnpm_config_verify_deps_before_run=false
+mise exec -- pnpm install --no-lockfile --ignore-scripts
+mise exec -- pnpm --filter @foundry/preset-config run build
+mise exec -- pnpm --filter @foundry/skills run build --mode release
+mise exec -- node --input-type=module <<'JS'
+import { execFileSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
+import { parse } from './packages/skills/node_modules/yaml/dist/index.js'
+
+const { steps } = parse(readFileSync('.github/workflows/publish.yml', 'utf8')).jobs.upload
+for (const id of ['archive', 'build-evidence'])
+  execFileSync('bash', ['-c', steps.find(step => step.id === id).run], { stdio: 'inherit' })
+JS
+test ! -e pnpm-lock.yaml
+test -s "$RELEASE_DIRECTORY/evidence/build-verification.json"
+test -s packages/skills/dist/VERSION
+bash -n packages/skills/dist/curl/install.sh
+bash -n packages/skills/dist/engine/install.sh
+```
+
+预期共享预设及技能包可无锁直接构建，`VERSION` 匹配源版本，当次 `dist` 与解包后的文件路径及字节相同。保存两次实际构建依赖解析并比较版本，记录 Bash、Node、pnpm、Python、uv、tar 版本。冻结后的归档和独立入口再核对各自的长度及 SHA-256。安装及供应链检查失败时保留日志并停止对应候选。归档前读回最小安装说明，核对它使用当前入口、参数及同包引擎，公开地址待配置时有明确条件。将旧 Node 入口说明作为反例。T031 验证完整发布及迁移说明。[正式归档契约](contracts/build-pipeline.md#2026-11-23-runner-直接构建和正式归档)
+
+对该提交保留两套测试结果。先核对 Node 分发测试所需的 `jq` 和 `uv`。在准备好工作区依赖后运行现有测试入口。
+
+```bash
+pnpm_config_lockfile=false pnpm_config_verify_deps_before_run=false mise exec -- pnpm --filter @foundry/skills run test
+mise exec -- node --test packages/skills/tests/distribution/*.test.mjs
+```
+
+两套测试各自留退出码和源码 SHA。必需检查失败、缺工具或未运行均按实际范围记录。实现后的 `packages/skills/tests/distribution/pipeline-workflow.test.mjs` 隔离验证下列表格的事件、目标和假对象故障。
+
+### 主线同包引擎验收
+
+用同版独立归档验证 curl 对 `engine/install.sh` 的实际调用及项目、原始参数、退出码和取消行为。覆盖默认适用挂载、成功集合含工作流或仅其他分类、`--no-mount --hidden`、部分复制失败和缺引擎。关闭挂载时仍可执行显式隐匿。部分复制失败保留已成功项及原复制退出码。T019 记录各平台入口和运行前置，T027/T028 分别验证实际接线和官方注册、宿主加载。下方旧 Node 调度示例对应此前验证。[安装契约](contracts/install.md#主线现行安装入口) · [挂载契约](contracts/mount.md#主线现行挂载入口)
+
+### 平台事件与权限预检
+
+| 输入或操作 | 应观察的结果 |
+| --- | --- |
+| 同一分支连续两次投递可检出提交的 `push` | 两次各有 Python 与 Node 结果，构建身份分别对应推送提交。 |
+| 分支删除无可检出提交，或 GitHub 抑制 `push` 投递 | 分支删除记录跳过原因，平台抑制通过实际事件证据确认。缺必需测试结果时对应发布停止。 |
+| 开放 `release` PR 的源分支由有权者推送 | 测试发布取事件 `after`，后续分支推进不改变候选提交。 |
+| 仅打开、重新开放或改目标，fork 或无授权测试来源 | 无测试发布写入，事件检查和跳过原因可追溯。 |
+| 普通直接推送、关闭未合并、间接关闭、提交归属另一 PR | 生产写入为 0。保留实际 `main` 分支保护、活动和归属接口结果。 |
+| 实际合并到 `main`，含启用的 merge、squash、rebase 及已合并 fork PR | `pr_merge` 活动唯一，活动 `after` 等于事件合并 SHA，操作者和归属 PR 匹配，本仓 `main` 可达且实际 `HEAD` 精确一致。 |
+| 缺权限、过期或替换的归档、必需 job 失败 | 在上传前停止。重跑发布只在原收据和冻结字节仍有效时继续。 |
+| 两个发布环境的授权对象和运行范围 | 环境凭据仅限对应桶和对象，两个目标各自授权。仅生产授权策略核对通过且绑定本次候选时，受信 job 才可执行生产写入。 |
+
+检查公开仓库策略对两份工作流路径的实际判定、checkout 的 fork 保护和 runner 缓存。记录实际事件的 PR、操作者、触发提交、工作流来源、生产者尝试、归档 ID 和必需 job。T059 先核对只读 API 实例和失败输入。T061 在迁后仓库逐种验证合并方式及间接关闭，保留 PR 详情、`main` 活动 ID 和前后 SHA、操作者、关联 PR 和实际 `HEAD`。证据来源及字段沿流水线契约，找不到唯一匹配时对应生产放行停止。[事件契约](contracts/pipeline.md#事件提交与授权) · [事件研究](research.md#github-事件与源码提交)
+
+### 测试环境按提交下载
+
+对同一版本号的两次不同源分支推送，分别打开对应的运行摘要。每次以测试桶只读身份使用该摘要中的两个对象键、长度与 SHA-256，替换本地命令所用变量。两组读回使用各自的摘要与独立临时目录，操作在测试对象保留期内完成。
+
+```bash
+set -euo pipefail
+skills_download_dir="$(mktemp -d)"
+aws --profile "$SKILLS_TEST_READER_PROFILE" --endpoint-url "$SKILLS_TEST_R2_ENDPOINT" --region auto \
+  s3api get-object --bucket "$SKILLS_TEST_R2_BUCKET" --key "$SKILLS_TEST_ARCHIVE_KEY" \
+  "$skills_download_dir/skills.tar.gz" >/dev/null
+aws --profile "$SKILLS_TEST_READER_PROFILE" --endpoint-url "$SKILLS_TEST_R2_ENDPOINT" --region auto \
+  s3api get-object --bucket "$SKILLS_TEST_R2_BUCKET" --key "$SKILLS_TEST_ENTRY_KEY" \
+  "$skills_download_dir/install.sh" >/dev/null
+test "$(wc -c < "$skills_download_dir/skills.tar.gz")" -eq "$SKILLS_TEST_ARCHIVE_BYTES"
+test "$(wc -c < "$skills_download_dir/install.sh")" -eq "$SKILLS_TEST_ENTRY_BYTES"
+printf '%s  %s\n' "$SKILLS_TEST_ARCHIVE_SHA256" "$skills_download_dir/skills.tar.gz" \
+  "$SKILLS_TEST_ENTRY_SHA256" "$skills_download_dir/install.sh" | sha256sum --check -
+```
+
+预期两个提交的归档及入口地址各自可定位，长度和 SHA-256 全部通过。流水线同时保留 `cmp` 对应的逐字节核对结果。换成任一对象缺失、访问被拒或返回非对应字节的输入时，记录实际失败阶段。真实结果归 T096。[取件路径](contracts/pipeline.md#测试-r2-的取件协议)
+
+### 生产固定对象与发现验证
+
+在获授权的隔离目标先核对 AWS CLI v2 的实际版本、条件创建、带原 ETag 的更新、明确的对象缺失和条件失败错误码。用两个执行者和响应丢失输入覆盖同字节复用、异字节拒绝、旧 ETag 冲突、已经提交但响应丢失，以及最新入口先行而版本表失败。每次失败后读回实际字节并核对旧版本仍可取。
+
+生产具备适用授权且 `main` PR 实际合并后，核对已批准仓库及环境策略，读回 `authorizationRef` 与本次 PR、可信工作流、候选、两个 artifact ID、实际目标和对象键的绑定。确认首个写操作前发现对象的原 ETag 或明确缺失和待写 SHA-256 均有记录。然后从运行结果记录的固定 HTTPS 地址只读下载归档、固定入口和两份发现对象，例如 `curl --fail --show-error --location "$SKILLS_PROD_FIXED_ARCHIVE_URL" --output skills.tar.gz`。核对两个固定对象的字节与候选一致、解包全集一致、正式记录位于生产表中。读取常规公开 URL 验证缓存后的实际发现结果。在独立受支持项目使用实际最新入口安装指定固定版本并观察适用挂载。完整矩阵、真实用户、首次发布和旧版复验各自记录对应证据。[生产流程](contracts/pipeline.md#生产-r2-的写入和读回) · [正式消费布局](contracts/curl-delivery.md#2026-11-23-公开入口与测试取件)
+
+</details>
+
+## 2026-11-20 容器构建验证
+
+从仓库根按[容器构建说明](../../../packages/skills/deploy/README.md)使用 `packages/skills/deploy/Dockerfile`，以新的空目录接收本地导出，核对根 VERSION、skill 正文附件和四份 Shell。与同源本地 dist 比较路径全集及字节，逐项执行 Bash 语法检查，确认无构建工具或旧输出混入。实际容器构建及 21 文件对照结果见[验收记录](analysis/acceptance/docker-build.md)，不能据此视为正式范围过滤或发布通过。
+
+## 2026-11-19 引擎统一入口验证
+
+构建后核对 `dist/engine/install.sh` 与同版子插件脚本，执行 Bash 语法检查。在独占项目从包外目录运行该入口，验证子脚本按路径顺序执行、参数原值和当前项目目录保留；缺后续脚本或父目录为链接时任何子脚本均未运行，首项失败后不运行后续项并保留退出码。空子脚本集合正常退出，普通资产不执行，write=false 不落盘；子插件增删后重新生成名单。真实安装源应调用统一入口，`--no-mount` 不调用，缺入口或子脚本失败保留已安装技能。下方原安装器直调 Speckit 的测试说明保留历史范围，当前实际结果沿 [T077](implementation/T077.md)。
+
+## 2026-11-19 引擎产物路径验证
+
+运行 `pnpm --filter @foundry/skills run build`，读取 `packages/skills/dist/engine/script/speckit-mount.sh` 并执行 `bash -n`。引擎测试验证显式相对路径、自动命名的资产及入口块都归在 `engine/`。安装测试验证新旧两种包内挂载路径。[实际验证](implementation/T077.md#2026-11-19-引擎子插件产物归档目录)
+
+## 2026-11-18 当前验证范围：引擎发现与加载
+
+本轮补齐默认关闭的 `plugin` 开关、引擎及唯一 Vite 配置接线，接口见[构建契约](contracts/build-pipeline.md)。已有依赖与 Node 环境就绪后，对 `packages/skills/build/plugins/vite-plugin-engine/index.ts` 执行定向 ESLint，运行 `pnpm --filter @foundry/skills run check-types`；定向测试运行 `node --test packages/skills/tests/distribution/vite-plugin-engine.test.mjs`；包构建仅证明当前启用集合的实际结果，不能据此认定业务子插件已生成挂载脚本。
+
+必要的隔离验证使用临时 src，按 `src/<集合>/plugin/vite-plugin-<名称>/index.ts` 放置测试入口：仅 `plugin: true` 被发现，script 关闭或技能未启用不影响；无配置、未声明及 `plugin: false` 的集合即使存在坏插件也不导入；无子插件返回空数组；多个集合/入口按名称稳定加载；增加或移除入口后新的配置加载反映变化；链接和更深附件不作为入口。工厂用加载记录验证已创建插件且尚未执行构建钩子，再通过真实 Vite 内存构建消费异步、嵌套数组及 false 返回值，验证实际钩子生效且 write=false 不落盘。
+
+反例包括模块导入失败、默认导出非函数及工厂抛错，均须带入口定位失败，不将坏插件静默当空结果。隔离测试来源显式传绝对路径，另在不同 cwd 核对默认来源仍锚定包内 src。实际验证结果由本轮执行输出核对，不由文档保存推定通过；最低 Node 22.20.0、其他平台与真实挂载分别未验。
+
+**本轮局部验证**：5 项引擎 Node 测试、包类型检查、改动代码的定向 ESLint 及真实 Vite 构建通过。原有 Python 测试 39 项中 3 项失败：`test_cli_failure_is_reported`、`test_every_run_reinstalls_all_sources`、`test_installs_increment_and_attachments`，均因缺少 `script/register-commands/register-commands.sh`，改动前已复现。Markdown 的 `pnpm exec eslint --fix` 已执行，但规格被现有忽略规则跳过，不计 Markdown lint 通过。完整分发、最低 Node、其他平台及真实挂载未执行。
+
+后续生成/回迁才核对一个自包含 `dist/script/speckit-mount.sh`、curl 唯一生成安装及 hidden、入口原字节和 hidden 模板派生。所有真实安装、挂载及发布验证仍按各自有效前置执行，不为测试引擎在当前项目注册扩展。
+
+## 2026-11-18 分步验证：脚本插件骨架与目录迁移
+
+依据[本轮输入及后续迁移授权](requirements/raw/2026-11-18-unified-script-directory.md)，先完成规划和插件骨架，再由子代理执行Tasks及综合分析，随后已迁移扫描/脚本生成和hidden模板并接入配置。局部检查命令及真实结果见[T077](implementation/T077.md)；完整正式包及消费仍待后续，不执行安装或发布来验证纯构建迁移。
+
+迁移接线后，沿下方已有包 build 命令验证：curl 插件只交付安装入口，script 插件只派生 hidden；两者各有唯一资产，`dist/script/install.sh` 与 curl 目录安装源原字节一致，`dist/script/hidden-install.sh` 与 `vite-plugin-script/hidden-install.template.ts` 派生一致，所有获准运行脚本都在 `dist/script/`；枚举 `dist/curl/` 下运行脚本必须为0。缺任一必需脚本、两插件重复交付、意外带入 old/测试/构建源码不能通过。write=false须无写盘副作用，根VERSION和技能附件保持原验收。
+
+下面内容构建示例可用于当前局部迁移的检查。任务图、综合分析和 Tasks 已同步目标路径，完整业务实施仍须核对原任务及其方案，不据目录存在声称可发布。
+
+## 2026-11-16 当前验证入口：统一包
+
+先读[curl契约](contracts/curl-delivery.md)、[模型](data-model.md)及[研究](research.md)。本节替代旧双包、分区VERSION及强制manifest验证；历史命令保留当时范围。当前仅完成规划，本轮未运行构建、产品测试、下载安装或发布；真实R2、最低运行时和全矩阵仍待验。
+
+### 已有入口与前置
+
+仓库初始化依根AGENTS使用pnpm install；本轮不重复安装。已有包命令可用于后续真实工程检查，记录失败/缺前置/not-run，不通过改规则删断言求绿：
+
+```bash
+pnpm --filter @foundry/skills run lint
+pnpm --filter @foundry/skills run check-types
+pnpm --filter @foundry/skills run build
+pnpm --filter @foundry/skills run test
+pnpm --filter @foundry/skills run test:distribution
+```
+
+没有根pnpm test。build:candidate属于紧急包，不证明主线统一候选已实现。当前主线未有统一归档/CI命令，后续原Task确定实际入口后再补命令，不运行不存在工具或伪造成功。旧测试可能依赖已归档模块，按真实结果定位；本轮仅对实际修改Markdown执行pnpm exec eslint --fix --no-ignore并读回。
+
+### 首次安装与后置公共入口
+
+主线从最新已发布install.sh取得所选统一包，不能把旧Node挂载调用写成首次下载前必须另取的安装器。Node公共入口仍负责后置挂载及内部Bash/PowerShell调度，源码在script/old不代表新单包已交付。T019在原方案中核对Windows首次获取、已核验包的PowerShell调用与三平台参数接线；当前未实现或未验部分明确限制，不提供可直接运行的假兼容命令。紧急版沿自己的官方安装加显式Node第二步，不受主线入口描述替代。
+
+### 当前内容构建检查
+
+运行包build后，根dist/VERSION应为package.json.version及换行，技能启用内容和附件与源字节一致，script/install.sh与install.source.sh一致，hidden脚本与真实模板输出一致；插件内归档保持注释，不应生成两个旧tar.gz。开发输出可含内部集合，不能因此宣告可公开。
+
+```bash
+cmp packages/skills/build/plugins/vite-plugin-curl/install.source.sh packages/skills/dist/script/install.sh
+cat packages/skills/dist/VERSION
+```
+
+再用独立文件枚举/原字节对照核验实际内容，不能只看目录存在。危险来源、输出链接、已启用正文缺失、重建增删及write=false按原构建骨架验收，尚未通过的完整要求如实报告。
+
+### 待实现的正式归档与候选验证
+
+流水线在独占暂存根收集获准三分类、同版script运行材料及curl映射数据、根VERSION、当前说明与真实许可。技能映射必须与目录双向相等，hidden候选不带eval/profile。缺正文/引用附件、安装目录碰撞、链接、越界、过时README或缺许可的反例不能通过正式候选。
+
+归档为skills-<version>.tar.gz，内部根直接为VERSION/skill/script/curl非脚本数据/说明及许可，不带dist外层；归档位于被归档目录之外。解包文件全集和字节与本次正式暂存100%一致，包内没有两个独立技能/helper归档。没有release-manifest.json或script/manifest.json本身不得导致失败；发现release.json、候选证据等包外材料不混入安装根。
+
+两次同源构建比较正式内容及解包后文件全集/字节，不要求tar/gzip原字节哈希相同。对选定候选归档求实际长度与SHA-256并冻结，随后重试不得重建替换。清理dist不丢失发布记录；仅build不新增已发布行。真实源版本及输入须实际提交，不以环境变量/夹具SHA冒认产品输入。
+
+### 单包安装与恢复场景
+
+准备两版独立统一包和一个较新入口的自有发布夹具，每场景独占HOME/项目。保留HTTPS、整包SHA、成员预检及VERSION链路，传输替身不跳过验证；只有真实目标才可算R2。入口先取得为文件并按可信固定身份比对，不能用远端latest元数据替代实际已执行脚本身份。
+
+参数接通后，可在自有消费目录按以下形式执行；变量必须来自本次夹具并先赋值，当前不是已部署命令：
+
+```bash
+bash "$VERIFIED_INSTALL" "$SKILL_VERSION" --agent codex --skill "$SKILL_NAME" --no-mount --hidden
+```
+
+| 输入                                                       | 必须观察的结果                                                                                       |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| 新入口消费两版统一包                                       | 各取所选固定包；技能/hidden与根VERSION同版，入口不回退，不另取helper                                 |
+| 默认latest、指定旧版、空表/重复/未知版/非法字段            | 一次固定记录；全表合法且显式唯一；非法输入零目标提交                                                 |
+| SHA缺失/非法/不符、长度不符、MD5-only记录                  | 新正式入口拒绝，不降级MD5、不改版本                                                                  |
+| 摘要正确但成员含绝对/逃逸/重复/大小写碰撞、链接/设备/FIFO  | 解包前拒绝；目标外写入0、下载脚本执行0；PAX/GNU有效路径也覆盖                                        |
+| 根VERSION错版/缺失、映射错/缺失、技能缺正文附件            | 不提交不可信技能，不因hidden容错掩盖整包或技能失败                                                   |
+| 整包/分类/单/多技能、重复选择、缺依赖、eval请求            | 仅所选获准技能；去重、不静默补依赖、不扩安装集合                                                     |
+| 已有相同来源同版完整技能、未知同名/另一版/用户改动/已跟踪  | 可核实同版完整项reused；其余保留并报告冲突，不认领未知内容                                           |
+| 首次安装后清理所有临时目录，再从新进程独立重试             | 来源标记同源同版且正文附件全集相同才reused；缺/损坏标记或只字节相同的未知目录冲突                    |
+| 复制中断、目标权限失败、目标与下载目录不同文件系统         | 暂存在目标同文件系统；完整成功项保留，残缺不算成功，重试先核对现场                                   |
+| 统一包下载或摘要失败且--hidden开启                         | installation不成功、零技能提交、零hidden执行                                                         |
+| 包通过且技能完整，hidden缺件/未知接口/运行失败             | 技能正常安装；hidden失败、overall=partial、退出非零；不执行未知接口                                  |
+| 多技能中部分安装失败，成功项hidden也失败                   | 保留逐项成功/失败/not-run，installation不误报success，hidden只处理成功交集，总体partial/failed且非零 |
+| 默认关闭hidden                                             | 不读取执行hidden代码，排除零写入；不因可选hidden步骤失败阻止纯安装                                   |
+| 普通Git，模板全量但仅部分安装成功                          | 只排除模板候选∩本次选择∩完整成功集合，未选/失败/历史技能仍可见                                       |
+| 无.git、父仓库子目录、.git文件、项目外global               | 明确跳过或限制；不改父仓库、共享或全局配置                                                           |
+| 特殊路径、否定规则、exclude权限、tracked目标、连续两次重试 | 精确规则生效、原规则保留、重复新增0，失败不谎报成功                                                  |
+
+保留实际stdout/stderr、退出码、逐技能文件全集对照、包/入口身份与阶段报告；Git效果以git check-ignore -v、git ls-files和git status --short联合证明。临时成功集合JSON允许存在，不是被暂缓的随包逐文件JSON。新用例沿原安装/隐匿骨架增量实现，具体测试文件和命令由后续原Task准备确定，本指南不内联实现或完整测试套件。
+
+### 后置发布与完整验收
+
+只在自有对象替身先验冻结对象、同字节复用/异字节拒绝、并发、断连及发现更新；真实迁后再验证目标客户端条件写、匿名固定包SHA和公开缓存、最小权限及独立消费。对象已上传、远端已核验、记录已受控回仓且读回、最新入口已核验、索引已更新分别留证。记录未持久保存时停止发现；先更新兼容入口再CAS版本表，后步失败保留旧索引及已更新入口。额外验证旧候选重试不回退latest、竞争不丢其他版本、授权错bucket/prefix/origin或新字节摘要明确拒绝。任何中断不抹去已发生事实或删除旧完整版本；无对应仓库写授权不自动提交/推送。
+
+原Node/PowerShell、在线动态agent/global、真实挂载及旧入口迁移、最低Node、独立使用者和完整支持矩阵仍按原验收后置。未知未实现请求明确拒绝，不将本地Linux组合当全部支持。紧急版T090保留已有迁后候选，T091～T093另等具体候选授权及真实公开输入，不按本次统一包重建或重发。
 
 ## 紧急版验证导航（2026-11-12）
+
+紧急版自 2026-11-23 起全线冻结。本节的操作在用户明确恢复之后按所处阶段使用。[冻结决定](spec.md#2026-11-23-紧急版冻结)
 
 依据[最新spec](spec.md)、[工作区输入及Clarify B](requirements/raw/2026-11-12-workspace-local-handoff.md)、[紧急契约](contracts/urgent-release.md)及[模型](data-model.md)。本地实施位置为当前工作区packages/skills-distribution-urgent；所有必需本地验证通过后按[连续推进豁免](requirements/raw/2026-11-12-urgent-continuous-exemption.md)继续，不逐阶段或逐Task重复确认；迁仓/建仓/推送/发布仍核对适用明确授权。源码可保留eval，正式技能发布、发现及安装仍排除eval。
 
@@ -331,7 +561,7 @@ bash <独立副本>/script/install-skills/install-skills.sh --source-dir <本地
 
 ## C：历史最小公共材料核验重现
 
-本节复验旧技能集合和固定官方包，不代替当前 Increment/准备 hook 移交。内部最小核验模块已实现，模块接口见 [内部核验说明](../../../packages/skills/script/mount-entry/README.md)，实际结果见 [MVU-C 验收记录](analysis/acceptance/mvu-c.md)。外部分发唯一入口为 node script/index.mjs 加参数，当前先接现有安装骨架，实际挂载仍待 T006。先准备固定版本 skills@1.7.4 npm 包，将 FOUNDRY_SKILLS_PACKAGE 指向该包目录；Bash 可将 FOUNDRY_JQ 指向已取得的 jq 1.8.1 官方二进制，否则内部模块会自行准备并核验。实验在自有 /tmp 目录执行，未提供真实公开来源。
+本节复验旧技能集合和固定官方包，不代替当前 Increment/准备 hook 移交。内部最小核验模块已实现，模块接口见 [内部核验说明](../../../packages/skills/script/old/mount-entry/README.md)，实际结果见 [MVU-C 验收记录](analysis/acceptance/mvu-c.md)。外部分发唯一入口为 node script/index.mjs 加参数，当前先接现有安装骨架，实际挂载仍待 T006。先准备固定版本 skills@1.7.4 npm 包，将 FOUNDRY_SKILLS_PACKAGE 指向该包目录；Bash 可将 FOUNDRY_JQ 指向已取得的 jq 1.8.1 官方二进制，否则内部模块会自行准备并核验。实验在自有 /tmp 目录执行，未提供真实公开来源。
 
 ```bash
 pnpm --filter @foundry/skills run test:distribution -- --mvu C

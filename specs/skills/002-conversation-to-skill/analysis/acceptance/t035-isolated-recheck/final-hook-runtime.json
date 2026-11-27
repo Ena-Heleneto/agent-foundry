@@ -1,0 +1,485 @@
+{
+  "installation": {
+    "maintainedSource": "packages/skills/src/profile/conversation-recording",
+    "builtSource": "packages/skills/dist/skill/profile/conversation-recording",
+    "entrypoint": "scripts/install.py",
+    "target": ".agents/skills/conversation-recording",
+    "sourceBuildAndIsolatedInstallAgree": true,
+    "skillFileHashes": {
+      "SKILL.md": "6eac4cd542961a358428efdcf0b274321752fa0b678e5f9df590ed1a30f67393",
+      "template/detail.md": "43b14c5bd86f03c14b8565bd341829b720d1495deaf37d8184fde8ccc1e47a81",
+      "template/record.md": "858e28dcc466b8e33ab67d28c136417d2007c1f3e7e963b5eada9d9ae2bc36bb",
+      "references/event-capture.md": "9a8657e9883debc029b0344e9ab149db1843d20a8b15b93dda9e3513559272b5",
+      "references/recording-timing.md": "b159aa40f0949909891ca2fc9c0239827624dd6d015743448ad230f87b834c6b",
+      "references/write-failures.md": "3406449a1df336c8298b64c22fe36e585f1792885d78c77255d7df683777f6b2",
+      "references/session-scope.md": "7cebbc12310f06f4202bf6caa94923cf2df5c48b0ee2f1c7df62c986fb1a8780",
+      "references/save-events.md": "77aca24301b904359776cf44b50891788b8091d6e688d69b88716fe1d414da8b",
+      "references/storage-contract.md": "7553cc35854e348eb6eeb960af7dde1724061d8b6e63788db0c7eb60dbba3187",
+      "references/resume-records.md": "d6668ff8ad9c81ec139ed1c15aafd92f18e9f5de90c5a31b7aa16e7019562186",
+      "scripts/record.py": "ac2556e8d27ea8a38af107315866b4c0e769fd9f3fb0fa536f3628430b621668",
+      "scripts/install.py": "9f237f34ebf4d64ee230cd699108c70a278306777f47c3272e8a68d2b5bcfc0f",
+      "scripts/events.py": "98fc9207bb57d721ac5fd24918aba3862d9acd30b976cda8c32524a11865cbe7"
+    },
+    "retiredManualWorkflowAbsent": true,
+    "oldPairedSaveResourceAbsent": true
+  },
+  "verification": {
+    "workspacePythonUnit": 53,
+    "isolationFixtureUnit": 8,
+    "build": "passed",
+    "lint": "passed",
+    "typeCheck": "passed",
+    "skillLocalLinksChecked": 35
+  },
+  "controlledCli": {
+    "version": "codex-cli 0.172.0",
+    "preseededTrust": false,
+    "ordinaryLaunch": true,
+    "emptyRecordCount": 0,
+    "formal": true,
+    "nativeTrustPrompts": [
+      "project",
+      "hooks"
+    ],
+    "skillDiscovery": {
+      "installedProjectSkillDiscovered": true,
+      "retiredEntryCount": 0
+    },
+    "candidateSha256": "ac2556e8d27ea8a38af107315866b4c0e769fd9f3fb0fa536f3628430b621668",
+    "hooks": [
+      {
+        "name": "postToolUse",
+        "trusted": true,
+        "enabled": true,
+        "currentHash": "sha256:8d93fe229b7fead74625263e7de75a5b1b6fda8358e0f93bbb8db33c370d7a15",
+        "source": ".codex/hooks.json"
+      },
+      {
+        "name": "userPromptSubmit",
+        "trusted": true,
+        "enabled": true,
+        "currentHash": "sha256:167e9c9ba08c9cb316f8c8c1be162c63e8b8e889e0e2f7a1388eaf0825889d60",
+        "source": ".codex/hooks.json"
+      },
+      {
+        "name": "stop",
+        "trusted": true,
+        "enabled": true,
+        "currentHash": "sha256:53525126a1069963b4311028a0d3387ec37c69582fb816ba772db14323c44ff1",
+        "source": ".codex/hooks.json"
+      }
+    ],
+    "hostFinal": [
+      {
+        "hostTime": "2026-11-25T14:00:35.088Z",
+        "hostText": "T035_README_FINAL\n\nT035_README_END"
+      },
+      {
+        "hostTime": "2026-11-25T14:00:35.882Z",
+        "hostText": "T035_NO_TOOLS\n\nT035_NO_TOOLS_END"
+      },
+      {
+        "hostTime": "2026-11-25T14:00:36.471Z",
+        "hostText": "T035_COMMIT_RESULT"
+      },
+      {
+        "hostTime": "2026-11-25T14:00:36.753Z",
+        "hostText": "T035_AFTER_NORMAL"
+      }
+    ],
+    "observed": [
+      {
+        "ns": 8749507462437,
+        "wallNs": 1795615234509795658,
+        "event": "ProviderRequest",
+        "correlation": "readme",
+        "auxiliary": false,
+        "outputHasReadme": false,
+        "promptAlreadySaved": true,
+        "commitOutputs": {},
+        "records": {}
+      },
+      {
+        "ns": 8749507502608,
+        "wallNs": 1795615234509835019,
+        "event": "ProviderBusinessTool",
+        "tool": "exec_command",
+        "command": "/usr/bin/cat README.md"
+      },
+      {
+        "ns": 8749507687362,
+        "wallNs": 1795615234510019863,
+        "event": "ProviderFinished",
+        "correlation": "readme",
+        "auxiliary": false,
+        "isFinal": false
+      },
+      {
+        "ns": 8749553098181,
+        "wallNs": 1795615234555431052,
+        "event": "ProviderRequest",
+        "correlation": "readme",
+        "auxiliary": true,
+        "outputHasReadme": false,
+        "promptAlreadySaved": true,
+        "commitOutputs": {},
+        "records": {}
+      },
+      {
+        "ns": 8749553244984,
+        "wallNs": 1795615234555577395,
+        "event": "ProviderFinished",
+        "correlation": "readme",
+        "auxiliary": true,
+        "isFinal": true
+      },
+      {
+        "ns": 8749633573532,
+        "wallNs": 1795615234635906303,
+        "event": "ProviderRequest",
+        "correlation": "readme",
+        "auxiliary": false,
+        "outputHasReadme": true,
+        "promptAlreadySaved": true,
+        "commitOutputs": {},
+        "records": {}
+      },
+      {
+        "ns": 8750083935922,
+        "wallNs": 1795615235086269013,
+        "event": "ProviderFinished",
+        "correlation": "readme",
+        "auxiliary": false,
+        "isFinal": true
+      },
+      {
+        "ns": 8750427263439,
+        "wallNs": 1795615235429596230,
+        "event": "ProviderRequest",
+        "correlation": "question",
+        "auxiliary": false,
+        "outputHasReadme": true,
+        "promptAlreadySaved": true,
+        "commitOutputs": {},
+        "records": {}
+      },
+      {
+        "ns": 8750877647169,
+        "wallNs": 1795615235879980470,
+        "event": "ProviderFinished",
+        "correlation": "question",
+        "auxiliary": false,
+        "isFinal": true
+      },
+      {
+        "ns": 8751165316885,
+        "wallNs": 1795615236167649916,
+        "event": "ProviderRequest",
+        "correlation": "commit",
+        "auxiliary": false,
+        "outputHasReadme": true,
+        "promptAlreadySaved": false,
+        "commitOutputs": {},
+        "records": {
+          "records/2026-11-25/01a21302-18a4-7c41-b76c-a2d783a8a344.md": [
+            1795615236145597278,
+            "a8409610f570d4acb2d82be1ffdeefb2f7b1ffda6c0e21e583ba111d5eebbab7"
+          ],
+          "records/2026-11-25/details/01a21302-18a4-7c41-b76c-a2d783a8a344/01a21302-1941-7360-b9a6-e8164756e368.md": [
+            1795615234615354941,
+            "37d8d39c95643bbc170556826b7edf68e3e44248a6bf7ee77cf3df3ea521068f"
+          ]
+        }
+      },
+      {
+        "ns": 8751165456498,
+        "wallNs": 1795615236167788899,
+        "event": "ProviderFinished",
+        "correlation": "commit",
+        "auxiliary": false,
+        "isFinal": false
+      },
+      {
+        "ns": 8751262660539,
+        "wallNs": 1795615236264993310,
+        "event": "ProviderRequest",
+        "correlation": "commit",
+        "auxiliary": false,
+        "outputHasReadme": true,
+        "promptAlreadySaved": false,
+        "commitOutputs": {
+          "t035-failure": "Chunk ID: be510d\nWall time: 0.0000 seconds\nProcess exited with code 1\nOriginal token count: 17\nOutput:\nerror: pathspec 'absent.txt' did not match any file(s) known to git\n"
+        },
+        "records": {
+          "records/2026-11-25/01a21302-18a4-7c41-b76c-a2d783a8a344.md": [
+            1795615236145597278,
+            "a8409610f570d4acb2d82be1ffdeefb2f7b1ffda6c0e21e583ba111d5eebbab7"
+          ],
+          "records/2026-11-25/details/01a21302-18a4-7c41-b76c-a2d783a8a344/01a21302-1941-7360-b9a6-e8164756e368.md": [
+            1795615234615354941,
+            "37d8d39c95643bbc170556826b7edf68e3e44248a6bf7ee77cf3df3ea521068f"
+          ]
+        }
+      },
+      {
+        "ns": 8751262804192,
+        "wallNs": 1795615236265136583,
+        "event": "ProviderFinished",
+        "correlation": "commit",
+        "auxiliary": false,
+        "isFinal": false
+      },
+      {
+        "ns": 8751364266413,
+        "wallNs": 1795615236366599124,
+        "event": "ProviderRequest",
+        "correlation": "commit",
+        "auxiliary": false,
+        "outputHasReadme": true,
+        "promptAlreadySaved": false,
+        "commitOutputs": {
+          "t035-failure": "Chunk ID: be510d\nWall time: 0.0000 seconds\nProcess exited with code 1\nOriginal token count: 17\nOutput:\nerror: pathspec 'absent.txt' did not match any file(s) known to git\n",
+          "t035-repair": "Chunk ID: 31431b\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 0\nOutput:\n"
+        },
+        "records": {
+          "records/2026-11-25/01a21302-18a4-7c41-b76c-a2d783a8a344.md": [
+            1795615236347579464,
+            "b632b311c9c5699633f3ad56452232a3808f8fcd2669c5c88595ac01a442cb75"
+          ],
+          "records/2026-11-25/details/01a21302-18a4-7c41-b76c-a2d783a8a344/01a21302-1fe0-74d2-9f8e-8ea88b505d15.md": [
+            1795615236347465392,
+            "5c4568f6bb81e9b89b007211a7109951c49ed3c3702c8d997386fb7438cb1de2"
+          ],
+          "records/2026-11-25/details/01a21302-18a4-7c41-b76c-a2d783a8a344/01a21302-1941-7360-b9a6-e8164756e368.md": [
+            1795615234615354941,
+            "37d8d39c95643bbc170556826b7edf68e3e44248a6bf7ee77cf3df3ea521068f"
+          ]
+        }
+      },
+      {
+        "ns": 8751364413406,
+        "wallNs": 1795615236366745807,
+        "event": "ProviderFinished",
+        "correlation": "commit",
+        "auxiliary": false,
+        "isFinal": false
+      },
+      {
+        "ns": 8751466166230,
+        "wallNs": 1795615236468498911,
+        "event": "ProviderRequest",
+        "correlation": "commit",
+        "auxiliary": false,
+        "outputHasReadme": true,
+        "promptAlreadySaved": false,
+        "commitOutputs": {
+          "t035-failure": "Chunk ID: be510d\nWall time: 0.0000 seconds\nProcess exited with code 1\nOriginal token count: 17\nOutput:\nerror: pathspec 'absent.txt' did not match any file(s) known to git\n",
+          "t035-repair": "Chunk ID: 31431b\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 0\nOutput:\n",
+          "t035-retry": "Chunk ID: bcbfd3\nWall time: 0.0000 seconds\nProcess exited with code 0\nOriginal token count: 19\nOutput:\n[master eb88b2f] repaired\n 1 file changed, 1 insertion(+), 1 deletion(-)\n"
+        },
+        "records": {
+          "records/2026-11-25/01a21302-18a4-7c41-b76c-a2d783a8a344.md": [
+            1795615236347579464,
+            "b632b311c9c5699633f3ad56452232a3808f8fcd2669c5c88595ac01a442cb75"
+          ],
+          "records/2026-11-25/details/01a21302-18a4-7c41-b76c-a2d783a8a344/01a21302-1fe0-74d2-9f8e-8ea88b505d15.md": [
+            1795615236347465392,
+            "5c4568f6bb81e9b89b007211a7109951c49ed3c3702c8d997386fb7438cb1de2"
+          ],
+          "records/2026-11-25/details/01a21302-18a4-7c41-b76c-a2d783a8a344/01a21302-1941-7360-b9a6-e8164756e368.md": [
+            1795615234615354941,
+            "37d8d39c95643bbc170556826b7edf68e3e44248a6bf7ee77cf3df3ea521068f"
+          ]
+        }
+      },
+      {
+        "ns": 8751466322873,
+        "wallNs": 1795615236468655264,
+        "event": "ProviderFinished",
+        "correlation": "commit",
+        "auxiliary": false,
+        "isFinal": true
+      },
+      {
+        "ns": 8751748522290,
+        "wallNs": 1795615236750855071,
+        "event": "ProviderRequest",
+        "correlation": "after",
+        "auxiliary": false,
+        "outputHasReadme": true,
+        "promptAlreadySaved": false,
+        "commitOutputs": {},
+        "records": {}
+      },
+      {
+        "ns": 8751748678703,
+        "wallNs": 1795615236751011104,
+        "event": "ProviderFinished",
+        "correlation": "after",
+        "auxiliary": false,
+        "isFinal": true
+      }
+    ],
+    "recordSha256": "e78c4b3b7192fd0f55ccc7a02b8dabb73a08f46b66c6153e227a543681052f0b",
+    "commit": {
+      "realFailureThenSuccess": true,
+      "repairRecordedBeforeRetry": true,
+      "bothCommitWindowsUnchanged": true,
+      "resultReplyOmitted": true,
+      "laterReplyRecorded": true
+    },
+    "recovery": {
+      "openingDate": "2026-11-25",
+      "resumedLocalDate": "2026-11-26",
+      "sameRecordAfterTwoResumes": true,
+      "ignoredOriginalPreserved": true,
+      "relocatedStartsWithNewTurn": true
+    },
+    "extended": {
+      "toolMatrix": {
+        "attachments": {
+          "attachments/attachment-a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57.png": "a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57",
+          "attachments/attachment-78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340.png": "78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340",
+          "attachments/attachment-66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b.png": "66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b"
+        },
+        "sourceHashes": {
+          "alpha": "78a1c98562de7c2de85685be27baee252fbdd28d187e84a1de3859dd37e9b340",
+          "beta": "66301d527e8fe13f9a665cbc2080f90f707f1accab22bb5a270b7000ec64d68b"
+        },
+        "userAttachmentSha256": "a9805dc10af831b2854ff8644c2882ae7558d8f34ab777922c124a431d059c57",
+        "afterNativeResume": true,
+        "longOutputExact": true,
+        "streamedOutputInOrder": true,
+        "outsideToolOutputInOriginalSession": true
+      },
+      "foreignResume": {
+        "linkedWorktree": true,
+        "sameNativeSession": true,
+        "resumedBusinessCompleted": true,
+        "noNewRecordOrRewrite": true
+      },
+      "interruptedStop": {
+        "finalVisibleBeforeKill": true,
+        "lastConfirmedBytesPreserved": true,
+        "sameRecordResumed": true,
+        "interruptedFinalRemainedGap": true
+      },
+      "failedWrite": {
+        "firstWriteBlocked": true,
+        "nativeWarningBeforeReply": true,
+        "businessContinued": true,
+        "originalPromptRecovered": true
+      },
+      "cancelAndEarlyClose": {
+        "nativeUserStoppedStreaming": true,
+        "partialFinalNotRecorded": true,
+        "closedBeforeInputSave": true,
+        "nativeInputUnavailable": true,
+        "staleInProgressIndexObserved": true,
+        "sameRecordResumedWithGap": true
+      },
+      "partialWrite": {
+        "mainRecordPreserved": true,
+        "toolStillCompleted": true,
+        "nativeWarningBeforeReply": true,
+        "detailRecoveredInSameTurn": true
+      },
+      "parallelMidnight": {
+        "openedAtDate": "2026-11-25",
+        "promptSentAtDate": "2026-11-26",
+        "twoSeparateRecords": true,
+        "emptyBeforePrompt": true,
+        "sameTextKeptInEachSession": true
+      },
+      "sameTurnSupplement": {
+        "sentDuringActualTool": true,
+        "oneNativeTurn": true,
+        "supplementBeforeFinalInRecord": true
+      }
+    },
+    "replySavedAfterHostFinal": true,
+    "recordVisible": true,
+    "controls": [
+      {
+        "mode": "exec",
+        "recordsUnchanged": true
+      },
+      {
+        "mode": "exec-resume",
+        "recordsUnchanged": true
+      }
+    ]
+  },
+  "liveCli": {
+    "completeInstalledResourcesRead": {
+      "SKILL.md": "6eac4cd542961a358428efdcf0b274321752fa0b678e5f9df590ed1a30f67393",
+      "references/recording-timing.md": "b159aa40f0949909891ca2fc9c0239827624dd6d015743448ad230f87b834c6b"
+    },
+    "model": "gpt-6.2-sol",
+    "hookTrust": [
+      "trusted",
+      "trusted",
+      "trusted"
+    ],
+    "turns": [
+      {
+        "modelToolCalls": [],
+        "final": [
+          "T035_LIVE_FIRST"
+        ]
+      },
+      {
+        "modelToolCalls": [],
+        "final": [
+          "T035_LIVE_FOLLOWUP"
+        ]
+      },
+      {
+        "modelToolCalls": [
+          "exec"
+        ],
+        "final": [
+          "T035_LIVE_README_VALUE"
+        ]
+      },
+      {
+        "modelToolCalls": [
+          "exec"
+        ],
+        "final": [
+          "T035_LIVE_SOURCE_READ"
+        ]
+      }
+    ],
+    "normalExit": true,
+    "recordCount": 1,
+    "recordSha256": "f29ffd4dedc0bc4f4a88bb1887c7db0d1af2939c10f3b503ba06f27951f30faf",
+    "recordingScriptSha256": "ac2556e8d27ea8a38af107315866b4c0e769fd9f3fb0fa536f3628430b621668"
+  },
+  "liveCodeModeGitCli": {
+    "nativeCodeModeDynamicGitCommit": true,
+    "codeModeCommitResultOmitted": true,
+    "model": "gpt-6.2-sol",
+    "hookTrust": [
+      "trusted",
+      "trusted",
+      "trusted"
+    ],
+    "turns": [
+      {
+        "modelToolCalls": [
+          "exec",
+          "exec",
+          "exec"
+        ],
+        "final": [
+          "T035_CODE_MODE_COMMIT_DONE"
+        ]
+      }
+    ],
+    "normalExit": true,
+    "recordCount": 1,
+    "recordSha256": "c5141aa053c27cba63b6ef30f0d25b77eecc39fb663e0dd87ef3e10bc09ee284",
+    "recordingScriptSha256": "ac2556e8d27ea8a38af107315866b4c0e769fd9f3fb0fa536f3628430b621668"
+  }
+}

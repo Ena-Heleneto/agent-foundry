@@ -1,0 +1,10 @@
+{
+  "synthetic_stop_case": true,
+  "native_source_was_current": true,
+  "capture_started": true,
+  "probe_sigterm_returncode": -2,
+  "capture_child_count": 1,
+  "capture_children_reaped": true,
+  "reported_status": "probe_failed",
+  "checked_at_ns": 1794966769122151983
+}

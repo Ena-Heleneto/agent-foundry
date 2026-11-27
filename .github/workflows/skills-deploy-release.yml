@@ -1,0 +1,35 @@
+name: skills-deploy-release
+
+on:
+  push:
+    branches:
+      - feature/init
+  workflow_call:
+    secrets:
+      SKILL_DEPLOY_R2_ACCESS_KEY_ID:
+        required: true
+      SKILL_DEPLOY_R2_SECRET_ACCESS_KEY:
+        required: true
+    outputs:
+      passed:
+        description: 测试工作流返回的放行结果
+        value: ${{ jobs.test.outputs.passed }}
+
+permissions: {}
+
+jobs:
+  test:
+    if: ${{ github.event_name != 'push' || !github.event.deleted }}
+    uses: ./.github/workflows/skills-test.yml
+
+  deploy:
+    needs: test
+    if: ${{ needs.test.outputs.passed == 'true' }}
+    permissions:
+      contents: read
+    uses: ./.github/workflows/skills-deploy-common.yml
+    with:
+      target: release
+    secrets:
+      SKILL_DEPLOY_R2_ACCESS_KEY_ID: ${{ secrets.SKILL_DEPLOY_R2_ACCESS_KEY_ID }}
+      SKILL_DEPLOY_R2_SECRET_ACCESS_KEY: ${{ secrets.SKILL_DEPLOY_R2_SECRET_ACCESS_KEY }}

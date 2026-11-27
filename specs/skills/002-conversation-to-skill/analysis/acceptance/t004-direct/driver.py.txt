@@ -1,0 +1,155 @@
+"""临时验证驱动：仅在隔离命名空间中使用合成资料和固定回包。"""
+import hashlib,http.server,importlib.util,json,os,re,shlex,subprocess,sys,threading,time,uuid
+from pathlib import Path
+spec=importlib.util.spec_from_file_location('host',Path(sys.argv[2])/'recording-host.py')
+host=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(host)
+root=Path(sys.argv[2]); codex=sys.argv[1]
+repo=root/'repository'; child=repo/'projects/alpha'; outside=root/'repository-outside'
+trace=root/'trace'; trace.mkdir(); records=root/'records'
+skill=repo/'.agents/skills/t004-recording-probe/SKILL.md'; skill.parent.mkdir(parents=True)
+skill.write_text('---\nname: t004-recording-probe\ndescription: 用于本次合成会话的记录接入核查。\n---\n\n使用宿主已有工具保存可取得的用户发言，读回后继续业务。核对真实会话身份和来源；无法核实时保留缺口。仅验证候选，不是最终记录入口。\n')
+
+class Endpoint(host.Responses):
+    def do_POST(self):
+        payload=json.loads(self.rfile.read(int(self.headers.get('Content-Length','0'))))
+        case=self.server.case
+        number=sum(x['case']==case for x in self.server.samples)
+        all_input=json.dumps(payload.get('input',[]),ensure_ascii=False)
+        texts=[]
+        for item in payload.get('input',[]):
+            if isinstance(item,dict):
+                for content in item.get('content',[]) if isinstance(item.get('content'),list) else []:
+                    if isinstance(content,dict) and isinstance(content.get('text'),str): texts.append(content['text'])
+        envs=[m for text in texts for m in re.findall(r'<environment_context>.*?</environment_context>',text,re.S)]
+        tools=[t.get('name') for t in payload.get('tools',[]) if isinstance(t,dict) and t.get('name')]
+        sample={'case':case,'request':number,'environmentContexts':envs,'candidateMentioned':'t004-recording-probe' in all_input,'tools':tools,'input':all_input,'requestPath':self.path,'topLevelKeys':sorted(payload),'hasTestPrompt':'T004_DIRECT_CHILD' in all_input,'receiptAtRequest':(records/'direct-user.md').exists()}
+        sample['inputTypes']=[x.get('type') for x in payload.get('input',[]) if isinstance(x,dict)]
+        sample['toolOutputs']=[x.get('output') for x in payload.get('input',[]) if isinstance(x,dict) and x.get('type')=='function_call_output']
+        self.server.samples.append(sample)
+        final=host.final_reply(case)
+        if not (trace/(case+'.json')).exists() and case!='stop':
+            source=f'''import os,json,re,hashlib
+from pathlib import Path
+base=Path({str(root)!r})
+info={{'cwd':str(Path.cwd()),'threadId':os.environ.get('CODEX_THREAD_ID'),'codexEnvNames':sorted(k for k in os.environ if k.startswith('CODEX_')),'sessionFileNames':[str(p.relative_to(Path.home()/'.codex')) for p in (Path.home()/'.codex/sessions').rglob('rollout-*.jsonl') if os.environ.get('CODEX_THREAD_ID','NO_ID') in p.name],'ancestors':[]}}
+pid=os.getppid()
+for unused in range(8):
+    proc=Path('/proc')/str(pid)
+    try:
+        args=proc.joinpath('cmdline').read_bytes().split(b'\\0')
+        args=[a.decode(errors='replace') for a in args if a]
+        status=proc.joinpath('status').read_text()
+        info['ancestors'].append({{'executable':Path(args[0]).name if args else '', 'execArgument':'exec' in args,'resumeArgument':'resume' in args,'cwd':str(proc.joinpath('cwd').resolve())}})
+        pid=int(re.search(r'^PPid:\\s*(\\d+)',status,re.M).group(1))
+        if pid<=1: break
+    except (OSError,ValueError,AttributeError): break
+candidate=Path({str(skill)!r})
+if candidate.exists(): info['candidateReadSha256']=hashlib.sha256(candidate.read_bytes()).hexdigest()
+if {case!r}=='child':
+    (base/'records/direct-user.md').write_text('T004_DIRECT_CHILD')
+    info['firstUserReadBack']=(base/'records/direct-user.md').read_text()=='T004_DIRECT_CHILD'
+    (base/'trace/business-after-save.txt').write_text('业务动作开始前已确认首条')
+(base/'trace'/{(case+'.json')!r}).write_text(json.dumps(info))
+print(json.dumps(info))
+'''
+            name='exec_command' if 'exec_command' in tools else 'shell_command' if 'shell_command' in tools else None
+            if name:
+                args={'cmd':'python3 -c '+shlex.quote(source),'yield_time_ms':1000,'max_output_tokens':1600} if name=='exec_command' else {'command':'python3 -c '+shlex.quote(source),'timeout_ms':10000}
+                item={'type':'function_call','id':'fc_'+uuid.uuid4().hex,'call_id':'call_'+uuid.uuid4().hex,'name':name,'arguments':json.dumps(args)}
+            else:
+                sample['toolUnavailable']=True
+                item={'type':'message','role':'assistant','id':'msg_'+uuid.uuid4().hex,'content':[{'type':'output_text','text':final}]}
+        elif case=='child' and not (records/'direct-final.md').exists():
+            source='from pathlib import Path; p=Path('+repr(str(records/'direct-final.md'))+'); p.write_text('+repr(final)+'); assert p.read_text()=='+repr(final)+'; print("末轮候选已保存并读回")'
+            item={'type':'function_call','id':'fc_'+uuid.uuid4().hex,'call_id':'call_'+uuid.uuid4().hex,'name':'exec_command','arguments':json.dumps({'cmd':'python3 -c '+shlex.quote(source),'yield_time_ms':1000,'max_output_tokens':300})}
+        else:
+            item={'type':'message','role':'assistant','id':'msg_'+uuid.uuid4().hex,'content':[{'type':'output_text','text':final}]}
+        rid='response-'+uuid.uuid4().hex
+        self.send_response(200);self.send_header('Content-Type','text/event-stream');self.send_header('Connection','close');self.end_headers()
+        try:
+            self.write_event({'type':'response.created','response':{'id':rid}})
+            if case=='stop': time.sleep(3)
+            self.write_event({'type':'response.output_item.done','item':item})
+            self.write_event({'type':'response.completed','response':{'id':rid,'output':[item],'usage':{'input_tokens':1,'output_tokens':1,'total_tokens':2}}})
+        except (BrokenPipeError,ConnectionResetError): pass
+
+server=http.server.ThreadingHTTPServer(('127.0.0.1',0),Endpoint)
+server.records=records;server.case='root';server.samples=[]
+threading.Thread(target=server.serve_forever,daemon=True).start()
+config=Path.home()/'.codex/config.toml';config.parent.mkdir(parents=True)
+config.write_text(f'''model = "gpt-5.4"
+model_provider = "foundry_fixture"
+check_for_update_on_startup = false
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+[model_providers.foundry_fixture]
+name = "Foundry fixture"
+base_url = "http://127.0.0.1:{server.server_address[1]}/v1"
+wire_api = "responses"
+requires_openai_auth = false
+request_max_retries = 0
+stream_max_retries = 0
+[projects.{json.dumps(str(repo))}]
+trust_level = "trusted"
+[projects.{json.dumps(str(outside))}]
+trust_level = "trusted"
+''')
+results=[]
+def interactive(case,cwd,extra=(),midnight=False,stop=False):
+    server.case=case
+    before=set(host.stored_sessions())
+    extra_env=None
+    if midnight:
+        boundary,offset,tz=host.timezone_boundary(5)
+        extra_env={'TZ':tz}
+    terminal=host.Terminal([codex,'--no-daemon','--no-alt-screen',*extra],cwd,extra_env)
+    try:
+        terminal.wait(lambda:'gpt-5.4' in terminal.text(),case+' 等待编辑器')
+        idle_count=len(list(records.rglob('*.md')))
+        opened=time.time()
+        if midnight: terminal.wait(lambda:time.time()>=boundary+0.1,'等待跨日')
+        terminal.submit('T004_DIRECT_'+case.upper().replace('-','_'))
+        if stop:
+            terminal.wait(lambda:any(x['case']==case for x in server.samples),'等待实际请求')
+            terminal.interrupt();terminal.settle(0.4)
+        else:
+            terminal.wait(lambda:host.final_reply(case) in terminal.text(),case+' 等待本轮回复',15)
+            terminal.settle(0.2)
+        terminal.submit('/exit');terminal.wait(terminal.exited,case+' 等待退出')
+        assert terminal.status==0,terminal.text()[-1600:]
+        ids=sorted(set(host.stored_sessions())-before)
+        row={'case':case,'launchCwd':str(cwd),'newSessionIds':ids,'idleRecordCount':idle_count,'finalShown':host.final_reply(case) in terminal.text(),'finalRecordExists':(records/'direct-final.md').exists()}
+        if midnight:
+            today=lambda t:time.strftime('%Y-%m-%d',time.gmtime(t+offset))
+            row.update(openDate=today(opened),firstPromptDate=today(boundary+0.1))
+        if ids:
+            session=Path.home()/'.codex'/host.stored_sessions()[ids[0]]
+            emitted=[]
+            for line in session.read_text().splitlines():
+                event=json.loads(line)
+                value=event.get('payload',{})
+                if event.get('type')=='response_item' and value.get('type')=='message' and value.get('role')=='assistant':
+                    emitted.extend(c.get('text','') for c in value.get('content',[]) if c.get('type')=='output_text')
+            actual=emitted[-1] if emitted else None
+            saved=records/'direct-final.md'
+            row['actualFinalInSyntheticTranscript']=actual==host.final_reply(case)
+            row['savedPreparedFinalMatchesActual']=saved.exists() and saved.read_text()==actual
+        results.append(row)
+        return ids[0] if ids else None
+    finally: terminal.close()
+
+try:
+    first_id=interactive('child',child,midnight=True)
+    outside_id=None
+    surveys={p.stem:json.loads(p.read_text()) for p in trace.glob('*.json')}
+    samples=[]
+    for item in server.samples:
+        item=dict(item)
+        text=item.pop('input')
+        sid=surveys.get(item['case'],{}).get('threadId')
+        item['currentThreadIdInInput']=bool(sid and sid in text)
+        samples.append(item)
+    report={'version':subprocess.check_output([codex,'--version'],text=True).strip(),'noProjectHooks':not (repo/'.codex/hooks.json').exists(),'candidateSha256':hashlib.sha256(skill.read_bytes()).hexdigest(),'cases':results,'samples':samples,'toolSurveys':surveys,'businessMarkerAfterReadback':(trace/'business-after-save.txt').exists(),'recordFiles':[str(p.relative_to(records)) for p in records.rglob('*.md')],'firstSession':first_id,'outsideSession':outside_id}
+    print(json.dumps(report,ensure_ascii=False))
+finally: server.shutdown()

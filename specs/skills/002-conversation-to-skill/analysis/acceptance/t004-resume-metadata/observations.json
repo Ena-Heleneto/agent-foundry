@@ -1,0 +1,641 @@
+{
+  "baselineToolMetadataEqualAcrossCases": true,
+  "probeSources": {
+    "initial": {
+      "bytes": 2689,
+      "sha256": "3f5107cec75cb703794ae864f7fadd49c7cedc4d5bdab55050ce71a500e3b1e2"
+    },
+    "indexed": {
+      "bytes": 5720,
+      "sha256": "7a0577b96b697ab9d9ff7c9409c1e1b9b92c068387045110e6924e4f155ba4dc"
+    }
+  },
+  "useOfOptInTuiLog": {
+    "fileAssignedPerLaunchByFixture": true,
+    "header": {
+      "dir": "meta",
+      "kind": "session_start",
+      "cwd": "/tmp/foundry-conversation-Owxfeg/repository-outside",
+      "ts": "2026-11-23T02:29:34.736Z",
+      "hasThreadId": false
+    },
+    "eventCounts": [
+      {
+        "direction": "from_tui",
+        "kind": "op",
+        "count": 2
+      },
+      {
+        "direction": "meta",
+        "kind": "session_end",
+        "count": 1
+      },
+      {
+        "direction": "meta",
+        "kind": "session_start",
+        "count": 1
+      },
+      {
+        "direction": "to_tui",
+        "kind": "app_event",
+        "count": 681
+      },
+      {
+        "direction": "to_tui",
+        "kind": "insert_history_cell",
+        "count": 107
+      }
+    ],
+    "containsSyntheticPrompt": true
+  },
+  "cases": [
+    {
+      "case": "inside",
+      "launchCwd": "/tmp/foundry-conversation-Owxfeg/repository",
+      "recordFilesBefore": {},
+      "seedSha256": "59d91f08ce7e8535c185751302ddb2adb8dae70018e361511859421dc10ddcb0",
+      "currentEntry": "codex resume",
+      "turnId": "01a20638-4fb6-7631-bc64-4d3d93a0a98b",
+      "exit": 0,
+      "rollout": "sessions/2026/11/23/rollout-2026-11-23T10-24-03-01a20637-b1bd-77c3-a9cb-c1103cc3ff91.jsonl",
+      "sessionId": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+      "recordFilesAfter": {},
+      "authMountBytes": 0,
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "model": "gpt-6.2-sol",
+      "rolloutTurnAttribution": {
+        "turn_id": "01a20638-4fb6-7631-bc64-4d3d93a0a98b",
+        "turn_trigger": "user",
+        "parent_turn_id": null,
+        "initiating_agent_path": null,
+        "root_turn_id": "01a20638-4fb6-7631-bc64-4d3d93a0a98b"
+      },
+      "shellMetadata": [
+        {
+          "line": 34,
+          "callId": "call_769e68d81932460abb6aaba4af780253",
+          "metadata": {
+            "probe": "T004-META-RAW",
+            "effectiveCwd": "/tmp/foundry-conversation-Owxfeg/repository",
+            "stdinTty": false,
+            "environment": {
+              "CODEX_THREAD_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_SESSION_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_NON_INTERACTIVE": null,
+              "CODEX_INTERNAL_ORIGINATOR_OVERRIDE": null,
+              "CODEX_SANDBOX": null,
+              "CODEX_SANDBOX_NETWORK_DISABLED": "1",
+              "PWD": "/tmp/foundry-conversation-Owxfeg/repository",
+              "OLDPWD": null,
+              "TERM": "xterm-256color"
+            },
+            "codexNames": [
+              "CODEX_APPLY_PATCH_PRESERVE_LINE_ENDINGS",
+              "CODEX_CI",
+              "CODEX_SANDBOX_NETWORK_DISABLED",
+              "CODEX_SESSION_ID",
+              "CODEX_THREAD_ID",
+              "CODEX_TOOL_CALL_ID",
+              "CODEX_VERSION"
+            ],
+            "originalSession": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "session_id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "originator": "codex-tui",
+              "thread_source": "user"
+            },
+            "indexedThread": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "originator": "codex-tui",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "thread_source": "user"
+            },
+            "ancestorProcesses": [
+              {
+                "pid": 1,
+                "comm": "codex",
+                "argv0": "codex-linux-sandbox",
+                "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+                "nspid": "1",
+                "argvFlags": [
+                  "--sandbox-policy-cwd",
+                  "--command-cwd",
+                  "--permission-profile",
+                  "--apply-seccomp-then-exec",
+                  "--"
+                ],
+                "execArgument": false,
+                "resumeArgument": false
+              }
+            ]
+          }
+        }
+      ],
+      "defaultLogRowsMentioningOutsidePath": 0
+    },
+    {
+      "case": "exec",
+      "launchCwd": "/tmp/foundry-conversation-Owxfeg/repository",
+      "recordFilesBefore": {},
+      "seedSha256": "59d91f08ce7e8535c185751302ddb2adb8dae70018e361511859421dc10ddcb0",
+      "currentEntry": "exec resume",
+      "exit": 0,
+      "turnId": "01a20638-bd13-7982-bf32-23b9960a30fa",
+      "rollout": "sessions/2026/11/23/rollout-2026-11-23T10-24-03-01a20637-b1bd-77c3-a9cb-c1103cc3ff91.jsonl",
+      "sessionId": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+      "recordFilesAfter": {},
+      "authMountBytes": 0,
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "model": "gpt-6.2-sol",
+      "rolloutTurnAttribution": {
+        "turn_id": "01a20638-bd13-7982-bf32-23b9960a30fa",
+        "turn_trigger": "exec",
+        "parent_turn_id": null,
+        "initiating_agent_path": null,
+        "root_turn_id": "01a20638-bd13-7982-bf32-23b9960a30fa"
+      },
+      "shellMetadata": [
+        {
+          "line": 40,
+          "callId": "call_db5a7dd32fb94f89a17ed98735aed798",
+          "metadata": {
+            "probe": "T004-META-RAW",
+            "effectiveCwd": "/tmp/foundry-conversation-Owxfeg/repository",
+            "stdinTty": false,
+            "environment": {
+              "CODEX_THREAD_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_SESSION_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_NON_INTERACTIVE": null,
+              "CODEX_INTERNAL_ORIGINATOR_OVERRIDE": null,
+              "CODEX_SANDBOX": null,
+              "CODEX_SANDBOX_NETWORK_DISABLED": "1",
+              "PWD": "/tmp/foundry-conversation-Owxfeg/repository",
+              "OLDPWD": null,
+              "TERM": "xterm-256color"
+            },
+            "codexNames": [
+              "CODEX_APPLY_PATCH_PRESERVE_LINE_ENDINGS",
+              "CODEX_CI",
+              "CODEX_SANDBOX_NETWORK_DISABLED",
+              "CODEX_SESSION_ID",
+              "CODEX_THREAD_ID",
+              "CODEX_TOOL_CALL_ID",
+              "CODEX_VERSION"
+            ],
+            "originalSession": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "session_id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "originator": "codex-tui",
+              "thread_source": "user"
+            },
+            "indexedThread": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "originator": "codex-tui",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "thread_source": "user"
+            },
+            "ancestorProcesses": [
+              {
+                "pid": 1,
+                "comm": "codex",
+                "argv0": "codex-linux-sandbox",
+                "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+                "nspid": "1",
+                "argvFlags": [
+                  "--sandbox-policy-cwd",
+                  "--command-cwd",
+                  "--permission-profile",
+                  "--apply-seccomp-then-exec",
+                  "--"
+                ],
+                "execArgument": false,
+                "resumeArgument": false
+              }
+            ]
+          }
+        }
+      ],
+      "defaultLogRowsMentioningOutsidePath": 0
+    },
+    {
+      "case": "outside",
+      "launchCwd": "/tmp/foundry-conversation-Owxfeg/repository-outside",
+      "recordFilesBefore": {},
+      "seedSha256": "59d91f08ce7e8535c185751302ddb2adb8dae70018e361511859421dc10ddcb0",
+      "currentEntry": "codex resume",
+      "turnId": "01a20639-36e0-7c51-a495-418f3312f498",
+      "exit": 0,
+      "rollout": "sessions/2026/11/23/rollout-2026-11-23T10-24-03-01a20637-b1bd-77c3-a9cb-c1103cc3ff91.jsonl",
+      "sessionId": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+      "recordFilesAfter": {},
+      "authMountBytes": 0,
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "model": "gpt-6.2-sol",
+      "rolloutTurnAttribution": {
+        "turn_id": "01a20639-36e0-7c51-a495-418f3312f498",
+        "turn_trigger": "user",
+        "parent_turn_id": null,
+        "initiating_agent_path": null,
+        "root_turn_id": "01a20639-36e0-7c51-a495-418f3312f498"
+      },
+      "shellMetadata": [
+        {
+          "line": 29,
+          "callId": "call_1ab6ab77086c46958e9b50e31676d3ca",
+          "metadata": {
+            "probe": "T004-META-RAW",
+            "effectiveCwd": "/tmp/foundry-conversation-Owxfeg/repository",
+            "stdinTty": false,
+            "environment": {
+              "CODEX_THREAD_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_SESSION_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_NON_INTERACTIVE": null,
+              "CODEX_INTERNAL_ORIGINATOR_OVERRIDE": null,
+              "CODEX_SANDBOX": null,
+              "CODEX_SANDBOX_NETWORK_DISABLED": "1",
+              "PWD": "/tmp/foundry-conversation-Owxfeg/repository",
+              "OLDPWD": null,
+              "TERM": "xterm-256color"
+            },
+            "codexNames": [
+              "CODEX_APPLY_PATCH_PRESERVE_LINE_ENDINGS",
+              "CODEX_CI",
+              "CODEX_SANDBOX_NETWORK_DISABLED",
+              "CODEX_SESSION_ID",
+              "CODEX_THREAD_ID",
+              "CODEX_TOOL_CALL_ID",
+              "CODEX_VERSION"
+            ],
+            "originalSession": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "session_id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "originator": "codex-tui",
+              "thread_source": "user"
+            },
+            "indexedThread": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "originator": "codex-tui",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "thread_source": "user"
+            },
+            "ancestorProcesses": [
+              {
+                "pid": 1,
+                "comm": "codex",
+                "argv0": "codex-linux-sandbox",
+                "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+                "nspid": "1",
+                "argvFlags": [
+                  "--sandbox-policy-cwd",
+                  "--command-cwd",
+                  "--permission-profile",
+                  "--apply-seccomp-then-exec",
+                  "--"
+                ],
+                "execArgument": false,
+                "resumeArgument": false
+              }
+            ]
+          }
+        }
+      ],
+      "defaultLogRowsMentioningOutsidePath": 0
+    },
+    {
+      "case": "inside-index",
+      "launchCwd": "/tmp/foundry-conversation-Owxfeg/repository",
+      "recordFilesBefore": {},
+      "seedSha256": "59d91f08ce7e8535c185751302ddb2adb8dae70018e361511859421dc10ddcb0",
+      "currentEntry": "codex resume",
+      "turnId": "01a2063b-e464-7e31-83fa-25e674418dc8",
+      "exit": 0,
+      "rollout": "sessions/2026/11/23/rollout-2026-11-23T10-24-03-01a20637-b1bd-77c3-a9cb-c1103cc3ff91.jsonl",
+      "sessionId": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+      "recordFilesAfter": {},
+      "authMountBytes": 0,
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "model": "gpt-6.2-sol",
+      "rolloutTurnAttribution": {
+        "turn_id": "01a2063b-e464-7e31-83fa-25e674418dc8",
+        "turn_trigger": "user",
+        "parent_turn_id": null,
+        "initiating_agent_path": null,
+        "root_turn_id": "01a2063b-e464-7e31-83fa-25e674418dc8"
+      },
+      "shellMetadata": [
+        {
+          "line": 29,
+          "callId": "call_8e8d4f8082a24e6f83de7cdd072d2667",
+          "metadata": {
+            "probe": "T004-META-RAW",
+            "effectiveCwd": "/tmp/foundry-conversation-Owxfeg/repository",
+            "stdinTty": false,
+            "environment": {
+              "CODEX_THREAD_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_SESSION_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_NON_INTERACTIVE": null,
+              "CODEX_INTERNAL_ORIGINATOR_OVERRIDE": null,
+              "CODEX_SANDBOX": null,
+              "CODEX_SANDBOX_NETWORK_DISABLED": "1",
+              "PWD": "/tmp/foundry-conversation-Owxfeg/repository",
+              "OLDPWD": null,
+              "TERM": "xterm-256color"
+            },
+            "codexNames": [
+              "CODEX_APPLY_PATCH_PRESERVE_LINE_ENDINGS",
+              "CODEX_CI",
+              "CODEX_SANDBOX_NETWORK_DISABLED",
+              "CODEX_SESSION_ID",
+              "CODEX_THREAD_ID",
+              "CODEX_TOOL_CALL_ID",
+              "CODEX_VERSION"
+            ],
+            "originalSession": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "session_id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "originator": "codex-tui",
+              "thread_source": "user"
+            },
+            "indexedThread": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "originator": "codex-tui",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "thread_source": "user"
+            },
+            "ancestorProcesses": [
+              {
+                "pid": 1,
+                "comm": "codex",
+                "argv0": "codex-linux-sandbox",
+                "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+                "nspid": "1",
+                "argvFlags": [
+                  "--sandbox-policy-cwd",
+                  "--command-cwd",
+                  "--permission-profile",
+                  "--apply-seccomp-then-exec",
+                  "--"
+                ],
+                "execArgument": false,
+                "resumeArgument": false
+              }
+            ],
+            "turnIndex": [
+              {
+                "turnId": "01a2063b-e464-7e31-83fa-25e674418dc8",
+                "status": "inProgress",
+                "offset": 131285
+              },
+              {
+                "turnId": "01a20637-b1f3-74f0-a878-969f59809c98",
+                "status": "completed",
+                "offset": 28901
+              }
+            ],
+            "activeTurnHeader": {
+              "turnId": "01a2063b-e464-7e31-83fa-25e674418dc8",
+              "trigger": "user"
+            },
+            "optInTuiHeader": null
+          }
+        }
+      ],
+      "defaultLogRowsMentioningOutsidePath": 0
+    },
+    {
+      "case": "exec-index",
+      "launchCwd": "/tmp/foundry-conversation-Owxfeg/repository",
+      "recordFilesBefore": {},
+      "seedSha256": "59d91f08ce7e8535c185751302ddb2adb8dae70018e361511859421dc10ddcb0",
+      "currentEntry": "exec resume",
+      "exit": 0,
+      "turnId": "01a2063c-55fd-77a2-bbd5-1669b4703808",
+      "rollout": "sessions/2026/11/23/rollout-2026-11-23T10-24-03-01a20637-b1bd-77c3-a9cb-c1103cc3ff91.jsonl",
+      "sessionId": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+      "recordFilesAfter": {},
+      "authMountBytes": 0,
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "model": "gpt-6.2-sol",
+      "rolloutTurnAttribution": {
+        "turn_id": "01a2063c-55fd-77a2-bbd5-1669b4703808",
+        "turn_trigger": "exec",
+        "parent_turn_id": null,
+        "initiating_agent_path": null,
+        "root_turn_id": "01a2063c-55fd-77a2-bbd5-1669b4703808"
+      },
+      "shellMetadata": [
+        {
+          "line": 31,
+          "callId": "call_1bb9fe9c4fdf40328d9d612d59fd1d26",
+          "metadata": {
+            "probe": "T004-META-RAW",
+            "effectiveCwd": "/tmp/foundry-conversation-Owxfeg/repository",
+            "stdinTty": false,
+            "environment": {
+              "CODEX_THREAD_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_SESSION_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_NON_INTERACTIVE": null,
+              "CODEX_INTERNAL_ORIGINATOR_OVERRIDE": null,
+              "CODEX_SANDBOX": null,
+              "CODEX_SANDBOX_NETWORK_DISABLED": "1",
+              "PWD": "/tmp/foundry-conversation-Owxfeg/repository",
+              "OLDPWD": null,
+              "TERM": "xterm-256color"
+            },
+            "codexNames": [
+              "CODEX_APPLY_PATCH_PRESERVE_LINE_ENDINGS",
+              "CODEX_CI",
+              "CODEX_SANDBOX_NETWORK_DISABLED",
+              "CODEX_SESSION_ID",
+              "CODEX_THREAD_ID",
+              "CODEX_TOOL_CALL_ID",
+              "CODEX_VERSION"
+            ],
+            "originalSession": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "session_id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "originator": "codex-tui",
+              "thread_source": "user"
+            },
+            "indexedThread": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "originator": "codex-tui",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "thread_source": "user"
+            },
+            "ancestorProcesses": [
+              {
+                "pid": 1,
+                "comm": "codex",
+                "argv0": "codex-linux-sandbox",
+                "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+                "nspid": "1",
+                "argvFlags": [
+                  "--sandbox-policy-cwd",
+                  "--command-cwd",
+                  "--permission-profile",
+                  "--apply-seccomp-then-exec",
+                  "--"
+                ],
+                "execArgument": false,
+                "resumeArgument": false
+              }
+            ],
+            "turnIndex": [
+              {
+                "turnId": "01a2063c-55fd-77a2-bbd5-1669b4703808",
+                "status": "inProgress",
+                "offset": 131285
+              },
+              {
+                "turnId": "01a20637-b1f3-74f0-a878-969f59809c98",
+                "status": "completed",
+                "offset": 28901
+              }
+            ],
+            "activeTurnHeader": {
+              "turnId": "01a2063c-55fd-77a2-bbd5-1669b4703808",
+              "trigger": "exec"
+            },
+            "optInTuiHeader": null
+          }
+        }
+      ],
+      "defaultLogRowsMentioningOutsidePath": 0
+    },
+    {
+      "case": "outside-trace",
+      "launchCwd": "/tmp/foundry-conversation-Owxfeg/repository-outside",
+      "recordFilesBefore": {},
+      "diagnosticTuiLog": "/tmp/foundry-conversation-Owxfeg/trace/outside-trace.tui.jsonl",
+      "seedSha256": "59d91f08ce7e8535c185751302ddb2adb8dae70018e361511859421dc10ddcb0",
+      "currentEntry": "codex resume",
+      "turnId": "01a2063c-cc28-7490-a9a1-42b628a26e17",
+      "exit": 0,
+      "rollout": "sessions/2026/11/23/rollout-2026-11-23T10-24-03-01a20637-b1bd-77c3-a9cb-c1103cc3ff91.jsonl",
+      "sessionId": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+      "recordFilesAfter": {},
+      "authMountBytes": 0,
+      "cliVersion": "0.171.0",
+      "historyMode": "paginated",
+      "model": "gpt-6.2-sol",
+      "rolloutTurnAttribution": {
+        "turn_id": "01a2063c-cc28-7490-a9a1-42b628a26e17",
+        "turn_trigger": "user",
+        "parent_turn_id": null,
+        "initiating_agent_path": null,
+        "root_turn_id": "01a2063c-cc28-7490-a9a1-42b628a26e17"
+      },
+      "shellMetadata": [
+        {
+          "line": 36,
+          "callId": "call_218f568f344a43dd897a043a2b7d0489",
+          "metadata": {
+            "probe": "T004-META-RAW",
+            "effectiveCwd": "/tmp/foundry-conversation-Owxfeg/repository",
+            "stdinTty": false,
+            "environment": {
+              "CODEX_THREAD_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_SESSION_ID": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "CODEX_NON_INTERACTIVE": null,
+              "CODEX_INTERNAL_ORIGINATOR_OVERRIDE": null,
+              "CODEX_SANDBOX": null,
+              "CODEX_SANDBOX_NETWORK_DISABLED": "1",
+              "PWD": "/tmp/foundry-conversation-Owxfeg/repository",
+              "OLDPWD": null,
+              "TERM": "xterm-256color"
+            },
+            "codexNames": [
+              "CODEX_APPLY_PATCH_PRESERVE_LINE_ENDINGS",
+              "CODEX_CI",
+              "CODEX_SANDBOX_NETWORK_DISABLED",
+              "CODEX_SESSION_ID",
+              "CODEX_THREAD_ID",
+              "CODEX_TOOL_CALL_ID",
+              "CODEX_TUI_RECORD_SESSION",
+              "CODEX_TUI_SESSION_LOG_PATH",
+              "CODEX_VERSION"
+            ],
+            "originalSession": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "session_id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "originator": "codex-tui",
+              "thread_source": "user"
+            },
+            "indexedThread": {
+              "id": "01a20637-b1bd-77c3-a9cb-c1103cc3ff91",
+              "source": "cli",
+              "originator": "codex-tui",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+              "thread_source": "user"
+            },
+            "ancestorProcesses": [
+              {
+                "pid": 1,
+                "comm": "codex",
+                "argv0": "codex-linux-sandbox",
+                "cwd": "/tmp/foundry-conversation-Owxfeg/repository",
+                "nspid": "1",
+                "argvFlags": [
+                  "--sandbox-policy-cwd",
+                  "--command-cwd",
+                  "--permission-profile",
+                  "--apply-seccomp-then-exec",
+                  "--"
+                ],
+                "execArgument": false,
+                "resumeArgument": false
+              }
+            ],
+            "turnIndex": [
+              {
+                "turnId": "01a2063c-cc28-7490-a9a1-42b628a26e17",
+                "status": "inProgress",
+                "offset": 131285
+              },
+              {
+                "turnId": "01a20637-b1f3-74f0-a878-969f59809c98",
+                "status": "completed",
+                "offset": 28901
+              }
+            ],
+            "activeTurnHeader": {
+              "turnId": "01a2063c-cc28-7490-a9a1-42b628a26e17",
+              "trigger": "user"
+            },
+            "optInTuiHeader": {
+              "dir": "meta",
+              "kind": "session_start",
+              "cwd": "/tmp/foundry-conversation-Owxfeg/repository-outside",
+              "ts": "2026-11-23T02:29:34.736Z",
+              "hasThreadId": false
+            }
+          }
+        }
+      ],
+      "defaultLogRowsMentioningOutsidePath": 0
+    }
+  ]
+}

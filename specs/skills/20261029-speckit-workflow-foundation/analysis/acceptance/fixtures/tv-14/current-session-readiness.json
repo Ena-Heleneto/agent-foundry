@@ -1,0 +1,38 @@
+{
+  "observed_at": "2026-11-16T14:06:39.269377+00:00",
+  "scope": "exact_current_thread_metadata_only",
+  "local_cli_version": "codex-cli 0.167.0",
+  "thread_identity_provided": true,
+  "lifecycle_handle_verified": false,
+  "lifecycle_check_scope": "当前环境已检查变量及本会话暴露工具；未取得经验证的会话结束通道，不推断宿主全局不支持",
+  "capture_started": false,
+  "transcript_text_copied": false,
+  "exact_thread_filename_matches": 1,
+  "session_meta_type_matches": true,
+  "thread_id_matches": true,
+  "cwd_matches": true,
+  "source_cli_version": "0.169.0",
+  "recognized_event_type_counts": {
+    "task_started": 2,
+    "item_completed": 64,
+    "task_complete": 1
+  },
+  "structured_visible_completed_counts": {
+    "UserMessage": 2,
+    "AgentMessage": 8
+  },
+  "legacy_message_counts": {},
+  "incomplete_or_invalid_lines_observed": 0,
+  "planned_source_profile_observed": true,
+  "candidate_status": "unsupported",
+  "failure_signals": [
+    "lifecycle_unavailable"
+  ],
+  "assistant_phase_counts": {
+    "commentary": 7,
+    "final_answer": 1
+  },
+  "observed_visible_event_identity_complete": true,
+  "turn_complete_followed_by_another_turn": true,
+  "observation_limit": "仅核对本会话日志结构/事件元数据，不是原文完整性、自动保存或会话结束实验"
+}

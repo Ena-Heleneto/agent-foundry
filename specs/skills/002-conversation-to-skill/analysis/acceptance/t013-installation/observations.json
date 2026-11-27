@@ -1,0 +1,289 @@
+{
+  "source": {
+    "directory": "packages/skills/src/profile/conversation-recording",
+    "config": "packages/skills/src/profile/collection.config.ts",
+    "configSha256": "31c142fc9c9c2450897cf92a698916d02b61388669704f3e37397a244412f7ad",
+    "workspaceSnapshotBase": "39340fe1950ed9717b70135cdd98f7f967c480e0",
+    "files": {
+      "SKILL.md": {
+        "bytes": 1438,
+        "sha256": "b8f2653ea7e3fd9a390e16097f4e136ea7b22c864a165e89b8b1a71751bde927"
+      },
+      "references/event-capture.md": {
+        "bytes": 4150,
+        "sha256": "49651ba56deba232797f57fb487e9a0efd4797af3c28354b1db4e59640a00966"
+      },
+      "references/paired-save.md": {
+        "bytes": 3745,
+        "sha256": "317debf508fb6ff38bcd91b3f077378c5d89c3fc70b13bfd15b691ae90b1633f"
+      },
+      "references/recording-timing.md": {
+        "bytes": 2134,
+        "sha256": "6fd0430d177b51a588b6e4a33ac267f74fbb475596f853f7e6a0d9698ad312ca"
+      },
+      "references/resume-records.md": {
+        "bytes": 2978,
+        "sha256": "b33c16f3e88cdeccbcc7dfd5ab21e5d24a9dbeb8c462b6b2750ec9599c41a07d"
+      },
+      "references/session-scope.md": {
+        "bytes": 5107,
+        "sha256": "4e18293134d0400253d5d66184e98ad58df1a50ab65784d1d640d921b2cf7f3b"
+      },
+      "references/storage-contract.md": {
+        "bytes": 11555,
+        "sha256": "54a8fb8c6c4bcea12b9c7b67b4745a2235a07b38bb734c59da94b31138cfe3d7"
+      },
+      "references/write-failures.md": {
+        "bytes": 2395,
+        "sha256": "3086e212d16f1096066f89b900024ea2f5c04181db08aa9b40770ae1835d1872"
+      }
+    }
+  },
+  "installation": {
+    "command": [
+      "scripts/dev/actions/link-skills/link-skills.sh",
+      "packages/skills/src/profile",
+      "/tmp/foundry-conversation-gHroSB/repository/.agents/skills"
+    ],
+    "output": "copy: conversation-recording\n完成: 新建 1，更新 0，跳过 0，冲突 0\n",
+    "root": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording",
+    "files": {
+      "SKILL.md": {
+        "bytes": 1438,
+        "sha256": "b8f2653ea7e3fd9a390e16097f4e136ea7b22c864a165e89b8b1a71751bde927"
+      },
+      "references/event-capture.md": {
+        "bytes": 4150,
+        "sha256": "49651ba56deba232797f57fb487e9a0efd4797af3c28354b1db4e59640a00966"
+      },
+      "references/paired-save.md": {
+        "bytes": 3745,
+        "sha256": "317debf508fb6ff38bcd91b3f077378c5d89c3fc70b13bfd15b691ae90b1633f"
+      },
+      "references/recording-timing.md": {
+        "bytes": 2134,
+        "sha256": "6fd0430d177b51a588b6e4a33ac267f74fbb475596f853f7e6a0d9698ad312ca"
+      },
+      "references/resume-records.md": {
+        "bytes": 2978,
+        "sha256": "b33c16f3e88cdeccbcc7dfd5ab21e5d24a9dbeb8c462b6b2750ec9599c41a07d"
+      },
+      "references/session-scope.md": {
+        "bytes": 5107,
+        "sha256": "4e18293134d0400253d5d66184e98ad58df1a50ab65784d1d640d921b2cf7f3b"
+      },
+      "references/storage-contract.md": {
+        "bytes": 11555,
+        "sha256": "54a8fb8c6c4bcea12b9c7b67b4745a2235a07b38bb734c59da94b31138cfe3d7"
+      },
+      "references/write-failures.md": {
+        "bytes": 2395,
+        "sha256": "3086e212d16f1096066f89b900024ea2f5c04181db08aa9b40770ae1835d1872"
+      }
+    },
+    "unrelatedFixturePreserved": true
+  },
+  "host": {
+    "version": "codex-cli 0.171.0",
+    "transport": "codex app-server stdio",
+    "model": "gpt-6.2-sol",
+    "trust": "单次命令参数仅信任 T002 合成项目",
+    "before": [
+      {
+        "cwd": "/tmp/foundry-conversation-gHroSB/repository",
+        "skills": [
+          {
+            "name": "t013-discovery-control",
+            "description": "T013 临时项目发现对照。",
+            "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/t013-discovery-control/SKILL.md",
+            "scope": "repo",
+            "enabled": true,
+            "pluginId": null
+          }
+        ],
+        "errors": []
+      },
+      {
+        "cwd": "/tmp/foundry-conversation-gHroSB/repository/projects/alpha",
+        "skills": [
+          {
+            "name": "t013-discovery-control",
+            "description": "T013 临时项目发现对照。",
+            "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/t013-discovery-control/SKILL.md",
+            "scope": "repo",
+            "enabled": true,
+            "pluginId": null
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "after": [
+      {
+        "cwd": "/tmp/foundry-conversation-gHroSB/repository",
+        "skills": [
+          {
+            "name": "conversation-recording",
+            "description": "在项目入口要求记录时，核验 Codex CLI 交互会话的身份和归属，并按实际轮次保存对话索引、详情及可取得的附件。",
+            "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/SKILL.md",
+            "scope": "repo",
+            "enabled": true,
+            "pluginId": null
+          },
+          {
+            "name": "t013-discovery-control",
+            "description": "T013 临时项目发现对照。",
+            "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/t013-discovery-control/SKILL.md",
+            "scope": "repo",
+            "enabled": true,
+            "pluginId": null
+          }
+        ],
+        "errors": []
+      },
+      {
+        "cwd": "/tmp/foundry-conversation-gHroSB/repository/projects/alpha",
+        "skills": [
+          {
+            "name": "conversation-recording",
+            "description": "在项目入口要求记录时，核验 Codex CLI 交互会话的身份和归属，并按实际轮次保存对话索引、详情及可取得的附件。",
+            "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/SKILL.md",
+            "scope": "repo",
+            "enabled": true,
+            "pluginId": null
+          },
+          {
+            "name": "t013-discovery-control",
+            "description": "T013 临时项目发现对照。",
+            "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/t013-discovery-control/SKILL.md",
+            "scope": "repo",
+            "enabled": true,
+            "pluginId": null
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "input": "请用本轮选择的 conversation-recording 做一次只读安装验收。从宿主选中的安装副本获取路径，用终端 cat 实际读出该 Skill 的 SKILL.md 完整正文和其中直接引用的每个文件的完整正文。每个 cat 调用只读一个文件，输出上限至少 8000 tokens。根据实际读到的规则，用中文回答三点：首条消息在什么时候保存、提交与结果回复如何处理、索引写入失败后怎样告知用户并继续。本轮只执行读取检查。",
+    "selectedSkill": {
+      "name": "conversation-recording",
+      "description": "在项目入口要求记录时，核验 Codex CLI 交互会话的身份和归属，并按实际轮次保存对话索引、详情及可取得的附件。",
+      "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/SKILL.md",
+      "scope": "repo",
+      "enabled": true,
+      "pluginId": null
+    },
+    "threadId": "01a207a2-f861-7593-bff2-ce3ff23d0458",
+    "turnId": "01a207a2-f925-7353-8cc6-c07438e31556",
+    "reads": {
+      "SKILL.md": {
+        "event": 56,
+        "toolId": "exec-26b59b64-0f45-450a-af72-82c84ab2aa80",
+        "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/SKILL.md",
+        "bytes": 1438,
+        "sha256": "b8f2653ea7e3fd9a390e16097f4e136ea7b22c864a165e89b8b1a71751bde927"
+      },
+      "references/resume-records.md": {
+        "event": 61,
+        "toolId": "exec-07e0aef2-eda0-41c0-8bf3-f6521bcf80db",
+        "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/references/resume-records.md",
+        "bytes": 2978,
+        "sha256": "b33c16f3e88cdeccbcc7dfd5ab21e5d24a9dbeb8c462b6b2750ec9599c41a07d"
+      },
+      "references/write-failures.md": {
+        "event": 63,
+        "toolId": "exec-6b001e1f-8f84-43ec-9f32-633453d17204",
+        "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/references/write-failures.md",
+        "bytes": 2395,
+        "sha256": "3086e212d16f1096066f89b900024ea2f5c04181db08aa9b40770ae1835d1872"
+      },
+      "references/storage-contract.md": {
+        "event": 69,
+        "toolId": "exec-a063f22e-b041-43da-9820-92b59d013826",
+        "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/references/storage-contract.md",
+        "bytes": 11555,
+        "sha256": "54a8fb8c6c4bcea12b9c7b67b4745a2235a07b38bb734c59da94b31138cfe3d7"
+      },
+      "references/paired-save.md": {
+        "event": 71,
+        "toolId": "exec-3eb893c4-f413-40d3-ad7e-a64b80726498",
+        "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/references/paired-save.md",
+        "bytes": 3745,
+        "sha256": "317debf508fb6ff38bcd91b3f077378c5d89c3fc70b13bfd15b691ae90b1633f"
+      },
+      "references/recording-timing.md": {
+        "event": 73,
+        "toolId": "exec-e1f6b0e6-4b32-425b-9974-d9b266900f5b",
+        "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/references/recording-timing.md",
+        "bytes": 2134,
+        "sha256": "6fd0430d177b51a588b6e4a33ac267f74fbb475596f853f7e6a0d9698ad312ca"
+      },
+      "references/session-scope.md": {
+        "event": 74,
+        "toolId": "exec-29817575-cf83-42c0-b7e3-7450211cac1f",
+        "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/references/session-scope.md",
+        "bytes": 5107,
+        "sha256": "4e18293134d0400253d5d66184e98ad58df1a50ab65784d1d640d921b2cf7f3b"
+      },
+      "references/event-capture.md": {
+        "event": 75,
+        "toolId": "exec-ecd14d92-c609-43e7-a131-35a73cb0640d",
+        "path": "/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/references/event-capture.md",
+        "bytes": 4150,
+        "sha256": "49651ba56deba232797f57fb487e9a0efd4797af3c28354b1db4e59640a00966"
+      }
+    },
+    "final": "已从宿主选中的 conversation-recording 安装副本完整读取 `SKILL.md` 及其直接引用的 7 个文件。每次 `cat` 只读取一个文件，输出上限均为 8000 tokens。本轮仅执行了读取检查。\n\n1. **首条消息在首个业务动作前保存。** 空白启动时等到首条用户消息到达，核实当前轮次和会话归属后，按会话首次实际开启的本地日期定位记录。先把用户原文写入详情并读回，再写入关联索引并读回。索引如实标记业务尚未发生。两份文件都确认后，用独立的工具调用开始业务。 [保存时机](/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/references/recording-timing.md)\n\n2. **每次 Git 提交及其对应结果回复都跳过记录写入。** 原始用户请求、提交前的修复和日常检查照常保存。每次实际提交的调用、工具回包和对应结果回复均跳过索引、详情及附件写入，即使结果回复是本轮最后一条回复也一样。只有工具结果时，边界在工具结果完成时结束。提交失败后的修复照常保存，下一次实际提交再单独应用同一规则。 [提交边界](/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/references/event-capture.md)\n\n3. **索引写入失败后，先提示具体缺口，再继续任务。** 先读回核对详情和附件。在下一次业务调用或普通回复前，向用户说明受影响的轮次和索引块、已知失败原因，以及可回查的已确认详情路径、轮次锚点和附件范围。保留已确认内容，把索引块留待补写，然后继续用户任务。归属仍可核实且资料区恢复可写后，重新取得会话锁，从实际文件状态核对断点，复用已确认内容，补写对应索引链接并读回确认。 [写入失败与重试](/tmp/foundry-conversation-gHroSB/repository/.agents/skills/conversation-recording/references/write-failures.md)",
+    "isolatedGitUnchangedThroughRead": true,
+    "isolatedRecordsEmpty": true
+  },
+  "mainlineBuild": {
+    "command": [
+      "node",
+      "node_modules/vite/bin/vite.js",
+      "build"
+    ],
+    "vite": "8.3.8",
+    "packageVersion": "0.1.0",
+    "outputPath": "dist/skill/profile/conversation-recording",
+    "isolatedRoot": "/tmp/foundry-conversation-gHroSB/mainline/dist",
+    "beforeEnabledProfileSelection": [],
+    "afterEnabledProfileSelection": [
+      "conversation-recording"
+    ],
+    "files": {
+      "SKILL.md": {
+        "bytes": 1438,
+        "sha256": "b8f2653ea7e3fd9a390e16097f4e136ea7b22c864a165e89b8b1a71751bde927"
+      },
+      "references/event-capture.md": {
+        "bytes": 4150,
+        "sha256": "49651ba56deba232797f57fb487e9a0efd4797af3c28354b1db4e59640a00966"
+      },
+      "references/paired-save.md": {
+        "bytes": 3745,
+        "sha256": "317debf508fb6ff38bcd91b3f077378c5d89c3fc70b13bfd15b691ae90b1633f"
+      },
+      "references/recording-timing.md": {
+        "bytes": 2134,
+        "sha256": "6fd0430d177b51a588b6e4a33ac267f74fbb475596f853f7e6a0d9698ad312ca"
+      },
+      "references/resume-records.md": {
+        "bytes": 2978,
+        "sha256": "b33c16f3e88cdeccbcc7dfd5ab21e5d24a9dbeb8c462b6b2750ec9599c41a07d"
+      },
+      "references/session-scope.md": {
+        "bytes": 5107,
+        "sha256": "4e18293134d0400253d5d66184e98ad58df1a50ab65784d1d640d921b2cf7f3b"
+      },
+      "references/storage-contract.md": {
+        "bytes": 11555,
+        "sha256": "54a8fb8c6c4bcea12b9c7b67b4745a2235a07b38bb734c59da94b31138cfe3d7"
+      },
+      "references/write-failures.md": {
+        "bytes": 2395,
+        "sha256": "3086e212d16f1096066f89b900024ea2f5c04181db08aa9b40770ae1835d1872"
+      }
+    }
+  }
+}

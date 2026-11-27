@@ -1,0 +1,71 @@
+{
+  "scope": "当前主会话受控普通文本记录；私有原文仅存同项目忽略目录",
+  "source_profile": "Linux/Codex session_meta 0.169.0 + event_msg/item_completed",
+  "copy_files_equal": true,
+  "recorded_count": 7,
+  "user_count": 1,
+  "assistant_commentary_count": 6,
+  "assistant_final_count": 0,
+  "source_text_and_parts_exact": true,
+  "source_role_phase_exact": true,
+  "source_identity_order_exact": true,
+  "no_duplicate_identity": true,
+  "excluded_tool_or_reasoning_events_seen": 77,
+  "receipt_count": 7,
+  "no_error_receipts": true,
+  "observed_to_saved_ms_max": 5.018638,
+  "stderr_empty": true,
+  "private_source_or_body_in_evidence": false,
+  "not_validated": [
+    "原生最终回复发生后实时落盘",
+    "控件和非文本适配",
+    "分析派发/commit/forget",
+    "真实项目正式启用"
+  ],
+  "date": "2026-11-17",
+  "targeted_tests": {
+    "command": "python3 -B -m unittest discover -s packages/skills/tests -p test_shadow_runtime.py",
+    "count": 15,
+    "passed": 15
+  },
+  "package_tests": {
+    "count": 27,
+    "passed": 24,
+    "failed": 3,
+    "failure_scope": "既有test_register_commands缺少packages/skills/script/register-commands/register-commands.sh，与实现前基线一致"
+  },
+  "skill_quick_validate": {
+    "status": "missing_prerequisite",
+    "detail": "ModuleNotFoundError: No module named yaml；未安装依赖或声称通过"
+  },
+  "runtime_cleanup": {
+    "status": "本次受管测试进程已回收",
+    "purpose": "测试清理，不作CLI退出信号验收"
+  },
+  "reviewed_candidate_recheck": {
+    "recorded_count": 10,
+    "user_count": 1,
+    "assistant_commentary_count": 9,
+    "assistant_final_count": 0,
+    "exact_text_identity_role_phase_order": true,
+    "receipt_count": 10,
+    "excluded_tool_or_reasoning_events_seen": 107,
+    "copy_files_equal": true,
+    "no_errors": true,
+    "observed_to_saved_ms_max": 4.785589
+  },
+  "initial_candidate_source_sha256": {
+    "SKILL.md": "be35264cfa638cad3c0b20a73f0b1503793bc878d083d477be0c0c116190f518",
+    "references/host-contract.md": "f1815a6385eb9ccbc5a72841e781f3b004e0e54c0855e99537929778ffe10048",
+    "scripts/shadow_runtime.py": "f5f8d05735d2850ca90fff443ad87d5e6685e58af6a6a96382e4d60a034d1ed2"
+  },
+  "candidate_source_sha256": {
+    "SKILL.md": "be35264cfa638cad3c0b20a73f0b1503793bc878d083d477be0c0c116190f518",
+    "references/host-contract.md": "f1815a6385eb9ccbc5a72841e781f3b004e0e54c0855e99537929778ffe10048",
+    "scripts/shadow_runtime.py": "e8ba82a4a2c322de5469f1cc573682e7339a6004a81739bcfc361959217efc5e"
+  },
+  "review": {
+    "status": "原P2已修正并复核",
+    "regression": "保存失败期间外部追加不能被回退删除；先红后绿"
+  }
+}

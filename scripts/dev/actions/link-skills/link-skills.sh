@@ -13,7 +13,7 @@
 #   - 内容相同则跳过，内容变化则替换整个 skill 目录。
 #   - 同名软链接会被实体副本替换；同名普通文件报告冲突。
 #   - 不处理源目录未声明的条目，保留其他来源的 skill。
-#   - 明确退役的技能和旧模式名称不再复制，已有目标保留待迁移核对。
+#   - 明确退役的名称不再复制。只清理本仓库的旧影子画像生成副本。
 
 set -euo pipefail
 
@@ -33,6 +33,23 @@ if [[ ! -d "${SOURCE_DIR}" ]]; then
 fi
 
 mkdir -p "${TARGET_DIR}"
+
+# 项目安装根之外的同名技能，以及附带用户资料的旧目录，继续由其原来源管理。
+project_target="${REPO_ROOT}/.agents/skills"
+retired_shadow="${project_target}/shadow-profile"
+if [[ "${TARGET_DIR}" -ef "${project_target}" && ! -L "${REPO_ROOT}/.agents" && ! -L "${project_target}" &&
+      -d "${retired_shadow}" && ! -L "${retired_shadow}" ]]; then
+  (
+    shopt -s dotglob nullglob
+    retired_entries=("${retired_shadow}"/*)
+    if [[ ${#retired_entries[@]} -eq 1 && -f "${retired_shadow}/SKILL.md" && ! -L "${retired_shadow}/SKILL.md" ]] &&
+       grep -Fxq 'name: shadow-profile' "${retired_shadow}/SKILL.md"; then
+      rm -- "${retired_shadow}/SKILL.md"
+      rmdir -- "${retired_shadow}"
+      echo "remove(已退役): shadow-profile"
+    fi
+  )
+fi
 
 created=0
 updated=0
@@ -61,8 +78,8 @@ for src in "${skill_dirs[@]}"; do
   case "${name}" in
     artifact-issue-description|artifact-pr-description|mvu-gate|artifact-business-flow|artifact-logic-flow|explainer-doc-sync|\
     task-review|task-guide|task-explore|task-pair|task-tutor|task-direct|\
-    speckit-modes-review|speckit-modes-guide|speckit-modes-explore|speckit-modes-pair|speckit-modes-tutor|speckit-modes-direct)
-      echo "skip(已退役，保留目标): ${name}"
+    speckit-modes-review|speckit-modes-guide|speckit-modes-explore|speckit-modes-pair|speckit-modes-tutor|speckit-modes-direct|shadow-profile)
+      echo "skip(已退役来源): ${name}"
       skipped=$((skipped + 1))
       continue
       ;;

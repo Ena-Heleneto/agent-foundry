@@ -1,0 +1,560 @@
+{
+  "baselines": {
+    "shortArgv": [
+      "--label",
+      "参数 A",
+      "--count",
+      "3",
+      "--enabled",
+      "false"
+    ],
+    "shortOutput": "[\"--label\", \"参数 A\", \"--count\", \"3\", \"--enabled\", \"false\"]\n短原文  \n",
+    "streamOutput": "流一  \n流二\n流三\n",
+    "structuredToolArgs": {
+      "label": "选项 A",
+      "count": 3,
+      "enabled": false
+    },
+    "originals": {
+      "t005-long.txt": {
+        "bytes": 163854,
+        "sha256": "d54776d7dc49adf2ac01e031b4241a5c88267857817aa950d7d43e430f8f64ed"
+      },
+      "附件 原件.bin": {
+        "bytes": 6,
+        "sha256": "a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d"
+      },
+      "session-original.png": {
+        "bytes": 154,
+        "sha256": "6c63b8654b9d53c32843d57497e64184f4ab99de5b8e24cbbb711c40ec29bc36"
+      },
+      "tool-original.png": {
+        "bytes": 151,
+        "sha256": "60bdccbb8a0fa6adf7742bbd23147af45875abb6dab4a694fde279c17e19308f"
+      }
+    }
+  },
+  "terminal": {
+    "context": {
+      "threadId": "01a2061a-3b85-7de2-9701-37f6070ed76c",
+      "parentTurnId": "01a2061a-3bc6-7843-a43e-47d2b22f9835",
+      "cwd": "/tmp/foundry-conversation-aZDp8e/repository",
+      "source": "cli",
+      "cliVersion": "0.171.0",
+      "model": "gpt-6.2-sol",
+      "rollout": "sessions/2026/11/23/rollout-2026-11-23T09-51-52-01a2061a-3b85-7de2-9701-37f6070ed76c.jsonl"
+    },
+    "calls": [
+      {
+        "line": 16,
+        "time": "2026-11-23T01:51:59.189Z",
+        "name": "exec",
+        "callId": "call_dac5665f3fed470e98231bce026e1213",
+        "code": "const r=await tools.exec_command({cmd:\"python3 -c 'import json,sys; print(json.dumps(sys.argv[1:], ensure_ascii=False)); print(\\\"短原文  \\\")' --label '参数 A' --count 3 --enabled false\"});store(\"t005_1\",r);text(r)\n"
+      },
+      {
+        "line": 21,
+        "time": "2026-11-23T01:52:01.621Z",
+        "name": "exec",
+        "callId": "call_6ad43f99df6344248eb7d38060c5e978",
+        "code": "const r=await tools.exec_command({cmd:\"cat /tmp/foundry-conversation-aZDp8e/input/t005-long.txt\",max_output_tokens:256});store(\"t005_2\",r);text(r)\n"
+      },
+      {
+        "line": 26,
+        "time": "2026-11-23T01:52:04.807Z",
+        "name": "exec",
+        "callId": "call_ae742d3f40674e34ace1ccf80b7a9f8e",
+        "code": "const r=await tools.exec_command({cmd:\"wc -c /tmp/foundry-conversation-aZDp8e/input/t005-long.txt && sha256sum /tmp/foundry-conversation-aZDp8e/input/t005-long.txt\"});store(\"t005_3\",r);text(r)\n"
+      },
+      {
+        "line": 31,
+        "time": "2026-11-23T01:52:07.744Z",
+        "name": "exec",
+        "callId": "call_7635890a161943499380a5e5ae3eaa41",
+        "code": "const r=await tools.exec_command({cmd:\"printf '流一  \\\\n'; sleep 6; printf '流二\\\\n'; sleep 5; printf '流三\\\\n'\",yield_time_ms:1000});store(\"t005_4\",[r]);text(r)\n"
+      },
+      {
+        "line": 35,
+        "time": "2026-11-23T01:52:11.542Z",
+        "name": "exec",
+        "callId": "call_6f537713c9ab469dba23e682015132f2",
+        "code": "const a=load(\"t005_4\");let r=a.at(-1);while(r.session_id!==undefined){r=await tools.write_stdin({session_id:r.session_id,chars:\"\",yield_time_ms:5000});a.push(r);store(\"t005_4\",a);text(r)}\n"
+      },
+      {
+        "line": 40,
+        "time": "2026-11-23T01:52:22.672Z",
+        "name": "exec",
+        "callId": "call_84978ec7b2f048c2a5bc28be27e65fc8",
+        "code": "const a=[];const workdir=\"/tmp/foundry-conversation-aZDp8e/repository-outside\";for(const cmd of [\"pwd\",\"head -n 1 README.md\",\"printf '%s\\\\n' \\\"$CODEX_THREAD_ID\\\"\"]){try{const r=await tools.exec_command(cmd.startsWith(\"printf\")?{cmd}:{cmd,workdir});a.push(r);text(r)}catch(e){a.push(String(e));text(String(e))}}store(\"t005_5\",a);\n"
+      }
+    ],
+    "visibleReturns": [
+      {
+        "line": 19,
+        "time": "2026-11-23T01:51:59.335Z",
+        "callId": "call_dac5665f3fed470e98231bce026e1213",
+        "result": {
+          "chunk_id": "db3ec1",
+          "wall_time_seconds": 1.8724e-05,
+          "exit_code": 0,
+          "original_token_count": 19,
+          "output": "[\"--label\", \"参数 A\", \"--count\", \"3\", \"--enabled\", \"false\"]\n短原文  \n"
+        }
+      },
+      {
+        "line": 24,
+        "time": "2026-11-23T01:52:01.718Z",
+        "callId": "call_6ad43f99df6344248eb7d38060c5e978",
+        "result": {
+          "chunk_id": "e7a73a",
+          "wall_time_seconds": 1.9836e-05,
+          "exit_code": 0,
+          "original_token_count": 40964,
+          "output": "Warning: truncated output (original token count: 40964)\nTotal output lines: 16386\n\n开始\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片…40708 tokens truncated… α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n片段 α\n结束\n"
+        }
+      },
+      {
+        "line": 29,
+        "time": "2026-11-23T01:52:04.946Z",
+        "callId": "call_ae742d3f40674e34ace1ccf80b7a9f8e",
+        "result": {
+          "chunk_id": "a0a71c",
+          "wall_time_seconds": 2.9585e-05,
+          "exit_code": 0,
+          "original_token_count": 45,
+          "output": "163854 /tmp/foundry-conversation-aZDp8e/input/t005-long.txt\nd54776d7dc49adf2ac01e031b4241a5c88267857817aa950d7d43e430f8f64ed  /tmp/foundry-conversation-aZDp8e/input/t005-long.txt\n"
+        }
+      },
+      {
+        "line": 33,
+        "time": "2026-11-23T01:52:08.924Z",
+        "callId": "call_7635890a161943499380a5e5ae3eaa41",
+        "result": {
+          "chunk_id": "5c777e",
+          "wall_time_seconds": 1.000822036,
+          "session_id": 33836,
+          "original_token_count": 3,
+          "output": "流一  \n"
+        }
+      },
+      {
+        "line": 38,
+        "time": "2026-11-23T01:52:18.864Z",
+        "callId": "call_6f537713c9ab469dba23e682015132f2",
+        "result": {
+          "chunk_id": "7c1bed",
+          "wall_time_seconds": 5.000602737,
+          "session_id": 33836,
+          "original_token_count": 2,
+          "output": "流二\n"
+        }
+      },
+      {
+        "line": 38,
+        "time": "2026-11-23T01:52:18.864Z",
+        "callId": "call_6f537713c9ab469dba23e682015132f2",
+        "result": {
+          "chunk_id": "6cf1cb",
+          "wall_time_seconds": 2.304019997,
+          "exit_code": 0,
+          "original_token_count": 2,
+          "output": "流三\n"
+        }
+      },
+      {
+        "line": 45,
+        "time": "2026-11-23T01:52:23.076Z",
+        "callId": "call_84978ec7b2f048c2a5bc28be27e65fc8",
+        "result": {
+          "chunk_id": "fb76c4",
+          "wall_time_seconds": 3.289e-05,
+          "exit_code": 0,
+          "original_token_count": 13,
+          "output": "/tmp/foundry-conversation-aZDp8e/repository-outside\n"
+        }
+      },
+      {
+        "line": 45,
+        "time": "2026-11-23T01:52:23.076Z",
+        "callId": "call_84978ec7b2f048c2a5bc28be27e65fc8",
+        "result": {
+          "chunk_id": "7fc8cc",
+          "wall_time_seconds": 2.6403e-05,
+          "exit_code": 0,
+          "original_token_count": 9,
+          "output": "仓库外工具原文 T005-OUTSIDE\n"
+        }
+      },
+      {
+        "line": 45,
+        "time": "2026-11-23T01:52:23.076Z",
+        "callId": "call_84978ec7b2f048c2a5bc28be27e65fc8",
+        "result": {
+          "chunk_id": "e7bcdb",
+          "wall_time_seconds": 1.7387e-05,
+          "exit_code": 0,
+          "original_token_count": 10,
+          "output": "01a2061a-3b85-7de2-9701-37f6070ed76c\n"
+        }
+      }
+    ],
+    "longVisibleBytesIncludingTruncationMarker": 1132
+  },
+  "attachments": {
+    "context": {
+      "threadId": "01a2061c-4384-7472-acc7-abb97d846fda",
+      "parentTurnId": "01a2061c-43b8-7b82-bb06-3db6173c9642",
+      "cwd": "/tmp/foundry-conversation-aZDp8e/repository",
+      "source": "cli",
+      "cliVersion": "0.171.0",
+      "model": "gpt-6.2-sol",
+      "rollout": "sessions/2026/11/23/rollout-2026-11-23T09-54-05-01a2061c-4384-7472-acc7-abb97d846fda.jsonl"
+    },
+    "inputPathMarker": "<image name=[Image #1] path=\"/tmp/foundry-conversation-aZDp8e/input/session-original.png\">",
+    "imagePayloads": {
+      "userImage": {
+        "line": 12,
+        "contentType": "input_image",
+        "mimeType": "image/png",
+        "bytes": 154,
+        "sha256": "6c63b8654b9d53c32843d57497e64184f4ab99de5b8e24cbbb711c40ec29bc36"
+      },
+      "toolImage": {
+        "line": 35,
+        "contentType": "input_image",
+        "mimeType": "image/png",
+        "bytes": 151,
+        "sha256": "60bdccbb8a0fa6adf7742bbd23147af45875abb6dab4a694fde279c17e19308f"
+      }
+    },
+    "savedFiles": {
+      "session-received.png": {
+        "source": "session-original.png",
+        "bytes": 154,
+        "sha256": "6c63b8654b9d53c32843d57497e64184f4ab99de5b8e24cbbb711c40ec29bc36"
+      },
+      "tool-received.bin": {
+        "source": "附件 原件.bin",
+        "bytes": 6,
+        "sha256": "a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d"
+      },
+      "tool-received.png": {
+        "source": "tool-original.png",
+        "bytes": 151,
+        "sha256": "60bdccbb8a0fa6adf7742bbd23147af45875abb6dab4a694fde279c17e19308f"
+      }
+    },
+    "fixtureCalls": [
+      {
+        "method": "tools/call",
+        "arguments": {
+          "label": "选项 A",
+          "count": 3,
+          "enabled": false
+        },
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "本地工具返回原文 T005-MCP  \n"
+            },
+            {
+              "type": "resource",
+              "resource": {
+                "uri": "t005://fixture/file",
+                "mimeType": "application/octet-stream",
+                "blob": "AP8NCoAB"
+              }
+            },
+            {
+              "type": "resource_link",
+              "uri": "t005://fixture/file",
+              "name": "附件 原件.bin",
+              "mimeType": "application/octet-stream",
+              "size": 6
+            },
+            {
+              "type": "image",
+              "mimeType": "image/png",
+              "dataDigest": {
+                "bytes": 151,
+                "sha256": "60bdccbb8a0fa6adf7742bbd23147af45875abb6dab4a694fde279c17e19308f"
+              }
+            }
+          ],
+          "structuredContent": {
+            "label": "选项 A",
+            "count": 3,
+            "enabled": false
+          }
+        }
+      },
+      {
+        "method": "resources/read",
+        "uri": "t005://fixture/file",
+        "contents": [
+          {
+            "uri": "t005://fixture/file",
+            "mimeType": "application/octet-stream",
+            "blob": "AP8NCoAB"
+          }
+        ]
+      }
+    ],
+    "visibleReturns": [
+      {
+        "line": 35,
+        "time": "2026-11-23T01:54:31.656Z",
+        "callId": "call_1fb6c5421e4f454a92b06268fc9c6b19",
+        "returnValue": {
+          "chunk_id": "0fe952",
+          "wall_time_seconds": 2.0298e-05,
+          "exit_code": 0,
+          "original_token_count": 23,
+          "output": "content[].image_url 154 6c63b8654b9d53c32843d57497e64184f4ab99de5b8e24cbbb711c40ec29bc36\n"
+        }
+      },
+      {
+        "line": 35,
+        "time": "2026-11-23T01:54:31.656Z",
+        "callId": "call_1fb6c5421e4f454a92b06268fc9c6b19",
+        "returnValue": {
+          "content": [
+            {
+              "type": "text",
+              "text": "本地工具返回原文 T005-MCP  \n"
+            },
+            {
+              "type": "resource",
+              "resource": {
+                "uri": "t005://fixture/file",
+                "mimeType": "application/octet-stream",
+                "blob": {
+                  "visible": true,
+                  "base64Length": 8
+                }
+              }
+            },
+            {
+              "type": "resource_link",
+              "uri": "t005://fixture/file",
+              "name": "附件 原件.bin",
+              "mimeType": "application/octet-stream",
+              "size": 6
+            },
+            {
+              "type": "image",
+              "mimeType": "image/png",
+              "dataVisible": true,
+              "base64Length": 204
+            }
+          ],
+          "structuredContent": {
+            "label": "选项 A",
+            "count": 3,
+            "enabled": false
+          }
+        }
+      },
+      {
+        "line": 41,
+        "time": "2026-11-23T01:54:37.840Z",
+        "callId": "call_eb7da032bcf34d859ff72bb18dd1d43f",
+        "returnValue": [
+          {
+            "status": "fulfilled",
+            "value": {
+              "chunk_id": "ecf57a",
+              "wall_time_seconds": 1.6384e-05,
+              "exit_code": 0,
+              "original_token_count": 43,
+              "output": "tool-received.bin 6 a0ed0f459b2094e0c609f62dfa4da8d4c80172534670ca2220f4f931a4f2c40d\ntool-received.png 151 60bdccbb8a0fa6adf7742bbd23147af45875abb6dab4a694fde279c17e19308f\n"
+            }
+          },
+          {
+            "status": "fulfilled",
+            "value": "{\"server\":\"t005_fixture\",\"uri\":\"t005://fixture/file\",\"contents\":[{\"uri\":\"t005://fixture/file\",\"mimeType\":\"application/octet-stream\",\"blob\":\"AP8NCoAB\"}]}"
+          }
+        ]
+      }
+    ],
+    "calls": [
+      {
+        "line": 31,
+        "time": "2026-11-23T01:54:31.506Z",
+        "name": "exec",
+        "callId": "call_1fb6c5421e4f454a92b06268fc9c6b19",
+        "code": "text(await tools.exec_command({cmd:`python3 - <<'PY'\nimport os,pathlib,json,base64,hashlib\nt=os.environ['CODEX_THREAD_ID']\nroot=pathlib.Path('/tmp/foundry-conversation-aZDp8e')\np,=(root/'state-attachments-readonly/sessions').rglob('*'+t+'.jsonl')\nrows=[json.loads(line) for line in p.open()]\nassert [r['payload']['id'] for r in rows if r['type']=='session_meta']==[t]\nq,=[r['payload'] for r in rows if r['payload'].get('role')=='user' and any('T005 合成附件取证' in x.get('text','') for x in r['payload'].get('content',[]))]\nx,=[x for x in q['content'] if x.get('type')=='input_image']\nheader,data=x['image_url'].split(',',1)\nassert header=='data:image/png;base64'\nb=base64.b64decode(data,validate=True)\n(root/'records/session-received.png').write_bytes(b)\nprint('content[].image_url',len(b),hashlib.sha256(b).hexdigest())\nPY`}))\nconst r=await tools.mcp__t005_fixture__known_artifacts({label:\"选项 A\",count:3,enabled:false});store(\"fixture\",r);\ntext({...r,content:r.content.map(c=>c.type===\"image\"?{type:c.type,mimeType:c.mimeType,dataVisible:typeof c.data===\"string\",base64Length:c.data?.length}:c.type===\"resource\"&&c.resource.blob?{...c,resource:{...c.resource,blob:{visible:true,base64Length:c.resource.blob.length}}}:c)});\nfor(const c of r.content) if(c.type===\"image\"&&c.data) image(c);\n"
+      },
+      {
+        "line": 37,
+        "time": "2026-11-23T01:54:37.711Z",
+        "name": "exec",
+        "callId": "call_eb7da032bcf34d859ff72bb18dd1d43f",
+        "code": "const r=load(\"fixture\");const blob=r.content.find(x=>x.type===\"resource\").resource.blob;const img=r.content.find(x=>x.type===\"image\").data;const uri=r.content.find(x=>x.type===\"resource_link\").uri;\nfor(const v of [blob,img]) if(!/^[A-Za-z0-9+/]+={0,2}$/.test(v)) exit();\nconst results=await Promise.allSettled([tools.exec_command({cmd:`cd /tmp/foundry-conversation-aZDp8e/records && python3 - '${blob}' '${img}' <<'PY'\nimport sys,base64,pathlib,hashlib\nfor name,data in zip(('tool-received.bin','tool-received.png'),sys.argv[1:]):\n b=base64.b64decode(data,validate=True)\n p=pathlib.Path(name)\n p.write_bytes(b)\n payload=p.read_bytes()\n assert payload==b\n print(name,len(payload),hashlib.sha256(payload).hexdigest())\nPY`}),tools.read_mcp_resource({server:\"t005_fixture\",uri})]);text(results);\n"
+      }
+    ]
+  },
+  "dispatch": {
+    "context": {
+      "threadId": "01a20618-77ac-7042-a542-44e792a8ce59",
+      "parentTurnId": "01a20618-7819-7633-9868-245e6ade5739",
+      "cwd": "/tmp/foundry-conversation-aZDp8e/repository",
+      "source": "cli",
+      "cliVersion": "0.171.0",
+      "model": "gpt-6.2-sol",
+      "rollout": "sessions/2026/11/23/rollout-2026-11-23T09-49-56-01a20618-77ac-7042-a542-44e792a8ce59.jsonl"
+    },
+    "childThreadId": "01a20618-88fa-7f52-a025-092fc62648e5",
+    "activities": [
+      {
+        "line": 16,
+        "time": "2026-11-23T01:50:00.939Z",
+        "type": "call",
+        "callId": "call_442e8df518af41efaecf476d4b89d932",
+        "name": "spawn_agent",
+        "arguments": {
+          "task_name": "t005_child",
+          "message": {
+            "plainTextInPersistedArguments": false
+          }
+        }
+      },
+      {
+        "line": 18,
+        "time": "2026-11-23T01:50:00.992Z",
+        "type": "activity",
+        "kind": "started",
+        "childThreadId": "01a20618-88fa-7f52-a025-092fc62648e5",
+        "agentPath": "/root/t005_child",
+        "parentTurnId": "01a20618-7819-7633-9868-245e6ade5739"
+      },
+      {
+        "line": 19,
+        "time": "2026-11-23T01:50:01.000Z",
+        "type": "return",
+        "callId": "call_442e8df518af41efaecf476d4b89d932",
+        "output": "{\"task_name\":\"/root/t005_child\"}"
+      },
+      {
+        "line": 22,
+        "time": "2026-11-23T01:50:02.992Z",
+        "type": "call",
+        "callId": "call_e267df5f28e5477694fc79c4b1a47eaf",
+        "name": "list_agents",
+        "arguments": {}
+      },
+      {
+        "line": 24,
+        "time": "2026-11-23T01:50:03.009Z",
+        "type": "return",
+        "callId": "call_e267df5f28e5477694fc79c4b1a47eaf",
+        "output": "{\"agents\":[{\"agent_name\":\"/root\",\"agent_status\":\"running\"},{\"agent_name\":\"/root/t005_child\",\"agent_status\":\"running\"}]}"
+      },
+      {
+        "line": 26,
+        "time": "2026-11-23T01:50:03.938Z",
+        "type": "activity",
+        "kind": "completed",
+        "childThreadId": "01a20618-88fa-7f52-a025-092fc62648e5",
+        "agentPath": "/root/t005_child",
+        "parentTurnId": "01a20618-7819-7633-9868-245e6ade5739"
+      },
+      {
+        "line": 33,
+        "time": "2026-11-23T01:50:05.233Z",
+        "type": "message",
+        "author": "/root/t005_child",
+        "recipient": "/root",
+        "content": [
+          "Message Type: FINAL_ANSWER\nTask name: /root\nSender: /root/t005_child\nPayload:\nT005-CHILD-INITIAL"
+        ]
+      },
+      {
+        "line": 34,
+        "time": "2026-11-23T01:50:07.106Z",
+        "type": "call",
+        "callId": "call_dc30b79a58d345619674a31b940f46ac",
+        "name": "followup_task",
+        "arguments": {
+          "target": "/root/t005_child",
+          "message": {
+            "plainTextInPersistedArguments": false
+          }
+        }
+      },
+      {
+        "line": 35,
+        "time": "2026-11-23T01:50:07.147Z",
+        "type": "activity",
+        "kind": "interacted",
+        "childThreadId": "01a20618-88fa-7f52-a025-092fc62648e5",
+        "agentPath": "/root/t005_child",
+        "parentTurnId": "01a20618-7819-7633-9868-245e6ade5739"
+      },
+      {
+        "line": 37,
+        "time": "2026-11-23T01:50:07.218Z",
+        "type": "return",
+        "callId": "call_dc30b79a58d345619674a31b940f46ac",
+        "output": ""
+      },
+      {
+        "line": 39,
+        "time": "2026-11-23T01:50:08.522Z",
+        "type": "activity",
+        "kind": "completed",
+        "childThreadId": "01a20618-88fa-7f52-a025-092fc62648e5",
+        "agentPath": "/root/t005_child",
+        "parentTurnId": "01a20618-7819-7633-9868-245e6ade5739"
+      },
+      {
+        "line": 46,
+        "time": "2026-11-23T01:50:09.887Z",
+        "type": "message",
+        "author": "/root/t005_child",
+        "recipient": "/root",
+        "content": [
+          "Message Type: FINAL_ANSWER\nTask name: /root\nSender: /root/t005_child\nPayload:\nT005-CHILD-FOLLOWUP"
+        ]
+      }
+    ],
+    "parentReadbacks": [
+      {
+        "line": 27,
+        "time": "2026-11-23T01:50:05.104Z",
+        "name": "exec",
+        "callId": "call_6258979294b7407384515b7f3ba1a6fb",
+        "code": "text(await tools.exec_command({cmd:\"printenv CODEX_THREAD_ID; rg --files --hidden /tmp/foundry-conversation-aZDp8e/records | head -50\"}))\n"
+      },
+      {
+        "line": 40,
+        "time": "2026-11-23T01:50:09.736Z",
+        "name": "exec",
+        "callId": "call_91697370b09c40b78a806e7c8f3d4945",
+        "code": "text(await tools.exec_command({cmd:`rg --files --hidden --no-ignore /tmp/foundry-conversation-aZDp8e ~/.codex -g \"*$CODEX_THREAD_ID*\" -g '!.git'`}))\n"
+      },
+      {
+        "line": 47,
+        "time": "2026-11-23T01:50:16.679Z",
+        "name": "exec",
+        "callId": "call_cf24bbaf0b2a44778d9447f173a0636a",
+        "code": "text(await tools.exec_command({cmd:`python - <<'PY'\nimport os,pathlib,json\nid=os.environ['CODEX_THREAD_ID']\nfor root in (pathlib.Path('/tmp/foundry-conversation-aZDp8e/state-agents/sessions'), pathlib.Path.home()/'.codex/sessions'):\n for p in root.rglob(f'*{id}.jsonl'):\n  print(p, p.stat().st_ino)\n  active=False\n  for n,line in enumerate(p.open(),1):\n   d=json.loads(line); a=d.get('payload',{}); t=a.get('type')\n   if d['type']=='session_meta': print(n,'session_meta.id',a.get('id'))\n   if t=='task_started': print(n,t,a.get('turn_id'))\n   if (t in ('function_call','custom_tool_call') and a.get('name','').split('.')[-1] in ('spawn_agent','followup_task','list_agents')) or (d['type']=='event_msg' and any(x in str(t) for x in ('agent_spawn','agent_interaction','collab'))):\n    print(n,a)\n    active=a.get('call_id')\n   if t in ('function_call_output','custom_tool_call_output') and active and a.get('call_id')==active: print(n,a)\nPY`}))\n"
+      },
+      {
+        "line": 52,
+        "time": "2026-11-23T01:50:22.346Z",
+        "name": "exec",
+        "callId": "call_6316c094cd9b44c4885b5fc45db0d536",
+        "code": "text(await tools.exec_command({cmd:`python - <<'PY'\nimport os,pathlib,json,re\np=next((pathlib.Path.home()/'.codex/sessions').rglob('*'+os.environ['CODEX_THREAD_ID']+'.jsonl'))\nfor n,l in enumerate(p.open(),1):\n if n>43: break\n d=json.loads(l); a=d['payload']\n print(n,d['type'],a.get('type'),a.get('role'),list(a) if n in range(28,42) else '', [x for x in re.findall(r'01[a-f0-9]{6}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}',l) if x not in (os.environ['CODEX_THREAD_ID'],'01a20618-7819-7633-9868-245e6ade5739')] if n in [17,18,32,33,35,36,38,39,40] else '')\nPY`}))\n"
+      },
+      {
+        "line": 57,
+        "time": "2026-11-23T01:50:26.185Z",
+        "name": "exec",
+        "callId": "call_eed8890439034af089ff9bfbfbaaf139",
+        "code": "text(await tools.exec_command({cmd:`python - <<'PY'\nimport os,pathlib,json\np=next((pathlib.Path.home()/'.codex/sessions').rglob('*'+os.environ['CODEX_THREAD_ID']+'.jsonl'))\nfor n,l in enumerate(p.open(),1):\n d=json.loads(l); a=d['payload']\n if n in [18,35,39] or a.get('type')=='agent_message' or d['type']=='inter_agent_communication_metadata':\n  print(n,{k:v for k,v in a.items() if k!='content'})\nPY`}))\n"
+      }
+    ]
+  }
+}
