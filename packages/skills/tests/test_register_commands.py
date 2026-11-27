@@ -66,6 +66,7 @@ class RegisterCommandsTests(unittest.TestCase):
         (source / 'references/example.md').write_text(ATTACHMENT, encoding='utf-8')
         config = {
             'packageName': 'workflow',
+            'enabled': True,
             'plugin': True,
             'skill': {'task-increment': {'enabled': True, 'command': 'speckit.modes.increment'}},
         }
